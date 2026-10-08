@@ -1,7 +1,14 @@
 # KYMA — Fiches produit Shopify (Drop 1)
 
-> Livrable Izaac, mode mission. Statut : version 2 (corrections Arthur, cycle 1/2), relecture juridique Victoire en parallèle.
-> Source : `brand/BRAND.md` (tech pack v3, avril 2026).
+> Livrable Izaac, mode mission. Statut : version 3 (vouvoiement, visuels 3D, section Médias 3D). Relecture juridique Victoire à refaire sur la mention des visuels.
+> Source : `brand/BRAND.md` (tech pack v3, avril 2026). Visuels : `shopify/3d/` (voir « Médias 3D » en fin de document).
+> Ton : vouvoiement partout, aligné sur les textes de Maya.
+
+## Mention des visuels (formule unique)
+
+> **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.**
+
+À afficher sous le visualiseur 3D et sous chaque vignette. Elle ne promet pas l'unicité : elle exprime l'intention (repli validé par Victoire) et annonce l'écart possible.
 
 ## Légende des balises (à lire avant publication)
 
@@ -25,7 +32,7 @@ Un seul produit Shopify, 30 variantes : 5 coloris × 6 tailles.
 - **Option 1 — Coloris** : Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow.
 - **Option 2 — Taille** : XS, S, M, L, XL, XXL.
 - **SKU suggéré** : `KYMA-HZ-001-<COLORIS>-<TAILLE>` (ex. `KYMA-HZ-001-LILAC-M`).
-- **Image de variante** : chaque coloris porte ses 3 images (face, détail motif, porté), textes alternatifs en partie B.
+- **Médias par coloris** : un modèle 3D (GLB) et sa vignette rendue depuis la 3D. Textes alternatifs en partie B, fichiers et statut d'import dans « Médias 3D ».
 
 ## Titre
 
@@ -50,9 +57,9 @@ Repli : `hoodie-zippe-kyma`.
 
 `drop-1`, `hoodie`, `unisexe`, `precommande`
 
-## Description HTML (à coller dans le champ description)
+## Description HTML — version source (balisée)
 
-Avant collage : pour chaque `[SI …]` non activé, supprimer le passage et activer le `[REPLI]` (retirer ses crochets). Les `[À COMPLÉTER]` et `[À CONFIRMER]` sont à résoudre ou à retirer avant mise en ligne.
+Cette version garde les balises pour le jour où les preuves seront réunies. **Ne pas la coller telle quelle** : coller la « VERSION À PUBLIER » ci-dessous.
 
 ```html
 <p><em>[SI PRÉSÉRIE VALIDÉE : Une vague ne se répète jamais. Celle-ci non plus.] [REPLI : Pensé pour que chaque pièce soit unique.]</em></p>
@@ -74,14 +81,50 @@ Avant collage : pour chaque `[SI …]` non activé, supprimer le passage et acti
 </ul>
 
 <h3>[SI PRÉSÉRIE VALIDÉE : Chaque pièce est unique] [REPLI : Pensé pour être unique]</h3>
-<p>[SI PRÉSÉRIE VALIDÉE : Le motif KYMA Wave est imprimé en continu sur un long rouleau de tissu. Il ne boucle pas. Chaque hoodie est découpé dans une zone différente du rouleau : le tourbillon qui passe sur ton épaule n'existe que sur ta pièce. Deux hoodies du même coloris partagent la même famille de nuances, jamais le même dessin.] [REPLI : Pensé pour que chaque pièce soit unique.]</p>
-<p>Les photos du site montrent l'esprit du motif, pas ta pièce exacte.</p>
+<p>[SI PRÉSÉRIE VALIDÉE : Le motif KYMA Wave est imprimé en continu sur un long rouleau de tissu. Il ne boucle pas. Chaque hoodie est découpé dans une zone différente du rouleau : le tourbillon qui passe sur votre épaule n'existe que sur votre pièce. Deux hoodies du même coloris partagent la même famille de nuances, jamais le même dessin.] [REPLI : Pensé pour que chaque pièce soit unique.]</p>
+<p><em>Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</em></p>
 
 <h3>Précommande</h3>
-<p>La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Conditions détaillées dans nos <a href="/policies/terms-of-service">CGV</a>.</p>
+<p>La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions détaillées dans nos <a href="/policies/terms-of-service">CGV</a> et sur la page <a href="/policies/refund-policy">Retours et remboursements</a>.</p>
 
 <h3>Coupe &amp; taille</h3>
-<p>Coupe oversize : ample, posée, épaules tombantes. Ta taille habituelle donne la silhouette voulue. Pour une coupe plus ajustée, prends une taille en dessous. Mesures détaillées dans le <a href="/pages/guide-des-tailles">guide des tailles</a>.</p>
+<p>Coupe oversize : ample, posée, épaules tombantes. Votre taille habituelle donne la silhouette voulue. Pour une coupe plus ajustée, prenez une taille en dessous. Mesures détaillées dans le <a href="/pages/guide-des-tailles">guide des tailles</a>.</p>
+
+<h3>Entretien</h3>
+<p>Laver à 30–40 °C, sur l'envers. Pas de sèche-linge. [À CONFIRMER : à aligner sur l'étiquette définitive]</p>
+```
+
+## VERSION À PUBLIER (brouillon Shopify)
+
+Replis appliqués, aucune balise `[SI …]`. Restent uniquement les trois champs que seul le fondateur peut renseigner : `[À COMPLÉTER : date]`, `[À COMPLÉTER : composition]` (doublure) et les `[À CONFIRMER]` (composition du corps, grammage, entretien). Ils sont à résoudre avant toute mise en ligne. Le bloc reste en brouillon.
+
+```html
+<p><em>Pensé pour que chaque pièce soit unique.</em></p>
+
+<p>Le coton épais tombe, lourd et doux. L'intérieur gratté garde la chaleur, comme un sable tiède. Le motif ondoie d'une épaule à l'autre. Le zip glisse ; la tirette brille, à peine.</p>
+
+<h3>Détails</h3>
+<ul>
+  <li><strong>Matière</strong> : French terry, 400–420 g/m² [À CONFIRMER : grammage définitif à la présérie], intérieur gratté.</li>
+  <li><strong>Composition</strong> : Corps : [À CONFIRMER : 100 % coton] · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : [À COMPLÉTER : composition]</li>
+  <li><strong>Coupe</strong> : oversize, épaules tombantes. Unisexe.</li>
+  <li><strong>Zip</strong> : intégral, métal argent brossé.</li>
+  <li><strong>Tirette</strong> : sculptée « Kyma », laiton plaqué or brossé.</li>
+  <li><strong>Capuche</strong> : double épaisseur, doublure en jersey ton sur ton. Sans cordon ni œillets : un choix de design, pour que la ligne reste pure.</li>
+  <li><strong>Poches</strong> : deux poches biais.</li>
+  <li><strong>Bords-côtes</strong> : 2×2, 6 cm aux poignets et à la taille.</li>
+  <li><strong>Impression</strong> : pigmentaire, all-over, motif KYMA Wave.</li>
+  <li><strong>Origine</strong> : imaginé à Paris.</li>
+</ul>
+
+<h3>Pensé pour être unique</h3>
+<p><em>Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</em></p>
+
+<h3>Précommande</h3>
+<p>La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions détaillées dans nos <a href="/policies/terms-of-service">CGV</a> et sur la page <a href="/policies/refund-policy">Retours et remboursements</a>.</p>
+
+<h3>Coupe &amp; taille</h3>
+<p>Coupe oversize : ample, posée, épaules tombantes. Votre taille habituelle donne la silhouette voulue. Pour une coupe plus ajustée, prenez une taille en dessous. Mesures détaillées dans le <a href="/pages/guide-des-tailles">guide des tailles</a>.</p>
 
 <h3>Entretien</h3>
 <p>Laver à 30–40 °C, sur l'envers. Pas de sèche-linge. [À CONFIRMER : à aligner sur l'étiquette définitive]</p>
@@ -129,25 +172,25 @@ Le coton épais tombe, lourd et doux. L'intérieur gratté garde la chaleur, com
 `[SI PRÉSÉRIE VALIDÉE :`
 Le motif KYMA Wave est imprimé en continu sur un long rouleau de tissu. Il ne boucle pas. Il ne se répète pas.
 
-Chaque hoodie est découpé dans une zone différente du rouleau. Le tourbillon qui passe sur ton épaule n'existe que sur ta pièce : deux hoodies du même coloris partagent la même famille de nuances, jamais le même dessin.
+Chaque hoodie est découpé dans une zone différente du rouleau. Le tourbillon qui passe sur votre épaule n'existe que sur votre pièce : deux hoodies du même coloris partagent la même famille de nuances, jamais le même dessin.
 
 Ce n'est pas une imperfection. C'est le principe.
 `]`
 
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
 
-Hors balise (toujours publiable) : les photos du site montrent l'esprit du motif, pas ta pièce exacte.
+Hors balise (toujours publiable, sous le visualiseur 3D et sous chaque vignette) : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
 
 `[À CONFIRMER : une carte numérotée accompagne chaque pièce, selon le packaging final]`
 
 ## Disponibilité
 
-Pièce proposée en précommande. La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le `[À COMPLÉTER : date]`. Conditions détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]`.
+Pièce proposée en précommande. La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le `[À COMPLÉTER : date]`. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]` et sur la page [Retours et remboursements] `[LIEN : /policies/refund-policy]`.
 
 ## Coupe & taille
 
-Coupe oversize : ample, posée, épaules tombantes. Ta taille habituelle donne la silhouette voulue.
-Pour une coupe plus ajustée, prends une taille en dessous.
+Coupe oversize : ample, posée, épaules tombantes. Votre taille habituelle donne la silhouette voulue.
+Pour une coupe plus ajustée, prenez une taille en dessous.
 Mesures détaillées dans le [guide des tailles](/pages/guide-des-tailles).
 
 ## Entretien
@@ -159,10 +202,12 @@ Laver à 30–40 °C, sur l'envers. Pas de sèche-linge.
 
 # B. Les cinq coloris — blocs coloris et textes alternatifs
 
-Depuis la décision « produit unique » : ces blocs servent aux textes alternatifs des images de variante et aux blocs coloris affichés sur la fiche ou la page de collection. Les « titres » ci-dessous sont des noms d'affichage de bloc, pas des titres de produit Shopify. Les tags et SEO par coloris sont facultatifs : ne pas les appliquer au produit unique (tags du produit : voir bloc en tête).
+Depuis la décision « produit unique » : ces blocs servent aux textes alternatifs des médias de variante et aux blocs coloris affichés sur la fiche ou la page de collection. Les « titres » ci-dessous sont des noms d'affichage de bloc, pas des titres de produit Shopify. Les tags et SEO par coloris sont facultatifs : ne pas les appliquer au produit unique (tags du produit : voir bloc en tête).
 
 Même pièce, même coupe, même tissu. Seuls changent la teinte du motif et la doublure de la capuche.
 Décompte en caractères, espaces compris.
+
+**Deux médias par coloris** : le modèle 3D (GLB) et la vignette rendue depuis la 3D (PNG 1600 × 1600, fond beige). Mention à afficher près de chacun : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
 
 ## 1. Lilac Whirl (coloris signature)
 
@@ -172,9 +217,8 @@ Décompte en caractères, espaces compris.
 - **SEO title (facultatif)** : `Ressac Lilac Whirl – Hoodie zippé oversize | KYMA` (49 caractères)
 - **Meta description (facultatif)** : `Ressac, hoodie zippé oversize KYMA en Lilac Whirl : lilas tourbillonnant sur poudre. Motif KYMA Wave, pensé pour que chaque pièce soit unique.` (142 caractères)
 - **Textes alternatifs**
-  - Face : Hoodie zippé oversize KYMA Ressac Lilac Whirl, vue de face, motif marbré lilas sur fond poudre, zip argent fermé.
-  - Détail motif : Gros plan sur le motif KYMA Wave Lilac Whirl : volutes lilas tourbillonnantes sur fond poudre, nuances proches.
-  - Porté : Homme portant le hoodie zippé KYMA Lilac Whirl, silhouette oversize, lumière douce, décor minimal.
+  - Modèle 3D : Hoodie zippé oversize KYMA Ressac Lilac Whirl, motif marbré lilas et crème, zip argent, tirette dorée, visuel de présentation 3D, à faire pivoter à 360°.
+  - Vignette (rendue depuis la 3D) : Hoodie zippé oversize KYMA Ressac Lilac Whirl, vue de face sur fond beige, motif marbré lilas et crème, vignette rendue depuis le modèle 3D.
 - **Tags (facultatifs, filtres de collection)** : `lilas`, `lilac-whirl`
 
 ## 2. Ivory Tide
@@ -185,9 +229,8 @@ Décompte en caractères, espaces compris.
 - **SEO title (facultatif)** : `Ressac Ivory Tide – Hoodie zippé oversize | KYMA` (48 caractères)
 - **Meta description (facultatif)** : `Ressac, hoodie zippé oversize KYMA en Ivory Tide : crème ivoire sur vanille. Motif KYMA Wave, pensé pour que chaque pièce soit unique.` (134 caractères)
 - **Textes alternatifs**
-  - Face : Hoodie zippé oversize KYMA Ressac Ivory Tide, vue de face, motif marbré crème ivoire sur fond vanille, zip argent fermé.
-  - Détail motif : Gros plan sur le motif KYMA Wave Ivory Tide : volutes crème ivoire sur vanille, transitions douces.
-  - Porté : Hoodie zippé KYMA Ivory Tide porté en silhouette oversize, lumière diffuse, décor clair et minimal.
+  - Modèle 3D : Hoodie zippé oversize KYMA Ressac Ivory Tide, motif marbré ivoire et grège clair, zip argent, tirette dorée, visuel de présentation 3D, à faire pivoter à 360°.
+  - Vignette (rendue depuis la 3D) : Hoodie zippé oversize KYMA Ressac Ivory Tide, vue de face sur fond beige, motif marbré ivoire et grège clair, vignette rendue depuis le modèle 3D.
 - **Tags (facultatifs, filtres de collection)** : `ivoire`, `ivory-tide`
 
 ## 3. Silver Drift
@@ -198,9 +241,8 @@ Décompte en caractères, espaces compris.
 - **SEO title (facultatif)** : `Ressac Silver Drift – Hoodie zippé oversize | KYMA` (50 caractères)
 - **Meta description (facultatif)** : `Ressac, hoodie zippé oversize KYMA en Silver Drift : gris acier sur perle. Motif KYMA Wave, pensé pour que chaque pièce soit unique.` (132 caractères)
 - **Textes alternatifs**
-  - Face : Hoodie zippé oversize KYMA Ressac Silver Drift, vue de face, motif marbré gris acier sur fond perle, zip argent fermé.
-  - Détail motif : Gros plan sur le motif KYMA Wave Silver Drift : volutes gris acier sur perle, nuances tonales.
-  - Porté : Femme portant le hoodie zippé KYMA Silver Drift, silhouette oversize, lumière douce, décor minimal.
+  - Modèle 3D : Hoodie zippé oversize KYMA Ressac Silver Drift, motif marbré gris acier et gris perle, zip argent, tirette dorée, visuel de présentation 3D, à faire pivoter à 360°.
+  - Vignette (rendue depuis la 3D) : Hoodie zippé oversize KYMA Ressac Silver Drift, vue de face sur fond beige, motif marbré gris acier et gris perle, vignette rendue depuis le modèle 3D.
 - **Tags (facultatifs, filtres de collection)** : `gris`, `silver-drift`
 
 ## 4. Noir Absolu
@@ -211,9 +253,8 @@ Décompte en caractères, espaces compris.
 - **SEO title (facultatif)** : `Ressac Noir Absolu – Hoodie zippé oversize | KYMA` (49 caractères)
 - **Meta description (facultatif)** : `Ressac, hoodie zippé oversize KYMA en Noir Absolu : nuit profonde, noir sur anthracite. Motif KYMA Wave, pensé pour que chaque pièce soit unique.` (145 caractères)
 - **Textes alternatifs**
-  - Face : Hoodie zippé oversize KYMA Ressac Noir Absolu, vue de face, marbrage subtil noir sur anthracite, zip argent fermé.
-  - Détail motif : Gros plan sur le motif KYMA Wave Noir Absolu : marbrage discret, noir sur anthracite, visible à la lumière.
-  - Porté : Hoodie zippé KYMA Noir Absolu porté en silhouette oversize, lumière douce, fond minimal.
+  - Modèle 3D : Hoodie zippé oversize KYMA Ressac Noir Absolu, marbrage discret noir et anthracite, zip argent, tirette dorée, visuel de présentation 3D, à faire pivoter à 360°.
+  - Vignette (rendue depuis la 3D) : Hoodie zippé oversize KYMA Ressac Noir Absolu, vue de face sur fond beige, marbrage discret noir et anthracite, vignette rendue depuis le modèle 3D.
 - **Tags (facultatifs, filtres de collection)** : `noir`, `noir-absolu`
 
 ## 5. Crimson Flow
@@ -224,14 +265,14 @@ Décompte en caractères, espaces compris.
 - **SEO title (facultatif)** : `Ressac Crimson Flow – Hoodie zippé oversize | KYMA` (50 caractères)
 - **Meta description (facultatif)** : `Ressac, hoodie zippé oversize KYMA en Crimson Flow : cramoisi sur bordeaux ardent. Motif KYMA Wave, pensé pour que chaque pièce soit unique.` (140 caractères)
 - **Textes alternatifs**
-  - Face : Hoodie zippé oversize KYMA Ressac Crimson Flow, vue de face, motif marbré cramoisi sur fond bordeaux, zip argent fermé.
-  - Détail motif : Gros plan sur le motif KYMA Wave Crimson Flow : volutes cramoisies sur bordeaux, nuances tonales.
-  - Porté : Hoodie zippé KYMA Crimson Flow porté en silhouette oversize, lumière douce, décor minimal.
+  - Modèle 3D : Hoodie zippé oversize KYMA Ressac Crimson Flow, motif marbré bordeaux et rose ancien, zip argent, tirette dorée, visuel de présentation 3D, à faire pivoter à 360°.
+  - Vignette (rendue depuis la 3D) : Hoodie zippé oversize KYMA Ressac Crimson Flow, vue de face sur fond beige, motif marbré bordeaux et rose ancien, vignette rendue depuis le modèle 3D.
 - **Tags (facultatifs, filtres de collection)** : `bordeaux`, `crimson-flow`
 
 ### Notes de production pour Sacha
 
-- Les images actuelles sont des rendus, pas des photos du produit fabriqué (BRAND.md). Les textes « porté » sont à ajuster au visuel final ; seuls Lilac Whirl (homme) et Silver Drift (femme) disposent aujourd'hui d'un visuel lifestyle.
+- Les textes alternatifs décrivent les couleurs réellement visibles dans les modèles 3D (palette de `shopify/3d/build_hoodie.py`). Les blocs « Ambiance » ci-dessus restent le texte éditorial du tech pack : à aligner si le fondateur préfère l'un ou l'autre (écart net sur Crimson Flow : bordeaux et rose ancien en 3D, « cramoisi sur bordeaux » en texte).
+- Les modèles 3D sont des visuels de présentation, pas des photos du produit fabriqué. La mention des visuels (en tête de document) s'affiche près du visualiseur et sous chaque vignette.
 - Les doublures de capuche de Noir Absolu et Crimson Flow ne sont pas précisées au tech pack : elles ne sont donc pas décrites ici.
 - Longueurs vérifiées : SEO title produit 48 caractères (plafond 60) ; meta produit 131 caractères (plafond 155) ; metas par coloris entre 132 et 145 caractères.
 
@@ -244,7 +285,7 @@ Décompte en caractères, espaces compris.
 
 ## Texte d'intro
 
-Le hoodie Ressac est coupé large. Les épaules tombent, la matière flotte, le zip suit le mouvement. Ce guide t'aide à choisir l'amplitude que tu préfères.
+Le hoodie Ressac est coupé large. Les épaules tombent, la matière flotte, le zip suit le mouvement. Ce guide vous aide à choisir l'amplitude que vous préférez.
 
 Les mesures sont données à plat, en centimètres, avec une tolérance de ±1 cm.
 
@@ -260,9 +301,39 @@ Les mesures sont données à plat, en centimètres, avec une tolérance de ±1 c
 
 ## Conseils
 
-- **Choisir sa taille** : pose à plat un hoodie que tu portes déjà, mesure-le, compare. C'est le plus fiable.
-- **Coupe prévue** : oversize. Ta taille habituelle donne la silhouette voulue : ample, posée.
-- **Pour une coupe plus ajustée, prends une taille en dessous.**
+- **Choisir sa taille** : posez à plat un hoodie que vous portez déjà, mesurez-le, comparez. C'est le plus fiable.
+- **Coupe prévue** : oversize. Votre taille habituelle donne la silhouette voulue : ample, posée.
+- **Pour une coupe plus ajustée, prenez une taille en dessous.**
 - **Entre deux tailles** : la plus petite pour plus de tenue, la plus grande pour plus d'amplitude.
 - **Unisexe** : une seule grille, pour toutes et tous.
-- **Un doute** : écris-nous `[À COMPLÉTER : adresse e-mail de contact]`, on te répond.
+- **Un doute** : écrivez-nous `[À COMPLÉTER : adresse e-mail de contact]`, nous vous répondons.
+
+---
+
+# D. Médias 3D
+
+Source : `shopify/contenu/visuels-3d.md`. Fichiers dans `shopify/3d/`, générés par `build_hoodie.py` (glTF 2.0 binaire standard, sans extension, à l'échelle réelle).
+
+> **Statut global : bloqué sur plan d'essai.** Shopify refuse l'import 3D natif : « Le fichier n'est pas pris en charge sur les comptes d'essai ». **Action : à importer dès le passage à un plan payant.**
+
+| Coloris | Modèle 3D (GLB) | Vignette (PNG 1600 × 1600) | Statut | Action |
+|---|---|---|---|---|
+| Lilac Whirl | `shopify/3d/ressac-lilac-whirl.glb` | `shopify/3d/ressac-lilac-whirl.png` | Bloqué sur plan d'essai | À importer dès le passage à un plan payant |
+| Ivory Tide | `shopify/3d/ressac-ivory-tide.glb` | `shopify/3d/ressac-ivory-tide.png` | Bloqué sur plan d'essai | À importer dès le passage à un plan payant |
+| Silver Drift | `shopify/3d/ressac-silver-drift.glb` | `shopify/3d/ressac-silver-drift.png` | Bloqué sur plan d'essai | À importer dès le passage à un plan payant |
+| Noir Absolu | `shopify/3d/ressac-noir-absolu.glb` | `shopify/3d/ressac-noir-absolu.png` | Bloqué sur plan d'essai | À importer dès le passage à un plan payant |
+| Crimson Flow | `shopify/3d/ressac-crimson-flow.glb` | `shopify/3d/ressac-crimson-flow.png` | Bloqué sur plan d'essai | À importer dès le passage à un plan payant |
+
+Les vignettes sont de simples images : leur import relève des règles habituelles des images produit (à vérifier par Sacha sur la boutique d'essai).
+
+Textes alternatifs : partie B, deux par coloris (modèle 3D, vignette).
+
+**À l'import (Sacha)**
+- Ordre conseillé : vignette face en premier média, puis le modèle 3D, puis les vues secondaires (trois-quarts avant, dos) si elles sont rendues.
+- Une vignette par coloris sert d'image de variante ; l'association d'un modèle 3D à une variante est à vérifier dans l'admin Shopify.
+- Mention à afficher près du visualiseur et sous chaque vignette : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
+- Éclairage du visualiseur : environnement « neutral » de model-viewer, ombre douce (intensité 1, flou 1), fond Beige #F5EDE4.
+
+**Ce que montre le 360°** : silhouette boxy aux épaules tombantes, bords-côtes de 6 cm, zip argent et tirette dorée, deux poches biais, capuche double épaisseur sans cordon ni œillets, motif marbré en deux tons continu d'une face à l'autre.
+
+**Limites** : représentation stylisée, non fabriquée. Le tombé du French terry, l'épaisseur, les coutures et le placement du motif diffèrent. La tirette est schématique (gravure « Kyma » définitive absente). À compléter par le shooting du produit fabriqué après validation des préséries.

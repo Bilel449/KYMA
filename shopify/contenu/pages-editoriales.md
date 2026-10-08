@@ -1,10 +1,12 @@
 # KYMA — Pages éditoriales Shopify
 
-> Livrable Izaac, mode mission. Version 2 (corrections Arthur, cycle 1/2), relecture juridique Victoire en parallèle.
+> Livrable Izaac, mode mission. Version 3 (vouvoiement, visuels 3D), relecture juridique Victoire en parallèle.
 > Mêmes balises que `fiches-produit.md` : `[SI CERTIFIÉ : …]`, `[SI CONFIRMÉ : …]`, `[SI PRÉSÉRIE VALIDÉE : …]` (avec `[REPLI : …]`), `[À COMPLÉTER : …]`, `[À CONFIRMER : …]`.
 > Par défaut, tant que rien n'est activé, le texte public se lit sans les passages entre crochets `[SI …]`, et les `[REPLI]` sont publiés.
 > Repli standard d'unicité : « Pensé pour que chaque pièce soit unique. »
+> Mention des visuels (formule unique) : « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. »
 > Aucun fabricant n'est nommé. Nom de la pièce signature utilisé : « Ressac » (repli : « le hoodie zippé KYMA »).
+> Ton : vouvoiement partout, aligné sur les textes de Maya.
 
 ---
 
@@ -64,6 +66,8 @@ Marbré. Fluide. Jamais symétrique.
 Deux nuances proches, un tourbillon qui s'écoule.
 `[SI PRÉSÉRIE VALIDÉE : Le motif ne se répète pas : chaque hoodie est découpé dans une zone différente du rouleau, et porte son propre dessin.]`
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
+
+Si un visuel 3D accompagne ce bloc, la mention s'affiche dessous : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
 
 ## Appel à l'action
 
@@ -131,25 +135,25 @@ Questions *fréquentes*
 
 ### 1. Quelle taille choisir ?
 
-Le hoodie Ressac est oversize : ta taille habituelle donne la silhouette voulue, ample et posée. Pour une coupe plus ajustée, prends une taille en dessous. Toutes les mesures sont dans le [guide des tailles](/pages/guide-des-tailles).
+Le hoodie Ressac est oversize : votre taille habituelle donne la silhouette voulue, ample et posée. Pour une coupe plus ajustée, prenez une taille en dessous. Toutes les mesures sont dans le [guide des tailles](/pages/guide-des-tailles).
 
 ### 2. Comment entretenir mon hoodie ?
 
-Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. `[À CONFIRMER : à aligner sur l'étiquette définitive]` Suis toujours l'étiquette cousue dans la pièce.
+Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. `[À CONFIRMER : à aligner sur l'étiquette définitive]` Suivez toujours l'étiquette cousue dans la pièce.
 
 ### 3. Chaque pièce est-elle unique ?
 
 `[SI PRÉSÉRIE VALIDÉE : Oui. Le motif est imprimé en continu sur un rouleau de tissu, sans répétition. Chaque hoodie est découpé dans une zone différente : deux pièces du même coloris partagent les mêmes teintes, jamais le même dessin.]`
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
-Les photos du site montrent l'esprit du motif, pas ta pièce exacte.
+Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.
 
 ### 4. Comment fonctionne la précommande ?
 
-Le Drop 1 est proposé en précommande : la fabrication est lancée après la clôture de la précommande. Expédition au plus tard le `[À COMPLÉTER : date]`, indiquée sur la fiche produit. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]`.
+Le Drop 1 est proposé en précommande : la fabrication est lancée après la clôture de la précommande. Expédition au plus tard le `[À COMPLÉTER : date]`, indiquée sur la fiche produit. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]`.
 
 ### 5. Comment se passe la livraison ?
 
-Nous livrons en `[À COMPLÉTER : pays desservis ; à ce stade, la France]`. Frais de livraison : `[À COMPLÉTER : frais]`. Délai : `[À COMPLÉTER : délai de livraison après expédition]`. Tu reçois un e-mail de suivi dès l'envoi. `[À CONFIRMER : transporteur et suivi]`
+Nous livrons en `[À COMPLÉTER : pays desservis ; à ce stade, la France]`. Frais de livraison : `[À COMPLÉTER : frais]`. Délai : `[À COMPLÉTER : délai de livraison après expédition]`. Vous recevez un e-mail de suivi dès l'envoi. `[À CONFIRMER : transporteur et suivi]`
 
 ### 6. Puis-je retourner ma commande ?
 
@@ -181,4 +185,4 @@ Aucune, sinon la couleur. Même coupe, même tissu, même motif KYMA Wave. Seuls
 2. Renseigner les `[À COMPLÉTER]` : date d'expédition, composition de la doublure de capuche, pays et frais de livraison, e-mail de contact.
 3. Créer les pages « Retours et échanges » et CGV, puis brancher les liens.
 4. Valider le nom « Ressac » (disponibilité).
-5. Remplacer les rendus par les photos de la pièce fabriquée après présérie.
+5. Compléter les visuels de présentation 3D par le shooting de la pièce fabriquée, après validation des préséries.

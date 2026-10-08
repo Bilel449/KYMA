@@ -357,7 +357,7 @@
   };
   S.frame = function (dt) {
     var C = this.col, f = 1 - Math.exp(-dt * 5); /* lissage du pointeur : taux 5/s, indépendant des i/s */
-    this.t += dt; this.frames++; this.ftime += dt;
+    this.t += dt * (this.p.speed == null ? 1 : this.p.speed); this.frames++; this.ftime += dt;
     if (C.k < 1) {
       C.k = Math.min(1, C.k + dt / FADE);
       var e = ease(C.k); C.a = mix3(C.fa, C.ta, e); C.b = mix3(C.fb, C.tb, e); C.v = mix3(C.fv, C.tv, e);
