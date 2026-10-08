@@ -16,6 +16,12 @@
         "price": {
           "type": "price"
         },
+        "price_note": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p class=\"kyma-price-note\">Hors frais de livraison. <a href=\"/policies/shipping-policy\">Livraison</a></p>"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -41,6 +47,7 @@
         "vendor",
         "title",
         "price",
+        "price_note",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -100,7 +107,10 @@
           "settings": {
             "heading": "Précommande",
             "text": "Cette pièce est produite après validation des commandes.",
-            "date_label": "Expédition prévue :",
+            "date_label": "Expédition au plus tard le :",
+            "cancel_text": "Annulation possible à tout moment avant l'expédition et jusqu'à 14 jours après réception.",
+            "returns_link": "/policies/refund-policy",
+            "cgv_link": "/policies/terms-of-service",
             "always_show": false
           }
         },
@@ -108,7 +118,7 @@
           "type": "disclaimer",
           "settings": {
             "heading": "Visuels",
-            "text": "Visuels non contractuels. Le motif étant unique à chaque pièce, votre hoodie pourra différer légèrement des images présentées."
+            "text": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente."
           }
         }
       },

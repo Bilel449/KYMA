@@ -1,8 +1,9 @@
 # KYMA — Pages éditoriales Shopify
 
-> Livrable Izaac, mode mission. Version 1 à valider par Arthur, relecture juridique Victoire en parallèle.
-> Mêmes balises que `fiches-produit.md` : `[SI CERTIFIÉ : …]`, `[SI CONFIRMÉ : …]`, `[À COMPLÉTER : …]`, `[À CONFIRMER : …]`.
-> Par défaut, tant que rien n'est activé, le texte public se lit sans les passages entre crochets.
+> Livrable Izaac, mode mission. Version 2 (corrections Arthur, cycle 1/2), relecture juridique Victoire en parallèle.
+> Mêmes balises que `fiches-produit.md` : `[SI CERTIFIÉ : …]`, `[SI CONFIRMÉ : …]`, `[SI PRÉSÉRIE VALIDÉE : …]` (avec `[REPLI : …]`), `[À COMPLÉTER : …]`, `[À CONFIRMER : …]`.
+> Par défaut, tant que rien n'est activé, le texte public se lit sans les passages entre crochets `[SI …]`, et les `[REPLI]` sont publiés.
+> Repli standard d'unicité : « Pensé pour que chaque pièce soit unique. »
 > Aucun fabricant n'est nommé. Nom de la pièce signature utilisé : « Ressac » (repli : « le hoodie zippé KYMA »).
 
 ---
@@ -27,8 +28,10 @@ C'est de là que la marque naît, à Paris. D'un rythme plutôt que d'une image.
 **Peu de choses, bien dites.**
 Une seule pièce signature : un hoodie zippé oversize. Épaules tombantes, matière dense, intérieur gratté, capuche sans cordon. Rien d'ajouté, rien de bruyant.
 
-**Un motif qui ne revient pas.**
-Le motif KYMA Wave, marbré, fluide, tonal, court sur le tissu comme l'eau sur le sable. Il ne se répète jamais à l'identique. Chaque pièce est donc unique.
+**Un motif fluide.**
+Le motif KYMA Wave, marbré, fluide, tonal, court sur le tissu comme l'eau sur le sable.
+`[SI PRÉSÉRIE VALIDÉE : Il ne se répète jamais à l'identique. Chaque pièce est donc unique.]`
+`[REPLI : Pensé pour que chaque pièce soit unique.]`
 
 **Des petites séries.**
 Le Drop 1 est produit en petites séries, coloris par coloris. Peu de pièces, une attention entière à chacune.
@@ -58,11 +61,13 @@ Le motif *KYMA Wave*
 
 Marbré. Fluide. Jamais symétrique.
 
-Deux nuances proches, un tourbillon qui s'écoule. Le motif ne se répète pas : chaque hoodie est découpé dans une zone différente du rouleau, et porte son propre dessin.
+Deux nuances proches, un tourbillon qui s'écoule.
+`[SI PRÉSÉRIE VALIDÉE : Le motif ne se répète pas : chaque hoodie est découpé dans une zone différente du rouleau, et porte son propre dessin.]`
+`[REPLI : Pensé pour que chaque pièce soit unique.]`
 
 ## Appel à l'action
 
-Voir les cinq coloris → `[LIEN : /collections/drop-1]`
+Voir les coloris → `[LIEN : /products/ressac-hoodie-zippe-oversize]`
 
 ### Note de mise en page (pour Sacha)
 
@@ -95,11 +100,12 @@ Un French terry de 400 à 420 g/m² `[À CONFIRMER : grammage définitif à la p
 
 ## 3. Le motif
 
-Le motif KYMA Wave est imprimé en pigmentaire, all-over, sur un long rouleau de tissu. Il ne boucle pas. `[SI CERTIFIÉ : Encres conformes GOTS / OEKO-TEX ECO PASSPORT.]`
+Le motif KYMA Wave est imprimé en pigmentaire, all-over, sur un long rouleau de tissu. `[SI PRÉSÉRIE VALIDÉE : Il ne boucle pas.]` `[SI CERTIFIÉ : Encres conformes GOTS / OEKO-TEX ECO PASSPORT.]`
 
 ## 4. La découpe
 
-Chaque pièce est découpée dans une zone différente du rouleau. C'est ce geste qui rend chaque hoodie unique.
+`[SI PRÉSÉRIE VALIDÉE : Chaque pièce est découpée dans une zone différente du rouleau. C'est ce geste qui rend chaque hoodie unique.]`
+`[REPLI : Chaque pièce est découpée avec soin dans le tissu imprimé. Pensé pour que chaque pièce soit unique.]`
 
 ## 5. La forme
 
@@ -131,13 +137,15 @@ Le hoodie Ressac est oversize : ta taille habituelle donne la silhouette voulue,
 
 Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. `[À CONFIRMER : à aligner sur l'étiquette définitive]` Suis toujours l'étiquette cousue dans la pièce.
 
-### 3. Pourquoi dit-on que chaque pièce est unique ?
+### 3. Chaque pièce est-elle unique ?
 
-Le motif est imprimé en continu sur un rouleau de tissu, sans répétition. Chaque hoodie est découpé dans une zone différente : deux pièces du même coloris partagent les mêmes teintes, jamais le même dessin. Les photos du site montrent l'esprit du motif, pas ta pièce exacte.
+`[SI PRÉSÉRIE VALIDÉE : Oui. Le motif est imprimé en continu sur un rouleau de tissu, sans répétition. Chaque hoodie est découpé dans une zone différente : deux pièces du même coloris partagent les mêmes teintes, jamais le même dessin.]`
+`[REPLI : Pensé pour que chaque pièce soit unique.]`
+Les photos du site montrent l'esprit du motif, pas ta pièce exacte.
 
 ### 4. Comment fonctionne la précommande ?
 
-Le Drop 1 est proposé en précommande : la production est lancée une fois les précommandes réunies. La date d'expédition estimée est indiquée sur chaque fiche produit `[À COMPLÉTER : date d'expédition estimée]`. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]`.
+Le Drop 1 est proposé en précommande : la fabrication est lancée après la clôture de la précommande. Expédition au plus tard le `[À COMPLÉTER : date]`, indiquée sur la fiche produit. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos [CGV] `[LIEN : /policies/terms-of-service]`.
 
 ### 5. Comment se passe la livraison ?
 
@@ -149,7 +157,9 @@ Oui. Les conditions, le délai et la marche à suivre sont réunis sur la page [
 
 ### 7. De quoi est fait le hoodie ?
 
-French terry de 400 à 420 g/m², intérieur gratté. Bords-côtes 2×2 en 95 % coton et 5 % élasthanne. Composition du corps : `[À CONFIRMER : 100 % coton, selon l'étiquette définitive]` `[SI CERTIFIÉ : coton biologique certifié GOTS]`. Zip métal argent brossé, tirette en laiton plaqué or brossé.
+French terry de 400 à 420 g/m², intérieur gratté `[À CONFIRMER : grammage définitif]`. Composition par élément :
+Corps : `[À CONFIRMER : 100 % coton]` `[SI CERTIFIÉ : coton biologique certifié GOTS]` · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : `[À COMPLÉTER : composition]`.
+Zip métal argent brossé, tirette en laiton plaqué or brossé.
 
 ### 8. Quelle est la différence entre les coloris ?
 
@@ -167,8 +177,8 @@ Aucune, sinon la couleur. Même coupe, même tissu, même motif KYMA Wave. Seuls
 
 ### Points ouverts à traiter avant publication
 
-1. Activer ou retirer chaque balise `[SI CERTIFIÉ]` / `[SI CONFIRMÉ]` selon preuves (Victoire).
-2. Renseigner les `[À COMPLÉTER]` : date d'expédition, pays et frais de livraison, e-mail de contact.
+1. Activer ou retirer chaque balise `[SI CERTIFIÉ]` / `[SI CONFIRMÉ]` / `[SI PRÉSÉRIE VALIDÉE]` selon preuves (Victoire).
+2. Renseigner les `[À COMPLÉTER]` : date d'expédition, composition de la doublure de capuche, pays et frais de livraison, e-mail de contact.
 3. Créer les pages « Retours et échanges » et CGV, puis brancher les liens.
 4. Valider le nom « Ressac » (disponibilité).
 5. Remplacer les rendus par les photos de la pièce fabriquée après présérie.

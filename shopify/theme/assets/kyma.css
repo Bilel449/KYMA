@@ -253,7 +253,6 @@ html.kyma-js .kyma-divider[data-kyma-reveal].is-in { transform: scaleX(1); }
   opacity: 0; animation: kyma-fadeUp 1s 0.5s var(--kyma-ease) forwards;
 }
 .kyma-hero__title em { font-style: italic; color: var(--kyma-lilas-ink); }
-.kyma-stack em { display: block; }
 .kyma-hero__sub {
   max-width: 560px; margin: 28px auto 0; font-size: 14px; font-weight: 400; line-height: 1.8;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--kyma-gris-ink);
@@ -404,6 +403,11 @@ html.kyma-ready .kyma-cw__nav { display: flex; }
 .kyma-table thead th { background: rgba(28, 28, 28, 0.04); letter-spacing: 0.12em; }
 .kyma-table tbody th { text-align: left; }
 .kyma-note { margin: 16px 0 0; font-size: 13px; line-height: 1.7; color: var(--kyma-gris-ink); }
+.kyma-note a, .kyma-price-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--kyma-lilas); }
+.kyma-note a:hover, .kyma-price-note a:hover { color: var(--kyma-noir); }
+.kyma-price-note { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--kyma-gris-ink); }
+.kyma-fig { margin: 0; }
+.kyma-caption { margin: 12px 0 0; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--kyma-gris-ink); }
 .kyma-pre { padding: 20px 24px; background: rgba(200, 162, 200, 0.14); border: 1px solid var(--kyma-lilas); }
 .kyma-pre__date { margin: 8px 0 0; font-size: 16px; }
 .kyma-pre__date strong { font-weight: 500; }

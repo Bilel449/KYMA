@@ -16,7 +16,11 @@
   <h2 class="kyma-sec__title"{% if heading_id != blank %} id="{{ heading_id }}"{% endif %}>
     {{- before | escape -}}
     {%- if em != blank %} <em>{{ em | escape }}</em>{% endif -%}
-    {%- if after != blank %} {{ after | escape }}{% endif -%}
+    {%- if after != blank -%}
+      {%- assign after_first = after | strip | slice: 0, 1 -%}
+      {%- unless '.,;:!?)' contains after_first %} {% endunless -%}
+      {{- after | strip | escape -}}
+    {%- endif -%}
   </h2>
 {%- endif -%}
 {%- if text != blank -%}<p class="kyma-sec__desc">{{ text | escape | newline_to_br }}</p>{%- endif -%}

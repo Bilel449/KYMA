@@ -70,6 +70,9 @@
                       class: 'kyma-cw__img'
                   }}
                 </div>
+                {%- if block.settings.caption != blank -%}
+                  <p class="kyma-caption">{{ block.settings.caption | escape }}</p>
+                {%- endif -%}
               {%- else -%}
                 <div class="kyma-cw__media kyma-cw__media--ph" style="--tile: {{ dot }};" aria-hidden="true"></div>
               {%- endif -%}
@@ -111,14 +114,14 @@
   "tag": "div",
   "class": "kyma-section",
   "settings": [
-    { "type": "text", "id": "number", "label": "Numéro", "default": "02" },
-    { "type": "text", "id": "label", "label": "Label", "default": "Drop 1" },
-    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cinq" },
-    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "courants" },
-    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
-    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Un seul hoodie zippé oversize, cinq marbrures. Chaque coloris a son propre sillage." },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Le Drop 1" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cinq coloris, un même" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "flux" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série." },
     { "type": "text", "id": "link_label", "label": "Texte du lien sous chaque coloris", "default": "Découvrir" },
-    { "type": "text", "id": "cta_label", "label": "Lien sous la bande — texte", "default": "Voir tout le Drop 1" },
+    { "type": "text", "id": "cta_label", "label": "Lien sous la bande — texte", "default": "Voir les coloris" },
     { "type": "url", "id": "cta_link", "label": "Lien sous la bande — URL" }
   ],
   "blocks": [
@@ -128,6 +131,7 @@
       "limit": 12,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (packshot, fond clair)" },
+        { "type": "text", "id": "caption", "label": "Légende sous l'image (laisser vide pour une vraie photo du produit fabriqué)", "default": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente." },
         { "type": "text", "id": "name", "label": "Nom du coloris", "default": "Lilac Whirl" },
         { "type": "text", "id": "description", "label": "Description courte" },
         { "type": "url", "id": "link", "label": "Lien (fiche produit ou variante)" },

@@ -28,10 +28,17 @@
     {%- endif -%}
 
     {%- if section.settings.title_before != blank or section.settings.title_em != blank -%}
-      <h2 class="kyma-hero__title{% if section.settings.em_new_line %} kyma-stack{% endif %}">
+      <h2 class="kyma-hero__title">
         {{- section.settings.title_before | escape -}}
-        {%- if section.settings.title_em != blank %} <em>{{ section.settings.title_em | escape }}</em>{% endif -%}
-        {%- if section.settings.title_after != blank %} {{ section.settings.title_after | escape }}{% endif -%}
+        {%- if section.settings.title_em != blank -%}
+          {%- if section.settings.em_new_line %}<br>{% else %} {% endif -%}
+          <em>{{ section.settings.title_em | escape }}</em>
+        {%- endif -%}
+        {%- if section.settings.title_after != blank -%}
+          {%- assign after_first = section.settings.title_after | strip | slice: 0, 1 -%}
+          {%- unless '.,;:!?)' contains after_first %} {% endunless -%}
+          {{- section.settings.title_after | strip | escape -}}
+        {%- endif -%}
       </h2>
     {%- endif -%}
 
@@ -83,14 +90,14 @@
   "class": "kyma-section",
   "settings": [
     { "type": "header", "content": "Texte" },
-    { "type": "text", "id": "label", "label": "Label (petites capitales)", "default": "KYMA Paris — Drop 1" },
-    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Ride the" },
-    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "wave" },
-    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
+    { "type": "text", "id": "label", "label": "Label (petites capitales)", "default": "DROP 1 — PRÉCOMMANDE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Une pièce. Aucune" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "identique" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
     { "type": "checkbox", "id": "em_new_line", "label": "Mot en italique sur sa propre ligne", "default": true },
-    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Le hoodie zippé oversize. Chaque pièce est unique." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Le hoodie zippé oversize. Pensé pour que chaque pièce soit unique." },
     { "type": "header", "content": "Boutons" },
-    { "type": "text", "id": "cta_label", "label": "Bouton principal — texte", "default": "Découvrir le Drop 1" },
+    { "type": "text", "id": "cta_label", "label": "Bouton principal — texte", "default": "Choisir mon coloris" },
     { "type": "url", "id": "cta_link", "label": "Bouton principal — lien" },
     { "type": "text", "id": "cta2_label", "label": "Bouton secondaire — texte", "default": "Notre histoire" },
     { "type": "url", "id": "cta2_link", "label": "Bouton secondaire — lien" },
