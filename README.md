@@ -2,7 +2,7 @@
 
 **Streetwear unisexe — L'art du flow.**
 
-Ce dépôt héberge l'équipe IA de la marque KYMA : 6 agents spécialisés qui collaborent pour cadrer, créer, communiquer, vérifier et livrer.
+Ce dépôt héberge l'équipe IA de la marque KYMA : 7 agents spécialisés qui collaborent pour cadrer, créer, communiquer, vérifier et livrer.
 
 ## L'équipe
 
@@ -12,6 +12,7 @@ Ce dépôt héberge l'équipe IA de la marque KYMA : 6 agents spécialisés qui 
 | **Izaac** | Création produit — drops, naming, direction artistique |
 | **Maya** | Communication & marketing — Instagram, campagnes, copy, RP |
 | **Sacha** | Site e-commerce Shopify — structure, thème & design, fiches produit, collections, SEO |
+| **Victoire** | Juridique — pages légales, CGV, RGPD, allégations, marque & PI, contrats |
 | **Isabelle** | Recherche — tendances, marché, données |
 | **Arthur** | Manager & QA — valide et livre (**seul** à livrer) |
 
@@ -22,8 +23,8 @@ Ce dépôt héberge l'équipe IA de la marque KYMA : 6 agents spécialisés qui 
                    │
               Clémentine
                    │
-     ┌──────────┬──┴───────┬──────────┐
-   Izaac      Maya      Sacha     Isabelle
+     ┌────────┬───────┼────────┬─────────┐
+   Izaac    Maya    Sacha   Victoire  Isabelle
 ```
 
 Tu peux **lancer une mission complète** (orchestration automatique respectant la hiérarchie) **ou parler directement à un agent** pour un échange ciblé.
@@ -44,7 +45,8 @@ KYMA/
 │     ├─ clementine.md
 │     ├─ izaac.md
 │     ├─ maya.md          ← communication & marketing
-│     ├─ sacha.md         ← NOUVEAU : site e-commerce Shopify
+│     ├─ sacha.md         ← site e-commerce Shopify + motion design
+│     ├─ victoire.md      ← NOUVEAU : juridique
 │     ├─ isabelle.md
 │     └─ arthur.md
 ├─ src/
@@ -81,7 +83,7 @@ Puis dans ce dossier :
 claude
 ```
 
-Tes 6 agents sont chargés. Quelques exemples :
+Tes 7 agents sont chargés. Quelques exemples :
 
 **Mission complète (orchestrée)** :
 > Lance une mission : concept de Drop 2 pour KYMA, avec coloris + plan de lancement Instagram.
@@ -118,7 +120,7 @@ Pousse le dépôt sur GitHub, ajoute le secret `ANTHROPIC_API_KEY` (Settings →
 ## Comment ça marche techniquement
 
 - Le runtime (`src/run.ts`) appelle `query()` du Claude Agent SDK avec `settingSources: ['project']`, ce qui charge automatiquement les sous-agents depuis `.claude/agents/`.
-- Un prompt « coordinateur » impose l'ordre Clémentine → Isabelle (si besoin) → Izaac/Maya/Sacha → Arthur.
+- Un prompt « coordinateur » impose l'ordre Clémentine → Isabelle (si besoin) → Izaac/Maya/Sacha/Victoire → Arthur.
 - En mode interactif Claude Code, le fichier `CLAUDE.md` décrit la hiérarchie et le routage par défaut — Claude Code délègue automatiquement à l'agent pertinent.
 - Chaque agent a son propre contexte ; les workflows multi-agents consomment plus de tokens qu'une session simple.
 
@@ -131,7 +133,7 @@ Clémentine    (cadre, étapes, aiguillage)
    ↓
 Isabelle      (recherche, si nécessaire)
    ↓
-Izaac / Maya / Sacha    (exécution selon le type de mission)
+Izaac / Maya / Sacha / Victoire    (exécution selon le type de mission)
    ↓
 Arthur        (relecture → corrections en boucle → livraison)
 ```
