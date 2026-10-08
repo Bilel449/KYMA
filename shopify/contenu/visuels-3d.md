@@ -26,5 +26,5 @@ Un hoodie sculpté plutôt que photographié. Nous suivons la référence **Spli
 ## Limites — à afficher
 - Il s'agit d'une **représentation stylisée**. Ce n'est pas le produit fabriqué : le tombé du French terry, l'épaisseur réelle, les coutures et le placement du motif diffèrent. Chaque pièce est découpée dans une zone différente du rouleau.
 - La tirette est schématique : elle ne reproduit pas la gravure « Kyma » définitive.
-- **Mention obligatoire** près du visualiseur et dans le texte alternatif : « *Visuel de présentation 3D — non contractuel. Le produit fabriqué peut différer (motif, tombé, finitions).* »
+- **Mention obligatoire** près du visualiseur et dans le texte alternatif : « *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.* » (formule unique du site, à valider par Victoire). Le rendu 3D reste stylisé : il doit rester fidèle à la coupe, aux coloris et aux finitions réels.
 - Ces visuels sont à remplacer ou à compléter par le shooting du produit fabriqué, après validation des préséries.

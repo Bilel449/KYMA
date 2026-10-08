@@ -45,7 +45,7 @@ Qu'on reconnaisse KYMA sans logo : à la texture, à la couleur, au mouvement. L
 
 ### Note de mise en page (pour Sacha)
 
-- Beaucoup d'espace blanc, une phrase par ligne. Fond beige, titres en DM Serif Display, mot fort en italique lilas foncé (`#9B7A9B`).
+- Beaucoup d'espace blanc, une phrase par ligne. Fond beige, titres en DM Serif Display, mot fort en italique Camel profond (`#8A6A52`, dès 32 px ; Brun `#4A3B32` en dessous — à confirmer par le fondateur).
 - Le grec κύμα en grand, seul, en tête de page.
 - Aucune date de fondation affichée : les documents source se contredisent (2024 / 2025 / 2026) — point à arbitrer par le fondateur.
 
@@ -76,7 +76,7 @@ Voir les coloris → `[LIEN : /products/ressac-hoodie-zippe-oversize]`
 ### Note de mise en page (pour Sacha)
 
 - Charte §05 : l'arrière-plan animé du site reprend le motif. Toujours tonal, jamais de contraste extrême, mouvement lent. Pas d'ombre, de glow ni de dégradé sur le logo.
-- Le lilas (`#C8A2C8`) reste rare : un seul accent, sur le bouton.
+- Accents : marron clair `#C19E86` et rose clair `#E8C4C4` en décor ; le lilas n'est plus une couleur d'interface (seulement le coloris Lilac Whirl).
 
 ---
 

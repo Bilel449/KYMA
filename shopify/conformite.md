@@ -40,7 +40,7 @@ Shopify demande aussi une politique « Coordonnées » (Contact information) : y
 | **Paris** | « Made in Paris », « fabriqué en France », drapeau tricolore sur le produit. | « **KYMA Paris** », « marque créée à Paris » (vrai : marque basée à Paris). | — |
 | **Disponibilité / rareté** | « En stock », « livraison rapide », « plus que X pièces » si c'est faux. | « **Précommande — expédition au plus tard le [date]** » | — |
 
-**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.** » Une mention « non contractuel » ne rend pas licite un visuel trompeur. Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries.
+**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.** » (formule mise à jour le 08/10/2026 : repli conforme au tableau d'unicité tant que les préséries ne sont pas validées — à confirmer par Victoire) Une mention « non contractuel » ne rend pas licite un visuel trompeur. Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries.
 
 ---
 
