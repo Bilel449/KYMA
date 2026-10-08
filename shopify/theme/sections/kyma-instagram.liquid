@@ -1,0 +1,64 @@
+{%- comment -%}
+  KYMA — Instagram (accueil § 06) : six tuiles, chacune un fragment du motif KYMA Wave (image fixe générée
+  une fois par kyma-3d.js : aucun canvas actif, aucune image IA) avec une courte légende en DM Serif Display.
+  Pas d'incrustation Instagram (traceurs tiers sans consentement) : chaque tuile renvoie vers le compte.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-ig-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-ig" aria-labelledby="{{ hid }}">
+  <div class="kyma-sec__inner">
+    <div class="kyma-ig__head" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      <p><a class="kyma-link" href="{{ section.settings.url }}" target="_blank" rel="noopener">{{ section.settings.cta_label | escape }}<span class="kyma-vh"> (nouvel onglet)</span></a></p>
+    </div>
+    <ul class="kyma-ig__grid" role="list" data-kyma-tiles>
+      {%- for block in section.blocks -%}
+        <li class="kyma-ig__tile" style="--i: {{ forloop.index0 }};" data-kyma-reveal {{ block.shopify_attributes }}>
+          <a href="{{ section.settings.url }}" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="{{ block.settings.palette }}" data-seed="{{ forloop.index | times: 37 }}">
+            <span class="kyma-ig__cap">{{ block.settings.caption | escape }}</span>
+            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Instagram",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "instagram" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "06" },
+    { "type": "text", "id": "label", "label": "Label", "default": "INSTAGRAM" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Dans le" },
+    { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "sillage" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Coulisses, textures et premiers regards, sur @kymasinsta." },
+    { "type": "text", "id": "cta_label", "label": "Lien — texte", "default": "Suivre @kymasinsta" },
+    { "type": "url", "id": "url", "label": "Lien du compte", "default": "https://www.instagram.com/kymasinsta/" }
+  ],
+  "blocks": [
+    {
+      "type": "tile", "name": "Tuile",
+      "settings": [
+        { "type": "text", "id": "caption", "label": "Légende", "default": "Écume" },
+        { "type": "select", "id": "palette", "label": "Palette", "options": [ { "value": "kyma", "label": "Rose clair et beige" }, { "value": "kyma-camel", "label": "Marron clair et rose" } ], "default": "kyma" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "KYMA — Instagram" } ]
+}
+{% endschema %}

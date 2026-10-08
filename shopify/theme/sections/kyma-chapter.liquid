@@ -1,0 +1,175 @@
+{%- comment -%}
+  KYMA — Chapitre éditorial (Nous connaître, fiche produit, Cercle Waves…).
+  « 01 — LABEL », titre à mot en italique, texte, lien, et un visuel sans image :
+    wave     = sculpture 3D « La Vague » (V), au repos, qui tourne avec le défilement
+    keywords = sculpture 3D + mots-clés (ex. Texture · Couleur · Mouvement) qui pilotent la sculpture
+    pattern  = motif KYMA Wave plein cadre (E à plat), tourbillon au pointeur, sélecteur de teinte facultatif
+    cloth    = étoffe / maille 3D (E)
+    river    = tracé libre d'un fleuve (vectoriel original, sans fond de carte) avec le point « Paris »
+    path     = ligne ondulée qui relie le symbole INITIUM (un anneau) au symbole ORIGINE (deux anneaux)
+    drawing  = dessin technique du hoodie (vectoriel)
+  Ancre facultative (ex. « motif ») pour les liens /pages/nous-connaitre#motif.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- liquid
+  assign tid = 'kyma-chap-' | append: section.id
+  assign hid = tid | append: '-t'
+  assign v = section.settings.visual
+  assign scene = ''
+  case v
+    when 'wave', 'keywords'
+      assign scene = 'hero'
+    when 'pattern'
+      assign scene = 'pattern'
+    when 'cloth'
+      assign scene = 'swatch'
+  endcase
+  assign kws = section.settings.keywords | newline_to_br | split: '<br />'
+-%}
+<section
+  id="{{ section.settings.anchor | default: tid }}"
+  class="kyma-sec kyma-chap kyma-chap--{{ v }}{% if section.settings.flip %} kyma-chap--flip{% endif %}{% if section.settings.tone == 'rose' %} kyma-sec--rose{% endif %}"
+  aria-labelledby="{{ hid }}"
+  {% if scene != '' %}data-kyma-tint-scope{% endif %}
+  {% if v == 'wave' or v == 'keywords' %}data-kyma-spin{% endif %}
+>
+  <div class="kyma-sec__inner kyma-chap__grid">
+    <div class="kyma-chap__text" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      {%- if v == 'keywords' and kws.size > 0 -%}
+        <ul class="kyma-chap__kw" role="list" data-kyma-keywords>
+          {%- for k in kws -%}
+            {%- assign kk = k | strip -%}
+            {%- if kk != blank -%}
+              <li><button type="button" class="kyma-chap__kwbtn" data-step="{{ forloop.index0 }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ kk | escape }}</button></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <p class="kyma-chap__cta"><a class="kyma-link" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label | escape }}</a></p>
+      {%- endif -%}
+    </div>
+
+    {%- if v != 'none' -%}
+      <figure class="kyma-chap__viz" data-kyma-reveal style="--kd: 150ms;">
+        {%- if scene != '' -%}
+          <div class="kyma-chap__stage" data-kyma-3d-host>
+            <canvas data-kyma-3d="{{ scene }}" data-colorway="{{ section.settings.colorway }}" {% if scene == 'hero' %}data-shift="0,0"{% endif %}{% if scene == 'swatch' or section.settings.tints %} data-grain="0"{% endif %} aria-hidden="true"></canvas>
+          </div>
+          {%- if v == 'pattern' and section.settings.tints -%}
+            <div class="kyma-tints" role="group" aria-label="{{ section.settings.tints_label | escape }}" data-kyma-tints>
+              {%- assign tints = 'kyma:KYMA:#E8C4C4:#F5EDE4,lilac-whirl:Lilac Whirl:#C8A2C8:#F5EDE4,ivory-tide:Ivory Tide:#E8E0D8:#C5BFB8,silver-drift:Silver Drift:#8E9EAB:#C8CDD2,noir-absolu:Noir Absolu:#1A1A1A:#3A3A4A,crimson-flow:Crimson Flow:#5C2032:#C4878E' | split: ',' -%}
+              {%- for t in tints -%}
+                {%- assign tp = t | split: ':' -%}
+                <button type="button" class="kyma-tints__dot" data-colorway="{{ tp[0] }}" aria-pressed="{% if tp[0] == section.settings.colorway %}true{% else %}false{% endif %}" style="--a: {{ tp[2] }}; --b: {{ tp[3] }};">
+                  <span class="kyma-vh">{{ tp[1] }}</span>
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- elsif v == 'river' -%}
+          <div class="kyma-chap__river">
+            <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tracé libre d'un fleuve qui traverse une ville, avec un point : Paris." focusable="false" data-kyma-trace data-kyma-river>
+              <path pathLength="1" class="kyma-river__bank" d="M-10 300 C60 290 92 250 150 236 C214 220 248 262 300 252 C352 242 372 186 430 168 C486 150 540 176 610 150"/>
+              <path pathLength="1" class="kyma-river__bank is-fine" d="M-10 326 C64 318 100 276 156 262 C218 246 252 290 304 280 C360 270 380 212 436 194 C492 176 546 202 610 176"/>
+              <path pathLength="1" class="is-fine" d="M236 244 C246 254 256 262 268 270 M248 236 L280 270"/>
+              <g class="kyma-river__pin">
+                <circle cx="300" cy="266" r="7"/>
+                <circle class="kyma-river__halo" cx="300" cy="266" r="16"/>
+                <text x="314" y="300">Paris</text>
+              </g>
+            </svg>
+            <button type="button" class="kyma-river__hit" aria-describedby="{{ tid }}-pin" style="left: 50%; top: 63%;"><span class="kyma-vh">Paris</span></button>
+            <p class="kyma-river__tip" id="{{ tid }}-pin" role="status">KYMA Paris</p>
+          </div>
+        {%- elsif v == 'path' -%}
+          <div class="kyma-chap__path">
+            <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-trace aria-hidden="true">
+              <circle pathLength="1" cx="80" cy="110" r="46"/>
+              <path pathLength="1" class="kyma-path__line" d="M126 110 C170 80 200 140 244 110 C288 80 318 140 362 110 C384 96 400 100 420 108"/>
+              <circle pathLength="1" class="kyma-path__end" cx="470" cy="110" r="46"/>
+              <circle pathLength="1" class="kyma-path__end" cx="530" cy="110" r="46"/>
+            </svg>
+            <ul class="kyma-chap__syms" role="list">
+              <li><button type="button" class="kyma-sym" aria-describedby="{{ tid }}-s1"><span>INITIUM</span></button><p id="{{ tid }}-s1" class="kyma-sym__tip">{{ section.settings.sym1 | escape }}</p></li>
+              <li><button type="button" class="kyma-sym" aria-describedby="{{ tid }}-s2"><span>ORIGINE</span></button><p id="{{ tid }}-s2" class="kyma-sym__tip">{{ section.settings.sym2 | escape }}</p></li>
+            </ul>
+          </div>
+        {%- elsif v == 'drawing' -%}
+          <div class="kyma-chap__draw" data-kyma-trace>{% render 'kyma-hoodie-tech', id: tid %}</div>
+        {%- endif -%}
+        {%- if section.settings.caption != blank -%}
+          <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Chapitre",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML, ex. motif)" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "HISTOIRE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Un mouvement qui ne" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "s'arrête" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "pas." },
+    { "type": "textarea", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "cta_label", "label": "Lien — texte" },
+    { "type": "url", "id": "cta_link", "label": "Lien — URL" },
+    {
+      "type": "select", "id": "visual", "label": "Visuel (sans image)",
+      "options": [
+        { "value": "none", "label": "Aucun" },
+        { "value": "wave", "label": "Sculpture 3D « La Vague »" },
+        { "value": "keywords", "label": "Sculpture 3D + mots-clés" },
+        { "value": "pattern", "label": "Motif KYMA Wave plein cadre" },
+        { "value": "cloth", "label": "Étoffe / maille 3D" },
+        { "value": "river", "label": "Tracé du fleuve + point Paris" },
+        { "value": "path", "label": "Passage INITIUM → ORIGINE" },
+        { "value": "drawing", "label": "Dessin technique du hoodie" }
+      ],
+      "default": "wave"
+    },
+    { "type": "textarea", "id": "keywords", "label": "Mots-clés (un par ligne, visuel « mots-clés »)", "default": "Texture\nCouleur\nMouvement" },
+    {
+      "type": "select", "id": "colorway", "label": "Palette de la 3D",
+      "options": [
+        { "value": "kyma", "label": "KYMA — rose clair et beige" },
+        { "value": "kyma-camel", "label": "KYMA — marron clair et rose" },
+        { "value": "lilac-whirl", "label": "Lilac Whirl" },
+        { "value": "ivory-tide", "label": "Ivory Tide" },
+        { "value": "silver-drift", "label": "Silver Drift" },
+        { "value": "noir-absolu", "label": "Noir Absolu" },
+        { "value": "crimson-flow", "label": "Crimson Flow" }
+      ],
+      "default": "kyma"
+    },
+    { "type": "checkbox", "id": "tints", "label": "Motif : afficher le sélecteur de teinte", "default": false },
+    { "type": "text", "id": "tints_label", "label": "Sélecteur — nom accessible", "default": "Teinte du motif" },
+    { "type": "text", "id": "sym1", "label": "Passage — phrase INITIUM", "default": "L'entrée dans le cercle." },
+    { "type": "text", "id": "sym2", "label": "Passage — phrase ORIGINE", "default": "Le palier supérieur." },
+    { "type": "text", "id": "caption", "label": "Légende du visuel" },
+    { "type": "checkbox", "id": "flip", "label": "Visuel à gauche (bureau)", "default": false },
+    {
+      "type": "select", "id": "tone", "label": "Fond",
+      "options": [ { "value": "beige", "label": "Beige" }, { "value": "rose", "label": "Rose pâle" } ],
+      "default": "beige"
+    }
+  ],
+  "presets": [ { "name": "KYMA — Chapitre" } ]
+}
+{% endschema %}

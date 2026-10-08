@@ -1,0 +1,72 @@
+{%- comment -%}
+  KYMA — Inscription au Cercle Waves (formulaire Shopify natif {% form 'customer' %}, étiquettes
+  « cercle-waves »). Un petit anneau resté ouvert (arc de 300°) se ferme en 900 ms à la réussite ; il tourne
+  lentement pendant l'envoi ; en cas d'erreur il reste ouvert, sans secousse, et le champ se souligne.
+  Case de consentement non pré-cochée. Aucun prix, aucun avantage inventé.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-cj-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-cj" aria-labelledby="{{ hid }}">
+  <div class="kyma-sec__inner kyma-cj__inner">
+    <svg class="kyma-ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false" data-kyma-ring>
+      <circle class="kyma-ring__track" cx="60" cy="60" r="44"/>
+      <circle class="kyma-ring__arc" cx="60" cy="60" r="44" pathLength="360"/>
+    </svg>
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+    </div>
+    {%- form 'customer', id: 'KymaCercle', class: 'kyma-form kyma-cj__form', novalidate: 'novalidate', data-kyma-form: 'cercle' -%}
+      <input type="hidden" name="contact[tags]" value="cercle-waves,initium">
+      {%- if form.posted_successfully? -%}
+        <p class="kyma-form__ok" role="status" data-kyma-posted>{{ section.settings.success | escape }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}<p class="kyma-form__err" role="alert">{{ section.settings.error | escape }}</p>{%- endif -%}
+      <div class="kyma-form__row">
+        <label class="kyma-field"><span class="kyma-field__l">Prénom</span>
+          <input class="kyma-field__i" type="text" name="contact[first_name]" autocomplete="given-name"></label>
+        <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
+          <input class="kyma-field__i" type="email" name="contact[email]" autocomplete="email" required aria-required="true" data-kyma-email>
+          <span class="kyma-field__err" hidden>{{ section.settings.error | escape }}</span></label>
+      </div>
+      <label class="kyma-check">
+        <input type="checkbox" required aria-required="true">
+        <span>{{ section.settings.consent | escape }}</span>
+      </label>
+      <button type="submit" class="kyma-btn" data-kyma-submit><span>{{ section.settings.button | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="kyma-form__ok" role="status" data-kyma-ok hidden>{{ section.settings.success | escape }}</p>
+      <p class="kyma-cj__terms">{{ section.settings.terms | escape }}</p>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Inscription Cercle",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "rejoindre" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "text", "id": "label", "label": "Label", "default": "ENTRER" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Entrer dans le" },
+    { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "cercle" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Prénom et adresse e-mail suffisent. Vous pourrez vous désinscrire à tout moment." },
+    { "type": "textarea", "id": "consent", "label": "Consentement [À VALIDER VICTOIRE]", "default": "J'accepte de recevoir les e-mails de KYMA (ouvertures, coulisses, premiers regards). Désinscription à tout moment. [À VALIDER VICTOIRE : formulation RGPD, responsable de traitement]" },
+    { "type": "text", "id": "button", "label": "Bouton", "default": "Rejoindre le cercle" },
+    { "type": "text", "id": "success", "label": "Confirmation", "default": "Bienvenue dans le cercle. Votre place est enregistrée." },
+    { "type": "text", "id": "error", "label": "Erreur", "default": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?" },
+    { "type": "text", "id": "terms", "label": "Mention conditions", "default": "Conditions du programme : [À COMPLÉTER : lien. Page non publiée tant que les règles ne sont pas décidées.]" }
+  ],
+  "presets": [ { "name": "KYMA — Inscription Cercle" } ]
+}
+{% endschema %}

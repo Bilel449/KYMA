@@ -1,16 +1,20 @@
 {%- comment -%}
-  KYMA — chargeur unique des ressources (polices, kyma.css, kyma-3d.js, kyma-motion.js).
-  Appelé par chaque section kyma-* ET, de préférence, une fois dans layout/theme.liquid (voir plan-site.md).
-  kyma-motion.js supprime les doublons (attribut data-kyma-asset).
-  Les deux scripts sont en « defer » : ils ne bloquent pas le premier affichage, et les scènes 3D
-  ne sont initialisées qu'après l'événement « load » (requestIdleCallback).
+  KYMA — chargeur unique des ressources (polices, kyma.css, kyma-pages.css, kyma-3d.js, kyma-motion.js, kyma-pages.js).
+  À insérer UNE fois dans layout/theme.liquid de Horizon, juste avant {{ content_for_header }} :
+      {% render 'kyma-assets' %}
+  Chaque section kyma-* l'appelle aussi (filet de sécurité si la ligne manque) : kyma-motion.js supprime les doublons
+  (attribut data-kyma-asset). Les scripts sont en « defer » : ils ne bloquent pas le premier affichage ; les scènes 3D
+  ne sont créées qu'après l'événement « load » et à l'approche de l'écran (un seul contexte WebGL par page).
   La classe « kyma-arrive » (rideau-vague) n'est posée qu'après une navigation interne animée.
-  Polices : Google Fonts par défaut. RGPD : à auto-héberger après le lancement (plan-site.md, §7).
+  Polices : Google Fonts par défaut. RGPD : à auto-héberger après le lancement (installation-horizon.md, § 7).
+  Aucune dépendance aux classes de Horizon ni de Dawn : toutes nos classes sont préfixées « kyma- ».
 {%- endcomment -%}
-<script>document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive')}catch(e){}</script>
+<script data-kyma-asset="boot">document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive');if(localStorage.getItem('kyma-motion-paused')==='1')document.documentElement.classList.add('kyma-motion-paused')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" data-kyma-asset="pc1">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-kyma-asset="pc2">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" data-kyma-asset="fonts">
 <link rel="stylesheet" href="{{ 'kyma.css' | asset_url }}" data-kyma-asset="css">
+<link rel="stylesheet" href="{{ 'kyma-pages.css' | asset_url }}" data-kyma-asset="css2">
 <script src="{{ 'kyma-3d.js' | asset_url }}" defer data-kyma-asset="js3d"></script>
 <script src="{{ 'kyma-motion.js' | asset_url }}" defer data-kyma-asset="js"></script>
+<script src="{{ 'kyma-pages.js' | asset_url }}" defer data-kyma-asset="js2"></script>

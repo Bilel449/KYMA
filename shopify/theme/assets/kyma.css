@@ -1,12 +1,13 @@
 /* ==========================================================================
-   KYMA — kyma.css  (v2 « KYMA × Spline »)
-   Thème Dawn + sections kyma-*  |  Source : charte graphique 2025 (BRAND.md)
+   KYMA — kyma.css  (v3 « KYMA × Spline », pages multiples)
+   Thème Horizon + sections kyma-*  |  Source : charte graphique 2025 (BRAND.md) + direction-pages-2026.md (Maya)
+   Aucune dépendance aux classes de Horizon : tout est préfixé « kyma- » ; seule la section 2 règle des variables.
    Aucune image générée par IA : 3D temps réel (kyma-3d.js), dessin vectoriel et typographie animée.
 
    CONTRASTE (WCAG AA) — palette beige / marron clair / rose clair / brun foncé
    - Texte : --kyma-ink #4A3B32 (9,2:1 sur beige, 8,3:1 rose pâle, 6,7:1 rose clair).
    - Secondaire : --kyma-ink-soft #6B5A4E (5,7:1 / 5,1:1). Labels : --kyma-camel-ink #7A5F4C (5,1:1 / 4,6:1).
-   - Italiques des grands titres : --kyma-camel-deep #9A7A62 (3,4:1, >= 24 px uniquement).
+   - Mot en italique des titres : Camel profond #8A6A52 (4,2:1) UNIQUEMENT à partir de 32 px ; en dessous, Brun.
    - --kyma-camel #C19E86 et --kyma-rose #E8C4C4 : décoratifs (filets, tracés, fonds), jamais du texte sur beige.
    - Sur brun foncé : texte beige (9,2:1) ou rose clair (6,7:1).
    - Texte posé sur la 3D : toujours sur un voile beige (>= 85 %) ou une carte givrée.
@@ -24,7 +25,8 @@
   --kyma-ink-deep: #2E241E;    /* texte sur marron clair (bouton secondaire au survol) */
   --kyma-ink-soft: #6B5A4E;    /* texte secondaire (5,7:1 beige, 5,1:1 rose pâle) */
   --kyma-camel-ink: #7A5F4C;   /* labels / petits textes accentués (5,1:1 beige, 4,6:1 rose pâle) */
-  --kyma-camel-deep: #9A7A62;  /* italiques des GRANDS titres seulement (3,4:1, >= 24 px) */
+  --kyma-camel-deep: #8A6A52;  /* mot en italique des titres >= 32 px uniquement (4,2:1, grand texte) */
+  --kyma-camel-soft: #D9C0AE;  /* verso ORIGINE (Brun 6,2:1) */
   --kyma-blanc: #FBF7F2;
   --kyma-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --kyma-sans: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -34,23 +36,19 @@
   --kyma-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --kyma-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --kyma-header-h: 72px; /* mesuré par kyma-motion.js */
+  --kyma-hero-pull: 0px;  /* maquettes : hauteur de l'en-tête à remonter sous le hero ; Horizon : en-tête transparent */
+
+  /* Tokens de mouvement (direction-pages-2026 § 5.1) */
+  --t-instant: 90ms; --t-fast: 180ms; --t-base: 320ms; --t-slow: 640ms; --t-flow: 1100ms; --t-ambient: 9000ms;
+  --ease-flow: cubic-bezier(0.22, 1, 0.36, 1); --ease-tide: cubic-bezier(0.65, 0, 0.35, 1); --ease-ebb: cubic-bezier(0.55, 0, 0.8, 0.2);
+  --lift-hover: 4px; --reveal-y: 24px; --reveal-y-title: 40px; --scale-hover: 1.02;
+  --tilt-card: 4deg; --tilt-circle: 8deg; --stagger: 60ms; --stagger-letter: 28ms;
+  /* Grain (§ 6) : tuile procédurale feTurbulence, monochrome, jamais sur le texte */
+  --kyma-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .29 0 0 0 0 .23 0 0 0 0 .2 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   /* Alias de compatibilité (anciens noms) */
   --kyma-noir: var(--kyma-ink);
   --kyma-gris-ink: var(--kyma-ink-soft);
 
-  /* Dawn : nos polices, boutons carrés */
-  --font-heading-family: var(--kyma-serif);
-  --font-body-family: var(--kyma-sans);
-  --font-heading-style: normal;
-  --font-heading-weight: 400;
-  --font-body-style: normal;
-  --font-body-weight: 300;
-  --font-body-weight-bold: 500;
-  --buttons-radius: 0px;
-  --buttons-radius-outset: 0px;
-  --inputs-radius: 0px;
-  --inputs-radius-outset: 0px;
-  --variant-pills-radius: 0px;
 }
 
 html { scroll-behavior: smooth; }
@@ -72,23 +70,20 @@ h1, h2, h3, .h0, .h1, .h2, .h3 { font-weight: 400; }
 [class*="kyma-"][tabindex]:focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 3px; }
 .kyma-on-dark a:focus-visible, .kyma-on-dark button:focus-visible { outline-color: var(--kyma-rose); }
 
-/* ─── 2. DAWN : header translucide, boutons, footer ───────────────────── */
-.section-header { position: sticky; top: 0; z-index: 100; }
-.section-header .header-wrapper {
-  background: rgba(245, 237, 228, 0.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(74, 59, 50, 0.06); transition: background-color 0.4s var(--kyma-ease);
+/* ─── 2. PONT HORIZON : polices de la marque (le reste se règle dans l'éditeur de thème) ──────────
+   Horizon lit ses polices dans des variables --font-*--family (sélecteur de polices Shopify, sans DM Serif /
+   Outfit) : on les redirige vers nos polices Google. Couleurs : palette Horizon réglée dans l'éditeur
+   (fond #F5EDE4, texte #4A3B32) — voir installation-horizon.md. */
+:root {
+  --font-body--family: var(--kyma-sans);
+  --font-subheading--family: var(--kyma-sans);
+  --font-heading--family: var(--kyma-serif);
+  --font-accent--family: var(--kyma-serif);
+  --font-primary--family: var(--kyma-serif);
 }
-html.kyma-scrolled .section-header .header-wrapper { background: rgba(245, 237, 228, 0.93); }
-.section-header .header__heading-link, .section-header .header__heading-link .h2, .section-header .header__heading-link span {
-  font-family: var(--kyma-serif); font-size: 28px; font-weight: 400; letter-spacing: 0.21em; text-transform: uppercase; color: var(--kyma-ink); text-decoration: none;
-}
-.section-header .header__menu-item, .section-header .header__menu-item span, .section-header .header__inline-menu .list-menu__item {
-  font-family: var(--kyma-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.23em; text-transform: uppercase; color: var(--kyma-ink-soft); transition: color 0.3s;
-}
-.section-header .header__menu-item:hover, .section-header .header__menu-item:hover span,
-.section-header .header__menu-item[aria-current], .section-header .header__active-menu-item { color: var(--kyma-ink); text-decoration: none; }
-.footer-block__heading { font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; }
-.button, .shopify-challenge__button, .customer button { font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+.kyma-section { color: var(--kyma-ink); }
+.kyma-section *, .kyma-section *::before, .kyma-section *::after { box-sizing: border-box; }
+html.kyma-js .kyma-section em { font-style: italic; }
 
 /* ─── 3. COMPOSANTS COMMUNS ───────────────────────────────────────────── */
 @keyframes kyma-failsafe { to { opacity: 1; transform: none; } }
@@ -123,7 +118,9 @@ html.kyma-js:not(.kyma-ready) .kyma-ch { animation: kyma-failsafe 0.01s 4s forwa
 .kyma-sec { position: relative; overflow: clip; padding: var(--kyma-section-y) var(--kyma-pad-x); color: var(--kyma-ink); background: var(--kyma-beige); scroll-margin-top: var(--kyma-header-h); }
 .kyma-sec__inner { position: relative; z-index: 1; max-width: 1240px; margin-inline: auto; }
 .kyma-sec__num { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: 13px; color: var(--kyma-ink-soft); }
-.kyma-sec__label { margin: 0 0 14px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-camel-ink); }
+/* Label numéroté « 01 — LE DROP 1 » : Outfit 500, capitales, interlettrage 4 px, 12,5 px, Brun à 72 % */
+.kyma-sec__label { margin: 0 0 16px; font-size: 12.5px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); }
+.kyma-sec__n { letter-spacing: 2px; }
 .kyma-sec__title { margin: 0 0 22px; font-family: var(--kyma-serif); font-size: clamp(34px, 4.6vw, 64px); font-weight: 400; line-height: 1.1; letter-spacing: 0.005em; color: var(--kyma-ink); }
 .kyma-sec__title em { font-style: italic; color: var(--kyma-camel-deep); }
 .kyma-sec__desc { margin: 0; max-width: 560px; font-size: 16px; line-height: 1.85; color: var(--kyma-ink-soft); }
@@ -191,21 +188,23 @@ html.kyma-js:not(.kyma-ready) [data-kyma-stagger] > * { animation: kyma-failsafe
 .kyma-off, .kyma-off *, html.kyma-paused [data-kyma-live], html.kyma-paused [data-kyma-live] * { animation-play-state: paused !important; }
 
 /* ─── 4. CHROME GLOBAL : curseur, progression, rideau ─────────────────── */
+/* Halo discret autour du curseur système (jamais masqué) ; 44 px + étiquette sur les éléments interactifs */
 .kyma-cursor { position: fixed; inset: 0; z-index: 2147483000; pointer-events: none; }
-.kyma-cursor__ring, .kyma-cursor__dot { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 0.3s; }
-.kyma-cursor.is-on .kyma-cursor__ring, .kyma-cursor.is-on .kyma-cursor__dot { opacity: 1; }
+.kyma-cursor__ring { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity var(--t-fast); }
+.kyma-cursor.is-on .kyma-cursor__ring { opacity: 1; }
 .kyma-cursor__ring::before {
-  content: ''; position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid rgba(74, 59, 50, 0.55); transition: transform 0.45s var(--kyma-ease-out), background-color 0.3s, border-color 0.3s;
+  content: ''; position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%;
+  border: 1px solid var(--kyma-camel); transition: transform var(--t-fast) var(--ease-flow), background-color var(--t-fast);
 }
-.kyma-cursor__dot::before { content: ''; position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; border-radius: 50%; background: var(--kyma-ink); }
-.kyma-cursor.is-link .kyma-cursor__ring::before { transform: scale(1.8); background: rgba(232, 196, 196, 0.35); border-color: var(--kyma-camel); }
-.kyma-cursor.is-down .kyma-cursor__ring::before { transform: scale(0.8); }
-.kyma-cursor.is-text .kyma-cursor__ring::before { transform: scale(0.4); }
-.kyma-cursor__wave {
-  position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
-  border: 1px solid var(--kyma-camel); animation: kyma-pulse 0.85s var(--kyma-ease-out) forwards;
+.kyma-cursor.is-link .kyma-cursor__ring::before { transform: scale(3.67); background: rgba(232, 196, 196, 0.4); }
+.kyma-cursor.is-down .kyma-cursor__ring::before { transform: scale(0.85); }
+.kyma-cursor.is-link.is-down .kyma-cursor__ring::before { transform: scale(3.2); }
+.kyma-cursor__label {
+  position: absolute; left: 0; top: 30px; transform: translateX(-50%); white-space: nowrap; opacity: 0;
+  font: 500 12px/1 var(--kyma-sans); letter-spacing: 0.08em; color: var(--kyma-ink); transition: opacity var(--t-fast);
 }
+.kyma-cursor.is-link.has-label .kyma-cursor__label { opacity: 1; }
+html.kyma-motion-paused .kyma-cursor { display: none; }
 
 .kyma-progress { position: fixed; left: 0; right: 0; top: 0; z-index: 2147482000; height: 10px; pointer-events: none; }
 .kyma-progress svg { display: block; width: 100%; height: 100%; overflow: visible; }
@@ -237,8 +236,8 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 /* ─── 6. HERO 3D ──────────────────────────────────────────────────────── */
 .kyma-hero {
   position: relative; isolation: isolate; overflow: clip; display: flex; align-items: center;
-  min-height: 100vh; min-height: 100svh; margin-top: calc(var(--kyma-header-h) * -1);
-  padding: calc(var(--kyma-header-h) + 40px) var(--kyma-pad-x) 96px; color: var(--kyma-ink); background: var(--kyma-beige);
+  min-height: 100vh; min-height: 100svh; margin-top: calc(var(--kyma-hero-pull) * -1);
+  padding: calc(var(--kyma-hero-pull) + 40px) var(--kyma-pad-x) 96px; color: var(--kyma-ink); background: var(--kyma-beige);
 }
 .kyma-hero--large { min-height: 82vh; min-height: 82svh; }
 .kyma-hero__stage { position: absolute; inset: 0; z-index: -1; }
@@ -254,12 +253,12 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-hero.is-in .kyma-hero__sub { opacity: 1; transform: none; transition-delay: 0.9s; }
 .kyma-hero.is-in .kyma-hero__ctas { opacity: 1; transform: none; transition-delay: 1.1s; }
 .kyma-hero.is-in .kyma-hero__note { opacity: 1; transform: none; transition-delay: 1.3s; }
-.kyma-hero__label { margin: 0 0 28px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-camel-ink); }
+.kyma-hero__label { margin: 0 0 28px; font-size: 12.5px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); }
 .kyma-hero__title {
   --kyma-stagger: 32ms; --sd: 250ms;
   margin: 0; font-family: var(--kyma-serif); font-size: clamp(46px, 6.6vw, 104px); font-weight: 400; line-height: 1.02; letter-spacing: 0.01em; color: var(--kyma-ink);
 }
-.kyma-hero__title em { font-style: italic; color: var(--kyma-camel-ink); }
+.kyma-hero__title em { font-style: italic; color: var(--kyma-camel-deep); } /* >= 40 px */
 .kyma-hero__sub { max-width: 470px; margin: 30px 0 0; font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--kyma-ink-soft); }
 .kyma-hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
 .kyma-hero__note { margin: 22px 0 0; font-size: 11px; letter-spacing: 0.08em; color: var(--kyma-ink-soft); }
@@ -281,7 +280,7 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
   flex: none; padding-right: 0.5em; white-space: nowrap; font-family: var(--kyma-serif); font-size: clamp(34px, 6vw, 84px);
   line-height: 1.15; letter-spacing: 0.01em;
 }
-.kyma-marquee__item em { font-style: italic; color: var(--kyma-camel-deep); }
+.kyma-marquee__item em { font-style: italic; color: var(--kyma-camel-deep); } /* >= 34 px */
 .kyma-marquee--dark .kyma-marquee__item em { color: var(--kyma-rose); }
 .kyma-marquee__sep { display: inline-block; margin: 0 0.35em; color: var(--kyma-camel); transform: translateY(-0.08em); }
 
@@ -408,48 +407,6 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 /* ─── 12. CERCLE WAVES (+ anneaux 3D) ────────────────────────────────── */
 .kyma-cercle__rings { position: relative; height: clamp(280px, 42vw, 460px); margin: 8px auto 0; max-width: 900px; }
 .kyma-cercle__rings canvas { position: absolute; inset: 0; }
-.kyma-cercle__grid { display: grid; gap: 20px; margin: 16px 0 0; padding: 0; list-style: none; }
-/* Cartes-paliers qui pivotent en 3D (data-kyma-flip) : recto = nom + accroche, verso = avantages.
-   Survol (souris), tap ou bouton clavier (aria-pressed). Inclinaison qui suit la souris + reflet satiné. */
-.kyma-tier { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%; position: relative; perspective: 1400px; }
-.kyma-flip__tilt { transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform 0.5s var(--kyma-ease-out); }
-.kyma-flip { position: relative; display: grid; transform-style: preserve-3d; border-radius: 24px;
-  transform: rotateY(calc(var(--flip, 0) * 180deg)); transition: transform 1.1s var(--kyma-ease-out); }
-.kyma-tier.is-flipped { --flip: 1; }
-.kyma-flip__face {
-  grid-area: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 320px;
-  padding: clamp(28px, 4vw, 44px); border-radius: 24px; background: var(--kyma-rose-pale); color: var(--kyma-ink);
-  border: 1px solid rgba(193, 158, 134, 0.45); -webkit-backface-visibility: hidden; backface-visibility: hidden;
-  box-shadow: 0 40px 70px -50px rgba(74, 59, 50, 0.55);
-}
-.kyma-flip__back { transform: rotateY(180deg); background: var(--kyma-beige); }
-.kyma-flip__face::after { /* reflet satiné qui suit la souris */
-  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: 0.0; transition: opacity 0.5s;
-  background: radial-gradient(120% 80% at var(--mx) var(--my), rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 45%),
-              linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0) 62%);
-  mix-blend-mode: soft-light;
-}
-.kyma-tier:hover .kyma-flip__face::after, .kyma-tier.is-flipped .kyma-flip__face::after { opacity: 1; }
-.kyma-tier--dark .kyma-flip__face { background: var(--kyma-ink); color: var(--kyma-beige); border-color: var(--kyma-ink); }
-.kyma-tier--dark .kyma-flip__back { background: #5A493E; }
-.kyma-tier__tag { margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-camel-ink); }
-.kyma-tier--dark .kyma-tier__tag { color: var(--kyma-rose); }
-.kyma-tier__name { margin: 0 0 10px; font-family: var(--kyma-serif); font-size: clamp(30px, 3.4vw, 44px); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; }
-.kyma-tier__lead { margin: 0; font-size: 15px; line-height: 1.8; color: var(--kyma-ink-soft); }
-.kyma-tier--dark .kyma-tier__lead { color: var(--kyma-rose-pale); }
-.kyma-tier__rings { margin-top: auto; padding-top: 28px; width: 72px; height: 32px; color: var(--kyma-camel); }
-.kyma-tier__perks { margin: 0; padding: 0; list-style: none; }
-.kyma-tier__perks li { position: relative; padding: 14px 0 14px 28px; font-size: 14px; line-height: 1.7; border-top: 1px solid var(--kyma-line); }
-.kyma-tier--dark .kyma-tier__perks li { border-top-color: rgba(245, 237, 228, 0.16); }
-.kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: 24px; width: 16px; height: 1px; background: var(--kyma-camel); }
-.kyma-flip__toggle {
-  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 16px; padding: 10px 18px;
-  font: 500 11px var(--kyma-sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--kyma-ink);
-  background: transparent; border: 1px solid var(--kyma-camel); border-radius: 999px; cursor: pointer; transition: background-color 0.3s;
-}
-.kyma-flip__toggle:hover { background: var(--kyma-rose-pale); }
-.kyma-flip__toggle svg { width: 14px; height: 14px; transition: transform 0.6s var(--kyma-ease-out); }
-.kyma-flip__toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
 .kyma-cercle__cta { margin-top: 44px; }
 
 /* ─── 13. SECTION SPLINE ─────────────────────────────────────────────── */
@@ -492,7 +449,6 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 
 /* ─── 15. RESPONSIVE ─────────────────────────────────────────────────── */
 @media (max-width: 749px) {
-  .section-header .header__heading-link, .section-header .header__heading-link .h2, .section-header .header__heading-link span { font-size: 22px; }
   .kyma-hero { align-items: flex-end; padding-bottom: 104px; }
   .kyma-hero__inner::before {
     content: ''; position: absolute; z-index: -1; left: calc(var(--kyma-pad-x) * -1); right: calc(var(--kyma-pad-x) * -1); top: -64px; bottom: -110px;
@@ -534,11 +490,7 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
   canvas[data-kyma-3d] { transition: none; }
   .kyma-btn, .kyma-btn > *, .kyma-btn__arrow, .kyma-link, .kyma-cw__opt, .kyma-cw__sw, .kyma-cw__name, .kyma-cw__desc, .kyma-cw__viz::after { transition: none; }
   .kyma-btn:hover .kyma-btn__arrow { transform: none; }
-  .kyma-flip, .kyma-flip__tilt { transition: none; transform: none !important; }
-  .kyma-flip__back { transform: none; visibility: hidden; }
-  .kyma-tier.is-flipped .kyma-flip__back { visibility: visible; }
-  .kyma-tier.is-flipped .kyma-flip__front { visibility: hidden; }
-  html.kyma-js [data-kyma-stagger] > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    html.kyma-js [data-kyma-stagger] > * { opacity: 1 !important; transform: none !important; transition: none !important; }
   .kyma-divider { opacity: 1 !important; transform: none !important; }
   .kyma-tech__spot, .kyma-tech__item { opacity: 1; transform: none; transition: none; }
   .kyma-drawer[open] .kyma-drawer__body { animation: none; }

@@ -27,7 +27,8 @@
         <p class="kyma-hero__label">{{ section.settings.label | escape }}</p>
       {%- endif -%}
 
-      <h2 class="kyma-hero__title" id="kyma-hero-title-{{ section.id }}" data-kyma-split>
+      {%- assign htag = section.settings.heading_tag | default: 'h1' -%}
+      <{{ htag }} class="kyma-hero__title" id="kyma-hero-title-{{ section.id }}" data-kyma-split>
         {{- section.settings.title_before | escape -}}
         {%- if section.settings.title_em != blank -%}
           {%- if section.settings.em_new_line %}<br>{% else %} {% endif -%}
@@ -38,7 +39,7 @@
           {%- unless '.,;:!?)' contains after_first %} {% endunless -%}
           {{- section.settings.title_after | strip | escape -}}
         {%- endif -%}
-      </h2>
+      </{{ htag }}>
 
       {%- if section.settings.subtitle != blank -%}
         <p class="kyma-hero__sub">{{ section.settings.subtitle | escape }}</p>
@@ -88,13 +89,14 @@
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Une pièce, pensée pour être" },
     { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "unique" },
     { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "select", "id": "heading_tag", "label": "Niveau du titre", "options": [ { "value": "h1", "label": "H1 (page d'accueil)" }, { "value": "h2", "label": "H2" } ], "default": "h1" },
     { "type": "checkbox", "id": "em_new_line", "label": "Mot en italique sur sa propre ligne", "default": true },
     { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter." },
     { "type": "text", "id": "note", "label": "Note sous les boutons (facultative)", "default": "Expédition au plus tard le [À COMPLÉTER : date]" },
     { "type": "header", "content": "Boutons" },
     { "type": "text", "id": "cta_label", "label": "Bouton principal — texte", "default": "Choisir mon coloris" },
     { "type": "url", "id": "cta_link", "label": "Bouton principal — lien" },
-    { "type": "text", "id": "cta2_label", "label": "Bouton secondaire — texte", "default": "Notre histoire" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton secondaire — texte", "default": "Découvrir le motif" },
     { "type": "url", "id": "cta2_link", "label": "Bouton secondaire — lien" },
     { "type": "header", "content": "Sculpture 3D « La Vague »" },
     { "type": "paragraph", "content": "Rendu WebGL temps réel, sans image. Le motif KYMA Wave s'écoule sur la sculpture et n'est jamais deux fois le même. Les visiteurs en mouvement réduit voient une image fixe ; sans WebGL, un dégradé tonal." },

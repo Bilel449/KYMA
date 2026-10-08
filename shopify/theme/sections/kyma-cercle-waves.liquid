@@ -1,19 +1,20 @@
 {%- comment -%}
-  KYMA — Cercle Waves : 2 paliers (INITIUM / ORIGINE) en cartes qui pivotent en 3D (recto = nom + accroche,
-  verso = avantages) au survol, au tap ou au clavier (bouton aria-pressed), avec inclinaison et reflet satiné ;
-  + deux anneaux 3D entrelacés
-  (kyma-3d.js, scène rings) qui orbitent lentement ; survoler ou focaliser un palier anime son anneau
-  (1er palier = anneau rose clair, 2e palier = anneau brun). Décoratif : tout le contenu est dans les cartes.
-  Les conditions d'accès et avantages ne sont PAS inventés : champs à compléter.
+  KYMA — Cercle Waves : deux paliers (INITIUM / ORIGINE) en cartes qui pivotent (cahier des charges § 4).
+  Rendu principal en CSS 3D (preserve-3d) : le texte reste du vrai texte, net, sélectionnable et lu par les
+  lecteurs d'écran ; aucun contexte WebGL de plus. Reflet satiné en CSS qui suit le pointeur (balayage lent
+  toutes les 7 s sans pointeur), inclinaison ±8° lissée, ombre de contact qui s'élargit quand la carte monte.
+  Déclencheurs (kyma-pages.js) : survol 120 ms -> pivote, sortie 400 ms -> revient ; clic = épingle ;
+  toucher = bascule, glisser horizontal = la carte suit le doigt puis s'accroche ; clavier : Tab, Entrée /
+  Espace = bascule, Échap = recto. Zone sensible fixe (le <li>), indépendante de la rotation.
+  Option : deux anneaux 3D (scène « rings », contexte WebGL partagé) qui se rapprochent au défilement.
+  AUCUN PRIX. Avantages et conditions : [À COMPLÉTER] tant que le fondateur n'a pas décidé.
 {%- endcomment -%}
 {% render 'kyma-assets' %}
 {%- assign title_id = 'kyma-cw2-title-' | append: section.id -%}
 
-<hr class="kyma-divider" data-kyma-reveal>
-
-<section class="kyma-sec kyma-cercle" aria-labelledby="{{ title_id }}" data-kyma-rings>
+<section id="{{ section.settings.anchor | default: title_id }}" class="kyma-sec kyma-cercle{% if section.settings.compact_top %} kyma-cercle--tight{% endif %}" aria-labelledby="{{ title_id }}" data-kyma-rings{% if section.settings.show_rings %} data-kyma-rings-scroll="join"{% endif %}>
   <div class="kyma-sec__inner">
-    <div data-kyma-reveal>
+    <div class="kyma-cercle__head" data-kyma-reveal>
       {% render 'kyma-section-head',
         number: section.settings.number,
         label: section.settings.label,
@@ -28,53 +29,65 @@
     {%- if section.settings.show_rings -%}
       <div class="kyma-cercle__rings" data-kyma-3d-host data-kyma-reveal>
         <canvas data-kyma-3d="rings" data-follow="false" aria-hidden="true"></canvas>
+        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--a" aria-hidden="true">INITIUM</span>
+        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--b" aria-hidden="true">ORIGINE</span>
       </div>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
       <ul class="kyma-cercle__grid" role="list">
         {%- for block in section.blocks -%}
-          {%- assign face_id = 'kyma-tier-' | append: section.id | append: '-' | append: forloop.index -%}
+          {%- liquid
+            assign face_id = 'kyma-tier-' | append: section.id | append: '-' | append: forloop.index
+            assign perk_lines = block.settings.perks | newline_to_br | split: '<br />'
+          -%}
           <li
-            class="kyma-tier{% if block.settings.dark %} kyma-tier--dark kyma-on-dark{% endif %}"
+            class="kyma-tier kyma-tier--{{ block.settings.tone }}"
             data-kyma-reveal
             data-kyma-flip
-            style="--kd: {{ forloop.index0 | times: 140 }}ms;"
+            style="--kd: {{ forloop.index0 | times: 120 }}ms;"
             data-ring="{{ forloop.index0 | at_most: 1 }}"
             {{ block.shopify_attributes }}
           >
-            <div class="kyma-flip__tilt">
-              <div class="kyma-flip">
-                <div class="kyma-flip__face kyma-flip__front" id="{{ face_id }}-front">
-                  {%- if block.settings.tag != blank -%}
-                    <p class="kyma-tier__tag">{{ block.settings.tag | escape }}</p>
-                  {%- endif -%}
-                  <h3 class="kyma-tier__name">{{ block.settings.name | escape }}</h3>
-                  {%- if block.settings.lead != blank -%}
+            <button type="button" class="kyma-tier__hit" aria-pressed="false" aria-label="{{ block.settings.aria | escape }}"></button>
+            <div class="kyma-tier__lift">
+              <div class="kyma-flip__tilt">
+                <div class="kyma-flip">
+                  <div class="kyma-flip__face kyma-flip__front" id="{{ face_id }}-front">
+                    <span class="kyma-tier__num">{{ block.settings.number | escape }}</span>
+                    <h3 class="kyma-tier__name">{{ block.settings.name | escape }}</h3>
                     <p class="kyma-tier__lead">{{ block.settings.lead | escape }}</p>
-                  {%- endif -%}
-                  <svg class="kyma-tier__rings" viewBox="0 0 72 32" aria-hidden="true" focusable="false"><circle cx="24" cy="16" r="13" fill="none" stroke="currentColor"/><circle cx="48" cy="16" r="13" fill="none" stroke="currentColor"/></svg>
-                </div>
-                <div class="kyma-flip__face kyma-flip__back" id="{{ face_id }}-back" aria-hidden="true">
-                  <p class="kyma-tier__tag">{{ block.settings.back_label | default: 'Avantages' | escape }} — {{ block.settings.name | escape }}</p>
-                  {%- assign perk_lines = block.settings.perks | newline_to_br | split: '<br />' -%}
-                  <ul class="kyma-tier__perks" role="list">
-                    {%- for perk in perk_lines -%}
-                      {%- assign perk_clean = perk | strip -%}
-                      {%- if perk_clean != blank -%}
-                        <li>{{ perk_clean | escape }}</li>
+                    {%- if block.settings.sub != blank -%}<p class="kyma-tier__sub">{{ block.settings.sub | escape }}</p>{%- endif -%}
+                    <svg class="kyma-tier__sym" viewBox="0 0 120 64" aria-hidden="true" focusable="false">
+                      {%- if block.settings.symbol == 'two' -%}
+                        <circle cx="44" cy="32" r="24"/><circle cx="76" cy="32" r="24"/>
+                      {%- else -%}
+                        <circle cx="60" cy="32" r="24"/>
                       {%- endif -%}
-                    {%- endfor -%}
-                  </ul>
+                    </svg>
+                    <span class="kyma-tier__invite" aria-hidden="true">{{ block.settings.invite | escape }}
+                      <svg viewBox="0 0 28 12" focusable="false"><path pathLength="1" d="M1 6 C7 2 11 10 17 6 L26 6 M22 2 L26 6 L22 10"/></svg>
+                    </span>
+                  </div>
+                  <div class="kyma-flip__face kyma-flip__back" id="{{ face_id }}-back" aria-hidden="true">
+                    <p class="kyma-tier__tag">{{ block.settings.back_label | escape }}</p>
+                    <ul class="kyma-tier__perks" role="list">
+                      {%- for perk in perk_lines -%}
+                        {%- assign perk_clean = perk | strip -%}
+                        {%- if perk_clean != blank -%}<li>{{ perk_clean | escape }}</li>{%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if block.settings.condition != blank -%}
+                      <p class="kyma-tier__cond">{{ block.settings.condition | escape }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.cta_label != blank -%}
+                      <a class="kyma-btn kyma-tier__cta" href="{{ block.settings.cta_link | default: '#rejoindre' }}"><span>{{ block.settings.cta_label | escape }}</span></a>
+                    {%- endif -%}
+                  </div>
                 </div>
               </div>
             </div>
-            <button type="button" class="kyma-flip__toggle" aria-pressed="false" aria-controls="{{ face_id }}-back"
-              data-label-on="{{ block.settings.toggle_back | default: 'Retour' | escape }}" data-label-off="{{ block.settings.toggle_front | default: 'Voir les avantages' | escape }}">
-              <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3" fill="none" stroke="currentColor"/><path d="M11 1v3H8M3 13v-3h3" fill="none" stroke="currentColor"/></svg>
-              <span>{{ block.settings.toggle_front | default: 'Voir les avantages' | escape }}</span>
-              <span class="kyma-vh">— {{ block.settings.name | escape }}</span>
-            </button>
+            <span class="kyma-tier__shadow" aria-hidden="true"></span>
           </li>
         {%- endfor -%}
       </ul>
@@ -89,10 +102,6 @@
       </div>
     {%- endif -%}
   </div>
-
-  {%- if section.settings.watermark != blank -%}
-    <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.watermark | escape }}</div>
-  {%- endif -%}
 </section>
 
 {% schema %}
@@ -101,16 +110,17 @@
   "tag": "div",
   "class": "kyma-section",
   "settings": [
-    { "type": "text", "id": "number", "label": "Numéro", "default": "04" },
-    { "type": "text", "id": "label", "label": "Label", "default": "Fidélité" },
-    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cercle" },
-    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "Waves" },
-    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
-    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Le Cercle Waves accompagne celles et ceux qui suivent le courant, en deux paliers." },
-    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Découvrir le Cercle Waves" },
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "cercle" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "05" },
+    { "type": "text", "id": "label", "label": "Label", "default": "CERCLE WAVES" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Rejoindre le" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "cercle" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE." },
+    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Entrer dans le Cercle" },
     { "type": "url", "id": "cta_link", "label": "Bouton — URL" },
-    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "04" },
-    { "type": "checkbox", "id": "show_rings", "label": "Afficher les deux anneaux 3D", "default": true }
+    { "type": "checkbox", "id": "show_rings", "label": "Afficher les deux anneaux 3D (ils s'entrelacent au défilement)", "default": true },
+    { "type": "checkbox", "id": "compact_top", "label": "Espacement réduit en haut", "default": false }
   ],
   "blocks": [
     {
@@ -118,14 +128,19 @@
       "name": "Palier",
       "limit": 4,
       "settings": [
-        { "type": "text", "id": "tag", "label": "Petite étiquette (ex. Palier 1)" },
-        { "type": "text", "id": "name", "label": "Nom du palier", "default": "Initium" },
-        { "type": "text", "id": "lead", "label": "Phrase d'accroche" },
-        { "type": "textarea", "id": "perks", "label": "Conditions et avantages (un par ligne)" },
-        { "type": "checkbox", "id": "dark", "label": "Carte sombre (palier supérieur)", "default": false },
-        { "type": "text", "id": "back_label", "label": "Verso — intitulé", "default": "Avantages" },
-        { "type": "text", "id": "toggle_front", "label": "Bouton — retourner la carte", "default": "Voir les avantages" },
-        { "type": "text", "id": "toggle_back", "label": "Bouton — revenir au recto", "default": "Retour" }
+        { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+        { "type": "text", "id": "name", "label": "Nom du palier", "default": "INITIUM" },
+        { "type": "text", "id": "lead", "label": "Accroche", "default": "L'entrée dans le cercle." },
+        { "type": "text", "id": "sub", "label": "Sous-ligne", "default": "Pour toute personne qui rejoint KYMA." },
+        { "type": "select", "id": "symbol", "label": "Symbole", "options": [ { "value": "one", "label": "Un anneau" }, { "value": "two", "label": "Deux anneaux entrelacés" } ], "default": "one" },
+        { "type": "select", "id": "tone", "label": "Teinte de la carte", "options": [ { "value": "initium", "label": "Rose clair (INITIUM)" }, { "value": "origine", "label": "Marron clair (ORIGINE)" } ], "default": "initium" },
+        { "type": "text", "id": "invite", "label": "Invite au recto", "default": "Retourner" },
+        { "type": "text", "id": "back_label", "label": "Verso — intitulé", "default": "AVANTAGES" },
+        { "type": "textarea", "id": "perks", "label": "Avantages (un par ligne)", "default": "[À COMPLÉTER : avantage 1, décision du fondateur]\n[À COMPLÉTER : avantage 2]" },
+        { "type": "text", "id": "condition", "label": "Condition d'accès / de passage", "default": "Condition d'accès : [À COMPLÉTER : décision du fondateur]" },
+        { "type": "text", "id": "cta_label", "label": "Verso — bouton", "default": "Rejoindre le cercle" },
+        { "type": "url", "id": "cta_link", "label": "Verso — lien (ancre de l'inscription)" },
+        { "type": "text", "id": "aria", "label": "Annonce lecteur d'écran", "default": "INITIUM, carte du palier d'entrée. Activer pour afficher les avantages." }
       ]
     }
   ],
@@ -134,26 +149,8 @@
     {
       "name": "KYMA — Cercle Waves",
       "blocks": [
-        {
-          "type": "tier",
-          "settings": {
-            "tag": "Palier 1",
-            "name": "Initium",
-            "lead": "L'entrée dans le Cercle.",
-            "perks": "[À COMPLÉTER : conditions d'accès et avantages INITIUM]",
-            "dark": false
-          }
-        },
-        {
-          "type": "tier",
-          "settings": {
-            "tag": "Palier 2",
-            "name": "Origine",
-            "lead": "Le palier supérieur.",
-            "perks": "[À COMPLÉTER : conditions d'accès et avantages ORIGINE]",
-            "dark": true
-          }
-        }
+        { "type": "tier", "settings": { "number": "01", "name": "INITIUM", "lead": "L'entrée dans le cercle.", "sub": "Pour toute personne qui rejoint KYMA.", "symbol": "one", "tone": "initium" } },
+        { "type": "tier", "settings": { "number": "02", "name": "ORIGINE", "lead": "Le palier supérieur.", "sub": "Pour celles et ceux qui portent KYMA depuis ses origines.", "symbol": "two", "tone": "origine", "condition": "Condition de passage : [À COMPLÉTER : critère décidé par le fondateur]", "aria": "ORIGINE, carte du palier supérieur. Activer pour afficher les avantages." } }
       ]
     }
   ]

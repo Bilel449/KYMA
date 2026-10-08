@@ -1,0 +1,158 @@
+{%- comment -%}
+  KYMA — Hoodie 3D 360° (fiche produit). Trois niveaux, dans cet ordre :
+  1. NATIF : le produit a un vrai média 3D Shopify (GLB téléversé dans « Médias » — plan payant requis) ->
+     lecteur 3D de Shopify (<model-viewer>, chargé par Shopify.loadFeatures 'model-viewer-ui'), un modèle par
+     coloris : le texte alternatif du média doit contenir le nom du coloris (ex. « Ressac — Lilac Whirl »).
+  2. MAISON : sinon, si un bloc « Coloris 3D » indique un fichier GLB téléversé dans les fichiers du thème
+     (assets/ressac-<coloris>.glb) -> lecteur kyma-glb.js (WebGL natif, < 8 Ko gzip). Contourne la limite
+     du plan d'essai (« fichier non pris en charge sur les comptes d'essai »).
+  3. REPLI : sinon (ou si WebGL / le fichier échoue) -> aperçu 3D du coloris (étoffe, kyma-3d.js).
+  Le coloris suit la variante (Horizon : <variant-picker>, option « Couleur ») ou, si la boutique a un produit
+  par coloris, le titre du produit ; les pastilles de la section permettent aussi de changer de coloris.
+  Préréglages Face · Profil · Dos · Détail (touches 1 à 4), flèches = 15°, rotation lente automatique coupée
+  en mouvement réduit. Le canvas est focusable ; tout le texte utile est hors canvas.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- liquid
+  assign tid = 'kyma-360-' | append: section.id
+  assign hid = tid | append: '-t'
+  assign p = section.settings.product | default: product
+  capture cw_key
+    render 'kyma-colorway-key', product: p
+  endcapture
+  assign cw_key = cw_key | strip
+  assign models = p.media | where: 'media_type', 'model'
+  assign mode = 'fallback'
+  if models.size > 0 and section.settings.prefer_native
+    assign mode = 'native'
+  else
+    for block in section.blocks
+      if block.settings.glb != blank
+        assign mode = 'glb'
+      endif
+    endfor
+    if mode == 'fallback' and models.size > 0
+      assign mode = 'native'
+    endif
+  endif
+  assign start_glb = ''
+  for block in section.blocks
+    assign bk = block.settings.name | handleize
+    if block.settings.glb != blank
+      if start_glb == '' or bk == cw_key
+        assign start_glb = block.settings.glb | asset_url
+      endif
+    endif
+  endfor
+-%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-360" aria-labelledby="{{ hid }}" data-kyma-360 data-mode="{{ mode }}" data-colorway="{{ cw_key }}"{% if section.settings.mv_src != blank %} data-mv-src="{{ section.settings.mv_src }}"{% endif %}>
+  <div class="kyma-sec__inner kyma-360__grid">
+    <div class="kyma-360__text" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      {%- if section.blocks.size > 1 -%}
+        <div class="kyma-tints kyma-tints--named" role="group" aria-label="{{ section.settings.list_label | escape }}" data-kyma-360-tints>
+          {%- for block in section.blocks -%}
+            {%- assign bk = block.settings.name | handleize -%}
+            <button type="button" class="kyma-tints__dot" data-colorway="{{ bk }}" data-name="{{ block.settings.name | escape }}"
+              {% if block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
+              aria-pressed="{% if bk == cw_key %}true{% else %}false{% endif %}" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
+              <span class="kyma-tints__name">{{ block.settings.name | escape }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <p class="kyma-360__help">{{ section.settings.help | escape }}</p>
+    </div>
+
+    <figure class="kyma-360__fig" data-kyma-reveal style="--kd: 120ms;">
+      <div class="kyma-360__stage" data-kyma-drag data-kyma-cursor="Glisser">
+        {%- case mode -%}
+          {%- when 'native' -%}
+            {%- for m in models -%}
+              {%- assign glb_src = m.sources | where: 'format', 'glb' | first -%}
+              {%- assign mk = m.alt | handleize -%}
+              <model-viewer
+                class="kyma-360__mv"
+                data-colorway="{{ mk }}"
+                {% if forloop.first %}src="{{ glb_src.url }}"{% else %}data-src="{{ glb_src.url }}" hidden{% endif %}
+                poster="{{ m.preview_image | image_url: width: 1200 }}"
+                alt="{{ m.alt | escape }}"
+                camera-controls disable-zoom touch-action="pan-y" interaction-prompt="none"
+                {% if section.settings.autorotate %}auto-rotate auto-rotate-delay="3000" rotation-per-second="7deg"{% endif %}
+                camera-orbit="0deg 82deg 105%" field-of-view="28deg" shadow-intensity="1" shadow-softness="1"
+                environment-image="neutral" tone-mapping="neutral" exposure="1" loading="lazy"
+              ></model-viewer>
+            {%- endfor -%}
+          {%- when 'glb' -%}
+            <canvas class="kyma-360__glb" tabindex="0" role="img" data-src="{{ start_glb }}"
+              aria-label="{{ section.settings.canvas_label | escape }}"></canvas>
+            <p class="kyma-360__loading" aria-hidden="true">{{ section.settings.loading_label | escape }}</p>
+          {%- endcase -%}
+        <div class="kyma-360__fallback" data-kyma-3d-host data-kyma-variant-sync{% if mode != 'fallback' %} hidden{% endif %}>
+          <canvas data-kyma-3d="swatch" data-colorway="{{ cw_key }}" data-grain="0" aria-hidden="true"{% if mode != 'fallback' %} hidden{% endif %}></canvas>
+        </div>
+      </div>
+      <div class="kyma-360__presets" role="group" aria-label="{{ section.settings.presets_label | escape }}"{% if mode == 'fallback' %} hidden{% endif %}>
+        <button type="button" data-preset="face" aria-keyshortcuts="1">Face</button>
+        <button type="button" data-preset="profil" aria-keyshortcuts="2">Profil</button>
+        <button type="button" data-preset="dos" aria-keyshortcuts="3">Dos</button>
+        <button type="button" data-preset="detail" aria-keyshortcuts="4">Détail</button>
+      </div>
+      <figcaption class="kyma-caption" data-kyma-360-caption
+        data-model="{{ section.settings.caption | escape }}" data-fallback="{{ section.settings.caption_fallback | escape }}">
+        {%- if mode == 'fallback' -%}{{ section.settings.caption_fallback | escape }}{%- else -%}{{ section.settings.caption | escape }}{%- endif -%}
+      </figcaption>
+    </figure>
+  </div>
+  {%- if mode == 'glb' -%}<script src="{{ 'kyma-glb.js' | asset_url }}" defer data-kyma-asset="glb"></script>{%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Hoodie 3D 360°",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "hoodie-3d" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "" },
+    { "type": "text", "id": "label", "label": "Label", "default": "LA PIÈCE EN 3D" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Faire le tour de la" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "pièce" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte" },
+    { "type": "product", "id": "product", "label": "Produit (vide = produit de la page)" },
+    { "type": "checkbox", "id": "prefer_native", "label": "Utiliser le média 3D Shopify s'il existe (plan payant)", "default": true },
+    { "type": "checkbox", "id": "autorotate", "label": "Rotation lente automatique", "default": true },
+    { "type": "text", "id": "help", "label": "Aide sous le titre", "default": "Glissez pour tourner, double-cliquez pour approcher. Touches 1 à 4 : face, profil, dos, détail." },
+    { "type": "text", "id": "list_label", "label": "Pastilles — nom accessible", "default": "Coloris du modèle 3D" },
+    { "type": "text", "id": "presets_label", "label": "Préréglages — nom accessible", "default": "Points de vue" },
+    { "type": "text", "id": "canvas_label", "label": "Texte équivalent du modèle 3D", "default": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter : capuche sans cordon, zip intégral argent, tirette dorée, deux poches biais, bords-côtes." },
+    { "type": "text", "id": "loading_label", "label": "Texte de chargement", "default": "Chargement du modèle 3D…" },
+    { "type": "text", "id": "caption", "label": "Mention sous le modèle 3D", "default": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." },
+    { "type": "text", "id": "caption_fallback", "label": "Mention sous l'aperçu de repli", "default": "Illustration du coloris." },
+    { "type": "text", "id": "mv_src", "label": "Lecteur 3D hors Shopify (maquettes uniquement, laisser vide)" }
+  ],
+  "blocks": [
+    {
+      "type": "colorway",
+      "name": "Coloris 3D",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom du coloris (= valeur de variante)", "default": "Lilac Whirl" },
+        { "type": "text", "id": "glb", "label": "Fichier GLB dans les fichiers du thème", "default": "ressac-lilac-whirl.glb", "info": "Téléverser le fichier dans « Modifier le code > assets » puis indiquer son nom exact. Vide = pas de modèle pour ce coloris." },
+        { "type": "color", "id": "color_a", "label": "Nuance principale (pastille)", "default": "#C8A2C8" },
+        { "type": "color", "id": "color_b", "label": "Nuance secondaire (pastille)", "default": "#F5EDE4" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "KYMA — Hoodie 3D 360°" } ]
+}
+{% endschema %}
