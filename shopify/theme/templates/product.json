@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "description": {
+          "type": "description"
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_position": "left",
+        "gallery_layout": "stacked",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "story": {
+      "type": "kyma-product-story",
+      "blocks": {
+        "details": {
+          "type": "details",
+          "settings": {
+            "heading": "Détails",
+            "items": "Coupe oversize, épaules tombantes\nZip intégral en métal\nCapuche double épaisseur, sans cordon\nDeux poches biais\nBords-côtes aux poignets et à la taille",
+            "composition": "",
+            "origin": "",
+            "certification": ""
+          }
+        },
+        "size-guide": {
+          "type": "size_guide",
+          "settings": {
+            "heading": "Tailles",
+            "model_info": "",
+            "drawer_title": "Guide des tailles",
+            "open": false,
+            "table": "Mesures (cm);XS;S;M;L;XL;XXL\nPoitrine;60;62;64;66;68;70\nÉpaules;54;56;58;60;62;64\nLongueur dos;66;68;70;72;74;76\nManche;62;63;64;65;66;67\nBas (à plat);58;60;62;64;66;68",
+            "note": "Mesures à plat, en centimètres, tolérance ± 1 cm.",
+            "link_label": "Voir le guide des tailles complet",
+            "link": "/pages/guide-des-tailles"
+          }
+        },
+        "care": {
+          "type": "care",
+          "settings": {
+            "heading": "Entretien",
+            "text": "Lavage à 30 °C, sur l'envers\nPas de sèche-linge\n[À COMPLÉTER : aligner sur l'étiquette définitive]"
+          }
+        },
+        "preorder": {
+          "type": "preorder",
+          "settings": {
+            "heading": "Précommande",
+            "text": "Cette pièce est produite après validation des commandes.",
+            "date_label": "Expédition prévue :",
+            "always_show": false
+          }
+        },
+        "disclaimer": {
+          "type": "disclaimer",
+          "settings": {
+            "heading": "Visuels",
+            "text": "Visuels non contractuels. Le motif étant unique à chaque pièce, votre hoodie pourra différer légèrement des images présentées."
+          }
+        }
+      },
+      "block_order": [
+        "details",
+        "size-guide",
+        "care",
+        "preorder",
+        "disclaimer"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Dans le même courant",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "story",
+    "related-products"
+  ]
+}

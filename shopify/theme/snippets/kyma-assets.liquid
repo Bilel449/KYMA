@@ -1,0 +1,13 @@
+{%- comment -%}
+  KYMA — chargeur unique des ressources (polices, kyma.css, kyma-motion.js).
+  Appelé par chaque section kyma-* ET, de préférence, une fois dans layout/theme.liquid
+  (voir plan-site.md). kyma-motion.js supprime automatiquement les doublons
+  (attribut data-kyma-asset) : le navigateur ne télécharge et n'exécute qu'un exemplaire.
+  Polices : Google Fonts par défaut. RGPD : à auto-héberger après le lancement (plan-site.md, §7).
+{%- endcomment -%}
+<script>document.documentElement.classList.add('kyma-js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" data-kyma-asset="pc1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-kyma-asset="pc2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" data-kyma-asset="fonts">
+<link rel="stylesheet" href="{{ 'kyma.css' | asset_url }}" data-kyma-asset="css">
+<script src="{{ 'kyma-motion.js' | asset_url }}" defer data-kyma-asset="js"></script>

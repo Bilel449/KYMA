@@ -1,0 +1,99 @@
+{%- comment -%}
+  KYMA — Section numérotée façon charte : 01 / label / titre avec mot en italique / texte / mots-clés,
+  chiffre géant en filigrane, image facultative avec parallaxe douce.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign title_id = 'kyma-man-title-' | append: section.id -%}
+
+{%- if section.settings.show_divider -%}
+  <hr class="kyma-divider" data-kyma-reveal>
+{%- endif -%}
+
+<section
+  class="kyma-sec kyma-man{% if section.settings.image != blank %} kyma-man--img{% endif %}"
+  aria-labelledby="{{ title_id }}"
+>
+  <div class="kyma-sec__inner">
+    <div class="kyma-man__grid">
+      <div class="kyma-man__text" data-kyma-reveal>
+        {% render 'kyma-section-head',
+          number: section.settings.number,
+          label: section.settings.label,
+          before: section.settings.title_before,
+          em: section.settings.title_em,
+          after: section.settings.title_after,
+          text: section.settings.text,
+          heading_id: title_id
+        %}
+        {%- if section.settings.text_2 != blank -%}
+          <p class="kyma-sec__desc">{{ section.settings.text_2 | escape | newline_to_br }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.keywords != blank -%}
+          {%- assign kw_lines = section.settings.keywords | newline_to_br | split: '<br />' -%}
+          <ul class="kyma-chips">
+            {%- for kw in kw_lines -%}
+              {%- assign kw_clean = kw | strip -%}
+              {%- if kw_clean != blank -%}
+                <li>{{ kw_clean | escape }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+          <div class="kyma-man__cta">
+            <a class="kyma-link" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="kyma-frame" data-kyma-reveal style="--kd: 150ms;">
+          <div class="kyma-frame__shift" data-kyma-parallax="0.3">
+            {{
+              section.settings.image
+              | image_url: width: 1100
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1100',
+                sizes: '(min-width: 990px) 45vw, 100vw'
+            }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.watermark != blank -%}
+    <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">{{ section.settings.watermark | escape }}</div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Manifeste",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_divider", "label": "Filet fin au-dessus de la section", "default": true },
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Manifeste" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "L'art du" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "flow" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
+    { "type": "textarea", "id": "text", "label": "Paragraphe 1", "default": "KYMA vient du grec κύμα, la vague. Une marque parisienne de streetwear unisexe, pensée comme un courant : des lignes fluides, des matières texturées, un luxe discret qui ne cherche pas à parler fort." },
+    { "type": "textarea", "id": "text_2", "label": "Paragraphe 2 (facultatif)", "default": "Le vide compte autant que le plein. Chaque pièce garde le rythme du ressac." },
+    { "type": "textarea", "id": "keywords", "label": "Mots-clés (un par ligne)", "default": "Mouvement\nFluidité\nLuxe discret\nOrganique\nHypnotique" },
+    { "type": "text", "id": "cta_label", "label": "Lien — texte", "default": "Lire notre histoire" },
+    { "type": "url", "id": "cta_link", "label": "Lien — URL" },
+    { "type": "header", "content": "Décor" },
+    { "type": "image_picker", "id": "image", "label": "Image (facultative, format portrait)" },
+    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "01" }
+  ],
+  "presets": [
+    { "name": "KYMA — Manifeste" }
+  ]
+}
+{% endschema %}

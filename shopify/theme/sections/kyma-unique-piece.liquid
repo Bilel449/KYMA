@@ -1,0 +1,114 @@
+{%- comment -%}
+  KYMA — « Chaque pièce est unique » : texte numéroté + zoom animé sur la texture (progression au scroll).
+  Le zoom est désactivé en mouvement réduit (image fixe).
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign title_id = 'kyma-up-title-' | append: section.id -%}
+{%- assign zoom_from = section.settings.zoom_from | divided_by: 100.0 -%}
+{%- assign zoom_to = section.settings.zoom_to | divided_by: 100.0 -%}
+
+<hr class="kyma-divider" data-kyma-reveal>
+
+<section class="kyma-sec kyma-up" aria-labelledby="{{ title_id }}">
+  <div class="kyma-sec__inner">
+    <div class="kyma-up__grid">
+      <div class="kyma-up__text" data-kyma-reveal>
+        {% render 'kyma-section-head',
+          number: section.settings.number,
+          label: section.settings.label,
+          before: section.settings.title_before,
+          em: section.settings.title_em,
+          after: section.settings.title_after,
+          text: section.settings.text,
+          heading_id: title_id
+        %}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="kyma-up__points" role="list">
+            {%- for block in section.blocks -%}
+              <li class="kyma-up__point" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3>{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p>{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div
+        class="kyma-up__frame{% if section.settings.image == blank %} kyma-up__frame--ph{% endif %}"
+        data-kyma-reveal
+        style="--kd: 150ms;"
+      >
+        {%- if section.settings.image != blank -%}
+          <div class="kyma-up__zoom" data-kyma-zoom="{{ zoom_from }},{{ zoom_to }}" style="transform-origin: {{ section.settings.focus_x }}% {{ section.settings.focus_y }}%;">
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                widths: '600, 900, 1200, 1400',
+                sizes: '(min-width: 990px) 55vw, 100vw'
+            }}
+          </div>
+        {%- elsif request.design_mode -%}
+          <span class="kyma-todo" style="position:absolute;left:16px;top:16px;">[À COMPLÉTER : image de texture (détail du motif)]</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.watermark != blank -%}
+    <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">{{ section.settings.watermark | escape }}</div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Pièce unique",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Pièce unique" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Chaque pièce est" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "unique" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le motif ne se répète jamais. Chaque pièce est découpée dans une zone différente du rouleau : aucune ne ressemble tout à fait à une autre." },
+    { "type": "header", "content": "Image et zoom" },
+    { "type": "image_picker", "id": "image", "label": "Image de texture (détail du motif)" },
+    { "type": "range", "id": "zoom_from", "label": "Zoom au début", "min": 100, "max": 200, "step": 5, "unit": "%", "default": 115 },
+    { "type": "range", "id": "zoom_to", "label": "Zoom à la fin", "min": 100, "max": 300, "step": 5, "unit": "%", "default": 165 },
+    { "type": "range", "id": "focus_x", "label": "Point de zoom — horizontal", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
+    { "type": "range", "id": "focus_y", "label": "Point de zoom — vertical", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
+    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "03" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point clé",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "KYMA — Pièce unique",
+      "blocks": [
+        { "type": "point", "settings": { "title": "Un motif qui ne se répète pas", "text": "Impression all-over, motif non répété." } },
+        { "type": "point", "settings": { "title": "Une découpe différente", "text": "Chaque hoodie est coupé dans une autre zone du rouleau." } },
+        { "type": "point", "settings": { "title": "Un sillage, le vôtre", "text": "Votre pièce porte son propre dessin." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
