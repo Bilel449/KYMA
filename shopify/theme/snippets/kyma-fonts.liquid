@@ -1,0 +1,18 @@
+{%- comment -%}
+  KYMA — polices AUTO-HÉBERGÉES (RGPD : aucun appel à Google Fonts depuis le thème).
+  Fichiers woff2 (sous-ensemble « latin », contient é, à, ç, œ, €…) issus de @fontsource 5.3.0,
+  licence SIL Open Font License 1.1 (textes complets : shopify/licences/OFL-*.txt).
+    DM Serif Display 400 + 400 italique · Outfit 300, 400, 500, 600.
+  Le grec (κύμα) n'est pas dans DM Serif Display : il est livré en SVG (snippet kyma-kuma) ; en texte, repli Georgia.
+  Appelé par kyma-assets. Préchargement des deux fichiers du premier écran (titre + corps).
+{%- endcomment -%}
+<link rel="preload" href="{{ 'kyma-font-dm-serif-400.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin data-kyma-asset="pf1">
+<link rel="preload" href="{{ 'kyma-font-outfit-300.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin data-kyma-asset="pf2">
+<style data-kyma-asset="fonts">
+  @font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'kyma-font-dm-serif-400.woff2' | asset_url }}) format('woff2'); }
+  @font-face { font-family: 'DM Serif Display'; font-style: italic; font-weight: 400; font-display: swap; src: url({{ 'kyma-font-dm-serif-400-italic.woff2' | asset_url }}) format('woff2'); }
+  @font-face { font-family: 'Outfit'; font-style: normal; font-weight: 300; font-display: swap; src: url({{ 'kyma-font-outfit-300.woff2' | asset_url }}) format('woff2'); }
+  @font-face { font-family: 'Outfit'; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'kyma-font-outfit-400.woff2' | asset_url }}) format('woff2'); }
+  @font-face { font-family: 'Outfit'; font-style: normal; font-weight: 500; font-display: swap; src: url({{ 'kyma-font-outfit-500.woff2' | asset_url }}) format('woff2'); }
+  @font-face { font-family: 'Outfit'; font-style: normal; font-weight: 600; font-display: swap; src: url({{ 'kyma-font-outfit-600.woff2' | asset_url }}) format('woff2'); }
+</style>

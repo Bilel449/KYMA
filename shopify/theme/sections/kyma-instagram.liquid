@@ -18,12 +18,12 @@
         text: section.settings.text,
         heading_id: hid
       %}
-      <p><a class="kyma-link" href="{{ section.settings.url }}" target="_blank" rel="noopener">{{ section.settings.cta_label | escape }}<span class="kyma-vh"> (nouvel onglet)</span></a></p>
+      <p><a class="kyma-link" href="{{ section.settings.url | default: 'https://www.instagram.com/kymasinsta/' }}" target="_blank" rel="noopener">{{ section.settings.cta_label | escape }}<span class="kyma-vh"> (nouvel onglet)</span></a></p>
     </div>
     <ul class="kyma-ig__grid" role="list" data-kyma-tiles>
       {%- for block in section.blocks -%}
         <li class="kyma-ig__tile" style="--i: {{ forloop.index0 }};" data-kyma-reveal {{ block.shopify_attributes }}>
-          <a href="{{ section.settings.url }}" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="{{ block.settings.palette }}" data-seed="{{ forloop.index | times: 37 }}">
+          <a href="{{ section.settings.url | default: 'https://www.instagram.com/kymasinsta/' }}" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="{{ block.settings.palette }}" data-seed="{{ forloop.index | times: 37 }}">
             <span class="kyma-ig__cap">{{ block.settings.caption | escape }}</span>
             <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
           </a>
@@ -47,7 +47,7 @@
     { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Coulisses, textures et premiers regards, sur @kymasinsta." },
     { "type": "text", "id": "cta_label", "label": "Lien — texte", "default": "Suivre @kymasinsta" },
-    { "type": "url", "id": "url", "label": "Lien du compte", "default": "https://www.instagram.com/kymasinsta/" }
+    { "type": "url", "id": "url", "label": "Lien du compte" }
   ],
   "blocks": [
     {

@@ -202,7 +202,11 @@ html.kyma-js .kyma-kuma.is-tracing.is-traced path { fill: var(--kyma-ink); trans
   --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%; --face: var(--kyma-rose); --back: var(--kyma-rose-pale); --fg: var(--kyma-ink);
   position: relative; width: min(320px, 78vw); aspect-ratio: 5 / 7; perspective: 1400px; list-style: none;
 }
+/* Contraste (WCAG 2.x, calculé) : Brun #4A3B32 sur camel #C19E86 = 4,33:1 (insuffisant sous 18,66 px gras) ->
+   ORIGINE entièrement en Brun foncé #2E241E : 6,13:1 sur #C19E86 (recto), 8,72:1 sur #D9C0AE (verso).
+   INITIUM : #4A3B32 = 6,69:1 sur #E8C4C4 (recto), 8,30:1 sur #F3DEDC (verso). */
 .kyma-tier--origine { --face: var(--kyma-camel); --back: var(--kyma-camel-soft); --fg: var(--kyma-ink-deep); }
+.kyma-tier--origine .kyma-todo { color: var(--kyma-ink-deep); }
 /* zone sensible fixe, indépendante de la rotation (la carte ne « clignote » pas sous le pointeur) */
 .kyma-tier__hit { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 3.5% / 2.5%; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: pan-y; }
 .kyma-tier__hit:focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 4px; box-shadow: 0 0 0 8px rgba(232, 196, 196, 0.85); }

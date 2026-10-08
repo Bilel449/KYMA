@@ -1,7 +1,8 @@
 # KYMA : installer le site multi-pages dans le thème Horizon
 
-> Auteur : Sacha, le 08/10/2026. Statut : **prêt à installer dans une COPIE non publiée de Horizon**, en attente du « VALIDÉ » d'Arthur et de l'accord du fondateur.
-> Rien n'a été écrit dans la boutique : Horizon a seulement été **lu**, en GraphQL et en lecture seule (thème MAIN `gid://shopify/OnlineStoreTheme/187511734652`), le 08/10/2026.
+> Auteur : Sacha, le 08/10/2026. Statut : « VALIDÉ » d'Arthur pour une copie non publiée. **INSTALLÉ le 08/10/2026 dans la copie non publiée « KYMA — Horizon (préparation) », `gid://shopify/OnlineStoreTheme/189991944572`.** Rien n'est publié.
+> Le thème en ligne (Horizon MAIN `gid://shopify/OnlineStoreTheme/187511734652`) n'a pas été modifié. Aucune attribution de template n'a été changée (pages et produit), puisqu'elle s'appliquerait au thème en ligne : voir le § 4, à faire **au moment de la publication**.
+> Prévisualisation : `https://kymas-store.myshopify.com/?preview_theme_id=189991944572`, à ouvrir depuis l'admin connecté. La boutique peut être protégée par mot de passe pendant l'essai.
 > Maquettes : `shopify/preview/*.html`. Elles sont rendues depuis les vrais fichiers Liquid, avec les réglages des templates ci-dessous.
 
 ## 0. Principe
@@ -17,19 +18,28 @@
 - `templates/page.json` : section `main-page` (blocs `text` et `page-content`). `templates/collection.json` : sections `section` et `main-collection`.
 - `layout/theme.liquid` : `{{ content_for_header }}` se trouve à la fin du `<head>`, et le contenu dans `<main id="MainContent" data-page-transition-enabled="…">`. Notre rideau-vague s'efface de lui-même si les transitions de page de Horizon sont activées.
 
-## 1. Fichiers à téléverser (48 fichiers)
+## 1. Fichiers installés dans la copie (54 fichiers + 1 ligne dans `layout/theme.liquid`)
 
 Source : `shopify/theme/` pour le thème, `shopify/3d/` pour les modèles GLB.
 
 | Dossier du thème | Fichiers | Remarque |
 |---|---|---|
 | `assets/` (6) | `kyma.css`, `kyma-pages.css`, `kyma-3d.js`, `kyma-motion.js`, `kyma-pages.js`, `kyma-glb.js` | JS : 36 Ko gzip au total (budget de Maya : 150 Ko) |
+| `assets/` (6 polices) | `kyma-font-dm-serif-400.woff2`, `kyma-font-dm-serif-400-italic.woff2`, `kyma-font-outfit-300.woff2`, `kyma-font-outfit-400.woff2`, `kyma-font-outfit-500.woff2`, `kyma-font-outfit-600.woff2` | **Auto-hébergées** (`@fontsource` 5.3.0, sous-ensemble latin, licence OFL 1.1 : `shopify/licences/`). Le thème ne fait **plus aucun appel à Google Fonts**. Seules les maquettes l'utilisent encore. |
 | `assets/` (5 GLB) | `ressac-lilac-whirl.glb`, `ressac-ivory-tide.glb`, `ressac-silver-drift.glb`, `ressac-noir-absolu.glb`, `ressac-crimson-flow.glb` | À copier depuis `shopify/3d/` **sans les renommer**, de 2,8 à 3,1 Mo chacun |
-| `sections/` (21) | `kyma-cercle-join`, `kyma-cercle-waves`, `kyma-chapter`, `kyma-colorway-cards`, `kyma-colorways`, `kyma-contact`, `kyma-faq`, `kyma-hero-wave`, `kyma-instagram`, `kyma-manifesto`, `kyma-marquee`, `kyma-page-hero`, `kyma-product-360`, `kyma-product-story`, `kyma-recolor`, `kyma-size-guide`, `kyma-spline`, `kyma-steps`, `kyma-technical`, `kyma-timeline`, `kyma-unique-piece` (tous en `.liquid`) | `kyma-manifesto`, `kyma-marquee`, `kyma-spline` et `kyma-unique-piece` ne sont pas utilisés par les templates : ils restent disponibles dans l'éditeur |
-| `snippets/` (8) | `kyma-assets`, `kyma-colorway-key`, `kyma-hoodie-tech`, `kyma-kuma`, `kyma-section-head`, `kyma-size-figure`, `kyma-step-icon`, `kyma-wave-lines` (en `.liquid`) | |
+| `sections/` (20) | `kyma-cercle-join`, `kyma-cercle-waves`, `kyma-chapter`, `kyma-colorway-cards`, `kyma-colorways`, `kyma-contact`, `kyma-faq`, `kyma-hero-wave`, `kyma-instagram`, `kyma-manifesto`, `kyma-page-hero`, `kyma-product-360`, `kyma-product-story`, `kyma-recolor`, `kyma-size-guide`, `kyma-spline`, `kyma-steps`, `kyma-technical`, `kyma-timeline`, `kyma-unique-piece` (tous en `.liquid`) | **`kyma-marquee` n'est PAS téléversé** : Maya refuse les bandeaux défilants. Il reste dans le dépôt. `kyma-manifesto`, `kyma-unique-piece` et `kyma-spline` ne sont utilisés par aucun template. **`kyma-spline` n'est pas testé** : son URL de scène est vide, et il retombe sur la 3D maison. |
+| `snippets/` (9) | `kyma-assets`, `kyma-fonts`, `kyma-colorway-key`, `kyma-hoodie-tech`, `kyma-kuma`, `kyma-section-head`, `kyma-size-figure`, `kyma-step-icon`, `kyma-wave-lines` (en `.liquid`) | `kyma-fonts` contient les `@font-face` (avec `asset_url`) et précharge les 2 polices du premier écran |
 | `templates/` (8) | `index.json`, `collection.kyma.json`, `product.kyma.json`, `page.nous-connaitre.json`, `page.cercle-waves.json`, `page.guide-des-tailles.json`, `page.faq.json`, `page.contact.json` | `index.json` et `page.contact.json` **remplacent** ceux de la copie. Le `product.json` de Horizon reste intact. |
 
 L'ancien `templates/product.json` du dépôt, écrit pour Dawn (section `main-product`, absente de Horizon), a été **supprimé** : il aurait cassé la fiche produit de Horizon.
+
+### Méthode utilisée le 08/10/2026 (API Admin, par Sacha)
+1. `themeDuplicate` du thème MAIN Horizon, qui crée la copie `189991944572` (UNPUBLISHED).
+2. `stagedUploadsCreate` (ressource FILE, PUT), puis envoi de chaque fichier et `themeFilesUpsert` sur la **copie** avec des corps `URL`. Lots : assets, polices, GLB, sections et snippets, puis templates et layout.
+3. Vérification : chaque fichier a été relu dans la copie et son MD5 comparé au dépôt. Les 54 fichiers sont identiques.
+Incident corrigé : 4 sections (`kyma-instagram`, `kyma-product-360`, `kyma-size-guide`, `kyma-spline`) ont d'abord été refusées sans message, à cause de réglages au défaut vide (`"default": ""`) ou d'une URL externe en défaut d'un réglage `url`. Ces défauts ont été retirés dans le dépôt, puis les sections ont été renvoyées.
+
+Pour une réinstallation manuelle :
 
 ### Méthode A : éditeur de code (sans outil)
 Dans la copie : ⋯ › Modifier le code.
@@ -41,7 +51,8 @@ Dans la copie : ⋯ › Modifier le code.
 ```bash
 # dans un dossier de travail : copier shopify/theme/* et shopify/3d/ressac-*.glb (dans assets/)
 shopify theme push --theme "<ID de la copie>" --path ./theme-kyma --nodelete \
-  --only "assets/kyma*" --only "assets/ressac-*.glb" --only "sections/kyma-*" --only "snippets/kyma-*" --only "templates/*.json"
+  --only "assets/kyma*" --only "assets/ressac-*.glb" --only "sections/kyma-*" --only "snippets/kyma-*" --only "templates/*.json" \
+  --ignore "sections/kyma-marquee.liquid"
 ```
 ⚠️ Toujours passer `--nodelete`. Sans cette option, `push` **supprime** de la copie tous les fichiers de Horizon absents du dossier local.
 
@@ -56,7 +67,8 @@ Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste ava
     {{ content_for_header }}
 ```
 
-Cette ligne charge les polices, `kyma.css`, `kyma-pages.css` et les trois scripts, une fois par page (en `defer`, sans bloquer l'affichage). Chaque section `kyma-*` rappelle aussi ce snippet : le site fonctionne même si la ligne manque, et `kyma-motion.js` supprime les doublons. `kyma-glb.js` n'est chargé que par la section 360°.
+**Fait dans la copie** : la ligne est placée juste avant `</head>`, après `{{ content_for_header }}`. Le fichier a été relu avant la modification (MD5 identique à Horizon) ; rien d'autre n'a été changé.
+Cette ligne charge les polices auto-hébergées, `kyma.css`, `kyma-pages.css` et les trois scripts, une fois par page (en `defer`, sans bloquer l'affichage). Chaque section `kyma-*` rappelle aussi ce snippet : le site fonctionne même si la ligne manque, et `kyma-motion.js` supprime les doublons. `kyma-glb.js` n'est chargé que par la section 360°.
 
 ## 3. Réglages de Horizon (éditeur de thème › Paramètres du thème)
 
@@ -66,7 +78,9 @@ Cette ligne charge les polices, `kyma.css`, `kyma-pages.css` et les trois script
 - **Logo** : texte « KYMA ». Le SVG de `brand/assets/kyma-logo.svg` contient encore un trait lilas : le repasser en `#C19E86` avant de l'utiliser.
 - **Bandeau d'annonce** (`header-announcements`) : message 1 seul au lancement, « Drop 1 — précommande ouverte. Expédition au plus tard le [À COMPLÉTER : date]. ». Ne l'afficher que si la précommande est réellement ouverte (blocage n° 3 de Victoire).
 
-## 4. Attribuer les templates
+## 4. Attribuer les templates (**au moment de la publication seulement**)
+
+⚠️ Ne rien attribuer avant de publier la copie. Le choix de template d'une page ou d'un produit vaut pour **tous** les thèmes, y compris le thème en ligne, qui n'a pas ces templates. Dans la copie, on prévisualise chaque template avec l'éditeur de thème (menu des modèles, aperçu d'un produit ou d'une page).
 
 | Ressource existante (brouillon) | Template à choisir | Action complémentaire |
 |---|---|---|
@@ -114,5 +128,8 @@ Mention sous le lecteur : « Visuel de présentation 3D — pensé pour que chaq
 - [ ] Les cartes Cercle Waves pivotent au survol, au clic, au toucher et au clavier (Tab, Entrée, Échap), et n'affichent **aucun prix**.
 - [ ] Toutes les balises `[À COMPLÉTER]` sont visibles et listées pour le fondateur : date d'expédition, dates de précommande, e-mail, téléphone, grammage, composition, avantages Cercle Waves.
 - [ ] Victoire valide les mentions de consentement des formulaires (Cercle Waves, contact) et la mention des visuels.
-- [ ] RGPD : héberger DM Serif Display et Outfit dans `assets/` après le lancement, pour supprimer l'appel à Google Fonts, puis retirer les trois `<link>` correspondants de `kyma-assets.liquid`.
+- [x] RGPD : DM Serif Display et Outfit sont auto-hébergées (`kyma-fonts`) et le thème n'appelle plus Google Fonts. « κύμα » est en SVG ; dans le seul H1 textuel (visuellement masqué), le grec retombe sur Georgia, via la pile `--kyma-serif`.
+- [ ] **Blocage n° 3 de Victoire** : le label « PRÉCOMMANDE » (hero de l'accueil, collection), le bandeau d'annonce de précommande, le bouton « Précommander » et toutes les dates (ouverture, clôture, « Expédition au plus tard le ») ne s'activent **qu'une fois le contrat fabricant signé**. Avant cela, retirer « — PRÉCOMMANDE » des labels dans l'éditeur, masquer le bandeau et laisser les dates en `[À COMPLÉTER]`.
+- [ ] Formulaire Cercle Waves : la case de consentement envoie `contact[accepts_marketing]=true` et n'est jamais pré-cochée. Victoire valide le texte.
+- [ ] `kyma-spline` : non testé. Ne l'ajouter qu'avec une URL de scène Spline validée.
 - [ ] Publication : **jamais** sans le « VALIDÉ » d'Arthur et la confirmation du fondateur.

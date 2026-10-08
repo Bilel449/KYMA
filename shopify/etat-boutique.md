@@ -1,6 +1,6 @@
 # État de la boutique Shopify — kymas-store.myshopify.com
 
-> Mis à jour le 08/10/2026. Plan : essai (passage à un plan payant nécessaire avant toute vente).
+> Mis à jour le 08/10/2026 (soir : copie de thème KYMA installée, non publiée). Plan : essai (passage à un plan payant nécessaire avant toute vente).
 > Tout ce qui est listé ici a été créé **en brouillon / non publié**, après « VALIDÉ » d'Arthur (cycle 2).
 
 ## Créé par l'équipe
@@ -23,7 +23,18 @@ SKU : `KYMA-HZ-001-<LILAC|IVORY|SILVER|NOIR|CRIMSON>-<XS…XXL>`.
 - ~10 produits **ACTIFS** de test ou d'une version précédente (« Exemple de produit », « Hoodie Mint Surge », « Hoodie Lilac Whirl », produits « Cercle Waves — INITIUM / ORIGINE »…).
 - → À arbitrer par le fondateur : archiver ces produits et remplacer ces pages par les nouvelles versions au lancement (Victoire : un abonnement payant Cercle Waves nécessite son propre règlement et des CGV adaptées).
 
+## Thème KYMA installé dans une copie NON PUBLIÉE (08/10/2026, après « VALIDÉ » d'Arthur)
+| Ressource | ID | Statut |
+|---|---|---|
+| Thème « KYMA — Horizon (préparation) » (copie de Horizon MAIN `187511734652`) | `gid://shopify/OnlineStoreTheme/189991944572` | **UNPUBLISHED** : rien n'est publié |
+
+- **Installé (54 fichiers, MD5 vérifiés)** : `assets/` (kyma.css, kyma-pages.css, kyma-3d.js, kyma-motion.js, kyma-pages.js, kyma-glb.js, 6 polices woff2 auto-hébergées, 5 GLB `ressac-<coloris>.glb`), 20 sections `kyma-*` (sans `kyma-marquee`), 9 snippets `kyma-*`, 8 templates (`index`, `collection.kyma`, `product.kyma`, `page.nous-connaitre`, `page.cercle-waves`, `page.guide-des-tailles`, `page.faq`, `page.contact`).
+- `layout/theme.liquid` de la copie : une ligne ajoutée, `{% render 'kyma-assets' %}`, avant `</head>`.
+- `index.json` et `page.contact.json` de la **copie** remplacent ceux de Horizon. Le thème en ligne n'est pas touché.
+- **Non fait, volontairement** : aucune attribution de template aux pages ni au produit (elle s'appliquerait au thème en ligne) ; aucune publication. Voir `installation-horizon.md` § 4.
+- Prévisualisation : `https://kymas-store.myshopify.com/?preview_theme_id=189991944572` (admin connecté). Non vérifiable depuis l'environnement de Sacha : le domaine de la boutique y est bloqué par la politique réseau.
+
 ## Pas encore fait (volontairement)
-- Installation du thème KYMA (voir `plan-site.md`, procédure Dawn + `shopify theme push` ou téléversement manuel).
+- Publication du thème KYMA et attribution des templates (voir `installation-horizon.md` § 4), après réglages Horizon (§ 3) et levée du blocage n° 3 (contrat fabricant).
 - Menus, politiques légales (attendent les données de la société), nom de la boutique, domaine, applis (avis, cookies, rétractation en ligne).
 - Aucune publication, aucun produit ACTIVE.

@@ -48,6 +48,13 @@
   }
 
   /* ── 2. Cartes Cercle Waves (data-kyma-flip) ─────────────────────────────────────────── */
+  /* verso fermé : hors de l'ordre de tabulation (inert + tabindex=-1), restauré à l'ouverture */
+  function tabbable(face, on) {
+    $('a[href], button, input, select, textarea, [tabindex]', face).forEach(function (n) {
+      if (on) { if (n.hasAttribute('data-kyma-tab')) { var t = n.getAttribute('data-kyma-tab'); if (t === '') n.removeAttribute('tabindex'); else n.setAttribute('tabindex', t); n.removeAttribute('data-kyma-tab'); } }
+      else if (!n.hasAttribute('data-kyma-tab')) { var cur = n.getAttribute('tabindex'); n.setAttribute('data-kyma-tab', cur === '-1' ? '' : (cur || '')); n.setAttribute('tabindex', '-1'); }
+    });
+  }
   function flips(scope) {
     $('[data-kyma-flip]', scope).forEach(function (card) {
       if (!once(card, 'fl')) return;
@@ -59,13 +66,13 @@
         state.on = on;
         card.classList.toggle('is-flipped', on);
         if (hit) hit.setAttribute('aria-pressed', on ? 'true' : 'false');
-        if (back) { back.setAttribute('aria-hidden', on ? 'false' : 'true'); back.inert = !on; }
+        if (back) { back.setAttribute('aria-hidden', on ? 'false' : 'true'); back.inert = !on; tabbable(back, on); }
         if (front) { front.setAttribute('aria-hidden', on ? 'true' : 'false'); front.inert = on; }
         if (!RM) { card.classList.remove('is-turning'); void card.offsetWidth; card.classList.add('is-turning'); clearTimeout(turning); turning = setTimeout(function () { card.classList.remove('is-turning'); }, 950); }
         card.dispatchEvent(new CustomEvent('kyma:flip', { bubbles: true, detail: { on: on, why: why } }));
       }
       set(false); state.on = false; card.classList.remove('is-flipped');
-      if (back) { back.inert = true; }
+      if (back) { back.inert = true; tabbable(back, false); }
       card.addEventListener('pointerdown', function (e) { state.ptype = e.pointerType; });
       /* souris : intention 120 ms, retour 400 ms après la sortie, clic = épingle */
       card.addEventListener('pointerenter', function (e) {

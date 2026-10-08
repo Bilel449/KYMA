@@ -13,9 +13,14 @@
   en mouvement réduit. Le canvas est focusable ; tout le texte utile est hors canvas.
 {%- endcomment -%}
 {% render 'kyma-assets' %}
+{%- comment -%} Sans titre (fiche produit) : aucun h2 avant le h1 de Horizon ; la section est nommée par son label (aria-label). {%- endcomment -%}
 {%- liquid
   assign tid = 'kyma-360-' | append: section.id
   assign hid = tid | append: '-t'
+  assign has_title = false
+  if section.settings.title_before != blank or section.settings.title_em != blank or section.settings.title_after != blank
+    assign has_title = true
+  endif
   assign p = section.settings.product | default: product
   capture cw_key
     render 'kyma-colorway-key', product: p
@@ -45,7 +50,7 @@
     endif
   endfor
 -%}
-<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-360" aria-labelledby="{{ hid }}" data-kyma-360 data-mode="{{ mode }}" data-colorway="{{ cw_key }}"{% if section.settings.mv_src != blank %} data-mv-src="{{ section.settings.mv_src }}"{% endif %}>
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-360{% if has_title == false %} kyma-360--quiet{% endif %}" {% if has_title %}aria-labelledby="{{ hid }}"{% else %}aria-label="{{ section.settings.label | default: 'Hoodie en 3D' | escape }}"{% endif %} data-kyma-360 data-mode="{{ mode }}" data-colorway="{{ cw_key }}"{% if section.settings.mv_src != blank %} data-mv-src="{{ section.settings.mv_src }}"{% endif %}>
   <div class="kyma-sec__inner kyma-360__grid">
     <div class="kyma-360__text" data-kyma-reveal>
       {% render 'kyma-section-head',
@@ -122,7 +127,7 @@
   "class": "kyma-section",
   "settings": [
     { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "hoodie-3d" },
-    { "type": "text", "id": "number", "label": "Numéro", "default": "" },
+    { "type": "text", "id": "number", "label": "Numéro" },
     { "type": "text", "id": "label", "label": "Label", "default": "LA PIÈCE EN 3D" },
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Faire le tour de la" },
     { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "pièce" },
