@@ -43,7 +43,12 @@
 - **Toujours tonal** : deux nuances proches, jamais de contraste extrême.
 - Application **site web : arrière-plan animé** (charte §05).
 
-## Direction photo
+## Direction digitale (décision du fondateur, 08/10/2026)
+- **Aucune image générée par IA** sur le site, les réseaux ou le packaging. Les rendus de `brand/private/images/` ne servent plus que de référence interne.
+- **Référence motion : Spline** (app.spline.design) — 3D douce et tactile : objets organiques aux matières satinées pastel, lumière de studio, ombres douces, interaction à la souris et au défilement. Le motif KYMA Wave vit **en 3D** (sculpture fluide, étoffe qui ondule), pas en photo.
+- En attendant le shooting du produit fabriqué : représentations 3D temps réel (WebGL), dessins techniques vectoriels animés et typographie en mouvement.
+
+## Direction photo (shooting du produit fabriqué)
 Lumière douce, naturelle, diffuse · décor minimal (mur, studio, béton clair, pierre) · focus produit + texture, le motif doit être lisible · attitude calme, le modèle ne surjoue jamais.
 
 ## Produit — Drop 1 (pièce unique : le hoodie zippé oversize)

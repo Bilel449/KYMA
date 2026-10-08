@@ -79,6 +79,7 @@ Tags         : drop-1, <type>, <coloris>, unisexe
 - Beaucoup d'air, grandes photos plein cadre, « le vide est aussi important que le plein ».
 
 ## Motion design KYMA (obligatoire)
+**Référence : Spline** (app.spline.design) — 3D douce, matières satinées pastel, lumière de studio, objets qui réagissent à la souris et au défilement. **Aucune image générée par IA** : en l'absence de photos réelles, le produit et le motif sont montrés en 3D temps réel (WebGL natif, sans dépendance lourde), en dessin technique vectoriel animé et en typographie animée. Une section accepte une scène Spline exportée (URL `.splinecode`) avec repli sur le WebGL maison.
 Le mouvement est l'ADN de la marque : la charte prévoit le motif vague **en arrière-plan animé** sur le site. Principes :
 - **Lent, fluide, organique** — comme le ressac. Courbes d'accélération douces (`cubic-bezier(.22,.61,.36,1)`), durées 0,6–1,2 s, jamais de rebond ni de clignotement.
 - **Hero** : motif marbré animé (canvas/WebGL léger ou SVG `feTurbulence` + `feDisplacementMap` animé), tonal (deux nuances proches), qui ne se répète jamais à l'identique ; le logo et le titre apparaissent en fondu montant décalé.

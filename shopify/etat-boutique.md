@@ -6,7 +6,7 @@
 ## Créé par l'équipe
 | Ressource | ID | Handle | Statut |
 |---|---|---|---|
-| Produit « Ressac — Hoodie zippé oversize » (5 coloris × 6 tailles = 30 variantes, 179 €, 7 visuels, SEO) | `gid://shopify/Product/16151822205308` | `ressac-hoodie-zippe-oversize` | DRAFT, stock 0, vente en rupture refusée |
+| Produit « Ressac — Hoodie zippé oversize » (5 coloris × 6 tailles = 30 variantes, 179 €, SEO) | `gid://shopify/Product/16151822205308` | `ressac-hoodie-zippe-oversize` | DRAFT, stock 0, vente en rupture refusée — **aucune image** (rendus IA supprimés le 08/10/2026 à la demande du fondateur ; photos du shooting à venir) |
 | Métachamp produit `custom.date_expedition` (date, « Expédition au plus tard le ») | `gid://shopify/MetafieldDefinition/336902488444` | — | aucune valeur |
 | Collection « Drop 1 » (manuelle) | `gid://shopify/Collection/702730174844` | `drop-1` | sur aucun canal |
 | Collection « Tous les produits » (auto, prix > 0) | `gid://shopify/Collection/702730207612` | `tous-les-produits` | sur aucun canal — règle à resserrer |
