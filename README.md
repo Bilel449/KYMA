@@ -2,7 +2,7 @@
 
 **Streetwear unisexe — L'art du flow.**
 
-Ce dépôt héberge l'équipe IA de la marque KYMA : 5 agents spécialisés qui collaborent pour cadrer, créer, communiquer, vérifier et livrer.
+Ce dépôt héberge l'équipe IA de la marque KYMA : 6 agents spécialisés qui collaborent pour cadrer, créer, communiquer, vérifier et livrer.
 
 ## L'équipe
 
@@ -11,6 +11,7 @@ Ce dépôt héberge l'équipe IA de la marque KYMA : 5 agents spécialisés qui 
 | **Clémentine** | Sous-manageuse — cadre la mission, étapes, aiguillage |
 | **Izaac** | Création produit — drops, naming, direction artistique |
 | **Maya** | Communication & marketing — Instagram, campagnes, copy, RP |
+| **Sacha** | Site e-commerce Shopify — structure, thème & design, fiches produit, collections, SEO |
 | **Isabelle** | Recherche — tendances, marché, données |
 | **Arthur** | Manager & QA — valide et livre (**seul** à livrer) |
 
@@ -21,8 +22,8 @@ Ce dépôt héberge l'équipe IA de la marque KYMA : 5 agents spécialisés qui 
                    │
               Clémentine
                    │
-       ┌───────────┼───────────┐
-     Izaac       Maya       Isabelle
+     ┌──────────┬──┴───────┬──────────┐
+   Izaac      Maya      Sacha     Isabelle
 ```
 
 Tu peux **lancer une mission complète** (orchestration automatique respectant la hiérarchie) **ou parler directement à un agent** pour un échange ciblé.
@@ -42,7 +43,8 @@ KYMA/
 │  └─ agents/
 │     ├─ clementine.md
 │     ├─ izaac.md
-│     ├─ maya.md          ← NOUVEAU : communication & marketing
+│     ├─ maya.md          ← communication & marketing
+│     ├─ sacha.md         ← NOUVEAU : site e-commerce Shopify
 │     ├─ isabelle.md
 │     └─ arthur.md
 ├─ src/
@@ -79,7 +81,7 @@ Puis dans ce dossier :
 claude
 ```
 
-Tes 5 agents sont chargés. Quelques exemples :
+Tes 6 agents sont chargés. Quelques exemples :
 
 **Mission complète (orchestrée)** :
 > Lance une mission : concept de Drop 2 pour KYMA, avec coloris + plan de lancement Instagram.
@@ -90,6 +92,7 @@ Tes 5 agents sont chargés. Quelques exemples :
 > Demande à Maya 3 captions Instagram pour annoncer le palier ORIGINE du Cercle Waves.
 > @izaac, propose 5 noms de coloris pour une capsule estivale.
 > Isabelle, quelles sont les 3 tendances streetwear à surveiller cet automne ?
+> Sacha, prépare la fiche produit Shopify du hoodie Lilac Whirl et la page d'accueil du site.
 
 → L'agent visé répond directement, en mode conversation.
 
@@ -115,7 +118,7 @@ Pousse le dépôt sur GitHub, ajoute le secret `ANTHROPIC_API_KEY` (Settings →
 ## Comment ça marche techniquement
 
 - Le runtime (`src/run.ts`) appelle `query()` du Claude Agent SDK avec `settingSources: ['project']`, ce qui charge automatiquement les sous-agents depuis `.claude/agents/`.
-- Un prompt « coordinateur » impose l'ordre Clémentine → Isabelle (si besoin) → Izaac/Maya → Arthur.
+- Un prompt « coordinateur » impose l'ordre Clémentine → Isabelle (si besoin) → Izaac/Maya/Sacha → Arthur.
 - En mode interactif Claude Code, le fichier `CLAUDE.md` décrit la hiérarchie et le routage par défaut — Claude Code délègue automatiquement à l'agent pertinent.
 - Chaque agent a son propre contexte ; les workflows multi-agents consomment plus de tokens qu'une session simple.
 
@@ -128,9 +131,18 @@ Clémentine    (cadre, étapes, aiguillage)
    ↓
 Isabelle      (recherche, si nécessaire)
    ↓
-Izaac et/ou Maya    (exécution selon le type de mission)
+Izaac / Maya / Sacha    (exécution selon le type de mission)
    ↓
 Arthur        (relecture → corrections en boucle → livraison)
 ```
 
 **Seul le livrable validé par Arthur sort de l'équipe.**
+
+## Sacha et Shopify
+
+Sacha peut travailler de deux façons :
+
+- **Avec le connecteur Shopify** (outils `mcp__Shopify__*` connectés à Claude Code) : il lit la boutique, crée produits et collections **en brouillon**, et ne publie rien sans « VALIDÉ » d'Arthur + ta confirmation.
+- **Sans connecteur** : il génère des fichiers prêts à importer dans `out/shopify/` — `produits.csv` (import produits Shopify), `theme/` (sections Liquid, templates JSON, `settings_data.json`, à pousser avec `shopify theme push`), `pages/` et `plan-site.md`.
+
+Si ton connecteur Shopify porte un autre nom que `Shopify`, adapte la ligne `tools:` de `.claude/agents/sacha.md`.
