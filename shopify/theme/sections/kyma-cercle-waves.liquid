@@ -1,7 +1,9 @@
 {%- comment -%}
-  KYMA — Cercle Waves : présentation des 2 paliers (INITIUM / ORIGINE) + deux anneaux 3D entrelacés
+  KYMA — Cercle Waves : 2 paliers (INITIUM / ORIGINE) en cartes qui pivotent en 3D (recto = nom + accroche,
+  verso = avantages) au survol, au tap ou au clavier (bouton aria-pressed), avec inclinaison et reflet satiné ;
+  + deux anneaux 3D entrelacés
   (kyma-3d.js, scène rings) qui orbitent lentement ; survoler ou focaliser un palier anime son anneau
-  (1er palier = anneau lilas, 2e palier = anneau noir). Décoratif : tout le contenu est dans les cartes.
+  (1er palier = anneau rose clair, 2e palier = anneau brun). Décoratif : tout le contenu est dans les cartes.
   Les conditions d'accès et avantages ne sont PAS inventés : champs à compléter.
 {%- endcomment -%}
 {% render 'kyma-assets' %}
@@ -32,30 +34,47 @@
     {%- if section.blocks.size > 0 -%}
       <ul class="kyma-cercle__grid" role="list">
         {%- for block in section.blocks -%}
+          {%- assign face_id = 'kyma-tier-' | append: section.id | append: '-' | append: forloop.index -%}
           <li
             class="kyma-tier{% if block.settings.dark %} kyma-tier--dark kyma-on-dark{% endif %}"
             data-kyma-reveal
+            data-kyma-flip
             style="--kd: {{ forloop.index0 | times: 140 }}ms;"
             data-ring="{{ forloop.index0 | at_most: 1 }}"
             {{ block.shopify_attributes }}
           >
-            {%- if block.settings.tag != blank -%}
-              <p class="kyma-tier__tag">{{ block.settings.tag | escape }}</p>
-            {%- endif -%}
-            <h3 class="kyma-tier__name">{{ block.settings.name | escape }}</h3>
-            {%- if block.settings.lead != blank -%}
-              <p class="kyma-tier__lead">{{ block.settings.lead | escape }}</p>
-            {%- endif -%}
-
-            {%- assign perk_lines = block.settings.perks | newline_to_br | split: '<br />' -%}
-            <ul class="kyma-tier__perks" role="list">
-              {%- for perk in perk_lines -%}
-                {%- assign perk_clean = perk | strip -%}
-                {%- if perk_clean != blank -%}
-                  <li>{{ perk_clean | escape }}</li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
+            <div class="kyma-flip__tilt">
+              <div class="kyma-flip">
+                <div class="kyma-flip__face kyma-flip__front" id="{{ face_id }}-front">
+                  {%- if block.settings.tag != blank -%}
+                    <p class="kyma-tier__tag">{{ block.settings.tag | escape }}</p>
+                  {%- endif -%}
+                  <h3 class="kyma-tier__name">{{ block.settings.name | escape }}</h3>
+                  {%- if block.settings.lead != blank -%}
+                    <p class="kyma-tier__lead">{{ block.settings.lead | escape }}</p>
+                  {%- endif -%}
+                  <svg class="kyma-tier__rings" viewBox="0 0 72 32" aria-hidden="true" focusable="false"><circle cx="24" cy="16" r="13" fill="none" stroke="currentColor"/><circle cx="48" cy="16" r="13" fill="none" stroke="currentColor"/></svg>
+                </div>
+                <div class="kyma-flip__face kyma-flip__back" id="{{ face_id }}-back" aria-hidden="true">
+                  <p class="kyma-tier__tag">{{ block.settings.back_label | default: 'Avantages' | escape }} — {{ block.settings.name | escape }}</p>
+                  {%- assign perk_lines = block.settings.perks | newline_to_br | split: '<br />' -%}
+                  <ul class="kyma-tier__perks" role="list">
+                    {%- for perk in perk_lines -%}
+                      {%- assign perk_clean = perk | strip -%}
+                      {%- if perk_clean != blank -%}
+                        <li>{{ perk_clean | escape }}</li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="kyma-flip__toggle" aria-pressed="false" aria-controls="{{ face_id }}-back"
+              data-label-on="{{ block.settings.toggle_back | default: 'Retour' | escape }}" data-label-off="{{ block.settings.toggle_front | default: 'Voir les avantages' | escape }}">
+              <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3" fill="none" stroke="currentColor"/><path d="M11 1v3H8M3 13v-3h3" fill="none" stroke="currentColor"/></svg>
+              <span>{{ block.settings.toggle_front | default: 'Voir les avantages' | escape }}</span>
+              <span class="kyma-vh">— {{ block.settings.name | escape }}</span>
+            </button>
           </li>
         {%- endfor -%}
       </ul>
@@ -103,7 +122,10 @@
         { "type": "text", "id": "name", "label": "Nom du palier", "default": "Initium" },
         { "type": "text", "id": "lead", "label": "Phrase d'accroche" },
         { "type": "textarea", "id": "perks", "label": "Conditions et avantages (un par ligne)" },
-        { "type": "checkbox", "id": "dark", "label": "Carte sombre (palier supérieur)", "default": false }
+        { "type": "checkbox", "id": "dark", "label": "Carte sombre (palier supérieur)", "default": false },
+        { "type": "text", "id": "back_label", "label": "Verso — intitulé", "default": "Avantages" },
+        { "type": "text", "id": "toggle_front", "label": "Bouton — retourner la carte", "default": "Voir les avantages" },
+        { "type": "text", "id": "toggle_back", "label": "Bouton — revenir au recto", "default": "Retour" }
       ]
     }
   ],

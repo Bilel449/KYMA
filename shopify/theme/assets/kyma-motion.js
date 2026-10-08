@@ -417,6 +417,37 @@
     });
   }
 
+  /* ── 15b. cartes qui pivotent (data-kyma-flip) : survol souris, tap, clavier + inclinaison ─ */
+  function flips(scope) {
+    $('[data-kyma-flip]', scope).forEach(function (card) {
+      if (card._fl) return; card._fl = 1;
+      var btn = card.querySelector('.kyma-flip__toggle'), front = card.querySelector('.kyma-flip__front'), back = card.querySelector('.kyma-flip__back');
+      var lab = btn && btn.querySelector('span');
+      function set(on) {
+        card.classList.toggle('is-flipped', on);
+        if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); if (lab) lab.textContent = btn.getAttribute(on ? 'data-label-on' : 'data-label-off'); }
+        if (back) { back.setAttribute('aria-hidden', on ? 'false' : 'true'); back.inert = !on; }
+        if (front) { front.setAttribute('aria-hidden', on ? 'true' : 'false'); front.inert = on; }
+      }
+      set(false);
+      if (btn) btn.addEventListener('click', function (e) { e.stopPropagation(); set(!card.classList.contains('is-flipped')); });
+      card.addEventListener('click', function (e) { if (e.target.closest('a, button')) return; if (!fine) set(!card.classList.contains('is-flipped')); });
+      if (!fine) return;
+      card.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') set(true); });
+      card.addEventListener('pointerleave', function (e) {
+        if (e.pointerType === 'mouse') set(false);
+        card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
+      });
+      if (K.reduced) return;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - y) * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      });
+    });
+  }
+
   /* ── 16. fiche produit : aperçu 3D synchronisé sur la variante Dawn ──────────────────── */
   function variants() {
     var hosts = $('[data-kyma-variant-sync]'); if (!hosts.length) return;
@@ -465,7 +496,7 @@
 
   function initScope(scope) {
     reveal(scope); hero(scope); magnetic(scope); marquee(scope); colorways(scope);
-    dive(scope); drawing(scope); rings(scope); spline(scope);
+    dive(scope); drawing(scope); rings(scope); flips(scope); spline(scope);
   }
   function init() {
     dedupe(); chrome(); initScope(d); smooth(); anchors(); progress(); cursor(); curtain(); variants();

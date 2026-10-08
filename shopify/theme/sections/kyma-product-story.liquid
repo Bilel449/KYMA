@@ -1,5 +1,6 @@
 {%- comment -%}
-  KYMA — Blocs sous la fiche produit : détails, guide des tailles (tiroir), entretien,
+  KYMA — Blocs sous la fiche produit : aperçu 3D du coloris (étoffe kyma-3d synchronisée sur la variante
+  choisie : PUB_SUB_EVENTS.variantChange de Dawn, sinon événement « change » des sélecteurs), détails, guide des tailles (tiroir), entretien,
   mention de précommande (date limite d'expédition = métachamp produit custom.date_expedition, type Date,
   avec rappel du droit d'annulation et liens Retours / CGV), mention « visuel de présentation (rendu) ».
   Aucune allégation en dur (matière, certification, origine) : tout est éditable et vide par défaut.
@@ -10,6 +11,34 @@
 <section class="kyma-story" aria-label="Informations sur le produit">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
+
+      {%- when 'preview_3d' -%}
+        {%- liquid
+          assign opt_name = block.settings.option_name | default: 'Couleur'
+          assign cw_value = ''
+          assign opt_index = 1
+          for option in product.options_with_values
+            if option.name == opt_name
+              assign cw_value = option.selected_value
+              assign opt_index = option.position
+            endif
+          endfor
+          assign cw_key = cw_value | handleize | default: 'kyma'
+        -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Aperçu 3D du coloris' | escape }}</h2>
+          <div class="kyma-story__body">
+            <div class="kyma-swatch3d" data-kyma-3d-host data-kyma-variant-sync data-option="{{ opt_name | escape }}" data-option-index="{{ opt_index }}">
+              <canvas data-kyma-3d="swatch" data-colorway="{{ cw_key }}" data-follow="false" aria-hidden="true"></canvas>
+            </div>
+            {%- if cw_value != blank -%}
+              <p class="kyma-swatch3d__name">{{ block.settings.name_label | escape }} <strong data-kyma-cw-name>{{ cw_value | escape }}</strong></p>
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}
+              <p class="kyma-disclaimer">{{ block.settings.caption | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
 
       {%- when 'details' -%}
         <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
@@ -171,6 +200,17 @@
   ],
   "blocks": [
     {
+      "type": "preview_3d",
+      "name": "Aperçu 3D du coloris",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Aperçu 3D du coloris" },
+        { "type": "text", "id": "option_name", "label": "Nom de l'option coloris (variantes)", "default": "Couleur" },
+        { "type": "text", "id": "name_label", "label": "Libellé devant le nom", "default": "Coloris :" },
+        { "type": "textarea", "id": "caption", "label": "Mention (validée par Victoire)", "default": "Illustration 3D du motif et des teintes du coloris — pas une photo du produit. Chaque pièce ayant un motif unique, la vôtre sera différente." }
+      ]
+    },
+    {
       "type": "details",
       "name": "Détails",
       "limit": 1,
@@ -230,7 +270,7 @@
       ]
     }
   ],
-  "max_blocks": 5,
+  "max_blocks": 6,
   "enabled_on": {
     "templates": ["product"]
   },
@@ -238,6 +278,7 @@
     {
       "name": "KYMA — Histoire produit",
       "blocks": [
+        { "type": "preview_3d" },
         { "type": "details" },
         { "type": "size_guide" },
         { "type": "care" },

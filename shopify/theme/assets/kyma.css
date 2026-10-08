@@ -3,33 +3,40 @@
    Thème Dawn + sections kyma-*  |  Source : charte graphique 2025 (BRAND.md)
    Aucune image générée par IA : 3D temps réel (kyma-3d.js), dessin vectoriel et typographie animée.
 
-   CONTRASTE (WCAG AA)
-   - --kyma-gris #8A8A8A (2,98:1 sur beige) : décoratif uniquement.
-   - --kyma-gris-ink #5F5F5F (5,5:1) : texte secondaire.
-   - --kyma-lilas-dark #9B7A9B (3,2:1) : GRANDS titres seulement (>= 24 px).
-   - --kyma-lilas-ink #7A5C7A (5,0:1) : labels et petits textes accentués.
-   - Texte posé sur la 3D : toujours sur un voile beige (>= 85 % d'opacité) ou une carte givrée.
+   CONTRASTE (WCAG AA) — palette beige / marron clair / rose clair / brun foncé
+   - Texte : --kyma-ink #4A3B32 (9,2:1 sur beige, 8,3:1 rose pâle, 6,7:1 rose clair).
+   - Secondaire : --kyma-ink-soft #6B5A4E (5,7:1 / 5,1:1). Labels : --kyma-camel-ink #7A5F4C (5,1:1 / 4,6:1).
+   - Italiques des grands titres : --kyma-camel-deep #9A7A62 (3,4:1, >= 24 px uniquement).
+   - --kyma-camel #C19E86 et --kyma-rose #E8C4C4 : décoratifs (filets, tracés, fonds), jamais du texte sur beige.
+   - Sur brun foncé : texte beige (9,2:1) ou rose clair (6,7:1).
+   - Texte posé sur la 3D : toujours sur un voile beige (>= 85 %) ou une carte givrée.
    ========================================================================== */
 
 /* ─── 1. TOKENS ───────────────────────────────────────────────────────── */
 :root {
-  --kyma-beige: #F5EDE4;
-  --kyma-lilas: #C8A2C8;
-  --kyma-lilas-dark: #9B7A9B;
-  --kyma-lilas-ink: #7A5C7A;
-  --kyma-gris: #8A8A8A;
-  --kyma-gris-ink: #5F5F5F;
-  --kyma-noir: #1C1C1C;
-  --kyma-blanc: #FAFAFA;
-  --kyma-camel: #C19E86;
+  /* Palette site (décision du fondateur, 08/10/2026) : beige, marron clair, rose clair, brun foncé.
+     Le lilas n'est plus une couleur du site (il reste un coloris produit : Lilac Whirl). */
+  --kyma-beige: #F5EDE4;       /* fond */
+  --kyma-camel: #C19E86;       /* marron clair : tracés, filets, bouton secondaire (décoratif : 2,1:1) */
+  --kyma-rose: #E8C4C4;        /* rose clair : fonds de cartes, halos, survols */
+  --kyma-rose-pale: #F3DEDC;   /* grands aplats */
+  --kyma-ink: #4A3B32;         /* brun foncé : texte et titres (9,2:1 sur beige) */
+  --kyma-ink-deep: #2E241E;    /* texte sur marron clair (bouton secondaire au survol) */
+  --kyma-ink-soft: #6B5A4E;    /* texte secondaire (5,7:1 beige, 5,1:1 rose pâle) */
+  --kyma-camel-ink: #7A5F4C;   /* labels / petits textes accentués (5,1:1 beige, 4,6:1 rose pâle) */
+  --kyma-camel-deep: #9A7A62;  /* italiques des GRANDS titres seulement (3,4:1, >= 24 px) */
+  --kyma-blanc: #FBF7F2;
   --kyma-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --kyma-sans: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --kyma-line: rgba(28, 28, 28, 0.08);
+  --kyma-line: rgba(74, 59, 50, 0.1);
   --kyma-pad-x: clamp(20px, 4vw, 48px);
   --kyma-section-y: clamp(72px, 10vw, 140px);
   --kyma-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --kyma-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --kyma-header-h: 72px; /* mesuré par kyma-motion.js */
+  /* Alias de compatibilité (anciens noms) */
+  --kyma-noir: var(--kyma-ink);
+  --kyma-gris-ink: var(--kyma-ink-soft);
 
   /* Dawn : nos polices, boutons carrés */
   --font-heading-family: var(--kyma-serif);
@@ -55,30 +62,30 @@ h1, h2, h3, .h0, .h1, .h2, .h3 { font-weight: 400; }
   position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
-.kyma-todo { display: inline-block; padding: 2px 8px; background: rgba(193, 158, 134, 0.28); color: var(--kyma-noir); font-weight: 400; }
+.kyma-todo { display: inline-block; padding: 2px 8px; background: rgba(193, 158, 134, 0.28); color: var(--kyma-ink); font-weight: 400; }
 
 /* Focus visible (clavier) */
 [class*="kyma-"] a:focus-visible,
 [class*="kyma-"] button:focus-visible,
 [class*="kyma-"] summary:focus-visible,
-[class*="kyma-"][tabindex]:focus-visible { outline: 2px solid var(--kyma-noir); outline-offset: 3px; }
-.kyma-on-dark a:focus-visible, .kyma-on-dark button:focus-visible { outline-color: var(--kyma-lilas); }
+[class*="kyma-"][tabindex]:focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 3px; }
+.kyma-on-dark a:focus-visible, .kyma-on-dark button:focus-visible { outline-color: var(--kyma-rose); }
 
 /* ─── 2. DAWN : header translucide, boutons, footer ───────────────────── */
 .section-header { position: sticky; top: 0; z-index: 100; }
 .section-header .header-wrapper {
   background: rgba(245, 237, 228, 0.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(28, 28, 28, 0.06); transition: background-color 0.4s var(--kyma-ease);
+  border-bottom: 1px solid rgba(74, 59, 50, 0.06); transition: background-color 0.4s var(--kyma-ease);
 }
 html.kyma-scrolled .section-header .header-wrapper { background: rgba(245, 237, 228, 0.93); }
 .section-header .header__heading-link, .section-header .header__heading-link .h2, .section-header .header__heading-link span {
-  font-family: var(--kyma-serif); font-size: 28px; font-weight: 400; letter-spacing: 0.21em; text-transform: uppercase; color: var(--kyma-noir); text-decoration: none;
+  font-family: var(--kyma-serif); font-size: 28px; font-weight: 400; letter-spacing: 0.21em; text-transform: uppercase; color: var(--kyma-ink); text-decoration: none;
 }
 .section-header .header__menu-item, .section-header .header__menu-item span, .section-header .header__inline-menu .list-menu__item {
-  font-family: var(--kyma-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.23em; text-transform: uppercase; color: var(--kyma-gris-ink); transition: color 0.3s;
+  font-family: var(--kyma-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.23em; text-transform: uppercase; color: var(--kyma-ink-soft); transition: color 0.3s;
 }
 .section-header .header__menu-item:hover, .section-header .header__menu-item:hover span,
-.section-header .header__menu-item[aria-current], .section-header .header__active-menu-item { color: var(--kyma-noir); text-decoration: none; }
+.section-header .header__menu-item[aria-current], .section-header .header__active-menu-item { color: var(--kyma-ink); text-decoration: none; }
 .footer-block__heading { font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; }
 .button, .shopify-challenge__button, .customer button { font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
 
@@ -112,18 +119,34 @@ html.kyma-js .is-split[data-kyma-reveal] { opacity: 1; transform: none; }
 html.kyma-js:not(.kyma-ready) .kyma-ch { animation: kyma-failsafe 0.01s 4s forwards; }
 
 /* Structure « charte » : 01 / label / titre avec mot en italique */
-.kyma-sec { position: relative; overflow: clip; padding: var(--kyma-section-y) var(--kyma-pad-x); color: var(--kyma-noir); background: var(--kyma-beige); scroll-margin-top: var(--kyma-header-h); }
+.kyma-sec { position: relative; overflow: clip; padding: var(--kyma-section-y) var(--kyma-pad-x); color: var(--kyma-ink); background: var(--kyma-beige); scroll-margin-top: var(--kyma-header-h); }
 .kyma-sec__inner { position: relative; z-index: 1; max-width: 1240px; margin-inline: auto; }
-.kyma-sec__num { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: 13px; color: var(--kyma-gris-ink); }
-.kyma-sec__label { margin: 0 0 14px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
-.kyma-sec__title { margin: 0 0 22px; font-family: var(--kyma-serif); font-size: clamp(34px, 4.6vw, 64px); font-weight: 400; line-height: 1.1; letter-spacing: 0.005em; color: var(--kyma-noir); }
-.kyma-sec__title em { font-style: italic; color: var(--kyma-lilas-dark); }
-.kyma-sec__desc { margin: 0; max-width: 560px; font-size: 16px; line-height: 1.85; color: var(--kyma-gris-ink); }
+.kyma-sec__num { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: 13px; color: var(--kyma-ink-soft); }
+.kyma-sec__label { margin: 0 0 14px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-camel-ink); }
+.kyma-sec__title { margin: 0 0 22px; font-family: var(--kyma-serif); font-size: clamp(34px, 4.6vw, 64px); font-weight: 400; line-height: 1.1; letter-spacing: 0.005em; color: var(--kyma-ink); }
+.kyma-sec__title em { font-style: italic; color: var(--kyma-camel-deep); }
+.kyma-sec__desc { margin: 0; max-width: 560px; font-size: 16px; line-height: 1.85; color: var(--kyma-ink-soft); }
 .kyma-sec__mark {
   position: absolute; right: var(--kyma-pad-x); bottom: 24px; z-index: 0; font-family: var(--kyma-serif);
-  font-size: clamp(120px, 20vw, 260px); line-height: 1; color: rgba(28, 28, 28, 0.04); pointer-events: none; user-select: none;
+  font-size: clamp(120px, 20vw, 260px); line-height: 1; color: rgba(193, 158, 134, 0.14); pointer-events: none; user-select: none;
 }
-.kyma-caption { margin: 12px 0 0; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--kyma-gris-ink); }
+.kyma-caption { margin: 12px 0 0; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--kyma-ink-soft); }
+
+/* Filet fin entre sections */
+.kyma-divider { height: 1px; margin: 0 var(--kyma-pad-x); border: 0; background: linear-gradient(90deg, transparent, var(--kyma-camel), transparent); }
+html.kyma-js .kyma-divider[data-kyma-reveal] { opacity: 0; transform: scaleX(0.15); }
+html.kyma-js .kyma-divider[data-kyma-reveal].is-in { opacity: 1; transform: scaleX(1); }
+
+/* Révélation en cascade des enfants : data-kyma-stagger (réutilisable sur toutes les pages) */
+html.kyma-js [data-kyma-stagger][data-kyma-reveal] { opacity: 1; transform: none; }
+html.kyma-js [data-kyma-stagger] > * { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--kyma-ease), transform 1.1s var(--kyma-ease-out); }
+html.kyma-js [data-kyma-stagger].is-in > * { opacity: 1; transform: none; }
+html.kyma-js [data-kyma-stagger] > :nth-child(2) { transition-delay: 0.12s; }
+html.kyma-js [data-kyma-stagger] > :nth-child(3) { transition-delay: 0.24s; }
+html.kyma-js [data-kyma-stagger] > :nth-child(4) { transition-delay: 0.36s; }
+html.kyma-js [data-kyma-stagger] > :nth-child(5) { transition-delay: 0.48s; }
+html.kyma-js [data-kyma-stagger] > :nth-child(n+6) { transition-delay: 0.6s; }
+html.kyma-js:not(.kyma-ready) [data-kyma-stagger] > * { animation: kyma-failsafe 0.01s 4s forwards; }
 
 /* Boutons */
 .kyma-btn {
@@ -131,34 +154,34 @@ html.kyma-js:not(.kyma-ready) .kyma-ch { animation: kyma-failsafe 0.01s 4s forwa
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.9em;
   min-height: 52px; padding: 18px 34px; overflow: hidden; border-radius: 999px;
   font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; line-height: 1; letter-spacing: 0.25em; text-transform: uppercase;
-  text-decoration: none; cursor: pointer; color: var(--kyma-blanc); background: var(--kyma-noir); border: 1px solid var(--kyma-noir);
+  text-decoration: none; cursor: pointer; color: var(--kyma-blanc); background: var(--kyma-ink); border: 1px solid var(--kyma-ink);
   transition: color 0.4s, background-color 0.4s, border-color 0.4s, transform 0.6s var(--kyma-ease-out);
 }
 .kyma-btn::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s;
-  background: radial-gradient(160px circle at var(--mx) var(--my), rgba(200, 162, 200, 0.55), transparent 70%);
+  background: radial-gradient(160px circle at var(--mx) var(--my), rgba(232, 196, 196, 0.45), transparent 70%);
 }
 .kyma-btn > * { position: relative; transition: transform 0.6s var(--kyma-ease-out); }
 .kyma-btn:hover::before { opacity: 1; }
 .kyma-btn__arrow { display: inline-block; transition: transform 0.5s var(--kyma-ease); }
 .kyma-btn:hover .kyma-btn__arrow { transform: translateX(6px); }
-.kyma-btn--ghost { color: var(--kyma-noir); background: rgba(245, 237, 228, 0.6); border-color: rgba(28, 28, 28, 0.35); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.kyma-btn--ghost { color: var(--kyma-ink); background: rgba(245, 237, 228, 0.6); border-color: var(--kyma-camel); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .kyma-btn--ghost::before { display: none; }
-.kyma-btn--ghost:hover { background: var(--kyma-lilas); border-color: var(--kyma-lilas); color: var(--kyma-noir); }
-.kyma-on-dark .kyma-btn { color: var(--kyma-noir); background: var(--kyma-lilas); border-color: var(--kyma-lilas); }
-.kyma-on-dark .kyma-btn:hover { background: var(--kyma-blanc); border-color: var(--kyma-blanc); }
+.kyma-btn--ghost:hover { background: var(--kyma-camel); border-color: var(--kyma-camel); color: var(--kyma-ink-deep); }
+.kyma-on-dark .kyma-btn { color: var(--kyma-ink); background: var(--kyma-rose); border-color: var(--kyma-rose); }
+.kyma-on-dark .kyma-btn:hover { background: var(--kyma-beige); border-color: var(--kyma-beige); }
 [data-kyma-magnetic] { will-change: transform; }
 
 .kyma-link {
-  display: inline-block; padding-bottom: 6px; text-decoration: none; color: var(--kyma-noir);
+  display: inline-block; padding-bottom: 6px; text-decoration: none; color: var(--kyma-ink);
   font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
-  background: linear-gradient(var(--kyma-lilas-dark), var(--kyma-lilas-dark)) 0 100% / 32% 2px no-repeat;
+  background: linear-gradient(var(--kyma-camel), var(--kyma-camel)) 0 100% / 32% 2px no-repeat;
   transition: background-size 0.6s var(--kyma-ease);
 }
 .kyma-link:hover { background-size: 100% 2px; }
 
 /* Vagues du logo (snippet kyma-wave-lines) */
-.kyma-waves { display: block; width: min(320px, 60vw); height: auto; color: var(--kyma-lilas); overflow: visible; }
+.kyma-waves { display: block; width: min(320px, 60vw); height: auto; color: var(--kyma-camel); overflow: visible; }
 .kyma-waves path { fill: none; stroke: currentColor; stroke-linecap: round; }
 .kyma-waves .kyma-waves__2 { opacity: 0.5; }
 .kyma-waves .kyma-waves__3 { opacity: 0.25; }
@@ -172,29 +195,29 @@ html.kyma-js:not(.kyma-ready) .kyma-ch { animation: kyma-failsafe 0.01s 4s forwa
 .kyma-cursor.is-on .kyma-cursor__ring, .kyma-cursor.is-on .kyma-cursor__dot { opacity: 1; }
 .kyma-cursor__ring::before {
   content: ''; position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid rgba(28, 28, 28, 0.55); transition: transform 0.45s var(--kyma-ease-out), background-color 0.3s, border-color 0.3s;
+  border: 1px solid rgba(74, 59, 50, 0.55); transition: transform 0.45s var(--kyma-ease-out), background-color 0.3s, border-color 0.3s;
 }
-.kyma-cursor__dot::before { content: ''; position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; border-radius: 50%; background: var(--kyma-noir); }
-.kyma-cursor.is-link .kyma-cursor__ring::before { transform: scale(1.8); background: rgba(200, 162, 200, 0.22); border-color: var(--kyma-lilas-dark); }
+.kyma-cursor__dot::before { content: ''; position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; border-radius: 50%; background: var(--kyma-ink); }
+.kyma-cursor.is-link .kyma-cursor__ring::before { transform: scale(1.8); background: rgba(232, 196, 196, 0.35); border-color: var(--kyma-camel); }
 .kyma-cursor.is-down .kyma-cursor__ring::before { transform: scale(0.8); }
 .kyma-cursor.is-text .kyma-cursor__ring::before { transform: scale(0.4); }
 .kyma-cursor__wave {
   position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
-  border: 1px solid var(--kyma-lilas-dark); animation: kyma-pulse 0.85s var(--kyma-ease-out) forwards;
+  border: 1px solid var(--kyma-camel); animation: kyma-pulse 0.85s var(--kyma-ease-out) forwards;
 }
 
 .kyma-progress { position: fixed; left: 0; right: 0; top: 0; z-index: 2147482000; height: 10px; pointer-events: none; }
 .kyma-progress svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.kyma-progress path { fill: none; stroke: var(--kyma-lilas-dark); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
+.kyma-progress path { fill: none; stroke: var(--kyma-camel); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
 
 .kyma-curtain { position: fixed; inset: 0; z-index: 2147483100; pointer-events: none; visibility: hidden; }
 .kyma-curtain.is-on { visibility: visible; pointer-events: auto; }
 .kyma-curtain svg { width: 100%; height: 100%; display: block; }
-.kyma-curtain__a { fill: var(--kyma-noir); }
-.kyma-curtain__b { fill: var(--kyma-lilas); }
+.kyma-curtain__a { fill: var(--kyma-camel); }
+.kyma-curtain__b { fill: var(--kyma-rose-pale); }
 /* Arrivée après un rideau : couvre la page jusqu'à ce que le JS prenne le relais (filet : 1,4 s) */
 html.kyma-arrive body::after {
-  content: ''; position: fixed; inset: 0; z-index: 2147483100; background: var(--kyma-lilas);
+  content: ''; position: fixed; inset: 0; z-index: 2147483100; background: var(--kyma-rose-pale);
   animation: kyma-arrive-out 0.4s 1.4s forwards;
 }
 
@@ -203,7 +226,7 @@ canvas[data-kyma-3d] { display: block; width: 100%; height: 100%; opacity: 0; tr
 canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma3d-off {
   background:
-    radial-gradient(60% 55% at 62% 45%, var(--k3a, #C8A2C8) 0%, transparent 70%),
+    radial-gradient(60% 55% at 62% 45%, var(--k3a, #E8C4C4) 0%, transparent 70%),
     radial-gradient(45% 45% at 40% 60%, var(--k3b, #F5EDE4) 0%, transparent 75%),
     var(--kyma-beige) !important;
 }
@@ -213,7 +236,7 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-hero {
   position: relative; isolation: isolate; overflow: clip; display: flex; align-items: center;
   min-height: 100vh; min-height: 100svh; margin-top: calc(var(--kyma-header-h) * -1);
-  padding: calc(var(--kyma-header-h) + 40px) var(--kyma-pad-x) 96px; color: var(--kyma-noir); background: var(--kyma-beige);
+  padding: calc(var(--kyma-header-h) + 40px) var(--kyma-pad-x) 96px; color: var(--kyma-ink); background: var(--kyma-beige);
 }
 .kyma-hero--large { min-height: 82vh; min-height: 82svh; }
 .kyma-hero__stage { position: absolute; inset: 0; z-index: -1; }
@@ -229,76 +252,76 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-hero.is-in .kyma-hero__sub { opacity: 1; transform: none; transition-delay: 0.9s; }
 .kyma-hero.is-in .kyma-hero__ctas { opacity: 1; transform: none; transition-delay: 1.1s; }
 .kyma-hero.is-in .kyma-hero__note { opacity: 1; transform: none; transition-delay: 1.3s; }
-.kyma-hero__label { margin: 0 0 28px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
+.kyma-hero__label { margin: 0 0 28px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-camel-ink); }
 .kyma-hero__title {
   --kyma-stagger: 32ms; --sd: 250ms;
-  margin: 0; font-family: var(--kyma-serif); font-size: clamp(46px, 6.6vw, 104px); font-weight: 400; line-height: 1.02; letter-spacing: 0.01em; color: var(--kyma-noir);
+  margin: 0; font-family: var(--kyma-serif); font-size: clamp(46px, 6.6vw, 104px); font-weight: 400; line-height: 1.02; letter-spacing: 0.01em; color: var(--kyma-ink);
 }
-.kyma-hero__title em { font-style: italic; color: var(--kyma-lilas-ink); }
-.kyma-hero__sub { max-width: 470px; margin: 30px 0 0; font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--kyma-gris-ink); }
+.kyma-hero__title em { font-style: italic; color: var(--kyma-camel-ink); }
+.kyma-hero__sub { max-width: 470px; margin: 30px 0 0; font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--kyma-ink-soft); }
 .kyma-hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
-.kyma-hero__note { margin: 22px 0 0; font-size: 11px; letter-spacing: 0.08em; color: var(--kyma-gris-ink); }
+.kyma-hero__note { margin: 22px 0 0; font-size: 11px; letter-spacing: 0.08em; color: var(--kyma-ink-soft); }
 .kyma-hero__cue {
   position: absolute; left: 50%; bottom: 24px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
   transform: translateX(-50%); font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--kyma-gris-ink); text-decoration: none; padding: 6px 10px;
+  color: var(--kyma-ink-soft); text-decoration: none; padding: 6px 10px;
 }
-.kyma-hero__cue-line { position: relative; display: block; width: 1px; height: 52px; overflow: hidden; background: rgba(28, 28, 28, 0.14); }
-.kyma-hero__cue-line::after { content: ''; position: absolute; inset: 0; background: var(--kyma-lilas-ink); animation: kyma-cue 2.4s var(--kyma-ease) infinite; }
+.kyma-hero__cue-line { position: relative; display: block; width: 1px; height: 52px; overflow: hidden; background: rgba(74, 59, 50, 0.14); }
+.kyma-hero__cue-line::after { content: ''; position: absolute; inset: 0; background: var(--kyma-camel-ink); animation: kyma-cue 2.4s var(--kyma-ease) infinite; }
 .kyma-hero__cue svg { width: 44px; height: 10px; overflow: visible; }
-.kyma-hero__cue path { fill: none; stroke: var(--kyma-lilas-dark); stroke-width: 1.4; stroke-dasharray: 6 4; animation: kyma-wave-dash 1.6s linear infinite; }
+.kyma-hero__cue path { fill: none; stroke: var(--kyma-camel); stroke-width: 1.4; stroke-dasharray: 6 4; animation: kyma-wave-dash 1.6s linear infinite; }
 
 /* ─── 7. BANDEAU DÉFILANT ─────────────────────────────────────────────── */
 .kyma-marquee { position: relative; overflow: hidden; padding: clamp(18px, 2.6vw, 30px) 0; background: var(--kyma-beige); border-block: 1px solid var(--kyma-line); }
-.kyma-marquee--dark { background: var(--kyma-noir); color: var(--kyma-blanc); border-color: var(--kyma-noir); }
+.kyma-marquee--dark { background: var(--kyma-ink); color: var(--kyma-blanc); border-color: var(--kyma-ink); }
 .kyma-marquee__track { display: flex; width: max-content; will-change: transform; }
 .kyma-marquee__item {
   flex: none; padding-right: 0.5em; white-space: nowrap; font-family: var(--kyma-serif); font-size: clamp(34px, 6vw, 84px);
   line-height: 1.15; letter-spacing: 0.01em;
 }
-.kyma-marquee__item em { font-style: italic; color: var(--kyma-lilas-dark); }
-.kyma-marquee--dark .kyma-marquee__item em { color: var(--kyma-lilas); }
-.kyma-marquee__sep { display: inline-block; margin: 0 0.35em; color: var(--kyma-lilas-dark); transform: translateY(-0.08em); }
+.kyma-marquee__item em { font-style: italic; color: var(--kyma-camel-deep); }
+.kyma-marquee--dark .kyma-marquee__item em { color: var(--kyma-rose); }
+.kyma-marquee__sep { display: inline-block; margin: 0 0.35em; color: var(--kyma-camel); transform: translateY(-0.08em); }
 
 /* ─── 8. 01 COLORIS (sélecteur + objet 3D) ────────────────────────────── */
-.kyma-cw { --cw-a: #C8A2C8; --cw-b: #F5EDE4; }
+.kyma-cw { --cw-a: #E8C4C4; --cw-b: #F5EDE4; }
 .kyma-cw__stage { display: grid; gap: 28px; margin-top: 40px; align-items: center; }
 .kyma-cw__viz {
   position: relative; aspect-ratio: 1 / 1; max-height: 74vh; width: 100%; overflow: hidden; border-radius: 28px; background: var(--kyma-beige);
-  box-shadow: inset 0 0 0 1px rgba(28, 28, 28, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06);
 }
 .kyma-cw__viz canvas { position: absolute; inset: 0; }
 .kyma-cw__viz::after {
   content: ''; position: absolute; inset: auto 18px 18px auto; width: 42px; height: 42px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--cw-a) 0 50%, var(--cw-b) 50% 100%); box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.12);
+  background: linear-gradient(135deg, var(--cw-a) 0 50%, var(--cw-b) 50% 100%); box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.12);
   transition: background 1.2s var(--kyma-ease);
 }
 .kyma-cw__now { margin: 0; }
-.kyma-cw__kicker { display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
+.kyma-cw__kicker { display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-camel-ink); }
 .kyma-cw__name {
   --kyma-stagger: 26ms;
   display: block; min-height: 1.1em; font-family: var(--kyma-serif); font-size: clamp(40px, 5.4vw, 76px); line-height: 1.05;
   transition: opacity 0.3s var(--kyma-ease), transform 0.35s var(--kyma-ease), filter 0.3s;
 }
 .kyma-cw__name.is-out { opacity: 0; transform: translateY(-0.25em); filter: blur(4px); }
-.kyma-cw__desc { margin: 10px 0 0; min-height: 1.6em; font-size: 15px; line-height: 1.6; color: var(--kyma-gris-ink); transition: opacity 0.3s; }
+.kyma-cw__desc { margin: 10px 0 0; min-height: 1.6em; font-size: 15px; line-height: 1.6; color: var(--kyma-ink-soft); transition: opacity 0.3s; }
 .kyma-cw__desc.is-out { opacity: 0; }
 .kyma-cw__list { display: grid; gap: 4px; margin: 28px 0 0; padding: 0; list-style: none; }
 .kyma-cw__opt {
   display: flex; align-items: center; gap: 16px; width: 100%; min-height: 52px; padding: 10px 14px 10px 10px; text-align: left;
-  font: 400 14px var(--kyma-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--kyma-noir);
+  font: 400 14px var(--kyma-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--kyma-ink);
   background: transparent; border: 1px solid transparent; border-radius: 999px; cursor: pointer;
   transition: background-color 0.4s, border-color 0.4s, padding 0.5s var(--kyma-ease-out);
 }
 .kyma-cw__opt:hover { background: rgba(255, 255, 255, 0.55); }
-.kyma-cw__opt[aria-pressed="true"] { background: rgba(255, 255, 255, 0.75); border-color: rgba(28, 28, 28, 0.18); padding-left: 16px; }
+.kyma-cw__opt[aria-pressed="true"] { background: rgba(255, 255, 255, 0.75); border-color: rgba(74, 59, 50, 0.18); padding-left: 16px; }
 .kyma-cw__sw {
-  flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.15);
+  flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.15);
   background: conic-gradient(from 200deg, var(--a) 0 45%, var(--b) 45% 70%, var(--a) 70% 100%);
   transition: transform 0.6s var(--kyma-ease-out);
 }
 .kyma-cw__opt[aria-pressed="true"] .kyma-cw__sw { transform: rotate(120deg) scale(1.1); }
-.kyma-cw__opt-idx { margin-left: auto; font-family: var(--kyma-serif); font-size: 13px; letter-spacing: 0; color: var(--kyma-gris-ink); }
+.kyma-cw__opt-idx { margin-left: auto; font-family: var(--kyma-serif); font-size: 13px; letter-spacing: 0; color: var(--kyma-ink-soft); }
 .kyma-cw__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; margin-top: 28px; }
 
 /* ─── 9. 02 LE MOTIF : plongée épinglée ──────────────────────────────── */
@@ -312,7 +335,7 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-dive__ui a, .kyma-dive__ui button { pointer-events: auto; }
 .kyma-dive__head, .kyma-dive__card {
   max-width: 520px; padding: 22px 26px; border-radius: 22px; background: rgba(245, 237, 228, 0.86);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1); box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.05);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1); box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.05);
 }
 .kyma-dive__head .kyma-sec__title { font-size: clamp(30px, 3.6vw, 50px); margin-bottom: 12px; }
 .kyma-dive__head .kyma-sec__desc { font-size: 15px; }
@@ -325,10 +348,10 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-dive__line.is-past { opacity: 0; transform: translateY(-40px); }
 .kyma-dive__line:last-child.is-past { opacity: 1; transform: none; }
 .kyma-dive__card h3 { margin: 0 0 6px; font-family: var(--kyma-serif); font-size: clamp(26px, 3vw, 38px); font-weight: 400; line-height: 1.15; }
-.kyma-dive__card p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--kyma-gris-ink); }
-.kyma-dive__idx { display: block; margin-bottom: 10px; font-size: 11px; letter-spacing: 0.4em; color: var(--kyma-lilas-ink); }
-.kyma-dive__meter { position: absolute; right: var(--kyma-pad-x); top: 50%; z-index: 1; width: 2px; height: 120px; margin-top: -60px; background: rgba(28, 28, 28, 0.12); border-radius: 2px; }
-.kyma-dive__meter span { position: absolute; inset: 0; background: var(--kyma-noir); transform: scaleY(0); transform-origin: 50% 0; border-radius: 2px; }
+.kyma-dive__card p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--kyma-ink-soft); }
+.kyma-dive__idx { display: block; margin-bottom: 10px; font-size: 11px; letter-spacing: 0.4em; color: var(--kyma-camel-ink); }
+.kyma-dive__meter { position: absolute; right: var(--kyma-pad-x); top: 50%; z-index: 1; width: 2px; height: 120px; margin-top: -60px; background: rgba(74, 59, 50, 0.12); border-radius: 2px; }
+.kyma-dive__meter span { position: absolute; inset: 0; background: var(--kyma-ink); transform: scaleY(0); transform-origin: 50% 0; border-radius: 2px; }
 .kyma-dive.is-static { height: auto; }
 .kyma-dive.is-static .kyma-dive__sticky { position: relative; height: auto; min-height: 100vh; }
 .kyma-dive.is-static .kyma-dive__lines { display: grid; gap: 12px; }
@@ -339,10 +362,10 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-tech__fig { position: relative; margin: 0; }
 .kyma-tech__art { position: relative; max-width: 620px; margin-inline: auto; }
 .kyma-tech__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.kyma-tech__svg path { fill: none; stroke: var(--kyma-noir); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.kyma-tech__svg .is-fine { stroke-width: 0.9; stroke: #5F5F5F; }
-.kyma-tech__svg .is-accent { stroke: var(--kyma-lilas-dark); stroke-width: 1.6; }
-.kyma-tech__svg .is-dim { stroke: var(--kyma-gris); stroke-width: 0.8; stroke-dasharray: 3 4; }
+.kyma-tech__svg path { fill: none; stroke: var(--kyma-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.kyma-tech__svg .is-fine { stroke-width: 0.9; stroke: var(--kyma-ink-soft); }
+.kyma-tech__svg .is-accent { stroke: var(--kyma-camel-deep); stroke-width: 1.6; }
+.kyma-tech__svg .is-dim { stroke: var(--kyma-camel); stroke-width: 0.8; stroke-dasharray: 3 4; }
 .kyma-tech.is-drawing .kyma-tech__svg [pathLength] { stroke-dasharray: 1; }
 .kyma-tech.is-drawing .kyma-tech__svg .is-dim[pathLength] { stroke-dasharray: 1; }
 .kyma-tech__spot {
@@ -352,11 +375,11 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-tech__spot.is-on { opacity: 1; transform: none; }
 .kyma-tech__spot::before {
   content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
-  background: var(--kyma-noir); box-shadow: 0 0 0 4px rgba(245, 237, 228, 0.9); transition: transform 0.4s var(--kyma-ease-out), background-color 0.3s;
+  background: var(--kyma-ink); box-shadow: 0 0 0 4px rgba(245, 237, 228, 0.9); transition: transform 0.4s var(--kyma-ease-out), background-color 0.3s;
 }
-.kyma-tech__spot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 1px solid var(--kyma-lilas-dark); animation: kyma-pulse 2.4s var(--kyma-ease-out) infinite; }
+.kyma-tech__spot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 1px solid var(--kyma-camel); animation: kyma-pulse 2.4s var(--kyma-ease-out) infinite; }
 .kyma-tech__spot span { position: relative; z-index: 1; font: 500 11px/44px var(--kyma-sans); color: var(--kyma-blanc); }
-.kyma-tech__spot:hover::before, .kyma-tech__spot.is-hot::before { transform: scale(1.25); background: var(--kyma-lilas-ink); }
+.kyma-tech__spot:hover::before, .kyma-tech__spot.is-hot::before { transform: scale(1.25); background: var(--kyma-camel-ink); }
 .kyma-tech__legend { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: k; }
 .kyma-tech__item {
   display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 18px 0; border-top: 1px solid var(--kyma-line);
@@ -364,62 +387,88 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 }
 .kyma-tech__item:last-child { border-bottom: 1px solid var(--kyma-line); }
 .kyma-tech__item.is-on { opacity: 1; transform: none; }
-.kyma-tech__item.is-hot .kyma-tech__n { background: var(--kyma-lilas-ink); }
-.kyma-tech__n { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--kyma-noir); color: var(--kyma-blanc); font-size: 11px; font-weight: 500; transition: background-color 0.3s; }
+.kyma-tech__item.is-hot .kyma-tech__n { background: var(--kyma-camel-ink); }
+.kyma-tech__n { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--kyma-ink); color: var(--kyma-blanc); font-size: 11px; font-weight: 500; transition: background-color 0.3s; }
 .kyma-tech__item h3 { margin: 2px 0 4px; font-family: var(--kyma-serif); font-size: 21px; font-weight: 400; }
-.kyma-tech__item p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--kyma-gris-ink); }
+.kyma-tech__item p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--kyma-ink-soft); }
 .kyma-tech.is-static .kyma-tech__item, .kyma-tech.is-static .kyma-tech__spot { opacity: 1; transform: none; }
 
 /* ─── 11. MANIFESTE / SAVOIR-FAIRE (+ étoffe 3D) ─────────────────────── */
 .kyma-man__grid { display: grid; gap: 40px; align-items: center; }
 .kyma-man__text > * + .kyma-sec__desc { margin-top: 20px; }
 .kyma-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 0; padding: 0; list-style: none; }
-.kyma-chips li { padding: 9px 20px; font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid rgba(28, 28, 28, 0.16); border-radius: 999px; color: var(--kyma-noir); }
+.kyma-chips li { padding: 9px 20px; font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid rgba(74, 59, 50, 0.16); border-radius: 999px; color: var(--kyma-ink); }
 .kyma-man__cta { margin-top: 36px; }
 .kyma-fabric { position: relative; margin: 0; }
-.kyma-fabric__stage { position: relative; aspect-ratio: 4 / 5; max-height: 80vh; overflow: hidden; border-radius: 28px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(28, 28, 28, 0.06); }
+.kyma-fabric__stage { position: relative; aspect-ratio: 4 / 5; max-height: 80vh; overflow: hidden; border-radius: 28px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06); }
 .kyma-fabric__stage canvas { position: absolute; inset: 0; }
 
 /* ─── 12. CERCLE WAVES (+ anneaux 3D) ────────────────────────────────── */
 .kyma-cercle__rings { position: relative; height: clamp(280px, 42vw, 460px); margin: 8px auto 0; max-width: 900px; }
 .kyma-cercle__rings canvas { position: absolute; inset: 0; }
 .kyma-cercle__grid { display: grid; gap: 20px; margin: 16px 0 0; padding: 0; list-style: none; }
-.kyma-tier {
-  padding: clamp(28px, 4vw, 48px); background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(28, 28, 28, 0.06); border-radius: 24px;
-  transition: transform 0.6s var(--kyma-ease-out), box-shadow 0.6s var(--kyma-ease);
+/* Cartes-paliers qui pivotent en 3D (data-kyma-flip) : recto = nom + accroche, verso = avantages.
+   Survol (souris), tap ou bouton clavier (aria-pressed). Inclinaison qui suit la souris + reflet satiné. */
+.kyma-tier { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%; position: relative; perspective: 1400px; }
+.kyma-flip__tilt { transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform 0.5s var(--kyma-ease-out); }
+.kyma-flip { position: relative; display: grid; transform-style: preserve-3d; border-radius: 24px;
+  transform: rotateY(calc(var(--flip, 0) * 180deg)); transition: transform 1.1s var(--kyma-ease-out); }
+.kyma-tier.is-flipped { --flip: 1; }
+.kyma-flip__face {
+  grid-area: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 320px;
+  padding: clamp(28px, 4vw, 44px); border-radius: 24px; background: var(--kyma-rose-pale); color: var(--kyma-ink);
+  border: 1px solid rgba(193, 158, 134, 0.45); -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  box-shadow: 0 40px 70px -50px rgba(74, 59, 50, 0.55);
 }
-.kyma-tier:hover, .kyma-tier:focus-within { transform: translateY(-6px); box-shadow: 0 30px 60px -40px rgba(28, 28, 28, 0.45); }
-.kyma-tier--dark { background: var(--kyma-noir); border-color: var(--kyma-noir); color: var(--kyma-blanc); }
-.kyma-tier__tag { margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
-.kyma-tier--dark .kyma-tier__tag { color: var(--kyma-lilas); }
-.kyma-tier__name { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: clamp(26px, 3vw, 36px); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; }
-.kyma-tier__lead { margin: 0 0 22px; font-size: 14px; line-height: 1.8; color: var(--kyma-gris-ink); }
-.kyma-tier--dark .kyma-tier__lead { color: rgba(250, 250, 250, 0.8); }
+.kyma-flip__back { transform: rotateY(180deg); background: var(--kyma-beige); }
+.kyma-flip__face::after { /* reflet satiné qui suit la souris */
+  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: 0.0; transition: opacity 0.5s;
+  background: radial-gradient(120% 80% at var(--mx) var(--my), rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 45%),
+              linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0) 62%);
+  mix-blend-mode: soft-light;
+}
+.kyma-tier:hover .kyma-flip__face::after, .kyma-tier.is-flipped .kyma-flip__face::after { opacity: 1; }
+.kyma-tier--dark .kyma-flip__face { background: var(--kyma-ink); color: var(--kyma-beige); border-color: var(--kyma-ink); }
+.kyma-tier--dark .kyma-flip__back { background: #5A493E; }
+.kyma-tier__tag { margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-camel-ink); }
+.kyma-tier--dark .kyma-tier__tag { color: var(--kyma-rose); }
+.kyma-tier__name { margin: 0 0 10px; font-family: var(--kyma-serif); font-size: clamp(30px, 3.4vw, 44px); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; }
+.kyma-tier__lead { margin: 0; font-size: 15px; line-height: 1.8; color: var(--kyma-ink-soft); }
+.kyma-tier--dark .kyma-tier__lead { color: var(--kyma-rose-pale); }
+.kyma-tier__rings { margin-top: auto; padding-top: 28px; width: 72px; height: 32px; color: var(--kyma-camel); }
 .kyma-tier__perks { margin: 0; padding: 0; list-style: none; }
 .kyma-tier__perks li { position: relative; padding: 14px 0 14px 28px; font-size: 14px; line-height: 1.7; border-top: 1px solid var(--kyma-line); }
-.kyma-tier--dark .kyma-tier__perks li { border-top-color: rgba(250, 250, 250, 0.14); }
-.kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: 24px; width: 16px; height: 1px; background: var(--kyma-lilas); }
+.kyma-tier--dark .kyma-tier__perks li { border-top-color: rgba(245, 237, 228, 0.16); }
+.kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: 24px; width: 16px; height: 1px; background: var(--kyma-camel); }
+.kyma-flip__toggle {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 16px; padding: 10px 18px;
+  font: 500 11px var(--kyma-sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--kyma-ink);
+  background: transparent; border: 1px solid var(--kyma-camel); border-radius: 999px; cursor: pointer; transition: background-color 0.3s;
+}
+.kyma-flip__toggle:hover { background: var(--kyma-rose-pale); }
+.kyma-flip__toggle svg { width: 14px; height: 14px; transition: transform 0.6s var(--kyma-ease-out); }
+.kyma-flip__toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
 .kyma-cercle__cta { margin-top: 44px; }
 
 /* ─── 13. SECTION SPLINE ─────────────────────────────────────────────── */
-.kyma-spline__stage { position: relative; height: clamp(360px, 70vh, 760px); margin-top: 32px; overflow: hidden; border-radius: 28px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(28, 28, 28, 0.06); }
+.kyma-spline__stage { position: relative; height: clamp(360px, 70vh, 760px); margin-top: 32px; overflow: hidden; border-radius: 28px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06); }
 .kyma-spline__stage spline-viewer, .kyma-spline__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 /* ─── 14. FICHE PRODUIT : blocs + aperçu 3D du coloris ───────────────── */
-.kyma-story { max-width: 1240px; margin: 0 auto; padding: clamp(48px, 7vw, 96px) var(--kyma-pad-x); color: var(--kyma-noir); }
-.kyma-story__row { display: grid; gap: 16px; padding: 32px 0; border-top: 1px solid rgba(28, 28, 28, 0.1); }
-.kyma-story__row:last-child { border-bottom: 1px solid rgba(28, 28, 28, 0.1); }
-.kyma-story__label { margin: 0; font-family: var(--kyma-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
-.kyma-story__body { font-size: 15px; line-height: 1.9; color: var(--kyma-noir); }
+.kyma-story { max-width: 1240px; margin: 0 auto; padding: clamp(48px, 7vw, 96px) var(--kyma-pad-x); color: var(--kyma-ink); }
+.kyma-story__row { display: grid; gap: 16px; padding: 32px 0; border-top: 1px solid rgba(74, 59, 50, 0.1); }
+.kyma-story__row:last-child { border-bottom: 1px solid rgba(74, 59, 50, 0.1); }
+.kyma-story__label { margin: 0; font-family: var(--kyma-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-camel-ink); }
+.kyma-story__body { font-size: 15px; line-height: 1.9; color: var(--kyma-ink); }
 .kyma-story__body p { margin: 0 0 12px; }
 .kyma-story__list { margin: 0; padding: 0; list-style: none; }
 .kyma-story__list li { position: relative; padding: 6px 0 6px 28px; }
-.kyma-story__list li::before { content: ''; position: absolute; left: 0; top: 17px; width: 16px; height: 1px; background: var(--kyma-lilas); }
-.kyma-swatch3d { position: relative; aspect-ratio: 16 / 10; max-width: 720px; overflow: hidden; border-radius: 22px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(28, 28, 28, 0.08); }
+.kyma-story__list li::before { content: ''; position: absolute; left: 0; top: 17px; width: 16px; height: 1px; background: var(--kyma-camel); }
+.kyma-swatch3d { position: relative; aspect-ratio: 16 / 10; max-width: 720px; overflow: hidden; border-radius: 22px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.08); }
 .kyma-swatch3d canvas { position: absolute; inset: 0; }
-.kyma-swatch3d__name { margin: 14px 0 0; font-size: 14px; color: var(--kyma-gris-ink); }
-.kyma-swatch3d__name strong { font-family: var(--kyma-serif); font-size: 20px; font-weight: 400; color: var(--kyma-noir); }
-.kyma-drawer { margin-top: 20px; border: 1px solid rgba(28, 28, 28, 0.12); background: rgba(255, 255, 255, 0.5); }
+.kyma-swatch3d__name { margin: 14px 0 0; font-size: 14px; color: var(--kyma-ink-soft); }
+.kyma-swatch3d__name strong { font-family: var(--kyma-serif); font-size: 20px; font-weight: 400; color: var(--kyma-ink); }
+.kyma-drawer { margin-top: 20px; border: 1px solid rgba(74, 59, 50, 0.12); background: rgba(255, 255, 255, 0.5); }
 .kyma-drawer > summary { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 18px 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; list-style: none; }
 .kyma-drawer > summary::-webkit-details-marker { display: none; }
 .kyma-drawer > summary::after { content: '+'; font-family: var(--kyma-serif); font-size: 26px; line-height: 1; transition: transform 0.4s var(--kyma-ease); }
@@ -429,15 +478,15 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-table-wrap { overflow-x: auto; }
 .kyma-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 13px; text-align: center; }
 .kyma-table th, .kyma-table td { padding: 12px 10px; border-bottom: 1px solid var(--kyma-line); font-weight: 400; }
-.kyma-table thead th { background: rgba(28, 28, 28, 0.04); letter-spacing: 0.12em; }
+.kyma-table thead th { background: rgba(74, 59, 50, 0.04); letter-spacing: 0.12em; }
 .kyma-table tbody th { text-align: left; }
-.kyma-note { margin: 16px 0 0; font-size: 13px; line-height: 1.7; color: var(--kyma-gris-ink); }
-.kyma-note a, .kyma-price-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--kyma-lilas-dark); }
-.kyma-price-note { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--kyma-gris-ink); }
-.kyma-pre { padding: 20px 24px; background: rgba(200, 162, 200, 0.14); border: 1px solid var(--kyma-lilas); }
+.kyma-note { margin: 16px 0 0; font-size: 13px; line-height: 1.7; color: var(--kyma-ink-soft); }
+.kyma-note a, .kyma-price-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--kyma-camel); }
+.kyma-price-note { margin: 4px 0 0; font-size: 13px; line-height: 1.6; color: var(--kyma-ink-soft); }
+.kyma-pre { padding: 20px 24px; background: var(--kyma-rose-pale); border: 1px solid var(--kyma-camel); }
 .kyma-pre__date { margin: 8px 0 0; font-size: 16px; }
 .kyma-pre__date strong { font-weight: 500; }
-.kyma-disclaimer { margin: 0; font-size: 13px; font-style: italic; line-height: 1.7; color: var(--kyma-gris-ink); }
+.kyma-disclaimer { margin: 0; font-size: 13px; font-style: italic; line-height: 1.7; color: var(--kyma-ink-soft); }
 
 /* ─── 15. RESPONSIVE ─────────────────────────────────────────────────── */
 @media (max-width: 749px) {
@@ -478,8 +527,14 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
   .kyma-hero__inner { transform: none; opacity: 1; }
   .kyma-hero__cue-line::after, .kyma-hero__cue path, .kyma-tech__spot::after { animation: none; }
   canvas[data-kyma-3d] { transition: none; }
-  .kyma-btn, .kyma-btn > *, .kyma-btn__arrow, .kyma-tier, .kyma-link, .kyma-cw__opt, .kyma-cw__sw, .kyma-cw__name, .kyma-cw__desc, .kyma-cw__viz::after { transition: none; }
-  .kyma-btn:hover .kyma-btn__arrow, .kyma-tier:hover { transform: none; }
+  .kyma-btn, .kyma-btn > *, .kyma-btn__arrow, .kyma-link, .kyma-cw__opt, .kyma-cw__sw, .kyma-cw__name, .kyma-cw__desc, .kyma-cw__viz::after { transition: none; }
+  .kyma-btn:hover .kyma-btn__arrow { transform: none; }
+  .kyma-flip, .kyma-flip__tilt { transition: none; transform: none !important; }
+  .kyma-flip__back { transform: none; visibility: hidden; }
+  .kyma-tier.is-flipped .kyma-flip__back { visibility: visible; }
+  .kyma-tier.is-flipped .kyma-flip__front { visibility: hidden; }
+  html.kyma-js [data-kyma-stagger] > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .kyma-divider { opacity: 1 !important; transform: none !important; }
   .kyma-tech__spot, .kyma-tech__item { opacity: 1; transform: none; transition: none; }
   .kyma-drawer[open] .kyma-drawer__body { animation: none; }
   html.kyma-arrive body::after { display: none; }

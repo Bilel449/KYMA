@@ -8,7 +8,9 @@
   'use strict';
   if (w.KYMA3D) return;
 
+  /* [nom, nuance A, nuance B, veines (facultatif)] — « kyma » = palette du site (rose clair / beige / marron clair) */
   var CW = {
+    'kyma': ['KYMA', '#E8C4C4', '#F5EDE4', '#C19E86'],
     'lilac-whirl': ['Lilac Whirl', '#C8A2C8', '#F5EDE4'],
     'ivory-tide': ['Ivory Tide', '#E8E0D8', '#C5BFB8'],
     'silver-drift': ['Silver Drift', '#8E9EAB', '#C8CDD2'],
@@ -32,8 +34,9 @@
   }
   function lin(c) { return c.map(function (v) { return Math.pow(v, 2.2); }); }
   function pair(name) {
-    var c = Array.isArray(name) ? [0, name[0], name[1]] : (CW[key(name)] || CW['lilac-whirl']);
-    return [lin(hex(c[1])), lin(hex(c[2]))];
+    var c = Array.isArray(name) ? [0, name[0], name[1], name[2]] : (CW[key(name)] || CW.kyma);
+    var a = lin(hex(c[1])), b = lin(hex(c[2]));
+    return [a, b, c[3] ? lin(hex(c[3])) : mix3(a, b, 0.35).map(function (v) { return v * 0.82; })];
   }
   function mix(a, b, t) { return a + (b - a) * t; }
   function mix3(a, b, t) { return [mix(a[0], b[0], t), mix(a[1], b[1], t), mix(a[2], b[2], t)]; }
@@ -57,7 +60,7 @@
   var FS = [
     '#ifdef GL_FRAGMENT_PRECISION_HIGH', 'precision highp float;', '#else', 'precision mediump float;', '#endif',
     'uniform vec2 uRes,uMouse,uShift;uniform float uT,uMorph,uFocus,uFloor,uHover,uPat;',
-    'uniform vec3 uCo,uCr,uCu,uCf,uA,uB,uA2,uB2,uBg;uniform float uFl;uniform mat3 uR,uR1,uR2;',
+    'uniform vec3 uCo,uCr,uCu,uCf,uA,uB,uV,uA2,uB2,uV2,uBg;uniform float uFl;uniform mat3 uR,uR1,uR2;',
     'const vec3 LK=vec3(-.55,.78,.52);const vec3 LB=vec3(.75,.2,-.7);',
     'mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,s,-s,c);}',
     'float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}',
@@ -115,11 +118,11 @@
     ' return clamp(r,0.,1.);}',
     'float occl(vec3 p,vec3 n){float o=0.,s=1.;for(int i=0;i<4;i++){float h=.02+.11*float(i);o+=(h-map(p+n*h).x)*s;s*=.72;}return clamp(1.-1.8*o,0.,1.);}',
     /* motif KYMA Wave : fbm à domain warping, deux nuances tonales, s'écoule lentement */
-    'vec3 wave(vec3 p,vec3 A,vec3 B){p*=uPat;float t=uT*.035;',
+    'vec3 wave(vec3 p,vec3 A,vec3 B,vec3 V){p*=uPat;float t=uT*.035;',
     ' vec2 q=vec2(fbm(p+vec3(0.,t,0.)),fbm(p+vec3(5.2,1.3,2.8)-t));',
     ' float f=fbm(p+3.4*vec3(q,q.x-q.y)+vec3(1.7,9.2,t*2.));',
     ' float m=smoothstep(.3,.7,f);float v=abs(fract(f*3.2+q.x*.8)-.5);',
-    ' vec3 c=mix(B,A,m);return mix(c,mix(A,B,.35)*.9,(1.-smoothstep(.0,.07,v))*.28);}',
+    ' vec3 c=mix(B,A,m);return mix(c,V,(1.-smoothstep(.0,.11,v))*.34);}',
     'vec3 shade(vec3 p,vec3 n,vec3 rd,vec3 base){vec3 L=normalize(LK),Lb=normalize(LB),bg=pow(uBg,vec3(2.2));',
     ' float ndl=dot(n,L),dif=clamp(ndl,0.,1.),wrap=clamp((ndl+.4)/1.4,0.,1.);',
     ' float sh=dif>0.?soft(p+n*.012,L):0.;float oc=occl(p,n);',
@@ -134,9 +137,9 @@
     ' float b=dot(ro,rd),c=dot(ro,ro)-BR*BR,hh=b*b-c;bool hit=false;float t=0.,id=0.;',
     ' if(hh>0.){hh=sqrt(hh);t=max(-b-hh,0.);float tx=-b+hh;',
     '  for(int i=0;i<80;i++){vec2 m=map(ro+rd*t);if(m.x<.0012*t){hit=true;id=m.y;break;}t+=m.x;if(t>tx)break;}}',
-    ' if(hit){vec3 p=ro+rd*t;vec3 n=nrm(p);vec3 A=uA,B=uB;',
-    '  if(id>.5){A=uA2;B=uB2;}',
-    '  vec3 c2=shade(p,n,rd,wave(opos(p,id),A,B));col=pow(clamp(c2,0.,1.),vec3(.4545));}',
+    ' if(hit){vec3 p=ro+rd*t;vec3 n=nrm(p);vec3 A=uA,B=uB,V=uV;',
+    '  if(id>.5){A=uA2;B=uB2;V=uV2;}',
+    '  vec3 c2=shade(p,n,rd,wave(opos(p,id),A,B,V));col=pow(clamp(c2,0.,1.),vec3(.4545));}',
     ' else if(rd.y<0.&&uFloor>-50.){float tf=(uFloor-ro.y)/rd.y;vec3 fp=ro+rd*tf;float dl=length(fp.xz);',
     '  if(dl<4.5){float s=soft(fp+vec3(0.,.01,0.),normalize(LK));float o=clamp(map(fp+vec3(0.,.35,0.)).x/.35,0.,1.);',
     '   float k=1.-smoothstep(2.5,4.5,dl);col=uBg*mix(1.,(1.-.2*(1.-s))*mix(.86,1.,o),k);}}',
@@ -154,10 +157,10 @@
     self.interactive = opts.interactive !== false;
     self.p = { morph: 0, dive: 0, focus: -1, shift: opts.shift || null, pat: opts.pattern || (opts.scene === 'swatch' ? 1.05 : 1.5) };
     self.t = reduced ? 14.2 : 20 + Math.random() * 400; /* graine : le motif n'est jamais deux fois le même */
-    self.name = key(opts.colorway || 'lilac-whirl');
+    self.name = key(opts.colorway || 'kyma');
     var c0 = pair(self.name);
-    self.col = { a: c0[0], b: c0[1], fa: c0[0], fb: c0[1], ta: c0[0], tb: c0[1], k: 1 };
-    self.c2 = pair('noir-absolu');
+    self.col = { a: c0[0], b: c0[1], v: c0[2], fa: c0[0], fb: c0[1], fv: c0[2], ta: c0[0], tb: c0[1], tv: c0[2], k: 1 };
+    self.c2 = pair(['#4A3B32', '#6B5A4E', '#C19E86']); /* 2e anneau (ORIGINE) : brun */
     self.yaw = 0; self.pitch = 0; self.ty = 0; self.tp = 0; self.spin = Math.random() * 6;
     self.hov = 0; self.thov = 0; self.mouse = [0, 0];
     self.scale = w.innerWidth < 750 ? 0.7 : 0.9; self.acc = 0; self.n = 0;
@@ -169,7 +172,7 @@
   var S = Scene.prototype;
 
   S.css = function (arr) {
-    var c = arr ? [0, arr[0], arr[1]] : (CW[this.name] || CW['lilac-whirl']), h = this.host;
+    var c = arr ? [0, arr[0], arr[1]] : (CW[this.name] || CW.kyma), h = this.host;
     if (h && h.style) { h.style.setProperty('--k3a', c[1]); h.style.setProperty('--k3b', c[2]); }
   };
   S.fail = function () {
@@ -206,7 +209,7 @@
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
     var u = this.u = {};
-    'uRes uMouse uShift uT uMorph uFocus uFloor uHover uPat uCo uCr uCu uCf uA uB uA2 uB2 uBg uFl uR uR1 uR2'.split(' ')
+    'uRes uMouse uShift uT uMorph uFocus uFloor uHover uPat uCo uCr uCu uCf uA uB uV uA2 uB2 uV2 uBg uFl uR uR1 uR2'.split(' ')
       .forEach(function (n) { u[n] = gl.getUniformLocation(pr, n); });
     gl.uniform3fv(u.uBg, hex(BG));
     this.ok = true;
@@ -257,8 +260,8 @@
     if (!CW[k2] && !arr) return;
     this.name = k2; this.css(arr ? name : null);
     var c = pair(name), C = this.col;
-    C.fa = C.a; C.fb = C.b; C.ta = c[0]; C.tb = c[1]; C.k = reduced ? 1 : 0;
-    if (reduced) { C.a = C.ta; C.b = C.tb; }
+    C.fa = C.a; C.fb = C.b; C.fv = C.v; C.ta = c[0]; C.tb = c[1]; C.tv = c[2]; C.k = reduced ? 1 : 0;
+    if (reduced) { C.a = C.ta; C.b = C.tb; C.v = C.tv; }
     this.dirty = true;
     if (reduced) this.draw(0); else wake();
   };
@@ -282,7 +285,7 @@
     this.t += dt; this.frames++; this.ftime += dt;
     if (C.k < 1) {
       C.k = Math.min(1, C.k + dt / FADE);
-      var e = ease(C.k); C.a = mix3(C.fa, C.ta, e); C.b = mix3(C.fb, C.tb, e);
+      var e = ease(C.k); C.a = mix3(C.fa, C.ta, e); C.b = mix3(C.fb, C.tb, e); C.v = mix3(C.fv, C.tv, e);
     }
     this.yaw += (this.ty - this.yaw) * f; this.pitch += (this.tp - this.pitch) * f;
     this.hov += (this.thov - this.hov) * (1 - Math.exp(-dt * 4));
@@ -324,7 +327,7 @@
     gl.uniform3fv(u.uCo, ro); gl.uniform3fv(u.uCr, rt); gl.uniform3fv(u.uCu, up); gl.uniform3fv(u.uCf, fw);
     gl.uniform1f(u.uFl, fl);
     gl.uniform3fv(u.uA, C.a); gl.uniform3fv(u.uB, C.b);
-    gl.uniform3fv(u.uA2, this.c2[0]); gl.uniform3fv(u.uB2, this.c2[1]);
+    gl.uniform3fv(u.uV, C.v); gl.uniform3fv(u.uA2, this.c2[0]); gl.uniform3fv(u.uB2, this.c2[1]); gl.uniform3fv(u.uV2, this.c2[2]);
     gl.uniformMatrix3fv(u.uR, false, R);
     gl.uniformMatrix3fv(u.uR1, false, R1 || R); gl.uniformMatrix3fv(u.uR2, false, R2 || R);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
