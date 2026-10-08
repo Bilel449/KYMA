@@ -13,7 +13,7 @@ Tout ce qui n'est pas confirmé reste en `[À COMPLÉTER : …]` (jamais d'allé
 
 | Page | URL (handle) | Template / type | Contenu et source | Statut |
 |---|---|---|---|---|
-| Accueil | `/` | `templates/index.json` (fourni) | Ordre de Maya (`contenu/copy-site.md` §3) : Hero « Une pièce. Aucune identique. » → 01 Le Drop 1 (coloris) → 02 Le motif → 03 La pièce → 04 Le savoir-faire → 05 Cercle Waves → 06 Instagram. Sections 03, 04 et 06 = `kyma-manifesto` ; 02 = `kyma-unique-piece` (zoom texture). Unicité : repli « Pensé pour que chaque pièce soit unique » | Thème prêt |
+| Accueil | `/` | `templates/index.json` (fourni) | Ordre de Maya (`contenu/copy-site.md` §3) : Hero « Une pièce, pensée pour être *unique*. » (repli ; « Aucune identique » après validation des préséries) → 01 Le Drop 1 (coloris) → 02 Le motif → 03 La pièce → 04 Le savoir-faire → 05 Cercle Waves → 06 Instagram. Sections 03, 04 et 06 = `kyma-manifesto` ; 02 = `kyma-unique-piece` (zoom texture). Unicité : repli « Pensé pour que chaque pièce soit unique » | Thème prêt |
 | Drop 1 (collection) | `/collections/drop-1` | collection (Dawn) + section « KYMA — Coloris » ajoutée en haut | Voir §3 | À créer |
 | Tous les produits | `/collections/tous-les-produits` | collection (Dawn) | Collection automatique | À créer |
 | Fiche produit | `/products/<handle>` | `templates/product.json` (fourni) | Dawn `main-product` + « KYMA — Histoire produit » + produits associés | Thème prêt |
@@ -203,7 +203,7 @@ Dépannage : si une section ne s'affiche pas ou un schéma est refusé, lancer `
 
 ## 9. Conformité (reprise de `shopify/conformite.md`, partie b — Victoire)
 
-Les textes et libellés ci-dessous sont des **modèles de Victoire, à faire valider par un avocat** avant mise en ligne. Sacha les implémente et les teste ; rien n'est installé ni écrit dans la boutique à cette étape. Note d'alerte : le titre du hero « Une pièce. Aucune identique. » est une affirmation d'unicité sans condition (demandée telle quelle) ; la note de conformité (a) n'autorise aujourd'hui que le repli « Pensé pour que chaque pièce soit unique » — à arbitrer par Arthur/Victoire avant publication ; les autres textes d'accueil utilisent le repli.
+Les textes et libellés ci-dessous sont des **modèles de Victoire, à faire valider par un avocat** avant mise en ligne. Sacha les implémente et les teste ; rien n'est installé ni écrit dans la boutique à cette étape. Titre du hero : tranché par Arthur — repli « Une pièce, pensée pour être *unique*. » jusqu'à validation des préséries ; « Une pièce. Aucune identique. » ensuite seulement.
 
 ### 9.1 « Renoncer au contrat ici » (obligatoire depuis le 19/06/2026)
 Sans cette fonction, le délai de rétractation passe à 12 mois et 14 jours. Shopify ne la fournit pas en natif (selon Victoire) : **appli ou page avec formulaire**, au choix du fondateur.
@@ -265,7 +265,7 @@ Ne **pas** lier la plateforme européenne de règlement en ligne des litiges (fe
 - [ ] Pied de page complet sur toutes les pages : Mentions légales · CGV · Livraison · Retours et remboursements · Confidentialité · Cookies · « Gérer mes cookies » · « Renoncer au contrat ici » · Contact
 - [ ] Fiche produit : « hors frais de livraison » + lien Livraison, bloc Précommande (annulation 14 jours + liens Retours/CGV), légende de rendu sous chaque visuel, composition par élément
 - [ ] Bandeau cookies conforme (accepter / refuser au même niveau), aucun pixel avant consentement
-- [ ] Textes juridiques validés par un avocat ; arbitrage Arthur/Victoire sur le titre du hero (unicité)
+- [ ] Textes juridiques validés par un avocat ; titre du hero : tranché par Arthur — repli jusqu'à validation des préséries
 
 **Contenu**
 - [ ] Produit créé en brouillon, 30 variantes, SKU, prix 179 € TTC, poids, stock/places de précommande

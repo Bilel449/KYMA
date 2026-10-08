@@ -153,7 +153,7 @@ Nous livrons en `[À COMPLÉTER : pays desservis ; à ce stade, la France]`. Fra
 
 ### 6. Puis-je retourner ma commande ?
 
-Oui. Les conditions, le délai et la marche à suivre sont réunis sur la page [Retours et échanges](/pages/retours) `[LIEN : à créer par Sacha]`.
+Oui. Les conditions, le délai et la marche à suivre sont réunis sur la page [Retours et remboursements](/policies/refund-policy).
 
 ### 7. De quoi est fait le hoodie ?
 

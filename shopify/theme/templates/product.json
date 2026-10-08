@@ -99,14 +99,14 @@
           "type": "care",
           "settings": {
             "heading": "Entretien",
-            "text": "Lavage à 30 °C, sur l'envers\nPas de sèche-linge\n[À COMPLÉTER : aligner sur l'étiquette définitive]"
+            "text": "Lavage à 30–40 °C, sur l'envers\nPas de sèche-linge\n[À COMPLÉTER : aligner sur l'étiquette définitive]"
           }
         },
         "preorder": {
           "type": "preorder",
           "settings": {
             "heading": "Précommande",
-            "text": "Cette pièce est produite après validation des commandes.",
+            "text": "La fabrication est lancée après la clôture de la précommande.",
             "date_label": "Expédition au plus tard le :",
             "cancel_text": "Annulation possible à tout moment avant l'expédition et jusqu'à 14 jours après réception.",
             "returns_link": "/policies/refund-policy",
