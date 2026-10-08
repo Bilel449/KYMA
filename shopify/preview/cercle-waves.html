@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cercle Waves — maquette KYMA</title>
+<!--
+  Maquette AUTONOME générée depuis le thème : chaque section kyma-* est rendue depuis le VRAI fichier Liquid
+  (shopify/theme/sections) avec les réglages de shopify/theme/templates/page.cercle-waves.json. Ressources partagées : ../theme/assets.
+  En-tête, menu, pied de page et bloc d'achat = coquille de maquette (dans la boutique : Horizon).
+  Aucune image : 3D temps réel (WebGL natif), tracés vectoriels, typographie. Les GLB du lecteur 360° (../3d/) se chargent
+  via un petit serveur local (ex. « npx http-server shopify -p 8080 » puis /preview/produit.html) ; ouverte en double-clic,
+  la fiche produit bascule sur l'aperçu 3D du coloris (repli prévu).
+-->
+<script>document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive');if(localStorage.getItem('kyma-motion-paused')==='1')document.documentElement.classList.add('kyma-motion-paused')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../theme/assets/kyma.css">
+<link rel="stylesheet" href="../theme/assets/kyma-pages.css">
+<link rel="stylesheet" href="preview.css">
+<script src="../theme/assets/kyma-3d.js" defer></script>
+<script src="../theme/assets/kyma-motion.js" defer></script>
+<script src="../theme/assets/kyma-pages.js" defer></script>
+<script src="preview.js" defer></script>
+</head>
+<body>
+<a class="kp-skip" href="#MainContent">Aller au contenu</a>
+<p class="kp-announce" role="region" aria-label="Annonce">Drop 1 — précommande ouverte. Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span>.</p>
+<header class="kp-header">
+  <div class="kp-header__bar">
+    <a class="kp-logo" href="index.html" aria-label="KYMA — accueil"><span>KYMA</span><svg viewBox="0 0 64 8" aria-hidden="true" focusable="false"><path d="M1 4 C9 1 13 7 21 4 S33 1 41 4 S55 7 63 4"/></svg></a>
+    <nav class="kp-nav" aria-label="Menu principal">
+      <ul>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="produit.html">Le produit</a></li>
+        <li><a href="cercle-waves.html" aria-current="page">Cercle Waves</a></li>
+        <li><a href="nous-connaitre.html">Nous connaître</a></li>
+        <li class="kp-nav__drop">
+          <button type="button" class="kp-nav__more" aria-expanded="false" aria-controls="kp-help">Aide<svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor"/></svg></button>
+          <ul class="kp-nav__sub" id="kp-help">
+            <li><a href="guide-des-tailles.html">Guide des tailles</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="kp-icons">
+      <a class="kp-icon" href="#panier" aria-label="Panier, 0 article" data-kyma-no-curtain><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 6h12l-1 11H5L4 6Z"/><path d="M7 6V5a3 3 0 0 1 6 0v1"/></svg></a>
+      <button type="button" class="kp-icon kp-burger" aria-expanded="false" aria-controls="kp-panel"><svg viewBox="0 0 22 10" aria-hidden="true" focusable="false"><path d="M1 2 C6 0 10 4 15 2 S21 1 21 2 M1 8 C6 6 10 10 15 8 S21 7 21 8"/></svg><span data-kp-label>Menu</span></button>
+    </div>
+  </div>
+</header>
+<nav class="kp-panel" id="kp-panel" aria-label="Menu principal (mobile)">
+  <ol>
+    <li style="--i:0"><a href="collection.html">Collection</a></li>
+    <li style="--i:1"><a href="produit.html">Le produit</a></li>
+    <li style="--i:2"><a href="cercle-waves.html" aria-current="page">Cercle Waves</a></li>
+    <li style="--i:3"><a href="nous-connaitre.html">Nous connaître</a></li>
+    <li style="--i:4"><a href="faq.html">Aide</a>
+      <ul class="kp-panel__help"><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </li>
+  </ol>
+  <p class="kp-panel__foot">KYMA Paris — L'art du flow. · @kymasinsta</p>
+</nav>
+<main id="MainContent" data-template="page.cercle-waves.json">
+<div id="shopify-section-ouverture" class="shopify-section kyma-section"><section
+  id="kyma-ph-ouverture"
+  class="kyma-ph kyma-ph--rings"
+  aria-labelledby="kyma-ph-ouverture-t"
+  data-kyma-ph
+  data-kyma-rings-scroll="enter"
+><div class="kyma-ph__stage" data-kyma-3d-host>
+      <canvas
+        data-kyma-3d="rings"
+        data-colorway="kyma"
+        
+        data-follow="false"
+        aria-hidden="true"
+      ></canvas>
+    </div><div class="kyma-ph__inner">
+    <div class="kyma-ph__copy"><p class="kyma-ph__label">CERCLE WAVES</p><h1 class="kyma-ph__title" id="kyma-ph-ouverture-t" data-kyma-split>Rejoindre le <em>cercle</em>.</h1><p class="kyma-ph__text" data-kyma-reveal style="--kd: 500ms;">Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu&#39;à la proximité. Deux paliers, qui se découvrent dans l&#39;ordre.</p><div class="kyma-ph__ctas" data-kyma-reveal style="--kd: 700ms;">
+          <a class="kyma-btn" href="#rejoindre" data-kyma-magnetic>
+            <span>Entrer dans le cercle</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div></div></div><p class="kyma-vh">Illustration animée : deux anneaux satinés, rose clair et marron clair, qui se rapprochent et s&#39;entrelacent.</p></section></div>
+<div id="shopify-section-paliers" class="shopify-section kyma-section"><section id="paliers" class="kyma-sec kyma-cercle" aria-labelledby="kyma-cw2-title-paliers" data-kyma-rings>
+  <div class="kyma-sec__inner">
+    <div class="kyma-cercle__head" data-kyma-reveal>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — LES DEUX PALIERS</p><h2 class="kyma-sec__title" id="kyma-cw2-title-paliers">Deux paliers, un même <em>courant</em>.</h2><p class="kyma-sec__desc">L&#39;entrée dans le cercle, puis le palier supérieur. Chacun se découvre en retournant sa carte.</p>
+    </div><ul class="kyma-cercle__grid" role="list"><li
+            class="kyma-tier kyma-tier--initium"
+            data-kyma-reveal
+            data-kyma-flip
+            style="--kd: 0ms;"
+            data-ring="0"
+            
+          >
+            <button type="button" class="kyma-tier__hit" aria-pressed="false" aria-label="INITIUM, carte du palier d&#39;entrée. Activer pour afficher les avantages."></button>
+            <div class="kyma-tier__lift">
+              <div class="kyma-flip__tilt">
+                <div class="kyma-flip">
+                  <div class="kyma-flip__face kyma-flip__front" id="kyma-tier-paliers-1-front">
+                    <span class="kyma-tier__num">01</span>
+                    <h3 class="kyma-tier__name">INITIUM</h3>
+                    <p class="kyma-tier__lead">L&#39;entrée dans le cercle.</p><p class="kyma-tier__sub">Pour toute personne qui rejoint KYMA.</p><svg class="kyma-tier__sym" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><circle cx="60" cy="32" r="24"/></svg>
+                    <span class="kyma-tier__invite" aria-hidden="true">Retourner
+                      <svg viewBox="0 0 28 12" focusable="false"><path pathLength="1" d="M1 6 C7 2 11 10 17 6 L26 6 M22 2 L26 6 L22 10"/></svg>
+                    </span>
+                  </div>
+                  <div class="kyma-flip__face kyma-flip__back" id="kyma-tier-paliers-1-back" aria-hidden="true">
+                    <p class="kyma-tier__tag">AVANTAGES</p>
+                    <ul class="kyma-tier__perks" role="list"><li><span class="kyma-todo">[À COMPLÉTER : avantage 1, décision du fondateur]</span></li><li><span class="kyma-todo">[À COMPLÉTER : avantage 2]</span></li><li><span class="kyma-todo">[À COMPLÉTER : avantage 3]</span></li></ul><p class="kyma-tier__cond">Condition d&#39;accès : <span class="kyma-todo">[À COMPLÉTER : décision du fondateur]</span></p><a class="kyma-btn kyma-tier__cta" href="#rejoindre"><span>Rejoindre le cercle</span></a></div>
+                </div>
+              </div>
+            </div>
+            <span class="kyma-tier__shadow" aria-hidden="true"></span>
+          </li><li
+            class="kyma-tier kyma-tier--origine"
+            data-kyma-reveal
+            data-kyma-flip
+            style="--kd: 120ms;"
+            data-ring="1"
+            
+          >
+            <button type="button" class="kyma-tier__hit" aria-pressed="false" aria-label="ORIGINE, carte du palier supérieur. Activer pour afficher les avantages."></button>
+            <div class="kyma-tier__lift">
+              <div class="kyma-flip__tilt">
+                <div class="kyma-flip">
+                  <div class="kyma-flip__face kyma-flip__front" id="kyma-tier-paliers-2-front">
+                    <span class="kyma-tier__num">02</span>
+                    <h3 class="kyma-tier__name">ORIGINE</h3>
+                    <p class="kyma-tier__lead">Le palier supérieur.</p><p class="kyma-tier__sub">Pour celles et ceux qui portent KYMA depuis ses origines.</p><svg class="kyma-tier__sym" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><circle cx="44" cy="32" r="24"/><circle cx="76" cy="32" r="24"/></svg>
+                    <span class="kyma-tier__invite" aria-hidden="true">Retourner
+                      <svg viewBox="0 0 28 12" focusable="false"><path pathLength="1" d="M1 6 C7 2 11 10 17 6 L26 6 M22 2 L26 6 L22 10"/></svg>
+                    </span>
+                  </div>
+                  <div class="kyma-flip__face kyma-flip__back" id="kyma-tier-paliers-2-back" aria-hidden="true">
+                    <p class="kyma-tier__tag">AVANTAGES</p>
+                    <ul class="kyma-tier__perks" role="list"><li><span class="kyma-todo">[À COMPLÉTER : avantage 1, décision du fondateur]</span></li><li><span class="kyma-todo">[À COMPLÉTER : avantage 2]</span></li></ul><p class="kyma-tier__cond">Condition de passage : <span class="kyma-todo">[À COMPLÉTER : critère décidé par le fondateur]</span></p><a class="kyma-btn kyma-tier__cta" href="#rejoindre"><span>Rejoindre le cercle</span></a></div>
+                </div>
+              </div>
+            </div>
+            <span class="kyma-tier__shadow" aria-hidden="true"></span>
+          </li></ul></div>
+</section></div>
+<div id="shopify-section-passage" class="shopify-section kyma-section"><section
+  id="passage"
+  class="kyma-sec kyma-chap kyma-chap--path kyma-sec--rose"
+  aria-labelledby="kyma-chap-passage-t"
+  
+  
+>
+  <div class="kyma-sec__inner kyma-chap__grid">
+    <div class="kyma-chap__text" data-kyma-reveal>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">02</span> — DE L&#39;UN À L&#39;AUTRE</p><h2 class="kyma-sec__title" id="kyma-chap-passage-t">Dans l&#39;ordre, sans <em>détour</em>.</h2><p class="kyma-sec__desc">Les paliers se découvrent dans l&#39;ordre. Le passage à ORIGINE : <span class="kyma-todo">[À COMPLÉTER : critère décidé par le fondateur]</span>.</p></div><figure class="kyma-chap__viz" data-kyma-reveal style="--kd: 150ms;"><div class="kyma-chap__path">
+            <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-trace aria-hidden="true">
+              <circle pathLength="1" cx="80" cy="110" r="46"/>
+              <path pathLength="1" class="kyma-path__line" d="M126 110 C170 80 200 140 244 110 C288 80 318 140 362 110 C384 96 400 100 420 108"/>
+              <circle pathLength="1" class="kyma-path__end" cx="470" cy="110" r="46"/>
+              <circle pathLength="1" class="kyma-path__end" cx="530" cy="110" r="46"/>
+            </svg>
+            <ul class="kyma-chap__syms" role="list">
+              <li><button type="button" class="kyma-sym" aria-describedby="kyma-chap-passage-s1"><span>INITIUM</span></button><p id="kyma-chap-passage-s1" class="kyma-sym__tip">INITIUM — L&#39;entrée dans le cercle.</p></li>
+              <li><button type="button" class="kyma-sym" aria-describedby="kyma-chap-passage-s2"><span>ORIGINE</span></button><p id="kyma-chap-passage-s2" class="kyma-sym__tip">ORIGINE — Le palier supérieur.</p></li>
+            </ul>
+          </div></figure></div>
+</section></div>
+<div id="shopify-section-rejoindre" class="shopify-section kyma-section"><section id="rejoindre" class="kyma-sec kyma-cj" aria-labelledby="kyma-cj-rejoindre-t">
+  <div class="kyma-sec__inner kyma-cj__inner">
+    <svg class="kyma-ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false" data-kyma-ring>
+      <circle class="kyma-ring__track" cx="60" cy="60" r="44"/>
+      <circle class="kyma-ring__arc" cx="60" cy="60" r="44" pathLength="360"/>
+    </svg>
+    <div data-kyma-reveal>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">03</span> — ENTRER</p><h2 class="kyma-sec__title" id="kyma-cj-rejoindre-t">Entrer dans le <em>cercle</em>.</h2><p class="kyma-sec__desc">Prénom et adresse e-mail suffisent. Vous pourrez vous désinscrire à tout moment.</p>
+    </div><form method="post" action="/contact#KymaCercle" id="KymaCercle" class="kyma-form kyma-cj__form" novalidate="novalidate" data-kyma-form="cercle" accept-charset="UTF-8"><input type="hidden" name="form_type" value="customer"><input type="hidden" name="contact[tags]" value="cercle-waves,initium"><div class="kyma-form__row">
+        <label class="kyma-field"><span class="kyma-field__l">Prénom</span>
+          <input class="kyma-field__i" type="text" name="contact[first_name]" autocomplete="given-name"></label>
+        <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
+          <input class="kyma-field__i" type="email" name="contact[email]" autocomplete="email" required aria-required="true" data-kyma-email>
+          <span class="kyma-field__err" hidden>Cette adresse semble incomplète. Pouvez-vous la vérifier ?</span></label>
+      </div>
+      <label class="kyma-check">
+        <input type="checkbox" required aria-required="true">
+        <span>J&#39;accepte de recevoir les e-mails de KYMA (ouvertures, coulisses, premiers regards). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Voir la politique de confidentialité. <span class="kyma-todo">[À VALIDER VICTOIRE : formulation RGPD, responsable de traitement]</span></span>
+      </label>
+      <button type="submit" class="kyma-btn" data-kyma-submit><span>Rejoindre le cercle</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="kyma-form__ok" role="status" data-kyma-ok hidden>Bienvenue dans le cercle. Votre place est enregistrée.</p>
+      <p class="kyma-cj__terms">Conditions du programme : <span class="kyma-todo">[À COMPLÉTER : lien. Page non publiée tant que les règles ne sont pas décidées.]</span></p></form></div>
+</section></div>
+</main>
+<footer class="kp-footer">
+  <svg class="kp-footer__wave" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 12 C100 2 200 22 300 12 S500 2 600 12 S800 22 900 12 S1100 2 1200 12"/></svg>
+  <div class="kp-footer__inner">
+    <p class="kp-footer__sig">KYMA Paris — <em>L'art du flow.</em></p>
+    <div class="kp-footer__cols">
+      <div><h2>La maison</h2><ul><li><a href="collection.html">Collection</a></li><li><a href="produit.html">Le produit</a></li><li><a href="cercle-waves.html">Cercle Waves</a></li><li><a href="nous-connaitre.html">Nous connaître</a></li></ul></div>
+      <div><h2>Aide</h2><ul><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h2>Suivre</h2><ul><li><a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">@kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></li></ul></div>
+    </div>
+    <nav class="kp-footer__legal" aria-label="Informations légales">
+      <a href="../pages/legal/mentions-legales.html" data-kyma-no-curtain>Mentions légales</a><a href="../pages/legal/cgv.html" data-kyma-no-curtain>CGV</a><a href="../pages/legal/livraison.html" data-kyma-no-curtain>Livraison</a><a href="../pages/legal/retours-remboursements.html" data-kyma-no-curtain>Retours &amp; remboursements</a><a href="../pages/legal/confidentialite.html" data-kyma-no-curtain>Confidentialité</a><a href="../pages/legal/cookies.html" data-kyma-no-curtain>Cookies</a><a href="#cookies" data-kyma-no-curtain>Gérer mes cookies</a><a href="#retractation" data-kyma-no-curtain>Renoncer au contrat ici</a>
+    </nav>
+    <div class="kp-footer__end">
+      <span>© KYMA — Paris</span>
+      <button type="button" class="kyma-pause" data-kyma-pause aria-pressed="false" data-label-off="Mettre le mouvement en pause" data-label-on="Relancer le mouvement">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="kyma-pause__bars" d="M5 3v10M11 3v10"/><path class="kyma-pause__play" d="M4 3l9 5-9 5z"/></svg>
+        <span data-kyma-pause-label>Mettre le mouvement en pause</span>
+      </button>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

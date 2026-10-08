@@ -1,0 +1,197 @@
+{
+  "sections": {
+    "ouverture": {
+      "type": "kyma-page-hero",
+      "settings": {
+        "anchor": "",
+        "label": "NOUS CONNAÎTRE",
+        "title_before": "",
+        "title_em": "κύμα",
+        "title_after": ".",
+        "text": "En grec, la vague. KYMA se prononce « Kouma ». Un mot ancien pour un mouvement qui ne s'arrête pas : la vague arrive, se retire, revient. Jamais tout à fait la même.",
+        "cta_label": "",
+        "cta_link": "",
+        "note": "",
+        "visual": "word",
+        "colorway": "kyma",
+        "align": "split",
+        "alt_text": "",
+        "caption": ""
+      }
+    },
+    "histoire": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "histoire",
+        "number": "01",
+        "label": "HISTOIRE",
+        "title_before": "Un mouvement qui ne",
+        "title_em": "s'arrête",
+        "title_after": "pas.",
+        "text": "C'est de là que la marque naît, à Paris. D'un rythme plutôt que d'une image. KYMA ne copie pas la nature : elle en capture la cadence.",
+        "cta_label": "",
+        "cta_link": "",
+        "visual": "wave",
+        "keywords": "",
+        "colorway": "kyma",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "",
+        "sym2": "",
+        "caption": "",
+        "flip": false,
+        "tone": "beige"
+      }
+    },
+    "adn": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "adn",
+        "number": "02",
+        "label": "ADN",
+        "title_before": "Peu de choses, bien",
+        "title_em": "dites",
+        "title_after": ".",
+        "text": "Une seule pièce signature : un hoodie zippé oversize. Épaules tombantes, matière dense, intérieur gratté, capuche sans cordon. Rien d'ajouté, rien de bruyant. Qu'on reconnaisse KYMA sans logo : à la texture, à la couleur, au mouvement. Le vide compte autant que le plein.",
+        "cta_label": "",
+        "cta_link": "",
+        "visual": "keywords",
+        "keywords": "Texture\nCouleur\nMouvement",
+        "colorway": "kyma",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "",
+        "sym2": "",
+        "caption": "",
+        "flip": true,
+        "tone": "beige"
+      }
+    },
+    "motif": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "motif",
+        "number": "03",
+        "label": "LE MOTIF",
+        "title_before": "Marbré. Fluide. Jamais",
+        "title_em": "symétrique",
+        "title_after": ".",
+        "text": "Deux nuances proches, un tourbillon qui s'écoule. Pensé pour que chaque pièce soit unique.",
+        "cta_label": "",
+        "cta_link": "",
+        "visual": "pattern",
+        "keywords": "",
+        "colorway": "kyma",
+        "tints": true,
+        "tints_label": "Teinte du motif",
+        "sym1": "",
+        "sym2": "",
+        "caption": "Illustration du coloris.",
+        "flip": false,
+        "tone": "beige"
+      }
+    },
+    "savoir-faire": {
+      "type": "kyma-steps",
+      "settings": {
+        "anchor": "savoir-faire",
+        "number": "04",
+        "label": "SAVOIR-FAIRE",
+        "title_before": "De la fibre au",
+        "title_em": "zip",
+        "title_after": ".",
+        "text": ""
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "La fibre",
+            "text": "Le point de départ est le coton. [À CONFIRMER : composition définitive, selon l'étiquette]",
+            "icon": "fibre"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Le tissu",
+            "text": "Un French terry de 400 à 420 g/m² [À CONFIRMER : grammage]. Dense, il tombe sans coller. L'intérieur est gratté : doux dès le premier jour.",
+            "icon": "maille"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Le motif",
+            "text": "Le motif KYMA Wave est imprimé en pigmentaire, all-over, sur un long rouleau de tissu.",
+            "icon": "rouleau"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "La découpe",
+            "text": "Chaque pièce est découpée avec soin dans le tissu imprimé. Pensé pour que chaque pièce soit unique.",
+            "icon": "ciseaux"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "La forme",
+            "text": "Coupe oversize, épaules tombantes. Capuche à double épaisseur, doublure en jersey ton sur ton. Deux poches biais. Bords-côtes 2×2 de 6 cm aux poignets et à la taille.",
+            "icon": "silhouette"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "title": "Le zip",
+            "text": "Zip intégral en métal argent brossé. Au bout, une tirette sculptée « Kyma » en laiton plaqué or brossé. C'est le seul éclat de la pièce.",
+            "icon": "tirette"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "paris": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "paris",
+        "number": "05",
+        "label": "PARIS",
+        "title_before": "Une adresse,",
+        "title_em": "Paris",
+        "title_after": ".",
+        "text": "KYMA naît à Paris. Imaginé à Paris : une ville de quais et de reflets, où l'eau est partout pour qui la suit. Ride the wave.",
+        "cta_label": "Découvrir le Drop 1",
+        "cta_link": "/collections/drop-1",
+        "visual": "river",
+        "keywords": "",
+        "colorway": "kyma",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "",
+        "sym2": "",
+        "caption": "",
+        "flip": false,
+        "tone": "beige"
+      }
+    }
+  },
+  "order": [
+    "ouverture",
+    "histoire",
+    "adn",
+    "motif",
+    "savoir-faire",
+    "paris"
+  ]
+}

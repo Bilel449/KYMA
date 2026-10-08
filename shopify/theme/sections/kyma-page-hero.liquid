@@ -4,7 +4,7 @@
     wave    = sculpture 3D « La Vague » (V)       cloth   = étoffe 3D qui ondule (E)
     rings   = anneaux INITIUM / ORIGINE (A) : ORIGINE entre par la droite au défilement
     pattern = motif KYMA Wave plein cadre (E à plat)
-    word    = le mot κύμα tracé au contour puis rempli (SVG)     tape = mètre ruban qui se déroule (SVG)
+    word    = le mot κύμα tracé au contour puis rempli (SVG ; le H1 reste du texte, lu par les lecteurs d'écran)     tape = mètre ruban qui se déroule (SVG)
   Les canvas 3D partagent le contexte WebGL unique de kyma-3d.js ; ils sont décoratifs (aria-hidden).
 {%- endcomment -%}
 {% render 'kyma-assets' %}
@@ -47,7 +47,7 @@
       {%- if section.settings.label != blank -%}
         <p class="kyma-ph__label">{{ section.settings.label | escape }}</p>
       {%- endif -%}
-      <h1 class="kyma-ph__title" id="{{ tid }}-t" data-kyma-split>
+      <h1 class="kyma-ph__title{% if v == 'word' %} kyma-vh{% endif %}" id="{{ tid }}-t"{% unless v == 'word' %} data-kyma-split{% endunless %}>
         {{- section.settings.title_before | escape -}}
         {%- if section.settings.title_em != blank %} <em>{{ section.settings.title_em | escape }}</em>{% endif -%}
         {%- if section.settings.title_after != blank -%}
@@ -72,7 +72,7 @@
     </div>
 
     {%- if v == 'word' -%}
-      <div class="kyma-ph__word">{% render 'kyma-kuma' %}</div>
+      <div class="kyma-ph__word">{% render 'kyma-kuma', decorative: true %}</div>
     {%- elsif v == 'tape' -%}
       <div class="kyma-ph__tape" aria-hidden="true">
         <svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-trace>

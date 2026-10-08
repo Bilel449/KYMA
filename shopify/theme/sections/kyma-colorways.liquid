@@ -8,7 +8,7 @@
 {%- assign title_id = 'kyma-cw-title-' | append: section.id -%}
 {%- assign first = section.blocks.first -%}
 
-<section class="kyma-sec kyma-cw" id="kyma-cw-{{ section.id }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
+<section class="kyma-sec kyma-cw" id="{{ section.settings.anchor | default: 'kyma-cw-' | append: section.id }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
   {% if first %}style="--cw-a: {{ first.settings.color_a }}; --cw-b: {{ first.settings.color_b }};"{% endif %}>
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
@@ -83,6 +83,7 @@
   "tag": "div",
   "class": "kyma-section",
   "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML, facultatif)" },
     { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
     { "type": "text", "id": "label", "label": "Label", "default": "Le Drop 1" },
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cinq coloris, un même" },

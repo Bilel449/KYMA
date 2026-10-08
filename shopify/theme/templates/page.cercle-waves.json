@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "ouverture": {
+      "type": "kyma-page-hero",
+      "settings": {
+        "anchor": "",
+        "label": "CERCLE WAVES",
+        "title_before": "Rejoindre le",
+        "title_em": "cercle",
+        "title_after": ".",
+        "text": "Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu'à la proximité. Deux paliers, qui se découvrent dans l'ordre.",
+        "cta_label": "Entrer dans le cercle",
+        "cta_link": "/pages/cercle-waves#rejoindre",
+        "note": "",
+        "visual": "rings",
+        "colorway": "kyma",
+        "align": "split",
+        "alt_text": "Illustration animée : deux anneaux satinés, rose clair et marron clair, qui se rapprochent et s'entrelacent.",
+        "caption": ""
+      }
+    },
+    "paliers": {
+      "type": "kyma-cercle-waves",
+      "settings": {
+        "anchor": "paliers",
+        "number": "01",
+        "label": "LES DEUX PALIERS",
+        "title_before": "Deux paliers, un même",
+        "title_em": "courant",
+        "title_after": ".",
+        "text": "L'entrée dans le cercle, puis le palier supérieur. Chacun se découvre en retournant sa carte.",
+        "cta_label": "",
+        "cta_link": "",
+        "show_rings": false,
+        "compact_top": false
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "number": "01",
+            "name": "INITIUM",
+            "lead": "L'entrée dans le cercle.",
+            "sub": "Pour toute personne qui rejoint KYMA.",
+            "symbol": "one",
+            "tone": "initium",
+            "invite": "Retourner",
+            "back_label": "AVANTAGES",
+            "perks": "[À COMPLÉTER : avantage 1, décision du fondateur]\n[À COMPLÉTER : avantage 2]\n[À COMPLÉTER : avantage 3]",
+            "condition": "Condition d'accès : [À COMPLÉTER : décision du fondateur]",
+            "cta_label": "Rejoindre le cercle",
+            "cta_link": "/pages/cercle-waves#rejoindre",
+            "aria": "INITIUM, carte du palier d'entrée. Activer pour afficher les avantages."
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "number": "02",
+            "name": "ORIGINE",
+            "lead": "Le palier supérieur.",
+            "sub": "Pour celles et ceux qui portent KYMA depuis ses origines.",
+            "symbol": "two",
+            "tone": "origine",
+            "invite": "Retourner",
+            "back_label": "AVANTAGES",
+            "perks": "[À COMPLÉTER : avantage 1, décision du fondateur]\n[À COMPLÉTER : avantage 2]",
+            "condition": "Condition de passage : [À COMPLÉTER : critère décidé par le fondateur]",
+            "cta_label": "Rejoindre le cercle",
+            "cta_link": "/pages/cercle-waves#rejoindre",
+            "aria": "ORIGINE, carte du palier supérieur. Activer pour afficher les avantages."
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2"
+      ]
+    },
+    "passage": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "passage",
+        "number": "02",
+        "label": "DE L'UN À L'AUTRE",
+        "title_before": "Dans l'ordre, sans",
+        "title_em": "détour",
+        "title_after": ".",
+        "text": "Les paliers se découvrent dans l'ordre. Le passage à ORIGINE : [À COMPLÉTER : critère décidé par le fondateur].",
+        "cta_label": "",
+        "cta_link": "",
+        "visual": "path",
+        "keywords": "",
+        "colorway": "kyma",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "INITIUM — L'entrée dans le cercle.",
+        "sym2": "ORIGINE — Le palier supérieur.",
+        "caption": "",
+        "flip": false,
+        "tone": "rose"
+      }
+    },
+    "rejoindre": {
+      "type": "kyma-cercle-join",
+      "settings": {
+        "anchor": "rejoindre",
+        "number": "03",
+        "label": "ENTRER",
+        "title_before": "Entrer dans le",
+        "title_em": "cercle",
+        "title_after": ".",
+        "text": "Prénom et adresse e-mail suffisent. Vous pourrez vous désinscrire à tout moment.",
+        "consent": "J'accepte de recevoir les e-mails de KYMA (ouvertures, coulisses, premiers regards). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Voir la politique de confidentialité. [À VALIDER VICTOIRE : formulation RGPD, responsable de traitement]",
+        "button": "Rejoindre le cercle",
+        "success": "Bienvenue dans le cercle. Votre place est enregistrée.",
+        "error": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?",
+        "terms": "Conditions du programme : [À COMPLÉTER : lien. Page non publiée tant que les règles ne sont pas décidées.]"
+      }
+    }
+  },
+  "order": [
+    "ouverture",
+    "paliers",
+    "passage",
+    "rejoindre"
+  ]
+}

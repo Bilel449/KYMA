@@ -543,7 +543,7 @@
       }
       /* 13b. lecteur GLB maison (fichiers du thème) */
       if (mode === 'glb') {
-        var cv = stage.querySelector('.kyma-360__glb');
+        var cv = stage.querySelector('.kyma-360__glb'), curUrl = cv ? cv.getAttribute('data-src') : '';
         var start = function () {
           if (!w.KYMAGLB) { fallback(); return; }
           stage.classList.add('is-loading');
@@ -558,7 +558,8 @@
             preset: function (n) { v.preset(n); },
             colorway: function (k) {
               var b = dots.filter(function (x) { return x.getAttribute('data-colorway') === k; })[0], url = b && b.getAttribute('data-glb');
-              if (!url) return; stage.classList.add('is-loading'); v.load(url).then(function () { stage.classList.remove('is-loading'); });
+              if (!url || url === curUrl) return; curUrl = url; stage.classList.add('is-loading');
+              v.load(url).then(function () { stage.classList.remove('is-loading'); }, function () { stage.classList.remove('is-loading'); });
             }
           };
           if (cur !== 'kyma') api.colorway(cur);

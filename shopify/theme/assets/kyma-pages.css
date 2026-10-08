@@ -1,0 +1,605 @@
+/* ==========================================================================
+   KYMA — kyma-pages.css (v1, site multi-pages, direction-pages-2026 de Maya)
+   Composants des pages : ouverture de page, chapitres, cartes Cercle Waves qui pivotent, inscription,
+   cartes coloris, recoloration, frise des étapes, frise de précommande, guide des tailles, lecteur 360°,
+   FAQ, Instagram, contact, formulaires, tracés SVG, κύμα.
+   Chargée APRÈS kyma.css (snippet kyma-assets). Mêmes tokens (--t-*, --ease-*, --kyma-*), tout préfixé « kyma- ».
+   Règles tenues : texte en Brun (#4A3B32) ou plus sombre ; camel #C19E86 et rose #E8C4C4 jamais en texte sur beige ;
+   mot en italique des titres en Camel profond #8A6A52 seulement à partir de 32 px (sinon Brun) ; on n'anime que
+   transform / opacity (et stroke-dashoffset pour les tracés) ; prefers-reduced-motion et bouton « pause » respectés.
+   ========================================================================== */
+
+/* ─── 0. OUTILS ─────────────────────────────────────────────────────────── */
+@keyframes kyma-spin { to { transform: rotate(360deg); } }
+@keyframes kyma-sheen { 0%, 68% { background-position: 130% 0; } 100% { background-position: -30% 0; } }
+@keyframes kyma-lift { 0%, 100% { transform: none; } 50% { transform: translateZ(38px) scale(1.03); } }
+@keyframes kyma-shadow { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(1.15); opacity: 0.7; } }
+@keyframes kyma-halo { 0% { box-shadow: 0 0 0 0 rgba(232, 196, 196, 0.9); } 100% { box-shadow: 0 0 0 18px rgba(232, 196, 196, 0); } }
+@keyframes kyma-tape { 0% { stroke-dashoffset: 1; } 45%, 100% { stroke-dashoffset: 0; } }
+@keyframes kyma-busy { 0% { transform: scaleX(0); transform-origin: 0 50%; } 50% { transform: scaleX(1); transform-origin: 0 50%; } 50.1% { transform-origin: 100% 50%; } 100% { transform: scaleX(0); transform-origin: 100% 50%; } }
+
+.kyma-sec--rose { background: var(--kyma-rose-pale); }
+.kyma-sec__title--sm { font-size: clamp(30px, 3.6vw, 48px); }
+/* Mot en italique : Camel profond seulement >= 32 px ; en dessous (petits titres), Brun */
+.kyma-tier__name em, .kyma-faq__gtitle em, .kyma-card__name em { color: var(--kyma-ink); }
+.kyma-inline, .kyma-link-inline, .kyma-rte a {
+  color: var(--kyma-ink); text-decoration: underline; text-decoration-color: var(--kyma-camel); text-decoration-thickness: 1px; text-underline-offset: 4px;
+  transition: text-decoration-color var(--t-fast);
+}
+.kyma-inline:hover, .kyma-link-inline:hover, .kyma-rte a:hover { text-decoration-color: var(--kyma-ink); }
+.kyma-rte > :first-child { margin-top: 0; }
+.kyma-rte > :last-child { margin-bottom: 0; }
+.kyma-rte p, .kyma-rte ul { margin: 0 0 0.9em; }
+.kyma-rte ul { padding-left: 1.1em; }
+.kyma-rte li + li { margin-top: 0.3em; }
+/* Liens : le trait se redessine en ligne ondulée au survol (§ 5.4) */
+.kyma-link { position: relative; }
+.kyma-link::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 6px; opacity: 0; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='6' viewBox='0 0 16 6'%3E%3Cpath d='M0 3 C4 0 4 0 8 3 S12 6 16 3' fill='none' stroke='%234A3B32' stroke-width='1'/%3E%3C/svg%3E") 0 0 / 16px 6px repeat-x;
+  clip-path: inset(0 100% 0 0); transition: clip-path var(--t-base) var(--ease-flow), opacity var(--t-fast);
+}
+.kyma-link:hover::after, .kyma-link:focus-visible::after { opacity: 1; clip-path: inset(0 0 0 0); }
+.kyma-link:hover, .kyma-link:focus-visible { background-size: 0 2px; }
+/* Anneau de focus double (Brun 2 px + Rose 4 px) sur nos commandes */
+.kyma-section :is(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 3px; box-shadow: 0 0 0 7px rgba(232, 196, 196, 0.75); }
+
+/* ─── 1. TRACÉS SVG AU DÉFILEMENT (data-kyma-trace) ─────────────────────── */
+[data-kyma-trace] [pathLength] { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+html.kyma-js .is-tracing [pathLength]:not(.is-dim) { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.kyma-js .is-tracing .is-dim { opacity: 0; transition: opacity var(--t-slow) var(--ease-flow) 900ms; }
+html.kyma-js .is-tracing.is-traced [pathLength]:not(.is-dim) {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--t-flow) var(--ease-flow) calc(min(var(--pi, 0), 14) * 70ms);
+}
+html.kyma-js .is-tracing.is-traced .is-dim { opacity: 1; }
+.is-static [pathLength] { transition: none !important; stroke-dashoffset: 0 !important; }
+
+/* κύμα tracé au contour puis rempli */
+.kyma-kuma { display: block; width: 100%; height: auto; overflow: visible; }
+.kyma-kuma path { fill: var(--kyma-ink); stroke: var(--kyma-camel-deep); stroke-width: 6; vector-effect: non-scaling-stroke; transition: fill var(--t-slow) var(--ease-flow) 1000ms; }
+.kyma-kuma .kyma-kuma__l { transition: transform 0.6s var(--ease-flow); }
+html.kyma-js .kyma-kuma.is-tracing path { fill: rgba(74, 59, 50, 0); stroke-width: 1.4; }
+html.kyma-js .kyma-kuma.is-tracing.is-traced path { fill: var(--kyma-ink); transition: stroke-dashoffset var(--t-flow) var(--ease-flow) calc(var(--pi, 0) * 160ms), fill var(--t-slow) var(--ease-flow) calc(900ms + var(--pi, 0) * 160ms); }
+
+/* ─── 2. OUVERTURE DE PAGE (kyma-page-hero) ─────────────────────────────── */
+.kyma-ph {
+  position: relative; isolation: isolate; overflow: clip; display: flex; flex-direction: column; justify-content: center;
+  min-height: min(88vh, 880px); min-height: min(88svh, 880px);
+  margin-top: calc(var(--kyma-hero-pull) * -1); padding: calc(var(--kyma-hero-pull) + clamp(56px, 8vw, 96px)) var(--kyma-pad-x) clamp(56px, 8vw, 96px);
+  color: var(--kyma-ink); background: var(--kyma-beige);
+}
+.kyma-ph__stage { position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; width: 62%; touch-action: pan-y; }
+.kyma-ph__stage canvas { position: absolute; inset: 0; }
+.kyma-ph--pattern .kyma-ph__stage { width: 100%; }
+.kyma-ph--pattern .kyma-ph__stage::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(245, 237, 228, 0.92) 0%, rgba(245, 237, 228, 0.7) 46%, rgba(245, 237, 228, 0) 72%); }
+.kyma-ph--cloth .kyma-ph__stage { width: 48%; top: 8%; bottom: 8%; }
+.kyma-ph--rings .kyma-ph__stage { width: 58%; }
+.kyma-ph__inner { position: relative; width: 100%; max-width: 1240px; margin-inline: auto; display: grid; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.kyma-ph__copy { max-width: 640px; }
+.kyma-ph__label { margin: 0 0 24px; font-size: 12.5px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); }
+.kyma-ph__title {
+  --kyma-stagger: 28ms; --sd: 150ms;
+  margin: 0; font-family: var(--kyma-serif); font-size: clamp(44px, 6.4vw, 104px); font-weight: 400; line-height: 1.04; letter-spacing: 0.005em; color: var(--kyma-ink);
+}
+.kyma-ph__title em { font-style: italic; color: var(--kyma-camel-deep); }
+.kyma-ph__text { max-width: 520px; margin: 28px 0 0; font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--kyma-ink-soft); }
+.kyma-ph__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.kyma-ph__note { margin: 18px 0 0; font-size: 12px; letter-spacing: 0.06em; color: var(--kyma-ink-soft); }
+.kyma-ph__caption { position: absolute; right: var(--kyma-pad-x); bottom: 20px; margin: 0; max-width: 360px; text-align: right; }
+.kyma-ph--center { text-align: center; }
+.kyma-ph--center .kyma-ph__copy { margin-inline: auto; }
+.kyma-ph--center .kyma-ph__text { margin-inline: auto; }
+.kyma-ph--center .kyma-ph__ctas { justify-content: center; }
+.kyma-ph--center .kyma-ph__stage { width: 100%; opacity: 0.55; }
+/* κύμα : un seul mot, très grand */
+.kyma-ph__word { width: min(100%, 980px); margin-top: clamp(8px, 3vw, 40px); }
+/* mètre ruban */
+.kyma-ph__tape svg { display: block; width: 100%; height: auto; overflow: visible; }
+.kyma-ph__tape path { stroke: var(--kyma-camel); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.kyma-ph__tape .is-fine { stroke: var(--kyma-ink-soft); stroke-width: 1; }
+.kyma-ph--word .kyma-ph__word { order: -1; }
+@media (min-width: 990px) {
+  .kyma-ph--tape .kyma-ph__inner { grid-template-columns: 0.9fr 1.1fr; }
+  .kyma-ph--word .kyma-ph__inner { grid-template-columns: 1.3fr 0.7fr; align-items: end; }
+}
+
+/* ─── 3. CHAPITRE (kyma-chapter) ────────────────────────────────────────── */
+.kyma-chap__grid { display: grid; gap: clamp(36px, 5vw, 88px); align-items: center; }
+.kyma-chap__text .kyma-sec__desc { white-space: normal; }
+.kyma-chap__cta { margin: 32px 0 0; }
+.kyma-chap__viz { position: relative; margin: 0; }
+.kyma-chap__stage { position: relative; aspect-ratio: 4 / 5; max-height: 78vh; overflow: hidden; border-radius: 28px; background: var(--kyma-beige); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06); touch-action: pan-y; }
+.kyma-sec--rose .kyma-chap__stage { background: var(--kyma-rose-pale); }
+.kyma-chap__stage canvas { position: absolute; inset: 0; }
+.kyma-chap--wave .kyma-chap__stage, .kyma-chap--keywords .kyma-chap__stage { aspect-ratio: 1 / 1; box-shadow: none; background: transparent; border-radius: 0; }
+.kyma-chap--pattern .kyma-chap__stage { aspect-ratio: 16 / 11; }
+.kyma-chap--cloth .kyma-chap__stage { aspect-ratio: 1 / 1; }
+.kyma-chap--flip .kyma-chap__text { order: 2; }
+/* mots-clés Texture · Couleur · Mouvement */
+.kyma-chap__kw { display: flex; flex-wrap: wrap; gap: 4px 28px; margin: 34px 0 0; padding: 0; list-style: none; }
+.kyma-chap__kwbtn {
+  position: relative; min-height: 44px; padding: 8px 0; border: 0; background: none; cursor: pointer;
+  font: 400 clamp(22px, 2.2vw, 28px)/1.2 var(--kyma-serif); color: var(--kyma-ink-soft); transition: color var(--t-fast);
+}
+.kyma-chap__kwbtn::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 1px; background: var(--kyma-camel); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--t-base) var(--ease-flow); }
+.kyma-chap__kwbtn[aria-pressed="true"] { color: var(--kyma-ink); font-style: italic; }
+.kyma-chap__kwbtn[aria-pressed="true"]::after, .kyma-chap__kwbtn:hover::after { transform: scaleX(1); }
+/* fleuve (Paris) */
+.kyma-chap__river { position: relative; }
+.kyma-chap__river svg { display: block; width: 100%; height: auto; overflow: visible; }
+.kyma-river__bank { stroke: var(--kyma-camel); stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: stroke-width var(--t-fast); }
+.kyma-chap__river .is-fine { stroke: var(--kyma-camel); stroke-width: 1; opacity: 0.7; }
+.kyma-chap__river:hover .kyma-river__bank:not(.is-fine) { stroke-width: 2.2; }
+.kyma-river__pin { opacity: 0; transition: opacity var(--t-slow) var(--ease-flow) 1400ms; }
+.is-traced .kyma-river__pin, .is-static .kyma-river__pin, html:not(.kyma-js) .kyma-river__pin { opacity: 1; }
+.kyma-river__pin circle:first-child { fill: var(--kyma-ink); }
+.kyma-river__halo { fill: none; stroke: var(--kyma-camel); stroke-width: 1; }
+.kyma-river__pin text { font: 400 30px var(--kyma-serif); fill: var(--kyma-ink); }
+.kyma-river__hit { position: absolute; width: 48px; height: 48px; margin: -24px 0 0 -24px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.kyma-river__tip {
+  position: absolute; left: 50%; top: calc(63% + 34px); margin: 0; padding: 8px 14px; border-radius: 999px; transform: translate(-50%, 6px);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--kyma-ink); background: var(--kyma-rose-pale);
+  opacity: 0; pointer-events: none; transition: opacity var(--t-fast), transform var(--t-base) var(--ease-flow);
+}
+.kyma-chap__river.is-tip .kyma-river__tip, .kyma-river__hit:hover + .kyma-river__tip, .kyma-river__hit:focus-visible + .kyma-river__tip { opacity: 1; transform: translate(-50%, 0); }
+/* passage INITIUM -> ORIGINE */
+.kyma-chap__path svg { display: block; width: 100%; height: auto; overflow: visible; }
+.kyma-chap__path circle, .kyma-chap__path path { fill: none; stroke: var(--kyma-camel); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.kyma-chap__path .kyma-path__line { stroke-width: 1.6; }
+.kyma-chap__path .kyma-path__end { transition: fill var(--t-slow) var(--ease-flow) 1500ms, stroke-dashoffset var(--t-flow) var(--ease-flow) 700ms; }
+.kyma-chap__path .is-traced .kyma-path__end, .kyma-chap__path .is-static .kyma-path__end { fill: rgba(193, 158, 134, 0.35); }
+.kyma-chap__syms { display: flex; justify-content: space-between; gap: 16px; margin: 18px 0 0; padding: 0; list-style: none; }
+.kyma-chap__syms li { position: relative; }
+.kyma-chap__syms li:last-child { text-align: right; }
+.kyma-sym { min-height: 44px; padding: 8px 2px; border: 0; background: none; cursor: pointer; font: 500 12.5px var(--kyma-sans); letter-spacing: 4px; color: var(--kyma-ink); }
+.kyma-sym span { border-bottom: 1px solid var(--kyma-camel); padding-bottom: 4px; }
+.kyma-sym__tip { margin: 4px 0 0; font-size: 14px; line-height: 1.6; color: var(--kyma-ink-soft); opacity: 0; transform: translateY(-4px); transition: opacity var(--t-fast), transform var(--t-base) var(--ease-flow); }
+.kyma-chap__syms li.is-tip .kyma-sym__tip, .kyma-sym:hover + .kyma-sym__tip, .kyma-sym:focus-visible + .kyma-sym__tip { opacity: 1; transform: none; }
+/* dessin technique dans un chapitre */
+.kyma-chap__draw { max-width: 560px; margin-inline: auto; }
+@media (min-width: 990px) {
+  .kyma-chap__grid { grid-template-columns: 0.95fr 1.05fr; }
+  .kyma-chap--flip .kyma-chap__grid { grid-template-columns: 1.05fr 0.95fr; }
+  .kyma-chap--flip .kyma-chap__viz { order: 1; }
+  .kyma-chap--pattern .kyma-chap__grid { grid-template-columns: 0.8fr 1.2fr; }
+}
+
+/* ─── 4. PASTILLES DE TEINTE (kyma-tints) ───────────────────────────────── */
+.kyma-tints { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+.kyma-chap__viz .kyma-tints { position: relative; z-index: 2; display: inline-flex; margin: -72px 0 16px 16px; padding: 6px; border-radius: 999px; background: rgba(245, 237, 228, 0.92); box-shadow: 0 10px 30px -18px rgba(74, 59, 50, 0.45); }
+.kyma-chap__viz .kyma-tints + .kyma-caption { margin-top: 12px; }
+.kyma-tints__dot {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0;
+  border: 0; border-radius: 999px; background: none; cursor: pointer; color: var(--kyma-ink);
+}
+.kyma-tints__dot::before {
+  content: ''; width: 26px; height: 26px; border-radius: 50%; flex: none;
+  background: conic-gradient(from 200deg, var(--a) 0 50%, var(--b) 50% 100%); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.18);
+  transition: transform var(--t-base) var(--ease-flow);
+}
+.kyma-tints__dot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; border: 1px solid var(--kyma-ink); opacity: 0; transform: scale(0.8); transition: opacity var(--t-fast), transform var(--t-base) var(--ease-flow); }
+.kyma-tints__dot[aria-pressed="true"]::after { opacity: 1; transform: none; }
+.kyma-tints__dot:hover::before { transform: scale(1.1); }
+.kyma-tints--named { gap: 8px; }
+.kyma-tints--named .kyma-tints__dot { width: auto; height: auto; min-height: 44px; gap: 10px; padding: 6px 16px 6px 8px; border: 1px solid var(--kyma-line); background: rgba(251, 247, 242, 0.6); transition: border-color var(--t-fast), background-color var(--t-fast); }
+.kyma-tints--named .kyma-tints__dot::after { display: none; }
+.kyma-tints--named .kyma-tints__dot[aria-pressed="true"] { border-color: var(--kyma-ink); background: var(--kyma-rose-pale); }
+.kyma-tints__name { font-size: 13px; font-weight: 400; letter-spacing: 0.04em; }
+
+/* ─── 5. CERCLE WAVES : cartes qui pivotent (kyma-cercle-waves, § 4) ─────── */
+.kyma-cercle__head { max-width: 640px; }
+.kyma-cercle--tight { padding-top: clamp(24px, 4vw, 48px); }
+.kyma-cercle__ringtag {
+  position: absolute; top: 50%; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; letter-spacing: 4px; color: var(--kyma-ink);
+  background: rgba(245, 237, 228, 0.85); opacity: 0; transform: translateY(6px); transition: opacity var(--t-fast), transform var(--t-base) var(--ease-flow); pointer-events: none;
+}
+.kyma-cercle__ringtag--a { left: 12%; }
+.kyma-cercle__ringtag--b { right: 12%; }
+.kyma-cercle__rings:hover .kyma-cercle__ringtag, .kyma-cercle.is-ring-a .kyma-cercle__ringtag--a, .kyma-cercle.is-ring-b .kyma-cercle__ringtag--b { opacity: 1; transform: none; }
+.kyma-cercle .kyma-cercle__grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 48px; margin: 40px 0 0; padding: 0; list-style: none; }
+.kyma-tier {
+  --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%; --face: var(--kyma-rose); --back: var(--kyma-rose-pale); --fg: var(--kyma-ink);
+  position: relative; width: min(320px, 78vw); aspect-ratio: 5 / 7; perspective: 1400px; list-style: none;
+}
+.kyma-tier--origine { --face: var(--kyma-camel); --back: var(--kyma-camel-soft); --fg: var(--kyma-ink-deep); }
+/* zone sensible fixe, indépendante de la rotation (la carte ne « clignote » pas sous le pointeur) */
+.kyma-tier__hit { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 3.5% / 2.5%; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: pan-y; }
+.kyma-tier__hit:focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 4px; box-shadow: 0 0 0 8px rgba(232, 196, 196, 0.85); }
+.kyma-tier__lift { position: relative; z-index: 1; height: 100%; transform-style: preserve-3d; pointer-events: none; }
+.kyma-tier.is-flipped .kyma-tier__lift { z-index: 3; }
+.kyma-tier.is-flipped .kyma-tier__cta { pointer-events: auto; }
+.kyma-tier.is-turning .kyma-tier__lift { animation: kyma-lift 900ms var(--ease-tide); }
+.kyma-flip__tilt { height: 100%; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); }
+.kyma-flip {
+  position: relative; height: 100%; transform-style: preserve-3d;
+  transform: rotateY(var(--drag, calc(var(--flip, 0) * 180deg)));
+  transition: transform 900ms cubic-bezier(0.34, 1.16, 0.5, 1); /* ressort doux : léger dépassement (≈ 2°) puis retour */
+}
+.kyma-tier.is-flipped { --flip: 1; }
+.kyma-tier.is-dragging .kyma-flip { transition: none; }
+.kyma-flip__face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden;
+  padding: clamp(24px, 7%, 32px); border-radius: 3.5% / 2.5%; color: var(--fg); background: var(--face);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.08), 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 30px 60px -38px rgba(74, 59, 50, 0.6);
+}
+.kyma-flip__back { transform: rotateY(180deg); background: var(--back); }
+/* grain 10 % sous le texte */
+.kyma-flip__face::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: var(--kyma-grain) 0 0 / 200px 200px; opacity: 0.1; mix-blend-mode: multiply; }
+/* reflet satiné : suit le pointeur ; sinon balayage lent toutes les 7 s (2,2 s) */
+.kyma-flip__face::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
+  background:
+    radial-gradient(70% 55% at var(--mx) var(--my), rgba(255, 244, 232, 0.36), rgba(255, 244, 232, 0) 60%),
+    linear-gradient(105deg, rgba(255, 244, 232, 0) 38%, rgba(255, 244, 232, 0.2) 50%, rgba(255, 244, 232, 0) 62%) 130% 0 / 260% 100% no-repeat;
+  animation: kyma-sheen 7s var(--ease-tide) infinite;
+}
+.kyma-flip__back::after { background: linear-gradient(105deg, rgba(255, 244, 232, 0) 38%, rgba(255, 244, 232, 0.1) 50%, rgba(255, 244, 232, 0) 62%) 130% 0 / 260% 100% no-repeat; }
+.kyma-flip__face > * { position: relative; z-index: 1; }
+.kyma-tier__num { font: 400 15px var(--kyma-serif); letter-spacing: 0.1em; }
+.kyma-tier__name { margin: auto 0 12px; font-family: var(--kyma-serif); font-size: clamp(30px, 9vw, 38px); font-weight: 400; letter-spacing: 6px; line-height: 1.05; text-transform: uppercase; }
+.kyma-tier__lead { margin: 0; font-size: 20px; font-weight: 400; line-height: 1.35; }
+.kyma-tier__sub { margin: 10px 0 0; font-size: 15px; line-height: 1.55; }
+.kyma-tier--origine .kyma-tier__lead, .kyma-tier--origine .kyma-tier__sub { font-weight: 500; }
+.kyma-tier__sym { position: absolute; top: clamp(24px, 7%, 32px); right: clamp(24px, 7%, 32px); width: 84px; height: auto; overflow: visible; }
+.kyma-tier__sym circle { fill: none; stroke: var(--kyma-camel-deep); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.kyma-tier--origine .kyma-tier__sym circle { stroke: rgba(46, 36, 30, 0.45); }
+.kyma-tier__invite { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 12px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; }
+.kyma-tier__invite svg { width: 28px; height: 12px; overflow: visible; }
+.kyma-tier__invite path { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset var(--t-base) var(--ease-flow); }
+.kyma-tier:hover .kyma-tier__invite path { animation: kyma-tape 1.4s var(--ease-flow); }
+.kyma-tier__tag { margin: 0 0 14px; font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; }
+.kyma-tier__perks { margin: 0; padding: 0; list-style: none; }
+.kyma-tier__perks li { position: relative; padding: 12px 0 12px 22px; font-size: 14.5px; line-height: 1.55; border-top: 1px solid rgba(74, 59, 50, 0.14); }
+.kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: 22px; width: 12px; height: 1px; background: currentColor; }
+.kyma-tier__cond { margin: 14px 0 0; font-size: 13.5px; line-height: 1.55; }
+.kyma-tier__cta { align-self: flex-start; margin-top: auto; min-height: 48px; padding: 14px 24px; pointer-events: none; }
+.kyma-tier__shadow { position: absolute; left: 10%; right: 10%; bottom: -26px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(74, 59, 50, 0.14), rgba(74, 59, 50, 0)); pointer-events: none; }
+.kyma-tier.is-turning .kyma-tier__shadow { animation: kyma-shadow 900ms var(--ease-tide); }
+.kyma-tier .kyma-todo { padding: 1px 6px; background: rgba(251, 247, 242, 0.55); }
+
+/* ─── 6. INSCRIPTION CERCLE + FORMULAIRES ───────────────────────────────── */
+.kyma-cj__inner { max-width: 760px; text-align: center; }
+.kyma-cj__inner .kyma-sec__desc { margin-inline: auto; }
+.kyma-ring { display: block; width: 120px; height: 120px; margin: 0 auto 28px; transform: rotate(-90deg); overflow: visible; }
+.kyma-ring circle { fill: none; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.kyma-ring__track { stroke: rgba(193, 158, 134, 0.25); }
+.kyma-ring__arc { stroke: var(--kyma-camel-deep); stroke-linecap: round; stroke-dasharray: 300 360; transition: stroke-dasharray 900ms var(--ease-flow), filter 900ms; transform-origin: 60px 60px; }
+.kyma-ring.is-loading .kyma-ring__arc { animation: kyma-spin 2s linear infinite; }
+.kyma-ring.is-closed .kyma-ring__arc { stroke-dasharray: 360 360; filter: drop-shadow(0 0 6px rgba(232, 196, 196, 0.9)); }
+.kyma-form { display: grid; gap: 18px; margin-top: 36px; text-align: left; }
+.kyma-form__row { display: grid; gap: 18px; }
+.kyma-field { display: grid; gap: 8px; }
+.kyma-field__l { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--kyma-ink); }
+.kyma-field__i {
+  width: 100%; min-height: 48px; padding: 12px 2px; border: 0; border-bottom: 1px solid var(--kyma-camel); border-radius: 0; background: transparent;
+  font: 300 16px/1.5 var(--kyma-sans); color: var(--kyma-ink); transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+textarea.kyma-field__i { resize: vertical; min-height: 120px; }
+select.kyma-field__i { appearance: none; -webkit-appearance: none; padding-right: 28px; cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%234A3B32'/%3E%3C/svg%3E") right 6px center no-repeat; }
+.kyma-field__i:hover { border-bottom-color: var(--kyma-ink-soft); }
+.kyma-field__i:focus { outline: none; border-bottom-color: var(--kyma-ink); box-shadow: 0 1px 0 0 var(--kyma-ink); }
+.kyma-field__i:focus-visible { outline: none; }
+.kyma-field__i[aria-invalid="true"] { border-bottom-color: var(--kyma-ink); box-shadow: 0 2px 0 0 var(--kyma-ink); }
+.kyma-field__err, .kyma-form__err { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--kyma-ink); }
+.kyma-form__err { padding: 12px 16px; background: var(--kyma-rose-pale); border-left: 2px solid var(--kyma-ink); }
+.kyma-form__ok { margin: 0; padding: 14px 18px; font-family: var(--kyma-serif); font-size: 20px; line-height: 1.4; color: var(--kyma-ink); background: var(--kyma-rose-pale); border-radius: 14px; }
+.kyma-check { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; font-size: 13.5px; line-height: 1.6; color: var(--kyma-ink-soft); cursor: pointer; }
+.kyma-check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--kyma-ink); cursor: pointer; }
+.kyma-form .kyma-btn { justify-self: start; }
+.kyma-btn.is-loading::after { content: ''; position: absolute; left: 24px; right: 24px; bottom: 9px; height: 1px; background: var(--kyma-camel); animation: kyma-busy 1.2s linear infinite; }
+.kyma-cj__terms { margin: 4px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--kyma-ink-soft); }
+.kyma-cj .kyma-form .kyma-btn { justify-self: center; }
+@media (min-width: 750px) { .kyma-form__row { grid-template-columns: 1fr 1fr; gap: 24px; } }
+
+/* ─── 7. CONTACT (ondes concentriques) ──────────────────────────────────── */
+.kyma-ct { position: relative; isolation: isolate; overflow: clip; margin-top: calc(var(--kyma-hero-pull) * -1); padding: calc(var(--kyma-hero-pull) + clamp(56px, 8vw, 104px)) var(--kyma-pad-x) clamp(64px, 9vw, 120px); color: var(--kyma-ink); background: var(--kyma-beige); }
+.kyma-ct__stage { position: absolute; inset: 0; z-index: -1; touch-action: pan-y; }
+.kyma-ct__stage canvas { position: absolute; inset: 0; }
+.kyma-ct__inner { position: relative; max-width: 1240px; margin-inline: auto; display: grid; gap: clamp(36px, 5vw, 80px); align-items: start; }
+.kyma-ct__copy { padding-top: 8px; }
+.kyma-ct__card { padding: clamp(24px, 4vw, 44px); border-radius: 24px; background: rgba(251, 247, 242, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 70px -48px rgba(74, 59, 50, 0.55), inset 0 0 0 1px rgba(74, 59, 50, 0.06); }
+.kyma-ct__card .kyma-form { margin-top: 0; }
+.kyma-ct-info__list { display: grid; gap: 0; max-width: 720px; margin: 8px 0 0; padding: 0; list-style: none; }
+.kyma-ct-info__list li { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--kyma-line); font-size: 16px; line-height: 1.6; }
+.kyma-ct-info__list li:last-child { border-bottom: 1px solid var(--kyma-line); }
+.kyma-ct-info__k { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); padding-top: 3px; }
+@media (min-width: 990px) { .kyma-ct__inner { grid-template-columns: 0.85fr 1.15fr; } .kyma-ct__copy { position: sticky; top: calc(var(--kyma-header-h) + 32px); } }
+
+/* ─── 8. FAQ (accordéon + recherche) ────────────────────────────────────── */
+.kyma-faq { margin-top: calc(var(--kyma-hero-pull) * -1); padding-top: calc(var(--kyma-hero-pull) + clamp(56px, 8vw, 104px)); }
+.kyma-faq__inner { max-width: 880px; }
+.kyma-faq__head { margin-bottom: clamp(36px, 5vw, 64px); }
+.kyma-faq__search { position: relative; max-width: 520px; margin-top: 36px; }
+.kyma-faq__slabel { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+.kyma-faq__q { width: 100%; min-height: 52px; padding: 12px 2px; border: 0; border-radius: 0; background: transparent; font: 300 18px var(--kyma-sans); color: var(--kyma-ink); -webkit-appearance: none; appearance: none; }
+.kyma-faq__q::placeholder { color: var(--kyma-ink-soft); opacity: 1; }
+.kyma-faq__q:focus { outline: none; }
+.kyma-faq__search::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--kyma-line); }
+.kyma-faq__wave { position: absolute; left: 0; bottom: -5px; width: 100%; height: 10px; overflow: visible; transform: scaleX(0.12); transform-origin: 0 50%; transition: transform var(--t-base) var(--ease-flow); }
+.kyma-faq__wave path { fill: none; stroke: var(--kyma-camel); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.kyma-faq__q:focus ~ .kyma-faq__wave path { stroke: var(--kyma-camel-deep); }
+.kyma-faq__group { margin-top: clamp(32px, 4vw, 48px); }
+.kyma-faq__group[hidden] { display: none; }
+.kyma-faq__gtitle { margin: 0 0 8px; font-size: 12.5px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); font-family: var(--kyma-sans); }
+.kyma-faq__item { border-top: 1px solid var(--kyma-line); }
+.kyma-faq__item:last-child { border-bottom: 1px solid var(--kyma-line); }
+.kyma-faq__item[hidden] { display: none; }
+.kyma-faq__h { margin: 0; font: inherit; }
+.kyma-faq__btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; min-height: 64px; padding: 18px 0; border: 0; background: none;
+  text-align: left; cursor: pointer; font: 400 clamp(19px, 2vw, 23px)/1.35 var(--kyma-serif); color: var(--kyma-ink);
+}
+.kyma-faq__btn:hover .kyma-faq__qtext { text-decoration: underline; text-decoration-color: var(--kyma-camel); text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.kyma-faq__icon { flex: none; width: 24px; height: 24px; overflow: visible; }
+.kyma-faq__icon path { fill: none; stroke: var(--kyma-ink); stroke-width: 1.3; stroke-linecap: round; vector-effect: non-scaling-stroke; transition: d var(--t-base) var(--ease-flow), opacity var(--t-base), transform var(--t-base) var(--ease-flow); transform-origin: 12px 12px; }
+.kyma-faq__item.is-open .kyma-faq__h-line { d: path("M3 12 C6 12 9 12 12 12 S18 12 21 12"); }
+.kyma-faq__item.is-open .kyma-faq__v-line { opacity: 0; transform: scaleY(0); }
+.kyma-faq__a { display: grid; grid-template-rows: 1fr; transition: grid-template-rows var(--t-base) var(--ease-flow); }
+.kyma-faq--js .kyma-faq__item:not(.is-open) .kyma-faq__a { grid-template-rows: 0fr; }
+.kyma-faq__ain { min-height: 0; overflow: hidden; }
+.kyma-faq__ain .kyma-rte { padding: 0 48px 24px 0; font-size: 16px; line-height: 1.8; color: var(--kyma-ink-soft); }
+.kyma-faq--js .kyma-faq__item:not(.is-open) .kyma-faq__ain { visibility: hidden; transition: visibility 0s var(--t-base); }
+.kyma-faq mark, .kyma-faq .kyma-hl { padding: 0 2px; color: var(--kyma-ink); background: var(--kyma-rose); border-radius: 2px; }
+.kyma-faq__empty { margin: 0 0 24px; padding: 18px 20px; font-size: 16px; background: var(--kyma-rose-pale); border-radius: 14px; }
+.kyma-faq__more { margin: 48px 0 0; font-family: var(--kyma-serif); font-size: 22px; }
+.kyma-faq__more .kyma-link { margin-left: 12px; font-family: var(--kyma-sans); vertical-align: middle; }
+
+/* ─── 9. INSTAGRAM (tuiles du motif, aucun traceur tiers) ───────────────── */
+.kyma-ig__head { max-width: 720px; }
+.kyma-ig__head > p:last-child { margin: 28px 0 0; }
+.kyma-ig__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 36px 0 0; padding: 0; list-style: none; }
+.kyma-ig__tile { aspect-ratio: 1 / 1; }
+.kyma-ig__link {
+  position: relative; display: flex; align-items: flex-end; height: 100%; padding: 16px; overflow: hidden; border-radius: 18px; text-decoration: none; color: var(--kyma-ink);
+  background: radial-gradient(80% 70% at 30% 30%, var(--kyma-rose), transparent 70%), radial-gradient(70% 60% at 75% 75%, rgba(193, 158, 134, 0.55), transparent 70%), var(--kyma-rose-pale);
+  background-size: cover; background-position: center;
+  transition: transform var(--t-base) var(--ease-flow), box-shadow var(--t-base) var(--ease-flow);
+}
+.kyma-ig__link::before { content: ''; position: absolute; inset: 0; background: var(--kyma-grain) 0 0 / 200px 200px; opacity: 0.08; mix-blend-mode: multiply; pointer-events: none; }
+.kyma-ig__cap { position: relative; padding: 6px 12px; border-radius: 999px; font: 400 18px/1.2 var(--kyma-serif); background: rgba(245, 237, 228, 0.88); }
+@media (hover: hover) and (pointer: fine) {
+  .kyma-ig__link:hover { transform: translateY(calc(var(--lift-hover) * -1)) rotate(-1deg); box-shadow: 0 18px 40px -20px rgba(74, 59, 50, 0.28), 0 0 0 6px rgba(232, 196, 196, 0.35); }
+  .kyma-ig__tile:nth-child(even) .kyma-ig__link:hover { transform: translateY(calc(var(--lift-hover) * -1)) rotate(1deg); }
+}
+@media (min-width: 750px) { .kyma-ig__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+@media (min-width: 1200px) { .kyma-ig__grid { grid-template-columns: repeat(6, 1fr); } }
+
+/* ─── 10. CARTES COLORIS (Collection § 01) ──────────────────────────────── */
+.kyma-cards__head { max-width: 760px; }
+.kyma-cards__price { margin: 20px 0 0; font-size: 15px; line-height: 1.7; color: var(--kyma-ink-soft); }
+.kyma-cards__amount { font: 400 26px var(--kyma-serif); color: var(--kyma-ink); margin-right: 6px; }
+.kyma-cards {
+  display: flex; gap: 14px; margin: 40px calc(var(--kyma-pad-x) * -1) 0; padding: 0 var(--kyma-pad-x) 12px; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--kyma-pad-x); -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+}
+.kyma-card { flex: 0 0 min(72vw, 300px); scroll-snap-align: start; transition: flex-grow var(--t-slow) var(--ease-flow), opacity var(--t-base); }
+.kyma-card__link { display: grid; align-content: start; gap: 14px; height: 100%; color: var(--kyma-ink); text-decoration: none; }
+.kyma-card__viz { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 20px; background: linear-gradient(160deg, var(--a), var(--b)); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06); transition: transform var(--t-base) var(--ease-flow), box-shadow var(--t-base); }
+.kyma-card__viz canvas { position: absolute; inset: 0; }
+.kyma-card__body { display: grid; gap: 4px; }
+.kyma-card__idx { font: 400 13px var(--kyma-serif); color: var(--kyma-ink-soft); }
+.kyma-card__name { font: 400 26px/1.15 var(--kyma-serif); }
+.kyma-card__lead { font-size: 14.5px; line-height: 1.6; color: var(--kyma-ink-soft); }
+.kyma-card__lining { font-size: 13px; color: var(--kyma-ink-soft); }
+.kyma-card__more { justify-self: start; margin-top: 8px; padding-bottom: 4px; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; border-bottom: 1px solid var(--kyma-camel); }
+.kyma-card__cap { margin: 8px 0 0; font-size: 12px; font-style: italic; color: var(--kyma-ink-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .kyma-card__link:hover .kyma-card__viz { transform: translateY(calc(var(--lift-hover) * -1)); box-shadow: 0 18px 40px -20px rgba(74, 59, 50, 0.28), 0 0 0 6px rgba(232, 196, 196, 0.35); }
+}
+@media (min-width: 990px) {
+  .kyma-cards { overflow: visible; margin-inline: 0; padding: 0; gap: 18px; }
+  .kyma-card { flex: 1 1 0; min-width: 0; }
+  .kyma-cards.has-hot .kyma-card { opacity: 0.72; }
+  .kyma-cards.has-hot .kyma-card.is-hot { flex-grow: 1.4; opacity: 1; }
+  .kyma-card__lead, .kyma-card__lining { max-height: 7.5em; overflow: hidden; }
+}
+
+/* ─── 11. RECOLORATION (même pièce, autre teinte) ───────────────────────── */
+.kyma-rc__grid { display: grid; gap: clamp(36px, 5vw, 88px); align-items: center; }
+.kyma-rc__now { margin: 18px 0 0; font: italic 400 24px var(--kyma-serif); color: var(--kyma-ink); }
+.kyma-rc__fig { margin: 0; }
+.kyma-rc__stage { position: relative; aspect-ratio: 520 / 600; max-height: 78vh; margin-inline: auto; }
+.kyma-rc__stage canvas { position: absolute; inset: 0; }
+.kyma-rc__mask, .kyma-rc__lines, .kyma-rc__lines svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.kyma-rc__mask path { fill: var(--kyma-beige); }
+.kyma-rc__lines .kyma-tech__svg path { stroke: var(--kyma-ink); }
+@media (min-width: 990px) { .kyma-rc__grid { grid-template-columns: 0.9fr 1.1fr; } }
+
+/* ─── 12. FRISE DES ÉTAPES (savoir-faire, épinglée sur bureau) ──────────── */
+.kyma-steps { padding-inline: 0; }
+.kyma-steps .kyma-sec__inner { padding-inline: var(--kyma-pad-x); }
+.kyma-steps__bar { position: relative; height: 1px; margin: 40px 0 0; background: rgba(193, 158, 134, 0.35); }
+.kyma-steps__bar span { position: absolute; inset: 0; background: var(--kyma-ink); transform: scaleX(0.08); transform-origin: 0 50%; }
+.kyma-steps__list { display: flex; gap: 16px; margin: 28px calc(var(--kyma-pad-x) * -1) 0; padding: 0 var(--kyma-pad-x) 12px; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--kyma-pad-x); }
+.kyma-step { flex: 0 0 min(78vw, 300px); scroll-snap-align: start; color: var(--kyma-ink); }
+.kyma-step__go { display: grid; justify-items: start; gap: 8px; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; color: inherit; }
+.kyma-step__icon { width: 96px; height: 96px; overflow: visible; }
+.kyma-step__icon path { fill: none; stroke: var(--kyma-camel); stroke-width: 1.3; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; transition: stroke var(--t-base); }
+.kyma-step__icon .is-fine { stroke-width: 1; opacity: 0.8; }
+html.kyma-js .kyma-steps .kyma-step__icon [pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--ease-flow), stroke var(--t-base); }
+html.kyma-js .kyma-steps .kyma-step__icon .is-fine[stroke-dasharray] { stroke-dasharray: 1; }
+html.kyma-js .kyma-step.is-on .kyma-step__icon [pathLength], html.kyma-js .kyma-step.is-past .kyma-step__icon [pathLength] { stroke-dashoffset: 0; }
+.kyma-step.is-on .kyma-step__icon path { stroke: var(--kyma-ink); }
+.kyma-step__n { font: 400 13px var(--kyma-serif); color: var(--kyma-ink-soft); }
+.kyma-step__title { font: 400 26px/1.15 var(--kyma-serif); }
+.kyma-step__text { margin: 10px 0 0; font-size: 15px; line-height: 1.75; color: var(--kyma-ink-soft); }
+html.kyma-js .kyma-step { opacity: 0.55; transition: opacity var(--t-base); }
+html.kyma-js .kyma-step.is-on, html.kyma-js .kyma-step.is-past { opacity: 1; }
+@media (min-width: 990px) {
+  .kyma-steps.is-pinned { height: calc(100vh + var(--steps, 6) * 26vh); padding: 0; }
+  .kyma-steps.is-pinned .kyma-steps__sticky { position: sticky; top: 0; display: flex; align-items: center; min-height: 100vh; padding-top: var(--kyma-header-h); }
+  .kyma-steps.is-pinned .kyma-steps__sticky > .kyma-sec__inner { width: 100%; }
+  .kyma-steps__list { display: grid; grid-template-columns: repeat(var(--steps, 6), 1fr); gap: 24px; margin-inline: 0; padding: 0; overflow: visible; }
+  .kyma-step { flex: none; }
+  .kyma-step__icon { width: 84px; height: 84px; }
+  .kyma-step__title { font-size: 22px; }
+  .kyma-step__text { font-size: 14px; }
+}
+
+/* ─── 13. FRISE DE LA PRÉCOMMANDE ───────────────────────────────────────── */
+.kyma-tl-sec .kyma-sec__desc p { margin: 0 0 0.8em; }
+.kyma-tl { position: relative; display: grid; gap: 0; margin: 44px 0 0; padding: 0; list-style: none; }
+.kyma-tl::before { content: ''; position: absolute; left: 11px; top: 12px; bottom: 12px; width: 1px; background: var(--kyma-camel); transform-origin: 50% 0; }
+html.kyma-js .kyma-tl[data-kyma-reveal]::before { transform: scaleY(0); transition: transform 1.4s var(--ease-flow) 200ms; }
+html.kyma-js .kyma-tl[data-kyma-reveal].is-in::before { transform: none; }
+.kyma-tl__item { position: relative; padding: 0 0 24px 44px; }
+.kyma-tl__pt { display: grid; gap: 2px; min-height: 44px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; color: var(--kyma-ink); }
+.kyma-tl__dot { position: absolute; left: 0; top: 2px; width: 23px; height: 23px; border-radius: 50%; border: 1px solid var(--kyma-camel); background: var(--kyma-beige); transition: background-color 320ms var(--ease-flow) calc(600ms + var(--i, 0) * 320ms), transform var(--t-fast); }
+html.kyma-js .kyma-tl.is-in .kyma-tl__dot, html:not(.kyma-js) .kyma-tl__dot { background: var(--kyma-rose); }
+.kyma-tl__item.is-open .kyma-tl__dot { transform: scale(1.15); border-color: var(--kyma-ink); }
+.kyma-tl__name { font: 400 24px/1.2 var(--kyma-serif); }
+.kyma-tl__date { font-size: 13.5px; color: var(--kyma-ink-soft); }
+.kyma-tl__tip { margin: 8px 0 0; max-width: 340px; font-size: 14.5px; line-height: 1.65; color: var(--kyma-ink-soft); opacity: 0.0; transform: translateY(-4px); transition: opacity var(--t-fast), transform var(--t-base) var(--ease-flow); }
+.kyma-tl__item.is-open .kyma-tl__tip { opacity: 1; transform: none; }
+@media (max-width: 989px) { .kyma-tl__tip { opacity: 1; transform: none; } } /* au toucher : phrase toujours lisible */
+@media (min-width: 990px) {
+  .kyma-tl { grid-template-columns: repeat(var(--n, 4), 1fr); gap: 24px; }
+  .kyma-tl::before { left: 12px; right: calc(100% / var(--n, 4) - 12px); top: 11px; bottom: auto; width: auto; height: 1px; transform-origin: 0 50%; }
+  html.kyma-js .kyma-tl[data-kyma-reveal]::before { transform: scaleX(0); }
+  .kyma-tl__item { padding: 44px 0 0; }
+  .kyma-tl__dot { top: 0; }
+}
+.kyma-tl-sec--compact { padding-block: clamp(48px, 6vw, 88px); }
+.kyma-tl-sec--compact .kyma-tl__name { font-size: 20px; }
+
+/* ─── 14. GUIDE DES TAILLES ─────────────────────────────────────────────── */
+.kyma-size__head { max-width: 720px; }
+.kyma-size__link { margin: 22px 0 0; }
+.kyma-size__grid { display: grid; gap: clamp(32px, 5vw, 72px); align-items: start; margin-top: 40px; }
+.kyma-size__pick { margin: 0 0 14px; font-size: 14px; line-height: 1.6; color: var(--kyma-ink-soft); }
+.kyma-size__scroll { overflow-x: auto; border-radius: 4px; -webkit-overflow-scrolling: touch; }
+.kyma-size__table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 15px; color: var(--kyma-ink); }
+.kyma-size__table th, .kyma-size__table td { padding: 0; height: 52px; text-align: center; font-weight: 400; border-bottom: 1px solid var(--kyma-line); transition: background-color var(--t-fast); }
+.kyma-size__table thead th { border-bottom-color: rgba(74, 59, 50, 0.3); }
+.kyma-size__table th[scope="row"], .kyma-size__corner { position: sticky; left: 0; z-index: 1; text-align: left; background: var(--kyma-beige); }
+.kyma-size__corner { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(74, 59, 50, 0.72); padding-right: 12px !important; }
+.kyma-size__sz, .kyma-size__ms { width: 100%; min-height: 52px; padding: 0 10px; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; }
+.kyma-size__ms { text-align: left; padding-left: 0; white-space: nowrap; }
+.kyma-size__sz { font-weight: 500; letter-spacing: 0.08em; }
+.kyma-size__sz[aria-pressed="true"] { color: var(--kyma-blanc); background: var(--kyma-ink); border-radius: 999px 999px 0 0; }
+.kyma-size__ms[aria-pressed="true"] { text-decoration: underline; text-decoration-color: var(--kyma-ink); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.kyma-size__table .is-col { background: var(--kyma-rose-pale); }
+.kyma-size__table tr.is-row td, .kyma-size__table tr.is-row th { background: rgba(232, 196, 196, 0.35); }
+.kyma-size__table tr.is-row td.is-col { background: var(--kyma-rose); font-weight: 500; }
+.kyma-size__fig { margin: 0; }
+.kyma-size__svg { display: block; width: 100%; max-width: 560px; height: auto; margin-inline: auto; overflow: visible; }
+.kyma-size__body { transform: scale(calc(var(--ks, 1) * var(--kf, 1))); transform-origin: 300px 320px; transform-box: view-box; transition: transform var(--t-base) var(--ease-flow); }
+.kyma-size__draw path { fill: none; stroke: var(--kyma-camel); stroke-width: 1.25; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.kyma-size__draw .is-fine { stroke-width: 0.9; opacity: 0.8; }
+.kyma-size__draw .is-accent { stroke: var(--kyma-camel-deep); }
+.kyma-size__draw .is-dim { stroke-dasharray: 3 3; }
+.kyma-cote path { fill: none; stroke: var(--kyma-ink-soft); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 3; transition: stroke var(--t-fast), stroke-width var(--t-fast); }
+.kyma-cote .kyma-cote__tick { stroke-dasharray: none; }
+.kyma-cote text { fill: var(--kyma-ink); font-family: var(--kyma-sans); }
+.kyma-cote__n { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.kyma-cote__v { font-size: 15px; font-variant-numeric: tabular-nums; }
+.kyma-cote.is-hot path { stroke: var(--kyma-ink); stroke-width: 2; stroke-dasharray: none; }
+.kyma-size__block { max-width: 880px; margin-top: clamp(72px, 9vw, 128px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--kyma-line); }
+.kyma-measure { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 36px 0 20px; padding: 0; list-style: none; }
+.kyma-measure__item { display: grid; justify-items: center; gap: 8px; padding: 16px 8px; border-radius: 18px; background: var(--kyma-rose-pale); }
+.kyma-measure__item svg { width: 100%; max-width: 180px; height: auto; overflow: visible; }
+.kyma-measure__garment { fill: rgba(245, 237, 228, 0.7); stroke: var(--kyma-camel); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+.kyma-measure__tape { fill: none; stroke: var(--kyma-ink); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.kyma-measure.is-play .kyma-measure__tape { animation: kyma-tape 2.4s var(--ease-flow) calc(var(--i, 0) * 1200ms) both; }
+.kyma-measure__n { font-size: 12.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.kyma-advice__ui { display: grid; gap: 22px; max-width: 560px; margin-top: 32px; }
+.kyma-range { display: grid; gap: 10px; }
+.kyma-range__ends { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+.kyma-range input { width: 100%; height: 44px; margin: 0; background: transparent; accent-color: var(--kyma-ink); cursor: pointer; }
+.kyma-advice__out { display: block; padding: 18px 20px; font-size: 16px; line-height: 1.6; background: var(--kyma-rose-pale); border-radius: 14px; }
+.kyma-advice__k { display: block; margin-bottom: 4px; font: italic 400 22px var(--kyma-serif); }
+.kyma-advice__small { margin: 0; font-size: 13px; color: var(--kyma-ink-soft); }
+.kyma-size__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; margin: 32px 0 0; }
+.kyma-size--compact .kyma-size__grid { margin-top: 28px; }
+@media (min-width: 990px) { .kyma-size__grid { grid-template-columns: 1.1fr 0.9fr; } }
+@media (max-width: 749px) { .kyma-measure { gap: 8px; } .kyma-measure__item { padding: 10px 4px; } .kyma-measure__n { font-size: 11px; letter-spacing: 0.08em; } }
+
+/* ─── 15. LECTEUR 3D 360° (fiche produit) ───────────────────────────────── */
+.kyma-360__grid { display: grid; gap: clamp(28px, 4vw, 64px); align-items: center; }
+.kyma-360__help { margin: 18px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--kyma-ink-soft); }
+.kyma-360__fig { position: relative; margin: 0; }
+.kyma-360__stage {
+  position: relative; aspect-ratio: 4 / 5; max-height: 78vh; margin-inline: auto; overflow: hidden; border-radius: 28px;
+  background: radial-gradient(70% 60% at 50% 40%, var(--kyma-blanc), var(--kyma-beige) 70%); box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.06);
+}
+.kyma-360__glb, .kyma-360__mv, .kyma-360__fallback, .kyma-360__fallback canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.kyma-360__glb { cursor: grab; touch-action: pan-y; outline-offset: -6px; }
+.kyma-360__glb:active { cursor: grabbing; }
+.kyma-360__glb:focus-visible { outline: 2px solid var(--kyma-ink); box-shadow: inset 0 0 0 6px rgba(232, 196, 196, 0.8); }
+.kyma-360__mv { --poster-color: transparent; background: transparent; }
+.kyma-360__mv[hidden], .kyma-360__glb[hidden], .kyma-360__fallback[hidden] { display: none; }
+.kyma-360__loading { position: absolute; left: 50%; bottom: 20px; margin: 0; padding: 8px 14px; transform: translateX(-50%); border-radius: 999px; font-size: 12px; letter-spacing: 0.1em; color: var(--kyma-ink); background: rgba(251, 247, 242, 0.9); opacity: 0; transition: opacity var(--t-base); pointer-events: none; white-space: nowrap; }
+.kyma-360__stage.is-loading .kyma-360__loading { opacity: 1; }
+.kyma-360__loading[hidden] { display: none; }
+.kyma-360__presets { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 0; }
+.kyma-360__presets[hidden] { display: none; }
+.kyma-360__presets button {
+  min-height: 44px; padding: 8px 18px; border: 1px solid var(--kyma-line); border-radius: 999px; background: rgba(251, 247, 242, 0.6); cursor: pointer;
+  font: 500 11px var(--kyma-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--kyma-ink); transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+.kyma-360__presets button:hover { border-color: var(--kyma-camel); background: var(--kyma-rose-pale); }
+.kyma-360__presets button[aria-pressed="true"] { border-color: var(--kyma-ink); background: var(--kyma-ink); color: var(--kyma-blanc); }
+.kyma-360 .kyma-caption { text-align: center; }
+@media (min-width: 990px) {
+  .kyma-360__grid { grid-template-columns: 0.8fr 1.2fr; }
+  .kyma-360__fig { order: 2; }
+}
+@media (max-width: 989px) { .kyma-360__fig { order: -1; } } /* mobile : le visualiseur d'abord (60 vh), le texte dessous */
+@media (max-width: 749px) { .kyma-360__stage { aspect-ratio: auto; height: 60vh; height: 60svh; } }
+
+/* ─── 16. RESPONSIVE DIVERS ─────────────────────────────────────────────── */
+@media (max-width: 989px) {
+  .kyma-ph { justify-content: flex-end; min-height: auto; }
+  .kyma-ph__stage { position: relative; inset: auto; width: auto; height: 46vh; height: 46svh; margin: -24px calc(var(--kyma-pad-x) * -1) 8px; order: -1; }
+  .kyma-ph--pattern .kyma-ph__stage, .kyma-ph--center .kyma-ph__stage { position: absolute; inset: 0; height: auto; margin: 0; }
+  .kyma-ph--pattern .kyma-ph__stage::after { background: linear-gradient(180deg, rgba(245, 237, 228, 0.2) 0%, rgba(245, 237, 228, 0.92) 55%); }
+  .kyma-ph--cloth .kyma-ph__stage { width: auto; top: auto; bottom: auto; }
+  .kyma-ph__caption { position: static; max-width: none; margin-top: 18px; text-align: left; }
+  .kyma-chap__stage { max-height: 62vh; }
+  .kyma-chap--wave .kyma-chap__stage, .kyma-chap--keywords .kyma-chap__stage { max-width: 520px; margin-inline: auto; }
+}
+@media (max-width: 749px) {
+  .kyma-ph__title { font-size: clamp(40px, 11.5vw, 56px); }
+  .kyma-ph__ctas .kyma-btn { flex: 1 1 auto; }
+  .kyma-ct-info__list li { grid-template-columns: 1fr; gap: 4px; }
+  .kyma-cercle .kyma-cercle__grid { gap: 32px; }
+  .kyma-faq__ain .kyma-rte { padding-right: 0; }
+  .kyma-tier__name { font-size: 32px; }
+}
+
+/* ─── 17. PAUSE DU MOUVEMENT (pied de page) ─────────────────────────────── */
+html.kyma-motion-paused .kyma-flip__face::after { animation: none; }
+html.kyma-motion-paused .kyma-ring.is-loading .kyma-ring__arc { animation-duration: 6s; }
+.kyma-pause { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 0; border: 0; background: none; cursor: pointer; font: 400 12px var(--kyma-sans); color: inherit; }
+.kyma-pause svg { width: 16px; height: 16px; }
+.kyma-pause svg path { fill: none; stroke: currentColor; stroke-width: 1.4; }
+.kyma-pause[aria-pressed="true"] .kyma-pause__bars { display: none; }
+.kyma-pause:not([aria-pressed="true"]) .kyma-pause__play { display: none; }
+
+/* ─── 18. MOUVEMENT RÉDUIT ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html.kyma-js .is-tracing [pathLength], .kyma-kuma path { transition: none !important; stroke-dashoffset: 0 !important; }
+  html.kyma-js .kyma-kuma.is-tracing path { fill: var(--kyma-ink); }
+  /* cartes : fondu croisé de 200 ms au lieu du pivot ; pas d'inclinaison ; pas de balayage de reflet */
+  .kyma-flip, .kyma-flip__tilt { transform: none !important; transition: none; }
+  .kyma-flip__back { transform: none; }
+  .kyma-flip__face { transition: opacity 200ms linear, visibility 0s linear 200ms; }
+  .kyma-flip__back { opacity: 0; visibility: hidden; }
+  .kyma-tier.is-flipped .kyma-flip__back { opacity: 1; visibility: visible; transition: opacity 200ms linear; }
+  .kyma-tier.is-flipped .kyma-flip__front { opacity: 0; visibility: hidden; }
+  .kyma-flip__face::after { animation: none; background: none; }
+  .kyma-tier.is-turning .kyma-tier__lift, .kyma-tier.is-turning .kyma-tier__shadow, .kyma-tier:hover .kyma-tier__invite path { animation: none; }
+  .kyma-ring.is-loading .kyma-ring__arc { animation: none; }
+  .kyma-measure.is-play .kyma-measure__tape { animation: none; }
+  .kyma-btn.is-loading::after { animation: none; transform: none; }
+  .kyma-faq__a, .kyma-faq__icon path, .kyma-faq__wave, .kyma-card, .kyma-card__viz, .kyma-ig__link, .kyma-size__body, .kyma-tl__dot, .kyma-tl__tip, .kyma-step, .kyma-chap__kwbtn::after { transition: none !important; }
+  html.kyma-js .kyma-tl[data-kyma-reveal]::before { transform: none !important; transition: none; }
+  html.kyma-js .kyma-steps .kyma-step__icon [pathLength] { stroke-dashoffset: 0; transition: none; }
+  .kyma-ig__link:hover { transform: none; }
+}
+
+/* ─── 19. GRILLES : les enfants peuvent rétrécir (sinon un tableau défilant élargit la colonne) ─ */
+.kyma-size__grid > *, .kyma-chap__grid > *, .kyma-360__grid > *, .kyma-rc__grid > *, .kyma-ct__inner > *, .kyma-ph__inner > * { min-width: 0; }

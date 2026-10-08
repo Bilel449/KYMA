@@ -8,7 +8,7 @@
 {%- assign title_id = 'kyma-tech-title-' | append: section.id -%}
 {%- assign n = section.blocks.size | at_least: 1 -%}
 
-<section class="kyma-sec kyma-tech" id="kyma-tech-{{ section.id }}" aria-labelledby="{{ title_id }}" data-kyma-draw>
+<section class="kyma-sec kyma-tech" id="{{ section.settings.anchor | default: 'kyma-tech-' | append: section.id }}" aria-labelledby="{{ title_id }}" data-kyma-draw>
   <div class="kyma-sec__inner">
     <div class="kyma-tech__grid">
       <figure class="kyma-tech__fig">
@@ -64,6 +64,7 @@
   "tag": "div",
   "class": "kyma-section",
   "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML, facultatif)" },
     { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
     { "type": "text", "id": "label", "label": "Label", "default": "La pièce" },
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Pensé pour que chaque pièce soit" },

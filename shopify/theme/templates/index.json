@@ -7,318 +7,303 @@
         "title_before": "Une pièce, pensée pour être",
         "title_em": "unique",
         "title_after": ".",
+        "heading_tag": "h1",
         "em_new_line": true,
         "subtitle": "Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.",
         "note": "Expédition au plus tard le [À COMPLÉTER : date]",
         "cta_label": "Choisir mon coloris",
         "cta_link": "/collections/drop-1",
-        "cta2_label": "Notre histoire",
-        "cta2_link": "/pages/notre-histoire",
+        "cta2_label": "Découvrir le motif",
+        "cta2_link": "/#motif",
         "colorway": "kyma",
-        "alt_text": "Illustration animée : une sculpture fluide rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.",
+        "alt_text": "Illustration animée : une sculpture fluide en volute, rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.",
         "cue_label": "Défiler",
-        "cue_target": "#MainContent",
+        "cue_target": "#drop",
         "height": "full"
-      }
-    },
-    "marquee": {
-      "type": "kyma-marquee",
-      "settings": {
-        "text": "L'art du flow · Ride the wave · κύμα ·",
-        "speed": 45,
-        "reverse": false,
-        "dark": false
       }
     },
     "drop": {
       "type": "kyma-colorways",
-      "blocks": {
-        "lilac-whirl": {
-          "type": "colorway",
-          "settings": {
-            "name": "Lilac Whirl",
-            "description": "Lilas tourbillonnant sur poudre",
-            "color_a": "#C8A2C8",
-            "color_b": "#F5EDE4",
-            "link": "/products/ressac-hoodie-zippe-oversize"
-          }
-        },
-        "ivory-tide": {
-          "type": "colorway",
-          "settings": {
-            "name": "Ivory Tide",
-            "description": "Crème ivoire sur vanille",
-            "color_a": "#E8E0D8",
-            "color_b": "#C5BFB8",
-            "link": "/products/ressac-hoodie-zippe-oversize"
-          }
-        },
-        "silver-drift": {
-          "type": "colorway",
-          "settings": {
-            "name": "Silver Drift",
-            "description": "Gris acier sur perle",
-            "color_a": "#8E9EAB",
-            "color_b": "#C8CDD2",
-            "link": "/products/ressac-hoodie-zippe-oversize"
-          }
-        },
-        "noir-absolu": {
-          "type": "colorway",
-          "settings": {
-            "name": "Noir Absolu",
-            "description": "Noir sur anthracite, marbrage subtil",
-            "color_a": "#1A1A1A",
-            "color_b": "#3A3A4A",
-            "link": "/products/ressac-hoodie-zippe-oversize"
-          }
-        },
-        "crimson-flow": {
-          "type": "colorway",
-          "settings": {
-            "name": "Crimson Flow",
-            "description": "Cramoisi sur bordeaux",
-            "color_a": "#5C2032",
-            "color_b": "#C4878E",
-            "link": "/products/ressac-hoodie-zippe-oversize"
-          }
-        }
-      },
-      "block_order": [
-        "lilac-whirl",
-        "ivory-tide",
-        "silver-drift",
-        "noir-absolu",
-        "crimson-flow"
-      ],
       "settings": {
+        "anchor": "drop",
         "number": "01",
-        "label": "Le Drop 1",
+        "label": "LE DROP 1",
         "title_before": "Cinq coloris, un même",
         "title_em": "flux",
         "title_after": ".",
         "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.",
         "kicker": "Coloris",
-        "list_label": "Choisir un coloris pour l'aperçu 3D",
-        "cta_label": "Voir ce coloris",
-        "cta_link": "/collections/drop-1",
-        "caption": "Aperçu 3D du motif et des teintes, à titre d'illustration — pas une photo du produit."
-      }
-    },
-    "motif": {
-      "type": "kyma-unique-piece",
+        "list_label": "Choisir un coloris pour l'illustration 3D",
+        "cta_label": "Voir les coloris",
+        "cta_link": "/collections/drop-1#coloris",
+        "caption": "Illustration du coloris."
+      },
       "blocks": {
-        "point-1": {
-          "type": "point",
+        "colorway_1": {
+          "type": "colorway",
           "settings": {
-            "title": "Un marbré fluide",
-            "text": "Volutes et tourbillons, toujours tonal."
+            "name": "Lilac Whirl",
+            "description": "Le lilas qui tourne, sans jamais revenir.",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
           }
         },
-        "point-2": {
-          "type": "point",
+        "colorway_2": {
+          "type": "colorway",
           "settings": {
-            "title": "Une impression all-over",
-            "text": "Le motif s'étend sur tout le tissu."
+            "name": "Ivory Tide",
+            "description": "L'ivoire monte comme une marée sur le sable clair.",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
           }
         },
-        "point-3": {
-          "type": "point",
+        "colorway_3": {
+          "type": "colorway",
           "settings": {
-            "title": "Une découpe différente",
-            "text": "Pensé pour que chaque pièce soit unique."
+            "name": "Silver Drift",
+            "description": "Un gris d'acier qui dérive sur la perle.",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "description": "La nuit, quand la mer ne se voit plus mais s'entend.",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "description": "Un cramoisi qui coule sur le bordeaux.",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
           }
         }
       },
       "block_order": [
-        "point-1",
-        "point-2",
-        "point-3"
-      ],
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    },
+    "motif": {
+      "type": "kyma-chapter",
       "settings": {
+        "anchor": "motif",
         "number": "02",
-        "label": "Le motif",
-        "title_before": "Un motif pensé pour ne pas se",
-        "title_em": "répéter",
+        "label": "LE MOTIF",
+        "title_before": "Un motif qui suit son",
+        "title_em": "flux",
         "title_after": ".",
         "text": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.",
-        "colorway": "kyma",
-        "length": 320
+        "cta_label": "Découvrir le motif",
+        "cta_link": "/pages/nous-connaitre#motif",
+        "visual": "pattern",
+        "keywords": "",
+        "colorway": "lilac-whirl",
+        "tints": true,
+        "tints_label": "Teinte du motif",
+        "sym1": "",
+        "sym2": "",
+        "caption": "Illustration du coloris.",
+        "flip": false,
+        "tone": "beige"
       }
     },
     "piece": {
       "type": "kyma-technical",
+      "settings": {
+        "anchor": "piece",
+        "number": "03",
+        "label": "LA PIÈCE",
+        "title_before": "Une pièce, un",
+        "title_em": "seul",
+        "title_after": "geste.",
+        "text": "Le motif est imprimé sur tout le tissu. Pensé pour que chaque pièce soit unique.",
+        "caption": "Dessin technique illustratif, vue de face — proportions indicatives.",
+        "cta_label": "Découvrir la pièce",
+        "cta_link": "/products/ressac-hoodie-zippe-oversize"
+      },
       "blocks": {
-        "zip": {
-          "type": "spot",
-          "settings": {
-            "title": "Zip intégral en métal",
-            "text": "Du col jusqu'à l'ourlet, finition argent brossé.",
-            "x": 50,
-            "y": 55
-          }
-        },
-        "tirette": {
-          "type": "spot",
-          "settings": {
-            "title": "Tirette sculptée « Kyma »",
-            "text": "Une tirette dessinée pour la pièce, signée « Kyma ».",
-            "x": 50,
-            "y": 27
-          }
-        },
-        "capuche": {
+        "spot_1": {
           "type": "spot",
           "settings": {
             "title": "Capuche sans cordon",
-            "text": "Double épaisseur, sans cordon ni œillets : un choix de ligne.",
+            "text": "Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d'œillets.",
             "x": 36,
             "y": 10
           }
         },
-        "poches": {
+        "spot_2": {
+          "type": "spot",
+          "settings": {
+            "title": "Tirette sculptée « Kyma »",
+            "text": "En laiton plaqué or brossé : le seul éclat de la pièce.",
+            "x": 50,
+            "y": 27
+          }
+        },
+        "spot_3": {
+          "type": "spot",
+          "settings": {
+            "title": "Zip intégral",
+            "text": "En métal argent brossé, du col jusqu'à l'ourlet.",
+            "x": 50,
+            "y": 55
+          }
+        },
+        "spot_4": {
+          "type": "spot",
+          "settings": {
+            "title": "Épaules tombantes",
+            "text": "Coupe oversize : ample, posée.",
+            "x": 20,
+            "y": 30
+          }
+        },
+        "spot_5": {
           "type": "spot",
           "settings": {
             "title": "Poches biais",
-            "text": "Deux poches coupées en biais, dans le prolongement du geste.",
+            "text": "Deux poches coupées en biais.",
             "x": 31,
             "y": 74
-          }
-        },
-        "bords-cotes": {
-          "type": "spot",
-          "settings": {
-            "title": "Bords-côtes 6 cm",
-            "text": "Aux poignets et à la taille, pour tenir la coupe oversize.",
-            "x": 62,
-            "y": 95
           }
         }
       },
       "block_order": [
-        "zip",
-        "tirette",
-        "capuche",
-        "poches",
-        "bords-cotes"
-      ],
-      "settings": {
-        "number": "03",
-        "label": "La pièce",
-        "title_before": "Pensé pour que chaque pièce soit",
-        "title_em": "unique",
-        "title_after": ".",
-        "text": "Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. [À CONFIRMER : validation sur préséries]",
-        "caption": "Dessin technique illustratif, vue de face — proportions indicatives, motif non représenté.",
-        "cta_label": "Découvrir la pièce",
-        "cta_link": "/collections/drop-1"
-      }
+        "spot_1",
+        "spot_2",
+        "spot_3",
+        "spot_4",
+        "spot_5"
+      ]
     },
     "savoir-faire": {
-      "type": "kyma-manifesto",
+      "type": "kyma-chapter",
       "settings": {
-        "show_divider": true,
+        "anchor": "savoir-faire",
         "number": "04",
-        "label": "Le savoir-faire",
+        "label": "LE SAVOIR-FAIRE",
         "title_before": "Une matière dense, une coupe",
         "title_em": "libre",
         "title_after": ".",
         "text": "French terry épais à l'intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.",
-        "text_2": "",
-        "keywords": "French terry gratté\nÉpaules tombantes\nZip métal brossé\nCapuche sans cordon",
         "cta_label": "Lire le détail de la pièce",
-        "cta_link": "/pages/savoir-faire",
-        "visual": "fabric",
-        "colorway": "kyma",
-        "caption": "Illustration 3D animée du motif KYMA Wave — pas une photo de l'étoffe.",
-        "watermark": "04"
-      }
-    },
-    "marquee-2": {
-      "type": "kyma-marquee",
-      "settings": {
-        "text": "Ride the wave · L'art du flow · κύμα ·",
-        "speed": 35,
-        "reverse": true,
-        "dark": true
+        "cta_link": "/pages/nous-connaitre#savoir-faire",
+        "visual": "cloth",
+        "keywords": "",
+        "colorway": "kyma-camel",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "",
+        "sym2": "",
+        "caption": "Illustration de la matière, en 3D.",
+        "flip": true,
+        "tone": "rose"
       }
     },
     "cercle": {
       "type": "kyma-cercle-waves",
-      "blocks": {
-        "initium": {
-          "type": "tier",
-          "settings": {
-            "tag": "Palier 1",
-            "name": "Initium",
-            "lead": "L'entrée dans le cercle.",
-            "perks": "[À COMPLÉTER : conditions d'accès et avantages INITIUM]",
-            "dark": false,
-            "back_label": "Avantages",
-            "toggle_front": "Voir les avantages",
-            "toggle_back": "Retour"
-          }
-        },
-        "origine": {
-          "type": "tier",
-          "settings": {
-            "tag": "Palier 2",
-            "name": "Origine",
-            "lead": "Le palier supérieur.",
-            "perks": "[À COMPLÉTER : conditions d'accès et avantages ORIGINE]",
-            "dark": true,
-            "back_label": "Avantages",
-            "toggle_front": "Voir les avantages",
-            "toggle_back": "Retour"
-          }
-        }
-      },
-      "block_order": [
-        "initium",
-        "origine"
-      ],
       "settings": {
+        "anchor": "cercle",
         "number": "05",
-        "label": "Cercle Waves",
+        "label": "CERCLE WAVES",
         "title_before": "Rejoindre le",
         "title_em": "cercle",
         "title_after": ".",
         "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.",
         "cta_label": "Entrer dans le Cercle",
         "cta_link": "/pages/cercle-waves",
-        "watermark": "05",
-        "show_rings": true
+        "show_rings": true,
+        "compact_top": false
       }
     },
     "instagram": {
-      "type": "kyma-manifesto",
+      "type": "kyma-instagram",
       "settings": {
-        "show_divider": true,
+        "anchor": "instagram",
         "number": "06",
-        "label": "Instagram",
+        "label": "INSTAGRAM",
         "title_before": "Dans le",
         "title_em": "sillage",
         "title_after": ".",
         "text": "Coulisses, textures et premiers regards, sur @kymasinsta.",
-        "text_2": "",
-        "keywords": "",
         "cta_label": "Suivre @kymasinsta",
-        "cta_link": "https://www.instagram.com/kymasinsta/",
-        "visual": "none",
-        "colorway": "kyma",
-        "caption": "",
-        "watermark": "06"
-      }
+        "url": "https://www.instagram.com/kymasinsta/"
+      },
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "caption": "Écume",
+            "palette": "kyma"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "caption": "Sillage",
+            "palette": "kyma-camel"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "caption": "Marée",
+            "palette": "kyma"
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "caption": "Courant",
+            "palette": "kyma-camel"
+          }
+        },
+        "tile_5": {
+          "type": "tile",
+          "settings": {
+            "caption": "Horizon",
+            "palette": "kyma"
+          }
+        },
+        "tile_6": {
+          "type": "tile",
+          "settings": {
+            "caption": "Ressac",
+            "palette": "kyma-camel"
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5",
+        "tile_6"
+      ]
     }
   },
   "order": [
     "hero",
-    "marquee",
     "drop",
     "motif",
     "piece",
     "savoir-faire",
-    "marquee-2",
     "cercle",
     "instagram"
   ]

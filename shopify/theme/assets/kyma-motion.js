@@ -44,12 +44,16 @@
     (function walk(src, out) {
       [].slice.call(src.childNodes).forEach(function (c) {
         if (c.nodeType === 3) {
-          c.data.split(/(\s+)/).forEach(function (part) {
+          c.data.split(/(\s+)/).forEach(function (part, k) {
             if (!part) return;
             if (/^\s+$/.test(part)) { out.appendChild(d.createTextNode(' ')); return; }
-            var wd = el('span', 'kyma-word');
+            var wd = el('span', 'kyma-word'), dest = out, prev = out.lastChild;
+            /* ponctuation collée à un mot en italique (« <em>tombe</em>. ») : aucune coupure de ligne entre les deux */
+            if (k === 0 && prev && prev.nodeType === 1 && prev.tagName !== 'BR' && !/kyma-word/.test(prev.className)) {
+              var glue = el('span', 'kyma-word'); out.replaceChild(glue, prev); glue.appendChild(prev); dest = glue;
+            }
             part.split('').forEach(function (ch) { var s = el('span', 'kyma-ch'); s.textContent = ch; s.style.setProperty('--ci', i++); wd.appendChild(s); });
-            out.appendChild(wd);
+            dest.appendChild(wd);
           });
         } else if (c.nodeType === 1) {
           var cl = c.cloneNode(false); out.appendChild(cl); if (c.tagName !== 'BR') walk(c, cl);
@@ -122,14 +126,14 @@
   /* ── 4. boucle commune (défilement, vitesse, tâches liées au scroll) ─────────────────── */
   function loop(now) {
     raf = 0;
-    var dt = lastT ? Math.min(0.1, (now - lastT) / 1000) : 1 / 60; lastT = now;
+    var dt = lastT ? Math.max(1 / 240, Math.min(0.1, (now - lastT) / 1000)) : 1 / 60; lastT = now; /* jamais 0 : pas de 0/0 */
     if (SS.active) {
       SS.cur += (SS.target - SS.cur) * (1 - Math.exp(-dt * 8.5));
       if (Math.abs(SS.target - SS.cur) < 0.6) { SS.cur = SS.target; SS.active = false; }
       w.scrollTo(0, SS.cur);
     }
     var y = w.scrollY, v = (y - lastY) / dt; lastY = y;
-    vel += (v - vel) * (1 - Math.exp(-dt * 6));
+    vel += (v - vel) * (1 - Math.exp(-dt * 6)); if (!isFinite(vel)) vel = 0;
     var keep = SS.active || Math.abs(vel) > 2;
     for (var i = 0; i < tasks.length; i++) if (tasks[i](dt, y, vel) === true) keep = true;
     if (keep && !d.hidden) raf = w.requestAnimationFrame(loop); else lastT = 0;

@@ -54,10 +54,10 @@
                 Composition :
                 {% if block.settings.composition != blank %}{{ block.settings.composition | escape }}{% else %}<span class="kyma-todo">[À COMPLÉTER : composition]</span>{% endif %}
               </li>
-              <li>
-                Fabrication :
-                {% if block.settings.origin != blank %}{{ block.settings.origin | escape }}{% else %}<span class="kyma-todo">[À COMPLÉTER : lieu de fabrication]</span>{% endif %}
-              </li>
+              {%- comment -%} Victoire (conformite.md) : aucune origine affichée tant qu'elle n'est pas prouvée -> ligne masquée si vide. {%- endcomment -%}
+              {%- if block.settings.origin != blank -%}
+                <li>Fabrication : {{ block.settings.origin | escape }}</li>
+              {%- endif -%}
               {%- if block.settings.certification != blank -%}
                 <li>Certification : {{ block.settings.certification | escape }}</li>
               {%- endif -%}
@@ -257,7 +257,7 @@
         { "type": "textarea", "id": "cancel_text", "label": "Droit d'annulation (texte validé par Victoire)", "default": "Annulation possible à tout moment avant l'expédition et jusqu'à 14 jours après réception." },
         { "type": "url", "id": "returns_link", "label": "Lien « Retours et remboursements »" },
         { "type": "url", "id": "cgv_link", "label": "Lien « CGV »" },
-        { "type": "checkbox", "id": "always_show", "label": "Toujours afficher (sinon : seulement si le produit a le tag « precommande »)", "default": false }
+        { "type": "checkbox", "id": "always_show", "label": "Toujours afficher (sinon : tag « precommande » requis)", "info": "Sinon, affiché seulement si le produit a le tag « precommande ».", "default": false }
       ]
     },
     {
