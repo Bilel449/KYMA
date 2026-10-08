@@ -1,0 +1,103 @@
+{%- comment -%}
+  KYMA — 03 La pièce : dessin technique vectoriel du hoodie zippé (snippet kyma-hoodie-tech, SVG fait main)
+  qui se trace au défilement (stroke-dashoffset), puis des points chauds numérotés apparaissent.
+  Les légendes sont du vrai texte (liste ordonnée) : rien d'essentiel n'est porté par l'animation seule.
+  Un bloc = un point chaud (position X / Y en % du dessin, titre, texte).
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign title_id = 'kyma-tech-title-' | append: section.id -%}
+{%- assign n = section.blocks.size | at_least: 1 -%}
+
+<section class="kyma-sec kyma-tech" id="kyma-tech-{{ section.id }}" aria-labelledby="{{ title_id }}" data-kyma-draw>
+  <div class="kyma-sec__inner">
+    <div class="kyma-tech__grid">
+      <figure class="kyma-tech__fig">
+        <div class="kyma-tech__art">
+          {% render 'kyma-hoodie-tech', id: title_id %}
+          {%- for block in section.blocks -%}
+            {%- assign at = forloop.index0 | times: 0.42 | divided_by: n | plus: 0.5 -%}
+            <button type="button" class="kyma-tech__spot" data-at="{{ at }}"
+              style="left: {{ block.settings.x }}%; top: {{ block.settings.y }}%;"
+              aria-describedby="{{ title_id }}-l{{ forloop.index }}" {{ block.shopify_attributes }}>
+              <span>{{ forloop.index }}</span><span class="kyma-vh">{{ block.settings.title | escape }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.caption != blank -%}
+          <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
+        {%- endif -%}
+      </figure>
+
+      <div class="kyma-tech__text">
+        <div data-kyma-reveal>
+          {% render 'kyma-section-head',
+            number: section.settings.number,
+            label: section.settings.label,
+            before: section.settings.title_before,
+            em: section.settings.title_em,
+            after: section.settings.title_after,
+            text: section.settings.text,
+            heading_id: title_id
+          %}
+        </div>
+        <ol class="kyma-tech__legend" role="list" style="margin-top: 32px;">
+          {%- for block in section.blocks -%}
+            {%- assign at = forloop.index0 | times: 0.42 | divided_by: n | plus: 0.5 -%}
+            <li class="kyma-tech__item" id="{{ title_id }}-l{{ forloop.index }}" data-at="{{ at }}">
+              <span class="kyma-tech__n" aria-hidden="true">{{ forloop.index }}</span>
+              <div><h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}</div>
+            </li>
+          {%- endfor -%}
+        </ol>
+        {%- if section.settings.cta_label != blank -%}
+          <div class="kyma-man__cta"><a class="kyma-link" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label | escape }}</a></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.number | escape }}</div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Dessin technique",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "text", "id": "label", "label": "Label", "default": "La pièce" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Pensé pour que chaque pièce soit" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "unique" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. [À CONFIRMER : validation sur préséries]" },
+    { "type": "text", "id": "caption", "label": "Légende du dessin", "default": "Dessin technique illustratif, vue de face — proportions indicatives, motif non représenté." },
+    { "type": "text", "id": "cta_label", "label": "Lien — texte", "default": "Découvrir la pièce" },
+    { "type": "url", "id": "cta_link", "label": "Lien — URL" }
+  ],
+  "blocks": [
+    {
+      "type": "spot",
+      "name": "Point chaud",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Zip intégral en métal" },
+        { "type": "text", "id": "text", "label": "Texte" },
+        { "type": "range", "id": "x", "label": "Position horizontale", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "y", "label": "Position verticale", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "KYMA — Dessin technique",
+      "blocks": [
+        { "type": "spot", "settings": { "title": "Zip intégral en métal", "text": "Du col jusqu'à l'ourlet, finition argent brossé.", "x": 50, "y": 55 } },
+        { "type": "spot", "settings": { "title": "Tirette sculptée « Kyma »", "text": "Une tirette dessinée pour la pièce, signée « Kyma ».", "x": 50, "y": 27 } },
+        { "type": "spot", "settings": { "title": "Capuche sans cordon", "text": "Double épaisseur, sans cordon ni œillets : un choix de ligne.", "x": 36, "y": 10 } },
+        { "type": "spot", "settings": { "title": "Poches biais", "text": "Deux poches coupées en biais, dans le prolongement du geste.", "x": 31, "y": 74 } },
+        { "type": "spot", "settings": { "title": "Bords-côtes 6 cm", "text": "Aux poignets et à la taille, pour tenir la coupe oversize.", "x": 62, "y": 95 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

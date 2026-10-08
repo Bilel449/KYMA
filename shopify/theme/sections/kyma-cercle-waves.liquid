@@ -1,5 +1,7 @@
 {%- comment -%}
-  KYMA — Cercle Waves : présentation des 2 paliers (INITIUM / ORIGINE).
+  KYMA — Cercle Waves : présentation des 2 paliers (INITIUM / ORIGINE) + deux anneaux 3D entrelacés
+  (kyma-3d.js, scène rings) qui orbitent lentement ; survoler ou focaliser un palier anime son anneau
+  (1er palier = anneau lilas, 2e palier = anneau noir). Décoratif : tout le contenu est dans les cartes.
   Les conditions d'accès et avantages ne sont PAS inventés : champs à compléter.
 {%- endcomment -%}
 {% render 'kyma-assets' %}
@@ -7,7 +9,7 @@
 
 <hr class="kyma-divider" data-kyma-reveal>
 
-<section class="kyma-sec kyma-cercle" aria-labelledby="{{ title_id }}">
+<section class="kyma-sec kyma-cercle" aria-labelledby="{{ title_id }}" data-kyma-rings>
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
       {% render 'kyma-section-head',
@@ -21,6 +23,12 @@
       %}
     </div>
 
+    {%- if section.settings.show_rings -%}
+      <div class="kyma-cercle__rings" data-kyma-3d-host data-kyma-reveal>
+        <canvas data-kyma-3d="rings" data-follow="false" aria-hidden="true"></canvas>
+      </div>
+    {%- endif -%}
+
     {%- if section.blocks.size > 0 -%}
       <ul class="kyma-cercle__grid" role="list">
         {%- for block in section.blocks -%}
@@ -28,6 +36,7 @@
             class="kyma-tier{% if block.settings.dark %} kyma-tier--dark kyma-on-dark{% endif %}"
             data-kyma-reveal
             style="--kd: {{ forloop.index0 | times: 140 }}ms;"
+            data-ring="{{ forloop.index0 | at_most: 1 }}"
             {{ block.shopify_attributes }}
           >
             {%- if block.settings.tag != blank -%}
@@ -54,7 +63,7 @@
 
     {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
       <div class="kyma-cercle__cta" data-kyma-reveal>
-        <a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.cta_link }}">
+        <a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.cta_link }}" data-kyma-magnetic>
           <span>{{ section.settings.cta_label | escape }}</span>
           <span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
         </a>
@@ -63,7 +72,7 @@
   </div>
 
   {%- if section.settings.watermark != blank -%}
-    <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">{{ section.settings.watermark | escape }}</div>
+    <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.watermark | escape }}</div>
   {%- endif -%}
 </section>
 
@@ -81,7 +90,8 @@
     { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Le Cercle Waves accompagne celles et ceux qui suivent le courant, en deux paliers." },
     { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Découvrir le Cercle Waves" },
     { "type": "url", "id": "cta_link", "label": "Bouton — URL" },
-    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "04" }
+    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "04" },
+    { "type": "checkbox", "id": "show_rings", "label": "Afficher les deux anneaux 3D", "default": true }
   ],
   "blocks": [
     {

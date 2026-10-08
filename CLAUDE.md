@@ -5,7 +5,8 @@ Ce dépôt contient l'équipe IA de la marque **KYMA**.
 ## La marque
 KYMA (prononcé « Kouma ») — streetwear unisexe. Slogan : « L'art du flow ». Univers : le mouvement perpétuel des vagues.
 - **Référentiel complet : `brand/BRAND.md`** (charte, produit, tailles, points à arbitrer). Documents originaux et visuels : `brand/private/` (non versionné — dépôt public, documents confidentiels).
-- **Palette (charte)** : Beige #F5EDE4, Lilas #C8A2C8, Noir #1C1C1C (+ Gris Pierre #8A8A8A, Camel #C19E86). Typos DM Serif Display + Outfit.
+- **Couleurs principales (décision 08/10/2026)** : Beige #F5EDE4, Marron clair #C19E86, Rose clair #E8C4C4 (+ texte Brun #4A3B32). Le lilas n'est plus qu'un coloris produit. Typos DM Serif Display + Outfit.
+- **Direction digitale** : aucune image IA ; référence motion = Spline (3D douce, interactive, défilement).
 - **Instagram** : @kymasinsta. **Fidélité** : Cercle Waves — INITIUM / ORIGINE.
 - **Drop 1 (tech pack v3)** : hoodie zippé oversize, 179 € — Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow.
 - **Boutique Shopify** : kymas-store.myshopify.com (plan d'essai).

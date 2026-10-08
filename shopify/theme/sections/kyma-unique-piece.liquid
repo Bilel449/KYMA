@@ -1,18 +1,20 @@
 {%- comment -%}
-  KYMA — « Le motif » : texte numéroté + zoom animé sur la texture (progression au scroll).
-  Le zoom est désactivé en mouvement réduit (image fixe).
+  KYMA — 02 Le motif : section épinglée au défilement (sticky). La caméra 3D plonge dans la surface marbrée
+  du motif KYMA Wave pendant que les phrases (blocs « point ») se révèlent l'une après l'autre.
+  Mouvement réduit / éditeur : la section n'est plus épinglée, les phrases sont toutes visibles, image fixe.
+  Le texte est posé sur des cartes givrées (contraste AA garanti quel que soit le coloris).
 {%- endcomment -%}
 {% render 'kyma-assets' %}
-{%- assign title_id = 'kyma-up-title-' | append: section.id -%}
-{%- assign zoom_from = section.settings.zoom_from | divided_by: 100.0 -%}
-{%- assign zoom_to = section.settings.zoom_to | divided_by: 100.0 -%}
+{%- assign title_id = 'kyma-dive-title-' | append: section.id -%}
+{%- assign n = section.blocks.size | at_least: 1 -%}
 
-<hr class="kyma-divider" data-kyma-reveal>
-
-<section class="kyma-sec kyma-up" aria-labelledby="{{ title_id }}">
-  <div class="kyma-sec__inner">
-    <div class="kyma-up__grid">
-      <div class="kyma-up__text" data-kyma-reveal>
+<section class="kyma-sec kyma-dive" id="kyma-dive-{{ section.id }}" aria-labelledby="{{ title_id }}" data-kyma-dive style="--dive-h: {{ section.settings.length }}vh;">
+  <div class="kyma-dive__sticky">
+    <div class="kyma-dive__stage" data-kyma-3d-host>
+      <canvas data-kyma-3d="hero" data-shift="0,0" data-colorway="{{ section.settings.colorway }}" data-interactive="false" aria-hidden="true"></canvas>
+    </div>
+    <div class="kyma-dive__ui">
+      <div class="kyma-dive__head" data-kyma-reveal>
         {% render 'kyma-section-head',
           number: section.settings.number,
           label: section.settings.label,
@@ -22,89 +24,65 @@
           text: section.settings.text,
           heading_id: title_id
         %}
-
-        {%- if section.blocks.size > 0 -%}
-          <ul class="kyma-up__points" role="list">
-            {%- for block in section.blocks -%}
-              <li class="kyma-up__point" {{ block.shopify_attributes }}>
-                {%- if block.settings.title != blank -%}
-                  <h3>{{ block.settings.title | escape }}</h3>
-                {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <p>{{ block.settings.text | escape }}</p>
-                {%- endif -%}
-              </li>
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
       </div>
-
-      <figure class="kyma-fig" data-kyma-reveal style="--kd: 150ms;">
-      <div class="kyma-up__frame{% if section.settings.image == blank %} kyma-up__frame--ph{% endif %}">
-        {%- if section.settings.image != blank -%}
-          <div class="kyma-up__zoom" data-kyma-zoom="{{ zoom_from }},{{ zoom_to }}" style="transform-origin: {{ section.settings.focus_x }}% {{ section.settings.focus_y }}%;">
-            {{
-              section.settings.image
-              | image_url: width: 1400
-              | image_tag:
-                loading: 'lazy',
-                widths: '600, 900, 1200, 1400',
-                sizes: '(min-width: 990px) 55vw, 100vw'
-            }}
-          </div>
-        {%- elsif request.design_mode -%}
-          <span class="kyma-todo" style="position:absolute;left:16px;top:16px;">[À COMPLÉTER : image de texture (détail du motif)]</span>
-        {%- endif -%}
-      </div>
-      {%- if section.settings.image != blank and section.settings.caption != blank -%}
-        <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
-      {%- endif -%}
-      </figure>
+      <ol class="kyma-dive__lines" role="list">
+        {%- for block in section.blocks -%}
+          {%- assign at = forloop.index0 | times: 0.8 | divided_by: n | plus: 0.12 -%}
+          <li class="kyma-dive__line" data-at="{{ at }}" {{ block.shopify_attributes }}>
+            <div class="kyma-dive__card">
+              <span class="kyma-dive__idx">{{ forloop.index | prepend: '0' }} / {{ n | prepend: '0' }}</span>
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
     </div>
+    <div class="kyma-dive__meter" aria-hidden="true"><span></span></div>
   </div>
-
-  {%- if section.settings.watermark != blank -%}
-    <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">{{ section.settings.watermark | escape }}</div>
-  {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "KYMA — Motif et zoom",
+  "name": "KYMA — Motif (plongée)",
   "tag": "div",
   "class": "kyma-section",
   "settings": [
-    { "type": "header", "content": "Texte" },
     { "type": "text", "id": "number", "label": "Numéro", "default": "02" },
     { "type": "text", "id": "label", "label": "Label", "default": "Le motif" },
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Un motif pensé pour ne pas se" },
     { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "répéter" },
-    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier." },
-    { "type": "header", "content": "Image et zoom" },
-    { "type": "image_picker", "id": "image", "label": "Image de texture (détail du motif)" },
-    { "type": "text", "id": "caption", "label": "Légende sous l'image (laisser vide pour une vraie photo du produit fabriqué)", "default": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente." },
-    { "type": "range", "id": "zoom_from", "label": "Zoom au début", "min": 100, "max": 200, "step": 5, "unit": "%", "default": 115 },
-    { "type": "range", "id": "zoom_to", "label": "Zoom à la fin", "min": 100, "max": 300, "step": 5, "unit": "%", "default": 165 },
-    { "type": "range", "id": "focus_x", "label": "Point de zoom — horizontal", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
-    { "type": "range", "id": "focus_y", "label": "Point de zoom — vertical", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
-    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "02" }
+    {
+      "type": "select",
+      "id": "colorway",
+      "label": "Coloris de départ (suit ensuite le coloris choisi en 01)",
+      "options": [
+        { "value": "lilac-whirl", "label": "Lilac Whirl" },
+        { "value": "ivory-tide", "label": "Ivory Tide" },
+        { "value": "silver-drift", "label": "Silver Drift" },
+        { "value": "noir-absolu", "label": "Noir Absolu" },
+        { "value": "crimson-flow", "label": "Crimson Flow" }
+      ],
+      "default": "lilac-whirl"
+    },
+    { "type": "range", "id": "length", "label": "Durée de la plongée (hauteur de défilement)", "min": 200, "max": 400, "step": 20, "unit": "vh", "default": 320 }
   ],
   "blocks": [
     {
       "type": "point",
-      "name": "Point clé",
-      "limit": 4,
+      "name": "Phrase",
       "settings": [
-        { "type": "text", "id": "title", "label": "Titre" },
-        { "type": "textarea", "id": "text", "label": "Texte" }
+        { "type": "text", "id": "title", "label": "Titre", "default": "Un marbré fluide" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Volutes et tourbillons, toujours tonal." }
       ]
     }
   ],
   "max_blocks": 4,
   "presets": [
     {
-      "name": "KYMA — Motif et zoom",
+      "name": "KYMA — Motif (plongée)",
       "blocks": [
         { "type": "point", "settings": { "title": "Un marbré fluide", "text": "Volutes et tourbillons, toujours tonal." } },
         { "type": "point", "settings": { "title": "Une impression all-over", "text": "Le motif s'étend sur tout le tissu." } },

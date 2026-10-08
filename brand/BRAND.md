@@ -18,7 +18,17 @@
 - **Cible** : jeunes adultes urbains, passionnés de mode et de culture streetwear, sensibles à la qualité, au design et aux matières certifiées (lookbook : 18–30 ans ; tech pack : 22–40 ans).
 - **Références concurrentielles (tech pack)** : ERL, Aries, Our Legacy ; Armedangels pour les standards durables.
 
-## Palette (charte — règle 80/20 : 80 % neutres, 20 % accent lilas)
+## Palette du site (décision du fondateur, 08/10/2026) — couleurs principales
+| Nom | Hex | Usage |
+|---|---|---|
+| Beige KYMA | `#F5EDE4` | Fond principal |
+| Marron clair (Camel KYMA) | `#C19E86` | Accent chaud : filets, tracés, boutons secondaires, détails |
+| Rose clair | `#E8C4C4` (aplats : `#F3DEDC`) | Accent doux : cartes, halos, survols |
+| Brun profond | `#4A3B32` | Texte et titres (remplace le noir pur sur le site) |
+
+Le lilas `#C8A2C8` n'est plus une couleur d'interface : il reste le coloris produit **Lilac Whirl** (et la couleur du logo d'origine, à revoir avec le fondateur).
+
+## Palette d'origine (charte 2025 — règle 80/20 : 80 % neutres, 20 % accent lilas)
 | Nom | Hex | Usage |
 |---|---|---|
 | Beige KYMA | `#F5EDE4` | Fond, packaging, espace de respiration |
