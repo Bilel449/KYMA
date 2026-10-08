@@ -72,6 +72,15 @@
     "story": {
       "type": "kyma-product-story",
       "blocks": {
+        "preview-3d": {
+          "type": "preview_3d",
+          "settings": {
+            "heading": "Aperçu 3D du coloris",
+            "option_name": "Couleur",
+            "name_label": "Coloris :",
+            "caption": "Illustration 3D du motif et des teintes du coloris — pas une photo du produit. Chaque pièce ayant un motif unique, la vôtre sera différente."
+          }
+        },
         "details": {
           "type": "details",
           "settings": {
@@ -118,11 +127,12 @@
           "type": "disclaimer",
           "settings": {
             "heading": "Visuels",
-            "text": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente."
+            "text": "Les photos du produit fabriqué seront ajoutées après le shooting des préséries. Chaque pièce ayant un motif unique, la vôtre sera différente."
           }
         }
       },
       "block_order": [
+        "preview-3d",
         "details",
         "size-guide",
         "care",

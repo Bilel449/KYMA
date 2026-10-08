@@ -134,7 +134,7 @@
   /* ── 5. barre de progression en forme de vague ───────────────────────────────────────── */
   function progress() {
     if (editor) return;
-    var bar = el('div', 'kyma-progress', '<svg viewBox="0 0 1000 14" preserveAspectRatio="none" focusable="false"><path pathLength="1"/></svg>');
+    var bar = el('div', 'kyma-progress', '<svg viewBox="0 0 1000 14" preserveAspectRatio="none" focusable="false"><path/></svg>');
     bar.setAttribute('aria-hidden', 'true'); d.body.appendChild(bar);
     var path = bar.querySelector('path'), ph = 0, amp = 2;
     function wave() {
@@ -142,7 +142,8 @@
       for (x = 0; x <= 1000; x += 20) s += ' L' + x + ' ' + (7 + Math.sin(x / 1000 * Math.PI * 22 + ph) * amp).toFixed(2);
       path.setAttribute('d', s);
     }
-    function set(y) { path.style.strokeDashoffset = (1 - clamp(y / (maxY() || 1), 0, 1)).toFixed(4); }
+    var svg = bar.firstChild;
+    function set(y) { svg.style.clipPath = 'inset(-10px ' + ((1 - clamp(y / (maxY() || 1), 0, 1)) * 100).toFixed(2) + '% -10px 0)'; }
     wave(); set(w.scrollY);
     if (K.reduced) { w.addEventListener('scroll', function () { set(w.scrollY); }, { passive: true }); return; }
     tasks.push(function (dt, y, v) {

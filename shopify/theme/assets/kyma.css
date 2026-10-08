@@ -208,7 +208,8 @@ html.kyma-js:not(.kyma-ready) [data-kyma-stagger] > * { animation: kyma-failsafe
 
 .kyma-progress { position: fixed; left: 0; right: 0; top: 0; z-index: 2147482000; height: 10px; pointer-events: none; }
 .kyma-progress svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.kyma-progress path { fill: none; stroke: var(--kyma-camel); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
+.kyma-progress path { fill: none; stroke: var(--kyma-camel); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.kyma-progress svg { clip-path: inset(-10px 100% -10px 0); }
 
 .kyma-curtain { position: fixed; inset: 0; z-index: 2147483100; pointer-events: none; visibility: hidden; }
 .kyma-curtain.is-on { visibility: visible; pointer-events: auto; }

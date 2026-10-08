@@ -142,7 +142,7 @@
     '  vec3 c2=shade(p,n,rd,wave(opos(p,id),A,B,V));col=pow(clamp(c2,0.,1.),vec3(.4545));}',
     ' else if(rd.y<0.&&uFloor>-50.){float tf=(uFloor-ro.y)/rd.y;vec3 fp=ro+rd*tf;float dl=length(fp.xz);',
     '  if(dl<4.5){float s=soft(fp+vec3(0.,.01,0.),normalize(LK));float o=clamp(map(fp+vec3(0.,.35,0.)).x/.35,0.,1.);',
-    '   float k=1.-smoothstep(2.5,4.5,dl);col=uBg*mix(1.,(1.-.2*(1.-s))*mix(.86,1.,o),k);}}',
+    '   float k=1.-smoothstep(1.6,3.4,dl);col=uBg*mix(1.,(1.-.17*(1.-s))*mix(.88,1.,o),k);}}',
     ' gl_FragColor=vec4(col,1.);}'
   ].join('\n');
 
@@ -247,7 +247,7 @@
     if (!this.ok) return;
     var cv = this.canvas, dpr = Math.min(w.devicePixelRatio || 1, 1.5);
     var cw = cv.clientWidth || 300, ch = cv.clientHeight || 150;
-    var k = dpr * this.scale, max = 1400000; /* plafond de pixels */
+    var k = dpr * this.scale, max = 1100000; /* plafond de pixels */
     if (cw * ch * k * k > max) k = Math.sqrt(max / (cw * ch));
     var W = Math.max(64, Math.round(cw * k)), H = Math.max(64, Math.round(ch * k));
     if (force || W !== cv.width || H !== cv.height) {
@@ -271,14 +271,15 @@
     if (reduced) this.draw(0); else wake();
   };
   S.active = function () { return this.ok && this.visible && !d.hidden && !reduced; };
+  /* résolution adaptative : mesure du temps de frame, ajustée toutes les ~0,4 s (ou 20 frames) */
   S.adapt = function (dt) {
     this.acc += dt; this.n++;
-    if (this.n < 24) return;
+    if (this.n < 20 && this.acc < 0.4) return;
     var avg = this.acc / this.n; this.acc = 0; this.n = 0;
     var s = this.scale;
-    if (avg > 0.024 && s > 0.34) s = Math.max(0.34, s * 0.82);
-    else if (avg < 0.0175 && s < 1) s = Math.min(1, s * 1.1);
-    if (s !== this.scale) { this.scale = s; this.resize(); }
+    if (avg > 0.05) s *= 0.7; else if (avg > 0.024) s *= 0.85; else if (avg < 0.0175) s *= 1.1;
+    s = Math.min(1, Math.max(w.KYMA3D_MIN_SCALE || 0.3, s)); /* KYMA3D_MIN_SCALE : plancher (tests / captures) */
+    if (Math.abs(s - this.scale) > 0.01) { this.scale = s; this.resize(); }
   };
   S.frame = function (dt) {
     var C = this.col, f = 1 - Math.exp(-dt * 3.2), mobile = (this.canvas.clientWidth || 1) < 600;
@@ -343,7 +344,7 @@
   /* ── boucle commune ──────────────────────────────────────────────────── */
   function loop(now) {
     raf = 0;
-    var dt = last ? Math.min(0.1, (now - last) / 1000) : 1 / 60, any = false;
+    var dt = last ? Math.min(0.25, (now - last) / 1000) : 1 / 60, any = false;
     last = now;
     for (var i = 0; i < list.length; i++) if (list[i].active()) { list[i].frame(dt); any = true; }
     if (any) raf = w.requestAnimationFrame(loop); else last = 0;

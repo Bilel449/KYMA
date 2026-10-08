@@ -4,324 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>KYMA — Maquette de la page d'accueil (aperçu avant installation)</title>
+<title>KYMA — Maquette de l'accueil (KYMA × Spline)</title>
 <!--
-  Maquette AUTONOME de l'accueil du thème KYMA (Dawn + sections kyma-*).
-  Reproduit le rendu et le motion design de theme/ : le CSS ci-dessous est celui de theme/assets/kyma.css
-  et le JS celui de theme/assets/kyma-motion.js (copiés tels quels). Seules dépendances : Google Fonts.
-  Images : ../../brand/private/images/ (rendus / maquettes, à remplacer par le shooting) ;
-  si un fichier manque, un fond de repli s'affiche.
-  À ouvrir directement dans le navigateur (double-clic), de préférence aussi sur téléphone.
+  Maquette AUTONOME de l'accueil du thème KYMA (Dawn + sections kyma-*), refonte « KYMA × Spline ».
+  Elle charge directement les fichiers du thème : ../theme/assets/kyma.css, kyma-3d.js, kyma-motion.js
+  (aucune copie, donc aucun écart avec le thème). Seule dépendance externe : Google Fonts.
+  AUCUNE image : 3D temps réel (WebGL natif), dessin technique vectoriel, typographie animée.
+  Le balisage reproduit celui des sections Liquid avec les réglages de templates/index.json.
+  À ouvrir directement dans le navigateur (double-clic), sur ordinateur et sur téléphone.
 -->
-<script>document.documentElement.classList.add('kyma-js');</script>
+<script>document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../theme/assets/kyma.css">
+<script src="../theme/assets/kyma-3d.js" defer></script>
+<script src="../theme/assets/kyma-motion.js" defer></script>
 <style>
-/* ===== kyma.css (copie) ================================================ */
-:root {
-  --kyma-beige: #F5EDE4;
-  --kyma-lilas: #C8A2C8;
-  --kyma-lilas-dark: #9B7A9B;
-  --kyma-lilas-ink: #7A5C7A;
-  --kyma-gris: #8A8A8A;
-  --kyma-gris-ink: #5F5F5F;
-  --kyma-noir: #1C1C1C;
-  --kyma-blanc: #FAFAFA;
-  --kyma-camel: #C19E86;
-  --kyma-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
-  --kyma-sans: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --kyma-line: rgba(28, 28, 28, 0.08);
-  --kyma-pad-x: clamp(24px, 4vw, 48px);
-  --kyma-section-y: clamp(64px, 9vw, 120px);
-  --kyma-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --kyma-header-h: 80px;
-}
-html { scroll-behavior: smooth; }
-body { font-family: var(--kyma-sans); font-weight: 300; }
-h1, h2, h3 { font-weight: 400; }
-.kyma-vh {
-  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-.kyma-todo { display: inline-block; padding: 2px 8px; background: rgba(193, 158, 134, 0.28); color: var(--kyma-noir); font-weight: 400; }
-[class*="kyma-"] a:focus-visible,
-[class*="kyma-"] button:focus-visible,
-[class*="kyma-"] summary:focus-visible,
-[class*="kyma-"][tabindex]:focus-visible { outline: 2px solid var(--kyma-noir); outline-offset: 3px; }
-.kyma-on-dark a:focus-visible,
-.kyma-on-dark button:focus-visible { outline-color: var(--kyma-lilas); }
-
-/* Header (équivalent du header Dawn stylé par kyma.css) */
-.section-header { position: sticky; top: 0; z-index: 100; }
-.section-header .header-wrapper {
-  background: rgba(245, 237, 228, 0.85);
-  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(28, 28, 28, 0.06);
-  transition: background-color 0.4s var(--kyma-ease);
-}
-html.kyma-scrolled .section-header .header-wrapper { background: rgba(245, 237, 228, 0.93); }
-.section-header .header__heading-link,
-.section-header .header__heading-link .h2,
-.section-header .header__heading-link span {
-  font-family: var(--kyma-serif); font-size: 28px; font-weight: 400;
-  letter-spacing: 0.21em; text-transform: uppercase; color: var(--kyma-noir); text-decoration: none;
-}
-.section-header .header__menu-item,
-.section-header .header__menu-item span {
-  font-family: var(--kyma-sans); font-size: 11px; font-weight: 400;
-  letter-spacing: 0.23em; text-transform: uppercase; color: var(--kyma-gris-ink); text-decoration: none;
-  transition: color 0.3s;
-}
-.section-header .header__menu-item:hover,
-.section-header .header__menu-item:hover span { color: var(--kyma-noir); }
-
-@keyframes kyma-fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes kyma-page-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes kyma-failsafe { to { opacity: 1; transform: none; } }
-@keyframes kyma-sway { from { transform: translateX(-8px); } to { transform: translateX(8px); } }
-@keyframes kyma-cue { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
-@keyframes kyma-drawer { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-
-html.kyma-js body { animation: kyma-page-in 0.6s ease both; }
-html.kyma-leaving body { opacity: 0; transition: opacity 0.28s ease; }
-html.kyma-js [data-kyma-reveal] {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 1s var(--kyma-ease) var(--kd, 0ms), transform 1s var(--kyma-ease) var(--kd, 0ms);
-}
-html.kyma-js [data-kyma-reveal].is-in { opacity: 1; transform: none; }
-html.kyma-js:not(.kyma-ready) [data-kyma-reveal] { animation: kyma-failsafe 0.01s 4s forwards; }
-.kyma-off, .kyma-off *, .kyma-off *::before, .kyma-off *::after,
-html.kyma-paused [data-kyma-live], html.kyma-paused [data-kyma-live] * { animation-play-state: paused !important; }
-[data-kyma-parallax] { transform: translate3d(0, var(--kpy, 0px), 0); will-change: transform; }
-[data-kyma-zoom] { transform: scale(var(--kz, 1)); transform-origin: 50% 50%; will-change: transform; }
-
-.kyma-sec { position: relative; overflow: hidden; padding: var(--kyma-section-y) var(--kyma-pad-x); color: var(--kyma-noir); scroll-margin-top: var(--kyma-header-h); }
-.kyma-sec__inner { position: relative; z-index: 1; max-width: 1200px; margin-inline: auto; }
-.kyma-sec__num { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: 12px; color: var(--kyma-gris-ink); }
-.kyma-sec__label { margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
-.kyma-sec__title {
-  margin: 0 0 20px; font-family: var(--kyma-serif); font-size: clamp(34px, 4.4vw, 60px);
-  font-weight: 400; line-height: 1.15; letter-spacing: 0.01em; color: var(--kyma-noir);
-}
-.kyma-sec__title em { font-style: italic; color: var(--kyma-lilas-dark); }
-.kyma-sec__desc { margin: 0; max-width: 560px; font-size: 15px; line-height: 1.9; color: var(--kyma-gris-ink); }
-.kyma-sec__mark {
-  position: absolute; right: var(--kyma-pad-x); bottom: 24px; z-index: 0;
-  font-family: var(--kyma-serif); font-size: clamp(120px, 20vw, 240px); line-height: 1;
-  color: rgba(28, 28, 28, 0.04); pointer-events: none; user-select: none;
-}
-.kyma-divider { height: 1px; margin: 0 var(--kyma-pad-x); border: 0; background: linear-gradient(90deg, transparent, rgba(200, 162, 200, 0.55), transparent); }
-html.kyma-js .kyma-divider[data-kyma-reveal] { transform: scaleX(0.15); }
-html.kyma-js .kyma-divider[data-kyma-reveal].is-in { transform: scaleX(1); }
-
-.kyma-btn {
-  --mx: 50%; --my: 50%;
-  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.9em;
-  min-height: 48px; padding: 16px 32px; overflow: hidden;
-  font-family: var(--kyma-sans); font-size: 11px; font-weight: 500; line-height: 1;
-  letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; cursor: pointer;
-  color: var(--kyma-blanc); background: var(--kyma-noir); border: 1px solid var(--kyma-noir); border-radius: 0;
-  transition: color 0.4s, background-color 0.4s, border-color 0.4s, transform 0.4s var(--kyma-ease);
-}
-.kyma-btn::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s;
-  background: radial-gradient(180px circle at var(--mx) var(--my), rgba(200, 162, 200, 0.4), transparent 70%);
-}
-.kyma-btn > * { position: relative; }
-.kyma-btn:hover::before { opacity: 1; }
-.kyma-btn:active { transform: translateY(1px); }
-.kyma-btn__arrow { display: inline-block; transition: transform 0.4s var(--kyma-ease); }
-.kyma-btn:hover .kyma-btn__arrow { transform: translateX(6px); }
-.kyma-btn--ghost { color: var(--kyma-noir); background: transparent; border-color: rgba(28, 28, 28, 0.35); }
-.kyma-btn--ghost::before { display: none; }
-.kyma-btn--ghost:hover { background: var(--kyma-lilas); border-color: var(--kyma-lilas); color: var(--kyma-noir); }
-.kyma-on-dark .kyma-btn { color: var(--kyma-noir); background: var(--kyma-lilas); border-color: var(--kyma-lilas); }
-.kyma-on-dark .kyma-btn:hover { background: var(--kyma-blanc); border-color: var(--kyma-blanc); }
-.kyma-on-dark .kyma-btn::before { display: none; }
-.kyma-link {
-  display: inline-block; padding-bottom: 6px; text-decoration: none; color: var(--kyma-noir);
-  font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
-  background: linear-gradient(var(--kyma-lilas), var(--kyma-lilas)) 0 100% / 32% 2px no-repeat;
-  transition: background-size 0.5s var(--kyma-ease);
-}
-.kyma-link:hover { background-size: 100% 2px; }
-
-.kyma-waves { display: block; width: min(520px, 70vw); height: auto; margin-inline: auto; color: var(--kyma-lilas); overflow: visible; }
-.kyma-waves path { fill: none; stroke: currentColor; stroke-linecap: round; }
-.kyma-waves .kyma-waves__2 { opacity: 0.45; }
-.kyma-waves .kyma-waves__3 { opacity: 0.2; }
-.kyma-waves[data-ready] path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
-.kyma-waves[data-ready] path { transition: stroke-dashoffset 2s var(--kyma-ease) calc(var(--i, 0) * 0.2s); }
-.kyma-waves[data-ready].is-in path {
-  stroke-dashoffset: 0; animation: kyma-sway 10s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -2.5s);
-}
-
-.kyma-hero {
-  position: relative; isolation: isolate; overflow: hidden;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  min-height: 100vh; min-height: 100svh;
-  margin-top: calc(var(--kyma-header-h) * -1);
-  padding: calc(var(--kyma-header-h) + clamp(48px, 8vw, 120px)) var(--kyma-pad-x) clamp(72px, 10vw, 120px);
-  color: var(--kyma-noir);
-  background: linear-gradient(135deg, var(--kh-a, #F5EDE4), var(--kh-b, #E9DCE6));
-}
-.kyma-hero__canvas { position: absolute; inset: 0; z-index: -2; display: block; width: 100%; height: 100%; }
-.kyma-hero::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(200, 162, 200, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 80%, rgba(200, 162, 200, 0.08) 0%, transparent 50%);
-}
-.kyma-hero__inner { position: relative; z-index: 1; max-width: 1100px; }
-.kyma-hero__label {
-  margin: 0 0 32px; font-size: 11px; font-weight: 400; letter-spacing: 0.45em; text-transform: uppercase;
-  color: var(--kyma-lilas-ink); opacity: 0; animation: kyma-fadeUp 1s 0.3s var(--kyma-ease) forwards;
-}
-.kyma-hero__title {
-  margin: 0; font-family: var(--kyma-serif); font-size: clamp(48px, 9vw, 128px); font-weight: 400;
-  line-height: 1; letter-spacing: 0.1em; color: var(--kyma-noir);
-  opacity: 0; animation: kyma-fadeUp 1s 0.5s var(--kyma-ease) forwards;
-}
-.kyma-hero__title em { font-style: italic; color: var(--kyma-lilas-ink); }
-.kyma-hero__sub {
-  max-width: 560px; margin: 28px auto 0; font-size: 14px; font-weight: 400; line-height: 1.8;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--kyma-gris-ink);
-  opacity: 0; animation: kyma-fadeUp 1s 0.7s var(--kyma-ease) forwards;
-}
-.kyma-hero__ctas {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 48px;
-  opacity: 0; animation: kyma-fadeUp 1s 0.9s var(--kyma-ease) forwards;
-}
-.kyma-hero__waves { margin-top: 56px; opacity: 0; animation: kyma-fadeUp 1s 1.1s var(--kyma-ease) forwards; }
-.kyma-hero__mark { bottom: 40px; color: rgba(28, 28, 28, 0.045); }
-.kyma-hero__cue { position: absolute; left: 50%; bottom: 0; z-index: 1; width: 1px; height: 56px; overflow: hidden; background: rgba(28, 28, 28, 0.12); }
-.kyma-hero__cue::after { content: ''; position: absolute; inset: 0; background: var(--kyma-lilas-ink); animation: kyma-cue 2.6s var(--kyma-ease) infinite; }
-
-.kyma-man__grid { display: grid; gap: 48px; align-items: center; }
-.kyma-man__text > * + .kyma-sec__desc { margin-top: 20px; }
-.kyma-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 0; padding: 0; list-style: none; }
-.kyma-chips li { padding: 8px 20px; font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid rgba(28, 28, 28, 0.14); color: var(--kyma-noir); }
-.kyma-man__cta { margin-top: 40px; }
-.kyma-frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--kyma-blanc); }
-.kyma-frame__shift { position: absolute; inset: -6% 0; }
-.kyma-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.kyma-frame--ph, .is-missing { background: linear-gradient(140deg, #E9DCE6, #F5EDE4 55%, #E4D3E2); }
-.kyma-fig { margin: 0; }
-.kyma-caption { margin: 12px 0 0; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--kyma-gris-ink); }
-
-.kyma-cw { padding-bottom: calc(var(--kyma-section-y) * 0.8); }
-.kyma-cw__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
-.kyma-cw__nav { display: none; gap: 8px; }
-html.kyma-ready .kyma-cw__nav { display: flex; }
-.kyma-cw__arrow {
-  width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0;
-  color: var(--kyma-noir); background: transparent; border: 1px solid rgba(28, 28, 28, 0.25); border-radius: 0; cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s, opacity 0.3s;
-}
-.kyma-cw__arrow:hover:not(:disabled) { background: var(--kyma-lilas); border-color: var(--kyma-lilas); }
-.kyma-cw__arrow:disabled { opacity: 0.35; cursor: default; }
-.kyma-cw__scroller {
-  --kyma-gutter: max(var(--kyma-pad-x), calc((100vw - 1200px) / 2));
-  margin-top: 48px; overflow-x: auto; scroll-behavior: smooth; scroll-snap-type: x proximity;
-  scroll-padding-inline: var(--kyma-gutter); scrollbar-width: none; overscroll-behavior-x: contain;
-}
-.kyma-cw__scroller::-webkit-scrollbar { display: none; }
-.kyma-cw__scroller:focus-visible { outline: 2px solid var(--kyma-noir); outline-offset: -2px; }
-.kyma-cw__track { display: flex; gap: 16px; margin: 0; padding: 0 var(--kyma-gutter) 24px; list-style: none; width: max-content; }
-.kyma-cw__item { flex: 0 0 clamp(220px, 26vw, 320px); scroll-snap-align: start; }
-.kyma-cw__card { display: block; color: inherit; text-decoration: none; }
-.kyma-cw__media { position: relative; overflow: hidden; aspect-ratio: 3 / 4; background: var(--kyma-blanc); border: 1px solid rgba(28, 28, 28, 0.05); }
-.kyma-cw__media--ph, .kyma-cw__media.is-missing { background: var(--tile, #EFE6DC); }
-.kyma-cw__img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; transition: transform 0.9s var(--kyma-ease); -webkit-user-drag: none; }
-.kyma-cw__card:hover .kyma-cw__img { transform: translateY(-4px) scale(1.04); }
-.kyma-cw__meta { padding-top: 18px; }
-.kyma-cw__name { display: flex; align-items: center; gap: 10px; margin: 0; font-family: var(--kyma-serif); font-size: 20px; font-weight: 400; line-height: 1.2; }
-.kyma-cw__dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--dot, var(--kyma-lilas)); border: 1px solid rgba(28, 28, 28, 0.15); }
-.kyma-cw__desc { margin: 6px 0 0; font-size: 13px; font-weight: 400; line-height: 1.6; color: var(--kyma-gris-ink); }
-.kyma-cw__more {
-  display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-  background: linear-gradient(var(--kyma-lilas), var(--kyma-lilas)) 0 100% / 24% 2px no-repeat; padding-bottom: 4px;
-  transition: background-size 0.5s var(--kyma-ease);
-}
-.kyma-cw__card:hover .kyma-cw__more { background-size: 100% 2px; }
-.kyma-cw__foot { margin-top: 24px; }
-
-.kyma-up__grid { display: grid; gap: 48px; align-items: center; }
-.kyma-up__frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--kyma-blanc); }
-.kyma-up__zoom { position: absolute; inset: 0; }
-.kyma-up__zoom img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.kyma-up__frame--ph, .kyma-up__frame.is-missing { background: linear-gradient(140deg, #E4D3E2, #F5EDE4 45%, #D9C3D7); }
-.kyma-up__points { display: grid; gap: 24px; margin: 40px 0 0; padding: 0; list-style: none; }
-.kyma-up__point { padding-top: 20px; border-top: 1px solid var(--kyma-line); }
-.kyma-up__point h3 { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: 20px; font-weight: 400; }
-.kyma-up__point p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--kyma-gris-ink); }
-
-.kyma-cercle__grid { display: grid; gap: 24px; margin: 56px 0 0; padding: 0; list-style: none; }
-.kyma-tier {
-  padding: clamp(28px, 4vw, 48px); background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(28, 28, 28, 0.06); border-radius: 2px;
-  transition: transform 0.4s var(--kyma-ease), box-shadow 0.4s var(--kyma-ease);
-}
-.kyma-tier:hover { transform: translateY(-4px); }
-.kyma-tier--dark { background: var(--kyma-noir); border-color: var(--kyma-noir); color: var(--kyma-blanc); }
-.kyma-tier__tag { margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--kyma-lilas-ink); }
-.kyma-tier--dark .kyma-tier__tag { color: var(--kyma-lilas); }
-.kyma-tier__name { margin: 0 0 8px; font-family: var(--kyma-serif); font-size: clamp(26px, 3vw, 34px); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; }
-.kyma-tier__lead { margin: 0 0 24px; font-size: 14px; line-height: 1.8; color: var(--kyma-gris-ink); }
-.kyma-tier--dark .kyma-tier__lead { color: rgba(250, 250, 250, 0.78); }
-.kyma-tier__perks { margin: 0; padding: 0; list-style: none; }
-.kyma-tier__perks li { position: relative; padding: 14px 0 14px 28px; font-size: 14px; line-height: 1.7; border-top: 1px solid var(--kyma-line); }
-.kyma-tier--dark .kyma-tier__perks li { border-top-color: rgba(250, 250, 250, 0.14); }
-.kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: 24px; width: 16px; height: 1px; background: var(--kyma-lilas); }
-.kyma-cercle__cta { margin-top: 48px; }
-
-@media (min-width: 750px) {
-  .kyma-cercle__grid { grid-template-columns: 1fr 1fr; }
-  .kyma-up__points { grid-template-columns: repeat(3, 1fr); gap: 32px; }
-}
-@media (min-width: 990px) {
-  .kyma-man--img .kyma-man__grid { grid-template-columns: 1.1fr 0.9fr; gap: 96px; }
-  .kyma-up__grid { grid-template-columns: 0.9fr 1.1fr; gap: 96px; }
-  .kyma-up__points { grid-template-columns: 1fr; }
-}
-@media (max-width: 749px) {
-  .section-header .header__heading-link,
-  .section-header .header__heading-link .h2,
-  .section-header .header__heading-link span { font-size: 22px; }
-  .kyma-hero__sub { letter-spacing: 0.14em; font-size: 13px; }
-  .kyma-hero__mark { display: none; }
-  .kyma-divider { margin: 0 24px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  html.kyma-js body { animation: none; }
-  html.kyma-js [data-kyma-reveal],
-  html.kyma-js .kyma-divider[data-kyma-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-  .kyma-hero__label, .kyma-hero__title, .kyma-hero__sub, .kyma-hero__ctas, .kyma-hero__waves { opacity: 1; animation: none; }
-  .kyma-hero__cue::after { animation: none; }
-  .kyma-waves path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; transition: none !important; animation: none !important; }
-  [data-kyma-parallax], [data-kyma-zoom] { transform: none !important; }
-  .kyma-btn, .kyma-btn__arrow, .kyma-cw__img, .kyma-tier, .kyma-link, .kyma-cw__more { transition: none; }
-  .kyma-btn:hover .kyma-btn__arrow, .kyma-cw__card:hover .kyma-cw__img, .kyma-tier:hover { transform: none; }
-  .kyma-cw__scroller { scroll-behavior: auto; }
-}
-
 /* ===== Spécifique à la maquette : coquille header / footer (le thème utilise ceux de Dawn) ===== */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: var(--kyma-beige); color: var(--kyma-noir); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--kyma-beige); color: var(--kyma-ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
-.pv-skip { position: absolute; left: -999px; top: 8px; z-index: 300; padding: 12px 16px; background: var(--kyma-noir); color: #fff; font-size: 13px; }
+.pv-skip { position: absolute; left: -999px; top: 8px; z-index: 300; padding: 12px 16px; background: var(--kyma-ink); color: var(--kyma-beige); font-size: 13px; }
 .pv-skip:focus { left: 16px; }
-.header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px var(--kyma-pad-x); }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px var(--kyma-pad-x); }
 .header__heading-link { text-decoration: none; line-height: 1; }
 .header__heading-link .h2 { margin: 0; }
 .header__inline-menu ul { display: none; gap: 32px; margin: 0; padding: 0; list-style: none; }
 .header__icons { display: flex; align-items: center; gap: 4px; }
-.pv-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--kyma-noir); background: none; border: 0; cursor: pointer; }
-.pv-icon:hover { color: var(--kyma-lilas-ink); }
+.pv-icon { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px; color: var(--kyma-ink); background: none; border: 0; cursor: pointer; }
+.pv-icon:hover { color: var(--kyma-camel-ink); }
 .pv-burger { font: 500 11px var(--kyma-sans); letter-spacing: 0.22em; text-transform: uppercase; }
-.pv-menu { display: none; padding: 8px var(--kyma-pad-x) 24px; background: rgba(245, 237, 228, 0.97); border-bottom: 1px solid rgba(28, 28, 28, 0.06); }
+.pv-menu { display: none; padding: 8px var(--kyma-pad-x) 24px; }
 .pv-menu.is-open { display: block; }
 .pv-menu a { display: block; padding: 14px 0; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; border-top: 1px solid var(--kyma-line); }
 @media (min-width: 750px) {
@@ -329,27 +43,27 @@ a { color: inherit; }
   .pv-burger { display: none; }
   .pv-menu, .pv-menu.is-open { display: none; }
 }
-.pv-footer { background: var(--kyma-noir); color: var(--kyma-blanc); padding: clamp(56px, 8vw, 96px) var(--kyma-pad-x) 32px; }
-.pv-footer__inner { max-width: 1200px; margin: 0 auto; }
+.pv-footer { background: var(--kyma-ink); color: var(--kyma-beige); padding: clamp(56px, 8vw, 96px) var(--kyma-pad-x) 32px; }
+.pv-footer__inner { max-width: 1240px; margin: 0 auto; }
 .pv-footer__logo { font-family: var(--kyma-serif); font-size: 36px; letter-spacing: 0.28em; margin: 0 0 8px; }
-.pv-footer__tag { margin: 0; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(250, 250, 250, 0.72); }
-.pv-footer .kyma-waves { margin: 28px 0 0; width: min(320px, 60vw); }
+.pv-footer__tag { margin: 0; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--kyma-rose-pale); }
+.pv-footer .kyma-waves { margin: 28px 0 0; width: min(280px, 60vw); color: var(--kyma-camel); }
 .pv-footer__cols { display: grid; gap: 32px; margin-top: 56px; }
-.pv-footer h2 { margin: 0 0 16px; font: 500 11px var(--kyma-sans); letter-spacing: 0.25em; text-transform: uppercase; color: var(--kyma-lilas); }
+.pv-footer h2 { margin: 0 0 16px; font: 500 11px var(--kyma-sans); letter-spacing: 0.25em; text-transform: uppercase; color: var(--kyma-rose); }
 .pv-footer ul { margin: 0; padding: 0; list-style: none; }
-.pv-footer li a { display: inline-block; padding: 6px 0; font-size: 14px; color: rgba(250, 250, 250, 0.82); text-decoration: none; }
-.pv-footer li a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--kyma-lilas); text-underline-offset: 4px; }
-.pv-footer__legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(250, 250, 250, 0.14); font-size: 12px; color: rgba(250, 250, 250, 0.72); }
+.pv-footer li a { display: inline-block; padding: 6px 0; font-size: 14px; color: var(--kyma-beige); text-decoration: none; }
+.pv-footer li a:hover { text-decoration: underline; text-decoration-color: var(--kyma-camel); text-underline-offset: 4px; }
+.pv-footer__legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(245, 237, 228, 0.16); font-size: 12px; color: var(--kyma-rose-pale); }
 .pv-legal { display: flex; flex-wrap: wrap; gap: 4px 24px; margin: 0 0 16px; padding: 0; list-style: none; }
-.pv-legal a, .pv-linkbtn { display: inline-block; padding: 8px 0; font: 400 12px var(--kyma-sans); color: rgba(250, 250, 250, 0.82); text-decoration: none; background: none; border: 0; cursor: pointer; }
-.pv-legal a:hover, .pv-linkbtn:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--kyma-lilas); text-underline-offset: 4px; }
+.pv-legal a, .pv-linkbtn { display: inline-block; padding: 8px 0; font: 400 12px var(--kyma-sans); color: var(--kyma-beige); text-decoration: none; background: none; border: 0; cursor: pointer; }
+.pv-legal a:hover, .pv-linkbtn:hover { text-decoration: underline; text-decoration-color: var(--kyma-camel); text-underline-offset: 4px; }
 .pv-legal__line { margin: 0; }
-.pv-footer .kyma-todo { color: var(--kyma-noir); }
+.pv-footer .kyma-todo { color: var(--kyma-ink); background: var(--kyma-rose-pale); }
 @media (min-width: 750px) { .pv-footer__cols { grid-template-columns: repeat(3, 1fr); } }
 </style>
 </head>
 <body>
-<a class="pv-skip" href="#main">Aller au contenu</a>
+<a class="pv-skip" href="#MainContent">Aller au contenu</a>
 
 <!-- ===== HEADER (Dawn : sticky, translucide, flou) ===== -->
 <div class="section-header">
@@ -359,8 +73,8 @@ a { color: inherit; }
       <nav class="header__inline-menu" aria-label="Menu principal">
         <ul>
           <li><a class="header__menu-item" href="#drop"><span>Drop 1</span></a></li>
-          <li><a class="header__menu-item" href="#drop"><span>Boutique</span></a></li>
-          <li><a class="header__menu-item" href="#piece"><span>Notre histoire</span></a></li>
+          <li><a class="header__menu-item" href="#motif"><span>Le motif</span></a></li>
+          <li><a class="header__menu-item" href="#piece"><span>La pièce</span></a></li>
           <li><a class="header__menu-item" href="#savoir-faire"><span>Savoir-faire</span></a></li>
           <li><a class="header__menu-item" href="#cercle"><span>Cercle Waves</span></a></li>
         </ul>
@@ -376,171 +90,207 @@ a { color: inherit; }
       </div>
     </header>
     <nav class="pv-menu" id="pv-menu" aria-label="Menu principal (mobile)">
-      <a href="#drop">Drop 1</a><a href="#drop">Boutique</a><a href="#piece">Notre histoire</a><a href="#savoir-faire">Savoir-faire</a><a href="#cercle">Cercle Waves</a>
+      <a href="#drop">Drop 1</a><a href="#motif">Le motif</a><a href="#piece">La pièce</a><a href="#savoir-faire">Savoir-faire</a><a href="#cercle">Cercle Waves</a>
     </nav>
   </div>
 </div>
 
-<main id="main">
 <span id="top"></span>
-
-<!-- ===== kyma-hero-wave ===== -->
-<section class="kyma-hero kyma-section" style="--kh-a:#F5EDE4;--kh-b:#E9DCE6;" data-kyma-hero data-kyma-live data-color-a="#F5EDE4" data-color-b="#E9DCE6" data-speed="30" data-scale="100">
-  <canvas class="kyma-hero__canvas" aria-hidden="true"></canvas>
-  <div class="kyma-hero__inner">
-    <p class="kyma-hero__label">DROP 1 — PRÉCOMMANDE</p>
-    <h2 class="kyma-hero__title">Une pièce, pensée pour être<br><em>unique</em>.</h2>
-    <p class="kyma-hero__sub">Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.</p>
-    <div class="kyma-hero__ctas">
-      <a class="kyma-btn" href="#drop"><span>Choisir mon coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
-      <a class="kyma-btn kyma-btn--ghost" href="#piece"><span>Notre histoire</span></a>
-    </div>
-    <svg class="kyma-waves kyma-hero__waves" viewBox="0 54 400 50" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-live aria-hidden="true">
-      <path class="kyma-waves__1" stroke-width="2.2" d="M50 68 C85 61 110 78 150 68 C190 61 220 78 260 68 C300 61 320 78 350 68"/>
-      <path class="kyma-waves__2" stroke-width="1.5" d="M50 80 C85 74 110 88 150 80 C190 74 220 88 260 80 C300 74 320 88 350 80"/>
-      <path class="kyma-waves__3" stroke-width="1" d="M50 90 C85 85 110 96 150 90 C190 85 220 96 260 90 C300 85 320 96 350 90"/>
-    </svg>
+<!-- ===== kyma-hero-wave (Hero 3D) ===== -->
+<section id="kyma-hero-hero" class="kyma-hero" data-kyma-hero aria-labelledby="kyma-hero-title-hero">
+  <div class="kyma-hero__stage" data-kyma-3d-host>
+    <canvas class="kyma-hero__canvas" data-kyma-3d="hero" data-colorway="kyma" aria-hidden="true"></canvas>
   </div>
-  <div class="kyma-sec__mark kyma-hero__mark" aria-hidden="true" data-kyma-parallax="-0.5">01</div>
-  <span class="kyma-hero__cue" aria-hidden="true"></span>
+  <div class="kyma-hero__inner">
+    <div class="kyma-hero__copy">
+      <p class="kyma-hero__label">DROP 1 — PRÉCOMMANDE</p>
+      <h2 class="kyma-hero__title" id="kyma-hero-title-hero" data-kyma-split>Une pièce, pensée pour être<br><em>unique</em>.</h2>
+      <p class="kyma-hero__sub">Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.</p>
+      <div class="kyma-hero__ctas">
+        <a class="kyma-btn" href="#drop" data-kyma-magnetic><span>Choisir mon coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="kyma-btn kyma-btn--ghost" href="#piece" data-kyma-magnetic><span>Notre histoire</span></a>
+      </div>
+      <p class="kyma-hero__note">Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span></p>
+    </div>
+  </div>
+  <p class="kyma-vh">Illustration animée : une sculpture fluide rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.</p>
+  <a class="kyma-hero__cue" href="#MainContent">
+    <span>Défiler</span>
+    <svg viewBox="0 0 44 10" aria-hidden="true" focusable="false"><path d="M1 5 C6 1 10 1 15 5 S24 9 29 5 S38 1 43 5"/></svg>
+    <span class="kyma-hero__cue-line" aria-hidden="true"></span>
+  </a>
 </section>
 
-<!-- ===== kyma-colorways (01 — Le Drop 1) ===== -->
-<section class="kyma-sec kyma-cw" id="drop" aria-labelledby="t-cw">
-  <div class="kyma-sec__inner kyma-cw__head">
+<main id="MainContent">
+
+<!-- ===== kyma-marquee ===== -->
+<div class="kyma-marquee" data-kyma-marquee data-speed="45" data-direction="1" data-kyma-live>
+  <p class="kyma-vh">L'art du flow · Ride the wave · κύμα ·</p>
+  <div class="kyma-marquee__track" aria-hidden="true">
+    <span class="kyma-marquee__item">L'art du flow<span class="kyma-marquee__sep">·</span><em>Ride the wave</em><span class="kyma-marquee__sep">·</span>κύμα<span class="kyma-marquee__sep">·</span></span>
+  </div>
+</div>
+
+<!-- ===== kyma-colorways (01 — Coloris 3D) ===== -->
+<section class="kyma-sec kyma-cw" id="drop" aria-labelledby="t-cw" data-kyma-colorways style="--cw-a: #C8A2C8; --cw-b: #F5EDE4;">
+  <div class="kyma-sec__inner">
     <div data-kyma-reveal>
       <p class="kyma-sec__num">01</p>
       <p class="kyma-sec__label">Le Drop 1</p>
       <h2 class="kyma-sec__title" id="t-cw">Cinq coloris, un même <em>flux</em>.</h2>
       <p class="kyma-sec__desc">Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.</p>
     </div>
-    <div class="kyma-cw__nav" data-kyma-reveal>
-      <button type="button" class="kyma-cw__arrow" data-kyma-scroll="-1" aria-label="Coloris précédents" disabled>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M11 3 5 9l6 6"/></svg>
-      </button>
-      <button type="button" class="kyma-cw__arrow" data-kyma-scroll="1" aria-label="Coloris suivants">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="m7 3 6 6-6 6"/></svg>
-      </button>
+    <div class="kyma-cw__stage">
+      <div class="kyma-cw__viz" data-kyma-3d-host data-kyma-reveal>
+        <canvas data-kyma-3d="hero" data-shift="0,0" data-colorway="lilac-whirl" aria-hidden="true"></canvas>
+      </div>
+      <div class="kyma-cw__panel" data-kyma-reveal style="--kd: 120ms;">
+        <p class="kyma-cw__now"><span class="kyma-cw__kicker">Coloris</span><span class="kyma-cw__name" data-kyma-cw-name>Lilac Whirl</span></p>
+        <p class="kyma-cw__desc" data-kyma-cw-desc>Lilas tourbillonnant sur poudre</p>
+        <p class="kyma-vh" aria-live="polite" data-kyma-cw-live></p>
+        <ul class="kyma-cw__list" role="list" aria-label="Choisir un coloris pour l'aperçu 3D">
+          <li><button type="button" class="kyma-cw__opt" data-colorway="lilac-whirl" data-name="Lilac Whirl" data-desc="Lilas tourbillonnant sur poudre" data-a="#C8A2C8" data-b="#F5EDE4" aria-pressed="true" style="--a: #C8A2C8; --b: #F5EDE4;"><span class="kyma-cw__sw" aria-hidden="true"></span><span>Lilac Whirl</span><span class="kyma-cw__opt-idx" aria-hidden="true">01</span></button></li>
+          <li><button type="button" class="kyma-cw__opt" data-colorway="ivory-tide" data-name="Ivory Tide" data-desc="Crème ivoire sur vanille" data-a="#E8E0D8" data-b="#C5BFB8" aria-pressed="false" style="--a: #E8E0D8; --b: #C5BFB8;"><span class="kyma-cw__sw" aria-hidden="true"></span><span>Ivory Tide</span><span class="kyma-cw__opt-idx" aria-hidden="true">02</span></button></li>
+          <li><button type="button" class="kyma-cw__opt" data-colorway="silver-drift" data-name="Silver Drift" data-desc="Gris acier sur perle" data-a="#8E9EAB" data-b="#C8CDD2" aria-pressed="false" style="--a: #8E9EAB; --b: #C8CDD2;"><span class="kyma-cw__sw" aria-hidden="true"></span><span>Silver Drift</span><span class="kyma-cw__opt-idx" aria-hidden="true">03</span></button></li>
+          <li><button type="button" class="kyma-cw__opt" data-colorway="noir-absolu" data-name="Noir Absolu" data-desc="Noir sur anthracite, marbrage subtil" data-a="#1A1A1A" data-b="#3A3A4A" aria-pressed="false" style="--a: #1A1A1A; --b: #3A3A4A;"><span class="kyma-cw__sw" aria-hidden="true"></span><span>Noir Absolu</span><span class="kyma-cw__opt-idx" aria-hidden="true">04</span></button></li>
+          <li><button type="button" class="kyma-cw__opt" data-colorway="crimson-flow" data-name="Crimson Flow" data-desc="Cramoisi sur bordeaux" data-a="#5C2032" data-b="#C4878E" aria-pressed="false" style="--a: #5C2032; --b: #C4878E;"><span class="kyma-cw__sw" aria-hidden="true"></span><span>Crimson Flow</span><span class="kyma-cw__opt-idx" aria-hidden="true">05</span></button></li>
+        </ul>
+        <div class="kyma-cw__foot">
+          <a class="kyma-btn" href="#drop" data-kyma-cw-link data-kyma-magnetic><span>Voir ce coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+        <p class="kyma-caption">Aperçu 3D du motif et des teintes, à titre d'illustration — pas une photo du produit.</p>
+      </div>
     </div>
   </div>
-  <div class="kyma-cw__scroller" data-kyma-carousel role="region" aria-label="Drop 1" tabindex="0">
-    <ul class="kyma-cw__track" role="list">
-      <li class="kyma-cw__item" style="--kd:0ms;" data-kyma-reveal>
-        <a class="kyma-cw__card" href="#drop">
-          <div class="kyma-cw__media" style="--tile:#C8A2C8;"><img class="kyma-cw__img" src="../../brand/private/images/produits/lilac-whirl.png" alt="Hoodie KYMA coloris Lilac Whirl" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
-          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
-          <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#C8A2C8;" aria-hidden="true"></span>Lilac Whirl</h3><p class="kyma-cw__desc">Lilas tourbillonnant sur poudre</p><span class="kyma-cw__more">Découvrir</span></div>
-        </a>
-      </li>
-      <li class="kyma-cw__item" style="--kd:90ms;" data-kyma-reveal>
-        <a class="kyma-cw__card" href="#drop">
-          <div class="kyma-cw__media" style="--tile:#EFE6D2;"><img class="kyma-cw__img" src="../../brand/private/images/produits/ivory-tide.png" alt="Hoodie KYMA coloris Ivory Tide" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
-          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
-          <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#EFE6D2;" aria-hidden="true"></span>Ivory Tide</h3><p class="kyma-cw__desc">Crème ivoire sur vanille</p><span class="kyma-cw__more">Découvrir</span></div>
-        </a>
-      </li>
-      <li class="kyma-cw__item" style="--kd:180ms;" data-kyma-reveal>
-        <a class="kyma-cw__card" href="#drop">
-          <div class="kyma-cw__media" style="--tile:#B9BDC4;"><img class="kyma-cw__img" src="../../brand/private/images/produits/silver-drift.png" alt="Hoodie KYMA coloris Silver Drift" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
-          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
-          <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#B9BDC4;" aria-hidden="true"></span>Silver Drift</h3><p class="kyma-cw__desc">Gris acier sur perle</p><span class="kyma-cw__more">Découvrir</span></div>
-        </a>
-      </li>
-      <li class="kyma-cw__item" style="--kd:270ms;" data-kyma-reveal>
-        <a class="kyma-cw__card" href="#drop">
-          <div class="kyma-cw__media" style="--tile:#2B2B2E;"><img class="kyma-cw__img" src="../../brand/private/images/produits/noir-absolu.png" alt="Hoodie KYMA coloris Noir Absolu" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
-          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
-          <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#2B2B2E;" aria-hidden="true"></span>Noir Absolu</h3><p class="kyma-cw__desc">Noir sur anthracite, marbrage subtil</p><span class="kyma-cw__more">Découvrir</span></div>
-        </a>
-      </li>
-      <li class="kyma-cw__item" style="--kd:360ms;" data-kyma-reveal>
-        <a class="kyma-cw__card" href="#drop">
-          <div class="kyma-cw__media" style="--tile:#8E1B33;"><img class="kyma-cw__img" src="../../brand/private/images/produits/crimson-flow.png" alt="Hoodie KYMA coloris Crimson Flow" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
-          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
-          <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#8E1B33;" aria-hidden="true"></span>Crimson Flow</h3><p class="kyma-cw__desc">Cramoisi sur bordeaux</p><span class="kyma-cw__more">Découvrir</span></div>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="kyma-sec__inner kyma-cw__foot" data-kyma-reveal>
-    <a class="kyma-link" href="#drop">Voir les coloris</a>
-  </div>
+  <div class="kyma-sec__mark" aria-hidden="true">01</div>
 </section>
 
-<!-- ===== kyma-unique-piece (02 — Le motif) ===== -->
-<hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-up" id="motif" aria-labelledby="t-up">
-  <div class="kyma-sec__inner">
-    <div class="kyma-up__grid">
-      <div class="kyma-up__text" data-kyma-reveal>
+<!-- ===== kyma-unique-piece (02 — Le motif, plongée épinglée) ===== -->
+<section class="kyma-sec kyma-dive" id="motif" aria-labelledby="t-dv" data-kyma-dive style="--dive-h: 320vh;">
+  <div class="kyma-dive__sticky">
+    <div class="kyma-dive__stage" data-kyma-3d-host>
+      <canvas data-kyma-3d="hero" data-shift="0,0" data-colorway="kyma" data-interactive="false" aria-hidden="true"></canvas>
+    </div>
+    <div class="kyma-dive__ui">
+      <div class="kyma-dive__head" data-kyma-reveal>
         <p class="kyma-sec__num">02</p>
         <p class="kyma-sec__label">Le motif</p>
-        <h2 class="kyma-sec__title" id="t-up">Un motif pensé pour ne pas se <em>répéter</em>.</h2>
+        <h2 class="kyma-sec__title" id="t-dv">Un motif pensé pour ne pas se <em>répéter</em>.</h2>
         <p class="kyma-sec__desc">Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.</p>
-        <ul class="kyma-up__points" role="list">
-          <li class="kyma-up__point"><h3>Un marbré fluide</h3><p>Volutes et tourbillons, toujours tonal.</p></li>
-          <li class="kyma-up__point"><h3>Une impression all-over</h3><p>Le motif s&#39;étend sur tout le tissu.</p></li>
-          <li class="kyma-up__point"><h3>Une découpe différente</h3><p>Pensé pour que chaque pièce soit unique.</p></li>
-        </ul>
       </div>
-      <figure class="kyma-fig" data-kyma-reveal style="--kd:150ms;">
-        <div class="kyma-up__frame kyma-up__frame--ph">
-          <div class="kyma-up__zoom" data-kyma-zoom="1.15,1.65" style="transform-origin:50% 55%;">
-            <img src="../../brand/private/images/produits/lilac-whirl.png" alt="Détail du motif marbré du hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
-          </div>
-        </div>
-        <figcaption class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</figcaption>
-      </figure>
+      <ol class="kyma-dive__lines" role="list">
+        <li class="kyma-dive__line" data-at="0.12"><div class="kyma-dive__card"><span class="kyma-dive__idx">01 / 03</span><h3>Un marbré fluide</h3><p>Volutes et tourbillons, toujours tonal.</p></div></li>
+        <li class="kyma-dive__line" data-at="0.3866666666666667"><div class="kyma-dive__card"><span class="kyma-dive__idx">02 / 03</span><h3>Une impression all-over</h3><p>Le motif s&#39;étend sur tout le tissu.</p></div></li>
+        <li class="kyma-dive__line" data-at="0.6533333333333333"><div class="kyma-dive__card"><span class="kyma-dive__idx">03 / 03</span><h3>Une découpe différente</h3><p>Pensé pour que chaque pièce soit unique.</p></div></li>
+      </ol>
     </div>
+    <div class="kyma-dive__meter" aria-hidden="true"><span></span></div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">02</div>
 </section>
 
-<!-- ===== kyma-manifesto (03 — La pièce, avec image) ===== -->
-<hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-man kyma-man--img" id="piece" aria-labelledby="t-pi">
+<!-- ===== kyma-technical (03 — La pièce, dessin technique) ===== -->
+<section class="kyma-sec kyma-tech" id="piece" aria-labelledby="kyma-tech-title" data-kyma-draw>
   <div class="kyma-sec__inner">
-    <div class="kyma-man__grid">
-      <div class="kyma-man__text" data-kyma-reveal>
-        <p class="kyma-sec__num">03</p>
-        <p class="kyma-sec__label">La pièce</p>
-        <h2 class="kyma-sec__title" id="t-pi">Pensé pour que chaque pièce soit <em>unique</em>.</h2>
-        <p class="kyma-sec__desc">Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. <span class="kyma-todo">[À CONFIRMER : validation sur préséries]</span></p>
+    <div class="kyma-tech__grid">
+      <figure class="kyma-tech__fig">
+        <div class="kyma-tech__art">
+<svg class="kyma-tech__svg" viewBox="40 10 520 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="kyma-tech-title-t" focusable="false">
+  <title id="kyma-tech-title-t">Dessin technique du hoodie zippé oversize KYMA, vue de face : capuche sans cordon, zip intégral, tirette sculptée, deux poches biais, bords-côtes aux poignets et à la taille.</title>
+  <g>
+    <path pathLength="1" d="M240 132 C204 100 210 34 300 24 C390 34 396 100 360 132"/>
+    <path pathLength="1" d="M262 132 C262 98 276 64 300 61 C324 64 338 98 338 132"/>
+    <path pathLength="1" class="is-fine" d="M271 132 C272 104 284 76 300 73 C316 76 328 104 329 132"/>
+    <path pathLength="1" class="is-fine" d="M300 24 L300 61"/>
+    <path pathLength="1" d="M240 132 C200 142 160 152 124 168"/>
+    <path pathLength="1" d="M 360 132 C 400 142 440 152 476 168"/>
+    <path pathLength="1" class="is-fine" d="M127 170 C146 206 156 250 160 296"/>
+    <path pathLength="1" class="is-fine" d="M 473 170 C 454 206 444 250 440 296"/>
+    <path pathLength="1" d="M124 168 C96 256 80 372 74 470"/>
+    <path pathLength="1" d="M 476 168 C 504 256 520 372 526 470"/>
+    <path pathLength="1" d="M160 296 C152 372 138 430 130 470"/>
+    <path pathLength="1" d="M 440 296 C 448 372 462 430 470 470"/>
+    <path pathLength="1" d="M74 470 L130 470 L126 508 L80 508 Z"/>
+    <path pathLength="1" d="M 526 470 L 470 470 L 474 508 L 520 508 Z"/>
+    <path pathLength="1" class="is-fine" d="M86 472 L87 506 M96 472 L96 506 M106 472 L105 506 M116 472 L115 506"/>
+    <path pathLength="1" class="is-fine" d="M 514 472 L 513 506 M 504 472 L 504 506 M 494 472 L 495 506 M 484 472 L 485 506"/>
+    <path pathLength="1" d="M160 296 C163 380 165 470 166 560"/>
+    <path pathLength="1" d="M 440 296 C 437 380 435 470 434 560"/>
+    <path pathLength="1" d="M166 560 L434 560 L431 597 L169 597 Z"/>
+    <path pathLength="1" class="is-fine" d="M180 562 L180 595 M192 562 L192 595 M204 562 L204 595 M216 562 L216 595 M228 562 L228 595 M240 562 L240 595 M252 562 L252 595 M264 562 L264 595 M276 562 L276 595 M288 562 L288 595 M312 562 L312 595 M324 562 L324 595 M336 562 L336 595 M348 562 L348 595 M360 562 L360 595 M372 562 L372 595 M384 562 L384 595 M396 562 L396 595 M408 562 L408 595 M420 562 L420 595"/>
+    <path pathLength="1" class="is-fine" d="M296 134 L296 597 M304 134 L304 597"/>
+    <path pathLength="1" class="is-dim" d="M297 196 L303 196 M297 203 L303 203 M297 210 L303 210 M297 217 L303 217 M297 224 L303 224 M297 231 L303 231 M297 238 L303 238 M297 245 L303 245 M297 252 L303 252 M297 259 L303 259 M297 266 L303 266 M297 273 L303 273 M297 280 L303 280 M297 287 L303 287 M297 294 L303 294 M297 301 L303 301 M297 308 L303 308 M297 315 L303 315 M297 322 L303 322 M297 329 L303 329 M297 336 L303 336 M297 343 L303 343 M297 350 L303 350 M297 357 L303 357 M297 364 L303 364 M297 371 L303 371 M297 378 L303 378 M297 385 L303 385 M297 392 L303 392 M297 399 L303 399 M297 406 L303 406 M297 413 L303 413 M297 420 L303 420 M297 427 L303 427 M297 434 L303 434 M297 441 L303 441 M297 448 L303 448 M297 455 L303 455 M297 462 L303 462 M297 469 L303 469 M297 476 L303 476 M297 483 L303 483 M297 490 L303 490 M297 497 L303 497 M297 504 L303 504 M297 511 L303 511 M297 518 L303 518 M297 525 L303 525 M297 532 L303 532 M297 539 L303 539 M297 546 L303 546 M297 553 L303 553 M297 560 L303 560 M297 567 L303 567 M297 574 L303 574 M297 581 L303 581 M297 588 L303 588"/>
+    <path pathLength="1" class="is-accent" d="M300 140 L300 150 C292 151 290 160 291 172 C292 186 296 194 300 196 C304 194 308 186 309 172 C310 160 308 151 300 150"/>
+    <path pathLength="1" class="is-accent" d="M296 162 C299 165 301 165 304 168 M296 172 C299 175 301 175 304 178"/>
+    <path pathLength="1" d="M184 398 L222 506 M192 396 L230 504"/>
+    <path pathLength="1" d="M 416 398 L 378 506 M 408 396 L 370 504"/>
+    <path pathLength="1" class="is-fine" d="M262 132 C280 140 320 140 338 132"/>
+    <path pathLength="1" class="is-dim" d="M452 560 L464 560 M458 560 L458 597 M452 597 L464 597"/>
+  </g>
+  <text x="470" y="583" font-size="11" fill="#5F5F5F" font-family="Outfit, sans-serif" letter-spacing="1">6 cm</text>
+</svg>
+          <button type="button" class="kyma-tech__spot" data-at="0.5" style="left: 50%; top: 55%;" aria-describedby="kyma-tech-title-l1"><span>1</span><span class="kyma-vh">Zip intégral en métal</span></button>
+          <button type="button" class="kyma-tech__spot" data-at="0.584" style="left: 50%; top: 27%;" aria-describedby="kyma-tech-title-l2"><span>2</span><span class="kyma-vh">Tirette sculptée « Kyma »</span></button>
+          <button type="button" class="kyma-tech__spot" data-at="0.6679999999999999" style="left: 36%; top: 10%;" aria-describedby="kyma-tech-title-l3"><span>3</span><span class="kyma-vh">Capuche sans cordon</span></button>
+          <button type="button" class="kyma-tech__spot" data-at="0.752" style="left: 31%; top: 74%;" aria-describedby="kyma-tech-title-l4"><span>4</span><span class="kyma-vh">Poches biais</span></button>
+          <button type="button" class="kyma-tech__spot" data-at="0.836" style="left: 62%; top: 95%;" aria-describedby="kyma-tech-title-l5"><span>5</span><span class="kyma-vh">Bords-côtes 6 cm</span></button>
+        </div>
+        <figcaption class="kyma-caption">Dessin technique illustratif, vue de face — proportions indicatives, motif non représenté.</figcaption>
+      </figure>
+      <div class="kyma-tech__text">
+        <div data-kyma-reveal>
+          <p class="kyma-sec__num">03</p>
+          <p class="kyma-sec__label">La pièce</p>
+          <h2 class="kyma-sec__title" id="kyma-tech-title">Pensé pour que chaque pièce soit <em>unique</em>.</h2>
+          <p class="kyma-sec__desc">Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. <span class="kyma-todo">[À CONFIRMER : validation sur préséries]</span></p>
+        </div>
+        <ol class="kyma-tech__legend" role="list" style="margin-top: 32px;">
+          <li class="kyma-tech__item" id="kyma-tech-title-l1" data-at="0.5"><span class="kyma-tech__n" aria-hidden="true">1</span><div><h3>Zip intégral en métal</h3><p>Du col jusqu&#39;à l&#39;ourlet, finition argent brossé.</p></div></li>
+          <li class="kyma-tech__item" id="kyma-tech-title-l2" data-at="0.584"><span class="kyma-tech__n" aria-hidden="true">2</span><div><h3>Tirette sculptée « Kyma »</h3><p>Une tirette dessinée pour la pièce, signée « Kyma ».</p></div></li>
+          <li class="kyma-tech__item" id="kyma-tech-title-l3" data-at="0.6679999999999999"><span class="kyma-tech__n" aria-hidden="true">3</span><div><h3>Capuche sans cordon</h3><p>Double épaisseur, sans cordon ni œillets : un choix de ligne.</p></div></li>
+          <li class="kyma-tech__item" id="kyma-tech-title-l4" data-at="0.752"><span class="kyma-tech__n" aria-hidden="true">4</span><div><h3>Poches biais</h3><p>Deux poches coupées en biais, dans le prolongement du geste.</p></div></li>
+          <li class="kyma-tech__item" id="kyma-tech-title-l5" data-at="0.836"><span class="kyma-tech__n" aria-hidden="true">5</span><div><h3>Bords-côtes 6 cm</h3><p>Aux poignets et à la taille, pour tenir la coupe oversize.</p></div></li>
+        </ol>
         <div class="kyma-man__cta"><a class="kyma-link" href="#drop">Découvrir la pièce</a></div>
       </div>
-      <figure class="kyma-fig" data-kyma-reveal style="--kd:150ms;">
-        <div class="kyma-frame kyma-frame--ph">
-          <div class="kyma-frame__shift" data-kyma-parallax="0.3">
-            <img src="../../brand/private/images/lifestyle/homme-lilac-whirl-paris.png" alt="Portrait en extérieur, hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
-          </div>
-        </div>
-        <figcaption class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</figcaption>
-      </figure>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">03</div>
+  <div class="kyma-sec__mark" aria-hidden="true">03</div>
 </section>
 
-<!-- ===== kyma-manifesto (04 — Le savoir-faire) ===== -->
+<!-- ===== kyma-manifesto (04 — Le savoir-faire, étoffe 3D) ===== -->
 <hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-man" id="savoir-faire" aria-labelledby="t-sf">
+<section class="kyma-sec kyma-man kyma-man--visual" id="savoir-faire" aria-labelledby="t-sf">
   <div class="kyma-sec__inner">
     <div class="kyma-man__grid">
-      <div class="kyma-man__text" data-kyma-reveal>
+      <div class="kyma-man__text" data-kyma-reveal data-kyma-stagger>
         <p class="kyma-sec__num">04</p>
         <p class="kyma-sec__label">Le savoir-faire</p>
         <h2 class="kyma-sec__title" id="t-sf">Une matière dense, une coupe <em>libre</em>.</h2>
         <p class="kyma-sec__desc">French terry épais à l&#39;intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.</p>
+        <ul class="kyma-chips"><li>French terry gratté</li><li>Épaules tombantes</li><li>Zip métal brossé</li><li>Capuche sans cordon</li></ul>
         <div class="kyma-man__cta"><a class="kyma-link" href="#savoir-faire">Lire le détail de la pièce</a></div>
       </div>
+      <figure class="kyma-fabric" data-kyma-reveal style="--kd: 150ms;">
+        <div class="kyma-fabric__stage" data-kyma-3d-host>
+          <canvas data-kyma-3d="swatch" data-colorway="kyma" aria-hidden="true"></canvas>
+        </div>
+        <figcaption class="kyma-caption">Illustration 3D animée du motif KYMA Wave — pas une photo de l&#39;étoffe.</figcaption>
+      </figure>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">04</div>
+  <div class="kyma-sec__mark" aria-hidden="true">04</div>
 </section>
 
-<!-- ===== kyma-cercle-waves (05) ===== -->
-<hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-cercle" id="cercle" aria-labelledby="t-ce">
+<!-- ===== kyma-marquee (sombre, sens inverse) ===== -->
+<div class="kyma-marquee kyma-marquee--dark kyma-on-dark" data-kyma-marquee data-speed="35" data-direction="-1" data-kyma-live>
+  <p class="kyma-vh">Ride the wave · L'art du flow · κύμα ·</p>
+  <div class="kyma-marquee__track" aria-hidden="true">
+    <span class="kyma-marquee__item">Ride the wave<span class="kyma-marquee__sep">·</span><em>L'art du flow</em><span class="kyma-marquee__sep">·</span>κύμα<span class="kyma-marquee__sep">·</span></span>
+  </div>
+</div>
+
+<!-- ===== kyma-cercle-waves (05 — cartes qui pivotent + anneaux 3D) ===== -->
+<section class="kyma-sec kyma-cercle" id="cercle" aria-labelledby="t-ce" data-kyma-rings>
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
       <p class="kyma-sec__num">05</p>
@@ -548,25 +298,56 @@ a { color: inherit; }
       <h2 class="kyma-sec__title" id="t-ce">Rejoindre le <em>cercle</em>.</h2>
       <p class="kyma-sec__desc">Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.</p>
     </div>
+    <div class="kyma-cercle__rings" data-kyma-3d-host data-kyma-reveal>
+      <canvas data-kyma-3d="rings" data-follow="false" aria-hidden="true"></canvas>
+    </div>
     <ul class="kyma-cercle__grid" role="list">
-      <li class="kyma-tier" data-kyma-reveal style="--kd:0ms;">
-        <p class="kyma-tier__tag">Palier 1</p>
-        <h3 class="kyma-tier__name">Initium</h3>
-        <p class="kyma-tier__lead">L&#39;entrée dans le cercle.</p>
-        <ul class="kyma-tier__perks" role="list"><li>[À COMPLÉTER : conditions d&#39;accès et avantages INITIUM]</li></ul>
+      <li class="kyma-tier" data-kyma-reveal data-kyma-flip style="--kd: 0ms;" data-ring="0">
+        <div class="kyma-flip__tilt">
+          <div class="kyma-flip">
+            <div class="kyma-flip__face kyma-flip__front" id="kyma-tier-1-front">
+              <p class="kyma-tier__tag">Palier 1</p>
+              <h3 class="kyma-tier__name">Initium</h3>
+              <p class="kyma-tier__lead">L&#39;entrée dans le cercle.</p>
+              <svg class="kyma-tier__rings" viewBox="0 0 72 32" aria-hidden="true" focusable="false"><circle cx="24" cy="16" r="13" fill="none" stroke="currentColor"/><circle cx="48" cy="16" r="13" fill="none" stroke="currentColor"/></svg>
+            </div>
+            <div class="kyma-flip__face kyma-flip__back" id="kyma-tier-1-back" aria-hidden="true">
+              <p class="kyma-tier__tag">Avantages — Initium</p>
+              <ul class="kyma-tier__perks" role="list"><li><span class="kyma-todo">[À COMPLÉTER : conditions d&#39;accès et avantages INITIUM]</span></li></ul>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="kyma-flip__toggle" aria-pressed="false" aria-controls="kyma-tier-1-back" data-label-on="Retour" data-label-off="Voir les avantages">
+          <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3" fill="none" stroke="currentColor"/><path d="M11 1v3H8M3 13v-3h3" fill="none" stroke="currentColor"/></svg>
+          <span>Voir les avantages</span><span class="kyma-vh">— Initium</span>
+        </button>
       </li>
-      <li class="kyma-tier kyma-tier--dark kyma-on-dark" data-kyma-reveal style="--kd:140ms;">
-        <p class="kyma-tier__tag">Palier 2</p>
-        <h3 class="kyma-tier__name">Origine</h3>
-        <p class="kyma-tier__lead">Le palier supérieur.</p>
-        <ul class="kyma-tier__perks" role="list"><li>[À COMPLÉTER : conditions d&#39;accès et avantages ORIGINE]</li></ul>
+      <li class="kyma-tier kyma-tier--dark kyma-on-dark" data-kyma-reveal data-kyma-flip style="--kd: 140ms;" data-ring="1">
+        <div class="kyma-flip__tilt">
+          <div class="kyma-flip">
+            <div class="kyma-flip__face kyma-flip__front" id="kyma-tier-2-front">
+              <p class="kyma-tier__tag">Palier 2</p>
+              <h3 class="kyma-tier__name">Origine</h3>
+              <p class="kyma-tier__lead">Le palier supérieur.</p>
+              <svg class="kyma-tier__rings" viewBox="0 0 72 32" aria-hidden="true" focusable="false"><circle cx="24" cy="16" r="13" fill="none" stroke="currentColor"/><circle cx="48" cy="16" r="13" fill="none" stroke="currentColor"/></svg>
+            </div>
+            <div class="kyma-flip__face kyma-flip__back" id="kyma-tier-2-back" aria-hidden="true">
+              <p class="kyma-tier__tag">Avantages — Origine</p>
+              <ul class="kyma-tier__perks" role="list"><li><span class="kyma-todo">[À COMPLÉTER : conditions d&#39;accès et avantages ORIGINE]</span></li></ul>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="kyma-flip__toggle" aria-pressed="false" aria-controls="kyma-tier-2-back" data-label-on="Retour" data-label-off="Voir les avantages">
+          <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3" fill="none" stroke="currentColor"/><path d="M11 1v3H8M3 13v-3h3" fill="none" stroke="currentColor"/></svg>
+          <span>Voir les avantages</span><span class="kyma-vh">— Origine</span>
+        </button>
       </li>
     </ul>
     <div class="kyma-cercle__cta" data-kyma-reveal>
-      <a class="kyma-btn kyma-btn--ghost" href="#cercle"><span>Entrer dans le Cercle</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="kyma-btn kyma-btn--ghost" href="#cercle" data-kyma-magnetic><span>Entrer dans le Cercle</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">05</div>
+  <div class="kyma-sec__mark" aria-hidden="true">05</div>
 </section>
 
 <!-- ===== kyma-manifesto (06 — Instagram) ===== -->
@@ -574,45 +355,45 @@ a { color: inherit; }
 <section class="kyma-sec kyma-man" id="instagram" aria-labelledby="t-ig">
   <div class="kyma-sec__inner">
     <div class="kyma-man__grid">
-      <div class="kyma-man__text" data-kyma-reveal>
+      <div class="kyma-man__text" data-kyma-reveal data-kyma-stagger>
         <p class="kyma-sec__num">06</p>
         <p class="kyma-sec__label">Instagram</p>
         <h2 class="kyma-sec__title" id="t-ig">Dans le <em>sillage</em>.</h2>
         <p class="kyma-sec__desc">Coulisses, textures et premiers regards, sur @kymasinsta.</p>
-        <div class="kyma-man__cta"><a class="kyma-link" href="#instagram">Suivre @kymasinsta</a></div>
+        <div class="kyma-man__cta"><a class="kyma-link" href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">Suivre @kymasinsta</a></div>
       </div>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">06</div>
+  <div class="kyma-sec__mark" aria-hidden="true">06</div>
 </section>
 </main>
 
-<!-- ===== FOOTER (Dawn, schéma de couleurs 3 : noir) ===== -->
+<!-- ===== FOOTER (Dawn, schéma sombre : brun foncé) ===== -->
 <footer class="pv-footer kyma-on-dark">
   <div class="pv-footer__inner">
     <p class="pv-footer__logo">KYMA</p>
     <p class="pv-footer__tag">Ride the wave</p>
-    <svg class="kyma-waves" viewBox="0 54 400 50" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-live aria-hidden="true" style="margin-left:0">
+    <svg class="kyma-waves" viewBox="0 54 400 50" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
       <path class="kyma-waves__1" stroke-width="2.2" d="M50 68 C85 61 110 78 150 68 C190 61 220 78 260 68 C300 61 320 78 350 68"/>
       <path class="kyma-waves__2" stroke-width="1.5" d="M50 80 C85 74 110 88 150 80 C190 74 220 88 260 80 C300 74 320 88 350 80"/>
       <path class="kyma-waves__3" stroke-width="1" d="M50 90 C85 85 110 96 150 90 C190 85 220 96 260 90 C300 85 320 96 350 90"/>
     </svg>
     <div class="pv-footer__cols">
-      <div><h2>Boutique</h2><ul><li><a href="#drop">Drop 1</a></li><li><a href="#drop">Tous les produits</a></li><li><a href="#drop">Guide des tailles</a></li></ul></div>
+      <div><h2>Boutique</h2><ul><li><a href="#drop">Drop 1</a></li><li><a href="#drop">Tous les produits</a></li><li><a href="index.html?page=guide-des-tailles">Guide des tailles</a></li></ul></div>
       <div><h2>Maison</h2><ul><li><a href="#piece">Notre histoire</a></li><li><a href="#savoir-faire">Savoir-faire</a></li><li><a href="#cercle">Cercle Waves</a></li></ul></div>
-      <div><h2>Aide</h2><ul><li><a href="#top">FAQ</a></li><li><a href="#top">Contact</a></li><li><a href="#instagram">Instagram @kymasinsta</a></li></ul></div>
+      <div><h2>Aide</h2><ul><li><a href="index.html?page=faq">FAQ</a></li><li><a href="index.html?page=contact">Contact</a></li><li><a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">Instagram @kymasinsta</a></li></ul></div>
     </div>
     <nav class="pv-footer__legal" aria-label="Informations légales">
       <ul class="pv-legal">
-        <li><a href="#top">Mentions légales</a></li>
-        <li><a href="#top">CGV</a></li>
-        <li><a href="#top">Livraison</a></li>
-        <li><a href="#top">Retours et remboursements</a></li>
-        <li><a href="#top">Confidentialité</a></li>
-        <li><a href="#top">Cookies</a></li>
+        <li><a href="index.html?page=mentions-legales">Mentions légales</a></li>
+        <li><a href="index.html?page=cgv">CGV</a></li>
+        <li><a href="index.html?page=livraison">Livraison</a></li>
+        <li><a href="index.html?page=retours">Retours et remboursements</a></li>
+        <li><a href="index.html?page=confidentialite">Confidentialité</a></li>
+        <li><a href="index.html?page=cookies">Cookies</a></li>
         <li><button type="button" class="pv-linkbtn">Gérer mes cookies</button></li>
-        <li><a href="#top">Renoncer au contrat ici</a></li>
-        <li><a href="#top">Contact</a></li>
+        <li><a href="index.html?page=retractation">Renoncer au contrat ici</a></li>
+        <li><a href="index.html?page=contact">Contact</a></li>
       </ul>
       <p class="pv-legal__line">&copy; KYMA <span class="kyma-todo">[À COMPLÉTER : année et raison sociale]</span> · Textes juridiques fournis par Victoire, à valider par un avocat.</p>
     </nav>
@@ -620,249 +401,12 @@ a { color: inherit; }
 </footer>
 
 <script>
-/*! KYMA motion v1.0 (copie de theme/assets/kyma-motion.js) */
-(function () {
-  'use strict';
-  if (window.KYMA) return;
-  var w = window, d = document, root = d.documentElement;
-  var mq = w.matchMedia ? w.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
-  var K = w.KYMA = { reduced: mq.matches };
-  var editor = !!(w.Shopify && w.Shopify.designMode), hasIO = 'IntersectionObserver' in w;
-  var syncs = [], items = [], queued = 0;
-  function $(s, c) { return [].slice.call((c || d).querySelectorAll(s)); }
-  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
-  function IO(fn, o) { return hasIO ? new IntersectionObserver(fn, o) : null; }
-
-  function dedupe() {
-    var seen = {};
-    $('[data-kyma-asset]').forEach(function (n) {
-      var k = n.getAttribute('data-kyma-asset');
-      if (seen[k]) n.parentNode.removeChild(n); else seen[k] = 1;
-    });
-  }
-
-  var live = IO(function (es) {
-    es.forEach(function (e) { e.target.classList.toggle('kyma-off', !e.isIntersecting); });
-  }, { rootMargin: '10% 0px' });
-
-  var rev = IO(function (es) {
-    es.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); rev.unobserve(e.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-
-  function prepWave(svg) {
-    if (K.reduced || svg._k) return;
-    svg._k = 1;
-    $('path', svg).forEach(function (p, i) {
-      p.style.setProperty('--len', Math.ceil((p.getTotalLength && p.getTotalLength()) || 700) + 2);
-      p.style.setProperty('--i', i);
-    });
-    svg.setAttribute('data-ready', '');
-  }
-  function reveal(scope) {
-    $('[data-kyma-reveal], .kyma-waves', scope).forEach(function (el) {
-      if (K.reduced || !rev || editor) el.classList.add('is-in'); else rev.observe(el);
-    });
-  }
-
-  var io2 = IO(function (es) {
-    es.forEach(function (e) { e.target._v = e.isIntersecting; });
-    tick();
-  }, { rootMargin: '15% 0px' });
-  function tick() { if (!queued) queued = w.requestAnimationFrame(frameAll); }
-  function frameAll() {
-    queued = 0;
-    if (K.reduced || d.hidden) return;
-    var vh = w.innerHeight || 800;
-    items = items.filter(function (el) { return el.isConnected; });
-    items.forEach(function (el) {
-      var h = el.parentElement || el, r, a, f, t;
-      if (!h._v) return;
-      r = h.getBoundingClientRect();
-      a = el.getAttribute('data-kyma-parallax');
-      if (a) el.style.setProperty('--kpy', (-(r.top + r.height / 2 - vh / 2) / vh * parseFloat(a) * 100).toFixed(1) + 'px');
-      a = el.getAttribute('data-kyma-zoom');
-      if (a) {
-        a = a.split(','); f = parseFloat(a[0]) || 1; t = parseFloat(a[1]) || f;
-        el.style.setProperty('--kz', (f + (t - f) * clamp((vh - r.top) / (vh + r.height), 0, 1)).toFixed(3));
-      }
-    });
-  }
-  function initPar(scope) {
-    if (K.reduced || !io2) return;
-    $('[data-kyma-parallax], [data-kyma-zoom]', scope).forEach(function (el) {
-      if (el._p) return;
-      el._p = 1; items.push(el); io2.observe(el.parentElement || el);
-    });
-  }
-
-  function noise(seed) {
-    var p = new Uint8Array(512), s = seed || 1, i, j, t;
-    var G = [1, 1, -1, 1, 1, -1, -1, -1, 1, 0, -1, 0, 0, 1, 0, -1];
-    for (i = 0; i < 256; i++) p[i] = i;
-    for (i = 255; i > 0; i--) { s = (s * 1664525 + 1013904223) >>> 0; j = s % (i + 1); t = p[i]; p[i] = p[j]; p[j] = t; }
-    for (i = 0; i < 256; i++) p[i + 256] = p[i];
-    function g(h, x, y) { h = (h & 7) * 2; return G[h] * x + G[h + 1] * y; }
-    function fade(v) { return v * v * v * (v * (v * 6 - 15) + 10); }
-    return function (x, y) {
-      var X = Math.floor(x), Y = Math.floor(y), u, a, b, n0, n1;
-      x -= X; y -= Y; X &= 255; Y &= 255; u = fade(x);
-      a = p[X] + Y; b = p[X + 1] + Y;
-      n0 = g(p[a], x, y) + u * (g(p[b], x - 1, y) - g(p[a], x, y));
-      n1 = g(p[a + 1], x, y - 1) + u * (g(p[b + 1], x - 1, y - 1) - g(p[a + 1], x, y - 1));
-      return n0 + fade(y) * (n1 - n0);
-    };
-  }
-  function rgb(h, f) {
-    var n = parseInt(String(h || f).replace('#', ''), 16) || 0;
-    return [n >> 16 & 255, n >> 8 & 255, n & 255];
-  }
-  function hero(el) {
-    var cv = el.querySelector('canvas'), ctx = cv && cv.getContext && cv.getContext('2d');
-    if (!ctx || el._h) return;
-    el._h = 1;
-    var A = rgb(el.getAttribute('data-color-a'), 'F5EDE4'), B = rgb(el.getAttribute('data-color-b'), 'E9DCE6');
-    var sv = parseFloat(el.getAttribute('data-speed')), sp = (isNaN(sv) ? 30 : sv) / 100;
-    var sc = (parseFloat(el.getAttribute('data-scale')) || 100) / 100;
-    var N = noise((Math.random() * 4294967296) >>> 0);
-    var ox = Math.random() * 60, oy = Math.random() * 60, t = Math.random() * 50;
-    var W, H, img, last = 0, raf = 0, on = false, vis = true, qual = 1, slow = 0, lw = 0, rt;
-    function f(x, y) { return N(x, y) * 0.5 + N(x * 2.1 + 5.2, y * 2.1 + 1.3) * 0.25; }
-    function g(x, y) { return f(x, y) + N(x * 4.3 + 9.1, y * 4.3 + 3.7) * 0.125; }
-    function size() {
-      var w0 = el.clientWidth || 800, h0 = el.clientHeight || 600, k = Math.min(1, (w.innerWidth < 750 ? 120 : 180) * qual / w0);
-      W = Math.max(48, Math.round(w0 * k)); H = Math.max(48, Math.round(h0 * k));
-      cv.width = W; cv.height = H; img = ctx.createImageData(W, H); lw = w0;
-    }
-    function draw() {
-      var o = img.data, i = 0, z = t * 0.05, S = 1.7 / sc, asp = W / H, x, y, px, py, qx, qy, rx, ry, v, m, k;
-      for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
-        px = x / W * asp * S + ox; py = y / H * S + oy;
-        qx = f(px + z, py); qy = f(px + 5.2, py + 1.3 - z);
-        rx = f(px + 3 * qx + 1.7 + z * 0.6, py + 3 * qy + 9.2);
-        ry = f(px + 3 * qx + 8.3, py + 3 * qy + 2.8 - z * 0.6);
-        v = g(px + 3 * rx, py + 3 * ry);
-        m = 0.5 + 0.5 * Math.sin(v * 9 + rx * 4); m = m * m * (3 - 2 * m);
-        k = 0.975 + 0.05 * (v + 0.5);
-        o[i++] = (A[0] + (B[0] - A[0]) * m) * k;
-        o[i++] = (A[1] + (B[1] - A[1]) * m) * k;
-        o[i++] = (A[2] + (B[2] - A[2]) * m) * k;
-        o[i++] = 255;
-      }
-      ctx.putImageData(img, 0, 0);
-    }
-    function loop(ts) {
-      if (!on) return;
-      raf = w.requestAnimationFrame(loop);
-      if (ts - last < 48) return;
-      t += (last ? Math.min((ts - last) / 1000, 0.2) : 0.05) * sp * 1.2; last = ts;
-      var t0 = w.performance.now(); draw();
-      if (w.performance.now() - t0 > 30) { if (++slow > 4 && qual > 0.4) { qual *= 0.75; slow = 0; size(); } } else slow = 0;
-    }
-    function sync() {
-      var go = el.isConnected && vis && !d.hidden && !K.reduced && sp > 0;
-      if (go && !on) { on = true; last = 0; raf = w.requestAnimationFrame(loop); }
-      else if (!go && on) { on = false; w.cancelAnimationFrame(raf); }
-    }
-    size(); draw();
-    var io = IO(function (es) { vis = es[0].isIntersecting; sync(); });
-    if (io) io.observe(el);
-    w.addEventListener('resize', function () {
-      clearTimeout(rt);
-      rt = setTimeout(function () { if (el.isConnected && Math.abs(el.clientWidth - lw) > 30) { size(); if (!on) draw(); } }, 200);
-    });
-    syncs.push(sync); sync();
-  }
-
-  function carousel(box) {
-    if (box._c) return;
-    box._c = 1;
-    var btns = $('[data-kyma-scroll]', box.closest('section') || d), q = 0;
-    function upd() {
-      var max = box.scrollWidth - box.clientWidth - 2;
-      btns.forEach(function (b) { b.disabled = +b.getAttribute('data-kyma-scroll') < 0 ? box.scrollLeft <= 2 : box.scrollLeft >= max; });
-    }
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var it = box.querySelector('li'), step = (it ? it.getBoundingClientRect().width : 300) + 16;
-        box.scrollBy({ left: +b.getAttribute('data-kyma-scroll') * step, behavior: K.reduced ? 'auto' : 'smooth' });
-      });
-    });
-    box.addEventListener('scroll', function () { if (!q) q = w.requestAnimationFrame(function () { q = 0; upd(); }); }, { passive: true });
-    w.addEventListener('resize', upd);
-    upd();
-  }
-
-  function header() {
-    var h = d.querySelector('.section-header');
-    function set() { root.style.setProperty('--kyma-header-h', h.offsetHeight + 'px'); }
-    if (h) { set(); if (w.ResizeObserver) new ResizeObserver(set).observe(h); else w.addEventListener('resize', set); }
-    function sc() { root.classList.toggle('kyma-scrolled', (w.pageYOffset || 0) > 8); tick(); }
-    w.addEventListener('scroll', sc, { passive: true });
-    w.addEventListener('resize', tick);
-    sc();
-  }
-
-  function pageAndCta() {
-    d.addEventListener('pointermove', function (e) {
-      var b = !K.reduced && e.pointerType === 'mouse' && e.target.closest && e.target.closest('.kyma-btn'), r;
-      if (!b) return;
-      r = b.getBoundingClientRect();
-      b.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      b.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    }, { passive: true });
-    if (editor) return;
-    d.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href]');
-      if (K.reduced || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !a) return;
-      if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.hasAttribute('data-kyma-no-transition')) return;
-      if (a.origin !== w.location.origin || /^\/checkout/.test(a.pathname)) return;
-      if (a.pathname === w.location.pathname && a.search === w.location.search) return;
-      e.preventDefault();
-      root.classList.add('kyma-leaving');
-      setTimeout(function () { w.location.href = a.href; }, 280);
-    });
-    w.addEventListener('pageshow', function (e) { if (e.persisted) root.classList.remove('kyma-leaving'); });
-  }
-
-  function init(scope) {
-    dedupe();
-    $('.kyma-waves', scope).forEach(prepWave);
-    reveal(scope); initPar(scope);
-    $('[data-kyma-hero]', scope).forEach(hero);
-    $('[data-kyma-carousel]', scope).forEach(carousel);
-    if (live) $('[data-kyma-live]', scope).forEach(function (e) { live.observe(e); });
-    tick();
-  }
-  function ready() { root.classList.add('kyma-ready'); init(d); header(); pageAndCta(); }
-  function motionChange() {
-    K.reduced = mq.matches;
-    if (K.reduced) $('[data-kyma-reveal], .kyma-waves').forEach(function (e) { e.classList.add('is-in'); });
-    syncs.forEach(function (s) { s(); });
-  }
-  d.addEventListener('visibilitychange', function () {
-    root.classList.toggle('kyma-paused', d.hidden);
-    syncs.forEach(function (s) { s(); });
-    tick();
-  });
-  if (mq.addEventListener) mq.addEventListener('change', motionChange); else if (mq.addListener) mq.addListener(motionChange);
-  d.addEventListener('shopify:section:load', function (e) { init(e.target); });
-  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', ready); else ready();
-})();
-</script>
-<script>
 /* Maquette seulement : menu mobile (le thème utilise le tiroir de menu de Dawn) */
 (function () {
   var b = document.querySelector('.pv-burger'), m = document.getElementById('pv-menu');
   if (!b || !m) return;
-  b.addEventListener('click', function () {
-    var o = m.classList.toggle('is-open');
-    b.setAttribute('aria-expanded', o ? 'true' : 'false');
-  });
-  m.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { m.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); }
-  });
+  b.addEventListener('click', function () { var o = m.classList.toggle('is-open'); b.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+  m.addEventListener('click', function (e) { if (e.target.tagName === 'A') { m.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); } });
 })();
 </script>
 </body>

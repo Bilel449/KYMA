@@ -9,17 +9,25 @@
         "title_after": ".",
         "em_new_line": true,
         "subtitle": "Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.",
+        "note": "Expédition au plus tard le [À COMPLÉTER : date]",
         "cta_label": "Choisir mon coloris",
         "cta_link": "/collections/drop-1",
         "cta2_label": "Notre histoire",
         "cta2_link": "/pages/notre-histoire",
-        "color_a": "#F5EDE4",
-        "color_b": "#E9DCE6",
-        "speed": 30,
-        "scale": 100,
-        "watermark": "01",
-        "show_waves": true,
+        "colorway": "kyma",
+        "alt_text": "Illustration animée : une sculpture fluide rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.",
+        "cue_label": "Défiler",
+        "cue_target": "#MainContent",
         "height": "full"
+      }
+    },
+    "marquee": {
+      "type": "kyma-marquee",
+      "settings": {
+        "text": "L'art du flow · Ride the wave · κύμα ·",
+        "speed": 45,
+        "reverse": false,
+        "dark": false
       }
     },
     "drop": {
@@ -30,8 +38,9 @@
           "settings": {
             "name": "Lilac Whirl",
             "description": "Lilas tourbillonnant sur poudre",
-            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-            "swatch": "#C8A2C8"
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4",
+            "link": "/products/ressac-hoodie-zippe-oversize"
           }
         },
         "ivory-tide": {
@@ -39,8 +48,9 @@
           "settings": {
             "name": "Ivory Tide",
             "description": "Crème ivoire sur vanille",
-            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-            "swatch": "#EFE6D2"
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8",
+            "link": "/products/ressac-hoodie-zippe-oversize"
           }
         },
         "silver-drift": {
@@ -48,8 +58,9 @@
           "settings": {
             "name": "Silver Drift",
             "description": "Gris acier sur perle",
-            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-            "swatch": "#B9BDC4"
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2",
+            "link": "/products/ressac-hoodie-zippe-oversize"
           }
         },
         "noir-absolu": {
@@ -57,8 +68,9 @@
           "settings": {
             "name": "Noir Absolu",
             "description": "Noir sur anthracite, marbrage subtil",
-            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-            "swatch": "#2B2B2E"
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A",
+            "link": "/products/ressac-hoodie-zippe-oversize"
           }
         },
         "crimson-flow": {
@@ -66,8 +78,9 @@
           "settings": {
             "name": "Crimson Flow",
             "description": "Cramoisi sur bordeaux",
-            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-            "swatch": "#8E1B33"
+            "color_a": "#5C2032",
+            "color_b": "#C4878E",
+            "link": "/products/ressac-hoodie-zippe-oversize"
           }
         }
       },
@@ -85,9 +98,11 @@
         "title_em": "flux",
         "title_after": ".",
         "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.",
-        "link_label": "Découvrir",
-        "cta_label": "Voir les coloris",
-        "cta_link": "/collections/drop-1"
+        "kicker": "Coloris",
+        "list_label": "Choisir un coloris pour l'aperçu 3D",
+        "cta_label": "Voir ce coloris",
+        "cta_link": "/collections/drop-1",
+        "caption": "Aperçu 3D du motif et des teintes, à titre d'illustration — pas une photo du produit."
       }
     },
     "motif": {
@@ -127,30 +142,76 @@
         "title_em": "répéter",
         "title_after": ".",
         "text": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.",
-        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-        "zoom_from": 115,
-        "zoom_to": 165,
-        "focus_x": 50,
-        "focus_y": 50,
-        "watermark": "02"
+        "colorway": "kyma",
+        "length": 320
       }
     },
     "piece": {
-      "type": "kyma-manifesto",
+      "type": "kyma-technical",
+      "blocks": {
+        "zip": {
+          "type": "spot",
+          "settings": {
+            "title": "Zip intégral en métal",
+            "text": "Du col jusqu'à l'ourlet, finition argent brossé.",
+            "x": 50,
+            "y": 55
+          }
+        },
+        "tirette": {
+          "type": "spot",
+          "settings": {
+            "title": "Tirette sculptée « Kyma »",
+            "text": "Une tirette dessinée pour la pièce, signée « Kyma ».",
+            "x": 50,
+            "y": 27
+          }
+        },
+        "capuche": {
+          "type": "spot",
+          "settings": {
+            "title": "Capuche sans cordon",
+            "text": "Double épaisseur, sans cordon ni œillets : un choix de ligne.",
+            "x": 36,
+            "y": 10
+          }
+        },
+        "poches": {
+          "type": "spot",
+          "settings": {
+            "title": "Poches biais",
+            "text": "Deux poches coupées en biais, dans le prolongement du geste.",
+            "x": 31,
+            "y": 74
+          }
+        },
+        "bords-cotes": {
+          "type": "spot",
+          "settings": {
+            "title": "Bords-côtes 6 cm",
+            "text": "Aux poignets et à la taille, pour tenir la coupe oversize.",
+            "x": 62,
+            "y": 95
+          }
+        }
+      },
+      "block_order": [
+        "zip",
+        "tirette",
+        "capuche",
+        "poches",
+        "bords-cotes"
+      ],
       "settings": {
-        "show_divider": true,
         "number": "03",
         "label": "La pièce",
         "title_before": "Pensé pour que chaque pièce soit",
         "title_em": "unique",
         "title_after": ".",
         "text": "Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. [À CONFIRMER : validation sur préséries]",
-        "text_2": "",
-        "keywords": "",
+        "caption": "Dessin technique illustratif, vue de face — proportions indicatives, motif non représenté.",
         "cta_label": "Découvrir la pièce",
-        "cta_link": "/collections/drop-1",
-        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
-        "watermark": "03"
+        "cta_link": "/collections/drop-1"
       }
     },
     "savoir-faire": {
@@ -164,11 +225,22 @@
         "title_after": ".",
         "text": "French terry épais à l'intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.",
         "text_2": "",
-        "keywords": "",
+        "keywords": "French terry gratté\nÉpaules tombantes\nZip métal brossé\nCapuche sans cordon",
         "cta_label": "Lire le détail de la pièce",
         "cta_link": "/pages/savoir-faire",
-        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
+        "visual": "fabric",
+        "colorway": "kyma",
+        "caption": "Illustration 3D animée du motif KYMA Wave — pas une photo de l'étoffe.",
         "watermark": "04"
+      }
+    },
+    "marquee-2": {
+      "type": "kyma-marquee",
+      "settings": {
+        "text": "Ride the wave · L'art du flow · κύμα ·",
+        "speed": 35,
+        "reverse": true,
+        "dark": true
       }
     },
     "cercle": {
@@ -181,7 +253,10 @@
             "name": "Initium",
             "lead": "L'entrée dans le cercle.",
             "perks": "[À COMPLÉTER : conditions d'accès et avantages INITIUM]",
-            "dark": false
+            "dark": false,
+            "back_label": "Avantages",
+            "toggle_front": "Voir les avantages",
+            "toggle_back": "Retour"
           }
         },
         "origine": {
@@ -191,7 +266,10 @@
             "name": "Origine",
             "lead": "Le palier supérieur.",
             "perks": "[À COMPLÉTER : conditions d'accès et avantages ORIGINE]",
-            "dark": true
+            "dark": true,
+            "back_label": "Avantages",
+            "toggle_front": "Voir les avantages",
+            "toggle_back": "Retour"
           }
         }
       },
@@ -208,7 +286,8 @@
         "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.",
         "cta_label": "Entrer dans le Cercle",
         "cta_link": "/pages/cercle-waves",
-        "watermark": "05"
+        "watermark": "05",
+        "show_rings": true
       }
     },
     "instagram": {
@@ -225,17 +304,21 @@
         "keywords": "",
         "cta_label": "Suivre @kymasinsta",
         "cta_link": "https://www.instagram.com/kymasinsta/",
-        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
+        "visual": "none",
+        "colorway": "kyma",
+        "caption": "",
         "watermark": "06"
       }
     }
   },
   "order": [
     "hero",
+    "marquee",
     "drop",
     "motif",
     "piece",
     "savoir-faire",
+    "marquee-2",
     "cercle",
     "instagram"
   ]
