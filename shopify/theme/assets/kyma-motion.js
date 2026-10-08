@@ -1,7 +1,9 @@
-/*! KYMA motion v2.0 — natif, sans dépendance. Charge unique (garde window.KYMA).
- *  Défilement doux, curseur, barre de progression en vague, rideau-vague entre les pages, titres lettre à lettre,
+/*! KYMA motion v3.0 — natif, sans dépendance. Charge unique (garde window.KYMA). Compatible Horizon.
+ *  Curseur-halo, barre de progression en vague, rideau-vague entre les pages, titres lettre à lettre,
  *  révélations, bouton magnétique, bandeau défilant, sélecteur de coloris 3D, plongée épinglée, dessin technique,
- *  anneaux Cercle Waves, synchronisation des variantes Dawn, repli Spline. Monte les scènes kyma-3d après le 1er rendu.
+ *  anneaux Cercle Waves, synchronisation des variantes (<variant-picker> Horizon), repli Spline.
+ *  Les scènes kyma-3d sont déclarées après le 1er rendu et créées à l'approche de l'écran (kyma-3d.js v2).
+ *  Défilement natif : aucune prise de contrôle du scroll (interpolation seulement si <html data-kyma-smooth-scroll>).
  *  prefers-reduced-motion : tout est statique et lisible. Pause hors écran / onglet caché. */
 (function (w, d) {
   'use strict';
@@ -18,7 +20,11 @@
   function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
   function el(tag, cls, html) { var n = d.createElement(tag); if (cls) n.className = cls; if (html) n.innerHTML = html; return n; }
   function IO(fn, o) { return hasIO ? new IntersectionObserver(fn, o) : null; }
-  function headerH() { var h = d.querySelector('.section-header, .shopify-section-header'); return h ? h.offsetHeight : 0; }
+  /* Horizon : <header-component> dans #header-group ; maquettes : .kp-header ; Dawn : .section-header */
+  function headerH() {
+    var h = d.querySelector('header-component, .kp-header, .section-header, .shopify-section-header');
+    return h ? Math.round(h.getBoundingClientRect().height) : 0;
+  }
   function maxY() { return Math.max(0, root.scrollHeight - w.innerHeight); }
 
   /* ── 0. ressources dédoublonnées (plusieurs sections appellent kyma-assets) ─────────────── */
@@ -82,7 +88,7 @@
     return false;
   }
   function smooth() {
-    if (K.reduced || !fine || editor || root.hasAttribute('data-kyma-native-scroll')) return;
+    if (K.reduced || !fine || editor || !root.hasAttribute('data-kyma-smooth-scroll')) return;
     SS.on = true; SS.cur = SS.target = w.scrollY; root.classList.add('kyma-smooth');
     w.addEventListener('wheel', function (e) {
       if (e.ctrlKey || e.defaultPrevented || scrollable(e.target, e.deltaY) || d.body.style.overflow === 'hidden' || root.classList.contains('overflow-hidden')) return;
@@ -154,33 +160,37 @@
     });
   }
 
-  /* ── 6. curseur : anneau qui suit avec inertie, grossit sur les liens, onde au clic ──── */
+  /* ── 6. curseur : halo discret (12 px) autour du curseur système, qui grossit sur les éléments
+         interactifs avec une étiquette (« Voir », « Faire pivoter », « Glisser », « Écrire ») ────────── */
   function cursor() {
     if (!fine || K.reduced || editor) return;
-    var c = el('div', 'kyma-cursor', '<span class="kyma-cursor__ring"></span><span class="kyma-cursor__dot"></span>');
+    var c = el('div', 'kyma-cursor', '<span class="kyma-cursor__ring"><span class="kyma-cursor__label"></span></span>');
     c.setAttribute('aria-hidden', 'true'); d.body.appendChild(c);
-    var ring = c.firstChild, dot = c.lastChild, x = -100, y = -100, rx = -100, ry = -100, shown = false;
-    var SEL = 'a, button, summary, label, select, [role="button"], [data-kyma-cursor], input[type="submit"]';
+    var ring = c.firstChild, lab = ring.firstChild, x = -100, y = -100, rx = -100, ry = -100, shown = false, cur = '';
+    var SEL = 'a, button, summary, label, select, [role="button"], [data-kyma-cursor], input[type="submit"], input:not([type]), input[type="text"], input[type="email"], input[type="search"], textarea, [data-kyma-flip], [data-kyma-drag]';
+    function word(t) {
+      if (!t) return '';
+      if (t.hasAttribute('data-kyma-cursor')) return t.getAttribute('data-kyma-cursor');
+      if (t.closest('[data-kyma-flip]')) return 'Faire pivoter';
+      if (t.closest('[data-kyma-drag]')) return 'Glisser';
+      if (/^(INPUT|TEXTAREA)$/.test(t.tagName) && t.type !== 'submit' && t.type !== 'checkbox') return '\u00c9crire';
+      if (t.tagName === 'A') return 'Voir';
+      return '';
+    }
     w.addEventListener('pointermove', function (e) {
       if (e.pointerType !== 'mouse') return;
       x = e.clientX; y = e.clientY;
       if (!shown) { shown = true; rx = x; ry = y; c.classList.add('is-on'); }
-      var t = e.target.closest ? e.target.closest(SEL) : null;
+      var t = e.target.closest ? e.target.closest(SEL) : null, wd = word(t);
       c.classList.toggle('is-link', !!t);
-      c.classList.toggle('is-text', !!(e.target.closest && e.target.closest('input:not([type="submit"]), textarea')));
-      dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      if (wd !== cur) { cur = wd; lab.textContent = wd; c.classList.toggle('has-label', !!wd); }
       wake();
     }, { passive: true });
     d.addEventListener('pointerleave', function () { shown = false; c.classList.remove('is-on'); });
-    w.addEventListener('pointerdown', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      var r = el('span', 'kyma-cursor__wave'); r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px';
-      c.appendChild(r); c.classList.add('is-down');
-      setTimeout(function () { if (r.parentNode) r.parentNode.removeChild(r); }, 900);
-    }, { passive: true });
+    w.addEventListener('pointerdown', function (e) { if (e.pointerType === 'mouse') c.classList.add('is-down'); }, { passive: true });
     w.addEventListener('pointerup', function () { c.classList.remove('is-down'); }, { passive: true });
     tasks.push(function (dt) {
-      var k = 1 - Math.exp(-dt * 14);
+      var k = 1 - Math.exp(-dt * 11); /* lissage ~0,18 par image à 60 i/s */
       rx += (x - rx) * k; ry += (y - ry) * k;
       ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
       return Math.abs(x - rx) + Math.abs(y - ry) > 0.3;
@@ -235,14 +245,16 @@
       setTimeout(function () { run(true, 820, function () { c.classList.remove('is-on'); }); }, 60);
     }
     w.addEventListener('pageshow', function (e) { if (e.persisted) c.classList.remove('is-on'); });
-    if (K.reduced || editor) return;
+    /* Horizon : si ses transitions de page natives sont activées, on lui laisse la main */
+    var horizonVT = d.querySelector('main[data-page-transition-enabled="true"]');
+    if (K.reduced || editor || horizonVT) return;
     d.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
       if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (a.target && a.target !== '_self') return;
       if (a.hasAttribute('download') || a.closest('[data-kyma-no-curtain]')) return;
       var u; try { u = new URL(a.href, w.location.href); } catch (er) { return; }
-      if (u.origin !== w.location.origin || !/^https?:$/.test(u.protocol)) return;
+      if (u.origin !== w.location.origin || !/^(https?|file):$/.test(u.protocol)) return;
       if (u.pathname === w.location.pathname && u.search === w.location.search) return; /* ancre de la même page */
       if (/^\/(cart|checkout|account)/.test(u.pathname)) return;
       e.preventDefault(); K.curtain(u.href);
@@ -276,6 +288,7 @@
 
   /* ── 10. scènes 3D : montées après le premier rendu ──────────────────────────────────── */
   function scene(cv) { return cv && cv._k3d && cv._k3d.ok ? cv._k3d : null; }
+  K.scene = scene;
   function mount3d(scope) {
     var X = w.KYMA3D;
     $('canvas[data-kyma-3d]', scope).forEach(function (cv) {
@@ -286,7 +299,8 @@
       X.mount(cv, {
         scene: cv.getAttribute('data-kyma-3d') || 'hero', colorway: cv.getAttribute('data-colorway') || 'kyma',
         host: host, follow: cv.getAttribute('data-follow') !== 'false', interactive: cv.getAttribute('data-interactive') !== 'false',
-        shift: sh ? sh.split(',').map(parseFloat) : null, pattern: parseFloat(cv.getAttribute('data-pattern')) || 0
+        shift: sh ? sh.split(',').map(parseFloat) : null, pattern: parseFloat(cv.getAttribute('data-pattern')) || 0,
+        grain: cv.hasAttribute('data-grain') ? parseFloat(cv.getAttribute('data-grain')) : null
       });
     });
   }
@@ -421,56 +435,28 @@
     });
   }
 
-  /* ── 15b. cartes qui pivotent (data-kyma-flip) : survol souris, tap, clavier + inclinaison ─ */
-  function flips(scope) {
-    $('[data-kyma-flip]', scope).forEach(function (card) {
-      if (card._fl) return; card._fl = 1;
-      var btn = card.querySelector('.kyma-flip__toggle'), front = card.querySelector('.kyma-flip__front'), back = card.querySelector('.kyma-flip__back');
-      var lab = btn && btn.querySelector('span');
-      function set(on) {
-        card.classList.toggle('is-flipped', on);
-        if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); if (lab) lab.textContent = btn.getAttribute(on ? 'data-label-on' : 'data-label-off'); }
-        if (back) { back.setAttribute('aria-hidden', on ? 'false' : 'true'); back.inert = !on; }
-        if (front) { front.setAttribute('aria-hidden', on ? 'true' : 'false'); front.inert = on; }
-      }
-      set(false);
-      if (btn) btn.addEventListener('click', function (e) { e.stopPropagation(); set(!card.classList.contains('is-flipped')); });
-      card.addEventListener('click', function (e) { if (e.target.closest('a, button')) return; if (!fine) set(!card.classList.contains('is-flipped')); });
-      if (!fine) return;
-      card.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') set(true); });
-      card.addEventListener('pointerleave', function (e) {
-        if (e.pointerType === 'mouse') set(false);
-        card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
-      });
-      if (K.reduced) return;
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        card.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
-        card.style.setProperty('--rx', ((0.5 - y) * 10).toFixed(2) + 'deg');
-        card.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
-      });
-    });
-  }
-
-  /* ── 16. fiche produit : aperçu 3D synchronisé sur la variante Dawn ──────────────────── */
+  /* ── 16. fiche produit : aperçu 3D / lecteur 360° synchronisés sur le coloris choisi ───────────
+         Horizon : <variant-picker> émet un « change » natif ; l'input porte data-option-name (« Couleur »).
+         Repli : tout <select>/<input> dont le name contient le nom d'option, ou [data-kyma-variant-source]. */
   function variants() {
     var hosts = $('[data-kyma-variant-sync]'); if (!hosts.length) return;
+    var opts = (hosts[0].getAttribute('data-option') || 'Couleur,Coloris,Color,Colour').split(',').map(function (o) { return o.trim().toLowerCase(); });
     function apply(v) {
       if (!v) return;
+      if (w.KYMA3D && !w.KYMA3D.colorways[w.KYMA3D.key(v)]) return; /* valeur qui n'est pas un coloris (ex. taille) */
       hosts.forEach(function (h) {
         var c = h.querySelector('canvas[data-kyma-3d]'), s = scene(c), lab = h.parentNode.querySelector('[data-kyma-cw-name]');
-        if (w.KYMA3D && !w.KYMA3D.colorways[w.KYMA3D.key(v)]) return; /* valeur qui n'est pas un coloris (ex. taille) */
-        if (s) s.setColorway(v); else if (c) c.setAttribute('data-colorway', v);
+        if (s) s.setColorway(v); else if (c) c.setAttribute('data-colorway', w.KYMA3D ? w.KYMA3D.key(v) : v);
         if (lab) lab.textContent = v;
       });
+      d.dispatchEvent(new CustomEvent('kyma:colorway', { detail: { name: v } }));
     }
-    var opt = hosts[0].getAttribute('data-option') || 'Couleur', idx = parseInt(hosts[0].getAttribute('data-option-index'), 10) || 1;
-    if (typeof w.subscribe === 'function' && w.PUB_SUB_EVENTS && w.PUB_SUB_EVENTS.variantChange) {
-      w.subscribe(w.PUB_SUB_EVENTS.variantChange, function (ev) { var v = ev && ev.data && ev.data.variant; if (v) apply(v['option' + idx] || (v.options && v.options[idx - 1])); });
-    }
+    K.applyColorway = apply;
     d.addEventListener('change', function (e) {
-      var t = e.target; if (!t || !t.name) return;
-      if (t.name.indexOf(opt) === 0 || t.name.indexOf('[' + opt + ']') > -1 || t.closest('[data-kyma-variant-source]')) apply(t.value);
+      var t = e.target; if (!t) return;
+      var on = (t.getAttribute('data-option-name') || t.name || '').toLowerCase();
+      var hit = opts.some(function (o) { return on.indexOf(o) > -1; }) || (t.closest && t.closest('[data-kyma-variant-source]'));
+      if (hit) apply(t.value);
     });
   }
 
@@ -500,7 +486,7 @@
 
   function initScope(scope) {
     reveal(scope); hero(scope); magnetic(scope); marquee(scope); colorways(scope);
-    dive(scope); drawing(scope); rings(scope); flips(scope); spline(scope);
+    dive(scope); drawing(scope); rings(scope); spline(scope);
   }
   function init() {
     dedupe(); chrome(); initScope(d); smooth(); anchors(); progress(); cursor(); curtain(); variants();

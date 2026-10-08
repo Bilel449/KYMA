@@ -695,6 +695,10 @@ class GLB:
         return len(self.g["accessors"]) - 1
 
     def primitive(self, V, N, F, material, UV=None):
+        N = np.asarray(N, np.float32).copy()
+        ln = np.linalg.norm(N, axis=1)
+        N[ln < 1e-6] = (0.0, 1.0, 0.0)                  # sommets isolés : normale unitaire valide
+        N /= np.linalg.norm(N, axis=1, keepdims=True)
         attrs = {"POSITION": self.accessor(V.astype(np.float32), "VEC3", 34962, minmax=True),
                  "NORMAL": self.accessor(N.astype(np.float32), "VEC3", 34962)}
         if UV is not None:
