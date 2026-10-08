@@ -25,7 +25,7 @@
 
   /* ── utilitaires ─────────────────────────────────────────────────────── */
   function key(n) {
-    return String(n || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    return String(n || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
   function hex(h) {
@@ -301,20 +301,20 @@
     var ro, ta, fl = 1.9, fy = -1.55, R, R1 = null, R2 = null, sh = P.shift;
     var t = this.t, m = P.morph || 0, dv = ease(Math.min(1, Math.max(0, P.dive || 0)));
     if (this.kind === 'hero') {
-      var dist = (mobile ? 5.6 : 4.4) + m * 0.9, orb = m * 0.7;
+      var dist = (mobile ? 7.4 : 4.4) + m * 0.9, orb = m * 0.7;
       ro = [Math.sin(orb) * dist, 0.62 + m * 0.5, Math.cos(orb) * dist]; ta = [0, -0.05, 0];
       /* plongée : la caméra rejoint la surface marbrée */
-      ro = mix3(ro, [0.05, 0.12, 1.92], dv); ta = mix3(ta, [0, 0.02, 1.0], dv); fl = mix(1.9, 2.2, dv);
+      ro = mix3(ro, [0.05, 0.12, 1.92], dv); ta = mix3(ta, [0, 0.02, 1.0], dv); fl = mix(1.9, mobile ? 3.4 : 2.3, dv);
       if (dv > 0.5) fy = -99;
       R = rotm(this.spin + this.yaw + m * 0.8, 0.5 + this.pitch + Math.sin(t * 0.21) * 0.07 - m * 0.3 - dv * 0.25, 0.18 + Math.sin(t * 0.17) * 0.06);
-      if (!sh) sh = mobile ? [0, 0.42] : [0.62, 0.02];
+      if (!sh) sh = mobile ? [0, 0.56] : [0.62, 0.02];
       sh = [sh[0] * (1 - dv), sh[1] * (1 - dv)];
     } else if (this.kind === 'swatch') {
       ro = [0, 1.75, 3.3]; ta = [0, -0.12, 0]; fy = -1.05; fl = mobile ? 1.6 : 1.9;
       R = rotm(0.5 + Math.sin(t * 0.23) * 0.18 + this.yaw * 0.6, -0.18 + this.pitch * 0.5, Math.sin(t * 0.31) * 0.06);
       sh = sh || [0, 0];
     } else {
-      ro = [0, 0.55, mobile ? 6.4 : 5.3]; ta = [0, -0.05, 0]; fy = -1.6;
+      ro = [0, 0.55, mobile ? 5.4 : 4.3]; ta = [0, -0.05, 0]; fy = -1.45;
       R = rotm(this.spin * 0.6 + this.yaw * 0.8, 0.35 + this.pitch * 0.6, 0.12);
       R1 = rotm(this.spin * 0.7, 1.5708, 0); R2 = rotm(-this.spin * 0.5, 0.15, 0);
       sh = sh || [0, 0];
@@ -327,6 +327,9 @@
     gl.uniform1f(u.uFloor, fy); gl.uniform1f(u.uHover, this.hov * (1 - dv)); gl.uniform1f(u.uPat, (P.pat || 1) * (1 + dv * 0.6));
     gl.uniform3fv(u.uCo, ro); gl.uniform3fv(u.uCr, rt); gl.uniform3fv(u.uCu, up); gl.uniform3fv(u.uCf, fw);
     gl.uniform1f(u.uFl, fl);
+    /* plongée : le fond prend la teinte du coloris pour que la surface remplisse l'écran sans couture */
+    var bgc = hex(BG), tint = C.b.map(function (v) { return Math.pow(v, 1 / 2.2); });
+    gl.uniform3fv(u.uBg, dv > 0 ? mix3(bgc, tint, dv * 0.9) : bgc);
     gl.uniform3fv(u.uA, C.a); gl.uniform3fv(u.uB, C.b);
     gl.uniform3fv(u.uV, C.v); gl.uniform3fv(u.uA2, this.c2[0]); gl.uniform3fv(u.uB2, this.c2[1]); gl.uniform3fv(u.uV2, this.c2[2]);
     gl.uniformMatrix3fv(u.uR, false, R);

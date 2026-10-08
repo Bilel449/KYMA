@@ -181,21 +181,23 @@ def rot_x(py, pz, ang):
     return c * py - s * pz, s * py + c * pz
 
 
+POCKET = ((0.168, 0.108), (0.098, 0.290))   # poches biais : (bas, côté) -> (haut, milieu), en (|x|, y)
+
 # --------------------------------------------------------------------------------------
 # Le vêtement
 # --------------------------------------------------------------------------------------
 class Hoodie:
     # Points de la manche (côté +x ; l'autre côté par symétrie |x| avec plis décalés)
-    S0 = (0.215, 0.605, -0.008)   # entrée d'épaule (dans le torse : épaule tombante)
-    S1 = (0.405, 0.345, 0.012)    # coude
-    S2 = (0.462, 0.128, 0.040)    # haut du poignet (blousant)
-    S3 = (0.470, 0.050, 0.046)    # bas du bord-côte
-    R0, R1, R2, RC = 0.098, 0.082, 0.074, 0.047
+    S0 = (0.215, 0.648, -0.008)   # entrée d'épaule (dans le torse : épaule tombante)
+    S1 = (0.398, 0.372, 0.012)    # coude
+    S2 = (0.452, 0.136, 0.040)    # haut du poignet (blousant)
+    S3 = (0.460, 0.057, 0.046)    # bas du bord-côte
+    R0, R1, R2, RC = 0.090, 0.075, 0.068, 0.045
     HEM = 0.062                   # hauteur du bord-côte de taille (6 cm)
     T = 0.011                     # épaisseur visible aux ouvertures
-    NECK_C = (0.0, 0.705, 0.004)  # centre de l'encolure
-    NECK_TILT = 0.36              # pente de l'encolure (devant plus bas)
-    HOOD_C = (0.0, 0.585, -0.150)
+    NECK_C = (0.0, 0.762, 0.004)  # centre de l'encolure
+    NECK_TILT = 0.62              # pente de l'encolure (devant plus bas)
+    HOOD_C = (0.0, 0.655, -0.150)
 
     def __init__(self):
         self.noise = Perlin(7)
@@ -212,9 +214,9 @@ class Hoodie:
         bul = 0.022 * (1 - np.clip(ax / 0.30, 0, 1) ** 2)       # léger gonflé avant/dos
         zc = -0.004
         hz = 0.118 + bul * smoothstep(0.03, 0.25, y)
-        main = sd_round_box(x, ys, z, (0, 0.385, zc), (0.300, 0.350, 1.0), 0.085)
+        main = sd_round_box(x, ys, z, (0, 0.400, zc), (0.300, 0.372, 1.0), 0.085)
         main = smax(main, np.abs(z - zc) - hz, 0.06)            # profondeur variable, arêtes douces
-        rib = sd_round_box(x, y, z, (0, self.HEM / 2, zc), (0.286, self.HEM / 2, 0.107), 0.022)
+        rib = sd_round_box(x, y, z, (0, self.HEM / 2, zc), (0.295, self.HEM / 2, 0.113), 0.022)
         rib = np.maximum(rib, sd_round_box(x, y, z, (0, self.HEM / 2, zc), (0.40, self.HEM / 2, 0.40), 0.008))
         return smin(main, rib, 0.012)
 
@@ -231,7 +233,7 @@ class Hoodie:
                 + 0.0028 * np.sin(t1 * 9.0 + 2 * ph) * smoothstep(0.55, 0.9, t1))
         s = s + fold
         cuff, tc = sd_capped_cyl(ax, y, z, self.CUFF_A, self.CUFF_B, self.RC, 0.012)
-        return smin(s, cuff, 0.016)
+        return smin(s, cuff, 0.016), s, t1
 
     # ---- capuche couchée + col --------------------------------------------------------
     def neck_frame(self, x, y, z):
@@ -243,34 +245,39 @@ class Hoodie:
         lx, ly, lz = self.neck_frame(x, y, z)
         # col : tore elliptique autour de l'encolure
         R = 0.100
-        rxz = np.sqrt((lx / 0.104) ** 2 + (lz / 0.092) ** 2) * R - R
-        collar = np.sqrt(rxz * rxz + (ly * 0.9) ** 2) - 0.030
+        rxz = np.sqrt((lx / 0.116) ** 2 + (lz / 0.100) ** 2) * R - R
+        rr = 0.034 + 0.014 * smoothstep(0.03, -0.09, lz) - 0.004 * smoothstep(0.0, 0.09, lz)
+        collar = np.sqrt(rxz * rxz + (ly * 0.85) ** 2) - rr      # col roulé : plus épais derrière (capuche)
         # masse de la capuche reposant dans le dos
         hc = self.HOOD_C
         py, pz = rot_x(y - hc[1], z - hc[2], -0.30)
-        mass = sd_ellipsoid(x - hc[0], py, pz, (0.170, 0.150, 0.058))
-        py2, pz2 = rot_x(y - 0.455, z - (-0.150), -0.15)
+        mass = sd_ellipsoid(x - hc[0], py, pz, (0.180, 0.165, 0.060))
+        py2, pz2 = rot_x(y - 0.500, z - (-0.150), -0.15)
         tip = sd_ellipsoid(x, py2, pz2, (0.085, 0.075, 0.042))
         h = smin(mass, tip, 0.05)
         # couture centrale de la capuche
         h = h + 0.0028 * np.exp(-(x / 0.0055) ** 2) * smoothstep(-0.12, -0.17, z)
         # bord d'ouverture de la capuche (bourrelet double épaisseur)
-        py3, pz3 = rot_x(y - 0.705, z - (-0.110), -0.95)
+        py3, pz3 = rot_x(y - 0.762, z - (-0.112), -0.95)
         edge = np.sqrt((np.sqrt((x / 0.150) ** 2 + (pz3 / 0.060) ** 2) * 0.1 - 0.1) ** 2 + (py3 * 1.0) ** 2) - 0.016
         h = smin(h, edge, 0.02)
         return smin(collar, h, 0.035)
 
     # ---- champ complet -----------------------------------------------------------------
     def body(self, x, y, z, details=True):
-        d = smin(self.torso(x, y, z), self.sleeves(x, y, z), 0.045)
+        sl, sl_raw, t1 = self.sleeves(x, y, z)
+        d = smin(self.torso(x, y, z), sl, 0.045)
         d = smin(d, self.hood(x, y, z), 0.030)
         if details:
             ax = np.abs(x)
+            # couture d'emmanchure (épaule tombante)
+            L1 = np.linalg.norm(np.subtract(self.S1, self.S0))
+            d = d + 0.0017 * np.exp(-(((t1 - 0.20) * L1) / 0.0035) ** 2) * smoothstep(0.012, 0.0, np.abs(sl_raw))
             front = smoothstep(0.02, 0.09, z)
             # sillon de zip
             d = d + 0.0032 * np.exp(-(x / 0.0065) ** 2) * front * smoothstep(0.80, 0.70, y)
             # poches biais : passepoil légèrement en relief + ligne d'ouverture creusée
-            A, B = np.array([0.092, 0.115]), np.array([0.168, 0.300])
+            A, B = np.array(POCKET[0]), np.array(POCKET[1])
             ba = B - A
             tt = np.clip(((ax - A[0]) * ba[0] + (y - A[1]) * ba[1]) / (ba @ ba), 0, 1)
             dd = np.sqrt((ax - A[0] - ba[0] * tt) ** 2 + (y - A[1] - ba[1] * tt) ** 2)
@@ -288,13 +295,13 @@ class Hoodie:
     def cavity(self, x, y, z):
         """Volumes creusés aux ouvertures : taille, poignets, encolure."""
         t = self.T
-        hem = sd_round_box(x, y, z, (0, -0.05, -0.004), (0.286 - t, 0.095, 0.107 - t), 0.022 - 0.004)
+        hem = sd_round_box(x, y, z, (0, -0.05, -0.004), (0.295 - t, 0.095, 0.113 - t), 0.022 - 0.004)
         ax = np.abs(x)
         A, B = np.array(self.CUFF_A), np.array(self.CUFF_B)
         dvec = (B - A) / np.linalg.norm(B - A)
         cuff, _ = sd_capped_cyl(ax, y, z, tuple(A + dvec * 0.015), tuple(B + dvec * 0.08), self.RC - t, 0.004)
         lx, ly, lz = self.neck_frame(x, y, z)
-        ell = (np.sqrt((lx / 0.072) ** 2 + (lz / 0.062) ** 2) - 1.0) * 0.062
+        ell = (np.sqrt((lx / 0.080) ** 2 + (lz / 0.068) ** 2) - 1.0) * 0.068
         neck = np.maximum(ell, -(ly + 0.10))
         return np.minimum(np.minimum(hem, cuff), neck)
 
@@ -317,7 +324,7 @@ class Hoodie:
 # --------------------------------------------------------------------------------------
 # Maillage tissu
 # --------------------------------------------------------------------------------------
-BOUNDS = (np.array([-0.58, -0.012, -0.26], np.float32), np.array([0.58, 0.84, 0.21], np.float32))
+BOUNDS = (np.array([-0.57, -0.012, -0.26], np.float32), np.array([0.57, 0.90, 0.21], np.float32))
 
 
 def fabric_mesh(H, res, target_faces):
@@ -418,19 +425,21 @@ def rasterize(UV, F, tex, attrs):
     return mask, outs
 
 
-def kyma_wave(P, seed, scale=3.3):
-    """Motif marbré KYMA Wave : fBm 3D à double domain warping. Renvoie (m, veine) dans [0,1]."""
+def kyma_wave(P, seed, scale=1.6, share=0.38):
+    """Motif marbré KYMA Wave : bandes de « courant » déformées par fBm 3D à double domain
+    warping, évaluées au point de surface. Renvoie (m, veine) dans [0, 1]."""
     nz = Perlin(seed)
     Q = (P * scale).astype(np.float32)
     off = [np.array(o, np.float32) for o in ((0, 0, 0), (5.2, 1.3, 2.8), (1.7, 9.2, 4.1), (8.3, 2.8, 7.7),
                                               (3.1, 6.6, 0.9), (4.4, 0.7, 6.2))]
-    q = np.stack([fbm(nz, Q + off[i], 4) for i in range(3)], 1)
-    r = np.stack([fbm(nz, Q + 3.2 * q + off[i + 3], 4) for i in range(3)], 1)
-    v = fbm(nz, Q + 3.6 * r, 5)
-    # bandes de marbre fluides qui s'enroulent
-    band = np.sin(7.0 * v + 2.2 * r[:, 0] * 3.0)
-    m = smoothstep(-0.35, 0.45, band)
-    vein = np.exp(-(band / 0.10) ** 2)
+    q = np.stack([fbm(nz, Q + off[i], 2) for i in range(3)], 1)
+    r = np.stack([fbm(nz, Q + 1.8 * q + off[i + 3], 3) for i in range(3)], 1)
+    flow = np.array([0.35, 0.94, 0.0], np.float32)          # courant ascendant en diagonale
+    f = Q @ flow + 1.1 * fbm(nz, Q + 2.0 * r, 3)
+    band = np.sin(9.0 * f)
+    t = float(np.quantile(band, 1.0 - share))                 # part exacte de la teinte secondaire
+    m = smoothstep(t - 0.28, t + 0.28, band)
+    vein = np.exp(-((band - t) / 0.10) ** 2)
     return m.astype(np.float32), vein.astype(np.float32)
 
 
@@ -451,7 +460,7 @@ def bake_texture(H, V, N, UV, F, col, tex):
 
     # zones : doublure (intérieur des ouvertures), bord-côtes (taille, poignets)
     body = H.body(x, y, z)
-    lining = smoothstep(-0.35 * H.T, -0.65 * H.T, body)
+    lining = smoothstep(-0.0015, -0.0040, body)
     ax = np.abs(x)
     A, B = np.array(H.CUFF_A), np.array(H.CUFF_B)
     ab = B - A
@@ -477,7 +486,7 @@ def bake_texture(H, V, N, UV, F, col, tex):
 
     # ligne d'ouverture des poches (ombre fine)
     front = smoothstep(0.02, 0.09, z)
-    Aq, Bq = np.array([0.092, 0.115]), np.array([0.168, 0.300])
+    Aq, Bq = np.array(POCKET[0]), np.array(POCKET[1])
     ba = Bq - Aq
     tq = ((ax - Aq[0]) * ba[0] + (y - Aq[1]) * ba[1]) / (ba @ ba)
     nrm = np.array([ba[1], -ba[0]]) / np.linalg.norm(ba)
@@ -627,8 +636,8 @@ def puller_sdf(x, y, z):
 
 def hardware(H, P, Nn, T, s):
     top = s[-1]
-    ts, tv = zip_teeth(P, Nn, T, s, top - 0.020)
-    i = int(np.searchsorted(s, top - 0.016))
+    ts, tv = zip_teeth(P, Nn, T, s, top - 0.006)
+    i = int(np.searchsorted(s, top - 0.028))
     t, n = T[i], Nn[i]
     b = np.cross(t, n)
     b /= np.linalg.norm(b)
@@ -636,7 +645,7 @@ def hardware(H, P, Nn, T, s):
     sv, sf = local_sdf_mesh(slider_sdf, (0.010, 0.015, 0.010), 0.00035, 2500)
     sv = P[i] + n * 0.0014 + sv @ Ms.T
     # tirette : pend vers le bas, légèrement décollée du buste
-    j = int(np.searchsorted(s, top - 0.019))
+    j = int(np.searchsorted(s, top - 0.031))
     tj, nj = T[j], Nn[j]
     ang = 0.22
     tt = tj * np.cos(ang) + nj * np.sin(ang)
@@ -645,8 +654,7 @@ def hardware(H, P, Nn, T, s):
     bb /= np.linalg.norm(bb)
     Mp = np.stack([bb, tt, nn], 1)
     pv, pf = local_sdf_mesh(puller_sdf, (0.010, 0.046, 0.004), 0.00030, 4000)
-    pv = pv + np.array([0, 0.0230, 0], np.float32)  # recentrer (grille symétrique en y)
-    pv = P[j] + nj * 0.0085 + pv @ Mp.T
+    pv = P[j] + nj * 0.0072 + pv @ Mp.T
     sil_v = np.concatenate([ts, sv])
     sil_f = np.concatenate([tv, sf + len(ts)])
     return (sil_v, sil_f), (pv, pf)

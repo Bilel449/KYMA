@@ -284,7 +284,7 @@
       if (cv._k3d || cv.hidden) return;
       var sh = cv.getAttribute('data-shift');
       X.mount(cv, {
-        scene: cv.getAttribute('data-kyma-3d') || 'hero', colorway: cv.getAttribute('data-colorway') || 'lilac-whirl',
+        scene: cv.getAttribute('data-kyma-3d') || 'hero', colorway: cv.getAttribute('data-colorway') || 'kyma',
         host: host, follow: cv.getAttribute('data-follow') !== 'false', interactive: cv.getAttribute('data-interactive') !== 'false',
         shift: sh ? sh.split(',').map(parseFloat) : null, pattern: parseFloat(cv.getAttribute('data-pattern')) || 0
       });
@@ -300,6 +300,9 @@
     $('[data-kyma-hero]', scope).forEach(function (h) {
       if (h._h) return; h._h = 1;
       var go = function () { h.classList.add('is-in'); };
+      $('[data-kyma-cue]', h).forEach(function (c) {
+        c.addEventListener('click', function (e) { e.preventDefault(); goTo(h.getBoundingClientRect().bottom + w.scrollY - headerH()); });
+      });
       if (K.reduced) go(); else if (d.fonts && d.fonts.ready) { d.fonts.ready.then(go); setTimeout(go, 1200); } else go();
       if (K.reduced) return;
       var last = -1;
@@ -331,7 +334,7 @@
         var ca = b.getAttribute('data-a'), cb = b.getAttribute('data-b');
         if (w.KYMA3D) w.KYMA3D.setColorway(ca && cb ? [ca, cb] : key);
         if (link && b.getAttribute('data-url')) link.setAttribute('href', b.getAttribute('data-url'));
-        if (live && announce) live.textContent = 'Coloris sélectionné : ' + nm;
+        if (live && announce) live.textContent = 'Coloris s\u00e9lectionn\u00e9 : ' + nm;
         if (!name) return;
         var swap = function () {
           if (my !== tok) return;

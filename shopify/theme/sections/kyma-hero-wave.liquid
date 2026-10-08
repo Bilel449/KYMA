@@ -69,7 +69,7 @@
   <p class="kyma-vh">{{ section.settings.alt_text | escape }}</p>
 
   {%- if section.settings.cue_label != blank -%}
-    <a class="kyma-hero__cue" href="{{ section.settings.cue_target | default: '#MainContent' }}">
+    <a class="kyma-hero__cue" href="{{ section.settings.cue_target | default: '#MainContent' }}" data-kyma-cue>
       <span>{{ section.settings.cue_label | escape }}</span>
       <svg viewBox="0 0 44 10" aria-hidden="true" focusable="false"><path d="M1 5 C6 1 10 1 15 5 S24 9 29 5 S38 1 43 5"/></svg>
       <span class="kyma-hero__cue-line" aria-hidden="true"></span>
@@ -115,7 +115,7 @@
     { "type": "text", "id": "alt_text", "label": "Texte équivalent de la 3D (lecteurs d'écran)", "default": "Illustration animée : une sculpture fluide rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave." },
     { "type": "header", "content": "Indicateur de défilement" },
     { "type": "text", "id": "cue_label", "label": "Texte", "default": "Défiler" },
-    { "type": "text", "id": "cue_target", "label": "Ancre visée (ex. #MainContent)", "default": "#MainContent" },
+    { "type": "text", "id": "cue_target", "label": "Ancre de repli sans JavaScript (avec JS : défile juste sous le hero)", "default": "#MainContent" },
     {
       "type": "select",
       "id": "height",

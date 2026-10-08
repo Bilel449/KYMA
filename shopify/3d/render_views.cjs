@@ -15,16 +15,19 @@ const size = parseInt(process.argv[5] || '1024', 10);
 const mvJs = process.env.MODEL_VIEWER_JS ||
   path.resolve(__dirname, 'node_modules/@google/model-viewer/dist/model-viewer.min.js');
 
-// Vues : face, trois-quarts, dos (+ profil). theta = azimut, phi = élévation depuis le haut.
+// Vues : face, trois-quarts, dos. theta = azimut, phi = angle depuis la verticale, [rayon].
+// Variables : VIEWS="nom:theta phi [rayon],...", TARGET="x y z" (cible caméra), FOV, BG.
 const VIEWS = (process.env.VIEWS || 'face:0deg 82deg,trois-quarts:38deg 78deg,dos:180deg 80deg')
-  .split(',').map(v => { const [n, o] = v.split(':'); return { n, o }; });
+  .split(',').map(v => { const [n, o] = v.split(':'); return { n, o: o.split(' ').length < 3 ? o + ' 105%' : o }; });
+const TARGET = process.env.TARGET || 'auto auto auto';
+const FOV = process.env.FOV || '26deg';
 const BG = process.env.BG || '#F5EDE4';
 
 const html = `<!doctype html><html><head><meta charset="utf-8">
 <script type="module" src="http://kyma.local/mv.js"></script>
 <style>html,body{margin:0;background:${BG}}model-viewer{width:${size}px;height:${size}px;--poster-color:transparent;background:${BG}}</style>
 </head><body>
-<model-viewer id="mv" src="http://kyma.local/model.glb" camera-orbit="0deg 82deg 105%" field-of-view="26deg"
+<model-viewer id="mv" src="http://kyma.local/model.glb" camera-orbit="0deg 82deg 105%" field-of-view="${FOV}" camera-target="${TARGET}"
   shadow-intensity="1" shadow-softness="1" exposure="1.0" tone-mapping="neutral" environment-image="neutral"
   interaction-prompt="none" disable-zoom></model-viewer></body></html>`;
 
@@ -45,7 +48,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8">
   await page.goto('http://kyma.local/index.html');
   await page.waitForFunction(() => { const mv = document.getElementById('mv'); return mv && mv.loaded; }, null, { timeout: 120000 });
   for (const v of VIEWS) {
-    await page.evaluate(o => { const mv = document.getElementById('mv'); mv.cameraOrbit = o + ' 105%'; mv.jumpCameraToGoal(); }, v.o);
+    await page.evaluate(o => { const mv = document.getElementById('mv'); mv.cameraOrbit = o; mv.jumpCameraToGoal(); }, v.o);
     await page.waitForTimeout(1500);
     const file = path.join(outDir, `${prefix}-${v.n}.png`);
     await page.locator('#mv').screenshot({ path: file });
