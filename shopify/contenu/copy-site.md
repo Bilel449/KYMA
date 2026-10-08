@@ -1,4 +1,4 @@
-# KYMA — Copy du site Shopify (v1, Maya)
+# KYMA — Copy du site Shopify (v2, Maya — corrections Arthur cycle 1/2 appliquées)
 
 Statut : BROUILLON PUBLIABLE sous réserve des balises. Relecture attendue : Arthur (QA), Victoire (juridique).
 Source : `brand/BRAND.md` (tech pack v3 retenu). Ton : calme, confiant, élégant, « KYMA ne crie jamais ». Aucune exclamation, aucune urgence artificielle, aucun faux compteur de stock.
@@ -7,15 +7,16 @@ Source : `brand/BRAND.md` (tech pack v3 retenu). Ton : calme, confiant, élégan
 - `[À COMPLÉTER : …]` : information manquante à fournir avant mise en ligne.
 - `[À VALIDER : …]` : proposition à valider par le fondateur ou Victoire.
 - `[SI CERTIFIÉ : …]` / `[SI CONFIRMÉ : …]` : texte à n'activer qu'avec la preuve en main. Sans preuve, utiliser le texte de repli indiqué.
+- `[SI PRÉSÉRIE VALIDÉE : …]` : affirmation d'unicité de chaque pièce, à n'activer qu'une fois les préséries validées. Texte de repli par défaut : « Pensé pour que chaque pièce soit unique. »
 - Dans les titres, `*mot*` = mot en DM Serif Display italique, lilas foncé `#9B7A9B`.
 - Les labels sont écrits en capitales ici ; l'interlettrage (2,5 à 5 px) se règle en CSS.
 
 ## Points d'attention transmis à Clémentine / Arthur
 1. **Coloris** : le copy suit le tech pack v3, soit 5 coloris (Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow). La mémoire projet en cite 6 (dont Midnight Current, Amber Flow, Mint Surge). Point d'arbitrage n°1 du fondateur : si la liste change, seuls les blocs 3.01 et les captions Instagram sont à ajuster.
 2. **Fournisseur** : aucun nom cité (consultation non signée).
-3. **Date d'expédition** : la durée indicative (~18 semaines) n'est volontairement pas écrite. Seule la date finale validée s'affiche.
+3. **Date d'expédition** : la durée indicative (~18 semaines) n'est volontairement pas écrite. Seule la date « Expédition au plus tard le [À COMPLÉTER : date] », une fois validée, s'affiche.
 4. **Prix** : non codé en dur dans le copy. Le prix vient de la fiche produit Shopify (179 € TTC retenu, 199 € à l'étude).
-5. **« Chaque pièce est unique »** : issu du tech pack (motif non répété, découpe dans une zone différente du rouleau). À reconfirmer sur les préséries avant mise en ligne.
+5. **Unicité de chaque pièce** : issue du tech pack (motif non répété, découpe dans une zone différente du rouleau). Toute affirmation d'unicité est encadrée par `[SI PRÉSÉRIE VALIDÉE : …]` avec un repli : « Pensé pour que chaque pièce soit unique. »
 6. **Visuels** : rendus actuels = maquettes. Le copy ne promet pas de photos du produit fabriqué.
 7. **Aucune allégation environnementale générique** dans ce document. « Petites séries » est employé comme fait de production, sans bénéfice environnemental affirmé.
 
@@ -26,7 +27,7 @@ Source : `brand/BRAND.md` (tech pack v3 retenu). Ton : calme, confiant, élégan
 ### Proposition A — Le courant
 - **Label** : DROP 1 — PRÉCOMMANDE OUVERTE
 - **Titre** : Chaque pièce suit son *courant*.
-- **Sous-titre** : Un hoodie zippé oversize, imprimé d'un motif de vagues qui ne se répète jamais. Cinq coloris, une seule pièce.
+- **Sous-titre** : Un hoodie zippé oversize, imprimé d'un motif de vagues fluide. Cinq coloris, une seule pièce. [SI PRÉSÉRIE VALIDÉE : Le motif ne se répète jamais.]
 - **CTA** : Découvrir le Drop 1
 
 ### Proposition B — Le mouvement
@@ -37,22 +38,26 @@ Source : `brand/BRAND.md` (tech pack v3 retenu). Ton : calme, confiant, élégan
 
 ### Proposition C — L'unicité
 - **Label** : DROP 1 — PRÉCOMMANDE
-- **Titre** : Une pièce. Aucune *identique*.
-- **Sous-titre** : Le motif KYMA Wave ne se répète jamais : chaque hoodie est découpé dans une zone différente du tissu imprimé.
-- **CTA** : Choisir mon coloris
+- **Version conditionnelle** `[SI PRÉSÉRIE VALIDÉE]` :
+  - **Titre** : Une pièce. Aucune *identique*.
+  - **Sous-titre** : Le motif KYMA Wave ne se répète jamais : chaque hoodie est découpé dans une zone différente du tissu imprimé.
+- **Version de repli (par défaut tant que les préséries ne sont pas validées)** :
+  - **Titre** : Une pièce, pensée pour être *unique*.
+  - **Sous-titre** : Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.
+- **CTA** (identique dans les deux versions) : Choisir mon coloris
 
-### Recommandation : C
-- Elle porte l'idée la plus propre à KYMA (le motif qui ne se répète jamais), donc reconnaissable sans logo, comme le veut la charte.
+### Recommandation : C, en version de repli jusqu'à validation des préséries
+- Elle porte l'idée la plus propre à KYMA (le motif qui ne cherche pas à se répéter), donc reconnaissable sans logo, comme le veut la charte.
 - Le titre est court, sans effet de manche, avec un seul mot en italique.
 - Le label annonce honnêtement qu'il s'agit d'une précommande.
 - Le CTA est concret et mène droit au choix du coloris.
-- Réserve : « chaque pièce unique » est à reconfirmer sur les préséries (point d'attention 5). En cas de doute, A est le repli sûr.
+- Bascule vers la version conditionnelle (« Aucune identique ») uniquement après validation des préséries. En cas de doute, A est le repli sûr.
 
 ---
 
 ## 2. Bandeau d'annonce (barre du haut)
 
-1. **Précommande Drop 1** : Drop 1 — précommande ouverte. Expédition estimée : [À COMPLÉTER : date d'expédition estimée].
+1. **Précommande Drop 1** : Drop 1 — précommande ouverte. Expédition au plus tard le [À COMPLÉTER : date].
 2. **Livraison** : Livraison en France. [À COMPLÉTER : délai et tarif de livraison, ou franco éventuel].
 3. **Cercle Waves** : Cercle Waves — inscrivez-vous pour suivre le courant de près.
 
@@ -75,14 +80,14 @@ Logique : on montre d'abord ce que l'on vend (coloris), puis ce qui le rend sing
 
 ### 02 — Le motif
 - **Label** : 02 — LE MOTIF
-- **Titre** : Un motif qui ne se répète *jamais*.
+- **Titre** : [SI PRÉSÉRIE VALIDÉE : Un motif qui ne se répète *jamais*.] Repli : Un motif qui suit son *flux*.
 - **Texte** : Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.
 - **Lien** : Découvrir le motif
 
 ### 03 — La pièce
 - **Label** : 03 — LA PIÈCE
-- **Titre** : Chaque hoodie est *unique*.
-- **Texte** : Le motif est imprimé sur tout le tissu, puis chaque pièce est découpée dans une zone différente du rouleau. Votre hoodie ne ressemble qu'à lui-même. [À CONFIRMER : validation sur préséries]
+- **Titre** : [SI PRÉSÉRIE VALIDÉE : Chaque hoodie est *unique*.] Repli : Une pièce, un *seul* geste.
+- **Texte** : Le motif est imprimé sur tout le tissu. [SI PRÉSÉRIE VALIDÉE : Chaque pièce est découpée dans une zone différente du rouleau : votre hoodie ne ressemble qu'à lui-même.] Repli : Pensé pour que chaque pièce soit unique.
 - **Lien** : Découvrir la pièce
 
 ### 04 — Le savoir-faire
@@ -111,27 +116,26 @@ Logique : on montre d'abord ce que l'on vend (coloris), puis ce qui le rend sing
 ### 4.1 Fiche produit — bloc sous le bouton
 **Titre du bloc** : Précommande, en toute transparence
 
-> Ce hoodie est produit après validation de la série. Votre paiement est enregistré à la commande ; la fabrication démarre ensuite.
+> La fabrication démarre après la clôture de la précommande. Votre paiement est enregistré à la commande.
 >
-> **Expédition estimée : [À COMPLÉTER : date d'expédition estimée].**
-> Si cette date évolue, nous vous écrivons avant tout le monde, avec la nouvelle date.
+> **Expédition au plus tard le [À COMPLÉTER : date].**
+> Si cette échéance devait être affectée, nous vous écrivons sans attendre.
 >
-> [À VALIDER VICTOIRE : conditions d'annulation et de remboursement avant expédition, y compris si la série n'était pas lancée.]
-> [À VALIDER VICTOIRE : droit de rétractation et conditions de retour applicables à une précommande.]
+> Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Voir les [CGV] et la page [Retours]. [À COMPLÉTER : liens vers les pages CGV et Retours]
 >
 > Livraison en France. [À COMPLÉTER : délais et frais de livraison.]
 > Guide des tailles : XS à XXL, coupe oversize.
 
-Note : la phrase « nous vous écrivons avant tout le monde » est un engagement. Le fondateur doit confirmer qu'il le tiendra, sinon la remplacer par « nous vous informons par e-mail ».
+Note : l'engagement « nous vous écrivons sans attendre » doit être confirmé par le fondateur, sinon le remplacer par « nous vous informons par e-mail ».
 
 ### 4.2 Bouton produit
 - **Libellé** : Précommander
-- **Sous-libellé optionnel** (sous le bouton, gris pierre) : Expédition estimée : [À COMPLÉTER : date d'expédition estimée]
+- **Sous-libellé optionnel** (sous le bouton, gris pierre) : Expédition au plus tard le [À COMPLÉTER : date]
 
 ### 4.3 Page panier
 - **Titre** : Votre panier
-- **Bandeau de rappel** (affiché si le panier contient une précommande) : Votre panier contient une précommande. Expédition estimée : [À COMPLÉTER : date d'expédition estimée]. Le paiement est enregistré à la commande.
-- **Case à cocher avant paiement** (à faire valider par Victoire) : J'ai compris que cet article est une précommande et que sa date d'expédition est estimée. [À VALIDER VICTOIRE : formulation définitive]
+- **Bandeau de rappel** (affiché si le panier contient une précommande) : Votre panier contient une précommande. Expédition au plus tard le [À COMPLÉTER : date]. Le paiement est enregistré à la commande.
+- **Case à cocher avant paiement** : J'ai compris que cet article est une précommande, expédiée au plus tard le [À COMPLÉTER : date], et que le motif de ma pièce est unique et différera des visuels.
 - **Bouton** : Passer au paiement
 - **Lien secondaire** : Continuer à explorer
 
@@ -146,11 +150,11 @@ Note : la phrase « nous vous écrivons avant tout le monde » est un engagement
 >
 > {{ line_items récapitulatif : produit, coloris, taille, quantité }}
 >
-> Ce que cela signifie : votre hoodie est fabriqué après validation de la série. Expédition estimée : [À COMPLÉTER : date d'expédition estimée]. Si cette date change, vous en serez informé(e) par e-mail, avec la nouvelle date.
+> Ce que cela signifie : la fabrication de votre hoodie démarre après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Si cette échéance devait être affectée, vous en serez informé(e) par e-mail sans attendre.
 >
-> Votre pièce est découpée dans une zone qui n'appartient qu'à elle. Elle arrivera accompagnée d'une carte portant son numéro dans la collection. [À CONFIRMER : packaging définitif]
+> [SI PRÉSÉRIE VALIDÉE : Votre pièce est découpée dans une zone qui n'appartient qu'à elle.] Repli : Pensé pour que chaque pièce soit unique. Elle arrivera accompagnée d'une carte portant son numéro dans la collection. [À CONFIRMER : packaging définitif]
 >
-> [À VALIDER VICTOIRE : rappel des conditions d'annulation, de remboursement et de rétractation + lien vers les CGV.]
+> Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Voir les [CGV] et la page [Retours]. [À COMPLÉTER : liens vers les pages CGV et Retours]
 >
 > Une question : [À COMPLÉTER : adresse e-mail de contact].
 >
@@ -194,9 +198,10 @@ Note : la phrase « nous vous écrivons avant tout le monde » est un engagement
 - **Texte** : Le palier supérieur, pour celles et ceux qui portent KYMA depuis ses origines.
 - **Avantages** :
   - [À VALIDER : accès anticipé aux prochaines ouvertures]
-  - [À VALIDER : attention particulière sur les éditions limitées]
   - [À VALIDER : autre avantage de palier supérieur]
 - **Condition de passage à ORIGINE** : [À VALIDER : critère d'accès, ex. nombre d'achats ou ancienneté. Ne rien chiffrer avant décision du fondateur.]
+
+Note : l'« accès anticipé aux prochaines ouvertures » est désormais l'avantage ORIGINE ; si le même avantage est proposé à INITIUM ou aux inscrits newsletter (section 5), le fondateur doit trancher pour que les paliers restent distincts.
 
 ### CTA d'inscription
 - **Bouton** : Rejoindre le cercle
@@ -237,7 +242,7 @@ Aucune mention de stock restant, aucun compte à rebours.
 ### Footer
 - **Signature de marque (une ligne)** : KYMA Paris — L'art du flow.
 - **Ligne de droits** : © KYMA [À COMPLÉTER : année et raison sociale]
-- **Navigation** (suggestion) : La pièce · Le motif · Cercle Waves · Contact · Livraison · Précommande · CGV · Mentions légales · Confidentialité
+- **Navigation** (suggestion) : La pièce · Le motif · Cercle Waves · Contact · Livraison · Précommande · Retours · CGV · Mentions légales · Confidentialité
 
 ---
 
@@ -247,24 +252,24 @@ Rappel : hashtags 3 à 6 maximum. Lien en bio vers le site (domaine : [À COMPL�
 
 ### Caption 1 — Sobre
 Le site s'ouvre, comme une marée qui monte.
-Le Drop 1 est en précommande : un hoodie, cinq coloris, un motif qui ne se répète jamais.
+Le Drop 1 est en précommande : un hoodie, cinq coloris, [SI PRÉSÉRIE VALIDÉE : un motif qui ne se répète jamais.] Repli : un motif fluide, pensé pour que chaque pièce soit unique.
 Plongez. Lien en bio.
 
 - **Alt-text (3 options)** :
   1. Hoodie zippé oversize KYMA au motif marbré lilas sur fond beige, lumière douce.
   2. Détail du motif KYMA Wave, volutes lilas tonales sur tissu poudré.
-  3. Page d'accueil du site KYMA : titre « Une pièce. Aucune identique. » sur fond beige.
+  3. Page d'accueil du site KYMA : titre du hero retenu (section 1) sur fond beige.
 - **Hashtags** : #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 - **CTA** : Plongez.
 
 ### Caption 2 — Le motif
 Aucune vague n'est identique à la précédente.
-Chaque hoodie du Drop 1 est découpé dans une zone différente du tissu imprimé. Le site est ouvert, la précommande aussi. [À CONFIRMER : unicité sur préséries]
+[SI PRÉSÉRIE VALIDÉE : Chaque hoodie du Drop 1 est découpé dans une zone différente du tissu imprimé.] Repli : Pensé pour que chaque pièce soit unique. Le site est ouvert, la précommande aussi.
 Le sillage s'élargit.
 
 - **Alt-text (3 options)** :
-  1. Gros plan sur un tissu marbré lilas et crème, volutes fluides sans répétition.
-  2. Plusieurs panneaux de tissu imprimés KYMA Wave côte à côte, chacun différent.
+  1. Gros plan sur un tissu marbré lilas et crème, volutes fluides.
+  2. Panneaux de tissu imprimés du motif KYMA Wave côte à côte. [SI PRÉSÉRIE VALIDÉE : chacun différent.]
   3. Main posée sur la manche d'un hoodie KYMA, motif marbré en lumière naturelle.
 - **Hashtags** : #kyma #lartduflow #streetwearunisexe #parisstreetwear #cerclewaves
 - **CTA** : Le sillage s'élargit.
@@ -284,5 +289,5 @@ Rejoignez le courant.
 ---
 
 ## Récapitulatif des balises ouvertes
-- Fondateur : date d'expédition estimée, frais et délais de livraison, nom de domaine, e-mail de contact, avantages et conditions des paliers INITIUM / ORIGINE, grammage définitif, raison sociale, liste finale des coloris (5 ou 6).
-- Victoire : conditions d'annulation / remboursement / rétractation / retours, mention RGPD, règlement du programme de fidélité, case de confirmation précommande, preuves GOTS et « Made in Portugal » avant d'activer les phrases balisées.
+- Fondateur : date « Expédition au plus tard le [date] », frais et délais de livraison, nom de domaine, e-mail de contact, avantages et conditions des paliers INITIUM / ORIGINE, grammage définitif, raison sociale, liste finale des coloris (5 ou 6), validation des préséries (bascule des textes `[SI PRÉSÉRIE VALIDÉE]`), liens vers les pages CGV et Retours.
+- Victoire : cohérence des CGV et de la page Retours avec la phrase « Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. » (cas d'une série non lancée non couvert par cette phrase), mention RGPD, règlement du programme de fidélité, formulation de la case de confirmation précommande (texte imposé par Arthur), preuves GOTS et « Made in Portugal » avant d'activer les phrases balisées.
