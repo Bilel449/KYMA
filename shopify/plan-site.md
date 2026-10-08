@@ -13,7 +13,7 @@ Tout ce qui n'est pas confirmé reste en `[À COMPLÉTER : …]` (jamais d'allé
 
 | Page | URL (handle) | Template / type | Contenu et source | Statut |
 |---|---|---|---|---|
-| Accueil | `/` | `templates/index.json` (fourni) | Hero Wave, manifeste, coloris, pièce unique, Cercle Waves. Textes par défaut à remplacer par Maya/Izaac | Thème prêt |
+| Accueil | `/` | `templates/index.json` (fourni) | Ordre de Maya (`contenu/copy-site.md` §3) : Hero « Une pièce. Aucune identique. » → 01 Le Drop 1 (coloris) → 02 Le motif → 03 La pièce → 04 Le savoir-faire → 05 Cercle Waves → 06 Instagram. Sections 03, 04 et 06 = `kyma-manifesto` ; 02 = `kyma-unique-piece` (zoom texture). Unicité : repli « Pensé pour que chaque pièce soit unique » | Thème prêt |
 | Drop 1 (collection) | `/collections/drop-1` | collection (Dawn) + section « KYMA — Coloris » ajoutée en haut | Voir §3 | À créer |
 | Tous les produits | `/collections/tous-les-produits` | collection (Dawn) | Collection automatique | À créer |
 | Fiche produit | `/products/<handle>` | `templates/product.json` (fourni) | Dawn `main-product` + « KYMA — Histoire produit » + produits associés | Thème prêt |
@@ -45,9 +45,10 @@ Le logo (KYMA en serif, interlettrage large) est le **nom de la boutique en text
 **Pied de page** — handle `footer`, 3 colonnes + légal :
 - *Boutique* : Drop 1 · Tous les produits · Guide des tailles
 - *Maison* : Notre histoire · Savoir-faire · Cercle Waves
-- *Aide* : FAQ · Contact · Livraison · Retours
-- *Légal* (ligne du bas) : CGV · Mentions légales · Confidentialité
-- Instagram : `@kymasinsta` (lien vers le profil officiel, à confirmer)
+- *Aide* : FAQ · Contact
+- *Légal* (ligne du bas, **sur toutes les pages**) : Mentions légales · CGV · Livraison · Retours et remboursements · Confidentialité · Cookies · « Gérer mes cookies » · « Renoncer au contrat ici » · Contact (détail et liens : §9.4)
+- Instagram : `@kymasinsta` (profil `https://www.instagram.com/kymasinsta/` à confirmer par le fondateur)
+- Bandeau d'annonce (Dawn) : « Drop 1 — précommande. Expédition au plus tard le [À COMPLÉTER : date] » (jamais « estimée »).
 - Bloc e-mail (newsletter) : texte de Maya ; consentement explicite (voir §6).
 
 ## 3. Collections
@@ -93,7 +94,7 @@ Ce qu'on perd, et le remède :
 | Suivi du stock | Oui, par variante (voir §5, précommande) |
 | Métachamp | `custom.date_expedition` (Date) = `[À COMPLÉTER : date communiquée par le fabricant]` |
 | SEO title (≤ 60) | `<Nom produit> \| KYMA — L'art du flow` — ex. « Hoodie zippé oversize \| KYMA — L'art du flow » (45 car.) |
-| Meta description (≤ 155) | ex. « Hoodie zippé oversize KYMA, streetwear unisexe au motif unique. Drop 1 en cinq coloris, XS à XXL. » (97 car.) |
+| Meta description (≤ 155) | ex. « Hoodie zippé oversize KYMA, streetwear unisexe. Drop 1 en cinq coloris, XS à XXL, pensé pour que chaque pièce soit unique. » (122 car. ; repli de Victoire, pas d'unicité affirmée) |
 | Description | Izaac (accroche + 2–3 phrases) ; détails/entretien/tailles/précommande sont dans le thème (section « Histoire produit ») |
 | Images | 1 packshot par coloris (fond clair, 4:5 portrait, ≥ 1600 px de large) **rattaché aux variantes du coloris** + lifestyle. Shopify sert déjà du WebP/AVIF via son CDN : inutile de convertir à la main |
 | Alt | « Hoodie KYMA coloris `<Coloris>`, vue de face / de dos / détail du motif » |
@@ -132,8 +133,8 @@ Ce qu'on perd, et le remède :
 | **B. « Continuer à vendre en rupture »** | Stock à 0, vente illimitée, Dawn peut afficher « Précommander » | Très simple | **Aucun plafond** : risque de vendre plus que la production prévue. À surveiller chaque jour |
 | **C. Appli de précommande** | Plafond, date par variante, paiement différé, relances | Le plus complet | Coût mensuel, dépendance, RGPD à vérifier — à benchmarker par Isabelle |
 
-Dans tous les cas : **tag `precommande`** sur le produit (affiche le bloc Précommande du thème) et **date d'expédition dans le métachamp** `custom.date_expedition` :
-Paramètres > Données personnalisées > Produits > Ajouter une définition → nom « Date d'expédition », espace de noms et clé `custom.date_expedition`, type **Date**. Puis remplir la valeur sur la fiche produit. Si la date manque, la fiche affiche `[À COMPLÉTER : date d'expédition…]` (garde-fou volontaire). Les informations précontractuelles de précommande (paiement, délai, rétractation) sont rédigées par **Victoire**.
+Dans tous les cas : **tag `precommande`** sur le produit (affiche le bloc Précommande du thème) et **date limite d'expédition dans le métachamp** `custom.date_expedition` :
+Paramètres > Données personnalisées > Produits > Ajouter une définition → nom « Date limite d'expédition », espace de noms et clé `custom.date_expedition`, type **Date**. Puis remplir la valeur sur la fiche produit. La fiche affiche « Expédition au plus tard le : <date> » ; si la date manque : « Expédition au plus tard le : `[À COMPLÉTER : date …]` » (garde-fou volontaire). Jamais « estimée », « environ » ni « ~18 semaines ». Les informations précontractuelles de précommande (paiement, délai, rétractation) sont rédigées par **Victoire** (voir §9).
 
 **Autres** : mode « mot de passe » actif jusqu'au lancement ; langue de la boutique = français ; Politiques = textes Victoire ; passer du plan *trial* à un plan payant pour vendre.
 
@@ -171,7 +172,7 @@ Le dossier à installer est `shopify/theme/`. On **ajoute** des fichiers `kyma-*
    - **Sections** > *Ajouter une nouvelle section* : `kyma-hero-wave`, `kyma-colorways`, `kyma-manifesto`, `kyma-unique-piece`, `kyma-cercle-waves`, `kyma-product-story` → coller le contenu de chaque fichier de `theme/sections/`.
    - **Templates** : ouvrir `index.json`, tout sélectionner, remplacer par `theme/templates/index.json` ; idem `product.json`.
    - **Layout > `theme.liquid`** : juste avant `</head>`, ajouter une ligne : `{% render 'kyma-assets' %}` (recommandé : le style du header et des polices s'applique alors à toutes les pages, pas seulement à celles qui contiennent une section KYMA).
-4. Enregistrer. Puis **Personnaliser** (voir ci-dessous) et **Aperçu** (menu ⋯ du thème) pour tester sur téléphone et ordinateur. **Ne pas publier** avant la check-list §9.
+4. Enregistrer. Puis **Personnaliser** (voir ci-dessous) et **Aperçu** (menu ⋯ du thème) pour tester sur téléphone et ordinateur. **Ne pas publier** avant la check-list §10.
 
 ### Méthode A — Shopify CLI (pour qui a Node.js)
 ```bash
@@ -195,12 +196,76 @@ shopify theme push --store kymas-store.myshopify.com --unpublished --theme "KYMA
 - **Mise en page** : largeur de page 1200 px. **Boutons / champs** : bordure 1 px, arrondi 0.
 - **Typographie** : laisser Dawn ; `kyma.css` impose DM Serif Display + Outfit.
 - **En-tête** : *En-tête fixe* = « Toujours » (le hero glisse sous l'en-tête translucide) ; schéma de couleurs 1 ; logo = texte « KYMA ». **Pied de page** : schéma 3.
-- **Page d'accueil** : remplacer les textes par défaut (Maya/Izaac), téléverser les visuels dans « Coloris » (packshots) et « Pièce unique » (détail du motif), renseigner les liens des coloris (`/products/<handle>?variant=<id>`).
+- **Page d'accueil** : remplacer les textes par défaut (Maya/Izaac), téléverser les visuels dans « Coloris » (packshots), « Le motif » (détail du motif) et « La pièce » (lifestyle) — la légende « Visuel de présentation (rendu) » s'affiche sous chaque rendu et se vide quand une vraie photo la remplace —, renseigner les liens des coloris (`/products/<handle>?variant=<id>`).
 - **Modifier les langues** : bouton d'ajout au panier → « Précommander » (option A du §5).
 
 Dépannage : si une section ne s'affiche pas ou un schéma est refusé, lancer `shopify theme check`. Si le thème Dawn est antérieur à la v15, remplacer dans `product.json` `"related-products"` par `"product-recommendations"` et `"scheme-1"` par `"background-1"`.
 
-## 9. Check-list de mise en ligne
+## 9. Conformité (reprise de `shopify/conformite.md`, partie b — Victoire)
+
+Les textes et libellés ci-dessous sont des **modèles de Victoire, à faire valider par un avocat** avant mise en ligne. Sacha les implémente et les teste ; rien n'est installé ni écrit dans la boutique à cette étape. Note d'alerte : le titre du hero « Une pièce. Aucune identique. » est une affirmation d'unicité sans condition (demandée telle quelle) ; la note de conformité (a) n'autorise aujourd'hui que le repli « Pensé pour que chaque pièce soit unique » — à arbitrer par Arthur/Victoire avant publication ; les autres textes d'accueil utilisent le repli.
+
+### 9.1 « Renoncer au contrat ici » (obligatoire depuis le 19/06/2026)
+Sans cette fonction, le délai de rétractation passe à 12 mois et 14 jours. Shopify ne la fournit pas en natif (selon Victoire) : **appli ou page avec formulaire**, au choix du fondateur.
+
+| Option | Principe | À vérifier |
+|---|---|---|
+| **A. Appli « droit de rétractation / retours »** (à benchmarker par Isabelle sur l'App Store ; aucune installée) | Bouton + formulaire + e-mail d'accusé de réception fournis par l'appli | Libellé personnalisable, accusé avec contenu + date + heure, hébergement RGPD, coût |
+| **B. Page `/pages/renoncer-au-contrat` avec formulaire** (template page + formulaire de contact Dawn adapté : nom, n° de commande, e-mail, bouton « Confirmer la rétractation ») | Sans appli ; le lien « Renoncer au contrat ici » du pied de page mène à cette page | Le formulaire natif envoie un e-mail à KYMA mais **pas forcément un accusé de réception automatique au client** : à compléter (appli de formulaires, ou automatisation d'e-mail) et à tester |
+
+Exigences communes (libellé exact à vérifier dans l'art. D.221-5) : bouton gratuit, visible et accessible **pendant tout le délai** ; libellé « Renoncer au contrat ici » ; formulaire (nom, n° de commande, e-mail) puis bouton « **Confirmer la rétractation** » ; **accusé de réception** par e-mail avec le contenu de la demande, la date et l'heure.
+**Emplacements** : pied de page de toutes les pages, e-mail de confirmation de commande, page de statut de commande.
+**Test (à documenter avec captures)** : (1) commande test en passerelle de test ; (2) clic depuis le pied de page sur mobile et ordinateur ; (3) clic depuis l'e-mail de confirmation ; (4) soumission du formulaire ; (5) accusé reçu avec contenu, date et heure ; (6) demande reçue côté KYMA ; (7) navigation au clavier et lecteur d'écran ; (8) archivage des captures (bonne pratique n°28 de Victoire).
+
+### 9.2 Panier et checkout
+- Récapitulatif modifiable : produit, coloris, taille, quantité, prix TTC, frais de livraison, **total TTC**.
+- **Trois cases, toutes non pré-cochées** :
+  1. « J'ai lu et j'accepte les CGV » (obligatoire, lien vers les CGV) ;
+  2. précommande + motif unique (obligatoire pour une précommande) : « J'ai compris que cet article est une précommande, expédiée au plus tard le `[À COMPLÉTER : date]`, et que le motif de ma pièce est unique et différera des visuels. » — formulation à valider par l'avocat ;
+  3. newsletter : case **distincte**, facultative, jamais liée aux CGV.
+- **Bouton final : « Commande avec obligation de paiement »** (ou formule équivalente sans ambiguïté). Le libellé par défaut de Shopify est à vérifier et à personnaliser (Boutique en ligne > Thèmes > Modifier les langues, rubrique panier/paiement ; sur les plans hors Shopify Plus le checkout ne se modifie pas par code : **[À VÉRIFIER dans l'admin]** ce qui est réellement modifiable).
+- Les cases du panier se posent dans le template panier (thème) ; le bouton « Commande avec obligation de paiement » reste désactivé tant que les cases obligatoires ne sont pas cochées. Si le checkout ne permet pas ces cases (hors Plus), prévoir une appli ou la validation de Victoire sur une alternative.
+- **Date limite d'expédition rappelée sur chaque ligne de précommande** du panier (« Expédition au plus tard le … », lue dans `custom.date_expedition`), reprise dans le checkout si possible, l'e-mail de confirmation et les notifications.
+- Moyens de paiement acceptés et frais affichés avant validation.
+
+### 9.3 Notifications Shopify (Paramètres > Notifications)
+E-mail de confirmation de commande : tous les éléments du contrat ; **date limite d'expédition** ; lien et copie des CGV (support durable) ; **formulaire type de rétractation** ; emplacement de « Renoncer au contrat ici » avec son lien ; contact du service client. Les autres notifications (expédition, remboursement) sont relues par Victoire. Remplacer « Expédition estimée » par « Expédition au plus tard le » dans tous les modèles (y compris celui de Maya, `copy-site.md` §4).
+
+### 9.4 Pied de page complet — toutes les pages
+| Libellé | Cible |
+|---|---|
+| Mentions légales | `/policies/legal-notice` |
+| CGV | `/policies/terms-of-service` |
+| Livraison | `/policies/shipping-policy` |
+| Retours et remboursements | `/policies/refund-policy` |
+| Confidentialité | `/policies/privacy-policy` |
+| Cookies | `/pages/cookies` |
+| **Gérer mes cookies** | lien permanent qui rouvre le bandeau de consentement (fonction de la bannière native ou de l'appli retenue) |
+| **Renoncer au contrat ici** | `/pages/renoncer-au-contrat` ou bouton de l'appli (§9.1) |
+| Contact | `/pages/contact` |
+
+Ne **pas** lier la plateforme européenne de règlement en ligne des litiges (fermée depuis le 20/07/2025). Le médiateur de la consommation figure dans les mentions légales et les CGV (Victoire).
+
+### 9.5 Fiche produit (déjà prévu dans le thème ou à renseigner)
+- Prix TTC avec « **Hors frais de livraison** » et lien « Livraison » : bloc `price_note` de `templates/product.json` (fait).
+- Bloc Précommande : « **Expédition au plus tard le** : date » (fait), « Annulation possible à tout moment avant l'expédition et jusqu'à 14 jours après réception » avec liens **Retours et remboursements** et **CGV** (fait) ; « Précommande du `[date]` au `[date]` » et condition de seuil minimal éventuelle : `[À COMPLÉTER : fondateur]`.
+- **Légende sous chaque rendu** : « Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente. » (réglage « Légende » des sections Coloris, Le motif et manifeste ; bloc « Mention des visuels » de la fiche). Plus aucune mention « non contractuel ».
+- Composition par élément (corps / bords-côtes 95 % coton, 5 % élasthanne / doublure), en français, avant l'achat : `[À COMPLÉTER : étiquette définitive]`. Pays de fabrication seulement s'il est prouvé. Entretien aligné sur l'étiquette.
+
+### 9.6 Bandeau cookies
+« Tout accepter » / « Tout refuser » au **même niveau et même format** / « Personnaliser » ; aucun pixel (Meta, TikTok, GA4) avant consentement ; fermer le bandeau vaut refus ; choix conservé 6 mois ; paramétrage dans Paramètres > Confidentialité des clients ; vérifier que chaque appli respecte l'API de consentement.
+
+## 10. Check-list de mise en ligne
+
+**Conformité (§9)**
+- [ ] Fonction « Renoncer au contrat ici » installée, libellé vérifié, accusé de réception (contenu, date, heure) **testé** de bout en bout et documenté
+- [ ] Panier : case CGV, case précommande + motif unique, case newsletter distincte — non pré-cochées ; bouton « Commande avec obligation de paiement »
+- [ ] Date limite « au plus tard le » affichée sur chaque ligne de précommande (panier, e-mail) ; plus aucune date « estimée »
+- [ ] Notifications Shopify : date limite, CGV, formulaire type de rétractation, lien « Renoncer au contrat ici », contact
+- [ ] Pied de page complet sur toutes les pages : Mentions légales · CGV · Livraison · Retours et remboursements · Confidentialité · Cookies · « Gérer mes cookies » · « Renoncer au contrat ici » · Contact
+- [ ] Fiche produit : « hors frais de livraison » + lien Livraison, bloc Précommande (annulation 14 jours + liens Retours/CGV), légende de rendu sous chaque visuel, composition par élément
+- [ ] Bandeau cookies conforme (accepter / refuser au même niveau), aucun pixel avant consentement
+- [ ] Textes juridiques validés par un avocat ; arbitrage Arthur/Victoire sur le titre du hero (unicité)
 
 **Contenu**
 - [ ] Produit créé en brouillon, 30 variantes, SKU, prix 179 € TTC, poids, stock/places de précommande
@@ -217,7 +282,7 @@ Dépannage : si une section ne s'affiche pas ou un schéma est refusé, lancer `
 - [ ] Thème : aperçu validé sur iPhone et Android, puis ordinateur ; Lighthouse mobile (perf, accessibilité ≥ 90)
 - [ ] Mouvement réduit testé (réglage système) ; navigation clavier ; contrastes
 - [ ] Polices auto-hébergées (§7) ; bannière cookies active ; analytics après consentement
-- [ ] Titres SEO ≤ 60 car., meta ≤ 155 car. (accueil proposé : « KYMA | Streetwear unisexe — L'art du flow » ; « KYMA, streetwear unisexe parisien. Hoodie zippé oversize du Drop 1, motif unique, inspiré du mouvement des vagues. »)
+- [ ] Titres SEO ≤ 60 car., meta ≤ 155 car. (accueil proposé : « KYMA | Streetwear unisexe — L'art du flow » ; « KYMA, streetwear unisexe parisien. Hoodie zippé oversize du Drop 1, pensé pour que chaque pièce soit unique, inspiré du mouvement des vagues. » — 141 car.)
 - [ ] Image de partage (Open Graph) ; favicon (lilas sur beige)
 
 **Boutique**
@@ -226,7 +291,7 @@ Dépannage : si une section ne s'affiche pas ou un schéma est refusé, lancer `
 - [ ] Avis, fidélité (INITIUM / ORIGINE), newsletter : applis choisies et testées
 - [ ] **Livrable « VALIDÉ » d'Arthur + confirmation explicite du fondateur** avant publication du thème ou passage du produit en ACTIVE
 
-## 10. Fichiers de cette livraison
+## 11. Fichiers de cette livraison
 
 ```
 shopify/

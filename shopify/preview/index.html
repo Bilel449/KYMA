@@ -184,7 +184,6 @@ html.kyma-js .kyma-divider[data-kyma-reveal].is-in { transform: scaleX(1); }
   opacity: 0; animation: kyma-fadeUp 1s 0.5s var(--kyma-ease) forwards;
 }
 .kyma-hero__title em { font-style: italic; color: var(--kyma-lilas-ink); }
-.kyma-stack em { display: block; }
 .kyma-hero__sub {
   max-width: 560px; margin: 28px auto 0; font-size: 14px; font-weight: 400; line-height: 1.8;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--kyma-gris-ink);
@@ -208,6 +207,8 @@ html.kyma-js .kyma-divider[data-kyma-reveal].is-in { transform: scaleX(1); }
 .kyma-frame__shift { position: absolute; inset: -6% 0; }
 .kyma-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .kyma-frame--ph, .is-missing { background: linear-gradient(140deg, #E9DCE6, #F5EDE4 55%, #E4D3E2); }
+.kyma-fig { margin: 0; }
+.kyma-caption { margin: 12px 0 0; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--kyma-gris-ink); }
 
 .kyma-cw { padding-bottom: calc(var(--kyma-section-y) * 0.8); }
 .kyma-cw__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
@@ -338,7 +339,12 @@ a { color: inherit; }
 .pv-footer ul { margin: 0; padding: 0; list-style: none; }
 .pv-footer li a { display: inline-block; padding: 6px 0; font-size: 14px; color: rgba(250, 250, 250, 0.82); text-decoration: none; }
 .pv-footer li a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--kyma-lilas); text-underline-offset: 4px; }
-.pv-footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(250, 250, 250, 0.14); font-size: 12px; color: rgba(250, 250, 250, 0.72); }
+.pv-footer__legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(250, 250, 250, 0.14); font-size: 12px; color: rgba(250, 250, 250, 0.72); }
+.pv-legal { display: flex; flex-wrap: wrap; gap: 4px 24px; margin: 0 0 16px; padding: 0; list-style: none; }
+.pv-legal a, .pv-linkbtn { display: inline-block; padding: 8px 0; font: 400 12px var(--kyma-sans); color: rgba(250, 250, 250, 0.82); text-decoration: none; background: none; border: 0; cursor: pointer; }
+.pv-legal a:hover, .pv-linkbtn:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--kyma-lilas); text-underline-offset: 4px; }
+.pv-legal__line { margin: 0; }
+.pv-footer .kyma-todo { color: var(--kyma-noir); }
 @media (min-width: 750px) { .pv-footer__cols { grid-template-columns: repeat(3, 1fr); } }
 </style>
 </head>
@@ -354,8 +360,8 @@ a { color: inherit; }
         <ul>
           <li><a class="header__menu-item" href="#drop"><span>Drop 1</span></a></li>
           <li><a class="header__menu-item" href="#drop"><span>Boutique</span></a></li>
-          <li><a class="header__menu-item" href="#histoire"><span>Notre histoire</span></a></li>
-          <li><a class="header__menu-item" href="#unique"><span>Savoir-faire</span></a></li>
+          <li><a class="header__menu-item" href="#piece"><span>Notre histoire</span></a></li>
+          <li><a class="header__menu-item" href="#savoir-faire"><span>Savoir-faire</span></a></li>
           <li><a class="header__menu-item" href="#cercle"><span>Cercle Waves</span></a></li>
         </ul>
       </nav>
@@ -370,7 +376,7 @@ a { color: inherit; }
       </div>
     </header>
     <nav class="pv-menu" id="pv-menu" aria-label="Menu principal (mobile)">
-      <a href="#drop">Drop 1</a><a href="#drop">Boutique</a><a href="#histoire">Notre histoire</a><a href="#unique">Savoir-faire</a><a href="#cercle">Cercle Waves</a>
+      <a href="#drop">Drop 1</a><a href="#drop">Boutique</a><a href="#piece">Notre histoire</a><a href="#savoir-faire">Savoir-faire</a><a href="#cercle">Cercle Waves</a>
     </nav>
   </div>
 </div>
@@ -382,12 +388,12 @@ a { color: inherit; }
 <section class="kyma-hero kyma-section" style="--kh-a:#F5EDE4;--kh-b:#E9DCE6;" data-kyma-hero data-kyma-live data-color-a="#F5EDE4" data-color-b="#E9DCE6" data-speed="30" data-scale="100">
   <canvas class="kyma-hero__canvas" aria-hidden="true"></canvas>
   <div class="kyma-hero__inner">
-    <p class="kyma-hero__label">KYMA Paris — Drop 1</p>
-    <h2 class="kyma-hero__title kyma-stack">Ride the <em>wave</em></h2>
-    <p class="kyma-hero__sub">Le hoodie zippé oversize. Chaque pièce est unique.</p>
+    <p class="kyma-hero__label">DROP 1 — PRÉCOMMANDE</p>
+    <h2 class="kyma-hero__title">Une pièce. Aucune<br><em>identique</em>.</h2>
+    <p class="kyma-hero__sub">Le hoodie zippé oversize. Pensé pour que chaque pièce soit unique.</p>
     <div class="kyma-hero__ctas">
-      <a class="kyma-btn" href="#drop"><span>Découvrir le Drop 1</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
-      <a class="kyma-btn kyma-btn--ghost" href="#histoire"><span>Notre histoire</span></a>
+      <a class="kyma-btn" href="#drop"><span>Choisir mon coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="kyma-btn kyma-btn--ghost" href="#piece"><span>Notre histoire</span></a>
     </div>
     <svg class="kyma-waves kyma-hero__waves" viewBox="0 54 400 50" xmlns="http://www.w3.org/2000/svg" focusable="false" data-kyma-live aria-hidden="true">
       <path class="kyma-waves__1" stroke-width="2.2" d="M50 68 C85 61 110 78 150 68 C190 61 220 78 260 68 C300 61 320 78 350 68"/>
@@ -399,40 +405,14 @@ a { color: inherit; }
   <span class="kyma-hero__cue" aria-hidden="true"></span>
 </section>
 
-<!-- ===== kyma-manifesto (01) ===== -->
-<hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-man kyma-man--img" id="histoire" aria-labelledby="t-man">
-  <div class="kyma-sec__inner">
-    <div class="kyma-man__grid">
-      <div class="kyma-man__text" data-kyma-reveal>
-        <p class="kyma-sec__num">01</p>
-        <p class="kyma-sec__label">Manifeste</p>
-        <h2 class="kyma-sec__title" id="t-man">L&#39;art du <em>flow</em></h2>
-        <p class="kyma-sec__desc">KYMA vient du grec κύμα, la vague. Une marque parisienne de streetwear unisexe, pensée comme un courant : des lignes fluides, des matières texturées, un luxe discret qui ne cherche pas à parler fort.</p>
-        <p class="kyma-sec__desc">Le vide compte autant que le plein. Chaque pièce garde le rythme du ressac.</p>
-        <ul class="kyma-chips">
-          <li>Mouvement</li><li>Fluidité</li><li>Luxe discret</li><li>Organique</li><li>Hypnotique</li>
-        </ul>
-        <div class="kyma-man__cta"><a class="kyma-link" href="#histoire">Lire notre histoire</a></div>
-      </div>
-      <div class="kyma-frame kyma-frame--ph" data-kyma-reveal style="--kd:150ms;">
-        <div class="kyma-frame__shift" data-kyma-parallax="0.3">
-          <img src="../../brand/private/images/lifestyle/homme-lilac-whirl-paris.png" alt="Portrait en extérieur, hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">01</div>
-</section>
-
-<!-- ===== kyma-colorways (02) ===== -->
+<!-- ===== kyma-colorways (01 — Le Drop 1) ===== -->
 <section class="kyma-sec kyma-cw" id="drop" aria-labelledby="t-cw">
   <div class="kyma-sec__inner kyma-cw__head">
     <div data-kyma-reveal>
-      <p class="kyma-sec__num">02</p>
-      <p class="kyma-sec__label">Drop 1</p>
-      <h2 class="kyma-sec__title" id="t-cw">Cinq <em>courants</em></h2>
-      <p class="kyma-sec__desc">Un seul hoodie zippé oversize, cinq marbrures. Chaque coloris a son propre sillage.</p>
+      <p class="kyma-sec__num">01</p>
+      <p class="kyma-sec__label">Le Drop 1</p>
+      <h2 class="kyma-sec__title" id="t-cw">Cinq coloris, un même <em>flux</em>.</h2>
+      <p class="kyma-sec__desc">Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.</p>
     </div>
     <div class="kyma-cw__nav" data-kyma-reveal>
       <button type="button" class="kyma-cw__arrow" data-kyma-scroll="-1" aria-label="Coloris précédents" disabled>
@@ -448,81 +428,131 @@ a { color: inherit; }
       <li class="kyma-cw__item" style="--kd:0ms;" data-kyma-reveal>
         <a class="kyma-cw__card" href="#drop">
           <div class="kyma-cw__media" style="--tile:#C8A2C8;"><img class="kyma-cw__img" src="../../brand/private/images/produits/lilac-whirl.png" alt="Hoodie KYMA coloris Lilac Whirl" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
+          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
           <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#C8A2C8;" aria-hidden="true"></span>Lilac Whirl</h3><p class="kyma-cw__desc">Lilas tourbillonnant sur poudre</p><span class="kyma-cw__more">Découvrir</span></div>
         </a>
       </li>
       <li class="kyma-cw__item" style="--kd:90ms;" data-kyma-reveal>
         <a class="kyma-cw__card" href="#drop">
           <div class="kyma-cw__media" style="--tile:#EFE6D2;"><img class="kyma-cw__img" src="../../brand/private/images/produits/ivory-tide.png" alt="Hoodie KYMA coloris Ivory Tide" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
+          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
           <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#EFE6D2;" aria-hidden="true"></span>Ivory Tide</h3><p class="kyma-cw__desc">Crème ivoire sur vanille</p><span class="kyma-cw__more">Découvrir</span></div>
         </a>
       </li>
       <li class="kyma-cw__item" style="--kd:180ms;" data-kyma-reveal>
         <a class="kyma-cw__card" href="#drop">
           <div class="kyma-cw__media" style="--tile:#B9BDC4;"><img class="kyma-cw__img" src="../../brand/private/images/produits/silver-drift.png" alt="Hoodie KYMA coloris Silver Drift" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
+          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
           <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#B9BDC4;" aria-hidden="true"></span>Silver Drift</h3><p class="kyma-cw__desc">Gris acier sur perle</p><span class="kyma-cw__more">Découvrir</span></div>
         </a>
       </li>
       <li class="kyma-cw__item" style="--kd:270ms;" data-kyma-reveal>
         <a class="kyma-cw__card" href="#drop">
           <div class="kyma-cw__media" style="--tile:#2B2B2E;"><img class="kyma-cw__img" src="../../brand/private/images/produits/noir-absolu.png" alt="Hoodie KYMA coloris Noir Absolu" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
+          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
           <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#2B2B2E;" aria-hidden="true"></span>Noir Absolu</h3><p class="kyma-cw__desc">Noir sur anthracite, marbrage subtil</p><span class="kyma-cw__more">Découvrir</span></div>
         </a>
       </li>
       <li class="kyma-cw__item" style="--kd:360ms;" data-kyma-reveal>
         <a class="kyma-cw__card" href="#drop">
           <div class="kyma-cw__media" style="--tile:#8E1B33;"><img class="kyma-cw__img" src="../../brand/private/images/produits/crimson-flow.png" alt="Hoodie KYMA coloris Crimson Flow" loading="lazy" width="320" height="427" onerror="this.parentNode.classList.add('is-missing');this.remove()"></div>
+          <p class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</p>
           <div class="kyma-cw__meta"><h3 class="kyma-cw__name"><span class="kyma-cw__dot" style="--dot:#8E1B33;" aria-hidden="true"></span>Crimson Flow</h3><p class="kyma-cw__desc">Cramoisi sur bordeaux</p><span class="kyma-cw__more">Découvrir</span></div>
         </a>
       </li>
     </ul>
   </div>
   <div class="kyma-sec__inner kyma-cw__foot" data-kyma-reveal>
-    <a class="kyma-link" href="#drop">Voir tout le Drop 1</a>
+    <a class="kyma-link" href="#drop">Voir les coloris</a>
   </div>
 </section>
 
-<!-- ===== kyma-unique-piece (03) ===== -->
+<!-- ===== kyma-unique-piece (02 — Le motif) ===== -->
 <hr class="kyma-divider" data-kyma-reveal>
-<section class="kyma-sec kyma-up" id="unique" aria-labelledby="t-up">
+<section class="kyma-sec kyma-up" id="motif" aria-labelledby="t-up">
   <div class="kyma-sec__inner">
     <div class="kyma-up__grid">
       <div class="kyma-up__text" data-kyma-reveal>
-        <p class="kyma-sec__num">03</p>
-        <p class="kyma-sec__label">Pièce unique</p>
-        <h2 class="kyma-sec__title" id="t-up">Chaque pièce est <em>unique</em></h2>
-        <p class="kyma-sec__desc">Le motif ne se répète jamais. Chaque pièce est découpée dans une zone différente du rouleau : aucune ne ressemble tout à fait à une autre.</p>
+        <p class="kyma-sec__num">02</p>
+        <p class="kyma-sec__label">Le motif</p>
+        <h2 class="kyma-sec__title" id="t-up">Un motif pensé pour ne pas se <em>répéter</em>.</h2>
+        <p class="kyma-sec__desc">Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.</p>
         <ul class="kyma-up__points" role="list">
-          <li class="kyma-up__point"><h3>Un motif qui ne se répète pas</h3><p>Impression all-over, motif non répété.</p></li>
-          <li class="kyma-up__point"><h3>Une découpe différente</h3><p>Chaque hoodie est coupé dans une autre zone du rouleau.</p></li>
-          <li class="kyma-up__point"><h3>Un sillage, le vôtre</h3><p>Votre pièce porte son propre dessin.</p></li>
+          <li class="kyma-up__point"><h3>Un marbré fluide</h3><p>Volutes et tourbillons, toujours tonal.</p></li>
+          <li class="kyma-up__point"><h3>Une impression all-over</h3><p>Le motif s&#39;étend sur tout le tissu.</p></li>
+          <li class="kyma-up__point"><h3>Une découpe différente</h3><p>Pensé pour que chaque pièce soit unique.</p></li>
         </ul>
       </div>
-      <div class="kyma-up__frame kyma-up__frame--ph" data-kyma-reveal style="--kd:150ms;">
-        <div class="kyma-up__zoom" data-kyma-zoom="1.15,1.65" style="transform-origin:50% 55%;">
-          <img src="../../brand/private/images/produits/lilac-whirl.png" alt="Détail du motif marbré du hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
+      <figure class="kyma-fig" data-kyma-reveal style="--kd:150ms;">
+        <div class="kyma-up__frame kyma-up__frame--ph">
+          <div class="kyma-up__zoom" data-kyma-zoom="1.15,1.65" style="transform-origin:50% 55%;">
+            <img src="../../brand/private/images/produits/lilac-whirl.png" alt="Détail du motif marbré du hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
+          </div>
         </div>
+        <figcaption class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">02</div>
+</section>
+
+<!-- ===== kyma-manifesto (03 — La pièce, avec image) ===== -->
+<hr class="kyma-divider" data-kyma-reveal>
+<section class="kyma-sec kyma-man kyma-man--img" id="piece" aria-labelledby="t-pi">
+  <div class="kyma-sec__inner">
+    <div class="kyma-man__grid">
+      <div class="kyma-man__text" data-kyma-reveal>
+        <p class="kyma-sec__num">03</p>
+        <p class="kyma-sec__label">La pièce</p>
+        <h2 class="kyma-sec__title" id="t-pi">Pensé pour que chaque pièce soit <em>unique</em>.</h2>
+        <p class="kyma-sec__desc">Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. <span class="kyma-todo">[À CONFIRMER : validation sur préséries]</span></p>
+        <div class="kyma-man__cta"><a class="kyma-link" href="#drop">Découvrir la pièce</a></div>
       </div>
+      <figure class="kyma-fig" data-kyma-reveal style="--kd:150ms;">
+        <div class="kyma-frame kyma-frame--ph">
+          <div class="kyma-frame__shift" data-kyma-parallax="0.3">
+            <img src="../../brand/private/images/lifestyle/homme-lilac-whirl-paris.png" alt="Portrait en extérieur, hoodie KYMA coloris Lilac Whirl" loading="lazy" onerror="this.parentNode.parentNode.classList.add('is-missing');this.remove()">
+          </div>
+        </div>
+        <figcaption class="kyma-caption">Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.</figcaption>
+      </figure>
     </div>
   </div>
   <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">03</div>
 </section>
 
-<!-- ===== kyma-cercle-waves (04) ===== -->
+<!-- ===== kyma-manifesto (04 — Le savoir-faire) ===== -->
+<hr class="kyma-divider" data-kyma-reveal>
+<section class="kyma-sec kyma-man" id="savoir-faire" aria-labelledby="t-sf">
+  <div class="kyma-sec__inner">
+    <div class="kyma-man__grid">
+      <div class="kyma-man__text" data-kyma-reveal>
+        <p class="kyma-sec__num">04</p>
+        <p class="kyma-sec__label">Le savoir-faire</p>
+        <h2 class="kyma-sec__title" id="t-sf">Une matière dense, une coupe <em>libre</em>.</h2>
+        <p class="kyma-sec__desc">French terry épais à l&#39;intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.</p>
+        <div class="kyma-man__cta"><a class="kyma-link" href="#savoir-faire">Lire le détail de la pièce</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">04</div>
+</section>
+
+<!-- ===== kyma-cercle-waves (05) ===== -->
 <hr class="kyma-divider" data-kyma-reveal>
 <section class="kyma-sec kyma-cercle" id="cercle" aria-labelledby="t-ce">
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
-      <p class="kyma-sec__num">04</p>
-      <p class="kyma-sec__label">Fidélité</p>
-      <h2 class="kyma-sec__title" id="t-ce">Cercle <em>Waves</em></h2>
-      <p class="kyma-sec__desc">Le Cercle Waves accompagne celles et ceux qui suivent le courant, en deux paliers.</p>
+      <p class="kyma-sec__num">05</p>
+      <p class="kyma-sec__label">Cercle Waves</p>
+      <h2 class="kyma-sec__title" id="t-ce">Rejoindre le <em>cercle</em>.</h2>
+      <p class="kyma-sec__desc">Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.</p>
     </div>
     <ul class="kyma-cercle__grid" role="list">
       <li class="kyma-tier" data-kyma-reveal style="--kd:0ms;">
         <p class="kyma-tier__tag">Palier 1</p>
         <h3 class="kyma-tier__name">Initium</h3>
-        <p class="kyma-tier__lead">L&#39;entrée dans le Cercle.</p>
+        <p class="kyma-tier__lead">L&#39;entrée dans le cercle.</p>
         <ul class="kyma-tier__perks" role="list"><li>[À COMPLÉTER : conditions d&#39;accès et avantages INITIUM]</li></ul>
       </li>
       <li class="kyma-tier kyma-tier--dark kyma-on-dark" data-kyma-reveal style="--kd:140ms;">
@@ -533,10 +563,27 @@ a { color: inherit; }
       </li>
     </ul>
     <div class="kyma-cercle__cta" data-kyma-reveal>
-      <a class="kyma-btn kyma-btn--ghost" href="#cercle"><span>Découvrir le Cercle Waves</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="kyma-btn kyma-btn--ghost" href="#cercle"><span>Entrer dans le Cercle</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">04</div>
+  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">05</div>
+</section>
+
+<!-- ===== kyma-manifesto (06 — Instagram) ===== -->
+<hr class="kyma-divider" data-kyma-reveal>
+<section class="kyma-sec kyma-man" id="instagram" aria-labelledby="t-ig">
+  <div class="kyma-sec__inner">
+    <div class="kyma-man__grid">
+      <div class="kyma-man__text" data-kyma-reveal>
+        <p class="kyma-sec__num">06</p>
+        <p class="kyma-sec__label">Instagram</p>
+        <h2 class="kyma-sec__title" id="t-ig">Dans le <em>sillage</em>.</h2>
+        <p class="kyma-sec__desc">Coulisses, textures et premiers regards, sur @kymasinsta.</p>
+        <div class="kyma-man__cta"><a class="kyma-link" href="#instagram">Suivre @kymasinsta</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="kyma-sec__mark" aria-hidden="true" data-kyma-parallax="-0.4">06</div>
 </section>
 </main>
 
@@ -552,13 +599,23 @@ a { color: inherit; }
     </svg>
     <div class="pv-footer__cols">
       <div><h2>Boutique</h2><ul><li><a href="#drop">Drop 1</a></li><li><a href="#drop">Tous les produits</a></li><li><a href="#drop">Guide des tailles</a></li></ul></div>
-      <div><h2>Maison</h2><ul><li><a href="#histoire">Notre histoire</a></li><li><a href="#unique">Savoir-faire</a></li><li><a href="#cercle">Cercle Waves</a></li></ul></div>
-      <div><h2>Aide</h2><ul><li><a href="#top">FAQ</a></li><li><a href="#top">Contact</a></li><li><a href="#top">Livraison et retours</a></li><li><a href="#top">Instagram @kymasinsta</a></li></ul></div>
+      <div><h2>Maison</h2><ul><li><a href="#piece">Notre histoire</a></li><li><a href="#savoir-faire">Savoir-faire</a></li><li><a href="#cercle">Cercle Waves</a></li></ul></div>
+      <div><h2>Aide</h2><ul><li><a href="#top">FAQ</a></li><li><a href="#top">Contact</a></li><li><a href="#instagram">Instagram @kymasinsta</a></li></ul></div>
     </div>
-    <div class="pv-footer__legal">
-      <span>&copy; 2026 KYMA Paris</span>
-      <span><a href="#top">CGV</a> · <a href="#top">Mentions légales</a> · <a href="#top">Confidentialité</a> <em>(textes fournis par Victoire)</em></span>
-    </div>
+    <nav class="pv-footer__legal" aria-label="Informations légales">
+      <ul class="pv-legal">
+        <li><a href="#top">Mentions légales</a></li>
+        <li><a href="#top">CGV</a></li>
+        <li><a href="#top">Livraison</a></li>
+        <li><a href="#top">Retours et remboursements</a></li>
+        <li><a href="#top">Confidentialité</a></li>
+        <li><a href="#top">Cookies</a></li>
+        <li><button type="button" class="pv-linkbtn">Gérer mes cookies</button></li>
+        <li><a href="#top">Renoncer au contrat ici</a></li>
+        <li><a href="#top">Contact</a></li>
+      </ul>
+      <p class="pv-legal__line">&copy; KYMA <span class="kyma-todo">[À COMPLÉTER : année et raison sociale]</span> · Textes juridiques fournis par Victoire, à valider par un avocat.</p>
+    </nav>
   </div>
 </footer>
 

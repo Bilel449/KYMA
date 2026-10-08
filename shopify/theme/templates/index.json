@@ -3,13 +3,13 @@
     "hero": {
       "type": "kyma-hero-wave",
       "settings": {
-        "label": "KYMA Paris — Drop 1",
-        "title_before": "Ride the",
-        "title_em": "wave",
-        "title_after": "",
+        "label": "DROP 1 — PRÉCOMMANDE",
+        "title_before": "Une pièce. Aucune",
+        "title_em": "identique",
+        "title_after": ".",
         "em_new_line": true,
-        "subtitle": "Le hoodie zippé oversize. Chaque pièce est unique.",
-        "cta_label": "Découvrir le Drop 1",
+        "subtitle": "Le hoodie zippé oversize. Pensé pour que chaque pièce soit unique.",
+        "cta_label": "Choisir mon coloris",
         "cta_link": "/collections/drop-1",
         "cta2_label": "Notre histoire",
         "cta2_link": "/pages/notre-histoire",
@@ -22,24 +22,7 @@
         "height": "full"
       }
     },
-    "manifesto": {
-      "type": "kyma-manifesto",
-      "settings": {
-        "show_divider": true,
-        "number": "01",
-        "label": "Manifeste",
-        "title_before": "L'art du",
-        "title_em": "flow",
-        "title_after": "",
-        "text": "KYMA vient du grec κύμα, la vague. Une marque parisienne de streetwear unisexe, pensée comme un courant : des lignes fluides, des matières texturées, un luxe discret qui ne cherche pas à parler fort.",
-        "text_2": "Le vide compte autant que le plein. Chaque pièce garde le rythme du ressac.",
-        "keywords": "Mouvement\nFluidité\nLuxe discret\nOrganique\nHypnotique",
-        "cta_label": "Lire notre histoire",
-        "cta_link": "/pages/notre-histoire",
-        "watermark": "01"
-      }
-    },
-    "colorways": {
+    "drop": {
       "type": "kyma-colorways",
       "blocks": {
         "lilac-whirl": {
@@ -47,6 +30,7 @@
           "settings": {
             "name": "Lilac Whirl",
             "description": "Lilas tourbillonnant sur poudre",
+            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
             "swatch": "#C8A2C8"
           }
         },
@@ -55,6 +39,7 @@
           "settings": {
             "name": "Ivory Tide",
             "description": "Crème ivoire sur vanille",
+            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
             "swatch": "#EFE6D2"
           }
         },
@@ -63,6 +48,7 @@
           "settings": {
             "name": "Silver Drift",
             "description": "Gris acier sur perle",
+            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
             "swatch": "#B9BDC4"
           }
         },
@@ -71,6 +57,7 @@
           "settings": {
             "name": "Noir Absolu",
             "description": "Noir sur anthracite, marbrage subtil",
+            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
             "swatch": "#2B2B2E"
           }
         },
@@ -79,6 +66,7 @@
           "settings": {
             "name": "Crimson Flow",
             "description": "Cramoisi sur bordeaux",
+            "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
             "swatch": "#8E1B33"
           }
         }
@@ -91,39 +79,39 @@
         "crimson-flow"
       ],
       "settings": {
-        "number": "02",
-        "label": "Drop 1",
-        "title_before": "Cinq",
-        "title_em": "courants",
-        "title_after": "",
-        "text": "Un seul hoodie zippé oversize, cinq marbrures. Chaque coloris a son propre sillage.",
+        "number": "01",
+        "label": "Le Drop 1",
+        "title_before": "Cinq coloris, un même",
+        "title_em": "flux",
+        "title_after": ".",
+        "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.",
         "link_label": "Découvrir",
-        "cta_label": "Voir tout le Drop 1",
+        "cta_label": "Voir les coloris",
         "cta_link": "/collections/drop-1"
       }
     },
-    "unique": {
+    "motif": {
       "type": "kyma-unique-piece",
       "blocks": {
         "point-1": {
           "type": "point",
           "settings": {
-            "title": "Un motif qui ne se répète pas",
-            "text": "Impression all-over, motif non répété."
+            "title": "Un marbré fluide",
+            "text": "Volutes et tourbillons, toujours tonal."
           }
         },
         "point-2": {
           "type": "point",
           "settings": {
-            "title": "Une découpe différente",
-            "text": "Chaque hoodie est coupé dans une autre zone du rouleau."
+            "title": "Une impression all-over",
+            "text": "Le motif s'étend sur tout le tissu."
           }
         },
         "point-3": {
           "type": "point",
           "settings": {
-            "title": "Un sillage, le vôtre",
-            "text": "Votre pièce porte son propre dessin."
+            "title": "Une découpe différente",
+            "text": "Pensé pour que chaque pièce soit unique."
           }
         }
       },
@@ -133,17 +121,54 @@
         "point-3"
       ],
       "settings": {
-        "number": "03",
-        "label": "Pièce unique",
-        "title_before": "Chaque pièce est",
-        "title_em": "unique",
-        "title_after": "",
-        "text": "Le motif ne se répète jamais. Chaque pièce est découpée dans une zone différente du rouleau : aucune ne ressemble tout à fait à une autre.",
+        "number": "02",
+        "label": "Le motif",
+        "title_before": "Un motif pensé pour ne pas se",
+        "title_em": "répéter",
+        "title_after": ".",
+        "text": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.",
+        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
         "zoom_from": 115,
         "zoom_to": 165,
         "focus_x": 50,
         "focus_y": 50,
+        "watermark": "02"
+      }
+    },
+    "piece": {
+      "type": "kyma-manifesto",
+      "settings": {
+        "show_divider": true,
+        "number": "03",
+        "label": "La pièce",
+        "title_before": "Pensé pour que chaque pièce soit",
+        "title_em": "unique",
+        "title_after": ".",
+        "text": "Le motif est imprimé sur tout le tissu ; chaque pièce est pensée pour être découpée dans une zone différente du rouleau. [À CONFIRMER : validation sur préséries]",
+        "text_2": "",
+        "keywords": "",
+        "cta_label": "Découvrir la pièce",
+        "cta_link": "/collections/drop-1",
+        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
         "watermark": "03"
+      }
+    },
+    "savoir-faire": {
+      "type": "kyma-manifesto",
+      "settings": {
+        "show_divider": true,
+        "number": "04",
+        "label": "Le savoir-faire",
+        "title_before": "Une matière dense, une coupe",
+        "title_em": "libre",
+        "title_after": ".",
+        "text": "French terry épais à l'intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.",
+        "text_2": "",
+        "keywords": "",
+        "cta_label": "Lire le détail de la pièce",
+        "cta_link": "/pages/savoir-faire",
+        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
+        "watermark": "04"
       }
     },
     "cercle": {
@@ -154,7 +179,7 @@
           "settings": {
             "tag": "Palier 1",
             "name": "Initium",
-            "lead": "L'entrée dans le Cercle.",
+            "lead": "L'entrée dans le cercle.",
             "perks": "[À COMPLÉTER : conditions d'accès et avantages INITIUM]",
             "dark": false
           }
@@ -175,23 +200,43 @@
         "origine"
       ],
       "settings": {
-        "number": "04",
-        "label": "Fidélité",
-        "title_before": "Cercle",
-        "title_em": "Waves",
-        "title_after": "",
-        "text": "Le Cercle Waves accompagne celles et ceux qui suivent le courant, en deux paliers.",
-        "cta_label": "Découvrir le Cercle Waves",
+        "number": "05",
+        "label": "Cercle Waves",
+        "title_before": "Rejoindre le",
+        "title_em": "cercle",
+        "title_after": ".",
+        "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.",
+        "cta_label": "Entrer dans le Cercle",
         "cta_link": "/pages/cercle-waves",
-        "watermark": "04"
+        "watermark": "05"
+      }
+    },
+    "instagram": {
+      "type": "kyma-manifesto",
+      "settings": {
+        "show_divider": true,
+        "number": "06",
+        "label": "Instagram",
+        "title_before": "Dans le",
+        "title_em": "sillage",
+        "title_after": ".",
+        "text": "Coulisses, textures et premiers regards, sur @kymasinsta.",
+        "text_2": "",
+        "keywords": "",
+        "cta_label": "Suivre @kymasinsta",
+        "cta_link": "https://www.instagram.com/kymasinsta/",
+        "caption": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente.",
+        "watermark": "06"
       }
     }
   },
   "order": [
     "hero",
-    "manifesto",
-    "colorways",
-    "unique",
-    "cercle"
+    "drop",
+    "motif",
+    "piece",
+    "savoir-faire",
+    "cercle",
+    "instagram"
   ]
 }

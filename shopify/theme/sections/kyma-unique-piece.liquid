@@ -1,5 +1,5 @@
 {%- comment -%}
-  KYMA — « Chaque pièce est unique » : texte numéroté + zoom animé sur la texture (progression au scroll).
+  KYMA — « Le motif » : texte numéroté + zoom animé sur la texture (progression au scroll).
   Le zoom est désactivé en mouvement réduit (image fixe).
 {%- endcomment -%}
 {% render 'kyma-assets' %}
@@ -39,11 +39,8 @@
         {%- endif -%}
       </div>
 
-      <div
-        class="kyma-up__frame{% if section.settings.image == blank %} kyma-up__frame--ph{% endif %}"
-        data-kyma-reveal
-        style="--kd: 150ms;"
-      >
+      <figure class="kyma-fig" data-kyma-reveal style="--kd: 150ms;">
+      <div class="kyma-up__frame{% if section.settings.image == blank %} kyma-up__frame--ph{% endif %}">
         {%- if section.settings.image != blank -%}
           <div class="kyma-up__zoom" data-kyma-zoom="{{ zoom_from }},{{ zoom_to }}" style="transform-origin: {{ section.settings.focus_x }}% {{ section.settings.focus_y }}%;">
             {{
@@ -59,6 +56,10 @@
           <span class="kyma-todo" style="position:absolute;left:16px;top:16px;">[À COMPLÉTER : image de texture (détail du motif)]</span>
         {%- endif -%}
       </div>
+      {%- if section.settings.image != blank and section.settings.caption != blank -%}
+        <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
+      {%- endif -%}
+      </figure>
     </div>
   </div>
 
@@ -69,24 +70,25 @@
 
 {% schema %}
 {
-  "name": "KYMA — Pièce unique",
+  "name": "KYMA — Motif et zoom",
   "tag": "div",
   "class": "kyma-section",
   "settings": [
     { "type": "header", "content": "Texte" },
-    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
-    { "type": "text", "id": "label", "label": "Label", "default": "Pièce unique" },
-    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Chaque pièce est" },
-    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "unique" },
-    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)" },
-    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le motif ne se répète jamais. Chaque pièce est découpée dans une zone différente du rouleau : aucune ne ressemble tout à fait à une autre." },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "02" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Le motif" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Un motif pensé pour ne pas se" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "répéter" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier." },
     { "type": "header", "content": "Image et zoom" },
     { "type": "image_picker", "id": "image", "label": "Image de texture (détail du motif)" },
+    { "type": "text", "id": "caption", "label": "Légende sous l'image (laisser vide pour une vraie photo du produit fabriqué)", "default": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente." },
     { "type": "range", "id": "zoom_from", "label": "Zoom au début", "min": 100, "max": 200, "step": 5, "unit": "%", "default": 115 },
     { "type": "range", "id": "zoom_to", "label": "Zoom à la fin", "min": 100, "max": 300, "step": 5, "unit": "%", "default": 165 },
     { "type": "range", "id": "focus_x", "label": "Point de zoom — horizontal", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
     { "type": "range", "id": "focus_y", "label": "Point de zoom — vertical", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 50 },
-    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "03" }
+    { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "02" }
   ],
   "blocks": [
     {
@@ -102,11 +104,11 @@
   "max_blocks": 4,
   "presets": [
     {
-      "name": "KYMA — Pièce unique",
+      "name": "KYMA — Motif et zoom",
       "blocks": [
-        { "type": "point", "settings": { "title": "Un motif qui ne se répète pas", "text": "Impression all-over, motif non répété." } },
-        { "type": "point", "settings": { "title": "Une découpe différente", "text": "Chaque hoodie est coupé dans une autre zone du rouleau." } },
-        { "type": "point", "settings": { "title": "Un sillage, le vôtre", "text": "Votre pièce porte son propre dessin." } }
+        { "type": "point", "settings": { "title": "Un marbré fluide", "text": "Volutes et tourbillons, toujours tonal." } },
+        { "type": "point", "settings": { "title": "Une impression all-over", "text": "Le motif s'étend sur tout le tissu." } },
+        { "type": "point", "settings": { "title": "Une découpe différente", "text": "Pensé pour que chaque pièce soit unique." } }
       ]
     }
   ]

@@ -49,18 +49,23 @@
       </div>
 
       {%- if section.settings.image != blank -%}
-        <div class="kyma-frame" data-kyma-reveal style="--kd: 150ms;">
-          <div class="kyma-frame__shift" data-kyma-parallax="0.3">
-            {{
-              section.settings.image
-              | image_url: width: 1100
-              | image_tag:
-                loading: 'lazy',
-                widths: '480, 720, 960, 1100',
-                sizes: '(min-width: 990px) 45vw, 100vw'
-            }}
+        <figure class="kyma-fig" data-kyma-reveal style="--kd: 150ms;">
+          <div class="kyma-frame">
+            <div class="kyma-frame__shift" data-kyma-parallax="0.3">
+              {{
+                section.settings.image
+                | image_url: width: 1100
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '480, 720, 960, 1100',
+                  sizes: '(min-width: 990px) 45vw, 100vw'
+              }}
+            </div>
           </div>
-        </div>
+          {%- if section.settings.caption != blank -%}
+            <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
       {%- endif -%}
     </div>
   </div>
@@ -90,6 +95,7 @@
     { "type": "url", "id": "cta_link", "label": "Lien — URL" },
     { "type": "header", "content": "Décor" },
     { "type": "image_picker", "id": "image", "label": "Image (facultative, format portrait)" },
+    { "type": "text", "id": "caption", "label": "Légende sous l'image (laisser vide pour une vraie photo du produit fabriqué)", "default": "Visuel de présentation (rendu) — chaque pièce ayant un motif unique, la vôtre sera différente." },
     { "type": "text", "id": "watermark", "label": "Chiffre en filigrane", "default": "01" }
   ],
   "presets": [
