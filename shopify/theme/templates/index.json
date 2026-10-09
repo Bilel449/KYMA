@@ -40,7 +40,8 @@
         "show_hoodie": true,
         "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
         "loading_label": "Chargement du modèle 3D…",
-        "caption_hoodie": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer."
+        "caption_hoodie": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "colorway_1": {
@@ -50,8 +51,7 @@
             "description": "Le lilas qui tourne, sans jamais revenir.",
             "color_a": "#C8A2C8",
             "color_b": "#F5EDE4",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316",
-            "glb": "ressac-lilac-whirl.glb"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
           }
         },
         "colorway_2": {
@@ -61,8 +61,7 @@
             "description": "L'ivoire monte comme une marée sur le sable clair.",
             "color_a": "#E8E0D8",
             "color_b": "#C5BFB8",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924",
-            "glb": "ressac-ivory-tide.glb"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
           }
         },
         "colorway_3": {
@@ -72,8 +71,7 @@
             "description": "Un gris d'acier qui dérive sur la perle.",
             "color_a": "#8E9EAB",
             "color_b": "#C8CDD2",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532",
-            "glb": "ressac-silver-drift.glb"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
           }
         },
         "colorway_4": {
@@ -83,8 +81,7 @@
             "description": "La nuit, quand la mer ne se voit plus mais s'entend.",
             "color_a": "#1A1A1A",
             "color_b": "#3A3A4A",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140",
-            "glb": "ressac-noir-absolu.glb"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
           }
         },
         "colorway_5": {
@@ -94,8 +91,7 @@
             "description": "Un cramoisi qui coule sur le bordeaux.",
             "color_a": "#5C2032",
             "color_b": "#C4878E",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748",
-            "glb": "ressac-crimson-flow.glb"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
           }
         }
       },
@@ -154,7 +150,8 @@
         "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
         "skip_label": "Passer la présentation de la pièce",
         "picker_label": "Coloris du modèle 3D",
-        "loading_label": "Chargement du modèle 3D…"
+        "loading_label": "Chargement du modèle 3D…",
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "step_1": {
@@ -245,7 +242,6 @@
           "type": "colorway",
           "settings": {
             "name": "Lilac Whirl",
-            "glb": "ressac-v2-lilac-whirl.glb",
             "color_a": "#C8A2C8",
             "color_b": "#F5EDE4",
             "lining": "#F3EBDD"
@@ -255,7 +251,6 @@
           "type": "colorway",
           "settings": {
             "name": "Ivory Tide",
-            "glb": "ressac-v2-ivory-tide.glb",
             "color_a": "#E8E0D8",
             "color_b": "#C5BFB8",
             "lining": "#FBF6EE"
@@ -265,7 +260,6 @@
           "type": "colorway",
           "settings": {
             "name": "Silver Drift",
-            "glb": "ressac-v2-silver-drift.glb",
             "color_a": "#8E9EAB",
             "color_b": "#C8CDD2",
             "lining": "#F1F3F4"
@@ -275,7 +269,6 @@
           "type": "colorway",
           "settings": {
             "name": "Noir Absolu",
-            "glb": "ressac-v2-noir-absolu.glb",
             "color_a": "#1A1A1A",
             "color_b": "#3A3A4A",
             "lining": "#2B2B31"
@@ -285,7 +278,6 @@
           "type": "colorway",
           "settings": {
             "name": "Crimson Flow",
-            "glb": "ressac-v2-crimson-flow.glb",
             "color_a": "#5C2032",
             "color_b": "#C4878E",
             "lining": "#E9D3D1"

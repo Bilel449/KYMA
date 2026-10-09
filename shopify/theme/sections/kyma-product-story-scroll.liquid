@@ -11,7 +11,9 @@
     8 outro      dézoom, puis en bas « Alors, qu'en dites-vous ? » + sous-titre + boutons
   Moteur : three.js r180 (MIT) vendorisé dans assets/kyma-three.js (core + GLTFLoader + RoomEnvironment),
   chargé en différé seulement à l'approche de la section, par assets/kyma-pstory.js.
-  Modèle : GLB des blocs « Coloris » (fichiers du thème). Contrat v2 (Izaac) : nœuds Panel_Left/Right (morph
+  Modèle : GLB des fichiers du thème, <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v2 ;
+  ressac-v3 pour les modèles v3), sauf si un bloc « Coloris » indique un fichier précis. three.js est partagé avec le
+  lecteur commun assets/kyma-viewer.js (téléchargé une seule fois par page). Contrat v2 (Izaac) : nœuds Panel_Left/Right (morph
   « open » ou pivots), Lining_*, Hood_*, Zip_Slider/Zip_Pull, extras zipPath + poi. Repli gracieux sur le GLB v1
   (un seul maillage) : ouverture calculée dans le shader, doublure = faces arrière teintées.
   Accessibilité : tout le texte est du vrai texte, dans l'ordre, lisible sans la 3D ; lien « Passer la présentation » ;
@@ -29,11 +31,16 @@
   assign start_key = section.settings.default_colorway | handleize
   assign start_glb = ''
   assign start_lining = '#F3EBDD'
+  assign prefix = section.settings.model_prefix | strip
   for block in cws
     assign bk = block.settings.name | handleize
-    if block.settings.glb != blank
+    assign b_file = block.settings.glb | strip
+    if b_file == blank and prefix != blank
+      assign b_file = prefix | append: '-' | append: bk | append: '.glb'
+    endif
+    if b_file != blank
       if start_glb == '' or bk == start_key
-        assign start_glb = block.settings.glb | asset_url
+        assign start_glb = b_file | asset_url
         assign start_lining = block.settings.lining
       endif
     endif
@@ -109,9 +116,11 @@
       <div class="kyma-pstory__tints kyma-tints kyma-tints--named" role="group" aria-label="{{ section.settings.picker_label | escape }}" data-story-tints>
         {%- for block in cws -%}
           {%- assign bk = block.settings.name | handleize -%}
-          {%- assign b_glb = '' -%}{%- if block.settings.glb != blank -%}{%- assign b_glb = block.settings.glb | asset_url -%}{%- endif -%}
+          {%- assign b_file = block.settings.glb | strip -%}
+          {%- if b_file == blank and prefix != blank -%}{%- assign b_file = prefix | append: '-' | append: bk | append: '.glb' -%}{%- endif -%}
+          {%- assign b_glb = '' -%}{%- if b_file != blank -%}{%- assign b_glb = b_file | asset_url -%}{%- endif -%}
           <button type="button" class="kyma-tints__dot" data-colorway="{{ bk }}" data-name="{{ block.settings.name | escape }}" data-lining="{{ block.settings.lining }}"
-            {% if block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
+            {% if b_glb != '' %}data-glb="{{ b_glb }}"{% endif %}
             aria-pressed="{% if b_glb != '' and b_glb == start_glb %}true{% else %}false{% endif %}" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
             <span class="kyma-tints__name">{{ block.settings.name | escape }}</span>
           </button>
@@ -138,6 +147,7 @@
     { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "geste." },
     { "type": "range", "id": "height", "label": "Longueur du défilement", "min": 500, "max": 900, "step": 50, "unit": "vh", "default": 700 },
     { "type": "text", "id": "default_colorway", "label": "Coloris par défaut (nom d'un bloc Coloris)", "default": "Lilac Whirl" },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3 (même contrat de nœuds). Vide = section statique." },
     { "type": "checkbox", "id": "show_picker", "label": "Afficher le sélecteur de coloris", "default": true },
     { "type": "checkbox", "id": "dof", "label": "Mise au point douce sur la tirette (ordinateur)", "default": true },
     { "type": "product", "id": "product", "label": "Produit (lien du bouton si vide)" },
@@ -181,7 +191,7 @@
       "limit": 8,
       "settings": [
         { "type": "text", "id": "name", "label": "Nom du coloris", "default": "Lilac Whirl" },
-        { "type": "text", "id": "glb", "label": "Fichier GLB dans les fichiers du thème", "default": "ressac-v2-lilac-whirl.glb", "info": "Modèle articulé v2 : ressac-v2-<coloris>.glb. Vide = pas de modèle pour ce coloris." },
+        { "type": "text", "id": "glb", "label": "Fichier GLB précis (facultatif)", "info": "Laisser vide : le fichier est déduit du préfixe de la section et du nom du coloris." },
         { "type": "color", "id": "color_a", "label": "Nuance principale (pastille)", "default": "#C8A2C8" },
         { "type": "color", "id": "color_b", "label": "Nuance secondaire (pastille)", "default": "#F5EDE4" },
         { "type": "color", "id": "lining", "label": "Doublure (si le modèle n'en a pas)", "default": "#F3EBDD" }

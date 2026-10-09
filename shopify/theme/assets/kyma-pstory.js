@@ -20,18 +20,18 @@
   function mix3(a, b, t) { return [mix(a[0], b[0], t), mix(a[1], b[1], t), mix(a[2], b[2], t)]; }
   function norm(v) { var l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; }
 
-  /* ── chargement différé de three.js (une seule fois par page) ── */
-  var threeP = null;
+  /* ── chargement différé de three.js (une seule fois par page : promesse partagée avec kyma-viewer.js) ── */
   function loadThree(url) {
     if (w.KYMAThree) return Promise.resolve(w.KYMAThree);
-    if (threeP) return threeP;
-    threeP = new Promise(function (res, rej) {
-      var s = d.createElement('script'); s.src = url; s.async = true;
-      s.onload = function () { w.KYMAThree ? res(w.KYMAThree) : rej(new Error('three')); };
-      s.onerror = function () { threeP = null; rej(new Error('three')); };
+    if (w.KYMAViewer && w.KYMAViewer.three) return w.KYMAViewer.three(url);
+    if (w.KYMAThreeP) return w.KYMAThreeP;
+    w.KYMAThreeP = new Promise(function (res, rej) {
+      var s = d.createElement('script'); s.src = url; s.async = true; s.setAttribute('data-kyma-three', '');
+      s.onload = function () { if (w.KYMAThree) res(w.KYMAThree); else { w.KYMAThreeP = null; rej(new Error('three')); } };
+      s.onerror = function () { w.KYMAThreeP = null; rej(new Error('three')); };
       d.head.appendChild(s);
     });
-    return threeP;
+    return w.KYMAThreeP;
   }
   function webgl() {
     try { var c = d.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; }

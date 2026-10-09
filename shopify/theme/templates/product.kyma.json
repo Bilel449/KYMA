@@ -20,14 +20,14 @@
         "loading_label": "Chargement du modèle 3D…",
         "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
         "caption_fallback": "Illustration du coloris.",
-        "mv_src": ""
+        "mv_src": "",
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "colorway_1": {
           "type": "colorway",
           "settings": {
             "name": "Lilac Whirl",
-            "glb": "ressac-lilac-whirl.glb",
             "color_a": "#C8A2C8",
             "color_b": "#F5EDE4"
           }
@@ -36,7 +36,6 @@
           "type": "colorway",
           "settings": {
             "name": "Ivory Tide",
-            "glb": "ressac-ivory-tide.glb",
             "color_a": "#E8E0D8",
             "color_b": "#C5BFB8"
           }
@@ -45,7 +44,6 @@
           "type": "colorway",
           "settings": {
             "name": "Silver Drift",
-            "glb": "ressac-silver-drift.glb",
             "color_a": "#8E9EAB",
             "color_b": "#C8CDD2"
           }
@@ -54,7 +52,6 @@
           "type": "colorway",
           "settings": {
             "name": "Noir Absolu",
-            "glb": "ressac-noir-absolu.glb",
             "color_a": "#1A1A1A",
             "color_b": "#3A3A4A"
           }
@@ -63,7 +60,6 @@
           "type": "colorway",
           "settings": {
             "name": "Crimson Flow",
-            "glb": "ressac-crimson-flow.glb",
             "color_a": "#5C2032",
             "color_b": "#C4878E"
           }

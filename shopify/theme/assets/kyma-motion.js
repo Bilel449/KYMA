@@ -353,7 +353,7 @@
       var opts = $('[data-colorway]', sec).filter(function (b) { return b.tagName === 'BUTTON'; });
       var name = sec.querySelector('[data-kyma-cw-name]'), desc = sec.querySelector('[data-kyma-cw-desc]');
       var link = sec.querySelector('[data-kyma-cw-link]'), live = sec.querySelector('[data-kyma-cw-live]'), cur = null, tok = 0, hov;
-      /* hoodie 3D (GLB) : monté à l'approche de l'écran, après le chargement ; le slime reste en fond */
+      /* hoodie 3D (GLB, lecteur commun KYMAViewer) : monté à l'approche de l'écran, après le chargement ; le slime reste en fond */
       var gcv = sec.querySelector('[data-kyma-cw-glb]'), gv = null, viz = gcv && gcv.parentNode;
       function glbOff() {
         if (!viz) return; viz.classList.add('is-glb-off'); if (gcv) gcv.hidden = true;
@@ -361,16 +361,16 @@
       }
       function glbOn() {
         if (gv || !gcv) return;
-        if (!w.KYMAGLB) { glbOff(); return; }
+        if (!w.KYMAViewer) { glbOff(); return; }
         viz.classList.add('is-loading');
-        gv = w.KYMAGLB.mount(gcv, { src: gcv.getAttribute('data-src'), bg: 'none', spin: 11, idle: 0.4, yaw: -18, fit: 1.18,
+        gv = w.KYMAViewer.mount(gcv, { src: gcv.getAttribute('data-src'), bg: 'none', spin: 11, idle: 0.4, yaw: -18, fit: 1.18,
           onload: function () { viz.classList.remove('is-loading'); viz.classList.add('is-glb'); },
           onerror: function () { viz.classList.remove('is-loading'); glbOff(); } });
         if (gv.dead) { gv = null; glbOff(); return; }
         if (w.KYMA3D && w.KYMA3D.external) w.KYMA3D.external(gcv); /* le hoodie compte dans le budget de canvas animés */
       }
       if (gcv) {
-        var go3 = function () { K.settled(function () { if (w.KYMAGLB) glbOn(); else w.addEventListener('load', glbOn); }); };
+        var go3 = function () { K.settled(function () { if (w.KYMAViewer) glbOn(); else w.addEventListener('load', glbOn); }); };
         var o3 = IO(function (es) { if (es[0].isIntersecting) { o3.disconnect(); go3(); } }, { rootMargin: '60% 0px' });
         if (o3) o3.observe(sec); else go3();
       }
@@ -405,7 +405,7 @@
         b.addEventListener('click', function () { pick(b, true); });
         b.addEventListener('focus', function () { pick(b, true); });
         b.addEventListener('pointerenter', function (e) {
-          if (gcv && w.KYMAGLB && w.KYMAGLB.prefetch) w.KYMAGLB.prefetch(b.getAttribute('data-glb'));
+          if (gcv && w.KYMAViewer && w.KYMAViewer.prefetch) w.KYMAViewer.prefetch(b.getAttribute('data-glb'));
           if (e.pointerType === 'mouse') { clearTimeout(hov); hov = setTimeout(function () { pick(b); }, gcv ? 260 : 110); }
         });
       });

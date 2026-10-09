@@ -1,7 +1,7 @@
 /*! KYMA pages v1.0 — composants des pages (natif, sans dépendance). Charge unique (garde window.KYMAP).
  *  Cartes Cercle Waves qui pivotent, FAQ en accordéon + recherche, guide des tailles, frise des étapes,
  *  frise de la précommande, tracés SVG au défilement, κύμα, fleuve, formulaires (contact, Cercle), lecteur
- *  3D 360° (Shopify natif / GLB maison / repli), pastilles de teinte, anneaux au défilement, tuiles Instagram,
+ *  3D 360° (Shopify natif / lecteur commun KYMAViewer / repli), pastilles de teinte, anneaux au défilement, tuiles Instagram,
  *  bouton « Mettre le mouvement en pause ». Tous les états sont accessibles au clavier et au toucher ;
  *  prefers-reduced-motion : fondus courts, aucun mouvement ambiant. */
 (function (w, d) {
@@ -523,8 +523,9 @@
     });
   }
 
-  /* ── 13. Lecteur 3D 360° : natif Shopify -> GLB maison -> aperçu de coloris ────────────── */
-  /* [point, normale, zoom] des détails du hoodie Ressac (modèle d'Izaac, shopify/3d) */
+  /* ── 13. Lecteur 3D 360° : natif Shopify -> lecteur commun KYMAViewer (three.js, GLB du thème) -> aperçu de coloris ── */
+  /* [point, normale, zoom] des détails du hoodie Ressac : valeurs de secours (GLB v1) ; le lecteur commun les recalcule
+     sur le modèle chargé (v.anchor : extras zipPath / poi du GLB v2+, sinon boîte englobante) */
   var ANCHORS = {
     capuche: [[0.09, 0.85, -0.03], [0.35, 0.7, 0.45], 1.2],
     tirette: [[0, 0.748, 0.15], [0, 0.1, 1], 1.45],
@@ -550,7 +551,7 @@
       }
       function placeSpots(v) {
         spots.forEach(function (x) {
-          var A = ANCHORS[x.getAttribute('data-anchor')]; if (!A) return;
+          var A = (v.anchor && v.anchor(x.getAttribute('data-anchor'))) || ANCHORS[x.getAttribute('data-anchor')]; if (!A) return;
           var r = v.project(A[0], A[1]); if (!r) return;
           var on = r.front > 0.12;
           x.style.transform = 'translate3d(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px,0)';
@@ -559,7 +560,7 @@
       }
       legs.forEach(function (li) {
         var a = li.getAttribute('data-anchor'), b = li.querySelector('button');
-        var go = function () { hot(a); var A = ANCHORS[a]; if (glbv && A) glbv.to(Math.atan2(-A[1][0], A[1][2]), 4 * Math.PI / 180, A[2] || 1.25, 1200); };
+        var go = function () { hot(a); var A = (glbv && glbv.anchor && glbv.anchor(a)) || ANCHORS[a]; if (glbv && A) glbv.to(Math.atan2(-A[1][0], A[1][2]), 4 * Math.PI / 180, A[2] || 1.25, 1200); };
         if (b) { b.addEventListener('click', go); b.addEventListener('focus', function () { hot(a); }); }
         li.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hot(a); });
         li.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hot(''); });
@@ -597,14 +598,14 @@
           }
         };
       }
-      /* 13b. lecteur GLB maison (fichiers du thème) */
+      /* 13b. lecteur commun KYMAViewer (assets/kyma-viewer.js + kyma-three.js ; GLB dans les fichiers du thème) */
       if (mode === 'glb') {
         var cv = stage.querySelector('.kyma-360__glb'), curUrl = cv ? cv.getAttribute('data-src') : '';
         var start = function () {
-          if (!w.KYMAGLB) { fallback(); return; }
+          if (!w.KYMAViewer) { fallback(); return; }
           stage.classList.add('is-loading');
           var sp = sec.getAttribute('data-spin');
-          var v = w.KYMAGLB.mount(cv, {
+          var v = w.KYMAViewer.mount(cv, {
             src: cv.getAttribute('data-src'), spin: sp == null ? 7 : parseFloat(sp), idle: parseFloat(sec.getAttribute('data-spin-delay') || '3'),
             yaw: spots.length ? -24 : 0,
             onload: function () { stage.classList.remove('is-loading'); stage.classList.add('is-ready'); },
@@ -619,13 +620,14 @@
             colorway: function (k) {
               var b = dots.filter(function (x) { return x.getAttribute('data-colorway') === k; })[0], url = b && b.getAttribute('data-glb');
               if (!url || url === curUrl) return; curUrl = url; stage.classList.add('is-loading');
+              if (cv.getAttribute('data-label')) cv.setAttribute('aria-label', cv.getAttribute('data-label') + ' Coloris : ' + (b.getAttribute('data-name') || k) + '.');
               v.load(url).then(function () { stage.classList.remove('is-loading'); }, function () { stage.classList.remove('is-loading'); });
             }
           };
           if (cur !== 'kyma') api.colorway(cur);
         };
         /* chargé seulement à l'approche de l'écran */
-        var go = function () { if (w.KYMAGLB) start(); else w.addEventListener('load', start); };
+        var go = function () { if (w.KYMAViewer) start(); else w.addEventListener('load', start); };
         var o = view(function (es) { if (es[0].isIntersecting) { o.disconnect(); if (w.KYMA && w.KYMA.settled) w.KYMA.settled(go); else go(); } }, { rootMargin: '50% 0px' });
         if (o) o.observe(stage); else start();
       }

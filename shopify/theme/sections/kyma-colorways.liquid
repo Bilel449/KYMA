@@ -3,15 +3,22 @@
   change de couleurs en direct (fondu 1,2 s) et le nom du coloris se recompose lettre par lettre.
   Aucune photo : les vraies photos du shooting iront dans la galerie de la fiche produit.
   Un bloc = un coloris (nom, description, deux nuances, lien). Les nuances doivent rester tonales.
-  v2 : si un bloc indique un fichier GLB (assets/ressac-<coloris>.glb), le HOODIE 3D de ce coloris s'affiche et
-  tourne doucement (lecteur kyma-glb.js, contexte WebGL partagé), devant le slime flottant gardé en fond.
+  v3 : le HOODIE 3D du coloris choisi s'affiche et tourne doucement devant le slime flottant gardé en fond, avec le
+  lecteur commun du site (assets/kyma-viewer.js + three.js vendorisé, chargés à l'approche de l'écran). Fichier lu :
+  <préfixe>-<coloris>.glb dans les fichiers du thème (réglage « Modèles 3D — préfixe », défaut ressac-v2 ; ressac-v3
+  pour les modèles v3), sauf si le bloc indique un fichier précis.
   Sans WebGL ou si le fichier échoue : le slime seul, teinté du coloris (comportement d'origine).
 {%- endcomment -%}
 {% render 'kyma-assets' %}
 {%- assign title_id = 'kyma-cw-title-' | append: section.id -%}
 {%- assign first = section.blocks.first -%}
+{%- assign prefix = section.settings.model_prefix | strip -%}
 {%- assign glb0 = '' -%}
-{%- if section.settings.show_hoodie and first.settings.glb != blank -%}{%- assign glb0 = first.settings.glb | asset_url -%}{%- endif -%}
+{%- if section.settings.show_hoodie and first -%}
+  {%- assign f_file = first.settings.glb | strip -%}
+  {%- if f_file == blank and prefix != blank -%}{%- assign f_file = prefix | append: '-' | append: first.settings.name | handleize | append: '.glb' -%}{%- endif -%}
+  {%- if f_file != blank -%}{%- assign glb0 = f_file | asset_url -%}{%- endif -%}
+{%- endif -%}
 
 {%- assign cw_anchor = 'kyma-cw-' | append: section.id -%}
 <section class="kyma-sec kyma-cw" id="{{ section.settings.anchor | default: cw_anchor }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
@@ -33,7 +40,7 @@
       <div class="kyma-cw__viz{% if glb0 != '' %} kyma-cw__viz--hoodie{% endif %}" data-kyma-3d-host data-kyma-reveal>
         <canvas class="kyma-cw__slime" data-kyma-3d="hero" data-shift="{% if glb0 != '' %}0.62,-0.42{% else %}0,0{% endif %}" data-colorway="{{ first.settings.name | handleize | default: 'lilac-whirl' }}"{% if glb0 != '' %} data-interactive="false" data-max-scale="0.45"{% endif %} aria-hidden="true"></canvas>
         {%- if glb0 != '' -%}
-          <canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="{{ glb0 }}" tabindex="0" role="img"
+          <canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="{{ glb0 }}" data-three="{{ 'kyma-three.js' | asset_url }}" tabindex="0" role="img"
             data-label="{{ section.settings.hoodie_label | escape }}"
             aria-label="{{ section.settings.hoodie_label | escape }} {{ first.settings.name | escape }}"></canvas>
           <p class="kyma-cw__loading" aria-hidden="true">{{ section.settings.loading_label | escape }}</p>
@@ -51,6 +58,8 @@
         {%- if section.blocks.size > 0 -%}
           <ul class="kyma-cw__list" role="list" aria-label="{{ section.settings.list_label | escape }}">
             {%- for block in section.blocks -%}
+              {%- assign b_file = block.settings.glb | strip -%}
+              {%- if b_file == blank and prefix != blank -%}{%- assign b_file = prefix | append: '-' | append: block.settings.name | handleize | append: '.glb' -%}{%- endif -%}
               <li {{ block.shopify_attributes }}>
                 <button
                   type="button"
@@ -61,7 +70,7 @@
                   data-a="{{ block.settings.color_a }}"
                   data-b="{{ block.settings.color_b }}"
                   {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %}
-                  {% if glb0 != '' and block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
+                  {% if glb0 != '' and b_file != blank %}data-glb="{{ b_file | asset_url }}"{% endif %}
                   aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
                   style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};"
                 >
@@ -90,7 +99,7 @@
     </div>
   </div>
   <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.number | escape }}</div>
-  {%- if glb0 != '' -%}<script src="{{ 'kyma-glb.js' | asset_url }}" defer data-kyma-asset="glb"></script>{%- endif -%}
+  {%- if glb0 != '' -%}<script src="{{ 'kyma-viewer.js' | asset_url }}" defer data-kyma-asset="viewer" data-three="{{ 'kyma-three.js' | asset_url }}"></script>{%- endif -%}
 </section>
 
 {% schema %}
@@ -111,7 +120,8 @@
     { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Voir ce coloris" },
     { "type": "url", "id": "cta_link", "label": "Bouton — lien par défaut" },
     { "type": "text", "id": "caption", "label": "Mention sous le sélecteur (sans hoodie 3D)", "default": "Illustration du coloris." },
-    { "type": "checkbox", "id": "show_hoodie", "label": "Afficher le hoodie 3D (fichiers GLB des blocs)", "default": true },
+    { "type": "checkbox", "id": "show_hoodie", "label": "Afficher le hoodie 3D", "default": true },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3. Vide = slime seul." },
     { "type": "text", "id": "hoodie_label", "label": "Texte équivalent du hoodie 3D", "default": "Hoodie zippé oversize Ressac en 3D, coloris" },
     { "type": "text", "id": "loading_label", "label": "Texte de chargement", "default": "Chargement du modèle 3D…" },
     { "type": "text", "id": "caption_hoodie", "label": "Mention sous le hoodie 3D", "default": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." }
@@ -126,7 +136,7 @@
         { "type": "color", "id": "color_a", "label": "Nuance principale", "default": "#C8A2C8" },
         { "type": "color", "id": "color_b", "label": "Nuance secondaire", "default": "#F5EDE4" },
         { "type": "url", "id": "link", "label": "Lien (fiche produit, variante)" },
-        { "type": "text", "id": "glb", "label": "Fichier GLB du hoodie dans les fichiers du thème", "info": "Ex. ressac-lilac-whirl.glb. Vide = slime seul pour ce coloris." }
+        { "type": "text", "id": "glb", "label": "Fichier GLB précis (facultatif)", "info": "Laisser vide : le fichier est déduit du préfixe de la section et du nom du coloris." }
       ]
     }
   ],

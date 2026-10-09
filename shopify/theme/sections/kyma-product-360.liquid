@@ -3,9 +3,10 @@
   1. NATIF : le produit a un vrai média 3D Shopify (GLB téléversé dans « Médias » — plan payant requis) ->
      lecteur 3D de Shopify (<model-viewer>, chargé par Shopify.loadFeatures 'model-viewer-ui'), un modèle par
      coloris : le texte alternatif du média doit contenir le nom du coloris (ex. « Ressac — Lilac Whirl »).
-  2. MAISON : sinon, si un bloc « Coloris 3D » indique un fichier GLB téléversé dans les fichiers du thème
-     (assets/ressac-<coloris>.glb) -> lecteur kyma-glb.js (WebGL natif, < 8 Ko gzip). Contourne la limite
-     du plan d'essai (« fichier non pris en charge sur les comptes d'essai »).
+  2. LECTEUR COMMUN : sinon, GLB des fichiers du thème -> assets/kyma-viewer.js (three.js r180 vendorisé dans
+     assets/kyma-three.js, chargé seulement à l'approche de l'écran ; même moteur que « La pièce »). Fichier lu pour
+     chaque coloris : <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v2 ; ressac-v3 pour les
+     modèles v3), sauf si le bloc indique un fichier précis. Contourne la limite du plan d'essai (média 3D refusé).
   3. REPLI : sinon (ou si WebGL / le fichier échoue) -> aperçu 3D du coloris (étoffe, kyma-3d.js).
   Le coloris suit la variante (Horizon : <variant-picker>, option « Couleur ») ou, si la boutique a un produit
   par coloris, le titre du produit ; les pastilles de la section permettent aussi de changer de coloris.
@@ -36,6 +37,9 @@
   if models.size > 0 and section.settings.prefer_native
     assign mode = 'native'
   else
+    if cws.size > 0 and section.settings.model_prefix != blank
+      assign mode = 'glb'
+    endif
     for block in cws
       if block.settings.glb != blank
         assign mode = 'glb'
@@ -45,12 +49,17 @@
       assign mode = 'native'
     endif
   endif
+  assign prefix = section.settings.model_prefix | strip
   assign start_glb = ''
   for block in cws
     assign bk = block.settings.name | handleize
-    if block.settings.glb != blank
+    assign b_file = block.settings.glb | strip
+    if b_file == blank and prefix != blank
+      assign b_file = prefix | append: '-' | append: bk | append: '.glb'
+    endif
+    if b_file != blank
       if start_glb == '' or bk == cw_key
-        assign start_glb = block.settings.glb | asset_url
+        assign start_glb = b_file | asset_url
       endif
     endif
   endfor
@@ -71,8 +80,10 @@
         <div class="kyma-tints kyma-tints--named" role="group" aria-label="{{ section.settings.list_label | escape }}" data-kyma-360-tints>
           {%- for block in cws -%}
             {%- assign bk = block.settings.name | handleize -%}
+            {%- assign b_file = block.settings.glb | strip -%}
+            {%- if b_file == blank and prefix != blank -%}{%- assign b_file = prefix | append: '-' | append: bk | append: '.glb' -%}{%- endif -%}
             <button type="button" class="kyma-tints__dot" data-colorway="{{ bk }}" data-name="{{ block.settings.name | escape }}"
-              {% if block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
+              {% if b_file != blank %}data-glb="{{ b_file | asset_url }}"{% endif %}
               aria-pressed="{% if bk == cw_key %}true{% else %}false{% endif %}" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
               <span class="kyma-tints__name">{{ block.settings.name | escape }}</span>
             </button>
@@ -118,8 +129,8 @@
               ></model-viewer>
             {%- endfor -%}
           {%- when 'glb' -%}
-            <canvas class="kyma-360__glb" tabindex="0" role="img" data-src="{{ start_glb }}"
-              aria-label="{{ section.settings.canvas_label | escape }}"></canvas>
+            <canvas class="kyma-360__glb" tabindex="0" role="img" data-src="{{ start_glb }}" data-three="{{ 'kyma-three.js' | asset_url }}"
+              data-label="{{ section.settings.canvas_label | escape }}" aria-label="{{ section.settings.canvas_label | escape }}"></canvas>
             <p class="kyma-360__loading" aria-hidden="true">{{ section.settings.loading_label | escape }}</p>
           {%- endcase -%}
         {%- if spots.size > 0 and mode == 'glb' -%}
@@ -145,7 +156,7 @@
       </figcaption>
     </figure>
   </div>
-  {%- if mode == 'glb' -%}<script src="{{ 'kyma-glb.js' | asset_url }}" defer data-kyma-asset="glb"></script>{%- endif -%}
+  {%- if mode == 'glb' -%}<script src="{{ 'kyma-viewer.js' | asset_url }}" defer data-kyma-asset="viewer" data-three="{{ 'kyma-three.js' | asset_url }}"></script>{%- endif -%}
 </section>
 
 {% schema %}
@@ -163,6 +174,7 @@
     { "type": "textarea", "id": "text", "label": "Texte" },
     { "type": "product", "id": "product", "label": "Produit (vide = produit de la page)" },
     { "type": "checkbox", "id": "prefer_native", "label": "Utiliser le média 3D Shopify s'il existe (plan payant)", "default": true },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3. Vide = aucun modèle (aperçu de repli)." },
     { "type": "checkbox", "id": "autorotate", "label": "Rotation lente automatique", "default": true },
     { "type": "range", "id": "spin_speed", "label": "Vitesse de rotation", "min": 3, "max": 20, "step": 1, "unit": "°/s", "default": 7 },
     { "type": "range", "id": "spin_delay", "label": "Délai avant la rotation", "min": 0, "max": 5, "step": 0.5, "unit": "s", "default": 3 },
@@ -184,7 +196,7 @@
       "name": "Coloris 3D",
       "settings": [
         { "type": "text", "id": "name", "label": "Nom du coloris (= valeur de variante)", "default": "Lilac Whirl" },
-        { "type": "text", "id": "glb", "label": "Fichier GLB dans les fichiers du thème", "default": "ressac-lilac-whirl.glb", "info": "Téléverser le fichier dans « Modifier le code > assets » puis indiquer son nom exact. Vide = pas de modèle pour ce coloris." },
+        { "type": "text", "id": "glb", "label": "Fichier GLB précis (facultatif)", "info": "Laisser vide : le fichier est déduit du préfixe de la section et du nom du coloris. Sinon, nom exact d'un fichier téléversé dans « Modifier le code > assets »." },
         { "type": "color", "id": "color_a", "label": "Nuance principale (pastille)", "default": "#C8A2C8" },
         { "type": "color", "id": "color_b", "label": "Nuance secondaire (pastille)", "default": "#F5EDE4" }
       ]
