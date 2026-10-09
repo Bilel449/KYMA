@@ -468,7 +468,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 
 ### F. Modèles 3D sous licence (shortlist d'Isabelle)
 
-Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-modeles-3d.md`). **Je n'en vérifie pas les licences maintenant**, mais je le ferai dès qu'elle sera disponible. Grille que j'appliquerai : usage commercial autorisé ; modification autorisée ; **mise à disposition publique du fichier GLB** (le navigateur le télécharge : beaucoup de licences interdisent de redistribuer le fichier brut) ; attribution (et où l'afficher) ; droits sur les textures et logos de tiers ; modèle non généré par IA (décision du fondateur : aucune image IA) ; preuve d'achat ou de licence conservée au nom de la société ; durée et exclusivité.
+Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-modeles-3d.md`). **Je n'en vérifie pas les licences maintenant**, mais je le ferai dès qu'elle sera disponible. Grille que j'appliquerai : usage commercial autorisé ; modification autorisée ; **mise à disposition publique du fichier GLB** (le navigateur le télécharge : beaucoup de licences interdisent de redistribuer le fichier brut) ; attribution (et où l'afficher) ; droits sur les textures et logos de tiers ; modèle non généré par IA (décision du fondateur : aucune image IA) ; preuve d'achat ou de licence conservée au nom de la société ; durée et exclusivité. **[Appliquée le 09/10/2026 : voir la partie H.]**
 
 ### G. Points de vigilance (cette entraide)
 
@@ -501,3 +501,118 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 | E13 | Le compte client affiche : solde de Crédit Waves, date d'expiration de chaque crédit, date du prochain prélèvement. | Intégrer au portail. | Sacha |
 | E14 | Réviser les valeurs d'avantages à chaque nouveau drop (dates d'accès anticipé annoncées 48 h avant). | Calendrier partagé. | Maya, Sacha |
 | E15 | Recontrôler le récit 3D après les préséries : coupe, finitions, impression all-over. | Comparaison modèle / pièce. | Izaac |
+
+### H. Licences de la shortlist de modèles 3D (`shopify/3d/recherche-modeles-3d.md`) — 09/10/2026
+
+> **Base** : la shortlist d'Isabelle, lue le 09/10/2026. Je n'ai pu ouvrir **aucune** page de marketplace ni aucun texte de licence : Isabelle a elle-même travaillé sur des extraits de recherche. Tous les feux ci-dessous sont donc des **évaluations de risque sur extraits, jamais une validation**. Les textes complets de licence (versions datées) doivent être lus avant tout achat, et la réponse écrite du vendeur conservée. **Aucun achat avant : réponse écrite du vendeur + accord du fondateur + feu de ma part.**
+> **Le risque commun** : une page WebGL envoie le fichier GLB au navigateur du visiteur, qui peut le récupérer. La plupart des licences « royalty free » interdisent de redistribuer l'asset brut ou de le rendre extractible. Deuxième risque : le récit 3D (contrat « v2 » d'Izaac : panneaux gauche/droit, tirette, doublure, coloris) impose de **modifier lourdement** le modèle (retopologie, rigging, retexture) ; la licence doit l'autoriser expressément. Troisième risque : fidélité au produit. Un modèle générique du commerce ne représente pas le hoodie Ressac (capuche sans cordon, poches biais, oversize) ; il doit être modifié jusqu'à lui ressembler, sinon le visuel est trompeur (partie E).
+> **Aucun modèle n'est vert aujourd'hui.** Aucun n'a de licence lue en entier, aucun vendeur n'a confirmé l'usage WebGL.
+
+#### H1. Feux par modèle
+
+| # | Modèle (plateforme) | Feu | Pourquoi | Condition pour passer au vert |
+|---|---|---|---|---|
+| 1 | Oversized Hoodie, polygonal-miniatures (RenderHub) | 🟠 | GLB natif (bon point), mais licence **non trouvée** et prix non trouvé. Photogrammétrie d'un vêtement réel : risque de **marque, étiquette ou logo de tiers cuits dans la texture**, et plis figés qui rendent la retexture difficile (modification). | Texte de licence lu ; réponse écrite du vendeur (H2) ; confirmation qu'aucun logo ou étiquette tiers n'apparaît ; test de retexture réalisable. |
+| 2 | Zip Hoodie Wash, Clothing Axis (RenderHub, **Extended Use**) | 🟠 (le plus proche du vert) | Extended Use = usage commercial « dans divers médias et applications », mais texte complet non lu et **aucune clause web/temps réel trouvée**. Projet CLO fourni (modification possible), GLB fourni. 300 000 polygones : décimation obligatoire, donc **dérivé**. | Réponse écrite du vendeur couvrant WebGL, dérivés et GLB servi au navigateur ; texte Extended Use lu en entier. |
+| 3 | Ultimate Oversized Zip Hoodie CLO 3D (CGTrader, 6 $) | 🔴 en l'état | « Custom License » **non lue**. Si c'est la Royalty Free standard de CGTrader : droit « strictement limité au produit incorporé », modèle qui ne doit pas être récupérable seul, viewer WebGL non clairement couvert. Pas de GLB : KYMA le fabriquerait elle-même (dérivé servi au public). Aucun avis. | Lecture de la « Custom License » ; réponse écrite du vendeur (H2) ; sinon écarter. Orange si la licence permet expressément la modification et l'affichage web. |
+| 4 | Hoodie Zip Generic, Frezzy (RenderHub / Superhive, 27 $) | 🟠 | Extended Use côté RenderHub (texte non lu) ; licence Superhive non trouvée ; **pas de GLB** ; oversize non confirmé. Intérêt faible pour ce brief. | Idem n° 2 ; priorité basse. |
+| 5 | Hoodies zippés Clothing Axis (autres références, Superhive) | 🟠 | « Royalty Free » Superhive : en général usage commercial dans un produit fini mais **pas de redistribution de l'asset brut** (non vérifié) ; modèles trop lourds. Même famille que le n° 2. | Réponse écrite ; préférer le n° 2 (même vendeur). |
+| 6 | Hoodie, CG StudioX (Reallusion) | 🔴 | Licence non trouvée ; format Character Creator / iClone, sans glTF natif ; zip et oversize non confirmés ; contenu Reallusion souvent limité en redistribution de l'asset brut (non vérifié). Seul atout : 2 342 polygones. | Écarter, sauf si le vendeur confirme par écrit le point H2 et si un export fidèle est possible. |
+| 7 | Stussy Zip Hoodie Low Poly PBR (RenderHub) | 🔴 **à écarter** | **Editorial Use Only** et marque tierce (Stüssy) : interdit pour un site marchand ; risque de contrefaçon et de pratique commerciale trompeuse. | Aucune. |
+| — | BinaryCloth (prestation sur mesure, dès 39 $) | 🟠 | Licence non trouvée ; sur mesure : tout se règle par contrat. | Contrat écrit avec cession de droits (H4) et GLB livré. |
+| — | Freelance CLO3D à partir du tech pack v3 | 🟢 **si** contrat de cession signé | Le modèle est fait pour KYMA, aux mesures du tech pack : fidélité maximale et plus de redistribution à craindre. | Clause H4 signée ; justificatif de licence commerciale du logiciel (CLO / Marvelous Designer) du freelance ; liste de tout élément tiers. |
+| — | Embed Sketchfab (viewer hébergé) | 🟠 | Évite de servir le GLB depuis notre site, mais : la licence Sketchfab Standard n'autorise pas la redistribution comme asset autonome (source secondaire) ; cookies et traceurs tiers du viewer (consentement CNIL, mise à jour de `cookies.html` et du bandeau) ; moins de contrôle sur le récit au défilement (tirette, panneaux) ; dépendance à un tiers. | Mêmes réponses écrites (H2) ; test de Sacha sur le récit ; consentement cookies avant chargement du viewer. |
+
+**Lecture d'ensemble** : aucun achat sur étagère n'est recommandable sans réponse écrite. **Ma préférence juridique** est le freelance CLO3D avec cession de droits (seule option « verte » en droit), puis le n° 2 si le vendeur répond positivement par écrit. Les GLB déjà présents dans le thème (`ressac-v2-*.glb`) : **documenter qui les a créés et avec quels outils** (cession, absence d'IA, absence d'élément tiers), pour la même raison.
+
+#### H2. Question écrite à poser au vendeur avant achat (anglais, prête à envoyer)
+
+À envoyer **tel quel** pour chaque modèle (messagerie du vendeur sur la plateforme, pour conserver la trace). Compléter les crochets. **Conserver la réponse** (capture datée + e-mail) avec la facture.
+
+> **Subject: Licence question before purchase — "[MODEL TITLE]" ([MODEL URL])**
+>
+> Hello,
+>
+> I am considering buying "[MODEL TITLE]" ([MODEL URL]) under the "[LICENCE NAME, e.g. Extended Use / Royalty Free / Custom License]" for the e-commerce website of my clothing brand KYMA ([COMPANY NAME], France). Before purchasing, could you please confirm the following in writing?
+>
+> 1. **Web display.** May I use the model, and files derived from it (converted to glTF/GLB, decimated, re-topologised, re-textured), in an interactive real-time 3D viewer (WebGL / three.js) on our commercial website? The GLB file is delivered to each visitor's browser, so a technically skilled visitor could download it from the browser.
+> 2. **Browser delivery is not "redistribution".** Do you confirm that serving the file this way is not a breach of the licence (no "redistribution", "standalone file" or "extractable asset" clause is violated)? If it is, is there another licence tier or an extension (and at what price) that covers it?
+> 3. **Modification.** May I modify the model (change the proportions to make it oversized, remove the drawstrings, change the pockets, re-colour and re-texture it with our own print, rig it, add morph targets, bake textures) and use the modified version commercially?
+> 4. **Ownership of our changes.** Do we remain free to use our own textures, prints and modifications as we wish, and to use renders and videos of the model in our marketing (website, social media, advertising)?
+> 5. **Third-party content.** Is the model, including textures and labels, entirely your original work? Does it contain any third-party brand, logo, label or scanned/photographed content you do not own? Was any AI-generated content used to create it?
+> 6. **Scope.** Is the licence perpetual, worldwide, non-exclusive, valid for unlimited visitors and impressions, and can it be issued to our company ([COMPANY NAME])? Will you provide a licence document or invoice in the company's name?
+>
+> A reply by e-mail or through the platform is sufficient. We will keep your answer with our purchase records. Thank you very much.
+>
+> Kind regards,
+> [NAME], [ROLE], KYMA
+
+**Ajout à insérer selon le modèle** (à placer avant « Kind regards ») :
+- N° 1 (photogrammétrie) : « 7. Was this model made from a scan or photographs of a real garment? If so, do you confirm that no brand name, logo or label of a third party is visible or baked into the textures? »
+- N° 2, 4, 5 (RenderHub) : « 7. Does your "Extended Use" licence cover real-time/interactive web use (WebGL), not only renders and videos? »
+- N° 3 (CGTrader) : « 7. Please send me the full text of your "Custom License", or tell me whether the standard CGTrader Royalty Free licence applies. »
+- N° 6 (Reallusion) : « 7. May the model be exported from Character Creator/iClone to glTF and used in a web viewer? »
+- Sketchfab : « 7. May the purchased model be uploaded to my own Sketchfab account and embedded on my website, and may I modify it and use the Viewer API to change materials? »
+
+**Règle de décision.** Une réponse vague (« yes, you can use it commercially ») ne répond pas aux points 1 à 3 : relancer. Un « non » ou l'absence de réponse sur les points 1, 2 ou 3 = rouge. Pas de réponse en 7 jours = rouge.
+
+#### H3. Solutions de repli
+
+1. **Freelance CLO3D** (recommandé) : modèle créé à partir du tech pack v3, livré avec les fichiers source et un GLB optimisé (objectif d'Isabelle : moins de 100 000 triangles, environ 5 Mo). Contrat avec la clause H4. Coût (repères d'Isabelle, non vérifiés) : de l'ordre de 250 $ à plusieurs centaines d'euros pour un vêtement, bien plus pour un modèle articulé au contrat « v2 » (panneaux, tirette, doublure) : à préciser dans le devis, **avec retopologie, bake et export GLB inclus**.
+2. **Embed Sketchfab** : seulement avec réponse écrite du vendeur (question 7 Sketchfab ci-dessus) et si Sacha confirme que le récit au défilement reste réalisable. Prévoir le consentement cookies avant le chargement du viewer et la mise à jour de `cookies.html` et de `confidentialite.html`.
+3. **BinaryCloth ou autre prestation sur mesure** : mêmes exigences contractuelles que le freelance.
+4. **Quoi qu'il en soit** : conserver licence, facture et échanges au nom de la société ; refaire la vérification si le modèle change de version ; ne livrer au navigateur que le GLB de production (pas le fichier source CLO ou les textures d'origine).
+
+#### H4. Clause type de cession de droits (freelance / prestataire 3D) — modèle à faire relire par un avocat
+
+> **Article [X] — Propriété intellectuelle et cession de droits**
+>
+> **X.1 Livrables.** Le Prestataire remet au Client les fichiers suivants, ensemble les « Livrables » : le modèle 3D du hoodie KYMA « Ressac » (fichier source [CLO / Marvelous Designer / Blender] et patrons), les textures et matériaux, le fichier optimisé pour le temps réel au format glTF/GLB, et toutes déclinaisons de coloris commandées.
+>
+> **X.2 Cession.** Le Prestataire cède au Client, à titre **exclusif**, **pour le monde entier** et **pour toute la durée légale de protection des droits d'auteur**, l'ensemble des droits patrimoniaux sur les Livrables, savoir :
+> (a) le droit de **reproduction**, sur tous supports et par tous procédés connus ou inconnus à ce jour (fichiers numériques, serveurs, sites internet, applications, réseaux sociaux, impression, supports publicitaires) ;
+> (b) le droit de **représentation**, par tout moyen de communication au public, notamment l'affichage interactif en temps réel (WebGL), la diffusion en ligne et la mise à disposition du fichier au navigateur des visiteurs du site du Client ;
+> (c) le droit d'**adaptation, de modification, de transformation et de dérivation** (retopologie, retexture, animation, rigging, changement de coloris, conversion de format, intégration dans d'autres œuvres), y compris par des tiers désignés par le Client ;
+> (d) le droit d'**exploitation commerciale**, à toute fin liée à l'activité du Client : site marchand, publicité, communication, packaging, presse, salons, ainsi que la **cession ou la concession à des tiers** de ces droits ;
+> (e) le droit de **distribution** des Livrables et de leurs dérivés.
+> Cette cession couvre toutes les finalités commerciales du Client. Elle prend effet **au paiement intégral du prix** prévu à l'article [Y].
+>
+> **X.3 Droit moral.** Le Prestataire conserve son droit moral inaliénable sur l'œuvre. Il **autorise expressément** les modifications, adaptations et dérivations décrites à l'article X.2(c), et renonce, dans la mesure permise par la loi, à exiger une mention de son nom. Le Client peut, sans y être tenu, mentionner le Prestataire.
+>
+> **X.4 Éléments du Client.** Le tech pack, le motif « KYMA Wave », le logo, les noms et les marques du Client restent sa propriété exclusive. Le Prestataire n'acquiert aucun droit dessus et s'interdit de les réutiliser, de les divulguer ou de les exploiter pour lui-même ou pour un tiers.
+>
+> **X.5 Originalité et garanties.** Le Prestataire garantit : (a) que les Livrables sont **originaux**, qu'il en est le seul auteur et qu'il est libre de céder les droits ci-dessus ; (b) qu'ils ne contiennent **aucun élément protégé appartenant à un tiers** (modèle, texture, tissu numérique, logo, marque, photographie, étiquette), sauf éléments listés à l'annexe [Z] avec la licence correspondante, qui doit autoriser l'usage commercial, la modification et l'affichage web ; (c) qu'**aucun outil d'intelligence artificielle générative** n'a été utilisé pour créer les Livrables, y compris leurs textures ; (d) qu'il détient une **licence commerciale valide** des logiciels utilisés (CLO, Marvelous Designer ou équivalent) pour toute la durée de la mission ; (e) que les Livrables ne portent atteinte à aucun droit de tiers. Le Prestataire garantit le Client contre toute réclamation de tiers à ce titre et prend en charge les frais et dommages en résultant, dans les limites de l'article [limitation de responsabilité].
+>
+> **X.6 Confidentialité.** Le Prestataire garde confidentiels le tech pack, les motifs, les visuels et les Livrables jusqu'à leur publication par le Client. Il ne les montre pas dans son portfolio, sur Fiverr, Malt, ComeUp, réseaux sociaux ou ailleurs sans l'accord écrit préalable du Client.
+>
+> **X.7 Sources et conservation.** Le Prestataire remet les fichiers source et supprime ses copies sur demande du Client à la fin de la mission, sauf obligation légale.
+>
+> **X.8 Prix.** La rémunération prévue à l'article [Y] rémunère la réalisation des Livrables **et** la cession de droits ci-dessus. Aucune redevance supplémentaire n'est due.
+>
+> *Notes pour le fondateur et l'avocat.* (1) L'art. L.131-3 du Code de la propriété intellectuelle exige que chaque droit cédé soit **mentionné distinctement** avec son étendue, sa destination, son lieu et sa durée : c'est pourquoi la clause les énumère (à vérifier sur Légifrance, texte non consulté). (2) La cession globale d'œuvres futures est nulle : la clause doit viser des livrables **déterminés** (art. X.1). (3) Une œuvre commandée n'est **pas** cédée automatiquement : sans clause écrite, le prestataire garde ses droits. (4) Faire signer par une personne physique ou morale identifiée (SIREN), facture au nom de la société. (5) Pour un prestataire établi hors de France, faire vérifier la loi applicable.
+
+#### H5. Points de vigilance (modèles 3D)
+
+**🔴 Bloquant**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| L1 | **Achat d'un modèle avant réponse écrite du vendeur** sur l'affichage WebGL, la modification et le GLB servi au navigateur. | Envoyer la question H2 ; ne rien acheter sans réponse écrite, accord du fondateur et feu de Victoire. | Izaac (envoi), fondateur |
+| L2 | **Modèle Stüssy (n° 7) et toute licence « Editorial Use Only »** : interdits sur un site marchand. | Écarter définitivement. | Izaac |
+| L3 | **Modèle générique non fidèle au produit** présenté sur le site : visuel trompeur (partie E). | Modifier jusqu'à fidélité avec le tech pack ; contrôler sur préséries. | Izaac |
+
+**🟠 À régler rapidement**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| L4 | **GLB téléchargeable par le navigateur** (risque commun à tout achat) : interdiction de redistribution dans la plupart des licences. | Obtenir la clause écrite (H2) ou passer au modèle sur mesure avec cession (H4). | Izaac, fondateur |
+| L5 | **Provenance des GLB `ressac-v2-*.glb` déjà dans le thème** non documentée : auteur, outils, éléments tiers, absence d'IA (décision du fondateur : aucune IA). | Izaac documente l'origine de chaque fichier ; cession écrite si un tiers est intervenu. | Izaac, fondateur |
+| L6 | **Embed Sketchfab** : cookies et traceurs tiers avant consentement. | N'activer le viewer qu'après consentement ; mettre à jour `cookies.html` et la politique de confidentialité. | Sacha, Victoire |
+
+**🟢 Bonnes pratiques**
+
+| # | Point | Action | Qui |
+|---|---|---|---|
+| L7 | Dossier de preuves 3D : licence en PDF datée, facture au nom de la société, échanges avec le vendeur, captures de la page de vente. | Dossier partagé. | Izaac |
+| L8 | Ne livrer au navigateur que le GLB de production, optimisé (moins de 100 000 triangles, environ 5 Mo), jamais les sources ni les textures d'origine. | Contrôle avant mise en ligne. | Sacha |
+| L9 | Retirer toute attribution exigée par une licence CC-BY ou équivalente dans un endroit visible (mentions légales ou pied de page de la page 3D). | Selon la licence retenue. | Sacha |
