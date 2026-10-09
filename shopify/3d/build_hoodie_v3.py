@@ -81,6 +81,7 @@ DF, DB = 0.104, 0.094   # demi-profondeurs devant / dos
 ZA_F, ZA_B = 0.074, 0.070   # demi-profondeur d'emmanchure
 XG = 0.0055           # demi-écart des lisières au milieu devant (sous le zip)
 TH = 0.005            # épaisseur du molleton + doublure (5 mm)
+TH_HOOD = 0.008       # v3 : capuche double épaisseur (molleton + jersey), tranche visible
 ALPHA = math.radians(9.0)   # écart des manches
 PIVOT_X = 0.272       # axe d'ouverture (couture de côté)
 
@@ -688,7 +689,7 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         f = np.linspace(0, 1, len(P0))
         g = np.linspace(0, 1, len(P2))
         P2 = np.stack([np.interp(f, g, P2[:, k]) for k in range(3)], 1)
-        P1 = 0.5 * (P0 + P2) + outward * th * 0.45
+        P1 = 0.5 * (P0 + P2) + outward * th * 0.62
         Vr = np.concatenate([P0, P1, P2])
         Fr = grid_faces(3, len(P0))
         uvr = np.tile(uv0[o_idx[0], o_idx[1]], (3, 1))
@@ -721,78 +722,162 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
 NOISE = Perlin(7)
 
 
+def fold_wave(ph):
+    """Profil de pli asymétrique : crête large et arrondie, creux plus pincé (tissu réel)."""
+    return np.sin(ph) + 0.32 * np.sin(2 * ph + 0.9)
+
+
+def wrap_pi(a):
+    return (a + np.pi) % (2 * np.pi) - np.pi
+
+
 def body_disp(G):
-    """Corps (x, y, z au repos). Plis verticaux de gravité, blousant et fronces au-dessus de la
-    taille, plis d'aisselle, plis horizontaux de taille ; nuls aux coutures d'emmanchure et d'encolure."""
+    """Corps (x, y, z au repos). v3 : amplitudes 2 à 3 fois le v2.
+    Plis de gravité (périodiques autour du corps : pas de fente au milieu dos), plis d'aisselle,
+    blousant et plis horizontaux de taille, fronces dans le bord-côte, bosse des sacs de poche,
+    coutures en creux (côtés, emmanchures, épaules, ourlet). Toutes les fonctions ne dépendent
+    que de la position : deux panneaux voisins se déplacent pareil sur leur couture commune."""
     x, y, z = G[..., 0], G[..., 1], G[..., 2]
     P = G[..., :3].reshape(-1, 3)
     ax = np.abs(x)
     shape = x.shape
-    # bruit étiré verticalement (gravité)
-    grav = fbm(NOISE, P * np.array([7.5, 1.7, 7.5]), 3).reshape(shape)
-    d = 0.0055 * grav * (0.55 + 0.45 * smoothstep(0.55, 0.12, y))
-    # plis d'aisselle (diagonales du dessous de bras vers le milieu, devant et dos)
+    th = np.arctan2(x, z)                       # 0 milieu devant, ±pi/2 côtés, ±pi milieu dos
+    # bosses basse fréquence (le molleton n'est jamais tendu comme une coque)
+    d = 0.0050 * fbm(NOISE, P * np.array([3.2, 1.8, 3.2]) + 41.0, 3).reshape(shape)
+    # plis de gravité : ondes verticales larges, phase déformée par le bruit, plus fortes en bas
+    warp = 2.2 * fbm(NOISE, P * np.array([2.4, 0.8, 2.4]) + 5.0, 2).reshape(shape)
+    amp = 0.55 + 0.45 * fbm(NOISE, P * np.array([2.0, 1.0, 2.0]) + 61.0, 2).reshape(shape)
+    gv = fold_wave(9 * th + warp) + 0.6 * np.sin(5 * th + 1.3 * warp + 1.0)
+    d += 0.0050 * gv * amp * smoothstep(0.62, 0.26, y) * smoothstep(Y0 + 0.02, Y0 + 0.10, y)
+    # plis d'aisselle : diagonales du dessous de bras vers le bas et le milieu (devant et dos)
     px, py = ax - W_CH, y - Y_AP
-    ang = math.radians(38)
+    ang = math.radians(40)
     perp = px * math.sin(ang) - py * math.cos(ang)
     dist = np.sqrt(px ** 2 + py ** 2)
     ph = fbm(NOISE, P * 4.0 + 31.0, 2).reshape(shape)
-    d += 0.0045 * np.sin(2 * np.pi * perp / 0.055 + 2.0 * ph) * np.exp(-dist / 0.10) * smoothstep(0.0, 0.05, -py + 0.04)
-    # plis horizontaux de taille (blousant de l'oversize)
-    hz = np.sin(2 * np.pi * (y - 0.10) / 0.075 + 2.5 * fbm(NOISE, P * np.array([3.0, 0.5, 3.0]) + 7.0, 2).reshape(shape))
-    d += 0.0030 * hz * np.exp(-((y - 0.16) / 0.07) ** 2)
-    # blousant + fronces dans le bord-côte
-    ul = G[..., 5] if G.shape[-1] > 5 else ax
-    gather = np.sin(2 * np.pi * ul / 0.042 + 1.8 * fbm(NOISE, P * 6 + 3.0, 2).reshape(shape))
-    d += 0.0068 * np.exp(-((y - (Y0 + 0.030)) / 0.024) ** 2)
-    d += 0.0034 * gather * smoothstep(Y0 + 0.05, Y0 + 0.004, y)
+    d += 0.0085 * fold_wave(2 * np.pi * perp / 0.062 + 2.0 * ph) * np.exp(-dist / 0.12) * smoothstep(0.0, 0.05, -py + 0.04)
+    # blousant : plis horizontaux irréguliers au-dessus du bord-côte (ils se cassent, se relaient)
+    hw = fbm(NOISE, P * np.array([3.0, 0.6, 3.0]) + 7.0, 2).reshape(shape)
+    br = 0.45 + 0.55 * smoothstep(-0.35, 0.35, fbm(NOISE, P * np.array([5.0, 2.0, 5.0]) + 13.0, 2).reshape(shape))
+    hz = fold_wave(2 * np.pi * (y - 0.09) / 0.052 + 2.8 * hw)
+    d += 0.0060 * hz * br * np.exp(-((y - (Y0 + 0.085)) / 0.055) ** 2)
+    d += 0.0030 * np.exp(-((y - (Y0 + 0.040)) / 0.030) ** 2)
+    # fronces dans le bord-côte (le corps est plus large que la côte : il fronce)
+    gw = 1.8 * fbm(NOISE, P * 6 + 3.0, 2).reshape(shape)
+    d += 0.0042 * np.sin(36 * th + gw) * smoothstep(Y0 + 0.055, Y0 + 0.004, y)
     d -= 0.0035 * smoothstep(Y0 + 0.012, Y0, y)          # rentre dans la couture
-    # atténuations : zip (milieu devant), emmanchure, encolure / épaules, poches
+    # sacs de poche : légère bosse sous la poche biais
     front = smoothstep(-0.01, 0.02, z)
-    d *= 1 - front * smoothstep(0.035, 0.008, ax)
+    d += 0.0030 * np.exp(-((ax - 0.150) / 0.055) ** 2 - ((y - 0.205) / 0.070) ** 2) * front
+    # atténuations : zip (milieu devant), emmanchure, encolure / épaules
+    d *= 1 - front * smoothstep(0.040, 0.010, ax)
     arm = np.clip((side_x(y) - ax) / 0.035, 0, 1) * (y > Y_AP - 0.02) + (y <= Y_AP - 0.02)
     d *= np.where(y > Y_AP - 0.03, smoothstep(0, 1, arm), 1.0)
     ysh = np.where(ax < NW, Y_SNP, Y_SNP - (Y_SNP - Y_SP) * np.clip((ax - NW) / (W_SH - NW), 0, 1) ** 1.18)
     d *= smoothstep(0.0, 0.07, ysh - y)
+    # coutures en creux (même valeur des deux côtés de chaque couture)
+    top_sh = smoothstep(NW + 0.005, NW + 0.02, ax)
+    s_side = np.exp(-(z / 0.007) ** 2) * smoothstep(0.18, 0.23, ax) * smoothstep(Y_AP + 0.012, Y_AP - 0.004, y)
+    s_arm = np.exp(-((side_x(y) - ax) / 0.007) ** 2) * smoothstep(Y_AP - 0.012, Y_AP + 0.004, y)
+    s_sh = np.exp(-((ysh - y) / 0.006) ** 2) * top_sh
+    s_hem = np.exp(-((y - Y0) / 0.006) ** 2)
+    d -= SEAM_DIP * np.maximum.reduce([s_side, s_arm, s_sh, s_hem])
     return d
 
 
+SEAM_DIP = 0.0022     # creux des coutures (m)
+
+
 def sleeve_disp(G):
+    """Manche. v3 : drapé en spirale, plis d'aisselle, plis de compression au pli du coude
+    (face avant, l'avant-bras fléchit vers l'avant), tassement en accordéon au-dessus du poignet,
+    fronces dans le poignet, coutures en creux (emmanchure, dessous de bras)."""
     x, y, z = G[..., 0], G[..., 1], G[..., 2]
     phi, v = G[..., 3], G[..., 4]
     P = G[..., :3].reshape(-1, 3)
     shape = x.shape
+    side = 1 if np.mean(x) > 0 else -1
+    ve = SLV_POSE[side]["elbow"]
     _, vlen = arc_coords(G)
-    grav = fbm(NOISE, P * np.array([6.0, 1.5, 6.0]) + 11.0, 3).reshape(shape)
-    d = 0.0045 * grav
-    # plis de coude : diagonales sur la face interne avant
-    c = vlen * math.cos(math.radians(32)) + 0.07 * np.sin(phi) * 1.0
-    face = 0.5 + 0.5 * np.cos(phi - 0.75 * np.pi)
-    d += 0.0060 * np.sin(2 * np.pi * c / 0.055 + 1.5 * grav) * np.exp(-((v - 0.48) / 0.12) ** 2) * face
-    # tassement au-dessus du poignet
+    d = 0.0045 * fbm(NOISE, P * np.array([5.0, 1.6, 5.0]) + 11.0, 3).reshape(shape)
     ph = fbm(NOISE, P * 5.0 + 5.0, 2).reshape(shape)
-    stack = np.sin(2 * np.pi * vlen / 0.046 + 1.2 * np.sin(phi + 2 * ph) + 2.0 * ph)
-    d += 0.0068 * stack * smoothstep(0.62, 0.78, v) * smoothstep(0.98, 0.90, v)
+    # drapé en spirale le long de la manche
+    d += 0.0045 * fold_wave(3 * phi + 2 * np.pi * vlen / 0.30 + 2.0 * ph) * smoothstep(-0.6, 0.1, v) * smoothstep(0.95, 0.72, v)
+    # plis d'aisselle (face interne, haut de manche)
+    dp = wrap_pi(phi - np.pi)
+    c40, s40 = math.cos(math.radians(40)), math.sin(math.radians(40))
+    pit = np.exp(-(dp / 0.95) ** 2) * np.exp(-((v + 0.45) / 0.40) ** 2)
+    d += 0.0080 * fold_wave(2 * np.pi * (vlen * c40 + dp * 0.08 * s40) / 0.055 + 1.5 * ph) * pit
+    # pli du coude : arcs de compression sur la face avant
+    face = (0.5 + 0.5 * np.cos(phi - np.pi / 2)) ** 1.5
+    cc = vlen + 0.035 * np.cos(phi - np.pi / 2)
+    d += 0.0100 * fold_wave(2 * np.pi * cc / 0.042 + 1.6 * ph) * np.exp(-((v - ve) / 0.13) ** 2) * face
+    # tassement en accordéon au-dessus du poignet (manche longue sur un bras au repos)
+    stack = fold_wave(2 * np.pi * vlen / 0.038 + 1.4 * np.sin(2 * phi + 2 * ph) + 2.0 * ph)
+    d += 0.0095 * stack * smoothstep(0.62, 0.78, v) * smoothstep(0.985, 0.90, v)
     # fronces dans le poignet
-    d += 0.0050 * np.sin(13 * phi + 3 * ph) * smoothstep(0.88, 0.985, v)
-    # nul à l'emmanchure et à la jonction du poignet (fronces exceptées)
+    d += 0.0055 * np.sin(13 * phi + 3 * ph) * smoothstep(0.88, 0.985, v)
+    # nul à l'emmanchure et à la jonction du poignet
     d *= smoothstep(-1.0, -0.72, v)
-    d *= smoothstep(1.0, 0.985, v) + 0.0
+    d *= smoothstep(1.0, 0.985, v)
+    # coutures en creux : emmanchure (même valeur que le corps) et dessous de bras
+    s_arm = np.exp(-(vlen / 0.007) ** 2)
+    s_under = np.exp(-((dp * 0.075) / 0.006) ** 2) * smoothstep(1.0, 0.97, v)
+    d -= SEAM_DIP * np.maximum(s_arm, s_under)
     return d
 
 
+def hood_relax(G):
+    """v3 : capuche détendue (aucune tête dedans). Le sommet s'affaisse, le bord d'ouverture
+    tombe vers l'avant et se resserre (ouverture en amande), légère rotation asymétrique.
+    La rangée d'encolure (b = 0) ne bouge pas : elle est cousue au corps."""
+    G = G.copy()
+    a, b = G[..., 3], G[..., 4]
+    P = G[..., :3]
+    wb = smoothstep(0.04, 0.40, b)
+    x, y, z = P[..., 0].copy(), P[..., 1].copy(), P[..., 2].copy()
+    # sommet affaissé
+    y = y - 2.4 * np.maximum(y - 0.775, 0) ** 2 * wb
+    # bord d'ouverture : tombe vers l'avant et vers le bas, se resserre au milieu de la hauteur
+    de = np.minimum(a, 1 - a)
+    we = np.exp(-(de / 0.16) ** 2) * smoothstep(0.35, 1.0, b)
+    z = z + 0.010 * we
+    y = y - 0.016 * we * smoothstep(0.55, 1.0, b)
+    x = x * (1 - 0.13 * np.exp(-(de / 0.20) ** 2) * np.sin(np.pi * np.clip(b, 0, 1)) ** 1.5 * wb)
+    # arrière de la capuche : le poids la fait pencher un peu en arrière et vers le bas
+    back = smoothstep(0.25, 0.5, 0.5 - np.abs(a - 0.5)) * wb
+    z = z - 0.012 * back * smoothstep(0.3, 0.8, b)
+    # légère rotation (asymétrie naturelle) autour d'un axe vertical passant par la nuque
+    ang = math.radians(3.0) * wb
+    cx, cz = 0.0, -0.06
+    xr = cx + (x - cx) * np.cos(ang) + (z - cz) * np.sin(ang)
+    zr = cz - (x - cx) * np.sin(ang) + (z - cz) * np.cos(ang)
+    G[..., 0], G[..., 1], G[..., 2] = xr, y, zr
+    return G
+
+
 def hood_disp(G):
+    """Capuche. v3 : plis de flanc (le tissu se creuse entre le bord et la couture milieu),
+    creux au sommet de part et d'autre de la couture, tassement autour de la nuque."""
     P = G[..., :3].reshape(-1, 3)
     shape = G.shape[:2]
     a, b = G[..., 3], G[..., 4]
     ulen, _ = arc_coords(G)
     rowL = ulen[:, -1:]
     d = 0.0035 * fbm(NOISE, P * np.array([7.0, 3.0, 7.0]) + 21.0, 3).reshape(shape)
+    win = smoothstep(0.12, 0.40, b) * smoothstep(1.0, 0.72, b)
+    ac1 = 0.27 + 0.05 * (b - 0.5)
+    ac2 = 0.745 - 0.04 * (b - 0.5)
+    d -= 0.0120 * np.exp(-((a - ac1) / 0.045) ** 2) * win
+    d -= 0.0095 * np.exp(-((a - ac2) / 0.050) ** 2) * win
+    d += 0.0050 * np.exp(-((a - 0.36) / 0.05) ** 2) * win + 0.0045 * np.exp(-((a - 0.64) / 0.05) ** 2) * win
+    # creux de part et d'autre de la couture au sommet
+    d -= 0.0055 * (np.exp(-((a - 0.44) / 0.03) ** 2) + np.exp(-((a - 0.56) / 0.03) ** 2)) * smoothstep(0.55, 0.85, b)
     # couture milieu légèrement en relief
     ds = np.abs(ulen - rowL / 2)
-    d += 0.0016 * np.exp(-(ds / 0.004) ** 2)
+    d += 0.0020 * np.exp(-(ds / 0.004) ** 2)
     # tassement à la base (plis horizontaux autour de la nuque)
-    d += 0.0040 * np.sin(2 * np.pi * b / 0.09 + 3 * fbm(NOISE, P * 5 + 2, 2).reshape(shape)) * np.exp(-((b - 0.14) / 0.08) ** 2)
+    d += 0.0060 * fold_wave(2 * np.pi * b / 0.09 + 3 * fbm(NOISE, P * 5 + 2, 2).reshape(shape)) * np.exp(-((b - 0.15) / 0.08) ** 2)
     d *= smoothstep(0.0, 0.06, b)
     return d
 
@@ -813,6 +898,7 @@ def apply_disp(G, d, flip_ref):
 # Bords-côtes 2×2 (taille et poignets) : profil plié, côtes en relief
 # --------------------------------------------------------------------------------------
 RIB_P = 0.0110   # période d'une côte 2×2 (2 mailles endroit + 2 envers)
+RIB_AMP = 0.0014  # v3 : relief des côtes (v2 : 0,85 mm), lisible à distance
 
 
 def rib_profile(height, inset, depth=0.0056, r=0.0028):
@@ -848,11 +934,11 @@ def hem_band(ring):
     nh = nrm(np.stack([T[:, 2], np.zeros(nu), -T[:, 0]], 1))
     if np.mean(np.sum(nh * np.stack([R[:, 0], np.zeros(nu), R[:, 2] + 0.005], 1), 1)) < 0:
         nh = -nh
-    o, h, side = rib_profile(Y0, 0.0065)
+    o, h, side = rib_profile(Y0, 0.0110)
     ulen = np.linspace(0, L, nu)
     rw = rib_wave(ulen)
     G = (R[None, :, :] * np.array([1, 0, 1])[None, None] + np.array([0, 1, 0])[None, None] * h[:, None, None]
-         + nh[None] * (o[:, None] + 0.00085 * side[:, None] * rw[None, :])[:, :, None])
+         + nh[None] * (o[:, None] + RIB_AMP * side[:, None] * rw[None, :])[:, :, None])
     return G, ulen, h
 
 
@@ -868,13 +954,13 @@ def cuff_band(ring, axis_dir):
     radial -= np.sum(radial * d[None], 1, keepdims=True) * d[None]
     rr = np.linalg.norm(radial, axis=1, keepdims=True)
     nh = radial / rr
-    o, h, side = rib_profile(CUFF_LEN, 0.0030)
+    o, h, side = rib_profile(CUFF_LEN, 0.0050)
     ulen = np.linspace(0, L, nu + 1)
     rw = rib_wave(ulen)
     base = C[None] + nh * rr                    # anneau de départ
     # h : hauteur depuis l'extrémité du poignet ; le poignet descend le long de d
     G = (base[None] + d[None, None] * (CUFF_LEN - h)[:, None, None]
-         + nh[None] * (o[:, None] + 0.0008 * side[:, None] * rw[None, :])[:, :, None])
+         + nh[None] * (o[:, None] + RIB_AMP * side[:, None] * rw[None, :])[:, :, None])
     return G, ulen, h
 
 
@@ -1218,27 +1304,148 @@ def kyma_wave(P, vort, seed):
 KNIT_TILE = 0.024   # m
 
 
-def knit_normal_tile(n=512, wales=20, courses=24, seed=3):
+def _height_to_normal(h, strength):
+    gy, gx = np.gradient(np.pad(h, 1, mode="wrap"))
+    gx, gy = gx[1:-1, 1:-1], gy[1:-1, 1:-1]
+    N = nrm(np.stack([-gx * strength, gy * strength, np.ones_like(h)], 2))
+    return Image.fromarray(((N * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8))
+
+
+def knit_height(n=512, wales=20, courses=24, seed=3):
+    """Hauteur de l'endroit du french terry (jersey) : colonnes de mailles en V, chaque boucle
+    légèrement différente (hauteur, décalage, inclinaison), fibres fines dans le sens du fil.
+    Tuile répétable (bruit périodique), 24 mm de côté."""
+    rng = np.random.default_rng(seed)
     u = (np.arange(n) + 0.5) / n
     U, V = np.meshgrid(u, u)
     cu, cv = U * wales, V * courses
+    iu, iv = np.floor(cu).astype(int) % wales, np.floor(cv).astype(int) % courses
     fu, fv = cu - np.floor(cu), cv - np.floor(cv)
+    jit = rng.normal(0, 1, (courses, wales, 4))
+    hgt = 1.0 + 0.13 * jit[iv, iu, 0]
+    dx = 0.035 * jit[iv, iu, 1]
+    tilt = 0.06 * jit[iv, iu, 2]
     h = np.zeros_like(U)
-    for sgn, cx in ((1, 0.30), (-1, 0.70)):        # deux jambes de la maille en V
-        x = (fu - cx)
-        y = (fv - 0.5)
-        xr = x * math.cos(sgn * 0.45) - y * math.sin(sgn * 0.45)
-        yr = x * math.sin(sgn * 0.45) + y * math.cos(sgn * 0.45)
-        h = np.maximum(h, np.exp(-(xr / 0.17) ** 2 - (yr / 0.42) ** 2))
-    rng = np.random.default_rng(seed)
-    noise = ndimage.gaussian_filter(rng.normal(size=(n, n)), 3, mode="wrap")
-    h = h + 0.35 * noise / noise.std() * 0.15
-    gy, gx = np.gradient(np.pad(h, 1, mode="wrap"))
-    gx, gy = gx[1:-1, 1:-1], gy[1:-1, 1:-1]
-    s = 2.2
-    N = nrm(np.stack([-gx * s, gy * s, np.ones_like(h)], 2))
-    img = ((N * 0.5 + 0.5) * 255 + 0.5).astype(np.uint8)
+    for sgn, cx in ((1, 0.29), (-1, 0.71)):        # deux jambes de la maille en V
+        x = fu - cx - dx
+        y = fv - 0.5
+        a = sgn * 0.47 + tilt
+        xr = x * np.cos(a) - y * np.sin(a)
+        yr = x * np.sin(a) + y * np.cos(a)
+        h = np.maximum(h, hgt * np.exp(-(xr / 0.165) ** 2 - (yr / 0.43) ** 2))
+    # fibres : bruit fin étiré dans l'axe des jambes (périodique : filtrage en mode « wrap »)
+    fib = ndimage.gaussian_filter(rng.normal(size=(n, n)), (2.2, 0.7), mode="wrap")
+    fib2 = ndimage.gaussian_filter(rng.normal(size=(n, n)), 6, mode="wrap")
+    h = h + 0.06 * fib / fib.std() + 0.05 * fib2 / fib2.std()
+    return (h - h.min()) / (h.max() - h.min())
+
+
+def knit_normal_tile(n=512):
+    return _height_to_normal(knit_height(n), 2.6)
+
+
+def knit_roughness_tile(n=256):
+    """Rugosité (canal G de metallicRoughness, B = 0 : non métallique). Les creux entre les
+    mailles sont plus mats que le dessus des boucles ; jamais en dessous de 0,74 : le coton
+    ne brille pas."""
+    h = np.asarray(Image.fromarray((knit_height(512) * 255).astype(np.uint8)).resize((n, n), Image.BILINEAR), np.float64) / 255
+    rng = np.random.default_rng(9)
+    nz = ndimage.gaussian_filter(rng.normal(size=(n, n)), 1.2, mode="wrap")
+    r = 0.95 - 0.17 * h + 0.025 * nz / nz.std()
+    r = np.clip(r, 0.74, 1.0)
+    img = np.zeros((n, n, 3), np.uint8)
+    img[..., 0] = 255
+    img[..., 1] = (r * 255 + 0.5).astype(np.uint8)
     return Image.fromarray(img)
+
+
+def fleece_normal_tile(n=256, seed=5):
+    """Envers gratté (molleton brossé) : duvet de fibres, aucune structure de maille lisible."""
+    rng = np.random.default_rng(seed)
+    h = (ndimage.gaussian_filter(rng.normal(size=(n, n)), 1.0, mode="wrap") * 0.5
+         + ndimage.gaussian_filter(rng.normal(size=(n, n)), 3.0, mode="wrap") * 2.0
+         + ndimage.gaussian_filter(rng.normal(size=(n, n)), 9.0, mode="wrap") * 5.0)
+    h = (h - h.min()) / (h.max() - h.min())
+    return _height_to_normal(h, 1.3)
+
+
+# --------------------------------------------------------------------------------------
+# Occlusion ambiante cuite (v3) : lancer de rayons sur le maillage complet, par sommet
+# --------------------------------------------------------------------------------------
+def bake_ao(layout, nrays=64, rmax=0.24, eps=6e-4, verbose=True):
+    """Occlusion par sommet (1 = dégagé). Calculée sur 3 états (fermé, ouvert, ouvert + revers) :
+    on garde la valeur la plus claire, pour que l'intérieur reste lisible une fois ouvert
+    tandis que l'intérieur de capuche, les dessous de bras et les creux de plis restent sombres.
+    Résultat stocké dans m.AO (multiplicateur COLOR_0)."""
+    import trimesh
+    t0 = time.time()
+    if not trimesh.ray.has_embree:
+        nrays = min(nrays, 12)
+        print("  (embreex absent : occlusion réduite à", nrays, "rayons par sommet — pip install embreex)")
+    prims = [(nd, m) for nd in layout["nodes"] for m in nd["prims"]]
+    ft = layout["fold_table"]
+    def state_open(m, sg):
+        return open_field(m.V, sg)
+    def state_fold(m, sg):
+        return open_field(fold_field(m.V, ft, sg), sg, rest=m.V)
+    states = [None, state_open, state_fold]
+    k = np.arange(nrays) + 0.5
+    r = np.sqrt(k / nrays)
+    ang = k * 2.399963229728653
+    local = np.stack([r * np.cos(ang), r * np.sin(ang), np.sqrt(np.maximum(1 - r * r, 0))], 1)
+    rng = np.random.default_rng(1)
+    best = [np.zeros(len(m.V)) for _, m in prims]
+    for st in states:
+        Vs, Ns = [], []
+        for nd, m in prims:
+            if st is None or not nd["morphs"]:
+                Vs.append(m.V)
+                Ns.append(m.N)
+            else:
+                Vd = st(m, nd["sigma"])
+                Vs.append(Vd)
+                Ns.append(vertex_normals(Vd, m.F))
+        offs = np.cumsum([0] + [len(v) for v in Vs])
+        allV = np.concatenate(Vs)
+        allF = np.concatenate([m.F + offs[i] for i, (_, m) in enumerate(prims)])
+        tm = trimesh.Trimesh(allV, allF, process=False)
+        N = nrm(np.concatenate(Ns))
+        # repère tangent par sommet, motif tourné au hasard (pas de bandes)
+        t1 = nrm(np.cross(N, np.where(np.abs(N[:, 1:2]) < 0.9, [[0, 1, 0]], [[1, 0, 0]])))
+        t2 = np.cross(N, t1)
+        rot = rng.uniform(0, 2 * np.pi, len(N))
+        c, s_ = np.cos(rot)[:, None], np.sin(rot)[:, None]
+        t1, t2 = t1 * c + t2 * s_, -t1 * s_ + t2 * c
+        occ = np.zeros(len(allV))
+        chunk = max(1, 600000 // nrays)
+        for i0 in range(0, len(allV), chunk):
+            sl = slice(i0, min(i0 + chunk, len(allV)))
+            nv = sl.stop - sl.start
+            D = (local[None, :, 0:1] * t1[sl, None] + local[None, :, 1:2] * t2[sl, None]
+                 + local[None, :, 2:3] * N[sl, None]).reshape(-1, 3)
+            O = np.repeat(allV[sl] + N[sl] * eps, nrays, 0)
+            loc, iray, _ = tm.ray.intersects_location(O, D, multiple_hits=False)
+            dist = np.linalg.norm(loc - O[iray], axis=1)
+            w = np.clip(1 - dist / rmax, 0, 1) ** 0.7
+            hit = np.zeros(len(O))
+            hit[iray] = w
+            occ[sl] = hit.reshape(nv, nrays).mean(1)
+        ao = 1 - occ
+        for i, (_, m) in enumerate(prims):
+            best[i] = np.maximum(best[i], ao[offs[i]:offs[i + 1]])
+        if verbose:
+            print(f"  occlusion : état {states.index(st) + 1}/3 ({time.time() - t0:.0f} s)")
+    # lissage léger sur le maillage (le bruit des 64 rayons disparaît, les creux restent)
+    for i, (_, m) in enumerate(prims):
+        a = best[i]
+        for _ in range(2):
+            acc = np.zeros(len(a))
+            cnt = np.zeros(len(a))
+            for e in ((0, 1), (1, 2), (2, 0)):
+                np.add.at(acc, m.F[:, e[0]], a[m.F[:, e[1]]])
+                np.add.at(cnt, m.F[:, e[0]], 1)
+            a = 0.5 * a + 0.5 * acc / np.maximum(cnt, 1)
+        m.AO = np.clip(0.16 + 0.84 * a ** 1.15, 0, 1)
 
 
 # --------------------------------------------------------------------------------------
@@ -1409,6 +1616,13 @@ class GLB:
         return self.acc({"bufferView": self.view(q4.tobytes(), 34962, 4), "componentType": 5120,
                          "normalized": True, "count": len(q), "type": "VEC3"})
 
+    def color_u8(self, ao):
+        """COLOR_0 (RGBA, octets normalisés) : occlusion cuite, multipliée à la couleur de base."""
+        q = np.clip(np.round(np.asarray(ao) * 255), 0, 255).astype(np.uint8)
+        c = np.stack([q, q, q, np.full_like(q, 255)], 1)
+        return self.acc({"bufferView": self.view(c.tobytes(), 34962), "componentType": 5121,
+                         "normalized": True, "count": len(c), "type": "VEC4"})
+
     def uv_u16(self, UV, scale=1.0):
         q = np.clip(np.round(np.asarray(UV) / scale * 65535), 0, 65535).astype(np.uint16)
         return self.acc({"bufferView": self.view(q.tobytes(), 34962), "componentType": 5123,
@@ -1551,7 +1765,7 @@ def pocket_parts(sampler, sigma):
     W = 0.018
     nl, nc = 40, 9
     l = np.linspace(0, 1, nl)
-    c = np.concatenate([[-0.17, -0.02], np.linspace(0, 1, nc)])
+    c = np.concatenate([[-0.34, -0.21, -0.07], np.linspace(0, 1, nc)])
     Lg, Cg = np.meshgrid(l, c)
     XY = T[None, None] + (B - T)[None, None] * Lg[..., None] + cdir[None, None] * (Cg * W)[..., None]
     S = sampler(XY.reshape(-1, 2)).reshape(len(c), nl, -1)
@@ -1560,18 +1774,22 @@ def pocket_parts(sampler, sigma):
     uv0, uv1 = S[..., 4:6], S[..., 6:8]
     # hauteur du passepoil : arête franche côté fente, couture à plat côté milieu
     cc = Cg
-    h = np.where(cc < 0, 0.0005, 0.0036 * smoothstep(-0.02, 0.10, cc) * smoothstep(1.0, 0.80, cc) + 0.0004)
-    h = h * (0.75 + 0.25 * smoothstep(0, 0.06, Lg) * smoothstep(1, 0.94, Lg))
+    # v3 : fente ouverte — bord arrière à fleur, fond en creux (ombre), lèvre du passepoil
+    # en surplomb puis passepoil bombé, cousu à plat côté milieu devant
+    lip = 0.0034 + 0.0024 * smoothstep(-0.07, 0.14, cc) * smoothstep(1.0, 0.72, cc)
+    h = np.where(cc < -0.30, 0.0004, np.where(cc < -0.10, -0.0040, np.where(cc < 0.5, lip, lip * smoothstep(1.0, 0.5, cc) + 0.0005)))
+    gap = smoothstep(0, 0.10, Lg) * smoothstep(1, 0.90, Lg)       # la fente se referme aux extrémités
+    h = np.where(cc < 0, h * gap + 0.0004 * (1 - gap), h * (0.7 + 0.3 * gap))
     G = P + N * h[..., None]
-    welt = G[1:]
+    welt = G[2:]
     nv, nu = welt.shape[:2]
     Vw = welt.reshape(-1, 3)
-    m_w = Mesh(Vw, grid_faces(nv, nu), "fabric", uv0[1:].reshape(-1, 2), uv1[1:].reshape(-1, 2))
+    m_w = Mesh(Vw, grid_faces(nv, nu), "fabric", uv0[2:].reshape(-1, 2), uv1[2:].reshape(-1, 2))
     if np.mean(m_w.N[:, 2]) < 0:
         m_w.F = m_w.F[:, ::-1].copy()
         m_w.N = -m_w.N
-    slot = G[:2]
-    m_s = Mesh(slot.reshape(-1, 3), grid_faces(2, nl), "pocket")
+    slot = G[:3]
+    m_s = Mesh(slot.reshape(-1, 3), grid_faces(3, nl), "pocket")
     if np.mean(m_s.N[:, 2]) < 0:
         m_s.F = m_s.F[:, ::-1].copy()
         m_s.N = -m_s.N
@@ -1589,7 +1807,7 @@ def build_geometry(font_path, verbose=True):
     Gbk = with_ulen(Gbk)
     Sl = sleeve_grid(Gf, Gb, side=1)
     Sr = mirror_x(sleeve_grid(Gf, Gb, side=-1))
-    Hd = hood_grid()
+    Hd = hood_relax(hood_grid())
     grids = {"Panel_Left": (GfL, body_disp, radial_out), "Panel_Right": (GfR, body_disp, radial_out),
              "Body_Back": (Gbk, body_disp, radial_out),
              "Sleeve_Left": (Sl, sleeve_disp, None), "Sleeve_Right": (Sr, sleeve_disp, None),
@@ -1671,7 +1889,9 @@ def finish_geometry(geo, S=2048):
         G = g[k]["G"][..., :3]
         closed = k.startswith("Sleeve")
         outer, inner = shell_from_grid(G, g[k]["ref"], g[k]["uv0"], g[k]["uv1"], closed_u=closed,
-                                       rims=("b", "t") if closed else ("l", "r", "b", "t"))
+                                       rims=("b", "t") if closed else ("l", "r", "b", "t"),
+                                       th=TH_HOOD if k == "Hood" else TH,
+                                       lining="hoodlining" if k == "Hood" else "lining")
         nodes[k] = [outer, inner]
     # poches
     for k, sg in (("Panel_Left", 1), ("Panel_Right", -1)):
@@ -1721,7 +1941,7 @@ def bake_atlas(geo, col, verbose=True):
         st = np.zeros(len(P))
         seam = np.zeros(len(P))
         if k in g and "d" in g[k]:
-            shade *= 1 + 10.0 * sample(g[k]["d"])
+            shade *= 1 + 5.0 * np.clip(sample(g[k]["d"]), -0.02, 0.02)
         ul, vl = sample(g[k]["ul"]), sample(g[k]["vl"])
         rowL = sample(np.tile(g[k]["ul"][:, -1:], (1, nu)))
         colL = sample(np.tile(g[k]["vl"][-1:, :], (nv, 1)))
@@ -1783,7 +2003,7 @@ def bake_atlas(geo, col, verbose=True):
 # Export d'un coloris : matériaux, nœuds, morph targets, animation, extras
 # --------------------------------------------------------------------------------------
 TARGETS = ["open", "open_fold", "unzip_1", "unzip_2", "unzip_3", "unzip_4"]
-MAT = {"fabric": 0, "lining": 1, "zip": 2, "brass": 3, "tape": 4, "pocket": 5}
+MAT = {"fabric": 0, "lining": 1, "zip": 2, "brass": 3, "tape": 4, "pocket": 5, "hoodlining": 6}
 
 
 def fold_table(geo):
@@ -1837,7 +2057,7 @@ def build_layout(geo, nodes):
     sf_p, sf_q = frame_after(lambda P: open_field(fold_field(P, ft, -1), -1, rest=P), zp[-1], zq[-1])
     layout = {
         "zipPath": zp, "zipPathQuat": zq, "zipTop": zip_top, "zipLen": zip_len,
-        "sliderOpen": (so_p, so_q), "sliderOpenFold": (sf_p, sf_q), "fields": fields,
+        "sliderOpen": (so_p, so_q), "sliderOpenFold": (sf_p, sf_q), "fields": fields, "fold_table": ft,
     }
     # nœuds : (nom, parent, primitives, sigma, morph?)
     L = [("Body_Back", None, nodes["Body_Back"], None),
@@ -1873,38 +2093,53 @@ def build_layout(geo, nodes):
     return layout
 
 
-def export_glb(path, col, geo, layout, atlas_img, knit_img):
+def export_glb(path, col, geo, layout, atlas_img, tiles):
     g = GLB()
+    g.g["extensionsUsed"].append("KHR_materials_sheen")
     tex_atlas = g.texture(g.image(atlas_img, quality=84), 33071)
-    tex_knit = g.texture(g.image(knit_img, quality=90), 10497)
+    tex_knit = g.texture(g.image(tiles["knit_normal"], mime="image/png"), 10497)
+    tex_rough = g.texture(g.image(tiles["knit_rough"], mime="image/png"), 10497)
+    tex_fleece = g.texture(g.image(tiles["fleece_normal"], mime="image/png"), 10497)
     # échelle des UV de maille quantifiées
     lmax = 0.0
     for nd in layout["nodes"]:
         for m in nd["prims"]:
-            if m.UV1 is not None and m.material in ("fabric", "lining"):
+            if m.UV1 is not None and m.material in ("fabric", "lining", "hoodlining"):
                 lmax = max(lmax, float(np.max(m.UV1)))
     lmax = math.ceil(lmax * 100) / 100 + 0.01
     ksc = lmax / KNIT_TILE
-    tt = {"KHR_texture_transform": {"scale": [ksc, ksc]}}
     A, B = hex_rgb(col["a"]), hex_rgb(col["b"])
     lin = srgb_to_lin(hex_rgb(col["lining"]))
     tape = srgb_to_lin(B) * 0.82
     pocket = srgb_to_lin(0.5 * (A + B)) * 0.10
+    mid = srgb_to_lin(0.5 * (A + B))
+    # reflet velouté du coton : teinte de la fibre, éclaircie, jamais blanche
+    sheen_f = [float(v) for v in np.clip(0.55 * mid + 0.05, 0, 1)]
+    sheen_l = [float(v) for v in np.clip(0.60 * lin + 0.05, 0, 1)]
+    tr = {"KHR_texture_transform": {"scale": [ksc, ksc]}}
+    trf = {"KHR_texture_transform": {"scale": [ksc * 0.5, ksc * 0.5]}}   # duvet : tuile de 48 mm
     g.g["materials"] = [
-        {"name": f"Molleton KYMA Wave — {col['name']}", "pbrMetallicRoughness": {
-            "baseColorTexture": {"index": tex_atlas, "texCoord": 0}, "metallicFactor": 0.0, "roughnessFactor": 0.86},
-         "normalTexture": {"index": tex_knit, "texCoord": 1, "scale": 0.55, "extensions": tt}},
-        {"name": f"Doublure jersey ton sur ton — {col['name']}", "pbrMetallicRoughness": {
-            "baseColorFactor": [*map(float, lin), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.92},
-         "normalTexture": {"index": tex_knit, "texCoord": 0, "scale": 0.45, "extensions": tt}},
+        {"name": f"French terry KYMA Wave — {col['name']}", "pbrMetallicRoughness": {
+            "baseColorTexture": {"index": tex_atlas, "texCoord": 0}, "metallicFactor": 1.0, "roughnessFactor": 1.0,
+            "metallicRoughnessTexture": {"index": tex_rough, "texCoord": 1, "extensions": tr}},
+         "normalTexture": {"index": tex_knit, "texCoord": 1, "scale": 0.60, "extensions": tr},
+         "extensions": {"KHR_materials_sheen": {"sheenColorFactor": sheen_f, "sheenRoughnessFactor": 0.62}}},
+        {"name": f"Envers molleton gratté — {col['name']}", "pbrMetallicRoughness": {
+            "baseColorFactor": [*map(float, lin), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.96},
+         "normalTexture": {"index": tex_fleece, "texCoord": 0, "scale": 0.55, "extensions": trf},
+         "extensions": {"KHR_materials_sheen": {"sheenColorFactor": sheen_l, "sheenRoughnessFactor": 0.80}}},
         {"name": "Zip métal argent brossé", "pbrMetallicRoughness": {
-            "baseColorFactor": [0.74, 0.75, 0.77, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.42}},
-        {"name": "Tirette Kyma laiton doré", "pbrMetallicRoughness": {
-            "baseColorFactor": [0.95, 0.76, 0.42, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.26}},
+            "baseColorFactor": [0.80, 0.81, 0.83, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.40}},
+        {"name": "Tirette Kyma laiton plaqué or brossé", "pbrMetallicRoughness": {
+            "baseColorFactor": [0.93, 0.74, 0.40, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.34}},
         {"name": "Ruban de zip", "pbrMetallicRoughness": {
             "baseColorFactor": [*map(float, tape), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.9}},
         {"name": "Fond de poche", "pbrMetallicRoughness": {
             "baseColorFactor": [*map(float, pocket), 1.0], "metallicFactor": 0.0, "roughnessFactor": 1.0}},
+        {"name": f"Doublure de capuche jersey ton sur ton — {col['name']}", "pbrMetallicRoughness": {
+            "baseColorFactor": [*map(float, lin), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.90},
+         "normalTexture": {"index": tex_knit, "texCoord": 0, "scale": 0.45, "extensions": tr},
+         "extensions": {"KHR_materials_sheen": {"sheenColorFactor": sheen_l, "sheenRoughnessFactor": 0.65}}},
     ]
     nodes_js = g.g["nodes"]
     index = {}
@@ -1917,8 +2152,11 @@ def export_glb(path, col, geo, layout, atlas_img, knit_img):
             if m.material == "fabric":
                 attrs["TEXCOORD_0"] = g.uv_u16(np.clip(m.UV0, 0, 1))
                 attrs["TEXCOORD_1"] = g.uv_u16(np.clip(m.UV1, 0, None), lmax)
-            elif m.material == "lining":
+            elif m.material in ("lining", "hoodlining"):
                 attrs["TEXCOORD_0"] = g.uv_u16(np.clip(m.UV1, 0, None), lmax)
+            ao = getattr(m, "AO", None)
+            if ao is not None:
+                attrs["COLOR_0"] = g.color_u8(ao)
             prim = {"attributes": attrs, "indices": g.indices(m.F, len(V)), "material": MAT[m.material], "mode": 4}
             if morphs:
                 tl = []
@@ -2054,6 +2292,8 @@ def main():
     ap.add_argument("--out", default=HERE)
     ap.add_argument("--font", default=None)
     ap.add_argument("--atlas-png", default=None, help="dossier où écrire aussi la texture d'atlas (contrôle)")
+    ap.add_argument("--textures", default=None, help="dossier où écrire aussi les tuiles PNG (maille, rugosité, envers gratté)")
+    ap.add_argument("--ao-rays", type=int, default=64, help="rayons d'occlusion par sommet (0 = sans occlusion cuite)")
     a = ap.parse_args()
     t0 = time.time()
     font = find_font(a.font)
@@ -2063,14 +2303,20 @@ def main():
     layout = build_layout(geo, nodes)
     for nd in layout["nodes"]:
         print(f"  {nd['name']:16s} morph={'oui' if nd['morphs'] else 'non'}  dépl. max {nd['maxdisp'] * 100:.1f} cm")
-    knit = knit_normal_tile()
+    if a.ao_rays > 0:
+        bake_ao(layout, nrays=a.ao_rays)
+    tiles = {"knit_normal": knit_normal_tile(), "knit_rough": knit_roughness_tile(), "fleece_normal": fleece_normal_tile()}
+    if a.textures:
+        os.makedirs(a.textures, exist_ok=True)
+        for k, im in tiles.items():
+            im.save(os.path.join(a.textures, f"{k.replace('_', '-')}.png"), optimize=True)
     for c in (COLORIS if a.coloris == "all" else [a.coloris]):
         col = COLORIS[c]
         img = bake_atlas(geo, col)
         if a.atlas_png:
             img.save(os.path.join(a.atlas_png, f"atlas-{c}.jpg"), quality=85)
         p = os.path.join(a.out, f"ressac-v3-{c}.glb")
-        export_glb(p, col, geo, layout, img, knit)
+        export_glb(p, col, geo, layout, img, tiles)
         ntri = sum(len(m.F) for nd in layout["nodes"] for m in nd["prims"]) + len(geo["slider"].F) + len(geo["pull"].F)
         print(f"  -> {p} : {os.path.getsize(p) / 1e6:.2f} Mo, {ntri} triangles ({time.time() - t0:.0f} s)")
 

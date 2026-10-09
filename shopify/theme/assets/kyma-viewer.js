@@ -115,7 +115,8 @@
     s.tw = null; s.vis = true; s.raf = 0; s.last = 0; s.ft = 1; s.t = 0;
     s.tx = 0; s.ty = 0; s.ptx = 0; s.pty = 0; s.sy = 0; s.psy = null; s.zg = 1;
     s.transparent = s.o.bg === 'none';
-    try { s.ctx = cv.getContext('2d', { alpha: s.transparent }); } catch (e) { s.ctx = null; }
+    /* 2D avec alpha même sur fond beige : le canvas reste transparent (jamais noir) tant que le modèle charge */
+    try { s.ctx = cv.getContext('2d'); } catch (e) { s.ctx = null; }
     if (!supported() || !s.ctx) { s.fail('webgl'); return; }
     VIEWERS.push(s);
     s.bind();
@@ -153,7 +154,8 @@
     /* résolution interne plafonnée (DPR 1,5 au plus, × qualité adaptative) */
     var cv = this.cv, r = Math.min(w.devicePixelRatio || 1, 1.5) * (this.q || 1);
     var W = Math.max(64, Math.round((cv.clientWidth || 300) * r)), H = Math.max(64, Math.round((cv.clientHeight || 300) * r));
-    if (W !== cv.width || H !== cv.height) { cv.width = W; cv.height = H; this.dirty = 1; this.wake(); }
+    /* la nouvelle taille n'est appliquée qu'au moment de dessiner (changer cv.width vide le canvas : pas de flash) */
+    if (W !== cv.width || H !== cv.height) { this.pw = W; this.ph = H; this.dirty = 1; this.wake(); } else this.pw = 0;
   };
   V.load = function (url) {
     var s = this; if (s.dead) return Promise.reject(new Error('webgl'));
@@ -277,6 +279,7 @@
   };
   V.draw = function () {
     var s = this, g = G; if (!g || g.dead || s.dead || !s.scene) return;
+    if (s.pw) { s.cv.width = s.pw; s.cv.height = s.ph; s.pw = 0; }
     var r = g.r, W = s.cv.width, H = s.cv.height, asp = W / H, c = s.cur;
     if (g.W < W || g.H < H) { g.W = Math.max(g.W, W); g.H = Math.max(g.H, H); r.setSize(g.W, g.H, false); }
     r.setViewport(0, 0, W, H); r.setScissor(0, 0, W, H); r.setScissorTest(true);
