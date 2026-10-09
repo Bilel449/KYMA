@@ -344,3 +344,5 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 - **Pratiques trompeuses et disponibilité** : C. conso art. L.121-2 et L.121-4 ; DGCCRF, « Pratiques commerciales trompeuses » (economie.gouv.fr).
 - **Cashback, fidélité, TVA** : C. conso art. L.212-1 et R.212-1 s. ; BOFiP BOI-TVA-BASE-10-10-30 ; art. 256 ter CGI, directive (UE) 2016/1065. Aucune règle spécifique sur la validité d'un cashback trouvée : analyse par les règles générales.
 - **Rétractation en ligne (« Renoncer au contrat ici »)** : voir section (b).
+
+> **Décision du fondateur (09/10/2026)** : le terme **« cashback »** est conservé dans la communication Cercle Waves (mot connu et rassurant pour la cible). Condition à respecter : sous l'avantage, préciser sa nature exacte — par ex. « Cashback versé en crédit KYMA, utilisable sur vos prochains achats, valable [À COMPLÉTER] mois » — pour ne pas laisser croire à un remboursement en argent.
