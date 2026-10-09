@@ -39,6 +39,7 @@
         l.textContent = b.getAttribute(on ? 'data-label-on' : 'data-label-off') || l.textContent;
       });
       if (save) store('kyma-motion-paused', on ? '1' : '0');
+      try { d.dispatchEvent(new CustomEvent('kyma:motion', { detail: { paused: on } })); } catch (e) { /* ancien navigateur */ }
     }
     $('[data-kyma-pause]').forEach(function (b) {
       if (!once(b, 'pz')) return;
@@ -512,13 +513,50 @@
   }
 
   /* ── 13. Lecteur 3D 360° : natif Shopify -> GLB maison -> aperçu de coloris ────────────── */
+  /* [point, normale, zoom] des détails du hoodie Ressac (modèle d'Izaac, shopify/3d) */
+  var ANCHORS = {
+    capuche: [[0.09, 0.85, -0.03], [0.35, 0.7, 0.45], 1.2],
+    tirette: [[0, 0.748, 0.15], [0, 0.1, 1], 1.45],
+    zip: [[0, 0.46, 0.142], [0, 0, 1], 1.15],
+    poches: [[0.19, 0.27, 0.13], [0.3, 0, 1], 1.25],
+    cotes: [[0.2, 0.045, 0.112], [0.15, -0.1, 1], 1.2],
+    poignet: [[0.43, 0.07, 0.03], [0.6, -0.3, 0.6], 1.2],
+    dos: [[0, 0.5, -0.2], [0, 0, -1], 1]
+  };
   function viewer360(scope) {
     $('[data-kyma-360]', scope).forEach(function (sec) {
       if (!once(sec, '36')) return;
       var mode = sec.getAttribute('data-mode'), stage = sec.querySelector('.kyma-360__stage');
       var presets = sec.querySelector('.kyma-360__presets'), cap = sec.querySelector('[data-kyma-360-caption]');
       var fb = sec.querySelector('.kyma-360__fallback'), dots = $('[data-kyma-360-tints] [data-colorway]', sec);
-      var cur = sec.getAttribute('data-colorway') || 'kyma', api = null;
+      var cur = sec.getAttribute('data-colorway') || 'kyma', api = null, glbv = null;
+      /* points chauds : position sur le modèle (coordonnées du GLB : mètres, Y en haut, face avant vers +Z) et normale */
+      var spots = $('.kyma-360__spot', sec), legs = $('.kyma-360__lg', sec), hotA = '';
+      function hot(a) {
+        hotA = a || '';
+        spots.forEach(function (x) { x.classList.toggle('is-hot', x.getAttribute('data-anchor') === hotA); });
+        legs.forEach(function (x) { x.classList.toggle('is-hot', x.getAttribute('data-anchor') === hotA); });
+      }
+      function placeSpots(v) {
+        spots.forEach(function (x) {
+          var A = ANCHORS[x.getAttribute('data-anchor')]; if (!A) return;
+          var r = v.project(A[0], A[1]); if (!r) return;
+          var on = r.front > 0.12;
+          x.style.transform = 'translate3d(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px,0)';
+          if (on !== x._on) { x._on = on; x.classList.toggle('is-back', !on); }
+        });
+      }
+      legs.forEach(function (li) {
+        var a = li.getAttribute('data-anchor'), b = li.querySelector('button');
+        var go = function () { hot(a); var A = ANCHORS[a]; if (glbv && A) glbv.to(Math.atan2(-A[1][0], A[1][2]), 4 * Math.PI / 180, A[2] || 1.25, 1200); };
+        if (b) { b.addEventListener('click', go); b.addEventListener('focus', function () { hot(a); }); }
+        li.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hot(a); });
+        li.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hot(''); });
+      });
+      spots.forEach(function (x) {
+        x.addEventListener('pointerenter', function () { hot(x.getAttribute('data-anchor')); });
+        x.addEventListener('pointerleave', function () { hot(''); });
+      });
       function fallback() {
         mode = 'fallback'; sec.setAttribute('data-mode', 'fallback');
         $('model-viewer, .kyma-360__glb, .kyma-360__loading', stage).forEach(function (n) { n.hidden = true; });
@@ -554,12 +592,16 @@
         var start = function () {
           if (!w.KYMAGLB) { fallback(); return; }
           stage.classList.add('is-loading');
+          var sp = sec.getAttribute('data-spin');
           var v = w.KYMAGLB.mount(cv, {
-            src: cv.getAttribute('data-src'),
+            src: cv.getAttribute('data-src'), spin: sp == null ? 7 : parseFloat(sp), idle: parseFloat(sec.getAttribute('data-spin-delay') || '3'),
+            yaw: spots.length ? -24 : 0,
             onload: function () { stage.classList.remove('is-loading'); stage.classList.add('is-ready'); },
-            onerror: function () { stage.classList.remove('is-loading'); fallback(); }
+            onerror: function () { stage.classList.remove('is-loading'); fallback(); },
+            onframe: spots.length ? placeSpots : null
           });
           if (v.dead) return;
+          glbv = v;
           if (w.KYMA3D && w.KYMA3D.external) w.KYMA3D.external(cv);
           api = {
             preset: function (n) { v.preset(n); },

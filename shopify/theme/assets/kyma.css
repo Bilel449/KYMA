@@ -336,7 +336,7 @@ canvas[data-kyma-3d].k3d-ready { opacity: 1; }
 .kyma-dive__ui a, .kyma-dive__ui button { pointer-events: auto; }
 .kyma-dive__head, .kyma-dive__card {
   max-width: 520px; padding: 22px 26px; border-radius: 22px; background: rgba(245, 237, 228, 0.86);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1); box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.05);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.05);
 }
 .kyma-dive__head .kyma-sec__title { font-size: clamp(30px, 3.6vw, 50px); margin-bottom: 12px; }
 .kyma-dive__head .kyma-sec__desc { font-size: 15px; }

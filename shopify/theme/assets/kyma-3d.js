@@ -1,4 +1,4 @@
-/*! KYMA 3D v2.0 — moteur WebGL natif, sans dépendance, UN SEUL contexte WebGL par page.
+/*! KYMA 3D v2.1 — moteur WebGL natif, sans dépendance, UN SEUL contexte WebGL par page.
  *  Toutes les scènes partagent un canvas WebGL hors écran : chaque scène y est rendue puis copiée
  *  (drawImage) dans son propre <canvas> 2D. Au plus MAX_ACTIVE (2) scènes s'animent en même temps
  *  (les plus visibles) ; les autres gardent leur dernière image, figée. Les scènes ne sont créées
@@ -11,7 +11,10 @@
  *        KYMA3D.pause(true|false) (bouton « Mettre le mouvement en pause ») ; KYMA3D.external(el) : déclare un
  *        autre canvas WebGL (ex. lecteur 3D Shopify) pour que le total des canvas actifs reste <= 2 ;
  *        KYMA3D.snapshot({ scene, colorway, width, height, pattern }) -> URL data:image (image fixe, sans canvas actif).
- *  Robustesse : DPR <= 1,75 (bureau) / 1,5 (mobile), résolution adaptative au temps d'image, pause hors écran et
+ *  v2.1 (fluidité) : rendu à résolution interne réduite (DPR 1) puis agrandi par le navigateur, échelle adaptative
+ *  visant 60 i/s, marche de rayon allégée (56 pas, ombres 14 pas, occlusion 2 pas, bruit 3 octaves, ombre au sol
+ *  par une seule sonde), paramètres de défilement (morph, dive) interpolés dans la boucle (plus d'à-coups).
+ *  Robustesse : résolution adaptative au temps d'image, pause hors écran et
  *  onglet caché, prefers-reduced-motion = image fixe (redessinée seulement à la demande), sans WebGL = repli CSS. */
 (function (w, d) {
   'use strict';
@@ -82,7 +85,7 @@
     ' return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),',
     '  mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}',
     'const mat3 M3=mat3(0.,.8,.6,-.8,.36,-.48,-.6,-.48,.64);',
-    'float fbm(vec3 p){float f=0.,a=.5;for(int i=0;i<4;i++){f+=a*noise(p);p=M3*p*2.03;a*=.5;}return f/.9375;}',
+    'float fbm(vec3 p){float f=0.,a=.5;for(int i=0;i<3;i++){f+=a*noise(p);p=M3*p*2.03;a*=.5;}return f/.875;}',
     'float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}',
     'float wob(vec3 p){return sin(p.x*2.1+uT*.7)*sin(p.y*2.4+uT*.9)*sin(p.z*1.8-uT*.6);}',
     'float ripple(vec3 p){if(uHover<.01)return 0.;vec3 v=p-uCo;float z=max(dot(v,uCf),.1);',
@@ -119,9 +122,9 @@
     '#endif',
     'vec3 nrm(vec3 p){vec2 e=vec2(.0015,-.0015);return normalize(e.xyy*map(p+e.xyy).x+e.yyx*map(p+e.yyx).x+e.yxy*map(p+e.yxy).x+e.xxx*map(p+e.xxx).x);}',
     'float soft(vec3 ro,vec3 rd){float b=dot(ro,rd),c=dot(ro,ro)-BR*BR,h=b*b-c;if(h<0.)return 1.;h=sqrt(h);',
-    ' float t=max(.02,-b-h),tx=-b+h,r=1.;if(tx<0.)return 1.;for(int i=0;i<28;i++){float d=map(ro+rd*t).x;r=min(r,7.*d/t);t+=clamp(d,.02,.25);if(r<.004||t>tx)break;}',
+    ' float t=max(.02,-b-h),tx=-b+h,r=1.;if(tx<0.)return 1.;for(int i=0;i<14;i++){float d=map(ro+rd*t).x;r=min(r,7.*d/t);t+=clamp(d,.05,.4);if(r<.01||t>tx)break;}',
     ' return clamp(r,0.,1.);}',
-    'float occl(vec3 p,vec3 n){float o=0.,s=1.;for(int i=0;i<4;i++){float h=.02+.11*float(i);o+=(h-map(p+n*h).x)*s;s*=.72;}return clamp(1.-1.8*o,0.,1.);}',
+    'float occl(vec3 p,vec3 n){float o=0.,s=1.;for(int i=0;i<2;i++){float h=.04+.18*float(i);o+=(h-map(p+n*h).x)*s;s*=.6;}return clamp(1.-1.6*o,0.,1.);}',
     'vec3 wave(vec3 p,vec3 A,vec3 B,vec3 V){p*=uPat;float t=uT*.035;',
     ' vec2 q=vec2(fbm(p+vec3(0.,t,0.)),fbm(p+vec3(5.2,1.3,2.8)-t));',
     ' float f=fbm(p+3.4*vec3(q,q.x-q.y)+vec3(1.7,9.2,t*2.));',
@@ -139,13 +142,13 @@
     ' vec3 ro=uCo,rd=normalize(uv.x*uCr+uv.y*uCu+uFl*uCf);vec3 col=uBg;',
     ' float b=dot(ro,rd),c=dot(ro,ro)-BR*BR,hh=b*b-c;bool hit=false;float t=0.,id=0.;',
     ' if(hh>0.){hh=sqrt(hh);t=max(-b-hh,0.);float tx=-b+hh;',
-    '  for(int i=0;i<80;i++){vec2 m=map(ro+rd*t);if(m.x<.0012*t){hit=true;id=m.y;break;}t+=m.x;if(t>tx)break;}}',
+    '  for(int i=0;i<56;i++){vec2 m=map(ro+rd*t);if(m.x<.002*t){hit=true;id=m.y;break;}t+=m.x*1.05;if(t>tx)break;}}',
     ' if(hit){vec3 p=ro+rd*t;vec3 n=nrm(p);vec3 A=uA,B=uB,V=uV;',
     '  if(id>.5){A=uA2;B=uB2;V=uV2;}',
     '  vec3 c2=shade(p,n,rd,wave(opos(p,id),A,B,V));col=pow(clamp(c2,0.,1.),vec3(.4545));',
     '  col+=gr(gl_FragCoord.xy,uT)*uGrain;}',
     ' else if(rd.y<0.&&uFloor>-50.){float tf=(uFloor-ro.y)/rd.y;vec3 fp=ro+rd*tf;float dl=length(fp.xz);',
-    '  if(dl<4.5){float s=soft(fp+vec3(0.,.01,0.),normalize(LK));float o=clamp(map(fp+vec3(0.,.35,0.)).x/.35,0.,1.);',
+    '  if(dl<4.5){float s=clamp(map(fp+normalize(LK)*.7).x/.7,0.,1.);float o=clamp(map(fp+vec3(0.,.35,0.)).x/.35,0.,1.);',
     '   float k=1.-smoothstep(1.6,3.4,dl);col=uBg*mix(1.,(1.-.17*(1.-s))*mix(.88,1.,o),k);}}',
     ' gl_FragColor=vec4(col,1.);}'
   ]).join('\n');
@@ -258,7 +261,7 @@
     self.yaw = 0; self.pitch = 0; self.ty = 0; self.tp = 0; self.spin = Math.random() * 6;
     self.hov = 0; self.thov = 0; self.mouse = [0, 0]; self.pm = [0.5, 0.5]; self.tpm = [0.5, 0.5]; self.sw = 0; self.tsw = 0;
     self.waves = []; self.autoT = 2.2; self.prio = 0;
-    self.scale = isMobile() ? 0.7 : 0.9; self.acc = 0; self.n = 0;
+    self.scale = isMobile() ? 0.7 : 0.6; self.acc = 0; self.n = 0; self.tgt = {};
     self.frames = 0; self.ftime = 0; self.visible = false; self.area = 0; self.drawn = false; self.dirty = true; self.active = false;
     try { self.ctx = canvas.getContext('2d', { alpha: false }); } catch (e) { self.ctx = null; }
     self.css();
@@ -321,9 +324,10 @@
   };
   S.resize = function (force) {
     if (!this.ok) return;
-    var cv = this.canvas, dpr = Math.min(w.devicePixelRatio || 1, isMobile() ? 1.5 : 1.75);
-    var cw = cv.clientWidth || 300, ch = cv.clientHeight || 150, flat = this.kind === 'pattern' || this.kind === 'ripple';
-    var k = dpr * this.scale * (flat ? 0.75 : 1), max = flat ? 700000 : 1100000; /* plafond de pixels */
+    /* résolution interne réduite : DPR 1 pour la marche de rayon (agrandie en douceur par le navigateur) */
+    var cv = this.canvas, flat = this.kind === 'pattern' || this.kind === 'ripple', dpr = flat ? Math.min(w.devicePixelRatio || 1, 1.25) : 1;
+    var cw = cv.clientWidth || 300, ch = cv.clientHeight || 150;
+    var k = dpr * this.scale * (flat ? 0.75 : 1), max = flat ? 500000 : 420000; /* plafond de pixels */
     if (cw * ch * k * k > max) k = Math.sqrt(max / (cw * ch));
     var W = Math.max(48, Math.round(cw * k)), H = Math.max(48, Math.round(ch * k));
     if (force || W !== cv.width || H !== cv.height) {
@@ -341,8 +345,12 @@
     this.dirty = true; this.prio = performance.now();
     if (reduced || paused) this.draw(0); else wake();
   };
+  var LERP = { morph: 1, dive: 1 }; /* paramètres de défilement : interpolés dans la boucle (taux 7/s) */
   S.set = function (o) {
-    for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) this.p[k] = o[k];
+    for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) {
+      if (LERP[k] && this.active && !reduced && !paused && this.p[k] != null) this.tgt[k] = o[k];
+      else { this.p[k] = o[k]; delete this.tgt[k]; }
+    }
     this.dirty = true;
     if (reduced || paused) this.draw(0); else wake();
   };
@@ -351,8 +359,9 @@
     if (this.n < 20 && this.acc < 0.4) return;
     var avg = this.acc / this.n; this.acc = 0; this.n = 0;
     var s = this.scale;
-    if (avg > 0.05) s *= 0.7; else if (avg > 0.024) s *= 0.85; else if (avg < 0.0175) s *= 1.1;
-    s = Math.min(1, Math.max(w.KYMA3D_MIN_SCALE || 0.3, s));
+    /* cible 60 i/s (16,7 ms) : on descend vite, on remonte prudemment */
+    if (avg > 0.034) s *= 0.75; else if (avg > 0.0185) s *= 0.88; else if (avg < 0.0145) s *= 1.06;
+    s = Math.min(1, Math.max(w.KYMA3D_MIN_SCALE || 0.22, s));
     if (Math.abs(s - this.scale) > 0.01) { this.scale = s; this.resize(); }
   };
   S.frame = function (dt) {
@@ -362,6 +371,7 @@
       C.k = Math.min(1, C.k + dt / FADE);
       var e = ease(C.k); C.a = mix3(C.fa, C.ta, e); C.b = mix3(C.fb, C.tb, e); C.v = mix3(C.fv, C.tv, e);
     }
+    for (var lk in this.tgt) { var dv0 = this.tgt[lk] - this.p[lk]; this.p[lk] += dv0 * (1 - Math.exp(-dt * 7)); if (Math.abs(dv0) < 0.0005) { this.p[lk] = this.tgt[lk]; delete this.tgt[lk]; } }
     this.yaw += (this.ty - this.yaw) * f; this.pitch += (this.tp - this.pitch) * f;
     this.hov += (this.thov - this.hov) * (1 - Math.exp(-dt * 4));
     this.pm[0] += (this.tpm[0] - this.pm[0]) * f; this.pm[1] += (this.tpm[1] - this.pm[1]) * f;

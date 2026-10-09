@@ -304,7 +304,7 @@ select.kyma-field__i { appearance: none; -webkit-appearance: none; padding-right
 .kyma-ct__stage canvas { position: absolute; inset: 0; }
 .kyma-ct__inner { position: relative; max-width: 1240px; margin-inline: auto; display: grid; gap: clamp(36px, 5vw, 80px); align-items: start; }
 .kyma-ct__copy { padding-top: 8px; }
-.kyma-ct__card { padding: clamp(24px, 4vw, 44px); border-radius: 24px; background: rgba(251, 247, 242, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 30px 70px -48px rgba(74, 59, 50, 0.55), inset 0 0 0 1px rgba(74, 59, 50, 0.06); }
+.kyma-ct__card { padding: clamp(24px, 4vw, 44px); border-radius: 24px; background: rgba(251, 247, 242, 0.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 30px 70px -48px rgba(74, 59, 50, 0.55), inset 0 0 0 1px rgba(74, 59, 50, 0.06); }
 .kyma-ct__card .kyma-form { margin-top: 0; }
 .kyma-ct-info__list { display: grid; gap: 0; max-width: 720px; margin: 8px 0 0; padding: 0; list-style: none; }
 .kyma-ct-info__list li { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--kyma-line); font-size: 16px; line-height: 1.6; }
@@ -553,6 +553,31 @@ html.kyma-js .kyma-tl.is-in .kyma-tl__dot, html:not(.kyma-js) .kyma-tl__dot { ba
 }
 @media (max-width: 989px) { .kyma-360__fig { order: -1; } } /* mobile : le visualiseur d'abord (60 vh), le texte dessous */
 @media (max-width: 749px) { .kyma-360__stage { aspect-ratio: auto; height: 60vh; height: 60svh; } }
+/* points chauds qui suivent le modèle 3D (accueil « La pièce ») + légendes latérales */
+.kyma-360__spots { position: absolute; inset: 0; pointer-events: none; }
+.kyma-360__spot {
+  position: absolute; left: 0; top: 0; width: 30px; height: 30px; margin: -15px 0 0 -15px; display: grid; place-items: center; border-radius: 50%;
+  font: 500 12px var(--kyma-sans); color: var(--kyma-ink); background: rgba(251, 247, 242, 0.94); box-shadow: 0 0 0 1px rgba(74, 59, 50, 0.18), 0 6px 18px -8px rgba(74, 59, 50, 0.55);
+  pointer-events: auto; cursor: default; opacity: 0; will-change: transform; transition: opacity 420ms var(--kyma-ease), box-shadow var(--t-base) var(--kyma-ease);
+}
+.kyma-360__stage.is-ready .kyma-360__spot { opacity: 1; }
+.kyma-360__stage.is-ready .kyma-360__spot.is-back { opacity: 0; pointer-events: none; }
+.kyma-360__spot::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(193, 158, 134, 0.7); animation: kyma-ping 2.8s var(--kyma-ease) infinite; }
+.kyma-360__spot.is-hot { color: var(--kyma-blanc); background: var(--kyma-ink); box-shadow: 0 0 0 6px rgba(232, 196, 196, 0.7); }
+@keyframes kyma-ping { 0% { transform: scale(0.8); opacity: 0.9; } 70%, 100% { transform: scale(1.5); opacity: 0; } }
+.kyma-360__legend { margin: 26px 0 0; padding: 0; list-style: none; counter-reset: none; }
+.kyma-360__lg { padding: 4px 0 12px; border-top: 1px solid var(--kyma-line); transition: background-color var(--t-base) var(--kyma-ease); }
+.kyma-360__lgbtn { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 6px 0; border: 0; background: none; cursor: pointer; text-align: left; font: 500 15px var(--kyma-sans); color: var(--kyma-ink); }
+.kyma-360__lgbtn:focus-visible { outline: 2px solid var(--kyma-ink); outline-offset: 2px; }
+.kyma-360__n { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: 12px; box-shadow: inset 0 0 0 1px rgba(74, 59, 50, 0.3); transition: background-color var(--t-base), color var(--t-base); }
+.kyma-360__lg p { margin: 0 0 0 38px; font-size: 14px; line-height: 1.55; color: var(--kyma-ink-soft); }
+.kyma-360__lg.is-hot .kyma-360__n { background: var(--kyma-ink); color: var(--kyma-blanc); }
+.kyma-360__lg.is-hot .kyma-360__lgt { text-decoration: underline; text-decoration-color: var(--kyma-camel); text-underline-offset: 5px; }
+.kyma-360__cta { margin: 26px 0 0; }
+.kyma-360--spots .kyma-360__stage { aspect-ratio: 1 / 1; max-height: 82vh; }
+@media (max-width: 749px) { .kyma-360--spots .kyma-360__stage { aspect-ratio: auto; height: 62vh; height: 62svh; } .kyma-360__spot { width: 28px; height: 28px; margin: -14px 0 0 -14px; } }
+@media (prefers-reduced-motion: reduce) { .kyma-360__spot::after { animation: none; display: none; } .kyma-360__spot { transition: none; } }
+html.kyma-motion-paused .kyma-360__spot::after { animation: none; }
 
 /* ─── 16. RESPONSIVE DIVERS ─────────────────────────────────────────────── */
 @media (max-width: 989px) {

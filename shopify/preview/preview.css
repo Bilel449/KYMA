@@ -18,7 +18,7 @@ img, svg { max-width: 100%; }
 .kp-announce .kyma-todo { padding: 0 6px; color: var(--kyma-ink); background: var(--kyma-rose-pale); }
 
 /* en-tête : collant, translucide, flou */
-.kp-header { position: sticky; top: 0; z-index: 110; background: rgba(245, 237, 228, 0.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(74, 59, 50, 0.06); transition: background-color 0.4s var(--kyma-ease); }
+.kp-header { position: sticky; top: 0; z-index: 110; background: rgba(245, 237, 228, 0.82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(74, 59, 50, 0.06); transition: background-color 0.4s var(--kyma-ease); }
 html.kyma-scrolled .kp-header { background: rgba(245, 237, 228, 0.94); }
 .kp-header__bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; max-width: 1440px; margin: 0 auto; padding: 10px var(--kyma-pad-x); }
 .kp-logo { display: inline-grid; justify-items: center; gap: 2px; padding: 6px 0; text-decoration: none; color: var(--kyma-ink); }
