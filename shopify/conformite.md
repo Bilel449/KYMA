@@ -16,7 +16,7 @@
 | `pages/legal/livraison.html` | Politiques > « Politique d'expédition » |
 | `pages/legal/confidentialite.html` | Politiques > « Politique de confidentialité » (remplacer le modèle Shopify) |
 | `pages/legal/cookies.html` | Page `/pages/cookies` |
-| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**ne pas publier avant d'avoir défini les règles**) |
+| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**v2 du 09/10/2026 : conditions d'abonnement, voir la dernière section de cette note ; ne pas publier avant validation des avantages**) |
 
 Shopify demande aussi une politique « Coordonnées » (Contact information) : y reprendre raison sociale, adresse, e-mail, téléphone, SIREN et TVA, sans rien inventer.
 
@@ -111,7 +111,7 @@ Le bandeau propose « Tout accepter », « Tout refuser » (même niveau, même 
 15. Médiateur de la consommation retenu (convention signée ?).
 16. Adhésion à Refashion (filière textiles) et IDU ; emballages (Citeo / Léko) et IDU.
 17. Applications Shopify prévues : précommande, fidélité, avis, newsletter (Shopify Email ? Klaviyo ?), analytics, pixels publicitaires.
-18. Règles du Cercle Waves : gratuit ou payant, critères d'accès à INITIUM et à ORIGINE, avantages, points, durée de validité.
+18. Règles du Cercle Waves : gratuit ou payant, critères d'accès à INITIUM et à ORIGINE, avantages, points, durée de validité. **[Tranché le 09/10/2026 : abonnement payant INITIUM / MAJESTÉ, voir la dernière section. Restent à fournir : valeur et durée de chaque avantage, quantités réservées, nature de la carte.]**
 
 **Propriété intellectuelle et visuels**
 19. Dépôt de la marque KYMA : effectué ? Classes, n° de dépôt ? Recherche d'antériorités faite ?
@@ -146,7 +146,7 @@ Le bandeau propose « Tout accepter », « Tout refuser » (même niveau, même 
 | 13 | **Étiquetage textile** : étiquette de composition en français, durable, cohérente avec la fiche produit (règlement 1007/2011). Bords-côtes à 5 % d'élasthanne. | Valider l'étiquette avec le fabricant avant production. | Fondateur, Izaac |
 | 14 | **Directive 2024/825 non transposée** mais applicable depuis le 27/09/2026 : la loi de transposition peut ajouter des règles. | Surveiller le projet de loi DDADUE. Relire tous les textes marketing tous les trimestres. | Victoire |
 | 15 | **Contrat fabricant** : propriété du motif, confidentialité, délais et pénalités alignés sur les dates promises aux clients, obligation de fournir les certificats GOTS et TC, qualité et défauts. | Transmettre le projet de contrat à Victoire pour relecture, puis à un avocat. | Fondateur |
-| 16 | **Cercle Waves** sans règles : un programme flou peut être une pratique trompeuse. | Définir les règles, compléter le squelette et le faire valider avant toute promotion. | Fondateur, Maya |
+| 16 | **Cercle Waves** sans règles : un programme flou peut être une pratique trompeuse. **[Remplacé le 09/10/2026 par la section « Cercle Waves (abonnement) » ci-dessous.]** | Définir les règles, compléter la page et la faire valider avant toute promotion. | Fondateur, Maya |
 | 17 | **RGPD** : registre des traitements, DPA Shopify accepté, liste des sous-traitants (applications), mécanismes de transfert vérifiés (Canada : adéquation ; États-Unis : DPF ou clauses contractuelles types). | Tenir un registre simple. Compléter `confidentialite.html` après le choix des applications. | Fondateur, Sacha |
 | 18 | **Paiement anticipé** : sans stipulation contraire, les sommes versées d'avance sont des **arrhes** (art. L.214-1). Les CGV les qualifient d'acompte. | Faire valider la clause par l'avocat (ou choisir un prélèvement différé). | Fondateur + avocat |
 | 19 | **TVA** : régime à déterminer ; guichet unique OSS si les ventes dans l'UE dépassent 10 000 € par an. | Voir l'expert-comptable. | Fondateur |
@@ -200,3 +200,147 @@ L'accès direct à Légifrance, economie.gouv.fr et village-justice.com était b
 - **REP textiles et emballages** : C. env. art. L.541-10 et s. ; Refashion, guide d'adhésion ; ministère de la Transition écologique, « Produits textiles (TLC) » [08/10/2026].
 - **Visuels non contractuels** : C. conso art. L.121-2 (pratiques trompeuses) ; DGCCRF (délit de tromperie) ; Cass. 1re civ., 06/05/2010, n° 08-14.461 (valeur contractuelle des documents publicitaires précis, référence secondaire non vérifiée) [08/10/2026].
 - **Accessibilité** : directive (UE) 2019/882 (European Accessibility Act), applicable depuis le 28/06/2025, avec exemption des micro-entreprises pour les services (sources secondaires) [08/10/2026].
+
+---
+
+## Cercle Waves (abonnement) : ajout du 09/10/2026
+
+> **Décision du fondateur** : le Cercle Waves devient un abonnement payant. **INITIUM 12,99 € TTC par trimestre** et **MAJESTÉ 39,99 € TTC par trimestre**, renouvellement automatique. L'ancien palier ORIGINE disparaît. Cette section **remplace** les points 16 et 18 ci-dessus. Texte de la page : `pages/legal/cercle-waves-conditions.html` (v2, réécrit). Les avantages et leurs valeurs ne sont pas validés : ils sont tous en `[À COMPLÉTER]` dans la page.
+> **Rappel unique** : modèles à faire relire par un avocat en droit de la consommation avant publication, et par l'expert-comptable pour la TVA du crédit.
+> **Sources** : l'accès direct à Légifrance et à economie.gouv.fr est bloqué depuis l'environnement de travail. Les règles ci-dessous viennent d'extraits de recherche (Légifrance, INC, DGCCRF, questions parlementaires) et de sources secondaires. **Relire les articles sur Légifrance** avant publication.
+
+### 1. Cadre en vigueur (synthèse)
+
+| Sujet | Règle | Conséquence pour KYMA | Certitude |
+|---|---|---|---|
+| **Informations précontractuelles et prix** | C. conso art. L.111-1, L.112-1 (prix TTC), L.221-5 (contrat à distance : caractéristiques, prix TTC, durée, conditions de reconduction et de résiliation, rétractation, médiation). Art. L.221-14 : bouton « commande avec obligation de paiement ». Art. L.221-13 : confirmation sur support durable. | Afficher avant le clic : prix TTC par trimestre, renouvellement automatique, date du prochain prélèvement, durée, façon de résilier, rétractation (texte au 2 ci-dessous). | Élevée |
+| **Rétractation 14 jours (service)** | Art. L.221-18 : 14 jours à compter de la conclusion. Art. L.221-25 : si le client demande **expressément** que le service démarre avant la fin des 14 jours, il ne paie, en cas de rétractation, que le **montant proportionnel au service déjà fourni** ; si la demande n'a pas été recueillie, ou si l'information sur ce paiement manque (art. L.221-5 9°), il ne doit **rien**. La DGCCRF a sanctionné en 2024 un professionnel qui n'avait pas informé du paiement dû (amende administrative jusqu'à 75 000 € pour une personne morale, art. L.242-13). L'exception de l'art. L.221-28 1° (service pleinement exécuté) ne joue pas : un trimestre n'est pas exécuté en 14 jours. | Case de démarrage immédiat obligatoire, non pré-cochée. Calcul : prix du trimestre × jours écoulés ÷ jours de la période. **Avantage déjà utilisé** : aucune retenue en plus du prorata (risque de pénalité dissuasive). Crédit non utilisé annulé, achats déjà faits conservés, carte non renvoyée. Fonction « Renoncer au contrat ici » obligatoire (voir (b)). | Élevée sur le principe ; **moyenne** sur les avantages utilisés (pas de texte spécifique, choix prudent) |
+| **Reconduction tacite** | Art. L.215-1 : le professionnel informe le consommateur **par écrit (lettre ou e-mail dédiés)**, **au plus tôt 3 mois et au plus tard 1 mois avant** le terme de la période permettant de refuser la reconduction, avec la date limite dans un **encadré visible**. À défaut : résiliation gratuite à tout moment à compter de la reconduction, remboursement sous 30 jours des sommes versées d'avance après la dernière reconduction, déduction faite du service fourni. | Rappel à envoyer **au moins 1 mois avant le renouvellement** (cible J-35), pas à J-7. E-mail dédié, avec encadré. Un second rappel à J-7 est une bonne pratique, non suffisant seul. | Élevée (texte) ; **moyenne** sur l'application à un contrat résiliable à tout moment (lecture la plus sûre retenue) |
+| **Résiliation en ligne** | Art. L.215-1-1 (loi n° 2022-1158 du 16/08/2022) et décret n° 2023-417 du 31/05/2023 (en vigueur depuis le 01/06/2023) : si le contrat peut être conclu en ligne, le professionnel offre une fonctionnalité de résiliation **gratuite, directe, permanente et facile d'accès**, libellée « résilier votre contrat » ou formule analogue sans ambiguïté, qui ne demande que les informations d'identification (identité, coordonnées, références du contrat, date d'effet souhaitée, motif facultatif), puis une page récapitulative et un bouton de confirmation. Le professionnel **confirme la réception sur support durable** et indique la date de fin et les effets. Aucune création de compte ne peut être exigée si le contrat n'en nécessitait pas. Sanction : amende administrative (75 000 € pour une personne morale selon les sources, à vérifier) ; la DGCCRF a mis fin à sa tolérance. | Le « bouton 3 clics » est un raccourci des médias : le texte parle de quelques validations. Nous visons **3 clics maximum** depuis le compte (« Mon abonnement » > « Résilier mon abonnement » > « Confirmer »). Lien public « Résilier mon abonnement » en pied de page. Aucun parcours dissuasif (offre de rétention bloquante, champs inutiles). | Élevée (principe) ; **moyenne** sur les rubriques exactes (relire D.215-1 à D.215-3) |
+| **Cashback** | Aucun texte spécifique sur la validité d'un cashback ou d'un avoir de fidélité, ni durée minimale légale (aucune fiche DGCCRF trouvée). S'appliquent : pratiques trompeuses (art. L.121-2), clauses abusives (art. L.212-1 et R.212-1 s., déséquilibre significatif), information claire sur taux, assiette, conditions et expiration. Le client **paie** pour obtenir l'avantage : une perte automatique du crédit acquis à la résiliation est un risque de clause abusive. Fiscalité : une prime de fidélité s'analyse en réduction de prix (BOFiP) ; un avoir utilisable chez le même vendeur peut relever des « bons » (art. 256 ter CGI, directive (UE) 2016/1065 ; usage unique = TVA à l'émission, usages multiples = TVA à l'utilisation). Un crédit **remboursable en argent** changerait de nature (paiement / monnaie électronique : à vérifier). | Choisir un **avoir (Crédit Waves)** non remboursable en espèces, jamais présenté comme de « l'argent remboursé ». Afficher taux, assiette, date de versement, validité (≥ 12 mois recommandé), usage partiel, maintien après résiliation (6 mois proposés). Versement **après** l'expiration du délai de rétractation de la commande, annulation en cas de retour. TVA à faire valider par l'expert-comptable. | **Moyenne** : pas de texte précis ; avocat et expert-comptable |
+| **« Priorité stock garantie »** | Art. L.121-2 (allégation fausse ou trompeuse sur la disponibilité) ; art. L.121-4 (fausse rareté, sanction sans preuve d'altération). Une promesse précise peut devenir **contractuelle**. | **À retirer.** KYMA produit en petites séries après précommande : aucune garantie de stock n'est tenable (rupture, défaut de production). Une part réservée n'est possible que chiffrée et respectée. | Élevée |
+| **« Statut élite »** | Art. L.121-2 : exclusivité alléguée alors que l'accès s'obtient en payant 39,99 € sans sélection : risque d'induire en erreur sur la nature et les qualités de l'offre. Risque modéré, plus fort si le statut est présenté comme rare ou mérité. | **À retirer.** Utiliser « palier MAJESTÉ ». « Accès réservé aux abonnés MAJESTÉ » est exact. | Moyenne à élevée |
+| **Carte physique** | Carte de membre nominative, accessoire de l'abonnement ; contrat mixte (bien + service). Pas un moyen de paiement tant qu'elle ne contient aucune valeur stockée. Si une valeur y est stockée ou si elle permet de payer ailleurs : risque de monnaie électronique ou d'instrument de paiement (agrément ACPR). Livraison : art. L.216-1 (date ou délai, à défaut 30 jours). Rétractation : KYMA ne demande pas le renvoi (choix simple ; sinon art. L.221-23 : frais de renvoi au client s'il en a été informé). Allégations sur la carte (matière, « numérotée ») seulement si exactes. | Carte « sans valeur monétaire, non rechargeable, pas un moyen de paiement ». Envoi inclus dans le prix. Délai d'envoi affiché. | Moyenne à élevée |
+
+### 2. Mentions obligatoires : texte exact prêt à coller
+
+**A. Sur la page Cercle Waves (en-tête, sous le titre).**
+
+> **Cercle Waves : abonnement trimestriel.** INITIUM : 12,99 € TTC par trimestre. MAJESTÉ : 39,99 € TTC par trimestre. L'abonnement est renouvelé automatiquement tous les 3 mois jusqu'à sa résiliation. Vous pouvez le résilier à tout moment en ligne, en quelques clics depuis votre espace client, sans frais ; la résiliation prend effet à la fin du trimestre payé. Vous disposez de 14 jours pour vous rétracter. Réservé aux personnes majeures. [Lire les conditions du Cercle Waves]
+
+**B. Sous les cartes de chaque palier.**
+
+> INITIUM : **12,99 € TTC / trimestre**. Prélevé à la souscription puis tous les 3 mois, renouvellement automatique. Résiliable à tout moment en ligne, sans frais. Rétractation possible sous 14 jours. Avantages soumis à conditions : voir les [conditions]. Réservé aux majeurs.
+>
+> MAJESTÉ : **39,99 € TTC / trimestre**. [même suite]
+
+Un montant annuel peut s'ajouter (« soit 51,96 € TTC pour 4 trimestres » pour INITIUM, « 159,96 € » pour MAJESTÉ), mais seulement avec la précision « si vous restez abonné 4 trimestres ». Il n'est pas obligatoire.
+
+**C. Au paiement (panier ou checkout, Sacha).**
+
+*Bloc récapitulatif* :
+> **Cercle Waves, palier [INITIUM / MAJESTÉ].** [12,99 € / 39,99 €] TTC par trimestre, payés aujourd'hui puis tous les 3 mois. Prochain prélèvement le [JJ/MM/AAAA], puis tous les 3 mois, jusqu'à votre résiliation. Renouvellement automatique. Résiliation à tout moment en ligne : Mon compte > Mon abonnement > Résilier. Effet à la fin de la période payée.
+
+*Case 1 (obligatoire, non pré-cochée)* :
+> J'ai lu et j'accepte les conditions du Cercle Waves et les CGV. Je comprends que mon abonnement est renouvelé automatiquement tous les 3 mois au prix de [12,99 € / 39,99 €] TTC, et que je peux le résilier à tout moment en ligne.
+
+*Case 2 (obligatoire pour démarrer tout de suite, non pré-cochée)* :
+> Je demande expressément que mon abonnement commence immédiatement, avant la fin du délai de rétractation de 14 jours. Je reconnais que, si je me rétracte, je devrai payer un montant proportionnel au service déjà fourni jusqu'à ma demande (prix du trimestre × jours écoulés ÷ nombre de jours du trimestre).
+
+*Bouton final* :
+> **Je m'abonne : commande avec obligation de paiement**
+
+Sur un forfait Shopify hors Plus, le libellé du bouton de paiement du checkout n'est pas librement modifiable. Si seul le libellé par défaut est disponible, ajouter juste au-dessus : « En cliquant sur ce bouton, vous vous abonnez au Cercle Waves avec obligation de paiement. » Formule à faire valider par l'avocat.
+
+**D. E-mail de confirmation.** Il contient : palier, prix TTC par trimestre, dates du premier et du prochain prélèvement, renouvellement automatique, avantages (comme dans les conditions), lien direct de résiliation, formulaire type de rétractation, lien « Renoncer au contrat ici », copie des conditions et des CGV, coordonnées du service client et du médiateur.
+
+**E. E-mail de rappel avant reconduction (J-35, e-mail dédié).**
+
+> **Objet : Votre abonnement Cercle Waves sera renouvelé le [JJ/MM/AAAA]**
+>
+> Bonjour [Prénom],
+>
+> Votre abonnement Cercle Waves (palier [INITIUM / MAJESTÉ]) sera renouvelé automatiquement pour 3 mois le **[JJ/MM/AAAA]**, au prix de **[12,99 € / 39,99 €] TTC**, prélevé sur votre moyen de paiement enregistré.
+>
+> **[Encadré] Vous pouvez refuser ce renouvellement et résilier gratuitement jusqu'au [JJ/MM/AAAA].**
+>
+> [Bouton : Résilier mon abonnement]
+>
+> Sans action de votre part, votre abonnement continue. Vous pouvez aussi le résilier à tout moment depuis Mon compte > Mon abonnement. Vos avantages restent actifs jusqu'à la fin de la période payée. [Si le prix change : nouveau prix et date d'effet.]
+>
+> KYMA — [coordonnées du service client]
+
+### 3. Formulations d'avantages : autorisées et à éviter
+
+| Avantage annoncé | À éviter | Autorisé (si l'avantage est validé et tenu) |
+|---|---|---|
+| Cashback 5 % / 10 % | « Cashback », « argent remboursé », « jusqu'à 10 % » sans dire quel palier, « gagnez de l'argent ». | « **Crédit Waves : [5 %] (INITIUM) / [10 %] (MAJESTÉ) du prix de vos achats reversés en avoir**, utilisable sur vos prochains achats. Versé après l'expiration du délai de rétractation, valable [12] mois, non remboursable en espèces. » |
+| Accès prioritaire aux drops | « Accès garanti », « toujours servi en premier », « sans file d'attente » si faux. | « **Accès anticipé de [24 h / 72 h]** avant l'ouverture au public. Il ne garantit pas la disponibilité : les quantités sont limitées. » |
+| Précommandes en avant-première | « Avant tout le monde » (non vérifiable) ; date d'expédition différente non annoncée. | « Précommandez avant l'ouverture au public ([durée]). La date d'expédition est affichée sur chaque produit. » |
+| Drops réservés aux membres | « Drops introuvables ailleurs » ; « édition limitée » sans quantité. | « Produits réservés aux abonnés [MAJESTÉ], dans la limite de [N] pièces par coloris, quantité indiquée sur la page du produit. » |
+| Carte physique | « Carte exclusive en métal », « numérotée » si faux ; « carte de crédit / de paiement ». | « **Carte de membre nominative** envoyée avec votre abonnement MAJESTÉ (sans valeur monétaire, pas un moyen de paiement). » Matière et numérotation seulement si exactes. |
+| « Priorité stock garantie » | **Retirer**, toute formule avec « garantie ». | Seulement chiffré : « [N] pièces par coloris réservées aux abonnés pendant l'accès anticipé. » |
+| « Statut élite » | **Retirer**. | « Palier MAJESTÉ ». Pas de « cercle fermé », « sélection », « VIP » si l'accès s'obtient par paiement. |
+| Engagement | « Sans engagement » (le contrat est reconduit par périodes de 3 mois), « gratuit », « 0 € » sans condition. | « **Résiliable à tout moment en ligne, sans frais.** Renouvellement automatique tous les 3 mois. » |
+
+Règle générale : tout avantage affiché est **chiffré, daté, conditionné et vérifiable**. Un avantage non validé par le fondateur n'apparaît ni sur le site, ni sur Instagram (Maya), ni dans les métadonnées.
+
+### 4. Mise en œuvre technique (Sacha)
+
+1. **Application d'abonnement.** Utiliser une application compatible avec le prestataire de paiement (par exemple *Shopify Subscriptions*, ou une application tierce reconnue : à comparer sur le portail client, les e-mails automatiques, la facturation récurrente et la 3D Secure aux renouvellements). Deux plans de vente : INITIUM 12,99 € / 3 mois, MAJESTÉ 39,99 € / 3 mois, TTC. Pas de période d'essai gratuite sans validation préalable de Victoire. Aucun abonnement réel encaissé tant que la boutique est sur le plan d'essai (point 10).
+2. **Contenu réservé.** Avantages gérés par tag client (`cercle-initium`, `cercle-majeste`) : accès anticipé (collection ou page protégée par tag), drops réservés. Tag retiré à la fin de la période payée.
+3. **Crédit Waves.** Application de fidélité ou Shopify Flow + avoirs. Règles : taux par palier, assiette (hors livraison et cotisation), versement après l'expiration du délai de rétractation (à confirmer), annulation en cas de retour, e-mail d'alerte 30 jours avant l'expiration. Non remboursable en espèces.
+4. **Bouton de résiliation.** Portail client : « Mon abonnement » > « Résilier mon abonnement » > « Confirmer la résiliation ». 3 clics maximum depuis le compte, sans offre de rétention obligatoire, sans champ superflu, motif facultatif. Page publique `/pages/resilier-abonnement` (lien en pied de page) qui identifie le contrat par e-mail et référence d'abonnement. E-mail de confirmation immédiat (support durable) avec la date de fin. Test complet documenté (captures) avant ouverture.
+5. **E-mail de rappel.** Planifier à J-35 (Shopify Flow, Klaviyo ou fonction de l'application) avec le modèle E et l'encadré. Vérifier la délivrabilité (SPF/DKIM). Conserver la preuve d'envoi (journal ou export) : en cas de litige, c'est KYMA qui doit la fournir.
+6. **Cases et mentions au paiement.** Hors forfait Plus, les cases personnalisées du checkout ne sont pas disponibles en natif : les placer sur la page du panier (case obligatoire qui bloque le bouton de commande, valeur enregistrée dans les attributs de commande, pour prouver le consentement et la demande de démarrage immédiat).
+7. **Rétractation.** La fonction « Renoncer au contrat ici » couvre aussi l'abonnement. Le remboursement partiel au prorata se fait depuis l'administration Shopify.
+8. **Pied de page et espace client.** Ajouter « Résilier mon abonnement » et « Conditions du Cercle Waves ».
+9. **Carte physique.** Flux d'expédition à définir avec le fondateur (une seule fois, à la première souscription MAJESTÉ). Aucune valeur stockée (numéro ou QR code d'identification uniquement).
+10. **Données.** Mettre à jour `confidentialite.html` (finalité « gestion de l'abonnement », application d'abonnement comme sous-traitant, durées de conservation).
+11. **Majeurs.** Mention « réservé aux majeurs » et déclaration de majorité à la souscription.
+
+### 5. Points bloquants et vigilance
+
+**🔴 Bloquant avant ouverture de l'abonnement**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| C1 | **Avantages non validés** : promettre des avantages non définis ou non tenables est une pratique trompeuse (art. L.121-2). | Le fondateur valide la liste finale et chiffrée (taux par palier, durée d'accès anticipé, quantités réservées, nature de la carte). Compléter tous les `[À COMPLÉTER]`. | Fondateur |
+| C2 | **« Priorité stock garantie » et « statut élite »** à retirer de tous les supports (site, Instagram, newsletter, fiches). | Appliquer le tableau 3. | Maya, Izaac, Sacha |
+| C3 | **Bouton de résiliation en ligne** absent ou compliqué (art. L.215-1-1, décret 2023-417). | Mettre en place et tester (4.4). | Sacha |
+| C4 | **E-mail de rappel avant reconduction** absent ou tardif (art. L.215-1) : résiliation gratuite à tout moment et remboursement. | Envoi à J-35, encadré, preuve d'envoi. | Sacha |
+| C5 | **Case de démarrage immédiat et information sur le prorata** absentes (art. L.221-5 9°, L.221-25) : rien à payer en cas de rétractation. | Case 2 et information dans l'e-mail de confirmation. | Sacha |
+| C6 | **Société non immatriculée** et mentions légales incomplètes : impossible de conclure un abonnement et de prélever (voir point 1). | Immatriculation d'abord. | Fondateur |
+| C7 | **Aucun prélèvement avant relecture de l'avocat** des conditions. | Relecture par un avocat. | Fondateur |
+
+**🟠 À régler rapidement**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| O1 | **TVA** du Crédit Waves (réduction de prix ou bon) et TVA de l'abonnement selon le pays du client (guichet unique au-delà de 10 000 € de ventes UE). | Expert-comptable. | Fondateur |
+| O2 | **Validité du crédit et sort à la résiliation** : expiration trop courte ou perte à la résiliation = risque de clause abusive. | Valider les durées (12 mois et 6 mois proposés). | Fondateur, avocat |
+| O3 | **Précommande + accès anticipé** : la date d'expédition de chaque drop reste obligatoire (point 3). L'accès anticipé ne la modifie pas. | Afficher la date sur chaque produit. | Sacha |
+| O4 | **Médiateur** non désigné (point 7). | Ajouter ses coordonnées (article 15 de la page). | Fondateur |
+| O5 | **Mise à jour de `confidentialite.html`, `cgv.html` et du pied de page** (abonnement, résiliation, rétractation). | Victoire met à jour après validation des règles ; Sacha intègre. | Victoire, Sacha |
+| O6 | **Préavis de 60 jours pour une hausse de prix** (le texte ne fixe pas de durée). | Valider avec l'avocat. | Avocat |
+| O7 | **Accès réservé aux abonnés** (refus de vente, discrimination) : le critère est objectif (abonnement) et non lié à la personne. | Confirmation par l'avocat. | Avocat |
+| O8 | **Traitement des avantages utilisés en cas de rétractation** (pas de texte précis). | Confirmer le choix « prorata seul » avec l'avocat. | Avocat |
+
+**🟢 Bonnes pratiques**
+
+| # | Point | Action | Qui |
+|---|---|---|---|
+| G1 | Second rappel à J-7 en plus du rappel légal à J-35. | Flow supplémentaire. | Sacha |
+| G2 | Proposer pause ou rétrogradation au moment de la résiliation, sans bloquer le bouton. | Option dans le portail client. | Sacha |
+| G3 | Archiver les versions datées des conditions et la capture des mentions affichées à chaque souscription. | Dossier de preuves. | Sacha |
+| G4 | Éviter « club privé », « cercle fermé », « sélection » si l'accès n'est pas sélectif. | Relecture de Maya. | Victoire |
+| G5 | Veille : une question parlementaire du 30/06/2026 évoque une limitation des reconductions tacites ; réforme européenne de l'équité numérique en discussion. | Veille trimestrielle. | Victoire |
+
+### 6. Sources de cette section (consultées le 09/10/2026)
+
+- **Résiliation en ligne** : C. conso art. L.215-1-1 (loi n° 2022-1158 du 16/08/2022, art. 17) ; décret n° 2023-417 du 31/05/2023 (D.215-1 à D.215-3), JO du 01/06/2023 ; INC, « Vous pouvez résilier votre contrat d'abonnement en quelques clics » (inc-conso.fr) ; CCI Paris Île-de-France, « Nouvelle fonctionnalité de résiliation des contrats en ligne » ; Deloitte Société d'Avocats ; Seban & Associés ; résumés du décret par la médiation des communications électroniques.
+- **Reconduction tacite** : C. conso art. L.215-1 (version en vigueur depuis le 18/08/2022), Légifrance ; réponses ministérielles à l'Assemblée nationale (QE n° 1438, 15e législature) ; question écrite n° 16374 (17e législature).
+- **Rétractation et démarrage anticipé** : C. conso art. L.221-5, L.221-18, L.221-25, L.221-28, L.242-13 ; DGCCRF, sanction de février 2024 rapportée par Simon Associés, « Lettre de la Consommation » (mars 2024).
+- **Pratiques trompeuses et disponibilité** : C. conso art. L.121-2 et L.121-4 ; DGCCRF, « Pratiques commerciales trompeuses » (economie.gouv.fr).
+- **Cashback, fidélité, TVA** : C. conso art. L.212-1 et R.212-1 s. ; BOFiP BOI-TVA-BASE-10-10-30 ; art. 256 ter CGI, directive (UE) 2016/1065. Aucune règle spécifique sur la validité d'un cashback trouvée : analyse par les règles générales.
+- **Rétractation en ligne (« Renoncer au contrat ici »)** : voir section (b).
