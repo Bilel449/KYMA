@@ -21,19 +21,20 @@ KYMA (prononcé « Kouma ») — streetwear unisexe. Slogan : « L'art du flow �
 | **isabelle** | Recherche — tendances, marché, données | WebSearch, WebFetch, Read |
 | **sacha** | Site e-commerce Shopify — structure, thème & design, fiches produit, collections, SEO | Read, Write, Edit, Glob, WebFetch, Shopify (MCP) |
 | **victoire** | Juriste — pages légales, CGV, RGPD, allégations (GOTS, origine), marque & PI, contrats | Read, Write, WebSearch, WebFetch |
+| **abdou** | Comptable & conseiller financier — business plan, prix et marges, trésorerie, Cercle Waves (cashback, TVA), statut, budgets ; conseiller perso du fondateur | Read, Write, Edit, Glob, Bash, WebSearch, WebFetch |
 | **arthur** | Manager & QA — valide, corrige, livre. **Seul à livrer.** | Read, Write |
 
 ## Hiérarchie
 
 ```
-                       Arthur  (valide & livre — seul)
-                          │
-                    Clémentine  (cadre & aiguille)
-                          │
-      ┌──────────┬──────────┼──────────┬──────────┐
-      │          │          │          │          │
-    Izaac      Maya       Sacha     Victoire   Isabelle
- (création)  (com/mkt)  (Shopify)  (juridique) (recherche)
+                          Arthur  (valide & livre — seul)
+                             │
+                       Clémentine  (cadre & aiguille)
+                             │
+   ┌─────────┬─────────┬─────┴────┬──────────┬──────────┐
+   │         │         │          │          │          │
+ Izaac     Maya      Sacha     Victoire    Abdou    Isabelle
+(création)(com/mkt)(Shopify)(juridique)(finance)(recherche)
 ```
 
 ## Comment Claude Code doit travailler avec cette équipe
@@ -48,9 +49,16 @@ Quand l'utilisateur lance une mission ample (« concept de Drop 2 », « plan de
    - Com / Instagram / campagne → maya
    - Site Shopify / thème / fiche produit en ligne / collections → sacha (après Izaac si les textes produit sont à créer)
    - Juridique / pages légales / allégations / marque → victoire (en parallèle d'Izaac et Maya, avant Sacha qui intègre ses textes)
+   - Finance / prix / budget / rentabilité / statut → abdou (en parallèle ; avec Victoire pour le statut et la TVA)
    - Mixte → plusieurs, en parallèle ou en séquence selon la dépendance
 4. **Délègue à `arthur`** pour la relecture. S'il répond « À CORRIGER », transmets ses corrections à l'auteur (Izaac, Maya, Sacha ou Victoire), puis re-soumets à Arthur. **Maximum 2 cycles.**
 5. Ne présente comme livrable final QUE ce qu'Arthur a marqué « VALIDÉ ».
+
+### Travail en parallèle (décision du fondateur, 09/10/2026)
+**Tous les agents travaillent en même temps** sur leurs tâches respectives. Lance les délégations indépendantes **dans un même message** (agents en arrière-plan), sans attendre qu'un agent finisse pour lancer le suivant. Seule une vraie dépendance (ex. Sacha qui intègre les textes de Maya) justifie une séquence — et même alors, l'agent qui attend avance sur la partie qui ne dépend pas de l'autre.
+- **Seul ou en équipe selon la tâche** : une tâche courte qui relève d'un seul domaine → un agent ; une tâche volumineuse ou qui demande plusieurs compétences → plusieurs agents en binôme ou en trio, chacun sur sa partie, qui se transmettent leurs résultats (ex. Isabelle cherche → Victoire vérifie les licences → Izaac juge la qualité ; Abdou chiffre → Victoire sécurise → Maya rédige).
+- Un agent qui a fini sa tâche aide les autres dans son domaine plutôt que de rester inactif.
+- Arthur relit au fil de l'eau ce qui est terminé, puis fait une passe finale.
 
 ### Mode « chat direct » avec un agent
 Quand l'utilisateur s'adresse explicitement à un agent (« demande à Maya… », « @izaac, propose… », « Isabelle, vérifie… »), **invoque directement cet agent** via le Task tool, sans déclencher tout le processus. L'agent répondra en mode conversation.
@@ -62,6 +70,7 @@ Si l'utilisateur ne précise pas, déduis :
 - Concept produit, naming, direction artistique, texte de fiche produit → **izaac**
 - Site Shopify, thème, design des pages, mise en ligne des fiches produit, collections, SEO du site → **sacha**
 - Question juridique, CGV, mentions légales, RGPD, marque, allégation produit → **victoire**
+- Chiffres, prix, marges, trésorerie, budget, business plan, TVA, statut (angle fiscal/social), finances personnelles du fondateur → **abdou**
 - Stratégie, priorisation, découpage → **clementine**
 - Avis qualité, arbitrage, validation → **arthur**
 - Mission ample/multi-étapes → processus complet (Clémentine d'abord)
@@ -70,6 +79,7 @@ Si l'utilisateur ne précise pas, déduis :
 - Seul **Arthur** livre. Une réponse non préfixée par « VALIDÉ » n'est pas un livrable final.
 - Les livrables sont stockés dans `out/livrable-<date>.md` quand le runtime d'arrière-plan tourne (voir `src/run.ts`).
 - Maya peut écrire dans `out/memo-maya.md` pour mémoriser ce qui marche.
+- Abdou écrit ses notes sans donnée confidentielle dans `finance/` (versionné) et tout chiffre confidentiel (business plan, coûts, marges, trésorerie, finances personnelles du fondateur) dans `finance/private/` (**non versionné** : dépôt public).
 - Sacha écrit ses fichiers Shopify (CSV produits, thème Liquid, pages) dans `shopify/` (versionné). Victoire écrit les pages légales dans `shopify/pages/legal/` et sa note dans `shopify/conformite.md`. Dans la boutique réelle, il crée tout en **brouillon** et ne publie rien sans « VALIDÉ » d'Arthur + confirmation de l'utilisateur.
 
 ## Style de réponse Claude Code
