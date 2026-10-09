@@ -74,3 +74,7 @@ Si l'utilisateur ne précise pas, déduis :
 
 ## Style de réponse Claude Code
 Quand tu orchestres, annonce brièvement les délégations (`→ clementine`, `→ maya`...) pour que l'utilisateur suive le flux. Quand un agent répond, préfixe son texte par son nom en gras (`**Maya** :`) pour rendre l'échange lisible.
+
+## Tableau de l'équipe (jauges)
+Un tableau en direct montre chaque membre en bulle (statut, jauge d'avancement, tâche en cours) : https://claude.ai/artifact/SJ9BNy6wbbCbHb5Lca6hzY (source : `outils/equipe-kyma.html`).
+**À chaque délégation et à chaque retour d'un agent**, Claude met à jour le document `team/<agent>` (`status` : en cours / terminé / en attente / bloqué / disponible ; `progress` 0-100 ; `task` ; `updated_at` ISO) et ajoute une ligne au journal `meta/journal` (`entries`, 30 dernières max) via l'outil ArtifactData.
