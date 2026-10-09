@@ -36,11 +36,11 @@
         "list_label": "Choisir un coloris du hoodie 3D",
         "cta_label": "Voir les coloris",
         "cta_link": "/collections/drop-1#coloris",
-        "caption": "Illustration du coloris.",
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
         "show_hoodie": true,
         "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
         "loading_label": "Chargement du modèle 3D…",
-        "caption_hoodie": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
         "model_prefix": "ressac-v2"
       },
       "blocks": {
@@ -122,7 +122,7 @@
         "tints_label": "Teinte du motif",
         "sym1": "",
         "sym2": "",
-        "caption": "Illustration du coloris.",
+        "caption": "Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique.",
         "flip": false,
         "tone": "beige"
       }
@@ -147,7 +147,7 @@
         "cta_link": "/products/ressac-hoodie-zippe-oversize",
         "cta2_label": "Choisir mon coloris",
         "cta2_link": "/collections/drop-1#coloris",
-        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
         "skip_label": "Passer la présentation de la pièce",
         "picker_label": "Coloris du modèle 3D",
         "loading_label": "Chargement du modèle 3D…",
@@ -161,9 +161,9 @@
             "side": "left",
             "kicker": "",
             "title": "",
-            "text": "Le hoodie zippé Ressac. Coupe oversize, épaules tombantes, un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile.",
+            "text": "Le hoodie zippé Ressac. Coupe oversize, épaules tombantes, un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile.",
             "spec": "",
-            "still_alt": ""
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, vue d'ensemble. Pas une photo du produit fabriqué."
           }
         },
         "step_2": {
@@ -175,7 +175,7 @@
             "title": "Dehors, puis dedans.",
             "text": "Double épaisseur, sans cordon ni œillets. À l’intérieur, une doublure en jersey ton sur ton.",
             "spec": "",
-            "still_alt": ""
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape capuche. Pas une photo du produit fabriqué."
           }
         },
         "step_3": {
@@ -187,7 +187,7 @@
             "title": "Le courant continue.",
             "text": "Le motif KYMA Wave court sur tout le dos, d’une épaule à l’autre, comme un courant.",
             "spec": "",
-            "still_alt": ""
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape dos. Pas une photo du produit fabriqué."
           }
         },
         "step_4": {
@@ -197,9 +197,9 @@
             "side": "left",
             "kicker": "LA TIRETTE",
             "title": "Un seul éclat.",
-            "text": "Sculptée « Kyma », en laiton plaqué or brossé. Le seul éclat de la pièce.",
+            "text": "Sculptée « Kyma », en laiton, finition dorée brossée. Le seul éclat de la pièce.",
             "spec": "",
-            "still_alt": ""
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape tirette. Pas une photo du produit fabriqué."
           }
         },
         "step_5": {
@@ -209,9 +209,9 @@
             "side": "left",
             "kicker": "LE ZIP",
             "title": "Elle descend, la pièce s’ouvre.",
-            "text": "Zip intégral en métal argent brossé, du col jusqu’à l’ourlet.",
+            "text": "Zip intégral en métal, finition argentée brossée, du col jusqu'à l'ourlet.",
             "spec": "",
-            "still_alt": ""
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape zip. Pas une photo du produit fabriqué."
           }
         },
         "step_6": {
@@ -221,9 +221,9 @@
             "side": "right",
             "kicker": "À L’INTÉRIEUR",
             "title": "Composition.",
-            "text": "",
-            "spec": "Corps | [À CONFIRMER : 100 % coton]\nBords-côtes | 95 % coton, 5 % élasthanne\nDoublure | [À COMPLÉTER]",
-            "still_alt": ""
+            "text": "La composition complète figure sur la fiche produit.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape intérieur, côté gauche. Pas une photo du produit fabriqué."
           }
         },
         "step_7": {
@@ -234,8 +234,8 @@
             "kicker": "À L’INTÉRIEUR",
             "title": "Fabrication.",
             "text": "",
-            "spec": "Lieu de fabrication | [À CONFIRMER : Portugal]\nImaginé à | Paris",
-            "still_alt": ""
+            "spec": "Lieu de fabrication |\nImaginé à | Paris",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape intérieur, côté droit. Pas une photo du produit fabriqué."
           }
         },
         "colorway_1": {
@@ -305,11 +305,11 @@
         "anchor": "cercle",
         "number": "04",
         "label": "CERCLE WAVES",
-        "title_before": "Rejoindre le",
-        "title_em": "cercle",
+        "title_before": "Le Cercle",
+        "title_em": "Waves",
         "title_after": ".",
-        "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.",
-        "cta_label": "Entrer dans le Cercle",
+        "text": "Le Cercle Waves accompagne celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ, par abonnement trimestriel.",
+        "cta_label": "Découvrir les deux paliers",
         "cta_link": "/pages/cercle-waves",
         "show_rings": true,
         "compact_top": false

@@ -77,12 +77,12 @@ ZN_F, ZN_B = 0.080, 0.068   # profondeur de l'anneau d'encolure devant / dos
 Y_AP = 0.395          # dessous de bras (emmanchure profonde)
 Y_SP = 0.612          # point d'épaule : ~4 cm plus bas qu'une coupe classique (épaule tombante)
 W_HEM, W_CH, W_SH = 0.281, 0.270, 0.272
-DF, DB = 0.104, 0.094   # demi-profondeurs devant / dos
+DF, DB = 0.110, 0.099   # demi-profondeurs devant / dos (v2 : 0,104 / 0,094)
 ZA_F, ZA_B = 0.074, 0.070   # demi-profondeur d'emmanchure
 XG = 0.0055           # demi-écart des lisières au milieu devant (sous le zip)
 TH = 0.005            # épaisseur du molleton + doublure (5 mm)
 TH_HOOD = 0.008       # v3 : capuche double épaisseur (molleton + jersey), tranche visible
-ALPHA = math.radians(9.0)   # écart des manches
+ALPHA = math.radians(8.0)   # écart des manches (v2 : 9°)
 PIVOT_X = 0.272       # axe d'ouverture (couture de côté)
 
 POCKET = ((0.148, 0.300), (0.198, 0.128))   # haut, bas de la poche biais (côté gauche +X)
@@ -219,9 +219,9 @@ def catmull(P, n):
 # --------------------------------------------------------------------------------------
 # Corps : contours de patronage et profils de section
 # --------------------------------------------------------------------------------------
-W_HEM_IN = 0.258      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
-W_BLOUSE = 0.287      # v3 : blousant au-dessus du bord-côte
-Y_BL = 0.140          # hauteur du blousant maximal
+W_HEM_IN = 0.266      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
+W_BLOUSE = 0.281      # v3 : blousant au-dessus du bord-côte
+Y_BL = 0.150          # hauteur du blousant maximal
 
 
 def side_x(y):
@@ -242,9 +242,9 @@ def depth_factor(y):
     """v3 : profondeur galbée (repris dans le bord-côte, blousant, poitrine)."""
     y = np.asarray(y, np.float64)
     t1 = np.clip((y - Y0) / (Y_BL - Y0), 0, 1)
-    f1 = 0.88 + (1.055 - 0.88) * np.sin(0.5 * np.pi * t1) ** 0.8
+    f1 = 0.92 + (1.03 - 0.92) * np.sin(0.5 * np.pi * t1) ** 0.8
     t2 = np.clip((y - Y_BL) / (Y_AP - Y_BL), 0, 1)
-    f2 = 1.055 + (1.0 - 1.055) * t2 * t2 * (3 - 2 * t2)
+    f2 = 1.03 + (1.0 - 1.03) * t2 * t2 * (3 - 2 * t2)
     return np.where(y <= Y_BL, f1, f2)
 
 
@@ -301,11 +301,12 @@ def body_half(back, ns=260, nt=300, ns_out=48, nt_out=108):
     D = DB if back else DF
     xR = Rx[:, None] * np.ones_like(S)
     e = arm_e(Ry, back)[:, None] * np.ones_like(S)
-    RS = 0.090
+    RS = 0.150            # v3 : arrondi de côté large (v2 : 9 cm, devant plat « boîte »)
     u = np.clip((X - (xR - RS)) / RS, 0, 1)
     pS = 2.0 - 0.75 * smoothstep(Y_AP - 0.01, Y_AP + 0.06, Ry)[:, None]
     rho_s = (1 - u ** pS) ** (1 / pS)
     z1 = e + (D - e) * rho_s
+    z1 = e + (z1 - e) * (1 - 0.07 * np.clip(X / xR, 0, 1) ** 2)    # v3 : devant galbé
     RT = 0.065
     yT = Ty[None, :] * np.ones_like(S)
     zt = Tz[None, :] * np.ones_like(S)
@@ -333,7 +334,7 @@ def mirror_x(G):
 # --------------------------------------------------------------------------------------
 # Manches
 # --------------------------------------------------------------------------------------
-SLV_C1 = np.array([0.352, 0.372, 0.004])
+SLV_C1 = np.array([0.337, 0.376, 0.004])
 SLV_LEN = 0.345
 SLV_D = np.array([math.sin(ALPHA), -math.cos(ALPHA), 0.0])
 SLV_OUT = np.array([math.cos(ALPHA), math.sin(ALPHA), 0.0])
@@ -453,13 +454,13 @@ def sleeve_grid(Gf, Gb, nphi=60, nv=104, side=1):
         return C[None] + (c * rx * flat)[:, None] * O[None] + (s_ * rz)[:, None] * Z[None]
 
     # 1re section
-    rx1, rz1 = 0.082, 0.073
+    rx1, rz1 = 0.077, 0.072
     R1 = ring(SLV_C1, SLV_D, rx1, rz1)
     n1 = 34
     rows = []
     b = np.linspace(0, 1, n1)[:-1]
     L = np.linalg.norm(R1 - A, axis=1)[:, None]
-    m0 = TA * L * 1.05
+    m0 = TA * L * 0.85     # v3 : tête de manche moins bombée (v2 : 1,05)
     m1 = SLV_D[None] * L * 1.0
     for bb in b:
         h00, h10, h01, h11 = 2 * bb ** 3 - 3 * bb ** 2 + 1, bb ** 3 - 2 * bb ** 2 + bb, -2 * bb ** 3 + 3 * bb ** 2, bb ** 3 - bb ** 2
@@ -473,8 +474,8 @@ def sleeve_grid(Gf, Gb, nphi=60, nv=104, side=1):
     for k, v in enumerate(vv):
         g = smoothstep(0.90, 1.0, v)
         # haut de bras ample, avant-bras plus fin, blousant au-dessus du poignet
-        rx = 0.082 - 0.016 * smoothstep(0.0, 0.80, v) + 0.009 * np.exp(-((v - 0.86) / 0.055) ** 2)
-        rz = 0.073 - 0.011 * smoothstep(0.0, 0.80, v) + 0.008 * np.exp(-((v - 0.86) / 0.055) ** 2)
+        rx = 0.077 - 0.013 * smoothstep(0.0, 0.80, v) + 0.008 * np.exp(-((v - 0.86) / 0.055) ** 2)
+        rz = 0.072 - 0.010 * smoothstep(0.0, 0.80, v) + 0.008 * np.exp(-((v - 0.86) / 0.055) ** 2)
         # coude : léger gonflement à l'arrière (le tissu se tend sur le coude)
         rz += 0.004 * np.exp(-((v - pose["elbow"]) / 0.08) ** 2)
         rx = rx * (1 - g) + (CUFF_R + 0.002) * g
@@ -489,8 +490,8 @@ def sleeve_grid(Gf, Gb, nphi=60, nv=104, side=1):
 # --------------------------------------------------------------------------------------
 # Capuche
 # --------------------------------------------------------------------------------------
-HC = np.array([0.0, 0.742, -0.050])
-HR = np.array([0.150, 0.150, 0.146])
+HC = np.array([0.0, 0.745, -0.042])
+HR = np.array([0.143, 0.153, 0.140])
 
 
 HP = 2.7   # exposant de superellipsoïde : flancs de capuche plus plats, base plus large
@@ -702,7 +703,16 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         rim_meshes.append(m)
     J, I = np.arange(nv), np.arange(nu)
     def tang(a, b):
-        return nrm(a - b)
+        # v3 : aux sommets dégénérés (pointe de la capuche, où les deux arêtes se rejoignent)
+        # la direction est nulle ; on reprend la plus proche valide (sinon la lisière fait un rabat)
+        v = a - b
+        ln = np.linalg.norm(v, axis=1)
+        ok = ln > 0.25 * np.median(ln)
+        if not ok.all() and ok.any():
+            idx = np.where(ok)[0]
+            near = idx[np.abs(np.arange(len(v))[:, None] - idx[None]).argmin(1)]
+            v = v[near]
+        return nrm(v)
     if "l" in rims and not closed_u:
         rim((J, np.zeros(nv, int)), (np.arange(len(jj)), np.zeros(len(jj), int)), tang(G[:, 0], G[:, 2]))
     if "r" in rims and not closed_u:
@@ -748,19 +758,19 @@ def body_disp(G):
     warp = 2.2 * fbm(NOISE, P * np.array([2.4, 0.8, 2.4]) + 5.0, 2).reshape(shape)
     amp = 0.55 + 0.45 * fbm(NOISE, P * np.array([2.0, 1.0, 2.0]) + 61.0, 2).reshape(shape)
     gv = fold_wave(9 * th + warp) + 0.6 * np.sin(5 * th + 1.3 * warp + 1.0)
-    d += 0.0050 * gv * amp * smoothstep(0.62, 0.26, y) * smoothstep(Y0 + 0.02, Y0 + 0.10, y)
+    d += 0.0060 * gv * amp * smoothstep(0.64, 0.26, y) * smoothstep(Y0 + 0.02, Y0 + 0.10, y)
     # plis d'aisselle : diagonales du dessous de bras vers le bas et le milieu (devant et dos)
     px, py = ax - W_CH, y - Y_AP
     ang = math.radians(40)
     perp = px * math.sin(ang) - py * math.cos(ang)
     dist = np.sqrt(px ** 2 + py ** 2)
     ph = fbm(NOISE, P * 4.0 + 31.0, 2).reshape(shape)
-    d += 0.0085 * fold_wave(2 * np.pi * perp / 0.062 + 2.0 * ph) * np.exp(-dist / 0.12) * smoothstep(0.0, 0.05, -py + 0.04)
+    d += 0.0100 * fold_wave(2 * np.pi * perp / 0.064 + 2.0 * ph) * np.exp(-dist / 0.12) * smoothstep(0.0, 0.05, -py + 0.04)
     # blousant : plis horizontaux irréguliers au-dessus du bord-côte (ils se cassent, se relaient)
     hw = fbm(NOISE, P * np.array([3.0, 0.6, 3.0]) + 7.0, 2).reshape(shape)
     br = 0.45 + 0.55 * smoothstep(-0.35, 0.35, fbm(NOISE, P * np.array([5.0, 2.0, 5.0]) + 13.0, 2).reshape(shape))
     hz = fold_wave(2 * np.pi * (y - 0.09) / 0.052 + 2.8 * hw)
-    d += 0.0060 * hz * br * np.exp(-((y - (Y0 + 0.085)) / 0.055) ** 2)
+    d += 0.0042 * hz * br * np.exp(-((y - (Y0 + 0.080)) / 0.050) ** 2)
     d += 0.0030 * np.exp(-((y - (Y0 + 0.040)) / 0.030) ** 2)
     # fronces dans le bord-côte (le corps est plus large que la côte : il fronce)
     gw = 1.8 * fbm(NOISE, P * 6 + 3.0, 2).reshape(shape)
@@ -813,10 +823,12 @@ def sleeve_disp(G):
     cc = vlen + 0.035 * np.cos(phi - np.pi / 2)
     d += 0.0100 * fold_wave(2 * np.pi * cc / 0.042 + 1.6 * ph) * np.exp(-((v - ve) / 0.13) ** 2) * face
     # tassement en accordéon au-dessus du poignet (manche longue sur un bras au repos)
-    stack = fold_wave(2 * np.pi * vlen / 0.038 + 1.4 * np.sin(2 * phi + 2 * ph) + 2.0 * ph)
-    d += 0.0095 * stack * smoothstep(0.62, 0.78, v) * smoothstep(0.985, 0.90, v)
+    zig = 2.6 * np.sin(2 * phi + 1.5 * ph) + 1.2 * np.sin(3 * phi + 0.7)
+    stack = fold_wave(2 * np.pi * vlen / 0.050 + zig + 2.0 * ph)
+    amp = 0.6 + 0.4 * smoothstep(-0.3, 0.3, fbm(NOISE, P * 9.0 + 19.0, 2).reshape(shape))
+    d += 0.0065 * stack * amp * smoothstep(0.62, 0.78, v) * smoothstep(0.975, 0.90, v)
     # fronces dans le poignet
-    d += 0.0055 * np.sin(13 * phi + 3 * ph) * smoothstep(0.88, 0.985, v)
+    d += 0.0035 * np.sin(13 * phi + 3 * ph) * smoothstep(0.92, 0.985, v)
     # nul à l'emmanchure et à la jonction du poignet
     d *= smoothstep(-1.0, -0.72, v)
     d *= smoothstep(1.0, 0.985, v)
@@ -1372,7 +1384,7 @@ def fleece_normal_tile(n=256, seed=5):
 # --------------------------------------------------------------------------------------
 # Occlusion ambiante cuite (v3) : lancer de rayons sur le maillage complet, par sommet
 # --------------------------------------------------------------------------------------
-def bake_ao(layout, nrays=64, rmax=0.24, eps=6e-4, verbose=True):
+def bake_ao(layout, nrays=64, rmax=0.30, eps=6e-4, verbose=True):
     """Occlusion par sommet (1 = dégagé). Calculée sur 3 états (fermé, ouvert, ouvert + revers) :
     on garde la valeur la plus claire, pour que l'intérieur reste lisible une fois ouvert
     tandis que l'intérieur de capuche, les dessous de bras et les creux de plis restent sombres.
@@ -1384,6 +1396,7 @@ def bake_ao(layout, nrays=64, rmax=0.24, eps=6e-4, verbose=True):
         print("  (embreex absent : occlusion réduite à", nrays, "rayons par sommet — pip install embreex)")
     prims = [(nd, m) for nd in layout["nodes"] for m in nd["prims"]]
     ft = layout["fold_table"]
+    no_ao = ("zip", "tape", "brass")          # métal et ruban : occultants, mais pas assombris
     def state_open(m, sg):
         return open_field(m.V, sg)
     def state_fold(m, sg):
@@ -1437,6 +1450,8 @@ def bake_ao(layout, nrays=64, rmax=0.24, eps=6e-4, verbose=True):
             print(f"  occlusion : état {states.index(st) + 1}/3 ({time.time() - t0:.0f} s)")
     # lissage léger sur le maillage (le bruit des 64 rayons disparaît, les creux restent)
     for i, (_, m) in enumerate(prims):
+        if m.material in no_ao:
+            continue
         a = best[i]
         for _ in range(2):
             acc = np.zeros(len(a))
@@ -1445,7 +1460,8 @@ def bake_ao(layout, nrays=64, rmax=0.24, eps=6e-4, verbose=True):
                 np.add.at(acc, m.F[:, e[0]], a[m.F[:, e[1]]])
                 np.add.at(cnt, m.F[:, e[0]], 1)
             a = 0.5 * a + 0.5 * acc / np.maximum(cnt, 1)
-        m.AO = np.clip(0.16 + 0.84 * a ** 1.15, 0, 1)
+        ex = {"hoodlining": 2.0, "lining": 1.4}.get(m.material, 1.15)   # intérieurs : plus d'ombre
+        m.AO = np.clip(0.14 + 0.86 * a ** ex, 0, 1)
 
 
 # --------------------------------------------------------------------------------------
@@ -1828,7 +1844,9 @@ def build_geometry(font_path, verbose=True):
         print(f"  nappes + drapé ({time.time() - t0:.0f} s)")
     # bord-côte de taille : anneau bas (milieu devant droit -> dos -> milieu devant gauche)
     gl, gr, gb = (geo["grids"][k]["G"] for k in ("Panel_Left", "Panel_Right", "Body_Back"))
-    ring = np.concatenate([gr[0, :, :3], gb[0, ::-1, :3][1:], gl[0, ::-1, :3][1:]])
+    # v3 (correctif du v2) : le dos va de -X à +X ; le v2 le prenait à l'envers, et l'anneau
+    # traversait le corps deux fois (bandes cachées à l'intérieur, normales faussées).
+    ring = np.concatenate([gr[0, :, :3], gb[0, :, :3][1:], gl[0, ::-1, :3][1:]])
     if ring[0, 0] > 0:
         ring = ring[::-1]
     Ghem, hem_u, hem_h = hem_band(ring)

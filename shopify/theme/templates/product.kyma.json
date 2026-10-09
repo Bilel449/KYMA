@@ -519,7 +519,7 @@
           "type": "spot",
           "settings": {
             "title": "Zip intégral",
-            "text": "En métal argent brossé.",
+            "text": "En métal, finition argentée brossée.",
             "x": 50,
             "y": 55
           }
@@ -528,7 +528,7 @@
           "type": "spot",
           "settings": {
             "title": "Tirette sculptée « Kyma »",
-            "text": "En laiton plaqué or brossé. C'est le seul éclat de la pièce.",
+            "text": "En laiton, finition dorée brossée. C'est le seul éclat de la pièce.",
             "x": 50,
             "y": 27
           }

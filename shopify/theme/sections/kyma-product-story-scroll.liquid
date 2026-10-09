@@ -57,6 +57,11 @@
       <span class="kyma-pstory__focus" data-story-focus></span>
       <p class="kyma-pstory__loading" data-story-loading>{{ section.settings.loading_label | escape }}</p>
     </div>
+    {%- comment -%} Mention R1 (Victoire) : PERMANENTE dans la zone épinglée, à chaque étape, aussi en rendu statique
+      (mouvement réduit, sans JavaScript, sans WebGL). Vrai texte, hors du canvas. {%- endcomment -%}
+    {%- if section.settings.caption != blank -%}
+      <p class="kyma-caption kyma-pstory__legal" id="{{ sid }}-legal">{{ section.settings.caption | escape }}</p>
+    {%- endif -%}
 
     <ol class="kyma-pstory__steps" role="list">
       {%- for block in steps -%}
@@ -80,7 +85,18 @@
             {%- if block.settings.kicker != blank -%}<p class="kyma-pstory__kicker">{{ block.settings.kicker | escape }}</p>{%- endif -%}
             {%- if block.settings.title != blank -%}<h3 class="kyma-pstory__h">{{ block.settings.title | escape }}</h3>{%- endif -%}
             {%- if block.settings.text != blank -%}<p class="kyma-pstory__p">{{ block.settings.text | escape }}</p>{%- endif -%}
-            {%- if block.settings.spec != blank -%}
+            {%- liquid
+              assign spec_n = 0
+              for row in rows
+                assign parts = row | split: '|'
+                assign lab = parts[0] | strip
+                assign val = parts[1] | strip
+                if lab != blank and val != blank
+                  assign spec_n = spec_n | plus: 1
+                endif
+              endfor
+            -%}
+            {%- if spec_n > 0 -%}
               <dl class="kyma-pstory__spec">
                 {%- for row in rows -%}
                   {%- assign parts = row | split: '|' -%}
@@ -108,7 +124,6 @@
           {%- if section.settings.cta_label != blank -%}<a class="kyma-btn" href="{{ cta_href }}" data-kyma-magnetic><span>{{ section.settings.cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>{%- endif -%}
           {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}<a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.cta2_link }}"><span>{{ section.settings.cta2_label | escape }}</span></a>{%- endif -%}
         </p>
-        <p class="kyma-caption kyma-pstory__caption">{{ section.settings.caption | escape }}</p>
       </li>
     </ol>
 
@@ -158,7 +173,7 @@
     { "type": "url", "id": "cta_link", "label": "Bouton 1 — lien (vide = produit)" },
     { "type": "text", "id": "cta2_label", "label": "Bouton 2 — texte", "default": "Choisir mon coloris" },
     { "type": "url", "id": "cta2_link", "label": "Bouton 2 — lien", "default": "/collections/all" },
-    { "type": "text", "id": "caption", "label": "Mention sous la présentation", "default": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." },
+    { "type": "text", "id": "caption", "label": "Mention permanente (visible à chaque étape)", "default": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran." },
     { "type": "header", "content": "Accessibilité" },
     { "type": "text", "id": "skip_label", "label": "Lien d'évitement", "default": "Passer la présentation de la pièce" },
     { "type": "text", "id": "picker_label", "label": "Sélecteur de coloris — nom accessible", "default": "Coloris du modèle 3D" },
@@ -180,7 +195,7 @@
         { "type": "text", "id": "kicker", "label": "Petit label" },
         { "type": "text", "id": "title", "label": "Titre" },
         { "type": "textarea", "id": "text", "label": "Texte" },
-        { "type": "textarea", "id": "spec", "label": "Fiche (une ligne « Libellé | valeur »)", "info": "Une ligne sans valeur n'est pas affichée. Ex. : Lieu de fabrication | [À CONFIRMER : Portugal]" },
+        { "type": "textarea", "id": "spec", "label": "Fiche (une ligne « Libellé | valeur »)", "info": "Une ligne sans valeur n'est pas affichée. Ex. : Imaginé à | Paris. Ne remplir une composition ou un lieu de fabrication qu’une fois confirmés (voir conformite.md)" },
         { "type": "image_picker", "id": "still", "label": "Image fixe (mouvement réduit)", "info": "Rendu de la 3D à cette étape, affiché seulement quand le mouvement est réduit." },
         { "type": "text", "id": "still_alt", "label": "Image fixe — texte alternatif" }
       ]

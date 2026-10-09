@@ -132,6 +132,11 @@
                         {%- if block.settings.condition != blank -%}
                           <p class="kyma-tier__cond">{{ block.settings.condition | escape }}</p>
                         {%- endif -%}
+                        {%- assign more_lines = block.settings.condition_more | newline_to_br | split: '<br />' -%}
+                        {%- for ml in more_lines -%}
+                          {%- assign ml_clean = ml | strip -%}
+                          {%- if ml_clean != blank -%}<p class="kyma-tier__cond kyma-tier__cond--more">{{ ml_clean | escape }}</p>{%- endif -%}
+                        {%- endfor -%}
                       </div>
                     </div>
                   </div>
@@ -185,18 +190,18 @@
     { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "cercle" },
     { "type": "text", "id": "number", "label": "Numéro", "default": "05" },
     { "type": "text", "id": "label", "label": "Label", "default": "CERCLE WAVES" },
-    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Rejoindre le" },
-    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "cercle" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Le Cercle" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "Waves" },
     { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
-    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ." },
-    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Entrer dans le Cercle" },
+    { "type": "textarea", "id": "text", "label": "Texte d'introduction", "default": "Le Cercle Waves accompagne celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ, par abonnement trimestriel." },
+    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Découvrir les deux paliers" },
     { "type": "url", "id": "cta_link", "label": "Bouton — URL" },
     { "type": "checkbox", "id": "show_rings", "label": "Afficher les deux anneaux 3D (ils s'entrelacent au défilement)", "default": true },
     { "type": "checkbox", "id": "compact_top", "label": "Espacement réduit en haut", "default": false },
     { "type": "text", "id": "ring_a", "label": "Anneaux — étiquette 1", "default": "INITIUM" },
     { "type": "text", "id": "ring_b", "label": "Anneaux — étiquette 2", "default": "MAJESTÉ" },
     { "type": "text", "id": "terms_text", "label": "Ligne sous les cartes", "default": "Abonnement trimestriel, renouvelé automatiquement, résiliable à tout moment. Conditions :" },
-    { "type": "text", "id": "terms_label", "label": "Lien des conditions — texte", "default": "règlement Cercle Waves" },
+    { "type": "text", "id": "terms_label", "label": "Lien des conditions — texte", "default": "conditions du Cercle Waves" },
     { "type": "url", "id": "terms_link", "label": "Lien des conditions — URL (vide = [À COMPLÉTER])" }
   ],
   "blocks": [
@@ -214,11 +219,12 @@
         { "type": "text", "id": "card_alt", "label": "Visuel de la carte — texte alternatif", "default": "Carte de membre INITIUM du Cercle Waves" },
         { "type": "select", "id": "image_fit", "label": "Visuel — cadrage", "options": [ { "value": "cover", "label": "Remplir la carte (recadre)" }, { "value": "contain", "label": "Image entière" } ], "default": "cover" },
         { "type": "select", "id": "tone", "label": "Carte", "options": [ { "value": "initium", "label": "Beige crème, écriture dorée (INITIUM)" }, { "value": "majeste", "label": "Gris clair, écriture dorée, liseré or (MAJESTÉ)" } ], "default": "initium" },
-        { "type": "text", "id": "invite", "label": "Invite au recto", "default": "Retourner" },
+        { "type": "text", "id": "invite", "label": "Invite au recto", "default": "Retourner la carte" },
         { "type": "text", "id": "back_label", "label": "Verso — intitulé", "default": "AVANTAGES" },
         { "type": "textarea", "id": "perks", "label": "Avantages (un par ligne)", "default": "[À COMPLÉTER : avantage 1]\n[À COMPLÉTER : avantage 2]" },
         { "type": "text", "id": "cashback_note", "label": "Précision sous l'avantage cashback / crédit", "default": "Versé en crédit KYMA sur vos prochains achats." },
-        { "type": "text", "id": "condition", "label": "Condition d'accès (verso)", "default": "Condition d'accès : [À COMPLÉTER]" },
+        { "type": "text", "id": "condition", "label": "Précision (verso)", "default": "Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris." },
+        { "type": "textarea", "id": "condition_more", "label": "Précisions supplémentaires (verso, facultatif, une par ligne)", "info": "Petits caractères sous la précision. Ex. : envoi de la carte, date du premier accès anticipé. Texte à faire valider par Victoire." },
         { "type": "text", "id": "price", "label": "Prix (texte libre)", "default": "12,99 €", "info": "Montant affiché tel quel, TTC." },
         { "type": "text", "id": "price_period", "label": "Période", "default": "par trimestre, TTC" },
         { "type": "text", "id": "join_label", "label": "Bouton — texte", "default": "Rejoindre" },

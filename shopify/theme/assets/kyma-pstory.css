@@ -38,7 +38,10 @@
 .kyma-pstory .kyma-sec__title { margin: 0 0 18px; font-size: clamp(34px, 4.6vw, 64px); }
 .kyma-pstory__rail { display: none; }
 .kyma-pstory__tints { margin: 0; }
-.kyma-pstory.is-static .kyma-pstory__steps { grid-row: 1 / span 2; }
+/* mention R1 permanente (vrai texte, hors canvas) : sous le modèle en rendu statique, en haut de la scène en rendu animé */
+.kyma-pstory__legal { grid-column: 1; grid-row: 2; margin: 0; max-width: 62ch; }
+.kyma-pstory.is-static .kyma-pstory__legal { grid-row: 3; }
+.kyma-pstory.is-static .kyma-pstory__steps { grid-row: 1 / span 3; }
 .kyma-pstory.is-static .kyma-pstory__tints { grid-column: 1; grid-row: 2; justify-self: start; align-self: start; margin-top: -8px; }
 
 /* pastilles compactes (nom gardé pour les lecteurs d'écran) */
@@ -53,7 +56,10 @@
   .kyma-pstory__canvas { position: relative; top: 0; aspect-ratio: 1 / 1; max-height: 70vh; }
   .kyma-pstory.is-static .kyma-pstory__tints { position: static; max-width: none; margin-top: -8px; }
   .kyma-pstory.is-static .kyma-pstory__tints { grid-row: 2; }
-  .kyma-pstory.is-static .kyma-pstory__steps { grid-row: 3; }
+  .kyma-pstory.is-static .kyma-pstory__steps { grid-row: 4; }
+  .kyma-pstory__legal { grid-row: 2; }
+  .kyma-pstory__sticky > .kyma-pstory__steps { grid-row: 3; }
+  .kyma-pstory.is-static .kyma-pstory__legal { grid-row: 3; }
 }
 
 /* ── animé ── */
@@ -83,6 +89,9 @@
 .kyma-pstory.is-live .kyma-pstory__rail { display: block; position: absolute; right: clamp(14px, 1.6vw, 26px); top: 50%; width: 1px; height: 120px; margin-top: -60px; background: rgba(74, 59, 50, 0.14); }
 .kyma-pstory.is-live .kyma-pstory__rail span { position: absolute; inset: 0; background: var(--kyma-ink); transform-origin: 50% 0; transform: scaleY(0); }
 .kyma-pstory.is-live .kyma-pstory__loading { bottom: 50%; }
+.kyma-pstory.is-live .kyma-pstory__legal { position: absolute; z-index: 5; left: clamp(24px, 6vw, 96px); top: calc(var(--kyma-header-h) + 14px); max-width: min(52ch, 42vw);
+  padding: 8px 12px; border-radius: 12px; background: rgba(251, 247, 242, 0.74); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  font-size: 11.5px; line-height: 1.45; color: var(--kyma-ink); }
 
 @media (max-width: 899px), (max-aspect-ratio: 9/10) {
   .kyma-pstory.is-live .kyma-pstory__step { top: auto; bottom: 18px; left: 16px; right: 16px; width: auto; padding: 18px 20px; border-radius: 22px;
@@ -103,6 +112,7 @@
   .kyma-pstory.is-live .kyma-pstory__tints { top: calc(var(--kyma-header-h) + 10px); bottom: auto; left: 50%; right: auto; transform: translateX(-50%); flex-wrap: nowrap; }
   .kyma-pstory.is-live .kyma-pstory__tints.kyma-tints--named .kyma-tints__dot { min-width: 38px; min-height: 38px; padding: 4px; }
   .kyma-pstory.is-live .kyma-pstory__rail { top: auto; bottom: auto; right: 10px; height: 80px; margin-top: -40px; top: 46%; }
+  .kyma-pstory.is-live .kyma-pstory__legal { left: 16px; right: 16px; top: calc(var(--kyma-header-h) + 64px); max-width: none; text-align: center; font-size: 11px; padding: 6px 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
