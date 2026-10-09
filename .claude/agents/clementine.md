@@ -13,7 +13,7 @@ KYMA (prononcé « Kouma ») : streetwear unisexe, slogan « L'art du flow », i
 - **Couleurs principales** : Beige #F5EDE4, Marron clair #C19E86, Rose clair #E8C4C4 (texte Brun #4A3B32). Lilas = coloris produit uniquement. Aucune image IA. Typos DM Serif Display + Outfit.
 - **Drop 1** : hoodie zippé oversize, 179 € — Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow.
 - **Fabrication** : Portugal (atelier en cours de sélection). **Instagram** : @kymasinsta.
-- **Fidélité** : Cercle Waves — paliers INITIUM et ORIGINE.
+- **Fidélité** : Cercle Waves — paliers INITIUM et MAJESTÉ (abonnement trimestriel).
 
 ## Tes deux modes de fonctionnement
 

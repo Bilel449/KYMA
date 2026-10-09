@@ -10,7 +10,7 @@ const mission =
 const KYMA_CONTEXT = `KYMA (« Kouma ») : streetwear premium unisexe parisien, slogan « L'art du flow », inspirée du mouvement perpétuel des vagues.
 Référentiel complet : brand/BRAND.md. Palette Beige #F5EDE4 / Lilas #C8A2C8 / Noir #1C1C1C. Instagram @kymasinsta.
 Drop 1 : hoodie zippé oversize 179 € — Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow.
-Fidélité Cercle Waves : INITIUM / ORIGINE.`;
+Fidélité Cercle Waves (abonnement trimestriel) : INITIUM 12,99 € / MAJESTÉ 39,99 €.`;
 
 // ── Coordinateur : orchestration stricte, hiérarchie respectée ──
 const coordinator = `Tu coordonnes l'équipe KYMA. La hiérarchie est :

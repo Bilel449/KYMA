@@ -96,7 +96,7 @@ Lumière douce, naturelle, diffuse · décor minimal (mur, studio, béton clair,
 - **Valider puis produire** : précommandes encaissées avant le lancement de la production (≈ 50 % du volume). Petite série (quelques dizaines de pièces par coloris).
 - Délai fabrication indicatif après validation : ~18 semaines (tech pack) → **la date d'expédition des précommandes doit être affichée** (voir Victoire).
 - Livraison France ; retours prévus (provision 15 %).
-- Fidélité : **Cercle Waves** — paliers INITIUM (entrée) / ORIGINE (supérieur).
+- Fidélité : **Cercle Waves** — abonnement trimestriel : INITIUM 12,99 € / MAJESTÉ 39,99 € (décision du fondateur, 09/10/2026).
 
 ## Packaging (expérience de déballage)
 Boîte beige motif vague en léger relief, logo lilas à chaud · papier de soie ton sur ton, sticker KYMA, carte au nom du coloris · carte 350 g numérotée (numéro de pièce dans la collection) · expédition kraft, zéro plastique superflu.
