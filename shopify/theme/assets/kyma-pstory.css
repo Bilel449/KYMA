@@ -1,0 +1,108 @@
+/* KYMA — « La pièce » pilotée par le défilement (sections/kyma-product-story-scroll.liquid, assets/kyma-pstory.js).
+   Par défaut (sans JS, mouvement réduit, sans WebGL) : rendu STATIQUE, tout le texte dans l'ordre.
+   .is-live (posé par kyma-pstory.js) : section très haute, scène épinglée, textes en fondu à gauche / à droite. */
+.kyma-pstory { position: relative; color: var(--kyma-ink); background: var(--kyma-beige); scroll-margin-top: var(--kyma-header-h); }
+.kyma-pstory__skip { position: absolute; left: var(--kyma-pad-x); top: 12px; z-index: 30; }
+.kyma-vh-focus:not(:focus):not(:focus-visible) { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.kyma-vh-focus:focus-visible { padding: 10px 16px; border-radius: 999px; background: var(--kyma-ink); color: var(--kyma-beige); font-size: 14px; text-decoration: none; }
+.kyma-pstory__end { display: block; height: 0; outline: none; }
+
+/* ── statique ── */
+.kyma-pstory__sticky { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: start;
+  max-width: 1240px; margin-inline: auto; padding: var(--kyma-section-y, 96px) var(--kyma-pad-x); }
+.kyma-pstory__canvas { position: sticky; top: calc(var(--kyma-header-h) + 24px); aspect-ratio: 4 / 5; max-height: 78vh; border-radius: 28px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 30%, #FBF7F2 0%, #F5EDE4 60%, #EFE3D6 100%); }
+.kyma-pstory__canvas canvas { display: block; width: 100%; height: 100%; }
+.kyma-pstory.is-nogl .kyma-pstory__canvas { display: none; }
+.kyma-pstory.is-nogl .kyma-pstory__sticky { grid-template-columns: minmax(0, 760px); justify-content: center; }
+.kyma-pstory__loading { position: absolute; left: 0; right: 0; bottom: 18px; margin: 0; text-align: center; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--kyma-ink-soft); }
+.kyma-pstory.is-ready .kyma-pstory__loading { display: none; }
+.kyma-pstory__focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; display: none; }
+.kyma-pstory__steps { margin: 0; padding: 0; list-style: none; display: grid; gap: clamp(28px, 4vw, 48px); grid-column: 2; grid-row: 1; }
+.kyma-pstory__canvas { grid-column: 1; grid-row: 1; }
+.kyma-pstory__kicker { margin: 0 0 8px; font-size: 11.5px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--kyma-camel-ink, #7A5F4C); }
+.kyma-pstory__h { margin: 0 0 10px; font: 400 clamp(24px, 2.6vw, 34px)/1.12 var(--kyma-serif); color: var(--kyma-ink); }
+.kyma-pstory__p { margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; color: var(--kyma-ink); max-width: 46ch; }
+.kyma-pstory__spec { margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+.kyma-pstory__spec div { display: grid; grid-template-columns: minmax(110px, 38%) 1fr; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(74, 59, 50, 0.14); }
+.kyma-pstory__spec div:last-child { border-bottom: 1px solid rgba(74, 59, 50, 0.14); }
+.kyma-pstory__spec dt { font-size: 11.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--kyma-ink-soft); padding-top: 2px; }
+.kyma-pstory__spec dd { margin: 0; font-size: 15px; line-height: 1.5; }
+.kyma-pstory__still { margin-top: 16px; border-radius: 20px; overflow: hidden; }
+.kyma-pstory__still img { display: block; width: 100%; height: auto; }
+.kyma-pstory__final { margin: 0; font: 400 clamp(34px, 5.2vw, 72px)/1.04 var(--kyma-serif); letter-spacing: -0.005em; color: var(--kyma-ink); }
+.kyma-pstory__sub { margin: 12px 0 0; font-size: clamp(16px, 1.5vw, 19px); font-weight: 300; line-height: 1.5; color: var(--kyma-ink); }
+.kyma-pstory__ctas { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 26px 0 0; }
+.kyma-pstory__caption { margin-top: 18px; }
+.kyma-pstory .kyma-sec__label { margin-bottom: 14px; }
+.kyma-pstory .kyma-sec__title { margin: 0 0 18px; font-size: clamp(34px, 4.6vw, 64px); }
+.kyma-pstory__rail { display: none; }
+.kyma-pstory__tints { margin: 0; }
+.kyma-pstory.is-static .kyma-pstory__tints { position: absolute; left: calc(var(--kyma-pad-x) + 16px); bottom: calc(var(--kyma-section-y, 96px) + 16px); max-width: calc(50% - 64px); }
+
+/* pastilles compactes (nom gardé pour les lecteurs d'écran) */
+.kyma-pstory__tints { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 6px; border-radius: 999px; background: rgba(251, 247, 242, 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 30px -18px rgba(74, 59, 50, 0.45); }
+.kyma-pstory__tints.kyma-tints--named .kyma-tints__dot { min-height: 40px; min-width: 40px; padding: 6px; border: 0; background: transparent; justify-content: center; }
+.kyma-pstory__tints .kyma-tints__name { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.kyma-pstory__tints.kyma-tints--named .kyma-tints__dot::after { display: block; }
+
+@media (max-width: 899px) {
+  .kyma-pstory__sticky { grid-template-columns: 1fr; }
+  .kyma-pstory__steps { grid-column: 1; grid-row: 2; }
+  .kyma-pstory__canvas { position: relative; top: 0; aspect-ratio: 1 / 1; max-height: 70vh; }
+  .kyma-pstory.is-static .kyma-pstory__tints { position: static; max-width: none; margin-top: -8px; }
+  .kyma-pstory.is-static .kyma-pstory__tints { grid-row: 2; }
+  .kyma-pstory.is-static .kyma-pstory__steps { grid-row: 3; }
+}
+
+/* ── animé ── */
+.kyma-pstory.is-live { height: var(--story-h, 700vh); padding: 0; overflow: visible; }
+.kyma-pstory.is-live .kyma-pstory__sticky { position: sticky; top: 0; display: block; max-width: none; height: 100vh; height: 100svh; margin: 0; padding: 0; overflow: hidden;
+  background: radial-gradient(90% 70% at 50% 42%, #FBF7F2 0%, #F5EDE4 55%, #EEE2D4 100%); }
+.kyma-pstory.is-live .kyma-pstory__canvas { position: absolute; inset: 0; top: 0; aspect-ratio: auto; max-height: none; border-radius: 0; background: none; }
+.kyma-pstory.is-live .kyma-pstory__focus { display: block; background: radial-gradient(closest-side, rgba(245, 237, 228, 0) 46%, rgba(245, 237, 228, 0.55) 100%); }
+@media (min-width: 900px) and (pointer: fine) {
+  .kyma-pstory.is-live[data-dof="true"] .kyma-pstory__focus { -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    -webkit-mask: radial-gradient(closest-side at 50% 50%, transparent 38%, #000 82%); mask: radial-gradient(closest-side at 50% 50%, transparent 38%, #000 82%);
+    background: rgba(245, 237, 228, 0.12); }
+}
+.kyma-pstory.is-live .kyma-pstory__steps { position: absolute; inset: 0; display: block; pointer-events: none; }
+.kyma-pstory.is-live .kyma-pstory__step { position: absolute; top: 50%; width: min(400px, 34vw); opacity: 0; visibility: hidden;
+  transform: translate3d(0, calc(-50% + 22px), 0); transition: opacity 700ms var(--kyma-ease), transform 900ms var(--kyma-ease), visibility 0s linear 700ms; }
+.kyma-pstory.is-live .kyma-pstory__step--left { left: clamp(24px, 6vw, 96px); }
+.kyma-pstory.is-live .kyma-pstory__step--right { right: clamp(24px, 6vw, 96px); }
+.kyma-pstory.is-live .kyma-pstory__step.is-active { opacity: 1; visibility: visible; transform: translate3d(0, -50%, 0); transition: opacity 800ms var(--kyma-ease) 120ms, transform 1000ms var(--kyma-ease) 120ms, visibility 0s; pointer-events: auto; }
+.kyma-pstory.is-live .kyma-pstory__still { display: none; }
+.kyma-pstory.is-live .kyma-pstory__outro { left: 50%; right: auto; top: auto; bottom: clamp(28px, 7vh, 72px); width: min(760px, calc(100% - 48px)); text-align: center;
+  transform: translate3d(-50%, 26px, 0); }
+.kyma-pstory.is-live .kyma-pstory__outro.is-active { transform: translate3d(-50%, 0, 0); }
+.kyma-pstory.is-live .kyma-pstory__outro .kyma-pstory__ctas { justify-content: center; }
+.kyma-pstory.is-live .kyma-pstory__tints { position: absolute; right: clamp(16px, 3vw, 40px); bottom: clamp(16px, 4vh, 36px); z-index: 4; transition: opacity 600ms var(--kyma-ease); }
+.kyma-pstory.is-live.is-outro .kyma-pstory__tints { opacity: 0; pointer-events: none; }
+.kyma-pstory.is-live .kyma-pstory__rail { display: block; position: absolute; right: clamp(14px, 1.6vw, 26px); top: 50%; width: 1px; height: 120px; margin-top: -60px; background: rgba(74, 59, 50, 0.14); }
+.kyma-pstory.is-live .kyma-pstory__rail span { position: absolute; inset: 0; background: var(--kyma-ink); transform-origin: 50% 0; transform: scaleY(0); }
+.kyma-pstory.is-live .kyma-pstory__loading { bottom: 50%; }
+
+@media (max-width: 899px), (max-aspect-ratio: 9/10) {
+  .kyma-pstory.is-live .kyma-pstory__step { top: auto; bottom: 18px; left: 16px; right: 16px; width: auto; padding: 18px 20px; border-radius: 22px;
+    background: rgba(251, 247, 242, 0.84); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 18px 40px -26px rgba(74, 59, 50, 0.5);
+    transform: translate3d(0, 24px, 0); }
+  .kyma-pstory.is-live .kyma-pstory__step.is-active { transform: none; }
+  .kyma-pstory.is-live .kyma-pstory__step:first-child { padding-top: 16px; }
+  .kyma-pstory.is-live .kyma-sec__title { font-size: clamp(28px, 8vw, 40px); margin-bottom: 8px; }
+  .kyma-pstory.is-live .kyma-pstory__h { font-size: 23px; margin-bottom: 6px; }
+  .kyma-pstory.is-live .kyma-pstory__p { font-size: 15px; line-height: 1.55; }
+  .kyma-pstory.is-live .kyma-pstory__spec div { grid-template-columns: minmax(96px, 36%) 1fr; padding: 7px 0; }
+  .kyma-pstory.is-live .kyma-pstory__spec dd { font-size: 14px; }
+  .kyma-pstory.is-live .kyma-pstory__outro { bottom: 18px; left: 16px; right: 16px; width: auto; transform: translate3d(0, 24px, 0); background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0 4px; }
+  .kyma-pstory.is-live .kyma-pstory__outro.is-active { transform: none; }
+  .kyma-pstory.is-live .kyma-pstory__final { font-size: clamp(32px, 9vw, 44px); }
+  .kyma-pstory.is-live .kyma-pstory__ctas { margin-top: 18px; }
+  .kyma-pstory.is-live .kyma-pstory__ctas .kyma-btn { flex: 1 1 auto; }
+  .kyma-pstory.is-live .kyma-pstory__tints { top: calc(var(--kyma-header-h) + 10px); bottom: auto; right: 50%; transform: translateX(50%); }
+  .kyma-pstory.is-live .kyma-pstory__rail { top: auto; bottom: auto; right: 10px; height: 80px; margin-top: -40px; top: 46%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kyma-pstory__step { transition: none !important; }
+}

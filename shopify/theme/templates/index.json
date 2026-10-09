@@ -132,7 +132,7 @@
       }
     },
     "piece": {
-      "type": "kyma-product-360",
+      "type": "kyma-product-story-scroll",
       "settings": {
         "anchor": "piece",
         "number": "03",
@@ -140,31 +140,115 @@
         "title_before": "Une pièce, un",
         "title_em": "seul",
         "title_after": "geste.",
-        "text": "Le motif est imprimé sur tout le tissu. Faites tourner la pièce : chaque détail est numéroté.",
+        "height": 700,
+        "default_colorway": "Lilac Whirl",
+        "show_picker": true,
+        "dof": true,
         "product": "ressac-hoodie-zippe-oversize",
-        "prefer_native": true,
-        "autorotate": true,
-        "spin_speed": 9,
-        "spin_delay": 0.5,
-        "help": "Glissez pour tourner. Choisissez un détail : la pièce pivote vers lui.",
-        "list_label": "Coloris du modèle 3D",
-        "presets_label": "Points de vue",
-        "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter : capuche sans cordon, zip intégral argent, tirette dorée, deux poches biais, bords-côtes.",
-        "loading_label": "Chargement du modèle 3D…",
-        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
-        "caption_fallback": "Illustration du coloris.",
-        "spots_label": "Détails de la pièce",
+        "final_title": "Alors, qu’en dites-vous ?",
+        "final_subtitle": "Êtes-vous prêt à suivre le mouvement ?",
         "cta_label": "Découvrir la pièce",
-        "cta_link": "/products/ressac-hoodie-zippe-oversize"
+        "cta_link": "/products/ressac-hoodie-zippe-oversize",
+        "cta2_label": "Choisir mon coloris",
+        "cta2_link": "/collections/drop-1#coloris",
+        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "skip_label": "Passer la présentation de la pièce",
+        "picker_label": "Coloris du modèle 3D",
+        "loading_label": "Chargement du modèle 3D…"
       },
       "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "key": "intro",
+            "side": "left",
+            "kicker": "",
+            "title": "",
+            "text": "Le hoodie zippé Ressac. Coupe oversize, épaules tombantes, un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile.",
+            "spec": "",
+            "still_alt": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "key": "hood",
+            "side": "right",
+            "kicker": "LA CAPUCHE",
+            "title": "Dehors, puis dedans.",
+            "text": "Double épaisseur, sans cordon ni œillets. À l’intérieur, une doublure en jersey ton sur ton.",
+            "spec": "",
+            "still_alt": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "key": "back",
+            "side": "left",
+            "kicker": "LE DOS",
+            "title": "Le courant continue.",
+            "text": "Le motif KYMA Wave court sur tout le dos, d’une épaule à l’autre, comme un courant.",
+            "spec": "",
+            "still_alt": ""
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "key": "pull",
+            "side": "left",
+            "kicker": "LA TIRETTE",
+            "title": "Un seul éclat.",
+            "text": "Sculptée « Kyma », en laiton plaqué or brossé. Le seul éclat de la pièce.",
+            "spec": "",
+            "still_alt": ""
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "key": "zip",
+            "side": "left",
+            "kicker": "LE ZIP",
+            "title": "Elle descend, la pièce s’ouvre.",
+            "text": "Zip intégral en métal argent brossé, du col jusqu’à l’ourlet.",
+            "spec": "",
+            "still_alt": ""
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "key": "open_left",
+            "side": "right",
+            "kicker": "À L’INTÉRIEUR",
+            "title": "Composition.",
+            "text": "",
+            "spec": "Corps | [À CONFIRMER : 100 % coton]\nBords-côtes | 95 % coton, 5 % élasthanne\nDoublure | [À COMPLÉTER]",
+            "still_alt": ""
+          }
+        },
+        "step_7": {
+          "type": "step",
+          "settings": {
+            "key": "open_right",
+            "side": "left",
+            "kicker": "À L’INTÉRIEUR",
+            "title": "Fabrication.",
+            "text": "",
+            "spec": "Lieu de fabrication | [À CONFIRMER : Portugal]\nImaginé à | Paris",
+            "still_alt": ""
+          }
+        },
         "colorway_1": {
           "type": "colorway",
           "settings": {
             "name": "Lilac Whirl",
             "glb": "ressac-lilac-whirl.glb",
             "color_a": "#C8A2C8",
-            "color_b": "#F5EDE4"
+            "color_b": "#F5EDE4",
+            "lining": "#F3EBDD"
           }
         },
         "colorway_2": {
@@ -173,7 +257,8 @@
             "name": "Ivory Tide",
             "glb": "ressac-ivory-tide.glb",
             "color_a": "#E8E0D8",
-            "color_b": "#C5BFB8"
+            "color_b": "#C5BFB8",
+            "lining": "#FBF6EE"
           }
         },
         "colorway_3": {
@@ -182,7 +267,8 @@
             "name": "Silver Drift",
             "glb": "ressac-silver-drift.glb",
             "color_a": "#8E9EAB",
-            "color_b": "#C8CDD2"
+            "color_b": "#C8CDD2",
+            "lining": "#F1F3F4"
           }
         },
         "colorway_4": {
@@ -191,7 +277,8 @@
             "name": "Noir Absolu",
             "glb": "ressac-noir-absolu.glb",
             "color_a": "#1A1A1A",
-            "color_b": "#3A3A4A"
+            "color_b": "#3A3A4A",
+            "lining": "#2B2B31"
           }
         },
         "colorway_5": {
@@ -200,92 +287,31 @@
             "name": "Crimson Flow",
             "glb": "ressac-crimson-flow.glb",
             "color_a": "#5C2032",
-            "color_b": "#C4878E"
-          }
-        },
-        "hotspot_1": {
-          "type": "hotspot",
-          "settings": {
-            "anchor": "capuche",
-            "title": "Capuche sans cordon",
-            "text": "Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d'œillets."
-          }
-        },
-        "hotspot_2": {
-          "type": "hotspot",
-          "settings": {
-            "anchor": "tirette",
-            "title": "Tirette sculptée « Kyma »",
-            "text": "En laiton plaqué or brossé : le seul éclat de la pièce."
-          }
-        },
-        "hotspot_3": {
-          "type": "hotspot",
-          "settings": {
-            "anchor": "zip",
-            "title": "Zip intégral",
-            "text": "En métal argent brossé, du col jusqu'à l'ourlet."
-          }
-        },
-        "hotspot_4": {
-          "type": "hotspot",
-          "settings": {
-            "anchor": "poches",
-            "title": "Poches biais",
-            "text": "Deux poches coupées en biais."
-          }
-        },
-        "hotspot_5": {
-          "type": "hotspot",
-          "settings": {
-            "anchor": "cotes",
-            "title": "Bords-côtes",
-            "text": "Bords-côtes 2×2 de 6 cm à la taille et aux poignets."
+            "color_b": "#C4878E",
+            "lining": "#E9D3D1"
           }
         }
       },
       "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6",
+        "step_7",
         "colorway_1",
         "colorway_2",
         "colorway_3",
         "colorway_4",
-        "colorway_5",
-        "hotspot_1",
-        "hotspot_2",
-        "hotspot_3",
-        "hotspot_4",
-        "hotspot_5"
+        "colorway_5"
       ]
-    },
-    "savoir-faire": {
-      "type": "kyma-chapter",
-      "settings": {
-        "anchor": "savoir-faire",
-        "number": "04",
-        "label": "LE SAVOIR-FAIRE",
-        "title_before": "Une matière dense, une coupe",
-        "title_em": "libre",
-        "title_after": ".",
-        "text": "French terry épais à l'intérieur gratté, épaules tombantes, zip intégral en métal brossé, capuche double épaisseur sans cordon.",
-        "cta_label": "Lire le détail de la pièce",
-        "cta_link": "/pages/nous-connaitre#savoir-faire",
-        "visual": "cloth",
-        "keywords": "",
-        "colorway": "kyma-camel",
-        "tints": false,
-        "tints_label": "",
-        "sym1": "",
-        "sym2": "",
-        "caption": "Illustration de la matière, en 3D.",
-        "flip": true,
-        "tone": "rose"
-      }
     },
     "cercle": {
       "type": "kyma-cercle-waves",
       "settings": {
         "anchor": "cercle",
-        "number": "05",
+        "number": "04",
         "label": "CERCLE WAVES",
         "title_before": "Rejoindre le",
         "title_em": "cercle",
@@ -303,7 +329,6 @@
     "drop",
     "motif",
     "piece",
-    "savoir-faire",
     "cercle"
   ]
 }

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>KYMA — L'art du flow — maquette KYMA</title>
+<title>La pièce au défilement — maquette KYMA</title>
 <!--
   Maquette AUTONOME générée depuis le thème : chaque section kyma-* est rendue depuis le VRAI fichier Liquid
-  (shopify/theme/sections) avec les réglages de shopify/theme/templates/index.json. Ressources partagées : ../theme/assets.
+  (shopify/theme/sections) avec les réglages de shopify/theme/templates//tmp/claude-0/-home-user-KYMA/c1d825b9-923a-55aa-b446-77eca2b662c3/scratchpad/v3/produit-story.json. Ressources partagées : ../theme/assets.
   En-tête, menu, pied de page et bloc d'achat = coquille de maquette (dans la boutique : Horizon).
   Aucune image : 3D temps réel (WebGL natif), tracés vectoriels, typographie. Les GLB du lecteur 360° (../3d/) se chargent
   via un petit serveur local (ex. « npx http-server shopify -p 8080 » puis /preview/produit.html) ; ouverte en double-clic,
@@ -34,7 +34,7 @@
     <nav class="kp-nav" aria-label="Menu principal">
       <ul>
         <li><a href="collection.html">Collection</a></li>
-        <li><a href="produit.html">Le produit</a></li>
+        <li><a href="produit.html" aria-current="page">Le produit</a></li>
         <li><a href="cercle-waves.html">Cercle Waves</a></li>
         <li><a href="nous-connaitre.html">Nous connaître</a></li>
         <li class="kp-nav__drop">
@@ -56,7 +56,7 @@
 <nav class="kp-panel" id="kp-panel" aria-label="Menu principal (mobile)">
   <ol>
     <li style="--i:0"><a href="collection.html">Collection</a></li>
-    <li style="--i:1"><a href="produit.html">Le produit</a></li>
+    <li style="--i:1"><a href="produit.html" aria-current="page">Le produit</a></li>
     <li style="--i:2"><a href="cercle-waves.html">Cercle Waves</a></li>
     <li style="--i:3"><a href="nous-connaitre.html">Nous connaître</a></li>
     <li style="--i:4"><a href="faq.html">Aide</a>
@@ -65,177 +65,7 @@
   </ol>
   <p class="kp-panel__foot">KYMA Paris — L'art du flow. · @kymasinsta</p>
 </nav>
-<main id="MainContent" data-template="index.json">
-<div id="shopify-section-hero" class="shopify-section kyma-section"><section
-  id="kyma-hero-hero"
-  class="kyma-hero"
-  data-kyma-hero
-  aria-labelledby="kyma-hero-title-hero"
->
-  <div class="kyma-hero__stage" data-kyma-3d-host>
-    <canvas
-      class="kyma-hero__canvas"
-      data-kyma-3d="hero"
-      data-colorway="kyma"
-      aria-hidden="true"
-    ></canvas>
-  </div>
-
-  <div class="kyma-hero__inner">
-    <div class="kyma-hero__copy"><p class="kyma-hero__label">DROP 1 — PRÉCOMMANDE</p><h1 class="kyma-hero__title" id="kyma-hero-title-hero" data-kyma-split>Une pièce, pensée pour être<br><em>unique</em>.</h1><p class="kyma-hero__sub">Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.</p><div class="kyma-hero__ctas"><a class="kyma-btn" href="collection.html" data-kyma-magnetic>
-              <span>Choisir mon coloris</span>
-              <span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
-            </a><a class="kyma-btn kyma-btn--ghost" href="#motif" data-kyma-magnetic>
-              <span>Découvrir le motif</span>
-            </a></div><p class="kyma-hero__note">Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span></p></div>
-  </div>
-
-  <p class="kyma-vh">Illustration animée : une sculpture fluide en volute, rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.</p><a class="kyma-hero__cue" href="#drop" data-kyma-cue>
-      <span>Défiler</span>
-      <svg viewBox="0 0 44 10" aria-hidden="true" focusable="false"><path d="M1 5 C6 1 10 1 15 5 S24 9 29 5 S38 1 43 5"/></svg>
-      <span class="kyma-hero__cue-line" aria-hidden="true"></span>
-    </a></section></div>
-<div id="shopify-section-drop" class="shopify-section kyma-section"><section class="kyma-sec kyma-cw" id="drop" aria-labelledby="kyma-cw-title-drop" data-kyma-colorways
-  style="--cw-a: #C8A2C8; --cw-b: #F5EDE4;">
-  <div class="kyma-sec__inner">
-    <div data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — LE DROP 1</p><h2 class="kyma-sec__title" id="kyma-cw-title-drop">Cinq coloris, un même <em>flux</em>.</h2><p class="kyma-sec__desc">Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Choisissez un coloris : le hoodie tourne devant vous, dans sa teinte.</p>
-    </div>
-
-    <div class="kyma-cw__stage">
-      <div class="kyma-cw__viz kyma-cw__viz--hoodie" data-kyma-3d-host data-kyma-reveal>
-        <canvas class="kyma-cw__slime" data-kyma-3d="hero" data-shift="0.62,-0.42" data-colorway="lilac-whirl" data-interactive="false" data-max-scale="0.45" aria-hidden="true"></canvas><canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="../3d/ressac-lilac-whirl.glb" tabindex="0" role="img"
-            data-label="Hoodie zippé oversize Ressac en 3D, coloris"
-            aria-label="Hoodie zippé oversize Ressac en 3D, coloris Lilac Whirl"></canvas>
-          <p class="kyma-cw__loading" aria-hidden="true">Chargement du modèle 3D…</p></div>
-
-      <div class="kyma-cw__panel" data-kyma-reveal style="--kd: 120ms;">
-        <p class="kyma-cw__now">
-          <span class="kyma-cw__kicker">Coloris</span>
-          <span class="kyma-cw__name" data-kyma-cw-name>Lilac Whirl</span>
-        </p>
-        <p class="kyma-cw__desc" data-kyma-cw-desc>Le lilas qui tourne, sans jamais revenir.</p>
-        <p class="kyma-vh" aria-live="polite" data-kyma-cw-live></p><ul class="kyma-cw__list" role="list" aria-label="Choisir un coloris du hoodie 3D"><li >
-                <button
-                  type="button"
-                  class="kyma-cw__opt"
-                  data-colorway="lilac-whirl"
-                  data-name="Lilac Whirl"
-                  data-desc="Le lilas qui tourne, sans jamais revenir."
-                  data-a="#C8A2C8"
-                  data-b="#F5EDE4"
-                  data-url="/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
-                  data-glb="../3d/ressac-lilac-whirl.glb"
-                  aria-pressed="true"
-                  style="--a: #C8A2C8; --b: #F5EDE4;"
-                >
-                  <span class="kyma-cw__sw" aria-hidden="true"></span>
-                  <span>Lilac Whirl</span>
-                  <span class="kyma-cw__opt-idx" aria-hidden="true">01</span>
-                </button>
-              </li><li >
-                <button
-                  type="button"
-                  class="kyma-cw__opt"
-                  data-colorway="ivory-tide"
-                  data-name="Ivory Tide"
-                  data-desc="L&#39;ivoire monte comme une marée sur le sable clair."
-                  data-a="#E8E0D8"
-                  data-b="#C5BFB8"
-                  data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
-                  data-glb="../3d/ressac-ivory-tide.glb"
-                  aria-pressed="false"
-                  style="--a: #E8E0D8; --b: #C5BFB8;"
-                >
-                  <span class="kyma-cw__sw" aria-hidden="true"></span>
-                  <span>Ivory Tide</span>
-                  <span class="kyma-cw__opt-idx" aria-hidden="true">02</span>
-                </button>
-              </li><li >
-                <button
-                  type="button"
-                  class="kyma-cw__opt"
-                  data-colorway="silver-drift"
-                  data-name="Silver Drift"
-                  data-desc="Un gris d&#39;acier qui dérive sur la perle."
-                  data-a="#8E9EAB"
-                  data-b="#C8CDD2"
-                  data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
-                  data-glb="../3d/ressac-silver-drift.glb"
-                  aria-pressed="false"
-                  style="--a: #8E9EAB; --b: #C8CDD2;"
-                >
-                  <span class="kyma-cw__sw" aria-hidden="true"></span>
-                  <span>Silver Drift</span>
-                  <span class="kyma-cw__opt-idx" aria-hidden="true">03</span>
-                </button>
-              </li><li >
-                <button
-                  type="button"
-                  class="kyma-cw__opt"
-                  data-colorway="noir-absolu"
-                  data-name="Noir Absolu"
-                  data-desc="La nuit, quand la mer ne se voit plus mais s&#39;entend."
-                  data-a="#1A1A1A"
-                  data-b="#3A3A4A"
-                  data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
-                  data-glb="../3d/ressac-noir-absolu.glb"
-                  aria-pressed="false"
-                  style="--a: #1A1A1A; --b: #3A3A4A;"
-                >
-                  <span class="kyma-cw__sw" aria-hidden="true"></span>
-                  <span>Noir Absolu</span>
-                  <span class="kyma-cw__opt-idx" aria-hidden="true">04</span>
-                </button>
-              </li><li >
-                <button
-                  type="button"
-                  class="kyma-cw__opt"
-                  data-colorway="crimson-flow"
-                  data-name="Crimson Flow"
-                  data-desc="Un cramoisi qui coule sur le bordeaux."
-                  data-a="#5C2032"
-                  data-b="#C4878E"
-                  data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
-                  data-glb="../3d/ressac-crimson-flow.glb"
-                  aria-pressed="false"
-                  style="--a: #5C2032; --b: #C4878E;"
-                >
-                  <span class="kyma-cw__sw" aria-hidden="true"></span>
-                  <span>Crimson Flow</span>
-                  <span class="kyma-cw__opt-idx" aria-hidden="true">05</span>
-                </button>
-              </li></ul><div class="kyma-cw__foot"><a class="kyma-btn" href="produit.html?variant=57613620904316" data-kyma-cw-link data-kyma-magnetic>
-              <span>Voir les coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
-            </a></div><p class="kyma-caption" data-kyma-cw-caption data-fallback="Illustration du coloris.">Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</p></div>
-    </div>
-  </div>
-  <div class="kyma-sec__mark" aria-hidden="true">01</div><script src="../theme/assets/kyma-glb.js" defer data-kyma-asset="glb"></script></section></div>
-<div id="shopify-section-motif" class="shopify-section kyma-section"><section
-  id="motif"
-  class="kyma-sec kyma-chap kyma-chap--pattern"
-  aria-labelledby="kyma-chap-motif-t"
-  data-kyma-tint-scope
-  
->
-  <div class="kyma-sec__inner kyma-chap__grid">
-    <div class="kyma-chap__text" data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">02</span> — LE MOTIF</p><h2 class="kyma-sec__title" id="kyma-chap-motif-t">Un motif qui suit son <em>flux</em>.</h2><p class="kyma-sec__desc">Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.</p><p class="kyma-chap__cta"><a class="kyma-link" href="nous-connaitre.html#motif">Découvrir le motif</a></p></div><figure class="kyma-chap__viz" data-kyma-reveal style="--kd: 150ms;"><div class="kyma-chap__stage" data-kyma-3d-host>
-            <canvas data-kyma-3d="pattern" data-colorway="lilac-whirl"  data-grain="0" aria-hidden="true"></canvas>
-          </div><div class="kyma-tints" role="group" aria-label="Teinte du motif" data-kyma-tints><button type="button" class="kyma-tints__dot" data-colorway="kyma" aria-pressed="false" style="--a: #E8C4C4; --b: #F5EDE4;">
-                  <span class="kyma-vh">KYMA</span>
-                </button><button type="button" class="kyma-tints__dot" data-colorway="lilac-whirl" aria-pressed="true" style="--a: #C8A2C8; --b: #F5EDE4;">
-                  <span class="kyma-vh">Lilac Whirl</span>
-                </button><button type="button" class="kyma-tints__dot" data-colorway="ivory-tide" aria-pressed="false" style="--a: #E8E0D8; --b: #C5BFB8;">
-                  <span class="kyma-vh">Ivory Tide</span>
-                </button><button type="button" class="kyma-tints__dot" data-colorway="silver-drift" aria-pressed="false" style="--a: #8E9EAB; --b: #C8CDD2;">
-                  <span class="kyma-vh">Silver Drift</span>
-                </button><button type="button" class="kyma-tints__dot" data-colorway="noir-absolu" aria-pressed="false" style="--a: #1A1A1A; --b: #3A3A4A;">
-                  <span class="kyma-vh">Noir Absolu</span>
-                </button><button type="button" class="kyma-tints__dot" data-colorway="crimson-flow" aria-pressed="false" style="--a: #5C2032; --b: #C4878E;">
-                  <span class="kyma-vh">Crimson Flow</span>
-                </button></div><figcaption class="kyma-caption">Illustration du coloris.</figcaption></figure></div>
-</section></div>
+<main id="MainContent" data-template="/tmp/claude-0/-home-user-KYMA/c1d825b9-923a-55aa-b446-77eca2b662c3/scratchpad/v3/produit-story.json">
 <div id="shopify-section-piece" class="shopify-section kyma-section"><link rel="stylesheet" href="../theme/assets/kyma-story.css"><section id="piece" class="kyma-story" aria-labelledby="kyma-story-piece-t"
   data-kyma-story data-three="../theme/assets/kyma-three.js" data-src="../3d/ressac-lilac-whirl.glb" data-lining="#F3EBDD"
   data-dof="true" style="--story-h: 700vh;">
@@ -275,21 +105,6 @@
   </div>
   <span id="kyma-story-piece-end" class="kyma-story__end" tabindex="-1"></span>
   <script src="../theme/assets/kyma-story.js" defer data-kyma-asset="story"></script>
-</section></div>
-<div id="shopify-section-cercle" class="shopify-section kyma-section"><section id="cercle" class="kyma-sec kyma-cercle" aria-labelledby="kyma-cw2-title-cercle" data-kyma-rings data-kyma-rings-scroll="join">
-  <div class="kyma-sec__inner">
-    <div class="kyma-cercle__head" data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">04</span> — CERCLE WAVES</p><h2 class="kyma-sec__title" id="kyma-cw2-title-cercle">Rejoindre le <em>cercle</em>.</h2><p class="kyma-sec__desc">Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.</p>
-    </div><div class="kyma-cercle__rings" data-kyma-3d-host data-kyma-reveal>
-        <canvas data-kyma-3d="rings" data-follow="false" aria-hidden="true"></canvas>
-        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--a" aria-hidden="true">INITIUM</span>
-        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--b" aria-hidden="true">MAJESTÉ</span>
-      </div><div class="kyma-cercle__cta" data-kyma-reveal>
-        <a class="kyma-btn kyma-btn--ghost" href="cercle-waves.html" data-kyma-magnetic>
-          <span>Entrer dans le Cercle</span>
-          <span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
-        </a>
-      </div></div>
 </section></div>
 </main>
 <footer class="kp-footer">

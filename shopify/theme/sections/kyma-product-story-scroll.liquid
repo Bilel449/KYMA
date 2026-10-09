@@ -1,0 +1,194 @@
+{%- comment -%}
+  KYMA — « La pièce » : présentation produit PILOTÉE PAR LE DÉFILEMENT (accueil).
+  Section épinglée très haute (réglage, 500 à 900 vh). La progression du défilement (0 → 1) pilote une timeline :
+    1 intro      apparition du hoodie (fondu, montée, rotation lente)
+    2 hood       capuche : extérieur en gros plan, puis la caméra passe à l'intérieur (doublure)
+    3 back       le dos (rotation à 180°)
+    4 pull       retour de face, zoom et mise au point sur la tirette dorée « Kyma »
+    5 zip        la tirette descend le long du zip, la caméra la suit, les panneaux s'ouvrent avec elle
+    6 open_left  sweat ouvert, intérieur à gauche : fiche composition
+    7 open_right intérieur à droite : fiche fabrication
+    8 outro      dézoom, puis en bas « Alors, qu'en dites-vous ? » + sous-titre + boutons
+  Moteur : three.js r180 (MIT) vendorisé dans assets/kyma-three.js (core + GLTFLoader + RoomEnvironment),
+  chargé en différé seulement à l'approche de la section, par assets/kyma-pstory.js.
+  Modèle : GLB des blocs « Coloris » (fichiers du thème). Contrat v2 (Izaac) : nœuds Panel_Left/Right (morph
+  « open » ou pivots), Lining_*, Hood_*, Zip_Slider/Zip_Pull, extras zipPath + poi. Repli gracieux sur le GLB v1
+  (un seul maillage) : ouverture calculée dans le shader, doublure = faces arrière teintées.
+  Accessibilité : tout le texte est du vrai texte, dans l'ordre, lisible sans la 3D ; lien « Passer la présentation » ;
+  mouvement réduit, bouton pause ou WebGL absent → section statique (texte complet + modèle immobile, ou images fixes
+  des blocs). Sans JavaScript : même rendu statique.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{{ 'kyma-pstory.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign sid = 'kyma-pstory-' | append: section.id
+  assign hid = sid | append: '-t'
+  assign p = section.settings.product
+  assign cws = section.blocks | where: 'type', 'colorway'
+  assign steps = section.blocks | where: 'type', 'step'
+  assign start_key = section.settings.default_colorway | handleize
+  assign start_glb = ''
+  assign start_lining = '#F3EBDD'
+  for block in cws
+    assign bk = block.settings.name | handleize
+    if block.settings.glb != blank
+      if start_glb == '' or bk == start_key
+        assign start_glb = block.settings.glb | asset_url
+        assign start_lining = block.settings.lining
+      endif
+    endif
+  endfor
+  assign cta_href = section.settings.cta_link | default: p.url | default: '/collections/drop-1'
+-%}
+<section id="{{ section.settings.anchor | default: sid }}" class="kyma-pstory" aria-labelledby="{{ hid }}"
+  data-kyma-pstory data-three="{{ 'kyma-three.js' | asset_url }}" data-src="{{ start_glb }}" data-lining="{{ start_lining }}"
+  data-dof="{{ section.settings.dof }}" style="--story-h: {{ section.settings.height }}vh;">
+  <a class="kyma-pstory__skip kyma-vh-focus" href="#{{ sid }}-end">{{ section.settings.skip_label | escape }}</a>
+  <div class="kyma-pstory__sticky" data-story-stage>
+    <div class="kyma-pstory__canvas" aria-hidden="true">
+      <canvas data-story-canvas></canvas>
+      <span class="kyma-pstory__focus" data-story-focus></span>
+      <p class="kyma-pstory__loading" data-story-loading>{{ section.settings.loading_label | escape }}</p>
+    </div>
+
+    <ol class="kyma-pstory__steps" role="list">
+      {%- for block in steps -%}
+        {%- liquid
+          assign rows = block.settings.spec | newline_to_br | split: '<br />'
+          assign key = block.settings.key
+          assign side = block.settings.side
+        -%}
+        <li class="kyma-pstory__step kyma-pstory__step--{{ side }}" data-step="{{ key }}" data-side="{{ side }}" {{ block.shopify_attributes }}>
+          {%- if forloop.first -%}
+            {% render 'kyma-section-head',
+              number: section.settings.number,
+              label: section.settings.label,
+              before: section.settings.title_before,
+              em: section.settings.title_em,
+              after: section.settings.title_after,
+              heading_id: hid
+            %}
+          {%- endif -%}
+          <div class="kyma-pstory__card">
+            {%- if block.settings.kicker != blank -%}<p class="kyma-pstory__kicker">{{ block.settings.kicker | escape }}</p>{%- endif -%}
+            {%- if block.settings.title != blank -%}<h3 class="kyma-pstory__h">{{ block.settings.title | escape }}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="kyma-pstory__p">{{ block.settings.text | escape }}</p>{%- endif -%}
+            {%- if block.settings.spec != blank -%}
+              <dl class="kyma-pstory__spec">
+                {%- for row in rows -%}
+                  {%- assign parts = row | split: '|' -%}
+                  {%- assign lab = parts[0] | strip -%}
+                  {%- assign val = parts[1] | strip -%}
+                  {%- if lab != blank and val != blank -%}<div><dt>{{ lab | escape }}</dt><dd>{{ val | escape }}</dd></div>{%- endif -%}
+                {%- endfor -%}
+              </dl>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.still != blank -%}
+            <div class="kyma-pstory__still">{{ block.settings.still | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 800, 1200', sizes: '(min-width: 900px) 50vw, 100vw', alt: block.settings.still_alt }}</div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+      {%- if steps.size == 0 -%}
+        <li class="kyma-pstory__step kyma-pstory__step--left" data-step="intro" data-side="left">
+          {% render 'kyma-section-head', number: section.settings.number, label: section.settings.label, before: section.settings.title_before, em: section.settings.title_em, after: section.settings.title_after, heading_id: hid %}
+        </li>
+      {%- endif -%}
+      <li class="kyma-pstory__step kyma-pstory__outro" data-step="outro">
+        <p class="kyma-pstory__final">{{ section.settings.final_title | escape }}</p>
+        {%- if section.settings.final_subtitle != blank -%}<p class="kyma-pstory__sub">{{ section.settings.final_subtitle | escape }}</p>{%- endif -%}
+        <p class="kyma-pstory__ctas">
+          {%- if section.settings.cta_label != blank -%}<a class="kyma-btn" href="{{ cta_href }}" data-kyma-magnetic><span>{{ section.settings.cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>{%- endif -%}
+          {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}<a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.cta2_link }}"><span>{{ section.settings.cta2_label | escape }}</span></a>{%- endif -%}
+        </p>
+        <p class="kyma-caption kyma-pstory__caption">{{ section.settings.caption | escape }}</p>
+      </li>
+    </ol>
+
+    {%- if cws.size > 1 and section.settings.show_picker -%}
+      <div class="kyma-pstory__tints kyma-tints kyma-tints--named" role="group" aria-label="{{ section.settings.picker_label | escape }}" data-story-tints>
+        {%- for block in cws -%}
+          {%- assign bk = block.settings.name | handleize -%}
+          {%- assign b_glb = '' -%}{%- if block.settings.glb != blank -%}{%- assign b_glb = block.settings.glb | asset_url -%}{%- endif -%}
+          <button type="button" class="kyma-tints__dot" data-colorway="{{ bk }}" data-name="{{ block.settings.name | escape }}" data-lining="{{ block.settings.lining }}"
+            {% if block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
+            aria-pressed="{% if b_glb != '' and b_glb == start_glb %}true{% else %}false{% endif %}" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
+            <span class="kyma-tints__name">{{ block.settings.name | escape }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <div class="kyma-pstory__rail" aria-hidden="true"><span data-story-bar></span></div>
+  </div>
+  <span id="{{ sid }}-end" class="kyma-pstory__end" tabindex="-1"></span>
+  <script src="{{ 'kyma-pstory.js' | asset_url }}" defer data-kyma-asset="story"></script>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Pièce au défilement",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "piece" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "text", "id": "label", "label": "Label", "default": "LA PIÈCE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Une pièce, un" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "seul" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "geste." },
+    { "type": "range", "id": "height", "label": "Longueur du défilement", "min": 500, "max": 900, "step": 50, "unit": "vh", "default": 700 },
+    { "type": "text", "id": "default_colorway", "label": "Coloris par défaut (nom d'un bloc Coloris)", "default": "Lilac Whirl" },
+    { "type": "checkbox", "id": "show_picker", "label": "Afficher le sélecteur de coloris", "default": true },
+    { "type": "checkbox", "id": "dof", "label": "Mise au point douce sur la tirette (ordinateur)", "default": true },
+    { "type": "product", "id": "product", "label": "Produit (lien du bouton si vide)" },
+    { "type": "header", "content": "Fin de la présentation" },
+    { "type": "text", "id": "final_title", "label": "Titre final", "default": "Alors, qu'en dites-vous ?" },
+    { "type": "text", "id": "final_subtitle", "label": "Sous-titre final", "default": "Êtes-vous prêt à suivre le mouvement ?" },
+    { "type": "text", "id": "cta_label", "label": "Bouton 1 — texte", "default": "Découvrir la pièce" },
+    { "type": "url", "id": "cta_link", "label": "Bouton 1 — lien (vide = produit)" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton 2 — texte", "default": "Choisir mon coloris" },
+    { "type": "url", "id": "cta2_link", "label": "Bouton 2 — lien", "default": "/collections/all" },
+    { "type": "text", "id": "caption", "label": "Mention sous la présentation", "default": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." },
+    { "type": "header", "content": "Accessibilité" },
+    { "type": "text", "id": "skip_label", "label": "Lien d'évitement", "default": "Passer la présentation de la pièce" },
+    { "type": "text", "id": "picker_label", "label": "Sélecteur de coloris — nom accessible", "default": "Coloris du modèle 3D" },
+    { "type": "text", "id": "loading_label", "label": "Texte de chargement", "default": "Chargement du modèle 3D…" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "limit": 7,
+      "settings": [
+        { "type": "select", "id": "key", "label": "Moment de la présentation", "options": [
+          { "value": "intro", "label": "1. Apparition" }, { "value": "hood", "label": "2. Capuche (extérieur puis intérieur)" },
+          { "value": "back", "label": "3. Le dos" }, { "value": "pull", "label": "4. La tirette" },
+          { "value": "zip", "label": "5. La tirette descend, le zip s'ouvre" }, { "value": "open_left", "label": "6. Intérieur, côté gauche" },
+          { "value": "open_right", "label": "7. Intérieur, côté droit" }
+        ], "default": "intro" },
+        { "type": "select", "id": "side", "label": "Texte à", "options": [ { "value": "left", "label": "Gauche" }, { "value": "right", "label": "Droite" } ], "default": "left" },
+        { "type": "text", "id": "kicker", "label": "Petit label" },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "textarea", "id": "text", "label": "Texte" },
+        { "type": "textarea", "id": "spec", "label": "Fiche (une ligne « Libellé | valeur »)", "info": "Une ligne sans valeur n'est pas affichée. Ex. : Lieu de fabrication | [À CONFIRMER : Portugal]" },
+        { "type": "image_picker", "id": "still", "label": "Image fixe (mouvement réduit)", "info": "Rendu de la 3D à cette étape, affiché seulement quand le mouvement est réduit." },
+        { "type": "text", "id": "still_alt", "label": "Image fixe — texte alternatif" }
+      ]
+    },
+    {
+      "type": "colorway",
+      "name": "Coloris 3D",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom du coloris", "default": "Lilac Whirl" },
+        { "type": "text", "id": "glb", "label": "Fichier GLB dans les fichiers du thème", "default": "ressac-lilac-whirl.glb", "info": "Modèle articulé v2 : ressac-v2-<coloris>.glb. Vide = pas de modèle pour ce coloris." },
+        { "type": "color", "id": "color_a", "label": "Nuance principale (pastille)", "default": "#C8A2C8" },
+        { "type": "color", "id": "color_b", "label": "Nuance secondaire (pastille)", "default": "#F5EDE4" },
+        { "type": "color", "id": "lining", "label": "Doublure (si le modèle n'en a pas)", "default": "#F3EBDD" }
+      ]
+    }
+  ],
+  "max_blocks": 15,
+  "presets": [ { "name": "KYMA — Pièce au défilement" } ]
+}
+{% endschema %}

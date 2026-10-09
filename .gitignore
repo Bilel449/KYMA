@@ -4,3 +4,4 @@ out/
 
 # Documents internes / confidentiels (dépôt public)
 brand/private/
+__pycache__/

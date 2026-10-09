@@ -298,6 +298,13 @@ html.kyma-js .kyma-kuma.is-tracing.is-traced path { fill: var(--kyma-ink); trans
 .kyma-tier__perks li::before { content: ''; position: absolute; left: 0; top: calc(1.1cqw + 0.7em); width: 2.6cqw; height: 1px; background: currentColor; }
 .kyma-tier__cond { margin: 1.4cqw 0 0; font-size: clamp(11px, 2.9cqw, 13px); line-height: 1.4; }
 .kyma-tier .kyma-todo { padding: 0 4px; background: rgba(251, 247, 242, 0.6); }
+/* recto = visuel de carte du fondateur (image), cadré dans le format carte ; reflet satiné (::after) conservé */
+.kyma-mc__img { position: absolute !important; inset: 0; z-index: 0 !important; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; border-radius: inherit; user-select: none; -webkit-user-drag: none; }
+.kyma-tier--fit-contain .kyma-mc__img { object-fit: contain; }
+.kyma-tier--img .kyma-flip__front { padding: 0; background: #EFE6DA; }
+.kyma-tier--img .kyma-flip__front::before { opacity: 0.04; }
+.kyma-tier__invite--img { padding: 7px 12px 7px 14px; border-radius: 999px; background: rgba(251, 247, 242, 0.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: var(--kyma-ink) !important; box-shadow: 0 6px 18px -10px rgba(74, 59, 50, 0.45); }
+.kyma-tier__note { display: block; margin-top: 0.3em; font-size: 0.86em; line-height: 1.35; font-style: italic; opacity: 0.86; }
 /* ombre portée qui respire avec la lévitation */
 .kyma-tier__shadow { position: absolute; left: 12%; right: 12%; bottom: -34px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(74, 59, 50, 0.26), rgba(74, 59, 50, 0)); pointer-events: none; animation: kyma-breathe 7.2s ease-in-out var(--fl, 0s) infinite; will-change: transform, opacity; }
 @keyframes kyma-breathe { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(0.82); opacity: 0.6; } }

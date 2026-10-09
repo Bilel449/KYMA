@@ -1,5 +1,7 @@
 {%- comment -%}
-  KYMA — Cercle Waves : deux paliers (INITIUM / MAJESTÉ) en CARTES DE MEMBRE 3D au format carte bancaire
+  KYMA — Cercle Waves : deux paliers (INITIUM / MAJESTÉ) en CARTES DE MEMBRE 3D au format carte bancaire.
+  RECTO = visuel de carte du fondateur (réglage image « Visuel de la carte », ou URL CDN de repli) ; sans image,
+  carte dessinée ci-dessous. VERSO = avantages (texte réglable) + précision « cashback » sous l'avantage concerné.
   (85,6 × 54 mm, ratio 1,585), dessinées en CSS 3D + SVG (aucune image, aucune IA) :
   INITIUM = carte beige crème, « KYMA » doré en relief, vague marbrée ton sur ton ;
   MAJESTÉ = carte gris clair, écriture dorée, léger liseré or (palier « premium »).
@@ -55,8 +57,18 @@
             if jl contains 'https://'
               assign jl_ok = true
             endif
+            assign card_src = ''
+            assign cu = block.settings.card_image_url | strip
+            if block.settings.card_image != blank
+              assign card_src = block.settings.card_image | image_url: width: 1400
+            elsif cu != blank
+              assign cu_first = cu | slice: 0, 1
+              if cu contains 'https://' or cu_first == '/' or cu_first == '.'
+                assign card_src = cu
+              endif
+            endif
           -%}
-          <li class="kyma-tier kyma-tier--{{ tone }}" data-kyma-flip style="--kd: {{ forloop.index0 | times: 140 }}ms; --fl: {{ forloop.index0 | times: -2.6 }}s;" data-ring="{{ forloop.index0 | at_most: 1 }}" {{ block.shopify_attributes }}>
+          <li class="kyma-tier kyma-tier--{{ tone }}{% if card_src != '' %} kyma-tier--img kyma-tier--fit-{{ block.settings.image_fit }}{% endif %}" data-kyma-flip style="--kd: {{ forloop.index0 | times: 140 }}ms; --fl: {{ forloop.index0 | times: -2.6 }}s;" data-ring="{{ forloop.index0 | at_most: 1 }}" {{ block.shopify_attributes }}>
             <div class="kyma-tier__card" data-kyma-reveal style="--kd: {{ forloop.index0 | times: 140 }}ms;">
               <button type="button" class="kyma-tier__hit" aria-pressed="false" aria-label="{{ block.settings.aria | escape }}"></button>
               <div class="kyma-tier__float">
@@ -64,6 +76,14 @@
                   <div class="kyma-flip__tilt">
                     <div class="kyma-flip">
                       <div class="kyma-flip__face kyma-flip__front" id="{{ face_id }}-front">
+                        {%- if card_src != '' -%}
+                        {%- comment -%} Visuel de carte du fondateur (image du recto), réutilisé tel quel. {%- endcomment -%}
+                        <img class="kyma-mc__img" src="{{ card_src }}" alt="{{ block.settings.card_alt | escape }}" width="1400" height="883" loading="lazy" decoding="async" draggable="false">
+                        <h3 class="kyma-tier__name kyma-vh">{{ block.settings.circle_label | escape }} — {{ block.settings.name | escape }}</h3>
+                        <span class="kyma-tier__invite kyma-tier__invite--img" aria-hidden="true">{{ block.settings.invite | escape }}
+                          <svg viewBox="0 0 14 14" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3"/><path d="M11 1v3H8M3 13v-3h3"/></svg>
+                        </span>
+                        {%- else -%}
                         <svg class="kyma-mc__marble" viewBox="0 0 856 540" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                           <defs>
                             <linearGradient id="{{ face_id }}-ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--mc-a)"/><stop offset="1" stop-color="var(--mc-b)"/></linearGradient>
@@ -90,6 +110,7 @@
                         <span class="kyma-tier__invite" aria-hidden="true">{{ block.settings.invite | escape }}
                           <svg viewBox="0 0 14 14" focusable="false"><path d="M2 7a5 5 0 0 1 9-3M12 7a5 5 0 0 1-9 3"/><path d="M11 1v3H8M3 13v-3h3"/></svg>
                         </span>
+                      {%- endif -%}
                       </div>
                       <div class="kyma-flip__face kyma-flip__back" id="{{ face_id }}-back" aria-hidden="true" inert>
                         <span class="kyma-mc__rim" aria-hidden="true"></span>
@@ -98,7 +119,14 @@
                         <ul class="kyma-tier__perks" role="list">
                           {%- for perk in perk_lines -%}
                             {%- assign perk_clean = perk | strip -%}
-                            {%- if perk_clean != blank -%}<li>{{ perk_clean | escape }}</li>{%- endif -%}
+                            {%- if perk_clean != blank -%}
+                              {%- assign perk_l = perk_clean | downcase -%}
+                              <li>{{ perk_clean | escape }}
+                                {%- if block.settings.cashback_note != blank -%}
+                                  {%- if perk_l contains 'cashback' or perk_l contains 'crédit' -%}<small class="kyma-tier__note">{{ block.settings.cashback_note | escape }}</small>{%- endif -%}
+                                {%- endif -%}
+                              </li>
+                            {%- endif -%}
                           {%- endfor -%}
                         </ul>
                         {%- if block.settings.condition != blank -%}
@@ -181,10 +209,15 @@
         { "type": "text", "id": "name", "label": "Nom du palier", "default": "INITIUM" },
         { "type": "text", "id": "circle_label", "label": "Mention avant le nom", "default": "Cercle Waves" },
         { "type": "text", "id": "lead", "label": "Accroche (recto)", "default": "L'entrée dans le cercle." },
+        { "type": "image_picker", "id": "card_image", "label": "Visuel de la carte (recto)", "info": "Image de carte de membre. Prioritaire sur l'URL ci-dessous. Vide + URL vide = carte dessinée." },
+        { "type": "text", "id": "card_image_url", "label": "Visuel de la carte — URL de repli (CDN Shopify)", "info": "Utilisée si aucune image n'est choisie ci-dessus. Ex. https://cdn.shopify.com/s/files/…" },
+        { "type": "text", "id": "card_alt", "label": "Visuel de la carte — texte alternatif", "default": "Carte de membre INITIUM du Cercle Waves" },
+        { "type": "select", "id": "image_fit", "label": "Visuel — cadrage", "options": [ { "value": "cover", "label": "Remplir la carte (recadre)" }, { "value": "contain", "label": "Image entière" } ], "default": "cover" },
         { "type": "select", "id": "tone", "label": "Carte", "options": [ { "value": "initium", "label": "Beige crème, écriture dorée (INITIUM)" }, { "value": "majeste", "label": "Gris clair, écriture dorée, liseré or (MAJESTÉ)" } ], "default": "initium" },
         { "type": "text", "id": "invite", "label": "Invite au recto", "default": "Retourner" },
         { "type": "text", "id": "back_label", "label": "Verso — intitulé", "default": "AVANTAGES" },
         { "type": "textarea", "id": "perks", "label": "Avantages (un par ligne)", "default": "[À COMPLÉTER : avantage 1]\n[À COMPLÉTER : avantage 2]" },
+        { "type": "text", "id": "cashback_note", "label": "Précision sous l'avantage cashback / crédit", "default": "Versé en crédit KYMA sur vos prochains achats." },
         { "type": "text", "id": "condition", "label": "Condition d'accès (verso)", "default": "Condition d'accès : [À COMPLÉTER]" },
         { "type": "text", "id": "price", "label": "Prix (texte libre)", "default": "12,99 €", "info": "Montant affiché tel quel, TTC." },
         { "type": "text", "id": "price_period", "label": "Période", "default": "par trimestre, TTC" },
