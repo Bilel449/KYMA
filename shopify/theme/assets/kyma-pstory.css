@@ -99,7 +99,8 @@
   .kyma-pstory.is-live .kyma-pstory__final { font-size: clamp(32px, 9vw, 44px); }
   .kyma-pstory.is-live .kyma-pstory__ctas { margin-top: 18px; }
   .kyma-pstory.is-live .kyma-pstory__ctas .kyma-btn { flex: 1 1 auto; }
-  .kyma-pstory.is-live .kyma-pstory__tints { top: calc(var(--kyma-header-h) + 10px); bottom: auto; right: 50%; transform: translateX(50%); }
+  .kyma-pstory.is-live .kyma-pstory__tints { top: calc(var(--kyma-header-h) + 10px); bottom: auto; left: 50%; right: auto; transform: translateX(-50%); flex-wrap: nowrap; }
+  .kyma-pstory.is-live .kyma-pstory__tints.kyma-tints--named .kyma-tints__dot { min-width: 38px; min-height: 38px; padding: 4px; }
   .kyma-pstory.is-live .kyma-pstory__rail { top: auto; bottom: auto; right: 10px; height: 80px; margin-top: -40px; top: 46%; }
 }
 

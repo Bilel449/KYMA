@@ -245,7 +245,7 @@ def top_curve(back, n=600):
     return polyline_resample(P, n)
 
 
-def body_half(back, ns=260, nt=300, ns_out=72, nt_out=150):
+def body_half(back, ns=260, nt=300, ns_out=48, nt_out=108):
     """Demi-panneau (x >= 0) : nappe de Coons (x, y) + profondeur z. Renvoie grille (nt, ns, C)
     avec canaux : x, y, z, s, t, dist_haut."""
     s = np.linspace(0, 1, ns)
@@ -352,7 +352,7 @@ def polyline_at(P, f):
     return np.stack([np.interp(f, cum, P[:, k]) for k in range(3)], 1)
 
 
-def sleeve_grid(Gf, Gb, nphi=72, nv=120):
+def sleeve_grid(Gf, Gb, nphi=56, nv=96):
     """Manche gauche (+X). Grille (nv, nphi+1, C) : x,y,z, phi, v. Couture sous le bras (phi = pi)."""
     phi = np.pi + np.linspace(0, 2 * np.pi, nphi + 1)
     A = armhole_loop(Gf, Gb, nphi)(phi)
@@ -400,12 +400,15 @@ def sleeve_grid(Gf, Gb, nphi=72, nv=120):
 # --------------------------------------------------------------------------------------
 # Capuche
 # --------------------------------------------------------------------------------------
-HC = np.array([0.0, 0.762, -0.062])
-HR = np.array([0.150, 0.128, 0.158])
+HC = np.array([0.0, 0.742, -0.050])
+HR = np.array([0.150, 0.150, 0.146])
+
+
+HP = 2.7   # exposant de superellipsoïde : flancs de capuche plus plats, base plus large
 
 
 def r_ell(d):
-    return 1.0 / np.sqrt(np.sum((d / HR[None]) ** 2, axis=1))
+    return np.sum(np.abs(d / HR[None]) ** HP, axis=1) ** (-1.0 / HP)
 
 
 def slerp(a, b, f):
@@ -420,7 +423,7 @@ def slerp(a, b, f):
     return nrm(w1 * a + w2 * b)
 
 
-def hood_grid(na=110, nb=64):
+def hood_grid(na=84, nb=52):
     """Capuche (2 panneaux) : rangée b (0 = encolure, 1 = sommet de l'ouverture F), colonne a
     (0 = arête d'ouverture droite, 0.5 = couture milieu, 1 = arête gauche)."""
     # arête d'ouverture (côté droit, -X), de l'encolure au front F
@@ -721,7 +724,7 @@ def apply_disp(G, d, flip_ref):
 # --------------------------------------------------------------------------------------
 # Bords-côtes 2×2 (taille et poignets) : profil plié, côtes en relief
 # --------------------------------------------------------------------------------------
-RIB_P = 0.0090   # période d'une côte 2×2 (2 mailles endroit + 2 envers)
+RIB_P = 0.0110   # période d'une côte 2×2 (2 mailles endroit + 2 envers)
 
 
 def rib_profile(height, inset, depth=0.0056, r=0.0028):
@@ -748,6 +751,8 @@ def rib_wave(ulen):
 def hem_band(ring):
     """ring : (n, 3) bas du corps (y = Y0), de la lisière droite (milieu devant) à la gauche.
     Renvoie la grille (nprof, nu, 3) et ses coordonnées (ulen, h)."""
+    ring = polyline_resample(ring, 400)
+    ring = np.concatenate([ring[:1], ndimage.gaussian_filter1d(ring, 3, axis=0, mode="nearest")[1:-1], ring[-1:]])
     L = np.sum(np.linalg.norm(np.diff(ring, axis=0), axis=1))
     nu = 4 * int(round(L / RIB_P)) + 1
     R = polyline_resample(ring, nu)
@@ -856,8 +861,8 @@ def zip_parts(path):
         P, X, Y, Z = at(ss, path), nrm(at(ss, ex)), nrm(at(ss, ey)), nrm(at(ss, ez))
         TV, TF = [], []
         for k in range(len(ss)):
-            c = P[k] + X[k] * sg * 0.0018
-            v, f = box(c, X[k] * sg, Y[k], Z[k], 0.0035, 0.00205, 0.00125, taper=0.72)
+            c = P[k] + X[k] * sg * 0.0011
+            v, f = box(c, X[k] * sg, Y[k], Z[k], 0.0028, 0.00195, 0.00120, taper=0.80)
             TF.append(f + len(TV) * 8)
             TV.append(v)
         V = np.concatenate(TV)
@@ -876,7 +881,7 @@ def zip_parts(path):
         # ruban : sous les dents, de 0.8 mm à 13.5 mm du milieu
         n = len(path)
         a = path + ex * sg * 0.0008 - ez * 0.0010
-        b = path + ex * sg * 0.0135 - ez * 0.0012
+        b = path + ex * sg * 0.0088 - ez * 0.0012
         a2, b2 = a - ez * 0.0008, b - ez * 0.0008
         G = np.stack([a2, a, b, b2], 0)            # (4, n, 3) section fermée par les bouts
         V = G.reshape(-1, 3)
@@ -1073,7 +1078,7 @@ def pull_mesh(font_path):
     txt = text_polygons("Kyma", font_path)
     minx, miny, maxx, maxy = txt.bounds
     # lecture de haut en bas : rotation -90°, mise à l'échelle sur la largeur utile
-    txt = affinity.rotate(txt, -90, origin=(0, 0))
+    txt = affinity.rotate(txt, 90, origin=(0, 0))
     minx, miny, maxx, maxy = txt.bounds
     sc = min(0.0074 / (maxx - minx), 0.024 / (maxy - miny))
     txt = affinity.scale(txt, sc, sc, origin=(0, 0))
@@ -1090,13 +1095,13 @@ def pull_mesh(font_path):
 # --------------------------------------------------------------------------------------
 # Motif KYMA Wave : marbrure à tourbillons (volutes) évaluée dans le volume au repos
 # --------------------------------------------------------------------------------------
-def make_vortices(surface_pts, seed, n=46):
+def make_vortices(surface_pts, seed, n=72):
     rng = np.random.default_rng(seed)
     idx = rng.choice(len(surface_pts), n, replace=False)
     C = surface_pts[idx]
     axis = nrm(np.stack([C[:, 0], np.zeros(n), C[:, 2] - np.where(C[:, 1] > 0.66, -0.06, 0.0)], 1) + 1e-6)
-    R = rng.uniform(0.045, 0.105, n)
-    A = rng.choice([-1, 1], n) * rng.uniform(1.8, 3.6, n)
+    R = rng.uniform(0.040, 0.095, n)
+    A = rng.choice([-1, 1], n) * rng.uniform(2.6, 4.6, n)
     return C, axis, R, A
 
 
@@ -1113,7 +1118,7 @@ def kyma_wave(P, vort, seed):
     nz = Perlin(seed)
     flow = nrm(np.array([0.42, 0.88, 0.22]))
     f = Q @ flow + 0.055 * fbm(nz, Q * 3.2, 3)
-    band = np.sin(2 * np.pi * f / 0.105)
+    band = np.sin(2 * np.pi * f / 0.095)
     grain = 0.18 * fbm(nz, Q * 22.0 + 9.0, 2)
     m = smoothstep(-0.62, 0.62, band + grain)          # bords « aérographe »
     return m
@@ -1203,16 +1208,19 @@ def shoulder_y(ax):
     return np.where(ax < NW, Y_SNP, Y_SNP - (Y_SNP - Y_SP) * np.clip((ax - NW) / (W_SH - NW), 0, 1) ** 1.18)
 
 
-def open_field(P, sigma=None):
+def open_field(P, sigma=None, rest=None):
     """Position ouverte (open = 1) : chaque demi-devant pivote autour de la couture de côté,
-    d'autant plus qu'on s'éloigne du côté et du haut de l'épaule (le tissu se plie, pas de trou)."""
+    d'autant plus qu'on s'éloigne du côté et du haut de l'épaule (le tissu se plie, pas de trou).
+    rest : positions au repos servant aux poids (si P est déjà déformé par le revers)."""
     P = np.asarray(P, np.float64)
+    W = P if rest is None else np.asarray(rest, np.float64)
+    x0, y0_, z0 = W[:, 0], W[:, 1], W[:, 2]
     x, y, z = P[:, 0], P[:, 1], P[:, 2]
-    sg = np.sign(x) if sigma is None else np.full(len(P), float(sigma))
+    sg = np.sign(x0) if sigma is None else np.full(len(P), float(sigma))
     sg[sg == 0] = 1
-    ax = sg * x
-    w = (smoothstep(PIVOT_X, PIVOT_X * 0.42, ax) * smoothstep(0.0, 0.11, shoulder_y(np.abs(x)) - y)
-         * smoothstep(-0.03, 0.02, z))
+    ax = sg * x0
+    w = (smoothstep(PIVOT_X, PIVOT_X * 0.42, ax) * smoothstep(0.0, 0.20, shoulder_y(np.abs(x0)) - y0_)
+         * smoothstep(-0.03, 0.02, z0))
     g = sg * BETA * w
     rx, rz = x - sg * PIVOT_X, z
     xo = rx * np.cos(g) + rz * np.sin(g)
@@ -1221,7 +1229,7 @@ def open_field(P, sigma=None):
     out = P.copy()
     out[:, 0] = xo + sg * PIVOT_X
     out[:, 2] = zo
-    out[:, 1] -= 0.006 * w * smoothstep(0.5, 0.1, y)
+    out[:, 1] -= 0.006 * w * smoothstep(0.5, 0.1, y0_)
     return out
 
 
@@ -1239,7 +1247,7 @@ def fold_field(P, zf_table, sigma=None):
     s = xf - sg * x
     zf = np.interp(y, zf_table[0], zf_table[1])
     h = z - zf
-    tm = FOLD_MAX * smoothstep(0.60, 0.40, y)
+    tm = FOLD_MAX * smoothstep(0.62, 0.42, y) * smoothstep(0.075, 0.24, y)
     act = (s > 0) & (z > -0.03)
     th = np.minimum(np.maximum(s, 0) / FOLD_R, tm)
     rest = np.maximum(s - FOLD_R * tm, 0)
@@ -1323,7 +1331,7 @@ class GLB:
         a = np.ascontiguousarray(F, it).reshape(-1)
         return self.acc({"bufferView": self.view(a.tobytes(), 34963), "componentType": ct, "count": len(a), "type": "SCALAR"})
 
-    def sparse(self, D, kind, quant_i8=False, minmax=False):
+    def sparse(self, D, kind, quant_i8=False, minmax=False, quant_i16=False):
         """Accesseur de morph target creux (seuls les sommets déplacés sont stockés)."""
         D = np.asarray(D, np.float64)
         n = len(D)
@@ -1331,16 +1339,27 @@ class GLB:
         a = {"count": n, "type": kind}
         if quant_i8:
             a.update({"componentType": 5120, "normalized": True})
+        elif quant_i16:
+            a.update({"componentType": 5122, "normalized": True})
         else:
             a["componentType"] = 5126
         if minmax:
-            a["min"] = [float(v) for v in (D.min(0) if n else [0, 0, 0])]
-            a["max"] = [float(v) for v in (D.max(0) if n else [0, 0, 0])]
+            Dz = np.zeros_like(D, dtype=np.float32)
+            if quant_i16:
+                Dz[nz] = np.clip(np.round(D[nz] * 32767), -32767, 32767)
+                a["min"] = [int(v) for v in Dz.min(0)]
+                a["max"] = [int(v) for v in Dz.max(0)]
+            else:
+                Dz[nz] = D[nz].astype(np.float32)
+                a["min"] = [float(v) for v in Dz.min(0)]
+                a["max"] = [float(v) for v in Dz.max(0)]
         if len(nz):
             it, ct = (np.uint16, 5123) if n < 65535 else (np.uint32, 5125)
             iv = self.view(np.ascontiguousarray(nz, it).tobytes())
             if quant_i8:
                 vals = np.clip(np.round(D[nz] * 127), -127, 127).astype(np.int8)
+            elif quant_i16:
+                vals = np.clip(np.round(D[nz] * 32767), -32767, 32767).astype(np.int16)
             else:
                 vals = D[nz].astype(np.float32)
             vv = self.view(np.ascontiguousarray(vals).tobytes())
@@ -1453,7 +1472,7 @@ def pocket_parts(sampler, sigma):
     uv0, uv1 = S[..., 4:6], S[..., 6:8]
     # hauteur du passepoil : arête franche côté fente, couture à plat côté milieu
     cc = Cg
-    h = np.where(cc < 0, 0.0005, 0.0026 * smoothstep(-0.02, 0.10, cc) * smoothstep(1.0, 0.80, cc) + 0.0004)
+    h = np.where(cc < 0, 0.0005, 0.0036 * smoothstep(-0.02, 0.10, cc) * smoothstep(1.0, 0.80, cc) + 0.0004)
     h = h * (0.75 + 0.25 * smoothstep(0, 0.06, Lg) * smoothstep(1, 0.94, Lg))
     G = P + N * h[..., None]
     welt = G[1:]
@@ -1491,11 +1510,10 @@ def build_geometry(font_path, verbose=True):
     for k, (G, fn, ref) in grids.items():
         d = fn(G)
         if ref is None:
-            ax = sleeve_axis(np.clip(G[..., 4], 0, 1).reshape(-1))
+            ax = sleeve_axis(np.linspace(-0.6, 1.0, 400))
             if k == "Sleeve_Right":
                 ax[:, 0] *= -1
-            Vr = G[..., :3].reshape(-1, 3)
-            ref = (lambda A: (lambda V: nrm(V - A)))(ax)
+            ref = (lambda A, T: (lambda V: nrm(V - A[T.query(V)[1]])))(ax, cKDTree(ax))
             grids[k] = (G, fn, ref)
         disp[k] = d
         G2 = apply_disp(G, d, ref)
@@ -1549,6 +1567,8 @@ def finish_geometry(geo, S=2048):
     for k in names:
         G = g[k]["G"][..., :3]
         ulen, vlen = arc_coords(G)
+        if "ulen" in g[k]:                     # bords-côtes : abscisse lisse (sans le relief des côtes)
+            ulen = np.tile(g[k]["ulen"][None], (G.shape[0], 1))
         g[k]["ul"], g[k]["vl"] = ulen, vlen
         sizes.append((float(np.mean(ulen[:, -1])), float(np.mean(vlen[-1, :]))))
     dens, rects = pack_atlas(sizes, S)
@@ -1669,3 +1689,303 @@ def bake_atlas(geo, col, verbose=True):
     _, (iy, ix) = ndimage.distance_transform_edt(~mask, return_indices=True)
     img = img[iy, ix]
     return Image.fromarray((np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8))
+
+
+# --------------------------------------------------------------------------------------
+# Export d'un coloris : matériaux, nœuds, morph targets, animation, extras
+# --------------------------------------------------------------------------------------
+TARGETS = ["open", "open_fold", "unzip_1", "unzip_2", "unzip_3", "unzip_4"]
+MAT = {"fabric": 0, "lining": 1, "zip": 2, "brass": 3, "tape": 4, "pocket": 5}
+
+
+def fold_table(geo):
+    g = geo["grids"]
+    xf = XG + FOLD_W
+    pts = np.concatenate([g["Panel_Left"]["G"][..., :3].reshape(-1, 3), g["Hem"]["G"][:4].reshape(-1, 3)])
+    pts = pts[(np.abs(pts[:, 0] - xf) < 0.008) & (pts[:, 2] > 0)]
+    ys = np.linspace(-0.01, 0.72, 147)
+    zs = []
+    for y in ys:
+        m = np.abs(pts[:, 1] - y) < 0.01
+        zs.append(pts[m, 2].max() if m.any() else np.nan)
+    zs = np.array(zs)
+    ok = ~np.isnan(zs)
+    zs = np.interp(ys, ys[ok], zs[ok])
+    return ys, ndimage.gaussian_filter1d(zs, 2, mode="nearest")
+
+
+def frame_after(fn, p, q, eps=0.002):
+    """Position et quaternion d'un repère (p, q) transporté par un champ de déformation fn."""
+    ex, ey, ez = quat_rotate(q, np.array([1.0, 0, 0])), quat_rotate(q, np.array([0, 1.0, 0])), quat_rotate(q, np.array([0, 0, 1.0]))
+    P = np.array([p, p + ex * eps, p + ey * eps, p + ez * eps])
+    D = fn(P)
+    a, b = nrm(D[1] - D[0]), nrm(D[2] - D[0])
+    c = nrm(np.cross(a, b))
+    b = nrm(np.cross(c, a))
+    return D[0], quat_from_frame(a, b, c)
+
+
+def build_layout(geo, nodes):
+    """Calcule une fois (indépendant du coloris) : nœuds, morphs, chemin du zip, animation."""
+    path = geo["zip_path"]
+    seg = np.linalg.norm(np.diff(path, axis=0), axis=1)
+    cum = np.concatenate([[0], np.cumsum(seg)])
+    ex, ey, ez = frames_on_path(path)
+    s_top, s_bot = 0.0105, cum[-1] - 0.0125
+    ss = np.linspace(s_top, s_bot, 41)
+    at = lambda A: np.stack([np.interp(ss, cum, A[:, k]) for k in range(3)], 1)
+    zp, X, Y, Z = at(path), nrm(at(ex)), nrm(at(ey)), nrm(at(ez))
+    zq = np.array([quat_from_frame(X[i], Y[i], Z[i]) for i in range(len(ss))])
+    zip_top, zip_len = float(zp[0, 1]), float(zp[0, 1] - zp[-1, 1])
+    ft = fold_table(geo)
+    fields = {
+        "open": lambda V, sg: open_field(V, sg),
+        "open_fold": lambda V, sg: open_field(fold_field(V, ft, sg), sg, rest=V) - open_field(V, sg) + V,
+    }
+    for k in range(4):
+        fields[f"unzip_{k + 1}"] = (lambda k: (lambda V, sg: unzip_field(V, k, zip_top, zip_len, sg)))(k)
+    # curseur ouvert (reste sur le côté droit du porteur)
+    so_p, so_q = frame_after(lambda P: open_field(P, -1), zp[-1], zq[-1])
+    sf_p, sf_q = frame_after(lambda P: open_field(fold_field(P, ft, -1), -1, rest=P), zp[-1], zq[-1])
+    layout = {
+        "zipPath": zp, "zipPathQuat": zq, "zipTop": zip_top, "zipLen": zip_len,
+        "sliderOpen": (so_p, so_q), "sliderOpenFold": (sf_p, sf_q), "fields": fields,
+    }
+    # nœuds : (nom, parent, primitives, sigma, morph?)
+    L = [("Body_Back", None, nodes["Body_Back"], None),
+         ("Panel_Left", None, [nodes["Panel_Left"][0]], 1), ("Lining_Left", "Panel_Left", [nodes["Panel_Left"][1]], 1),
+         ("Pocket_Left", "Panel_Left", nodes["Pocket_Left"], 1), ("Zip_Teeth_Left", "Panel_Left", list(geo["zip"][1]), 1),
+         ("Panel_Right", None, [nodes["Panel_Right"][0]], -1), ("Lining_Right", "Panel_Right", [nodes["Panel_Right"][1]], -1),
+         ("Pocket_Right", "Panel_Right", nodes["Pocket_Right"], -1), ("Zip_Teeth_Right", "Panel_Right", list(geo["zip"][-1]), -1),
+         ("Hood_Outer", None, [nodes["Hood"][0]], None), ("Hood_Inner", None, [nodes["Hood"][1]], None),
+         ("Sleeve_Left", None, nodes["Sleeve_Left"], 1), ("Sleeve_Right", None, nodes["Sleeve_Right"], -1),
+         ("Cuff_Left", None, nodes["Cuff_Left"], 1), ("Cuff_Right", None, nodes["Cuff_Right"], -1),
+         ("Hem", None, nodes["Hem"], None)]
+    out = []
+    for name, parent, prims, sg in L:
+        morphs = []
+        mx = 0.0
+        for m in prims:
+            ds = {}
+            for t in TARGETS:
+                Vd = fields[t](m.V, sg)
+                dP = Vd - m.V
+                mx = max(mx, float(np.abs(dP).max()))
+                dN = None
+                if t in ("open", "open_fold"):
+                    base = m.V if t == "open" else open_field(m.V, sg)
+                    tgt = open_field(m.V, sg) if t == "open" else Vd
+                    dN = np.clip(vertex_normals(tgt, m.F) - vertex_normals(base, m.F), -1, 1)
+                ds[t] = (dP, dN)
+            morphs.append(ds)
+        use = mx > 2.5e-3
+        out.append({"name": name, "parent": parent, "prims": prims, "sigma": sg, "morphs": morphs if use else None,
+                    "maxdisp": mx})
+    layout["nodes"] = out
+    return layout
+
+
+def export_glb(path, col, geo, layout, atlas_img, knit_img):
+    g = GLB()
+    tex_atlas = g.texture(g.image(atlas_img, quality=84), 33071)
+    tex_knit = g.texture(g.image(knit_img, quality=90), 10497)
+    # échelle des UV de maille quantifiées
+    lmax = 0.0
+    for nd in layout["nodes"]:
+        for m in nd["prims"]:
+            if m.UV1 is not None and m.material in ("fabric", "lining"):
+                lmax = max(lmax, float(np.max(m.UV1)))
+    lmax = math.ceil(lmax * 100) / 100 + 0.01
+    ksc = lmax / KNIT_TILE
+    tt = {"KHR_texture_transform": {"scale": [ksc, ksc]}}
+    A, B = hex_rgb(col["a"]), hex_rgb(col["b"])
+    lin = srgb_to_lin(hex_rgb(col["lining"]))
+    tape = srgb_to_lin(B) * 0.82
+    pocket = srgb_to_lin(0.5 * (A + B)) * 0.10
+    g.g["materials"] = [
+        {"name": f"Molleton KYMA Wave — {col['name']}", "pbrMetallicRoughness": {
+            "baseColorTexture": {"index": tex_atlas, "texCoord": 0}, "metallicFactor": 0.0, "roughnessFactor": 0.86},
+         "normalTexture": {"index": tex_knit, "texCoord": 1, "scale": 0.55, "extensions": tt}},
+        {"name": f"Doublure jersey ton sur ton — {col['name']}", "pbrMetallicRoughness": {
+            "baseColorFactor": [*map(float, lin), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.92},
+         "normalTexture": {"index": tex_knit, "texCoord": 0, "scale": 0.45, "extensions": tt}},
+        {"name": "Zip métal argent brossé", "pbrMetallicRoughness": {
+            "baseColorFactor": [0.74, 0.75, 0.77, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.42}},
+        {"name": "Tirette Kyma laiton doré", "pbrMetallicRoughness": {
+            "baseColorFactor": [0.95, 0.76, 0.42, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.26}},
+        {"name": "Ruban de zip", "pbrMetallicRoughness": {
+            "baseColorFactor": [*map(float, tape), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.9}},
+        {"name": "Fond de poche", "pbrMetallicRoughness": {
+            "baseColorFactor": [*map(float, pocket), 1.0], "metallicFactor": 0.0, "roughnessFactor": 1.0}},
+    ]
+    nodes_js = g.g["nodes"]
+    index = {}
+
+    def add_mesh(name, prims, morphs, offset):
+        P = []
+        for pi, m in enumerate(prims):
+            V = m.V - offset[None]
+            attrs = {"POSITION": g.f32(V, "VEC3", minmax=True), "NORMAL": g.normals_i8(m.N)}
+            if m.material == "fabric":
+                attrs["TEXCOORD_0"] = g.uv_u16(np.clip(m.UV0, 0, 1))
+                attrs["TEXCOORD_1"] = g.uv_u16(np.clip(m.UV1, 0, None), lmax)
+            elif m.material == "lining":
+                attrs["TEXCOORD_0"] = g.uv_u16(np.clip(m.UV1, 0, None), lmax)
+            prim = {"attributes": attrs, "indices": g.indices(m.F, len(V)), "material": MAT[m.material], "mode": 4}
+            if morphs:
+                tl = []
+                for t in TARGETS:
+                    dP, dN = morphs[pi][t]
+                    tgt = {"POSITION": g.sparse(dP, "VEC3", minmax=True, quant_i16=True)}
+                    if dN is not None:
+                        tgt["NORMAL"] = g.sparse(dN, "VEC3", quant_i8=True)
+                    else:
+                        tgt["NORMAL"] = g.acc({"componentType": 5120, "normalized": True, "count": len(V), "type": "VEC3"})
+                    tl.append(tgt)
+                prim["targets"] = tl
+            P.append(prim)
+        mesh = {"name": name, "primitives": P}
+        if morphs:
+            mesh["extras"] = {"targetNames": TARGETS}
+        g.g["meshes"].append(mesh)
+        return len(g.g["meshes"]) - 1
+
+    root = {"name": "KYMA_Hoodie", "children": []}
+    nodes_js.append(root)
+    index["KYMA_Hoodie"] = 0
+    for nd in layout["nodes"]:
+        sg = nd["sigma"]
+        pivoted = nd["name"].startswith(("Panel_", "Lining_", "Pocket_", "Zip_Teeth_"))
+        off = np.array([sg * PIVOT_X, 0, 0]) if pivoted else np.zeros(3)
+        mi = add_mesh(nd["name"], nd["prims"], nd["morphs"], off)
+        js = {"name": nd["name"], "mesh": mi}
+        if nd["morphs"]:
+            js["weights"] = [0.0] * len(TARGETS)
+        if nd["name"].startswith("Panel_"):
+            js["translation"] = [float(v) for v in off]
+            js["extras"] = {"hinge": "origine du nœud = couture de côté ; rotation Y possible mais préférer le morph `open`"}
+        nodes_js.append(js)
+        index[nd["name"]] = len(nodes_js) - 1
+        parent = index[nd["parent"]] if nd["parent"] else 0
+        nodes_js[parent].setdefault("children", []).append(index[nd["name"]])
+    # curseur + tirette
+    zp, zq = layout["zipPath"], layout["zipPathQuat"]
+    mi = add_mesh("Zip_Slider", [geo["slider"]], None, np.zeros(3))
+    slider = {"name": "Zip_Slider", "mesh": mi, "translation": [float(v) for v in zp[0]],
+              "rotation": [float(v) for v in zq[0]],
+              "extras": {"zipPath": [[round(float(c), 5) for c in p] for p in zp],
+                         "zipPathQuat": [[round(float(c), 6) for c in q] for q in zq]}}
+    nodes_js.append(slider)
+    index["Zip_Slider"] = len(nodes_js) - 1
+    root["children"].append(index["Zip_Slider"])
+    mi = add_mesh("Zip_Pull", [geo["pull"]], None, np.zeros(3))
+    tilt = -math.radians(12)
+    nodes_js.append({"name": "Zip_Pull", "mesh": mi, "translation": [float(v) for v in geo["pull_pivot"]],
+                     "rotation": [math.sin(tilt / 2), 0.0, 0.0, math.cos(tilt / 2)],
+                     "extras": {"description": "Tirette « Kyma » (laiton doré), pivote autour de X sur l'anse du curseur"}})
+    index["Zip_Pull"] = len(nodes_js) - 1
+    nodes_js[index["Zip_Slider"]]["children"] = [index["Zip_Pull"]]
+    g.g["scenes"][0]["nodes"] = [0]
+    # animation ZipOpen : 0–3 s curseur + V, 3–5 s ouverture, 5–6 s revers
+    times = np.round(np.arange(0, 6.0001, 0.05), 4)
+    W = np.zeros((len(times), len(TARGETS)))
+    Tr, Rt = [], []
+    so_p, so_q = layout["sliderOpen"]
+    sf_p, sf_q = layout["sliderOpenFold"]
+    for i, t in enumerate(times):
+        s = min(t / 3.0, 1.0)
+        k = 4 * s
+        for j in range(4):
+            W[i, 2 + j] = max(0.0, 1 - abs(k - (j + 1))) if k < 4 else (1.0 if j == 3 else 0.0)
+        o = float(np.clip((t - 3.0) / 2.0, 0, 1))
+        o = o * o * (3 - 2 * o)
+        f = float(np.clip(t - 5.0, 0, 1))
+        f = f * f * (3 - 2 * f)
+        W[i, 0], W[i, 1] = o, f
+        W[i, 5] *= (1 - o)
+        z = s * (len(zp) - 1)
+        a = min(int(z), len(zp) - 2)
+        fr = z - a
+        p = zp[a] * (1 - fr) + zp[a + 1] * fr
+        q = slerp(zq[a][None], zq[a + 1][None], fr)[0]
+        if o > 0:
+            p = p * (1 - o) + so_p * o
+            q = slerp(q[None], so_q[None], o)[0]
+        if f > 0:
+            p = p * (1 - f) + sf_p * f
+            q = slerp(q[None], sf_q[None], f)[0]
+        Tr.append(p)
+        Rt.append(q)
+    tin = g.acc({"bufferView": g.view(times.astype(np.float32).tobytes()), "componentType": 5126, "count": len(times),
+                 "type": "SCALAR", "min": [0.0], "max": [float(times[-1])]})
+    samplers, channels = [], []
+    def chan(node, pathname, data, kind):
+        a = g.acc({"bufferView": g.view(np.ascontiguousarray(data, np.float32).tobytes()), "componentType": 5126,
+                   "count": len(data) if kind != "SCALAR" else data.size, "type": kind})
+        samplers.append({"input": tin, "output": a, "interpolation": "LINEAR"})
+        channels.append({"sampler": len(samplers) - 1, "target": {"node": node, "path": pathname}})
+    chan(index["Zip_Slider"], "translation", np.array(Tr), "VEC3")
+    chan(index["Zip_Slider"], "rotation", np.array(Rt), "VEC4")
+    morph_nodes = [nd["name"] for nd in layout["nodes"] if nd["morphs"]]
+    for n in morph_nodes:
+        chan(index[n], "weights", W.reshape(-1), "SCALAR")
+    g.g["animations"] = [{"name": "ZipOpen", "samplers": samplers, "channels": channels}]
+    root["extras"] = {
+        "kyma": "Hoodie zippé oversize Ressac v2 — " + col["name"],
+        "units": "m", "up": "+Y", "front": "+Z", "hemBottomY": 0.0,
+        "left": "Left = gauche du porteur = +X (à droite de l'écran en vue de face)",
+        "zipPath": slider["extras"]["zipPath"], "zipPathQuat": slider["extras"]["zipPathQuat"],
+        "sliderOpen": {"position": [float(v) for v in so_p], "quaternion": [float(v) for v in so_q]},
+        "sliderOpenFold": {"position": [float(v) for v in sf_p], "quaternion": [float(v) for v in sf_q]},
+        "morphTargets": TARGETS, "morphNodes": morph_nodes, "unzipApex": list(UNZIP_APEX),
+        "animation": {"name": "ZipOpen", "zip": [0, 3], "open": [3, 5], "fold": [5, 6]},
+        "poi": POI(layout),
+    }
+    g.save(path)
+
+
+def POI(layout):
+    zp = layout["zipPath"]
+    top = zp[0]
+    return {
+        "overview": {"target": [0, 0.43, 0], "position": [0, 0.55, 2.35], "fov": 30},
+        "hood": {"target": [0, 0.79, -0.04], "position": [0.62, 0.98, 1.10], "fov": 30},
+        "hood_inside": {"target": [0, 0.77, -0.10], "position": [0.0, 0.84, 0.75], "fov": 30},
+        "back": {"target": [0, 0.47, 0], "position": [0, 0.62, -2.3], "fov": 30},
+        "pull": {"target": [round(float(top[0]), 4), round(float(top[1] - 0.022), 4), round(float(top[2]), 4)],
+                 "position": [0.07, round(float(top[1] + 0.02), 4), round(float(top[2] + 0.30), 4)], "fov": 22},
+        "inside_left": {"target": [0.10, 0.36, 0.06], "position": [-0.70, 0.55, 1.45], "fov": 30},
+        "inside_right": {"target": [-0.10, 0.36, 0.06], "position": [0.70, 0.55, 1.45], "fov": 30},
+    }
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--coloris", default="all", choices=list(COLORIS) + ["all"])
+    ap.add_argument("--tex", type=int, default=2048)
+    ap.add_argument("--out", default=HERE)
+    ap.add_argument("--font", default=None)
+    ap.add_argument("--atlas-png", default=None, help="dossier où écrire aussi la texture d'atlas (contrôle)")
+    a = ap.parse_args()
+    t0 = time.time()
+    font = find_font(a.font)
+    print("police tirette :", font)
+    geo = build_geometry(font)
+    nodes = finish_geometry(geo, a.tex)
+    layout = build_layout(geo, nodes)
+    for nd in layout["nodes"]:
+        print(f"  {nd['name']:16s} morph={'oui' if nd['morphs'] else 'non'}  dépl. max {nd['maxdisp'] * 100:.1f} cm")
+    knit = knit_normal_tile()
+    for c in (COLORIS if a.coloris == "all" else [a.coloris]):
+        col = COLORIS[c]
+        img = bake_atlas(geo, col)
+        if a.atlas_png:
+            img.save(os.path.join(a.atlas_png, f"atlas-{c}.jpg"), quality=85)
+        p = os.path.join(a.out, f"ressac-v2-{c}.glb")
+        export_glb(p, col, geo, layout, img, knit)
+        ntri = sum(len(m.F) for nd in layout["nodes"] for m in nd["prims"]) + len(geo["slider"].F) + len(geo["pull"].F)
+        print(f"  -> {p} : {os.path.getsize(p) / 1e6:.2f} Mo, {ntri} triangles ({time.time() - t0:.0f} s)")
+
+
+if __name__ == "__main__":
+    main()

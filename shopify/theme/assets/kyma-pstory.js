@@ -42,11 +42,11 @@
     open_left: [0.645, 0.775], open_right: [0.775, 0.88], outro: [0.88, 1.01] };
   var POI = { /* cibles / directions par défaut (GLB v1 normalisé) ; remplacées par extras.poi du GLB v2 */
     full: { t: [0, 0.5, 0], dir: [0, 0.1, 1], fit: 1, world: 1 },
-    hood_outer: { t: [0, 0.78, -0.14], dir: [0.6, 0.38, -0.7], dist: 1.3 },
+    hood_outer: { t: [0, 0.76, -0.12], dir: [0.6, 0.36, -0.72], dist: 1.75 },
     hood_inner: { t: [0, 0.84, -0.07], dir: [0.1, 0.62, 0.78], dist: 0.82 },
     pull: { t: [0, 0.83, 0.16], dir: [0.2, 0.1, 1], dist: 0.34 },
-    open_left: { t: [-0.16, 0.5, 0.02], dir: [0.5, 0.14, 0.86], dist: 1.75 },
-    open_right: { t: [0.16, 0.5, 0.02], dir: [-0.5, 0.14, 0.86], dist: 1.75 }
+    open_left: { t: [-0.12, 0.5, 0.02], dir: [0.42, 0.12, 0.9], dist: 2.3 },
+    open_right: { t: [0.12, 0.5, 0.02], dir: [-0.42, 0.12, 0.9], dist: 2.3 }
   };
   function keys(P) {
     function k(p, o) { o.p = p; return o; }
@@ -62,15 +62,15 @@
       k(0.35, { yaw: PI + 0.14, poi: F, fit: 0.96 }),
       k(0.405, { yaw: 2 * PI, poi: P.pull, focus: 1 }),
       k(0.462, { yaw: 2 * PI, poi: P.pull, dk: 0.86, focus: 1 }),
-      k(0.485, { yaw: 2 * PI, poi: P.pull, follow: 1, dk: 1.25, focus: 0.7, slider: 0 }),
-      k(0.625, { yaw: 2 * PI + 0.08, poi: P.pull, follow: 1, dk: 1.6, focus: 0, slider: 1, open: 0.6 }),
+      k(0.485, { yaw: 2 * PI, poi: P.pull, follow: 1, dk: 1.5, focus: 0.7, slider: 0 }),
+      k(0.625, { yaw: 2 * PI + 0.08, poi: P.pull, follow: 1, dk: 3.2, focus: 0, slider: 1, open: 0.6 }),
       k(0.665, { yaw: 2 * PI, poi: F, fit: 0.92, slider: 1, open: 1 }),
       k(0.7, { yaw: 2 * PI, poi: P.open_left, slider: 1, open: 1 }),
       k(0.765, { yaw: 2 * PI + 0.06, poi: P.open_left, dk: 0.95, slider: 1, open: 1 }),
       k(0.805, { yaw: 2 * PI, poi: P.open_right, slider: 1, open: 1 }),
       k(0.87, { yaw: 2 * PI - 0.06, poi: P.open_right, dk: 0.95, slider: 1, open: 1 }),
-      k(0.935, { yaw: 2 * PI + 0.32, poi: F, fit: 1.5, slider: 1, open: 0.55, outro: 1 }),
-      k(1, { yaw: 2 * PI + 0.5, poi: F, fit: 1.56, slider: 1, open: 0.55, outro: 1 })
+      k(0.935, { yaw: 2 * PI + 0.32, poi: F, fit: 1.62, slider: 1, open: 0.55, outro: 1 }),
+      k(1, { yaw: 2 * PI + 0.5, poi: F, fit: 1.68, slider: 1, open: 0.55, outro: 1 })
     ];
   }
   /* valeur d'une clé (les champs absents prennent des valeurs neutres) */
@@ -94,15 +94,15 @@
         'float y=smoothstep(kySlider-.03,kySlider+.12,p.y)*(1.-smoothstep(kyTop+.02,kyTop+.08,p.y));return f*y*kyOpen;}\n' +
         /* le devant s'écarte vers les côtés (le tissu se tasse vers la couture) puis pivote un peu vers l'avant */
         'vec3 kyDef(vec3 p,float a){float s=p.x<0.?-1.:1.;float wx=1.-smoothstep(0.,kyHinge,abs(p.x));' +
-        'float wr=1.-smoothstep(kyHinge-.07,kyHinge+.01,abs(p.x));p.x+=s*.17*a*wx;float an=a*.62*s*wr;vec2 r=vec2(p.x-s*kyHinge,p.z);' +
+        'float wr=1.-smoothstep(kyHinge-.07,kyHinge+.01,abs(p.x));p.x+=s*.2*a*wx;float an=a*.4*s*wr;vec2 r=vec2(p.x-s*kyHinge,p.z);' +
         'float c=cos(an),n=sin(an);return vec3(s*kyHinge+r.x*c+r.y*n,p.y,-r.x*n+r.y*c);}\n' +
-        'vec3 kyRotN(vec3 v,vec3 p,float a){float s=p.x<0.?-1.:1.;float wr=1.-smoothstep(kyHinge-.07,kyHinge+.01,abs(p.x));float an=a*.62*s*wr;float c=cos(an),n=sin(an);return vec3(v.x*c+v.z*n,v.y,-v.x*n+v.z*c);}\n';
+        'vec3 kyRotN(vec3 v,vec3 p,float a){float s=p.x<0.?-1.:1.;float wr=1.-smoothstep(kyHinge-.07,kyHinge+.01,abs(p.x));float an=a*.4*s*wr;float c=cos(an),n=sin(an);return vec3(v.x*c+v.z*n,v.y,-v.x*n+v.z*c);}\n';
       sh.vertexShader = head + sh.vertexShader
         .replace('#include <beginnormal_vertex>', '#include <beginnormal_vertex>\nfloat kyA=kyWeight(position);objectNormal=kyRotN(objectNormal,position,kyA);')
         .replace('#include <begin_vertex>', '#include <begin_vertex>\ntransformed=kyDef(transformed,kyA);kySide=position.x<0.?-1.:1.;kyW=kyA;');
       sh.fragmentShader = 'uniform vec3 kyLining;varying float kySide,kyW;\n' + sh.fragmentShader
         .replace('#include <clipping_planes_fragment>', '#include <clipping_planes_fragment>\nif(kyW>.002&&abs(kySide)<.999)discard;')
-        .replace('#include <color_fragment>', '#include <color_fragment>\nif(!gl_FrontFacing)diffuseColor.rgb=kyLining*.92;');
+        .replace('#include <color_fragment>', '#include <color_fragment>\nif(!gl_FrontFacing)diffuseColor.rgb=kyLining*.8;');
     };
     mat.customProgramCacheKey = function () { return 'kyma-open'; };
     mat.needsUpdate = true;
@@ -229,20 +229,26 @@
     var toN = function (v) { return [v[0] * s + m.position.x, v[1] * s + m.position.y, v[2] * s + m.position.z]; };
     if (ex.poi) Object.keys(ex.poi).forEach(function (k) {
       var q = ex.poi[k]; if (!q || !q.target) return;
-      P[k] = { t: toN(q.target), dir: q.dir || (P[k] && P[k].dir) || [0, 0.1, 1], dist: q.dist ? q.dist * s : (P[k] && P[k].dist) || 0.6 };
+      var dir = q.dir, dist = q.dist;
+      var cp = q.position || q.camera || q.eye;
+      if (!dir && cp) { var dv = [cp[0] - q.target[0], cp[1] - q.target[1], cp[2] - q.target[2]]; dist = dist || Math.hypot(dv[0], dv[1], dv[2]); dir = dv; }
+      P[k] = { t: toN(q.target), dir: dir || (P[k] && P[k].dir) || [0, 0.1, 1], dist: dist ? dist * s : (P[k] && P[k].dist) || 0.6 };
       if (k === 'full') { P.full.fit = 1; delete P.full.dist; }
     });
     self.K = keys(P);
     /* nœuds du contrat v2 */
     var nodes = { pl: find(m, 'Panel_Left'), pr: find(m, 'Panel_Right'), slider: find(m, 'Zip_Slider'), pull: find(m, 'Zip_Pull') };
-    var morphs = [];
+    var morphs = [], unzips = [];
     m.traverse(function (n) {
       if (n.isMesh) {
         n.frustumCulled = false;
         if (n.morphTargetDictionary && n.morphTargetDictionary.open != null) morphs.push(n);
+        if (n.morphTargetDictionary) Object.keys(n.morphTargetDictionary).forEach(function (mk) {
+          var mm = /^unzip_(\d+)$/.exec(mk); if (mm) unzips.push({ n: n, i: n.morphTargetDictionary[mk], k: +mm[1] });
+        });
       }
     });
-    self.morphs = morphs; self.panels = (!morphs.length && nodes.pl && nodes.pr) ? [nodes.pl, nodes.pr] : null;
+    self.morphs = morphs; self.unzips = unzips; self.unzipN = unzips.reduce(function (a, u) { return Math.max(a, u.k); }, 0); self.panels = (!morphs.length && nodes.pl && nodes.pr) ? [nodes.pl, nodes.pr] : null;
     if (self.panels) self.panelRot = self.panels.map(function (n) { return n.rotation.y; });
     /* tirette : Zip_Slider (v2) ou maillage dont le matériau s'appelle « Tirette… » (v1) */
     var mover = nodes.slider || nodes.pull, zipMesh = null;
@@ -356,7 +362,7 @@
     /* décalage du cadrage selon le côté du texte (ordinateur) ou le bas de l'écran (portrait) */
     var portrait = self.cam.aspect < 0.9, wantSx = 0, wantSy = 0;
     if (portrait) wantSy = self.side === 'center' ? 0.2 : 0.14;
-    else if (self.side === 'left') wantSx = 0.15; else if (self.side === 'right') wantSx = -0.15; else wantSy = 0.17;
+    else if (self.side === 'left') wantSx = 0.15; else if (self.side === 'right') wantSx = -0.15; else wantSy = 0.2;
     var ka = 1 - Math.exp(-dt * 3.2);
     self.sx += (wantSx - self.sx) * ka; self.sy += (wantSy - self.sy) * ka;
     var framing = Math.abs(wantSx - self.sx) + Math.abs(wantSy - self.sy) > 0.0006;
@@ -374,7 +380,12 @@
     } else spt = [0, mix(self.zipTop, self.zipBot, sl), 0.16];
     /* ouverture */
     var op = S.open;
-    if (self.morphs.length) self.morphs.forEach(function (n) { n.morphTargetInfluences[n.morphTargetDictionary.open] = op; });
+    if (self.morphs.length && self.unzipN) {
+      /* v2 : V progressif derrière le curseur (unzip_1..N), puis ouverture complète (open) qui le remplace */
+      var oi = sl > 0.999 ? sstep((op - 0.6) / 0.4) : 0, N = self.unzipN;
+      self.unzips.forEach(function (u) { u.n.morphTargetInfluences[u.i] = (sl > 0.001 ? clamp(1 - Math.abs(sl * N - u.k), 0, 1) : 0) * (1 - oi); });
+      self.morphs.forEach(function (n) { n.morphTargetInfluences[n.morphTargetDictionary.open] = oi; });
+    } else if (self.morphs.length) self.morphs.forEach(function (n) { n.morphTargetInfluences[n.morphTargetDictionary.open] = op; });
     else if (self.panels) { self.panels[0].rotation.y = self.panelRot[0] - op * 1.15; self.panels[1].rotation.y = self.panelRot[1] + op * 1.15; }
     else { self.U.open.value = op; self.U.slider.value = (spt[1] - self.off.y) / self.scale; }
     /* caméra : interpolation des deux clés voisines (positions déjà calculées pour l'écran courant) */
