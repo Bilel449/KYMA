@@ -52,8 +52,8 @@
     function k(p, o) { o.p = p; return o; }
     var F = P.full;
     return [
-      k(0, { yaw: -0.7, poi: F, fit: 1.08, rise: 0.3 }),
-      k(0.085, { yaw: 0.1, poi: F, fit: 1.0, rise: 0 }),
+      k(0, { yaw: -0.7, poi: F, fit: 1.2, rise: 0.3 }),
+      k(0.085, { yaw: 0.1, poi: F, fit: 1.1, rise: 0 }),
       k(0.125, { yaw: 0, poi: P.hood_outer }),
       k(0.165, { yaw: 0.12, poi: P.hood_outer, dk: 0.92 }),
       k(0.205, { yaw: 0.05, poi: P.hood_inner }),
@@ -63,12 +63,12 @@
       k(0.405, { yaw: 2 * PI, poi: P.pull, focus: 1 }),
       k(0.462, { yaw: 2 * PI, poi: P.pull, dk: 0.86, focus: 1 }),
       k(0.485, { yaw: 2 * PI, poi: P.pull, follow: 1, dk: 1.5, focus: 0.7, slider: 0 }),
-      k(0.625, { yaw: 2 * PI + 0.08, poi: P.pull, follow: 1, dk: 3.2, focus: 0, slider: 1, open: 0.6 }),
+      k(0.625, { yaw: 2 * PI + 0.08, poi: P.pull, follow: 1, dk: 5, focus: 0, slider: 1, open: 0.6 }),
       k(0.665, { yaw: 2 * PI, poi: F, fit: 0.92, slider: 1, open: 1 }),
-      k(0.7, { yaw: 2 * PI, poi: P.open_left, slider: 1, open: 1 }),
-      k(0.765, { yaw: 2 * PI + 0.06, poi: P.open_left, dk: 0.95, slider: 1, open: 1 }),
-      k(0.805, { yaw: 2 * PI, poi: P.open_right, slider: 1, open: 1 }),
-      k(0.87, { yaw: 2 * PI - 0.06, poi: P.open_right, dk: 0.95, slider: 1, open: 1 }),
+      k(0.7, { yaw: 2 * PI, poi: P.open_left, slider: 1, open: 1, fold: 1 }),
+      k(0.765, { yaw: 2 * PI + 0.06, poi: P.open_left, dk: 0.95, slider: 1, open: 1, fold: 1 }),
+      k(0.805, { yaw: 2 * PI, poi: P.open_right, slider: 1, open: 1, fold: 1 }),
+      k(0.87, { yaw: 2 * PI - 0.06, poi: P.open_right, dk: 0.95, slider: 1, open: 1, fold: 1 }),
       k(0.935, { yaw: 2 * PI + 0.32, poi: F, fit: 1.62, slider: 1, open: 0.55, outro: 1 }),
       k(1, { yaw: 2 * PI + 0.5, poi: F, fit: 1.68, slider: 1, open: 0.55, outro: 1 })
     ];
@@ -76,7 +76,7 @@
   /* valeur d'une clé (les champs absents prennent des valeurs neutres) */
   function kv(k, n) {
     switch (n) {
-      case 'rise': case 'focus': case 'follow': case 'slider': case 'open': case 'outro': return k[n] || 0;
+      case 'rise': case 'focus': case 'follow': case 'slider': case 'open': case 'fold': case 'outro': return k[n] || 0;
       case 'dk': return k.dk || 1;
     }
     return k[n];
@@ -227,14 +227,20 @@
     /* POI du GLB v2 (mètres, espace modèle) → unités normalisées */
     var P = JSON.parse(JSON.stringify(POI));
     var toN = function (v) { return [v[0] * s + m.position.x, v[1] * s + m.position.y, v[2] * s + m.position.z]; };
-    if (ex.poi) Object.keys(ex.poi).forEach(function (k) {
-      var q = ex.poi[k]; if (!q || !q.target) return;
-      var dir = q.dir, dist = q.dist;
-      var cp = q.position || q.camera || q.eye;
-      if (!dir && cp) { var dv = [cp[0] - q.target[0], cp[1] - q.target[1], cp[2] - q.target[2]]; dist = dist || Math.hypot(dv[0], dv[1], dv[2]); dir = dv; }
-      P[k] = { t: toN(q.target), dir: dir || (P[k] && P[k].dir) || [0, 0.1, 1], dist: dist ? dist * s : (P[k] && P[k].dist) || 0.6 };
-      if (k === 'full') { P.full.fit = 1; delete P.full.dist; }
-    });
+    if (ex.poi) {
+      /* GLB v2 (Izaac) : { target, position, fov } ; « inside_left » = gauche du PORTEUR (+X) = droite de l'écran */
+      var alias = { full: 'full', overview: null, hood: 'hood_outer', hood_outer: 'hood_outer', hood_inside: 'hood_inner', hood_inner: 'hood_inner', pull: 'pull' };
+      Object.keys(ex.poi).forEach(function (k) {
+        var q = ex.poi[k]; if (!q || !q.target) return;
+        var to = alias.hasOwnProperty(k) ? alias[k] : (/^(inside|open)_/.test(k) ? (q.target[0] < 0 ? 'open_left' : 'open_right') : null);
+        if (!to || to === 'full') return; /* la vue d'ensemble reste calculée pour l'écran (cadrage + texte) */
+        var dir = q.dir, dist = q.dist;
+        var cp = q.position || q.camera || q.eye;
+        if (!dir && cp) { var dv = [cp[0] - q.target[0], cp[1] - q.target[1], cp[2] - q.target[2]]; dist = dist || Math.hypot(dv[0], dv[1], dv[2]); dir = dv; }
+        if (dist && q.fov) dist *= Math.tan(q.fov * PI / 360) / Math.tan(15 * PI / 180);
+        P[to] = { t: toN(q.target), dir: dir || (P[to] && P[to].dir) || [0, 0.1, 1], dist: dist ? dist * s : (P[to] && P[to].dist) || 0.6 };
+      });
+    }
     self.K = keys(P);
     /* nœuds du contrat v2 */
     var nodes = { pl: find(m, 'Panel_Left'), pr: find(m, 'Panel_Right'), slider: find(m, 'Zip_Slider'), pull: find(m, 'Zip_Pull') };
@@ -259,6 +265,16 @@
       if (!zipMesh && nm.indexOf('zip') >= 0) zipMesh = n;
     });
     self.mover = mover; self.moverPos = mover ? mover.position.clone() : null;
+    /* clip « ZipOpen » (v2) : 0–3 s descente du curseur + V, 3–5 s ouverture, 5–6 s revers ; temps piloté au défilement */
+    var clip = (gltf.animations || []).filter(function (a) { return a.name === 'ZipOpen'; })[0];
+    self.mixer = null;
+    if (clip && T.AnimationMixer) {
+      self.mixer = new T.AnimationMixer(m);
+      var act = self.mixer.clipAction(clip); act.setLoop(T.LoopOnce, 1); act.clampWhenFinished = true; act.play();
+      var an = ex.animation || {};
+      self.seg = { zip: an.zip || [0, 3], open: an.open || [3, 5], fold: an.fold || [5, 6] };
+      self.sliderNode = nodes.slider; self.tmpV = new T.Vector3();
+    }
     /* chemin du zip : extras.zipPath (v2) ou sommets du maillage du zip (point le plus en avant par tranche) */
     var path = null;
     if (ex.zipPath && ex.zipPath.length > 1) path = ex.zipPath.map(function (v) { return new T.Vector3(v[0], v[1], v[2]); });
@@ -327,7 +343,7 @@
     while (i < K.length - 2 && p > K[i + 1].p) i++;
     var a = K[i], b = K[i + 1], t = sstep((p - a.p) / (b.p - a.p || 1));
     var o = { yaw: mix(a.yaw, b.yaw, t) };
-    ['rise', 'focus', 'follow', 'slider', 'open', 'outro', 'dk'].forEach(function (n) { o[n] = mix(kv(a, n), kv(b, n), t); });
+    ['rise', 'focus', 'follow', 'slider', 'open', 'fold', 'outro', 'dk'].forEach(function (n) { o[n] = mix(kv(a, n), kv(b, n), t); });
     o.a = a; o.b = b; o.t = t;
     return o;
   };
@@ -340,7 +356,8 @@
       var hFit = 0.5 * 1.18 / tanH, wFit = 0.5 * 1.28 / (tanH * asp);
       dist = Math.max(hFit, wFit) * (k.fit || 1);
     } else dist = P.dist * portrait * kv(k, 'dk');
-    if (follow > 0 && sliderPt) t = mix3(t, [sliderPt[0], sliderPt[1] - 0.02, sliderPt[2]], follow);
+    /* la caméra suit la tirette ; en bas du zip, la cible reste dans le buste pour garder la pièce cadrée */
+    if (follow > 0 && sliderPt) t = mix3(t, [sliderPt[0], Math.max(sliderPt[1] - 0.02, mix(sliderPt[1], 0.34, clamp((kv(k, 'dk') - 1.5) / 3.5, 0, 1))), sliderPt[2]], follow);
     var c = Math.cos(yaw), s = Math.sin(yaw);
     function ry(v) { return [v[0] * c + v[2] * s, v[1], -v[0] * s + v[2] * c]; }
     t = ry(t); if (!P.world) dir = ry(dir);
@@ -380,7 +397,16 @@
     } else spt = [0, mix(self.zipTop, self.zipBot, sl), 0.16];
     /* ouverture */
     var op = S.open;
-    if (self.morphs.length && self.unzipN) {
+    if (self.mixer) {
+      var G = self.seg, ct = sl < 0.999 ? mix(G.zip[0], G.zip[1], sl) : (S.fold > 0.001 ? mix(G.fold[0], G.fold[1], S.fold) : mix(G.open[0], G.open[1], op));
+      self.mixer.setTime(Math.min(ct, G.fold[1] - 1e-4));
+      if (self.sliderNode) {
+        self.model.updateMatrixWorld(true);
+        var sv = self.sliderNode.getWorldPosition(self.tmpV); self.pivot.worldToLocal(sv);
+        spt = [sv.x, sv.y, sv.z];
+      }
+    }
+    else if (self.morphs.length && self.unzipN) {
       /* v2 : V progressif derrière le curseur (unzip_1..N), puis ouverture complète (open) qui le remplace */
       var oi = sl > 0.999 ? sstep((op - 0.6) / 0.4) : 0, N = self.unzipN;
       self.unzips.forEach(function (u) { u.n.morphTargetInfluences[u.i] = (sl > 0.001 ? clamp(1 - Math.abs(sl * N - u.k), 0, 1) : 0) * (1 - oi); });

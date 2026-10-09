@@ -30,7 +30,7 @@
 .kyma-pstory__spec dd { margin: 0; font-size: 15px; line-height: 1.5; }
 .kyma-pstory__still { margin-top: 16px; border-radius: 20px; overflow: hidden; }
 .kyma-pstory__still img { display: block; width: 100%; height: auto; }
-.kyma-pstory__final { margin: 0; font: 400 clamp(34px, 5.2vw, 72px)/1.04 var(--kyma-serif); letter-spacing: -0.005em; color: var(--kyma-ink); }
+.kyma-pstory__final { text-wrap: balance; margin: 0; font: 400 clamp(34px, 5.2vw, 72px)/1.04 var(--kyma-serif); letter-spacing: -0.005em; color: var(--kyma-ink); }
 .kyma-pstory__sub { margin: 12px 0 0; font-size: clamp(16px, 1.5vw, 19px); font-weight: 300; line-height: 1.5; color: var(--kyma-ink); }
 .kyma-pstory__ctas { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 26px 0 0; }
 .kyma-pstory__caption { margin-top: 18px; }
@@ -38,7 +38,8 @@
 .kyma-pstory .kyma-sec__title { margin: 0 0 18px; font-size: clamp(34px, 4.6vw, 64px); }
 .kyma-pstory__rail { display: none; }
 .kyma-pstory__tints { margin: 0; }
-.kyma-pstory.is-static .kyma-pstory__tints { position: absolute; left: calc(var(--kyma-pad-x) + 16px); bottom: calc(var(--kyma-section-y, 96px) + 16px); max-width: calc(50% - 64px); }
+.kyma-pstory.is-static .kyma-pstory__steps { grid-row: 1 / span 2; }
+.kyma-pstory.is-static .kyma-pstory__tints { grid-column: 1; grid-row: 2; justify-self: start; align-self: start; margin-top: -8px; }
 
 /* pastilles compactes (nom gardé pour les lecteurs d'écran) */
 .kyma-pstory__tints { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 6px; border-radius: 999px; background: rgba(251, 247, 242, 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 30px -18px rgba(74, 59, 50, 0.45); }
@@ -96,7 +97,7 @@
   .kyma-pstory.is-live .kyma-pstory__spec dd { font-size: 14px; }
   .kyma-pstory.is-live .kyma-pstory__outro { bottom: 18px; left: 16px; right: 16px; width: auto; transform: translate3d(0, 24px, 0); background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0 4px; }
   .kyma-pstory.is-live .kyma-pstory__outro.is-active { transform: none; }
-  .kyma-pstory.is-live .kyma-pstory__final { font-size: clamp(32px, 9vw, 44px); }
+  .kyma-pstory.is-live .kyma-pstory__final { font-size: clamp(28px, 7.6vw, 44px); }
   .kyma-pstory.is-live .kyma-pstory__ctas { margin-top: 18px; }
   .kyma-pstory.is-live .kyma-pstory__ctas .kyma-btn { flex: 1 1 auto; }
   .kyma-pstory.is-live .kyma-pstory__tints { top: calc(var(--kyma-header-h) + 10px); bottom: auto; left: 50%; right: auto; transform: translateX(-50%); flex-wrap: nowrap; }

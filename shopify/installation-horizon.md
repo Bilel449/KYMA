@@ -69,6 +69,13 @@ Ce qui change à l'écran :
 - **Nous connaître** : grand titre **KYMA** (visuel « brand » de `kyma-page-hero`), le grec κύμα en petite mention étymologique.
 - **Fluidité** : marche de rayon allégée et rendue en DPR 1 avec échelle adaptative (cible 60 i/s), paramètres de défilement interpolés, une seule boucle d'animation par moteur (correction d'un doublement de boucle), courbes de révélation plus douces, rideau sinusoïdal, scènes 3D et GLB montées après le rideau, défilement lissé léger sur ordinateur (`<html data-kyma-native-scroll>` pour le couper). **Un seul contexte WebGL pour tous les lecteurs GLB** (modèles téléchargés une fois par URL) + un pour les scènes kyma-3d : 2 au plus par page.
 
+## 1 ter. Réinstallation du 09/10/2026 (après-midi) — récit au défilement, cartes du fondateur, GLB v2 — 13 fichiers, MD5 relus
+Copie `189991944572` uniquement (rôle relu : UNPUBLISHED). `stagedUploadsCreate` + `themeFilesUpsert` (corps URL), en 2 lots (assets / GLB / sections, puis templates). Les 13 MD5 relus sont identiques au dépôt.
+- **Nouveaux** : `assets/kyma-three.js` (three.js r180, MIT : core + GLTFLoader + RoomEnvironment + AnimationMixer ; 591 Ko, 151 Ko gzip ; licence dans `shopify/licences/three-js-LICENSE.txt`), `assets/kyma-pstory.js` (29 Ko, 10 Ko gzip), `assets/kyma-pstory.css`, `sections/kyma-product-story-scroll.liquid` (« KYMA — Pièce défilée »), `assets/ressac-v2-<coloris>.glb` × 5 (Izaac, 3,6–3,7 Mo).
+- **Modifiés** : `sections/kyma-cercle-waves.liquid` (recto = visuel de carte : réglage image + URL de repli ; précision sous l'avantage cashback/crédit), `assets/kyma-pages.css`, `templates/index.json` (« Savoir-faire » retiré ; « La pièce » = récit au défilement ; Cercle Waves renuméroté 04), `templates/page.cercle-waves.json` (avantages repris de la page publiée).
+- `kyma-three.js` n'est chargé que par la section, à l'approche de l'écran (script injecté, pas de module : aucun souci CORS sur le CDN). Les GLB v1 restent utilisés par le lecteur maison `kyma-glb.js` (accueil « Drop 1 », collection, fiche) : il ne lit pas `KHR_mesh_quantization`, donc pas les v2.
+- **Cartes du fondateur** : la page `/pages/cercle-waves` (Admin API, 09/10) **ne contient aucune image** et aucun fichier de la boutique n'est identifiable comme carte. Dans l'éditeur : Cercle Waves › bloc Palier › « Visuel de la carte (recto) » → choisir son image (ou coller son URL CDN dans « URL de repli »). Sans image, la carte dessinée reste affichée.
+
 ## 2. Une ligne à ajouter dans `layout/theme.liquid`
 
 Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste avant `{{ content_for_header }}` (dans le `<head>`) :

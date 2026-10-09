@@ -72,3 +72,9 @@ Logo : la copie n'avait **aucune couleur lilas** dans `config/settings_data.json
 
 ### Cercle Waves (décision du fondateur)
 Paliers **INITIUM** et **MAJESTÉ** (ORIGINE supprimé partout dans le thème et les maquettes), prix affichés en réglages texte : 12,99 € / 39,99 € **par trimestre, TTC**. Bouton « Rejoindre » inactif tant que le lien d'abonnement est `[À COMPLÉTER]` : **aucun achat branché**. Avantages en `[À COMPLÉTER]`, mentions à valider par Victoire.
+
+### Retours du fondateur — 09/10/2026, après-midi (Sacha)
+Copie `189991944572` seulement, 13 fichiers relus (MD5 identiques) ; rien de publié, aucun produit, menu ni page modifiés.
+- **Accueil** : section « Savoir-faire » retirée de `index.json` (la page Nous connaître garde sa propre section « Savoir-faire » `kyma-steps` : non touchée). « La pièce » = `kyma-product-story-scroll` : récit épinglé de 700 vh piloté au défilement (apparition, capuche dehors/dedans, dos, tirette, zip qui s'ouvre, intérieur gauche/droite avec fiches Composition et Fabrication balisées `[À CONFIRMER]`, dézoom, « Alors, qu'en dites-vous ? » / « Êtes-vous prêt à suivre le mouvement ? »), sur les GLB v2 d'Izaac (clip `ZipOpen`). Mouvement réduit / pause / sans WebGL : texte complet + modèle immobile.
+- **Cercle Waves** : recto des cartes = visuel du fondateur (réglage image ou URL), verso = avantages de sa page publiée, + « Versé en crédit KYMA sur vos prochains achats. ». **Visuels non trouvés** dans la boutique : à choisir dans l'éditeur (voir `installation-horizon.md` § 1 ter).
+- **À arbitrer (fondateur)** : la page publiée `cercle-waves` porte encore ORIGINE 29,99 €, « crédits » (pas « cashback »), des cartes « bleu nuit et argent » / « noire effet miroir » et le tutoiement ; « Priorité stock garantie » et « Statut élite » (déconseillés par Victoire) n'y figurent pas.
