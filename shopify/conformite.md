@@ -1,6 +1,6 @@
 # KYMA — Note de conformité juridique du site Shopify
 
-> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
+> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; section « Entraide 09/10/2026 » en fin de note) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
 > **Destinataires** : Arthur (validation), Clémentine, Izaac, Maya, Sacha, fondateur.
 > **Rappel unique** : les textes de `shopify/pages/legal/` et cette note sont des **modèles**. Ils doivent être relus et validés par un avocat (droit de la consommation / RGPD) avant toute mise en ligne.
 
@@ -16,7 +16,7 @@
 | `pages/legal/livraison.html` | Politiques > « Politique d'expédition » |
 | `pages/legal/confidentialite.html` | Politiques > « Politique de confidentialité » (remplacer le modèle Shopify) |
 | `pages/legal/cookies.html` | Page `/pages/cookies` |
-| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**v2 du 09/10/2026 : conditions d'abonnement, voir la dernière section de cette note ; ne pas publier avant validation des avantages**) |
+| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**v3 du 09/10/2026 : avantages alignés sur la section « Entraide 09/10/2026 » en fin de note ; ne pas publier avant validation des avantages et des valeurs entre crochets**) |
 
 Shopify demande aussi une politique « Coordonnées » (Contact information) : y reprendre raison sociale, adresse, e-mail, téléphone, SIREN et TVA, sans rien inventer.
 
@@ -40,7 +40,7 @@ Shopify demande aussi une politique « Coordonnées » (Contact information) : y
 | **Paris** | « Made in Paris », « fabriqué en France », drapeau tricolore sur le produit. | « **KYMA Paris** », « marque créée à Paris » (vrai : marque basée à Paris). | — |
 | **Disponibilité / rareté** | « En stock », « livraison rapide », « plus que X pièces » si c'est faux. | « **Précommande — expédition au plus tard le [date]** » | — |
 
-**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.** » (formule mise à jour le 08/10/2026 : repli conforme au tableau d'unicité tant que les préséries ne sont pas validées — à confirmer par Victoire) Une mention « non contractuel » ne rend pas licite un visuel trompeur. Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries.
+**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.** » (formule mise à jour le 08/10/2026 : repli conforme au tableau d'unicité tant que les préséries ne sont pas validées — à confirmer par Victoire) Une mention « non contractuel » ne rend pas licite un visuel trompeur. Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries. **[Mise à jour 09/10/2026 : cette formule est jugée insuffisante seule et doit être remplacée par la version de la section « Entraide 09/10/2026 », partie E, correction R1.]**
 
 ---
 
@@ -205,7 +205,7 @@ L'accès direct à Légifrance, economie.gouv.fr et village-justice.com était b
 
 ## Cercle Waves (abonnement) : ajout du 09/10/2026
 
-> **Décision du fondateur** : le Cercle Waves devient un abonnement payant. **INITIUM 12,99 € TTC par trimestre** et **MAJESTÉ 39,99 € TTC par trimestre**, renouvellement automatique. L'ancien palier ORIGINE disparaît. Cette section **remplace** les points 16 et 18 ci-dessus. Texte de la page : `pages/legal/cercle-waves-conditions.html` (v2, réécrit). Les avantages et leurs valeurs ne sont pas validés : ils sont tous en `[À COMPLÉTER]` dans la page.
+> **Décision du fondateur** : le Cercle Waves devient un abonnement payant. **INITIUM 12,99 € TTC par trimestre** et **MAJESTÉ 39,99 € TTC par trimestre**, renouvellement automatique. L'ancien palier ORIGINE disparaît. Cette section **remplace** les points 16 et 18 ci-dessus. Texte de la page : `pages/legal/cercle-waves-conditions.html` (v3, voir la section « Entraide 09/10/2026 » en fin de note). Les avantages et leurs valeurs ne sont pas validés par le fondateur.
 > **Rappel unique** : modèles à faire relire par un avocat en droit de la consommation avant publication, et par l'expert-comptable pour la TVA du crédit.
 > **Sources** : l'accès direct à Légifrance et à economie.gouv.fr est bloqué depuis l'environnement de travail. Les règles ci-dessous viennent d'extraits de recherche (Légifrance, INC, DGCCRF, questions parlementaires) et de sources secondaires. **Relire les articles sur Légifrance** avant publication.
 
@@ -274,11 +274,11 @@ Sur un forfait Shopify hors Plus, le libellé du bouton de paiement du checkout 
 
 | Avantage annoncé | À éviter | Autorisé (si l'avantage est validé et tenu) |
 |---|---|---|
-| Cashback 5 % / 10 % | « Cashback », « argent remboursé », « jusqu'à 10 % » sans dire quel palier, « gagnez de l'argent ». | « **Crédit Waves : [5 %] (INITIUM) / [10 %] (MAJESTÉ) du prix de vos achats reversés en avoir**, utilisable sur vos prochains achats. Versé après l'expiration du délai de rétractation, valable [12] mois, non remboursable en espèces. » |
-| Accès prioritaire aux drops | « Accès garanti », « toujours servi en premier », « sans file d'attente » si faux. | « **Accès anticipé de [24 h / 72 h]** avant l'ouverture au public. Il ne garantit pas la disponibilité : les quantités sont limitées. » |
+| Cashback 5 % / 10 % | « Argent remboursé », « jusqu'à 10 % » sans dire quel palier, « gagnez de l'argent », « cashback » **sans** préciser sa nature (décision du fondateur du 09/10/2026 : le mot « cashback » est conservé à condition d'être accompagné de sa nature exacte). | « **Cashback [5 %] (INITIUM) / [10 %] (MAJESTÉ) du prix de vos achats de produits, versé en Crédit Waves** (avoir), utilisable sur vos prochains achats. Versé après l'expiration du délai de rétractation, valable [12] mois, non remboursable en espèces. » |
+| Accès prioritaire aux drops | « Accès garanti », « toujours servi en premier », « sans file d'attente » si faux. | « **Accès anticipé de [24 h / 48 h]** avant l'ouverture au public. Il ne garantit pas la disponibilité : les quantités sont limitées. » |
 | Précommandes en avant-première | « Avant tout le monde » (non vérifiable) ; date d'expédition différente non annoncée. | « Précommandez avant l'ouverture au public ([durée]). La date d'expédition est affichée sur chaque produit. » |
 | Drops réservés aux membres | « Drops introuvables ailleurs » ; « édition limitée » sans quantité. | « Produits réservés aux abonnés [MAJESTÉ], dans la limite de [N] pièces par coloris, quantité indiquée sur la page du produit. » |
-| Carte physique | « Carte exclusive en métal », « numérotée » si faux ; « carte de crédit / de paiement ». | « **Carte de membre nominative** envoyée avec votre abonnement MAJESTÉ (sans valeur monétaire, pas un moyen de paiement). » Matière et numérotation seulement si exactes. |
+| Carte physique | « Carte exclusive en métal », « numérotée » si faux ; « carte de crédit / de paiement ». | « **Carte de membre** envoyée avec votre abonnement (sans valeur monétaire, pas un moyen de paiement). » Matière, nom imprimé et numérotation seulement si exacts. |
 | « Priorité stock garantie » | **Retirer**, toute formule avec « garantie ». | Seulement chiffré : « [N] pièces par coloris réservées aux abonnés pendant l'accès anticipé. » |
 | « Statut élite » | **Retirer**. | « Palier MAJESTÉ ». Pas de « cercle fermé », « sélection », « VIP » si l'accès s'obtient par paiement. |
 | Engagement | « Sans engagement » (le contrat est reconduit par périodes de 3 mois), « gratuit », « 0 € » sans condition. | « **Résiliable à tout moment en ligne, sans frais.** Renouvellement automatique tous les 3 mois. » |
@@ -295,7 +295,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 6. **Cases et mentions au paiement.** Hors forfait Plus, les cases personnalisées du checkout ne sont pas disponibles en natif : les placer sur la page du panier (case obligatoire qui bloque le bouton de commande, valeur enregistrée dans les attributs de commande, pour prouver le consentement et la demande de démarrage immédiat).
 7. **Rétractation.** La fonction « Renoncer au contrat ici » couvre aussi l'abonnement. Le remboursement partiel au prorata se fait depuis l'administration Shopify.
 8. **Pied de page et espace client.** Ajouter « Résilier mon abonnement » et « Conditions du Cercle Waves ».
-9. **Carte physique.** Flux d'expédition à définir avec le fondateur (une seule fois, à la première souscription MAJESTÉ). Aucune valeur stockée (numéro ou QR code d'identification uniquement).
+9. **Carte physique.** Flux d'expédition à définir avec le fondateur (une seule fois, à la première souscription). Aucune valeur stockée (numéro ou QR code d'identification uniquement).
 10. **Données.** Mettre à jour `confidentialite.html` (finalité « gestion de l'abonnement », application d'abonnement comme sous-traitant, durées de conservation).
 11. **Majeurs.** Mention « réservé aux majeurs » et déclaration de majorité à la souscription.
 
@@ -345,4 +345,159 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 - **Cashback, fidélité, TVA** : C. conso art. L.212-1 et R.212-1 s. ; BOFiP BOI-TVA-BASE-10-10-30 ; art. 256 ter CGI, directive (UE) 2016/1065. Aucune règle spécifique sur la validité d'un cashback trouvée : analyse par les règles générales.
 - **Rétractation en ligne (« Renoncer au contrat ici »)** : voir section (b).
 
-> **Décision du fondateur (09/10/2026)** : le terme **« cashback »** est conservé dans la communication Cercle Waves (mot connu et rassurant pour la cible). Condition à respecter : sous l'avantage, préciser sa nature exacte — par ex. « Cashback versé en crédit KYMA, utilisable sur vos prochains achats, valable [À COMPLÉTER] mois » — pour ne pas laisser croire à un remboursement en argent.
+> **Décision du fondateur (09/10/2026)** : le terme **« cashback »** est conservé dans la communication Cercle Waves (mot connu et rassurant pour la cible). Condition à respecter : sous l'avantage, préciser sa nature exacte — par ex. « Cashback versé en crédit KYMA, utilisable sur vos prochains achats, valable [À COMPLÉTER] mois » — pour ne pas laisser croire à un remboursement en argent. **[Mise en œuvre : voir la section « Entraide 09/10/2026 », partie B.]**
+
+---
+
+## Entraide 09/10/2026 — formulations Cercle Waves et récit 3D
+
+> **Auteur** : Victoire · **Demande** : plan de Clémentine du 09/10/2026 · **Pour** : Maya (formulations), Sacha (intégration), Izaac (récit 3D), Arthur (validation), fondateur (valeurs).
+> **Fichiers lus** : `brand/BRAND.md`, la présente note, `pages/legal/cercle-waves-conditions.html` (réécrit en **v3**), `theme/templates/page.cercle-waves.json`, `theme/sections/kyma-product-story-scroll.liquid`, `theme/templates/index.json`, `contenu/recherche-abonnement-fidelite.md` (Isabelle). Les autres fichiers du thème n'ont pas été relus.
+> **Rappel unique** : modèles à faire valider par un avocat en droit de la consommation. **Sources** : Légifrance, DGCCRF et INC restent inaccessibles depuis l'environnement ; la numérotation des alinéas de l'art. L.121-4 est donnée de mémoire (la liste est connue : fausse rareté ou fausse limitation dans le temps, droits légaux présentés comme spécificité de l'offre, mention « gratuit » trompeuse, label sans autorisation) et **doit être relue sur Légifrance**. Une jurisprudence confirme que les pratiques de L.121-4 sont trompeuses « en toutes circonstances », sans preuve d'altération du comportement du consommateur (Cass. crim., 28/01/2020, n° 19-80496, selon Revue des contrats, Lextenso). Directive (UE) 2024/825 : l'allégation environnementale générique et le label de durabilité non certifié sont interdits depuis le 27/09/2026 [recherche web du 09/10/2026, sources secondaires].
+
+### A. Les cinq règles à suivre pour chaque avantage
+
+1. **Chiffré, daté, conditionné, tenable** (art. L.121-2 et L.121-3 : une omission d'information essentielle est aussi trompeuse). Un avantage qui n'existe pas encore (aucun drop prévu, par exemple) ne peut pas être vendu comme acquis : la date de première application est affichée avant l'achat.
+2. **Ce que tout le monde a déjà n'est pas un avantage.** « Accès classique aux drops » (INITIUM) est l'accès du public : le présenter comme un avantage d'un abonnement payant est trompeur sur ce que le client achète. À remplacer ou à supprimer.
+3. **Aucun superlatif invérifiable** : « maximale », « avant tout le monde », « garantie », « élite », « exclusifs » (sauf si la quantité et la période sont fixées et respectées).
+4. **Pas d'avantage « à la discrétion » de KYMA** sans engagement minimal : « teasing » sans durée ni contenu est un avantage illusoire.
+5. **Cashback : la nature du crédit est dite à côté du mot** (décision du fondateur). Jamais « argent », « remboursé en espèces », « gagnez », « rentabilisez ».
+
+### B. Table avant → après des avantages (pour Maya)
+
+**Mode d'emploi.** Colonne « Face de la carte » = texte court (champ `perks`). Colonne « Précision » = ce qui doit figurer sous la carte ou au verso, ou dans les conditions (article indiqué). `[valeur]` = valeur à fixer par le fondateur ; « proposition » = valeur que je suggère.
+
+**INITIUM (12,99 € TTC par trimestre)**
+
+| # | Avant (site actuel) | Problème | Après : face de la carte | Précision (verso / conditions) | Valeur |
+|---|---|---|---|---|---|
+| I1 | « Cashback 5 % sur chaque achat » + « Versé en crédit KYMA sur vos prochains achats. » | « Chaque achat » est faux (livraison, cotisation, cartes cadeaux exclues, versement différé) ; nature du crédit, durée et non-conversion absentes. | **« Cashback 5 % sur vos achats de produits »** | **Note sous l'avantage (remplace `cashback_note`)** : « Cashback versé en crédit KYMA (Crédit Waves), pas en espèces : utilisable sur vos prochains achats pendant [12] mois. Hors livraison et cotisation. Voir les conditions. » Art. 7.1 : versé 14 jours après réception, non remboursable ni convertible, plusieurs crédits cumulables, cumul avec codes promo possible, aucun minimum d'achat. | 5 % (décision fondateur) ; validité **[12] mois (proposition)** |
+| I2 | « Accès classique aux drops » | Droit du public présenté comme avantage payant (L.121-2 ; L.121-4 si assimilé à un droit légal). | **« Accès anticipé de [24 h] à chaque drop »** (ou supprimer la ligne) | Art. 7.2 : fenêtre avant l'ouverture au public, ne garantit pas la disponibilité, ne change ni la date d'expédition ni la rétractation. | **[24 h] (proposition)** |
+| I3 | « Carte physique beige, écriture argentée » | « Argentée » peut se lire « en argent » ; statut de la carte non précisé ; carte INITIUM absente des conditions v2. | **« Carte de membre physique beige, écriture argentée »** | « Sans valeur monétaire, pas un moyen de paiement. Envoyée une fois, frais d'envoi inclus. » Art. 7.5. N'écrire « nominative » ou « numérotée » que si c'est vrai. | Délai d'envoi **[14] jours (proposition)** |
+| I4 | « Teasing léger des nouvelles collections » | « Léger » et « teasing » : ni durée ni contenu, avantage non vérifiable. | **« Aperçu des nouvelles collections [3] jours avant l'ouverture au public »** | Art. 7.3 : visuels et informations dans l'espace client ; prévenu par e-mail seulement si la personne a accepté les e-mails de KYMA. | **[3] jours (proposition)** |
+
+**MAJESTÉ (39,99 € TTC par trimestre)**
+
+| # | Avant | Problème | Après : face de la carte | Précision (verso / conditions) | Valeur |
+|---|---|---|---|---|---|
+| M1 | « Cashback 10 % sur chaque achat » | Idem I1. | **« Cashback 10 % sur vos achats de produits »** | Même note que I1. | 10 % (décision fondateur) ; **[12] mois (proposition)** |
+| M2 | « Accès prioritaire aux drops » | « Prioritaire » ne dit pas ce que c'est ; peut se lire « stock garanti ». | **« Accès anticipé de [48 h] à chaque drop »** | Art. 7.2. Ajouter : « Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité. » | **[48 h] (proposition)**, soit le repère observé par Isabelle |
+| M3 | « Précommandes avant tout le monde » | « Avant tout le monde » : faux si des influenceurs ou proches ont un accès plus tôt ; superlatif invérifiable. Double emploi avec M2. | **Fusionner dans M2 : « Accès anticipé de [48 h] à chaque drop, précommandes comprises »** | « Précommandez avant l'ouverture au public. La date d'expédition est affichée sur chaque produit. » | Idem M2 |
+| M4 | « Accès anticipé privatif (teasing) » | « Privatif » détourné ; « teasing » sans contenu ; double emploi avec M2. | **« Aperçu des nouvelles collections [7] jours avant l'ouverture au public »** | Art. 7.3. | **[7] jours (proposition)** |
+| M5 | « Drops exclusifs réservés aux membres » | « Exclusifs » promet qu'on ne les trouvera pas ailleurs ; aucun engagement de nombre ni de quantité : avantage illusoire. | **« Produits réservés aux abonnés MAJESTÉ (au moins [1] par an)** » | Art. 7.4 : quantité et période de réservation sur la page du produit ; KYMA peut ensuite ouvrir au public, ce qui est indiqué. Ne pas écrire « exclusif », « introuvable ailleurs ». | **[1] par an (proposition)** ; à retirer si le fondateur ne peut pas s'y engager |
+| M6 | « Priorité stock garantie » | **Retirer** : « garantie » = promesse contractuelle intenable (petite série, aléas de production). Fausse sécurité de disponibilité (L.121-2). | **Supprimé.** Si le fondateur veut protéger les MAJESTÉ d'un épuisement par les INITIUM : « [N] pièces par coloris réservées aux abonnés MAJESTÉ pendant leur fenêtre » | Art. 7.2 (variante prévue, entre crochets). | **Par défaut : aucune quantité réservée** (la fenêtre de 48 h suffit) |
+| M7 | « Statut élite · Rareté maximale » | « Élite » : sélection alléguée alors que l'accès s'obtient en payant (L.121-2). « Rareté maximale » : superlatif invérifiable, et fausse rareté si les séries ne sont pas limitées ou rééditées (L.121-4). | **« Le palier supérieur du Cercle Waves »** (`lead` existant) ; pas de ligne de statut | Pour la rareté, seulement un fait : « Éditions limitées à [N] pièces par coloris » avec le chiffre réel et sans réédition identique. | — |
+| M8 | « Carte physique gris clair, écriture dorée » | « Dorée » peut se lire « en or ». | **« Carte de membre physique gris clair, écriture dorée »** | Idem I3. | Idem I3 |
+
+**Ce que Maya peut dire, sans risque, autour de ces avantages** : « Deux paliers », « Le palier supérieur », « Accès anticipé », « Aperçu », « Cashback en Crédit Waves », « Résiliable à tout moment en ligne ». **À proscrire** : élite, VIP, privilège, cercle fermé, sélection, garanti, avant tout le monde, exclusif sans quantité, maximale, « rentabilisez votre abonnement », « gagnez ». Le Cercle ne doit pas être décrit comme sélectif ni mérité : tout majeur peut s'abonner.
+
+### C. Autres textes de la page Cercle Waves à corriger (fichier `page.cercle-waves.json`)
+
+| Où | Avant | Après | Pourquoi |
+|---|---|---|---|
+| Ouverture, `text` | « Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu'à la proximité. Deux paliers, qui se découvrent dans l'ordre. » | « Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback, accès anticipé aux drops et carte de membre. Vous choisissez votre palier, vous pouvez en changer ou résilier en ligne à tout moment. » (Maya peut réécrire le ton, pas les faits.) | « Programme de fidélité » laisse croire à une adhésion gratuite. « Dans l'ordre » est faux si on peut choisir MAJESTÉ directement. |
+| Paliers, `terms_text` | « Abonnement trimestriel, renouvelé automatiquement, résiliable à tout moment. Conditions : » | « Abonnement trimestriel : INITIUM 12,99 € TTC, MAJESTÉ 39,99 € TTC, renouvelé automatiquement tous les 3 mois. Résiliable à tout moment en ligne, sans frais, en quelques clics. Rétractation possible sous 14 jours. Réservé aux majeurs. Conditions : » | Mentions précontractuelles (L.221-5). Éviter « en 3 clics » tant que Sacha n'a pas chronométré le parcours. |
+| Paliers, `terms_label` | « règlement Cercle Waves » | « conditions du Cercle Waves » | Cohérence avec la page légale. |
+| Cartes, `condition` (les deux) | « Condition d'accès : [À COMPLÉTER] » | « Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. » | Le champ est affiché tel quel. Aucune condition d'accès n'existe (voir art. 3 des conditions). |
+| Cartes, `aria` | « … 12,99 € par trimestre TTC. … » | Ajouter « , renouvelé automatiquement » après « TTC » | Cohérence avec l'affichage visuel. |
+| Passage, `text` | « Les paliers se découvrent dans l'ordre. Le passage à MAJESTÉ : [À COMPLÉTER : critère décidé par le fondateur]. » | « Vous pouvez choisir directement l'un ou l'autre palier. Passer à MAJESTÉ prend effet tout de suite (vous payez la différence au prorata) ; passer à INITIUM prend effet à la fin du trimestre en cours. » | Art. 9 des conditions. Si le fondateur impose un critère, il faut l'écrire ici et à l'art. 3. |
+| Passage, `title_*` | « Dans l'ordre, sans détour. » | À réécrire par Maya, par exemple « D'un palier à l'autre, sans détour. » | Même raison. |
+| Passage, `sym1` / `sym2` | « L'entrée dans le cercle. » / « Le palier supérieur. » | Inchangé. | Faits. |
+| Rejoindre (formulaire e-mail), `title`, `button`, `success` | « Entrer dans le cercle. » / « Rejoindre le cercle » / « Bienvenue dans le cercle. Votre place est enregistrée. » | **Tant que l'appli d'abonnement n'est pas branchée** : titre « Être prévenu de l'ouverture » ; bouton « Me prévenir » ; succès « Merci. Nous vous écrirons à l'ouverture du Cercle Waves. Cette inscription n'est pas un abonnement. » Une fois l'abonnement actif, ce bloc redevient un lien vers le paiement. | Un simple formulaire e-mail ne peut pas s'appeler « rejoindre » ni confirmer une « place » : le visiteur croirait être abonné ou avoir une place réservée. |
+| Rejoindre, `consent` | « J'accepte de recevoir les e-mails de KYMA (…) [À VALIDER VICTOIRE …] » | « Je souhaite recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. » Case **non pré-cochée**. | Consentement libre, spécifique, éclairé (RGPD, CPCE art. L.34-5). Les e-mails liés à l'abonnement n'ont pas besoin de ce consentement, mais l'accès anticipé ne doit pas être conditionné à cette case. |
+| Rejoindre, `terms` | « Conditions du programme : [À COMPLÉTER : lien. …] » | « Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]. » | Page rédigée (v3), non publiée. |
+| Accueil `index.json`, section `cercle`, `text` | « … Deux paliers, INITIUM et MAJESTÉ. » | Ajouter « , par abonnement trimestriel » avant le point. | L'accueil ne doit pas laisser croire à un programme gratuit. |
+
+### D. Valeurs proposées au fondateur (toutes marquées « proposition »)
+
+| Paramètre | Proposition | Repère (Isabelle, 09/10/2026) | Remarque |
+|---|---|---|---|
+| Cashback INITIUM / MAJESTÉ | 5 % / 10 % (décision) | Marché 3–5 % | 10 % est au-dessus des repères : rentabilité à valider avec l'expert-comptable. |
+| Validité d'un Crédit Waves | **12 mois** à compter du versement | 12 mois (Gymshark) | Pas de minimum légal trouvé ; 12 mois limite le risque de clause abusive. |
+| Alerte avant expiration | 30 jours, par e-mail | — | E-mail de service, pas de prospection. |
+| Sort des crédits à la résiliation | Utilisables jusqu'à leur expiration, et au moins **6 mois** après la fin de l'abonnement | — | Remplace « 6 mois seulement » de la v2 : le client a payé pour cet avantage, le perdre à la résiliation est un risque de clause abusive. |
+| Versement du cashback | 14 jours après réception des produits (précommande : après expédition et réception) | — | Délai de rétractation écoulé : pas de crédit à reprendre. Un achat passé pendant l'abonnement garde son cashback même après résiliation. |
+| Plafond / minimum | Aucun plafond, aucun minimum d'utilisation | — | Si le fondateur veut un plafond, l'écrire à l'art. 7.1 et sous la carte. |
+| Cumul avec codes promo | Oui (cashback calculé sur le prix payé après remise), sauf mention contraire sur le code | — | |
+| Accès anticipé | **MAJESTÉ [48 h], INITIUM [24 h]** | 48 h (SNIPES, 2 jours) | MAJESTÉ s'ouvre toujours avant INITIUM. |
+| Aperçu des collections | MAJESTÉ [7] jours, INITIUM [3] jours avant l'ouverture au public | — | Dans l'espace client, pas par e-mail promotionnel. |
+| Produits réservés MAJESTÉ | Au moins **[1] par an**, quantité indiquée sur la page | — | À retirer si le fondateur ne peut pas s'engager sur un chiffre. |
+| Quantités réservées pendant l'accès anticipé | Aucune par défaut | — | Variante : [N] pièces par coloris réservées MAJESTÉ. |
+| Envoi de la carte | Au plus tard **[14] jours** après la souscription, frais inclus | — | Date ou délai obligatoire (L.216-1). Carte INITIUM et MAJESTÉ (cartes du fondateur). |
+| Fenêtre d'annonce | Dates d'accès anticipé annoncées au moins 48 h à l'avance | — | |
+| Calendrier type d'un drop | J-7 aperçu MAJESTÉ · J-3 aperçu INITIUM · J-2 accès anticipé MAJESTÉ · J-1 accès anticipé INITIUM · J ouverture au public | — | Indicatif. |
+
+**Chiffres à connaître avant de fixer les taux.** Le cashback ne couvre la cotisation qu'au-delà de **260 € d'achats par trimestre pour INITIUM** (12,99 ÷ 5 %), soit 2 hoodies à 179 € ; et de **400 € pour MAJESTÉ** (39,99 ÷ 10 %), soit 3 hoodies. À 179 €, un hoodie génère 8,95 € (INITIUM) ou 17,90 € (MAJESTÉ). Conséquence rédactionnelle : ne jamais écrire que l'abonnement « se rentabilise » ou « rapporte ».
+
+### E. Relecture du récit 3D (`kyma-product-story-scroll.liquid`, `index.json`)
+
+**Résultat de la vérification des allégations dans les trois fichiers lus.**
+
+| Allégation | Résultat |
+|---|---|
+| GOTS | Absente. |
+| Bio / coton biologique | Absente. |
+| Made in Portugal | Absente en clair, **mais présente comme valeur de fiche** : `Lieu de fabrication | [À CONFIRMER : Portugal]`. Le gabarit affiche toute ligne dont la valeur n'est pas vide : sur un site publié, le visiteur lirait « [À CONFIRMER : Portugal] ». Même risque pour `Corps | [À CONFIRMER : 100 % coton]` et `Doublure | [À COMPLÉTER]`. |
+| « Chaque pièce est unique » | Pas en clair, mais **« un motif qui ne se répète jamais »** (étape 1) est une affirmation absolue équivalente. Les formules « pensé(e) pour être unique » (hero, légende) sont conformes au tableau (a). |
+| Autres allégations matière | « **laiton plaqué or brossé** » (étape 4) et « **métal argent brossé** » (étape 5) : appellations de matériaux non prouvées (pas de fiche technique) ; « plaqué or » est une dénomination de métal précieux qui suppose une couche d'or minimale (à vérifier avant usage) ; « argent brossé » peut se lire « en argent ». |
+
+**La mention « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » est insuffisante**, pour trois raisons :
+1. **Elle n'est visible qu'à la toute fin.** Dans le gabarit, la légende est dans le bloc de sortie (`outro`) de la section épinglée de 700 vh : pendant les sept étapes de la présentation (capuche, tirette, intérieur), aucune mention n'est à l'écran.
+2. **Elle ne dit pas que ce n'est pas une photo du produit fabriqué.** « Visuel de présentation 3D » peut se lire comme un rendu fidèle d'un produit existant. Or le produit n'est pas encore fabriqué ni photographié.
+3. **Elle ne dit pas en quoi la pièce peut différer** (motif, nuances de couleur, finitions, écran). Une mention « non contractuel » ne rend de toute façon pas licite un visuel trompeur : le rendu doit rester fidèle à la coupe, au coloris et aux finitions annoncés dans le tech pack.
+
+**Corrections exactes (texte avant → après)**
+
+| # | Où | Avant | Après |
+|---|---|---|---|
+| R1 | Légende (réglage `caption` de la section, `index.json` « piece » et valeur par défaut du schéma ; aussi `caption_hoodie` de la section « drop ») | « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » | « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** » |
+| R2 | Affichage de la légende (Sacha, `.liquid`) | Légende dans l'étape finale seulement | **Légende permanente dans la zone épinglée** (`kyma-pstory__sticky`), visible à chaque étape, aussi dans le rendu statique (mouvement réduit, sans JavaScript, sans WebGL) |
+| R3 | Sections « drop » et « motif », `caption` | « Illustration du coloris. » | « Rendu 3D du coloris, pas une photo du produit fabriqué. » (section drop) · « Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique. » (section motif) |
+| R4 | Étape 1 (`text`) | « … un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile. » | « … un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile. » |
+| R5 | Étape 4 (`text`) | « Sculptée « Kyma », en laiton plaqué or brossé. Le seul éclat de la pièce. » | « Sculptée « Kyma », en laiton, finition dorée brossée. Le seul éclat de la pièce. » (revenir à « plaqué or » seulement avec la fiche technique du fabricant et après vérification de la dénomination) |
+| R6 | Étape 5 (`text`) | « Zip intégral en métal argent brossé, du col jusqu'à l'ourlet. » | « Zip intégral en métal, finition argentée brossée, du col jusqu'à l'ourlet. » |
+| R7 | Étape 6 (`spec`) | `Corps \| [À CONFIRMER : 100 % coton]` · `Bords-côtes \| 95 % coton, 5 % élasthanne` · `Doublure \| [À COMPLÉTER]` | **Laisser les valeurs vides** tant que le fabricant n'a pas confirmé la composition (le gabarit n'affiche pas une ligne sans valeur) ; Sacha masque le bloc `<dl>` s'il est vide et affiche à la place : « La composition complète figure sur la fiche produit. » Les valeurs seront ajoutées à l'identique de l'étiquette (jamais « bio » ni « GOTS » sans le tableau (a)). |
+| R8 | Étape 7 (`spec`) | `Lieu de fabrication \| [À CONFIRMER : Portugal]` · `Imaginé à \| Paris` | `Lieu de fabrication \|` (valeur vide jusqu'au contrat signé et à l'attestation d'origine) · `Imaginé à \| Paris` (conservé, vrai si la conception est bien faite à Paris ; confirmer avec le fondateur) |
+| R9 | Étape 3 (`text`) | « Le motif KYMA Wave court sur tout le dos, d'une épaule à l'autre, comme un courant. » | Conservé, **sous réserve** que le tech pack confirme l'impression all-over ; à recontrôler sur les préséries. |
+| R10 | Images fixes (`still_alt`, mouvement réduit) | vide | « Rendu 3D du hoodie Ressac, [coloris], étape [capuche / dos / tirette / zip / intérieur]. Pas une photo du produit fabriqué. » |
+| R11 | Hero `index.json`, note | « Expédition au plus tard le [À COMPLÉTER : date] » | Inchangé dans sa formule. **Ne pas publier tant que la date n'est pas renseignée** : sinon le crochet s'affiche. |
+
+**Sont conformes (sans changement)** : « pensé pour être unique » (hero), « Pensé pour que chaque pièce soit unique », « Double épaisseur, sans cordon ni œillets », « doublure en jersey ton sur ton » (descriptif de conception, à recontrôler sur les préséries), « Imaginé à Paris », les noms de coloris et leurs descriptions poétiques, le sélecteur « Coloris du modèle 3D ».
+
+**Remarques complémentaires.** (i) Le nom de produit « Ressac » (URL `ressac-hoodie-zippe-oversize`) n'a fait l'objet d'aucune recherche d'antériorité : à inclure dans le dépôt de marque (point 4). (ii) Le modèle 3D doit rester fidèle au produit : toute différence de coupe ou de finition entre le GLB et la préserie corrigée par Izaac avant ouverture des précommandes. (iii) Le thème rend accessible le texte de chaque étape ; la légende R1 doit l'être aussi (texte réel, pas dans le canvas).
+
+### F. Modèles 3D sous licence (shortlist d'Isabelle)
+
+Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-modeles-3d.md`). **Je n'en vérifie pas les licences maintenant**, mais je le ferai dès qu'elle sera disponible. Grille que j'appliquerai : usage commercial autorisé ; modification autorisée ; **mise à disposition publique du fichier GLB** (le navigateur le télécharge : beaucoup de licences interdisent de redistribuer le fichier brut) ; attribution (et où l'afficher) ; droits sur les textures et logos de tiers ; modèle non généré par IA (décision du fondateur : aucune image IA) ; preuve d'achat ou de licence conservée au nom de la société ; durée et exclusivité.
+
+### G. Points de vigilance (cette entraide)
+
+**🔴 Bloquant avant publication**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| E1 | **Avantages vendus mais pas encore disponibles** (accès anticipé, aperçu et produits réservés sans drop prévu) : omission trompeuse (L.121-3) et avantage illusoire. | Afficher la date de première application (art. 7.6) et l'état du prochain drop sur la page ; ne pas ouvrir l'abonnement avant d'avoir au moins un drop ou un événement daté. Dans l'e-mail de confirmation, répéter cette date. | Fondateur, Sacha |
+| E2 | **Les textes « Priorité stock garantie », « Statut élite · Rareté maximale », « Accès classique », « avant tout le monde »** sont encore dans `page.cercle-waves.json` (champ `perks`). | Appliquer le tableau B, ligne par ligne. | Maya (textes), Sacha (intégration) |
+| E3 | **Champs affichant des crochets** (`[À COMPLÉTER]`, `[À CONFIRMER : Portugal]`) dans le récit 3D et la page Cercle. | Vider ou renseigner avant tout partage de l'URL ; pas de publication avec crochets. | Sacha |
+| E4 | **Légende 3D visible seulement à la dernière étape** et libellée « Visuel de présentation 3D ». | Correctifs R1 à R3 : légende permanente, texte « Modèle 3D de présentation, pas une photo du produit fabriqué. … ». | Sacha |
+| E5 | **Allégations de matière non prouvées** : « plaqué or », « argent brossé ». | Correctifs R5, R6 jusqu'à la fiche technique. | Izaac, Sacha |
+| E6 | **Formulaire e-mail intitulé « Rejoindre le cercle »** alors que l'adhésion est payante. | Correctifs de la partie C (liste d'attente tant que l'abonnement n'est pas actif). | Maya, Sacha |
+
+**🟠 À régler rapidement**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| E7 | **Information avant reconduction (art. L.215-1) : aucune appli d'abonnement Shopify examinée par Isabelle ne confirme un rappel automatique** (Shopify Subscriptions, Appstle, Seal, Recharge, Loop, Bold : « non trouvé »). Sans rappel conforme, le client peut résilier gratuitement à tout moment et se faire rembourser les sommes versées d'avance. | **Sacha** met en place le rappel lui-même : e-mail dédié programmé à J-35 par *Shopify Flow* ou *Klaviyo* (déclenché sur la date du prochain renouvellement, modèle E de la section 2, avec encadré et lien de résiliation). Il teste l'envoi, vérifie SPF/DKIM et conserve la preuve d'envoi par abonné. **Solution de repli** si l'automatisation n'est pas possible : le **fondateur** envoie un e-mail manuel, chaque lundi, à tous les abonnés dont le renouvellement tombe 5 semaines plus tard, à partir d'un export de l'appli. Avant d'installer une appli, **Sacha demande par écrit à l'éditeur** si elle envoie ce rappel et dans quel délai. | Sacha ; repli : fondateur |
+| E8 | **Cashback de 10 % et carte physique à 12,99 €** : équilibre économique non vérifié ; un changement ultérieur à la baisse est encadré (art. 12 des conditions). | Valider les taux avec l'expert-comptable avant publication (partie D). | Fondateur, expert-comptable |
+| E9 | **TVA** du Crédit Waves et de la carte. | Voir O1. | Expert-comptable |
+| E10 | **Mise à jour de `confidentialite.html` et de `cgv.html`** (abonnement, Crédit Waves, carte, accès anticipé). | Je les mets à jour après validation des valeurs. | Victoire |
+| E11 | **Nominative / numérotée** pour la carte : à écrire seulement si le nom ou un numéro est imprimé. | Confirmer avec le fondateur. | Fondateur |
+
+**🟢 Bonnes pratiques**
+
+| # | Point | Action | Qui |
+|---|---|---|---|
+| E12 | Chronométrer le parcours de résiliation avant d'écrire « en 3 clics ». | Test documenté, captures. | Sacha |
+| E13 | Le compte client affiche : solde de Crédit Waves, date d'expiration de chaque crédit, date du prochain prélèvement. | Intégrer au portail. | Sacha |
+| E14 | Réviser les valeurs d'avantages à chaque nouveau drop (dates d'accès anticipé annoncées 48 h avant). | Calendrier partagé. | Maya, Sacha |
+| E15 | Recontrôler le récit 3D après les préséries : coupe, finitions, impression all-over. | Comparaison modèle / pièce. | Izaac |
