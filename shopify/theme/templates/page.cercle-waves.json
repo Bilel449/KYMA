@@ -51,14 +51,15 @@
             "tone": "initium",
             "invite": "Retourner",
             "back_label": "AVANTAGES",
-            "perks": "5 % de crédits sur chacun de tes achats\nAccès aux drops 24 h avant l'ouverture au public\nCarte membre bleu nuit et argent",
+            "perks": "Cashback 5 % sur chaque achat\nAccès classique aux drops\nCarte physique beige, écriture argentée\nTeasing léger des nouvelles collections",
             "cashback_note": "Versé en crédit KYMA sur vos prochains achats.",
             "condition": "Condition d'accès : [À COMPLÉTER]",
             "price": "12,99 €",
             "price_period": "par trimestre, TTC",
             "join_label": "Rejoindre",
             "join_link": "[À COMPLÉTER : lien d'abonnement]",
-            "aria": "Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC. Activer pour afficher les avantages au verso."
+            "aria": "Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC. Activer pour afficher les avantages au verso.",
+            "card_image": "shopify://shop_images/kyma-carte-initium.jpg"
           }
         },
         "tier_2": {
@@ -74,14 +75,15 @@
             "tone": "majeste",
             "invite": "Retourner",
             "back_label": "AVANTAGES",
-            "perks": "10 % de crédits sur chacun de tes achats\nAccès aux précommandes privées\nTeasers exclusifs : une page dédiée te dévoile chaque drop avant sa sortie\nCarte membre noire effet miroir, détails or embossés",
+            "perks": "Cashback 10 % sur chaque achat\nAccès prioritaire aux drops\nCarte physique gris clair, écriture dorée\nAccès anticipé privatif (teasing)\nPrécommandes avant tout le monde\nDrops exclusifs réservés aux membres\nPriorité stock garantie\nStatut élite · Rareté maximale",
             "cashback_note": "Versé en crédit KYMA sur vos prochains achats.",
             "condition": "Condition d'accès : [À COMPLÉTER]",
             "price": "39,99 €",
             "price_period": "par trimestre, TTC",
             "join_label": "Rejoindre",
             "join_link": "[À COMPLÉTER : lien d'abonnement]",
-            "aria": "Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC. Activer pour afficher les avantages au verso."
+            "aria": "Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC. Activer pour afficher les avantages au verso.",
+            "card_image": "shopify://shop_images/kyma-carte-majeste.jpg"
           }
         }
       },
