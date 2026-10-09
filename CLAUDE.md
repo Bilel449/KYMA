@@ -78,3 +78,5 @@ Quand tu orchestres, annonce brièvement les délégations (`→ clementine`, `�
 ## Tableau de l'équipe (jauges)
 Un tableau en direct montre chaque membre en bulle (statut, jauge d'avancement, tâche en cours) : https://claude.ai/artifact/SJ9BNy6wbbCbHb5Lca6hzY (source : `outils/equipe-kyma.html`).
 **À chaque délégation et à chaque retour d'un agent**, Claude met à jour le document `team/<agent>` (`status` : en cours / terminé / en attente / bloqué / disponible ; `progress` 0-100 ; `task` ; `updated_at` ISO) et ajoute une ligne au journal `meta/journal` (`entries`, 30 dernières max) via l'outil ArtifactData.
+
+**Présent à chaque requête** (demande du fondateur) : au début de chaque réponse, Claude ouvre le tableau (outil Artifact, action `open`) et termine sa réponse par la ligne « 📊 Tableau de l'équipe : <lien> ». Un hook `UserPromptSubmit` (`.claude/settings.json` → `.claude/hooks/tableau-equipe.sh`) le rappelle automatiquement à chaque message.
