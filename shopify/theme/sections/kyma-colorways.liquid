@@ -3,12 +3,18 @@
   change de couleurs en direct (fondu 1,2 s) et le nom du coloris se recompose lettre par lettre.
   Aucune photo : les vraies photos du shooting iront dans la galerie de la fiche produit.
   Un bloc = un coloris (nom, description, deux nuances, lien). Les nuances doivent rester tonales.
+  v2 : si un bloc indique un fichier GLB (assets/ressac-<coloris>.glb), le HOODIE 3D de ce coloris s'affiche et
+  tourne doucement (lecteur kyma-glb.js, contexte WebGL partagé), devant le slime flottant gardé en fond.
+  Sans WebGL ou si le fichier échoue : le slime seul, teinté du coloris (comportement d'origine).
 {%- endcomment -%}
 {% render 'kyma-assets' %}
 {%- assign title_id = 'kyma-cw-title-' | append: section.id -%}
 {%- assign first = section.blocks.first -%}
+{%- assign glb0 = '' -%}
+{%- if section.settings.show_hoodie and first.settings.glb != blank -%}{%- assign glb0 = first.settings.glb | asset_url -%}{%- endif -%}
 
-<section class="kyma-sec kyma-cw" id="{{ section.settings.anchor | default: 'kyma-cw-' | append: section.id }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
+{%- assign cw_anchor = 'kyma-cw-' | append: section.id -%}
+<section class="kyma-sec kyma-cw" id="{{ section.settings.anchor | default: cw_anchor }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
   {% if first %}style="--cw-a: {{ first.settings.color_a }}; --cw-b: {{ first.settings.color_b }};"{% endif %}>
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
@@ -24,8 +30,14 @@
     </div>
 
     <div class="kyma-cw__stage">
-      <div class="kyma-cw__viz" data-kyma-3d-host data-kyma-reveal>
-        <canvas data-kyma-3d="hero" data-shift="0,0" data-colorway="{{ first.settings.name | handleize | default: 'lilac-whirl' }}" aria-hidden="true"></canvas>
+      <div class="kyma-cw__viz{% if glb0 != '' %} kyma-cw__viz--hoodie{% endif %}" data-kyma-3d-host data-kyma-reveal>
+        <canvas class="kyma-cw__slime" data-kyma-3d="hero" data-shift="{% if glb0 != '' %}0.62,-0.42{% else %}0,0{% endif %}" data-colorway="{{ first.settings.name | handleize | default: 'lilac-whirl' }}"{% if glb0 != '' %} data-interactive="false" data-max-scale="0.45"{% endif %} aria-hidden="true"></canvas>
+        {%- if glb0 != '' -%}
+          <canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="{{ glb0 }}" tabindex="0" role="img"
+            data-label="{{ section.settings.hoodie_label | escape }}"
+            aria-label="{{ section.settings.hoodie_label | escape }} {{ first.settings.name | escape }}"></canvas>
+          <p class="kyma-cw__loading" aria-hidden="true">{{ section.settings.loading_label | escape }}</p>
+        {%- endif -%}
       </div>
 
       <div class="kyma-cw__panel" data-kyma-reveal style="--kd: 120ms;">
@@ -49,6 +61,7 @@
                   data-a="{{ block.settings.color_a }}"
                   data-b="{{ block.settings.color_b }}"
                   {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %}
+                  {% if glb0 != '' and block.settings.glb != blank %}data-glb="{{ block.settings.glb | asset_url }}"{% endif %}
                   aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
                   style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};"
                 >
@@ -68,13 +81,16 @@
             </a>
           {%- endif -%}
         </div>
-        {%- if section.settings.caption != blank -%}
+        {%- if glb0 != '' and section.settings.caption_hoodie != blank -%}
+          <p class="kyma-caption" data-kyma-cw-caption data-fallback="{{ section.settings.caption | escape }}">{{ section.settings.caption_hoodie | escape }}</p>
+        {%- elsif section.settings.caption != blank -%}
           <p class="kyma-caption">{{ section.settings.caption | escape }}</p>
         {%- endif -%}
       </div>
     </div>
   </div>
   <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.number | escape }}</div>
+  {%- if glb0 != '' -%}<script src="{{ 'kyma-glb.js' | asset_url }}" defer data-kyma-asset="glb"></script>{%- endif -%}
 </section>
 
 {% schema %}
@@ -94,7 +110,11 @@
     { "type": "text", "id": "list_label", "label": "Nom accessible de la liste", "default": "Choisir un coloris pour l'aperçu 3D" },
     { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Voir ce coloris" },
     { "type": "url", "id": "cta_link", "label": "Bouton — lien par défaut" },
-    { "type": "text", "id": "caption", "label": "Mention sous le sélecteur", "default": "Aperçu 3D du motif et des teintes, à titre d'illustration — pas une photo du produit." }
+    { "type": "text", "id": "caption", "label": "Mention sous le sélecteur (sans hoodie 3D)", "default": "Illustration du coloris." },
+    { "type": "checkbox", "id": "show_hoodie", "label": "Afficher le hoodie 3D (fichiers GLB des blocs)", "default": true },
+    { "type": "text", "id": "hoodie_label", "label": "Texte équivalent du hoodie 3D", "default": "Hoodie zippé oversize Ressac en 3D, coloris" },
+    { "type": "text", "id": "loading_label", "label": "Texte de chargement", "default": "Chargement du modèle 3D…" },
+    { "type": "text", "id": "caption_hoodie", "label": "Mention sous le hoodie 3D", "default": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." }
   ],
   "blocks": [
     {
@@ -105,7 +125,8 @@
         { "type": "text", "id": "description", "label": "Description courte", "default": "Lilas tourbillonnant sur poudre" },
         { "type": "color", "id": "color_a", "label": "Nuance principale", "default": "#C8A2C8" },
         { "type": "color", "id": "color_b", "label": "Nuance secondaire", "default": "#F5EDE4" },
-        { "type": "url", "id": "link", "label": "Lien (fiche produit, variante)" }
+        { "type": "url", "id": "link", "label": "Lien (fiche produit, variante)" },
+        { "type": "text", "id": "glb", "label": "Fichier GLB du hoodie dans les fichiers du thème", "info": "Ex. ressac-lilac-whirl.glb. Vide = slime seul pour ce coloris." }
       ]
     }
   ],

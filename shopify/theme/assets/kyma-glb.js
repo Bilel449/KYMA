@@ -185,7 +185,8 @@
     g.viewers.push(self);
     self.bind();
     if ('ResizeObserver' in w) new ResizeObserver(function () { self.size(); }).observe(cv); else w.addEventListener('resize', function () { self.size(); });
-    if ('IntersectionObserver' in w) new IntersectionObserver(function (es) { self.vis = es[es.length - 1].isIntersecting; self.wake(); }, { rootMargin: '60px 0px' }).observe(cv);
+    /* n'anime que si au moins 20 % du lecteur est à l'écran (pas de rendu pour un bord qui dépasse) */
+    if ('IntersectionObserver' in w) new IntersectionObserver(function (es) { var e = es[es.length - 1]; self.vis = e.isIntersecting && e.intersectionRatio >= 0.2; if (self.vis) self.wake(); else self.last = 0; }, { threshold: [0, 0.2, 0.5] }).observe(cv);
     d.addEventListener('visibilitychange', function () { self.wake(); });
     d.addEventListener('kyma:motion', function () { self.wake(); });
     self.size();
@@ -258,8 +259,9 @@
   V.wake = function () { var s = this; if (!s.raf && !s.dead) s.raf = w.requestAnimationFrame(function (t) { s.tick(t); }); };
   V.tick = function (now) {
     var s = this; s.raf = 0;
-    if (!s.vis || d.hidden) { s.last = 0; return; }
-    var dt = s.last ? Math.min(0.1, (now - s.last) / 1000) : 1 / 60, go = false; s.last = now;
+    if (d.hidden || (!s.vis && s.shown && !s.dirty)) { s.last = 0; return; }
+    if (!s.vis) { s.draw(0); s.dirty = 0; s.last = 0; return; } /* hors champ : une image fixe, sans animation */
+    var real = s.last ? now - s.last : 0, dt = s.last ? Math.min(0.1, real / 1000) : 1 / 60, go = false; s.last = now;
     if (s.tw) {
       var T = s.tw; T.t += dt * 1000; var k = ease(Math.min(1, T.t / T.ms));
       s.yaw = T.y0 + (T.y1 - T.y0) * k; s.pitch = T.p0 + (T.p1 - T.p0) * k; s.z = T.z0 + (T.z1 - T.z0) * k;
@@ -274,13 +276,13 @@
       }
     } else go = true;
     if (s.old) { s.ft += dt / (RM ? 0.01 : 0.9); if (s.ft >= 1) s.old = null; go = true; }
-    if (go || s.dirty) s.draw(dt);
+    if (go || s.dirty) { s.draw(dt); if (real && go) s.adapt(real); }
     s.dirty = 0;
     if (go || (s.auto && !s.hold && !paused() && !s.hover)) s.wake(); else s.last = 0;
   };
   V.draw = function (dt) {
     var s = this, g = shared(), m = s.cur; if (!g || s.dead) return;
-    var gl = g.gl, W = s.cv.width, H = s.cv.height, asp = W / H, t0 = performance.now();
+    var gl = g.gl, W = s.cv.width, H = s.cv.height, asp = W / H;
     if (g.cv.width < W || g.cv.height < H) { g.cv.width = Math.max(g.cv.width, W); g.cv.height = Math.max(g.cv.height, H); }
     gl.viewport(0, 0, W, H);
     gl.clearColor(s.clear[0], s.clear[1], s.clear[2], s.clear[3]);
@@ -312,17 +314,16 @@
       s.ctx.drawImage(g.cv, 0, g.cv.height - H, W, H, 0, 0, W, H);
     } catch (e) { /* contexte perdu */ }
     if (m && !s.shown) { s.shown = 1; s.cv.classList.add('is-drawn'); }
-    s.adapt(performance.now() - t0, dt);
     if (s.o.onframe && m) s.o.onframe(s);
   };
-  /* qualité adaptative : si une image coûte plus de 20 ms, on réduit la résolution interne (jusqu'à 55 %) */
-  V.adapt = function (ms, dt) {
-    if (!dt) return;
-    this.acc = (this.acc || 0) + ms; this.n = (this.n || 0) + 1;
-    if (this.n < 24) return;
+  /* qualité adaptative sur l'intervalle réel entre deux images (cible 60 i/s) : on réduit la résolution interne
+     (jusqu'à 50 %) si l'image dépasse 22 ms, on remonte prudemment sous 17,5 ms */
+  V.adapt = function (ms) {
+    this.acc = (this.acc || 0) + Math.min(ms, 400); this.n = (this.n || 0) + 1;
+    if (this.n < 12 && this.acc < 600) return;
     var avg = this.acc / this.n, q = this.q || 1; this.acc = 0; this.n = 0;
-    if (avg > 20) q *= 0.85; else if (avg < 8) q *= 1.08;
-    q = Math.max(0.55, Math.min(1, q));
+    if (avg > 40) q *= 0.75; else if (avg > 22) q *= 0.88; else if (avg < 17.5) q *= 1.06;
+    q = Math.max(0.5, Math.min(1, q));
     if (Math.abs(q - (this.q || 1)) > 0.02) { this.q = q; this.size(); }
   };
   V.mesh = function (g, m, M, cy, cs) {

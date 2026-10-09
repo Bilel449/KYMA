@@ -100,7 +100,7 @@ Logique : on montre d'abord ce que l'on vend (coloris), puis ce qui le rend sing
 ### 05 — Cercle Waves
 - **Label** : 05 — CERCLE WAVES
 - **Titre** : Rejoindre le *cercle*.
-- **Texte** : Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.
+- **Texte** : Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.
 - **Lien** : Entrer dans le Cercle
 
 ### 06 — Instagram
@@ -193,15 +193,15 @@ Note : l'engagement « nous vous écrivons sans attendre » doit être confirmé
   - [À VALIDER : autre avantage d'entrée, à définir par le fondateur]
 - **Condition d'accès** : [À VALIDER : inscription gratuite, ou lié à un premier achat]
 
-### Palier 2 — ORIGINE
-- **Label** : 02 — ORIGINE
+### Palier 2 — MAJESTÉ
+- **Label** : 02 — MAJESTÉ
 - **Texte** : Le palier supérieur, pour celles et ceux qui portent KYMA depuis ses origines.
 - **Avantages** :
   - [À VALIDER : accès anticipé aux prochaines ouvertures]
   - [À VALIDER : autre avantage de palier supérieur]
-- **Condition de passage à ORIGINE** : [À VALIDER : critère d'accès, ex. nombre d'achats ou ancienneté. Ne rien chiffrer avant décision du fondateur.]
+- **Condition de passage à MAJESTÉ** : [À VALIDER : critère d'accès, ex. nombre d'achats ou ancienneté. Ne rien chiffrer avant décision du fondateur.]
 
-Note : l'« accès anticipé aux prochaines ouvertures » est désormais l'avantage ORIGINE ; si le même avantage est proposé à INITIUM ou aux inscrits newsletter (section 5), le fondateur doit trancher pour que les paliers restent distincts.
+Note : l'« accès anticipé aux prochaines ouvertures » est désormais l'avantage MAJESTÉ ; si le même avantage est proposé à INITIUM ou aux inscrits newsletter (section 5), le fondateur doit trancher pour que les paliers restent distincts.
 
 ### CTA d'inscription
 - **Bouton** : Rejoindre le cercle
@@ -289,5 +289,5 @@ Rejoignez le courant.
 ---
 
 ## Récapitulatif des balises ouvertes
-- Fondateur : date « Expédition au plus tard le [date] », frais et délais de livraison, nom de domaine, e-mail de contact, avantages et conditions des paliers INITIUM / ORIGINE, grammage définitif, raison sociale, liste finale des coloris (5 ou 6), validation des préséries (bascule des textes `[SI PRÉSÉRIE VALIDÉE]`), liens vers les pages CGV et Retours.
+- Fondateur : date « Expédition au plus tard le [date] », frais et délais de livraison, nom de domaine, e-mail de contact, avantages et conditions des paliers INITIUM / MAJESTÉ, grammage définitif, raison sociale, liste finale des coloris (5 ou 6), validation des préséries (bascule des textes `[SI PRÉSÉRIE VALIDÉE]`), liens vers les pages CGV et Retours.
 - Victoire : cohérence des CGV et de la page Retours avec la phrase « Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. » (cas d'une série non lancée non couvert par cette phrase), mention RGPD, règlement du programme de fidélité, formulation de la case de confirmation précommande (texte imposé par Arthur), preuves GOTS et « Made in Portugal » avant d'activer les phrases balisées.

@@ -31,12 +31,16 @@
         "title_before": "Cinq coloris, un même",
         "title_em": "flux",
         "title_after": ".",
-        "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.",
+        "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Choisissez un coloris : le hoodie tourne devant vous, dans sa teinte.",
         "kicker": "Coloris",
-        "list_label": "Choisir un coloris pour l'illustration 3D",
+        "list_label": "Choisir un coloris du hoodie 3D",
         "cta_label": "Voir les coloris",
         "cta_link": "/collections/drop-1#coloris",
-        "caption": "Illustration du coloris."
+        "caption": "Illustration du coloris.",
+        "show_hoodie": true,
+        "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
+        "loading_label": "Chargement du modèle 3D…",
+        "caption_hoodie": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer."
       },
       "blocks": {
         "colorway_1": {
@@ -46,7 +50,8 @@
             "description": "Le lilas qui tourne, sans jamais revenir.",
             "color_a": "#C8A2C8",
             "color_b": "#F5EDE4",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316",
+            "glb": "ressac-lilac-whirl.glb"
           }
         },
         "colorway_2": {
@@ -56,7 +61,8 @@
             "description": "L'ivoire monte comme une marée sur le sable clair.",
             "color_a": "#E8E0D8",
             "color_b": "#C5BFB8",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924",
+            "glb": "ressac-ivory-tide.glb"
           }
         },
         "colorway_3": {
@@ -66,7 +72,8 @@
             "description": "Un gris d'acier qui dérive sur la perle.",
             "color_a": "#8E9EAB",
             "color_b": "#C8CDD2",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532",
+            "glb": "ressac-silver-drift.glb"
           }
         },
         "colorway_4": {
@@ -76,7 +83,8 @@
             "description": "La nuit, quand la mer ne se voit plus mais s'entend.",
             "color_a": "#1A1A1A",
             "color_b": "#3A3A4A",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140",
+            "glb": "ressac-noir-absolu.glb"
           }
         },
         "colorway_5": {
@@ -86,7 +94,8 @@
             "description": "Un cramoisi qui coule sur le bordeaux.",
             "color_a": "#5C2032",
             "color_b": "#C4878E",
-            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748",
+            "glb": "ressac-crimson-flow.glb"
           }
         }
       },
@@ -123,7 +132,7 @@
       }
     },
     "piece": {
-      "type": "kyma-technical",
+      "type": "kyma-product-360",
       "settings": {
         "anchor": "piece",
         "number": "03",
@@ -131,64 +140,121 @@
         "title_before": "Une pièce, un",
         "title_em": "seul",
         "title_after": "geste.",
-        "text": "Le motif est imprimé sur tout le tissu. Pensé pour que chaque pièce soit unique.",
-        "caption": "Dessin technique illustratif, vue de face — proportions indicatives.",
+        "text": "Le motif est imprimé sur tout le tissu. Faites tourner la pièce : chaque détail est numéroté.",
+        "product": "ressac-hoodie-zippe-oversize",
+        "prefer_native": true,
+        "autorotate": true,
+        "spin_speed": 9,
+        "spin_delay": 0.5,
+        "help": "Glissez pour tourner. Choisissez un détail : la pièce pivote vers lui.",
+        "list_label": "Coloris du modèle 3D",
+        "presets_label": "Points de vue",
+        "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter : capuche sans cordon, zip intégral argent, tirette dorée, deux poches biais, bords-côtes.",
+        "loading_label": "Chargement du modèle 3D…",
+        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "caption_fallback": "Illustration du coloris.",
+        "spots_label": "Détails de la pièce",
         "cta_label": "Découvrir la pièce",
         "cta_link": "/products/ressac-hoodie-zippe-oversize"
       },
       "blocks": {
-        "spot_1": {
-          "type": "spot",
+        "colorway_1": {
+          "type": "colorway",
           "settings": {
+            "name": "Lilac Whirl",
+            "glb": "ressac-lilac-whirl.glb",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "glb": "ressac-ivory-tide.glb",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "glb": "ressac-silver-drift.glb",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "glb": "ressac-noir-absolu.glb",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "glb": "ressac-crimson-flow.glb",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E"
+          }
+        },
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "anchor": "capuche",
             "title": "Capuche sans cordon",
-            "text": "Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d'œillets.",
-            "x": 36,
-            "y": 10
+            "text": "Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d'œillets."
           }
         },
-        "spot_2": {
-          "type": "spot",
+        "hotspot_2": {
+          "type": "hotspot",
           "settings": {
+            "anchor": "tirette",
             "title": "Tirette sculptée « Kyma »",
-            "text": "En laiton plaqué or brossé : le seul éclat de la pièce.",
-            "x": 50,
-            "y": 27
+            "text": "En laiton plaqué or brossé : le seul éclat de la pièce."
           }
         },
-        "spot_3": {
-          "type": "spot",
+        "hotspot_3": {
+          "type": "hotspot",
           "settings": {
+            "anchor": "zip",
             "title": "Zip intégral",
-            "text": "En métal argent brossé, du col jusqu'à l'ourlet.",
-            "x": 50,
-            "y": 55
+            "text": "En métal argent brossé, du col jusqu'à l'ourlet."
           }
         },
-        "spot_4": {
-          "type": "spot",
+        "hotspot_4": {
+          "type": "hotspot",
           "settings": {
-            "title": "Épaules tombantes",
-            "text": "Coupe oversize : ample, posée.",
-            "x": 20,
-            "y": 30
-          }
-        },
-        "spot_5": {
-          "type": "spot",
-          "settings": {
+            "anchor": "poches",
             "title": "Poches biais",
-            "text": "Deux poches coupées en biais.",
-            "x": 31,
-            "y": 74
+            "text": "Deux poches coupées en biais."
+          }
+        },
+        "hotspot_5": {
+          "type": "hotspot",
+          "settings": {
+            "anchor": "cotes",
+            "title": "Bords-côtes",
+            "text": "Bords-côtes 2×2 de 6 cm à la taille et aux poignets."
           }
         }
       },
       "block_order": [
-        "spot_1",
-        "spot_2",
-        "spot_3",
-        "spot_4",
-        "spot_5"
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5",
+        "hotspot_1",
+        "hotspot_2",
+        "hotspot_3",
+        "hotspot_4",
+        "hotspot_5"
       ]
     },
     "savoir-faire": {
@@ -224,78 +290,12 @@
         "title_before": "Rejoindre le",
         "title_em": "cercle",
         "title_after": ".",
-        "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.",
+        "text": "Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.",
         "cta_label": "Entrer dans le Cercle",
         "cta_link": "/pages/cercle-waves",
         "show_rings": true,
         "compact_top": false
       }
-    },
-    "instagram": {
-      "type": "kyma-instagram",
-      "settings": {
-        "anchor": "instagram",
-        "number": "06",
-        "label": "INSTAGRAM",
-        "title_before": "Dans le",
-        "title_em": "sillage",
-        "title_after": ".",
-        "text": "Coulisses, textures et premiers regards, sur @kymasinsta.",
-        "cta_label": "Suivre @kymasinsta",
-        "url": "https://www.instagram.com/kymasinsta/"
-      },
-      "blocks": {
-        "tile_1": {
-          "type": "tile",
-          "settings": {
-            "caption": "Écume",
-            "palette": "kyma"
-          }
-        },
-        "tile_2": {
-          "type": "tile",
-          "settings": {
-            "caption": "Sillage",
-            "palette": "kyma-camel"
-          }
-        },
-        "tile_3": {
-          "type": "tile",
-          "settings": {
-            "caption": "Marée",
-            "palette": "kyma"
-          }
-        },
-        "tile_4": {
-          "type": "tile",
-          "settings": {
-            "caption": "Courant",
-            "palette": "kyma-camel"
-          }
-        },
-        "tile_5": {
-          "type": "tile",
-          "settings": {
-            "caption": "Horizon",
-            "palette": "kyma"
-          }
-        },
-        "tile_6": {
-          "type": "tile",
-          "settings": {
-            "caption": "Ressac",
-            "palette": "kyma-camel"
-          }
-        }
-      },
-      "block_order": [
-        "tile_1",
-        "tile_2",
-        "tile_3",
-        "tile_4",
-        "tile_5",
-        "tile_6"
-      ]
     }
   },
   "order": [
@@ -304,7 +304,6 @@
     "motif",
     "piece",
     "savoir-faire",
-    "cercle",
-    "instagram"
+    "cercle"
   ]
 }

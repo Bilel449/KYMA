@@ -5,18 +5,19 @@
       "settings": {
         "anchor": "",
         "label": "NOUS CONNAÎTRE",
-        "title_before": "",
-        "title_em": "κύμα",
-        "title_after": ".",
-        "text": "En grec, la vague. KYMA se prononce « Kouma ». Un mot ancien pour un mouvement qui ne s'arrête pas : la vague arrive, se retire, revient. Jamais tout à fait la même.",
+        "title_before": "KYMA",
+        "title_em": "",
+        "title_after": "",
+        "text": "Un nom ancien pour un mouvement qui ne s'arrête pas : la vague arrive, se retire, revient. Jamais tout à fait la même.",
         "cta_label": "",
         "cta_link": "",
         "note": "",
-        "visual": "word",
+        "visual": "brand",
         "colorway": "kyma",
         "align": "split",
         "alt_text": "",
-        "caption": ""
+        "caption": "",
+        "etymology": "Du grec κύμα, « la vague ». Se prononce « Kouma »."
       }
     },
     "histoire": {

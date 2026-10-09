@@ -145,7 +145,7 @@ Nom du produit : « Ressac » sous réserve de disponibilité (repli : « Hoodie
 - Attention au grec : je ne suis pas sûr que DM Serif Display contienne les glyphes grecs. Si non, « κύμα » est livré en SVG (contours dessinés) plutôt qu'en repli sur une autre police. À vérifier par Sacha.
 
 **A — Anneaux 3D**
-- Tore de rayon R=1, rayon de tube r=0,16, segments 96×32. Matière satin mat, léger brossage radial, marbrage tonal le long de u. INITIUM `#E8C4C4`, ORIGINE `#C19E86` [À VALIDER].
+- Tore de rayon R=1, rayon de tube r=0,16, segments 96×32. Matière satin mat, léger brossage radial, marbrage tonal le long de u. INITIUM `#E8C4C4`, MAJESTÉ `#C19E86` [À VALIDER].
 - Paire entrelacée : axes inclinés de 70°, centres écartés de 1,0·R. Au repos : rotation de chaque anneau autour de son axe à 4°/s, en sens opposés. Parallaxe souris ±10°. Jamais de logo sur les anneaux.
 
 **G — Grain** : voir section 6. **R — Ondes concentriques** : voir page Contact.
@@ -214,11 +214,11 @@ Nom du produit : « Ressac » sous réserve de disponibilité (repli : « Hoodie
 **Section 5**
 - Label : 05 — CERCLE WAVES
 - Titre : Rejoindre le *cercle*.
-- Texte : Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.
+- Texte : Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.
 - Lien : Entrer dans le Cercle → `/pages/cercle-waves`
 - 3D : **A**, deux anneaux d'abord écartés (distance 2,4·R).
   - Défilement : la distance passe à 1,0·R (entrelacés) sur la section, avec un arrêt ralenti en fin de course.
-  - Souris : parallaxe ±10°. À moins de 80 px d'un anneau, une étiquette INITIUM ou ORIGINE apparaît (fondu de 180 ms).
+  - Souris : parallaxe ±10°. À moins de 80 px d'un anneau, une étiquette INITIUM ou MAJESTÉ apparaît (fondu de 180 ms).
   - Toucher : glisser horizontal pour tourner la paire.
 - Transition : les anneaux glissent vers le bas et s'effacent pendant que la grille de la section suivante monte.
 
@@ -370,8 +370,8 @@ Cette page détaille la section 4 du document pour les cartes. Aucune mention de
 - Label : CERCLE WAVES
 - Titre : Rejoindre le *cercle*.
 - Texte : Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu'à la proximité. Deux paliers, qui se découvrent dans l'ordre.
-- 3D : **A**, un seul anneau INITIUM centré, un second ORIGINE qui entre depuis la droite.
-  - Défilement : l'anneau ORIGINE glisse jusqu'à s'entrelacer avec INITIUM (progression de 0 à 100 % du hero).
+- 3D : **A**, un seul anneau INITIUM centré, un second MAJESTÉ qui entre depuis la droite.
+  - Défilement : l'anneau MAJESTÉ glisse jusqu'à s'entrelacer avec INITIUM (progression de 0 à 100 % du hero).
   - Souris : parallaxe ±10°. Toucher : glisser horizontal pour tourner.
 - Transition : les anneaux se réduisent et s'élèvent derrière le titre de la section 1.
 
@@ -385,7 +385,7 @@ Cette page détaille la section 4 du document pour les cartes. Aucune mention de
 **Section 2 — Le passage**
 - Label : 02 — DE L'UN À L'AUTRE
 - Titre : Dans l'ordre, sans *détour*.
-- Texte : Les paliers se découvrent dans l'ordre. Le passage à ORIGINE : [À COMPLÉTER : critère décidé par le fondateur]. Ne rien chiffrer avant sa décision.
+- Texte : Les paliers se découvrent dans l'ordre. Le passage à MAJESTÉ : [À COMPLÉTER : critère décidé par le fondateur]. Ne rien chiffrer avant sa décision.
 - Interactif : **D**, une ligne ondulée Camel relie les deux symboles de palier (un anneau puis deux anneaux entrelacés en vectoriel), et se trace au scroll en 900 ms ; le deuxième symbole se remplit de Camel à l'arrivée.
   - Souris et toucher : survol ou appui sur un symbole = rappel du nom et de la phrase d'accroche.
 - Transition : la ligne se referme en cercle autour du formulaire.
@@ -547,7 +547,7 @@ Page fonctionnelle : le mouvement reste minimal.
 - Puis-je annuler ou retourner ma commande ? Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions et marche à suivre sur la page Retours et remboursements.
 
 *04 — CERCLE WAVES*
-- Comment fonctionne Cercle Waves ? Cercle Waves est le programme de fidélité de KYMA, en deux paliers, INITIUM et ORIGINE. Les avantages et les conditions sont [À COMPLÉTER : règles décidées par le fondateur]. Voir la page Cercle Waves.
+- Comment fonctionne Cercle Waves ? Cercle Waves est le programme de fidélité de KYMA, en deux paliers, INITIUM et MAJESTÉ. Les avantages et les conditions sont [À COMPLÉTER : règles décidées par le fondateur]. Voir la page Cercle Waves.
 
 - Interactif des accordéons : ouverture de la hauteur en 320 ms (`--ease-flow`) ; l'icône « + » est une ligne ondulée qui s'aplatit en trait puis en « − » (320 ms). Une seule réponse ouverte à la fois par groupe (au clavier : Entrée, flèches haut/bas). Au toucher : appui sur toute la ligne (44 px de hauteur minimum).
 - Transition : le pied de page, avec le lien « Une autre question ? → Contact ».
@@ -579,7 +579,7 @@ Page fonctionnelle : le mouvement reste minimal.
 ## 4. Page Cercle Waves en détail : les deux cartes pivotantes
 
 ### 4.1 Point d'alerte (prix non validés)
-La boutique contient déjà une page Cercle Waves avec des prix (INITIUM 12,99 €, ORIGINE 29,99 €). Ces prix n'ont pas été validés : **je ne les reprends nulle part**, ni dans le texte, ni dans les `alt`, ni dans les métadonnées.
+La boutique contient déjà une page Cercle Waves avec des prix (INITIUM 12,99 €, MAJESTÉ 29,99 €). Ces prix n'ont pas été validés : **je ne les reprends nulle part**, ni dans le texte, ni dans les `alt`, ni dans les métadonnées.
 - Je ne peux pas consulter la boutique depuis cet environnement (pas d'accès Shopify) : je m'appuie sur ce qu'a indiqué le fondateur, non vérifié.
 - Actions demandées : Sacha garde l'ancienne page hors ligne (brouillon) et ne l'utilise pas comme base. Le fondateur décide si Cercle Waves est gratuit ou payant.
 - Conséquences si c'est payant : programme à titre onéreux, donc conditions spécifiques, CGV adaptées, droit de rétractation et facturation à traiter par Victoire. Cela contredit aussi l'hypothèse « Cercle Waves sans règles » de `conformite.md` et la formulation « inscription gratuite, ou lié à un premier achat [À VALIDER] » de `copy-site.md` §6.
@@ -587,7 +587,7 @@ La boutique contient déjà une page Cercle Waves avec des prix (INITIUM 12,99 �
 
 ### 4.2 Structure des cartes
 - Format portrait 5:7 (320 × 448 px sur bureau, 78 vw plafonné sur mobile), angles arrondis à 3,5 % du côté, épaisseur 0,8 % de la largeur, tranche biseautée.
-- Disposition : deux cartes côte à côte sur bureau (écart 48 px), l'une sous l'autre sur mobile (écart 32 px). Ordre toujours INITIUM puis ORIGINE.
+- Disposition : deux cartes côte à côte sur bureau (écart 48 px), l'une sous l'autre sur mobile (écart 32 px). Ordre toujours INITIUM puis MAJESTÉ.
 - Rendu : WebGL (corps, tranche, reflet satiné, rotation). Les faces sont dessinées au chargement dans un canvas 2D à 1024 × 1434 px (texte net, anisotropie 4×, mipmaps), puis passées en textures.
 - Texte réel : le contenu des deux faces existe dans le DOM (`<button>` + liste, masqués visuellement sauf quand ils sont lus par un lecteur d'écran). Le texte sélectionnable ne dépend jamais de la texture.
 - Repli : sans WebGL, même carte en CSS 3D (`transform-style: preserve-3d`, `backface-visibility: hidden`), mêmes durées.
@@ -608,21 +608,21 @@ La boutique contient déjà une page Cercle Waves avec des prix (INITIUM 12,99 �
 - Condition d'accès : [À COMPLÉTER : décision du fondateur]
 - Bouton : Rejoindre le cercle (ancre vers l'inscription)
 
-**ORIGINE, recto** (fond marron clair `#C19E86`, texte Brun 600, 20 px minimum)
+**MAJESTÉ, recto** (fond marron clair `#C19E86`, texte Brun 600, 20 px minimum)
 - Numéro : 02
-- Nom : ORIGINE
+- Nom : MAJESTÉ
 - Accroche : Le palier supérieur.
 - Sous-ligne : Pour celles et ceux qui portent KYMA depuis ses origines.
 - Petit motif : deux anneaux entrelacés, filet Brun à 40 %.
 - Invite en bas : « Retourner ».
 
-**ORIGINE, verso** (aplat camel clair `#D9C0AE` [À VALIDER], texte Brun)
+**MAJESTÉ, verso** (aplat camel clair `#D9C0AE` [À VALIDER], texte Brun)
 - Label : AVANTAGES
 - Liste : [À COMPLÉTER : avantage 1, décision du fondateur] · [À COMPLÉTER : avantage 2]
 - Condition de passage : [À COMPLÉTER : critère décidé par le fondateur]
 - Bouton : Rejoindre le cercle
 
-**Couleurs, à valider par le fondateur.** Rose clair pour INITIUM, marron clair pour ORIGINE. Les paliers se distinguent aussi par la forme (un anneau / deux anneaux) et le numéro, pas seulement par la couleur. Contraste du Brun : 6,7:1 sur le rose, 4,3:1 sur le camel `#C19E86` (acceptable uniquement pour du texte de 20 px ou 18,66 px en gras) et 6,2:1 sur le camel clair du verso. Mes calculs, à recontrôler par Sacha avec un outil.
+**Couleurs, à valider par le fondateur.** Rose clair pour INITIUM, marron clair pour MAJESTÉ. Les paliers se distinguent aussi par la forme (un anneau / deux anneaux) et le numéro, pas seulement par la couleur. Contraste du Brun : 6,7:1 sur le rose, 4,3:1 sur le camel `#C19E86` (acceptable uniquement pour du texte de 20 px ou 18,66 px en gras) et 6,2:1 sur le camel clair du verso. Mes calculs, à recontrôler par Sacha avec un outil.
 
 ### 4.4 Déclencheurs
 | Contexte | Action | Effet |
@@ -643,7 +643,7 @@ La boutique contient déjà une page Cercle Waves avec des prix (INITIUM 12,99 �
 - Pivot : 900 ms, ressort (raideur 120, amortissement 18, masse 1) : dépassement de 2° puis retour. Pendant le pivot, la carte monte de 12 % de sa largeur sur z et passe à l'échelle 1,03 au milieu de l'arc, puis revient.
 - Inclinaison à la souris : rotation en X ±8° et en Y ±8° selon la position du pointeur dans la carte, lissage exponentiel (taux 6/s). Atténuée à 25 % pendant un pivot. Pas d'inclinaison au toucher.
 - Ombre : ellipse de contact Brun à 14 %, qui s'élargit de 15 % quand la carte monte.
-- Montée au défilement : les cartes entrent avec 24 px de translation et un fondu de 640 ms, INITIUM puis ORIGINE (décalage 120 ms).
+- Montée au défilement : les cartes entrent avec 24 px de translation et un fondu de 640 ms, INITIUM puis MAJESTÉ (décalage 120 ms).
 - Mode mouvement réduit : le pivot est remplacé par un fondu croisé de 200 ms ; pas d'inclinaison ; pas de balayage de reflet.
 
 ### 4.6 Reflet satiné

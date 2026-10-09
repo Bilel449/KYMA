@@ -2,8 +2,10 @@
   KYMA — Ouverture de page (Collection, Cercle Waves, Nous connaître, Guide des tailles…).
   Titre H1 révélé ligne par ligne, mot en italique, texte, bouton + mention, et un visuel SANS image :
     wave    = sculpture 3D « La Vague » (V)       cloth   = étoffe 3D qui ondule (E)
-    rings   = anneaux INITIUM / ORIGINE (A) : ORIGINE entre par la droite au défilement
+    rings   = anneaux INITIUM / MAJESTÉ (A) : MAJESTÉ entre par la droite au défilement
     pattern = motif KYMA Wave plein cadre (E à plat)
+    brand   = le nom KYMA en très grand (H1 visible, DM Serif), trois vagues qui se tracent, mention étymologique
+              en petit (« du grec κύμα, la vague ») — page Nous connaître (demande du fondateur : le nom, c'est KYMA)
     word    = le mot κύμα tracé au contour puis rempli (SVG ; le H1 reste du texte, lu par les lecteurs d'écran)     tape = mètre ruban qui se déroule (SVG)
   Les canvas 3D partagent le contexte WebGL unique de kyma-3d.js ; ils sont décoratifs (aria-hidden).
 {%- endcomment -%}
@@ -56,6 +58,14 @@
           {{- section.settings.title_after | strip | escape -}}
         {%- endif -%}
       </h1>
+      {%- if v == 'brand' -%}
+        <svg class="kyma-ph__waves" viewBox="0 0 240 40" aria-hidden="true" focusable="false" data-kyma-trace>
+          <path pathLength="1" d="M4 10C34 2 50 18 80 10S126 2 156 10"/><path pathLength="1" d="M4 22C34 14 50 30 80 22S120 14 140 22"/><path pathLength="1" d="M4 34C28 27 44 41 68 34"/>
+        </svg>
+        {%- if section.settings.etymology != blank -%}
+          <p class="kyma-ph__etym" data-kyma-reveal style="--kd: 380ms;">{{ section.settings.etymology | escape | replace: 'κύμα', '<span lang="el">κύμα</span>' }}</p>
+        {%- endif -%}
+      {%- endif -%}
       {%- if section.settings.text != blank -%}
         <p class="kyma-ph__text" data-kyma-reveal style="--kd: 500ms;">{{ section.settings.text | escape | newline_to_br }}</p>
       {%- endif -%}
@@ -104,6 +114,7 @@
     { "type": "text", "id": "title_before", "label": "Titre — début" },
     { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "κύμα" },
     { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "text", "id": "etymology", "label": "Mention étymologique (visuel « nom KYMA »)", "default": "Du grec κύμα, « la vague ». Se prononce « Kouma »." },
     { "type": "textarea", "id": "text", "label": "Texte" },
     { "type": "text", "id": "cta_label", "label": "Bouton — texte" },
     { "type": "url", "id": "cta_link", "label": "Bouton — lien" },
@@ -116,6 +127,7 @@
         { "value": "cloth", "label": "Étoffe 3D qui ondule" },
         { "value": "rings", "label": "Anneaux Cercle Waves (3D)" },
         { "value": "pattern", "label": "Motif KYMA Wave plein cadre" },
+        { "value": "brand", "label": "Le nom KYMA en grand + mention grecque" },
         { "value": "word", "label": "Le mot κύμα (tracé)" },
         { "value": "tape", "label": "Mètre ruban (tracé)" }
       ],

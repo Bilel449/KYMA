@@ -22,7 +22,7 @@
   function view(fn, opts) { return hasIO ? new IntersectionObserver(fn, opts || { threshold: 0.15 }) : null; }
   function goTo(y) { if (w.KYMA && w.KYMA.goTo) w.KYMA.goTo(y); else w.scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' }); }
   var ticks = [], raf = 0;
-  function tick() { raf = 0; var more = false; for (var i = 0; i < ticks.length; i++) if (ticks[i]() === true) more = true; if (more) raf = w.requestAnimationFrame(tick); }
+  function tick() { raf = 0; var more = false; for (var i = 0; i < ticks.length; i++) if (ticks[i]() === true) more = true; if (more && !raf) raf = w.requestAnimationFrame(tick); }
   function wake() { if (!raf) raf = w.requestAnimationFrame(tick); }
   w.addEventListener('scroll', wake, { passive: true });
   w.addEventListener('resize', wake);
@@ -60,6 +60,7 @@
     $('[data-kyma-flip]', scope).forEach(function (card) {
       if (!once(card, 'fl')) return;
       var hit = card.querySelector('.kyma-tier__hit'), front = card.querySelector('.kyma-flip__front'), back = card.querySelector('.kyma-flip__back');
+      var zone = card.querySelector('.kyma-tier__card') || card; /* zone sensible = la carte seule (pas le prix ni le bouton) */
       var flipEl = card.querySelector('.kyma-flip'), state = { on: false, pin: false, tIn: 0, tOut: 0, ptype: 'mouse' };
       var tilt = { x: 0, y: 0, tx: 0, ty: 0, mx: 50, my: 30, run: false, last: 0 }, turning = 0;
       function set(on, why) {
@@ -74,15 +75,15 @@
       }
       set(false); state.on = false; card.classList.remove('is-flipped');
       if (back) { back.inert = true; tabbable(back, false); }
-      card.addEventListener('pointerdown', function (e) { state.ptype = e.pointerType; });
+      zone.addEventListener('pointerdown', function (e) { state.ptype = e.pointerType; });
       /* souris : intention 120 ms, retour 400 ms après la sortie, clic = épingle */
-      card.addEventListener('pointerenter', function (e) {
+      zone.addEventListener('pointerenter', function (e) {
         if (e.pointerType !== 'mouse') return;
         clearTimeout(state.tOut); state.tIn = setTimeout(function () { set(true, 'hover'); }, 120);
       });
-      card.addEventListener('pointerleave', function (e) {
+      zone.addEventListener('pointerleave', function (e) {
         if (e.pointerType !== 'mouse') return;
-        clearTimeout(state.tIn); tilt.tx = 0; tilt.ty = 0; runTilt();
+        clearTimeout(state.tIn); runTilt();
         state.tOut = setTimeout(function () { if (!state.pin) set(false, 'leave'); }, 400);
       });
       if (hit) hit.addEventListener('click', function (e) {
@@ -97,11 +98,11 @@
       card.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.on) { state.pin = false; set(false, 'esc'); if (hit) hit.focus(); } });
       /* toucher : glisser horizontal = la carte suit le doigt, puis s'accroche à la face la plus proche */
       var drag = null;
-      card.addEventListener('pointerdown', function (e) {
+      zone.addEventListener('pointerdown', function (e) {
         if (e.pointerType === 'mouse') return;
         drag = { x: e.clientX, y: e.clientY, t: performance.now(), a: state.on ? 180 : 0, v: 0, live: false };
       });
-      card.addEventListener('pointermove', function (e) {
+      zone.addEventListener('pointermove', function (e) {
         if (drag) {
           var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
           if (!drag.live && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) { drag.live = true; card.classList.add('is-dragging'); }
@@ -111,10 +112,20 @@
           flipEl.style.setProperty('--drag', ang.toFixed(1) + 'deg');
           return;
         }
-        if (e.pointerType !== 'mouse' || RM) return;
-        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        tilt.tx = (0.5 - y) * 16; tilt.ty = (x - 0.5) * 16; tilt.mx = x * 100; tilt.my = y * 100; runTilt();
       });
+      /* inclinaison vers le pointeur : toute la section attire les cartes (±6°), davantage sur la carte (±11°) */
+      if (fine && !RM) {
+        var sec = card.closest('section') || d.body;
+        sec.addEventListener('pointermove', function (e) {
+          if (e.pointerType !== 'mouse' || drag) return;
+          var r = zone.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+          var inside = x >= 0 && x <= 1 && y >= 0 && y <= 1, k = inside ? 22 : 12;
+          var cx = clamp(x - 0.5, -1, 1), cy = clamp(y - 0.5, -1, 1);
+          tilt.tx = -cy * k * 0.5; tilt.ty = cx * k * 0.5;
+          tilt.mx = clamp(x, 0, 1) * 100; tilt.my = clamp(y, 0, 1) * 100; runTilt();
+        });
+        sec.addEventListener('pointerleave', function () { tilt.tx = 0; tilt.ty = 0; runTilt(); });
+      }
       function endDrag() {
         if (!drag) return;
         if (drag.live) {
@@ -124,7 +135,7 @@
         }
         drag = null;
       }
-      card.addEventListener('pointerup', endDrag); card.addEventListener('pointercancel', endDrag);
+      zone.addEventListener('pointerup', endDrag); zone.addEventListener('pointercancel', endDrag);
       /* inclinaison ±8°, lissage exponentiel (taux 6/s), atténuée à 25 % pendant un pivot */
       function runTilt() {
         if (tilt.run || RM) return; tilt.run = true; tilt.last = 0;
@@ -425,7 +436,7 @@
     });
   }
 
-  /* ── 10. Anneaux au défilement : ORIGINE entre par la droite (« enter ») / se rapprochent (« join ») ─ */
+  /* ── 10. Anneaux au défilement : MAJESTÉ entre par la droite (« enter ») / se rapprochent (« join ») ─ */
   function ringsScroll(scope) {
     $('[data-kyma-rings-scroll]', scope).forEach(function (sec) {
       if (!once(sec, 'rs')) return;
@@ -614,7 +625,8 @@
           if (cur !== 'kyma') api.colorway(cur);
         };
         /* chargé seulement à l'approche de l'écran */
-        var o = view(function (es) { if (es[0].isIntersecting) { o.disconnect(); if (w.KYMAGLB) start(); else w.addEventListener('load', start); } }, { rootMargin: '50% 0px' });
+        var go = function () { if (w.KYMAGLB) start(); else w.addEventListener('load', start); };
+        var o = view(function (es) { if (es[0].isIntersecting) { o.disconnect(); if (w.KYMA && w.KYMA.settled) w.KYMA.settled(go); else go(); } }, { rootMargin: '50% 0px' });
         if (o) o.observe(stage); else start();
       }
       if (presets) $('[data-preset]', presets).forEach(function (b) {

@@ -257,11 +257,11 @@
     self.name = Array.isArray(opts.colorway) ? 'custom' : key(opts.colorway || 'kyma');
     var c0 = pair(opts.colorway || 'kyma');
     self.col = { a: c0[0], b: c0[1], v: c0[2], fa: c0[0], fb: c0[1], fv: c0[2], ta: c0[0], tb: c0[1], tv: c0[2], k: 1 };
-    self.c2 = pair(['#C19E86', '#E8C4C4', '#A88670']); /* 2e anneau (ORIGINE) : marron clair */
+    self.c2 = pair(['#C19E86', '#E8C4C4', '#A88670']); /* 2e anneau (MAJESTÉ) : marron clair */
     self.yaw = 0; self.pitch = 0; self.ty = 0; self.tp = 0; self.spin = Math.random() * 6;
     self.hov = 0; self.thov = 0; self.mouse = [0, 0]; self.pm = [0.5, 0.5]; self.tpm = [0.5, 0.5]; self.sw = 0; self.tsw = 0;
     self.waves = []; self.autoT = 2.2; self.prio = 0;
-    self.scale = isMobile() ? 0.7 : 0.6; self.acc = 0; self.n = 0; self.tgt = {};
+    self.maxScale = opts.maxScale || 1; self.scale = Math.min(self.maxScale, 0.5); self.acc = 0; self.n = 0; self.tgt = {}; /* départ bas, remontée progressive */
     self.frames = 0; self.ftime = 0; self.visible = false; self.area = 0; self.drawn = false; self.dirty = true; self.active = false;
     try { self.ctx = canvas.getContext('2d', { alpha: false }); } catch (e) { self.ctx = null; }
     self.css();
@@ -361,10 +361,10 @@
     var s = this.scale;
     /* cible 60 i/s (16,7 ms) : on descend vite, on remonte prudemment */
     if (avg > 0.034) s *= 0.75; else if (avg > 0.0185) s *= 0.88; else if (avg < 0.0145) s *= 1.06;
-    s = Math.min(1, Math.max(w.KYMA3D_MIN_SCALE || 0.22, s));
+    s = Math.min(this.maxScale, Math.max(w.KYMA3D_MIN_SCALE || 0.22, s));
     if (Math.abs(s - this.scale) > 0.01) { this.scale = s; this.resize(); }
   };
-  S.frame = function (dt) {
+  S.frame = function (dt, fresh) {
     var C = this.col, f = 1 - Math.exp(-dt * 5); /* lissage du pointeur : taux 5/s, indépendant des i/s */
     this.t += dt * (this.p.speed == null ? 1 : this.p.speed); this.frames++; this.ftime += dt;
     if (C.k < 1) {
@@ -386,7 +386,7 @@
         this.autoT = 3.2 + Math.random() * 2;
       }
     }
-    this.adapt(dt);
+    if (!fresh) this.adapt(dt); /* la 1re image après une pause n'a pas d'intervalle mesurable */
     this.draw(dt);
   };
   /* rendu dans le contexte partagé, puis copie dans le canvas 2D de la scène */
@@ -465,7 +465,7 @@
   }
   function loop(now) {
     raf = 0;
-    var dt = last ? Math.min(0.25, (now - last) / 1000) : 1 / 60, any = false, i;
+    var fresh = !last, dt = last ? Math.min(0.25, (now - last) / 1000) : 1 / 60, any = false, i;
     last = now;
     var vis = [];
     for (i = 0; i < list.length; i++) {
@@ -475,10 +475,11 @@
     vis.sort(function (a, b) { return (b.area + (now - b.prio < 2500 ? 1e9 : 0)) - (a.area + (now - a.prio < 2500 ? 1e9 : 0)); });
     var nb = budget();
     for (i = 0; i < vis.length; i++) {
-      if (i < nb) { vis[i].active = true; vis[i].frame(dt); any = true; }
+      if (i < nb) { vis[i].active = true; vis[i].frame(dt, fresh); any = true; }
       else if (!vis[i].drawn || vis[i].dirty) vis[i].draw(); /* figée : une image, puis plus rien */
     }
-    if (any && !reduced && !paused) raf = w.requestAnimationFrame(loop); else last = 0;
+    /* une seule chaîne de boucle : un wake() appelé pendant la boucle (resize, set) a déjà pu programmer l'image suivante */
+    if (any && !reduced && !paused) { if (!raf) raf = w.requestAnimationFrame(loop); } else if (!raf) last = 0;
   }
   function wake() {
     if (raf) return;

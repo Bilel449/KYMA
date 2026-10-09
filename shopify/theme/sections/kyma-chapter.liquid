@@ -6,7 +6,7 @@
     pattern  = motif KYMA Wave plein cadre (E à plat), tourbillon au pointeur, sélecteur de teinte facultatif
     cloth    = étoffe / maille 3D (E)
     river    = tracé libre d'un fleuve (vectoriel original, sans fond de carte) avec le point « Paris »
-    path     = ligne ondulée qui relie le symbole INITIUM (un anneau) au symbole ORIGINE (deux anneaux)
+    path     = ligne ondulée qui relie le symbole INITIUM (un anneau) au symbole MAJESTÉ (deux anneaux)
     drawing  = dessin technique du hoodie (vectoriel)
   Ancre facultative (ex. « motif ») pour les liens /pages/nous-connaitre#motif.
 {%- endcomment -%}
@@ -101,7 +101,7 @@
             </svg>
             <ul class="kyma-chap__syms" role="list">
               <li><button type="button" class="kyma-sym" aria-describedby="{{ tid }}-s1"><span>INITIUM</span></button><p id="{{ tid }}-s1" class="kyma-sym__tip">{{ section.settings.sym1 | escape }}</p></li>
-              <li><button type="button" class="kyma-sym" aria-describedby="{{ tid }}-s2"><span>ORIGINE</span></button><p id="{{ tid }}-s2" class="kyma-sym__tip">{{ section.settings.sym2 | escape }}</p></li>
+              <li><button type="button" class="kyma-sym" aria-describedby="{{ tid }}-s2"><span>MAJESTÉ</span></button><p id="{{ tid }}-s2" class="kyma-sym__tip">{{ section.settings.sym2 | escape }}</p></li>
             </ul>
           </div>
         {%- elsif v == 'drawing' -%}
@@ -139,7 +139,7 @@
         { "value": "pattern", "label": "Motif KYMA Wave plein cadre" },
         { "value": "cloth", "label": "Étoffe / maille 3D" },
         { "value": "river", "label": "Tracé du fleuve + point Paris" },
-        { "value": "path", "label": "Passage INITIUM → ORIGINE" },
+        { "value": "path", "label": "Passage INITIUM → MAJESTÉ" },
         { "value": "drawing", "label": "Dessin technique du hoodie" }
       ],
       "default": "wave"
@@ -161,7 +161,7 @@
     { "type": "checkbox", "id": "tints", "label": "Motif : afficher le sélecteur de teinte", "default": false },
     { "type": "text", "id": "tints_label", "label": "Sélecteur — nom accessible", "default": "Teinte du motif" },
     { "type": "text", "id": "sym1", "label": "Passage — phrase INITIUM", "default": "L'entrée dans le cercle." },
-    { "type": "text", "id": "sym2", "label": "Passage — phrase ORIGINE", "default": "Le palier supérieur." },
+    { "type": "text", "id": "sym2", "label": "Passage — phrase MAJESTÉ", "default": "Le palier supérieur." },
     { "type": "text", "id": "caption", "label": "Légende du visuel" },
     { "type": "checkbox", "id": "flip", "label": "Visuel à gauche (bureau)", "default": false },
     {

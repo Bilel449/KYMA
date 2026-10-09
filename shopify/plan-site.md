@@ -19,7 +19,7 @@ Tout ce qui n'est pas confirmé reste en `[À COMPLÉTER : …]` (jamais d'allé
 | Fiche produit | `/products/<handle>` | `templates/product.json` (fourni) | Dawn `main-product` + « KYMA — Histoire produit » + produits associés | Thème prêt |
 | Notre histoire | `/pages/notre-histoire` | page (Dawn) ou template dérivé avec « KYMA — Manifeste » | Izaac / Maya | À écrire |
 | Savoir-faire | `/pages/savoir-faire` | page (Dawn) | Izaac. Aucune mention de fabricant, certification ou pays tant que non confirmés | À écrire |
-| Cercle Waves | `/pages/cercle-waves` | page + section « KYMA — Cercle Waves » | Maya (conditions, avantages INITIUM / ORIGINE) | À écrire |
+| Cercle Waves | `/pages/cercle-waves` | page + section « KYMA — Cercle Waves » | Maya (conditions, avantages INITIUM / MAJESTÉ) | À écrire |
 | Guide des tailles | `/pages/guide-des-tailles` | page (Dawn) | Tableau cm de `BRAND.md` (déjà dans la fiche produit) + conseil de coupe oversize | À écrire |
 | FAQ | `/pages/faq` | page (Dawn) | Maya + Victoire (livraison, retours, précommande) | À écrire |
 | Contact | `/pages/contact` | template Dawn `page.contact` (formulaire) | Adresse e-mail publique à choisir (ne pas publier l'e-mail de compte sans accord) | À créer |
@@ -143,7 +143,7 @@ Paramètres > Données personnalisées > Produits > Ajouter une définition → 
 | Besoin | Piste | À vérifier |
 |---|---|---|
 | Avis | Judge.me, Loox, Okendo ou Stamped | Prix, import, RGPD, obligations d'information sur les avis (Victoire), impact sur les performances |
-| Fidélité Cercle Waves | Smile.io, Yotpo Loyalty, LoyaltyLion ou équivalent à **paliers nommés** | Possibilité de nommer INITIUM / ORIGINE, règles de passage de palier (Maya), coût selon volume |
+| Fidélité Cercle Waves | Smile.io, Yotpo Loyalty, LoyaltyLion ou équivalent à **paliers nommés** | Possibilité de nommer INITIUM / MAJESTÉ, règles de passage de palier (Maya), coût selon volume |
 | Consentement cookies | Bannière native Shopify (Paramètres > Confidentialité et conformité), sinon appli dédiée | Doit bloquer analytics/pixels avant consentement ; textes : Victoire |
 | Newsletter | Shopify Email (natif) ou Klaviyo | Consentement explicite à l'inscription |
 | Précommande | Seulement si l'option C est retenue | Voir §5 |
@@ -288,7 +288,7 @@ Ne **pas** lier la plateforme européenne de règlement en ligne des litiges (fe
 **Boutique**
 - [ ] Plan payant activé ; passerelle de paiement ; commande test de bout en bout (paiement, e-mails, TVA TTC)
 - [ ] Marchés France/UE, taxes TTC, expédition vérifiés
-- [ ] Avis, fidélité (INITIUM / ORIGINE), newsletter : applis choisies et testées
+- [ ] Avis, fidélité (INITIUM / MAJESTÉ), newsletter : applis choisies et testées
 - [ ] **Livrable « VALIDÉ » d'Arthur + confirmation explicite du fondateur** avant publication du thème ou passage du produit en ACTIVE
 
 ## 11. Fichiers de cette livraison

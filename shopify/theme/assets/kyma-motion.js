@@ -1,9 +1,10 @@
-/*! KYMA motion v3.0 — natif, sans dépendance. Charge unique (garde window.KYMA). Compatible Horizon.
+/*! KYMA motion v3.1 — natif, sans dépendance. Charge unique (garde window.KYMA). Compatible Horizon.
  *  Curseur-halo, barre de progression en vague, rideau-vague entre les pages, titres lettre à lettre,
  *  révélations, bouton magnétique, bandeau défilant, sélecteur de coloris 3D, plongée épinglée, dessin technique,
  *  anneaux Cercle Waves, synchronisation des variantes (<variant-picker> Horizon), repli Spline.
  *  Les scènes kyma-3d sont déclarées après le 1er rendu et créées à l'approche de l'écran (kyma-3d.js v2).
- *  Défilement natif : aucune prise de contrôle du scroll (interpolation seulement si <html data-kyma-smooth-scroll>).
+ *  v3.1 (fluidité) : défilement lissé léger sur ordinateur (souris / pavé ; jamais au toucher ; <html data-kyma-native-scroll>
+ *  pour le couper), rideau sinusoïdal, scènes 3D et GLB montées seulement après le rideau d'arrivée (K.settled).
  *  prefers-reduced-motion : tout est statique et lisible. Pause hors écran / onglet caché. */
 (function (w, d) {
   'use strict';
@@ -91,8 +92,9 @@
     }
     return false;
   }
+  /* défilement lissé léger, ordinateur uniquement (souris / pavé) ; désactivable avec <html data-kyma-native-scroll> */
   function smooth() {
-    if (K.reduced || !fine || editor || !root.hasAttribute('data-kyma-smooth-scroll')) return;
+    if (K.reduced || !fine || editor || root.hasAttribute('data-kyma-native-scroll')) return;
     SS.on = true; SS.cur = SS.target = w.scrollY; root.classList.add('kyma-smooth');
     w.addEventListener('wheel', function (e) {
       if (e.ctrlKey || e.defaultPrevented || scrollable(e.target, e.deltaY) || d.body.style.overflow === 'hidden' || root.classList.contains('overflow-hidden')) return;
@@ -128,7 +130,7 @@
     raf = 0;
     var dt = lastT ? Math.max(1 / 240, Math.min(0.1, (now - lastT) / 1000)) : 1 / 60; lastT = now; /* jamais 0 : pas de 0/0 */
     if (SS.active) {
-      SS.cur += (SS.target - SS.cur) * (1 - Math.exp(-dt * 8.5));
+      SS.cur += (SS.target - SS.cur) * (1 - Math.exp(-dt * 10));
       if (Math.abs(SS.target - SS.cur) < 0.6) { SS.cur = SS.target; SS.active = false; }
       w.scrollTo(0, SS.cur);
     }
@@ -136,7 +138,7 @@
     vel += (v - vel) * (1 - Math.exp(-dt * 6)); if (!isFinite(vel)) vel = 0;
     var keep = SS.active || Math.abs(vel) > 2;
     for (var i = 0; i < tasks.length; i++) if (tasks[i](dt, y, vel) === true) keep = true;
-    if (keep && !d.hidden) raf = w.requestAnimationFrame(loop); else lastT = 0;
+    if (keep && !d.hidden) { if (!raf) raf = w.requestAnimationFrame(loop); } else if (!raf) lastT = 0;
   }
   function wake() { if (!raf && !K.reduced) raf = w.requestAnimationFrame(loop); }
   function prog(n) { var r = n.getBoundingClientRect(), vh = w.innerHeight; return { r: r, vh: vh, on: r.bottom > -vh * 0.2 && r.top < vh * 1.2 }; }
@@ -223,7 +225,7 @@
     c.setAttribute('aria-hidden', 'true'); d.body.appendChild(c);
     var pa = c.querySelector('.kyma-curtain__a'), pb = c.querySelector('.kyma-curtain__b');
     function shape(p, up) { /* p 0..1 ; up=false : monte depuis le bas ; up=true : se retire vers le haut */
-      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2, bend = Math.sin(p * Math.PI) * 18, L;
+      var e = 0.5 - 0.5 * Math.cos(Math.PI * p), bend = Math.sin(p * Math.PI) * 14, L; /* sinusoïde : ni à-coup au départ, ni à l'arrivée */
       if (!up) { L = 100 - e * 100; return 'M0 100 L0 ' + L + ' Q25 ' + (L - bend) + ' 50 ' + L + ' T100 ' + L + ' L100 100 Z'; }
       L = 100 - e * 100; return 'M0 0 L100 0 L100 ' + L + ' Q75 ' + (L + bend) + ' 50 ' + L + ' T0 ' + L + ' Z';
     }
@@ -237,16 +239,19 @@
       })(performance.now());
     }
     K.curtain = function (href) {
-      run(false, 760, function () {
+      run(false, 820, function () {
         try { sessionStorage.setItem('kyma-curtain', '1'); } catch (e) { /* stockage indisponible */ }
-        if (href) w.location.href = href; else run(true, 760, function () { c.classList.remove('is-on'); });
+        if (href) w.location.href = href; else run(true, 900, function () { c.classList.remove('is-on'); });
       });
     };
     if (root.classList.contains('kyma-arrive')) {
       try { sessionStorage.removeItem('kyma-curtain'); } catch (e) { /* stockage indisponible */ }
       pa.setAttribute('d', 'M0 0H100V100H0Z'); pb.setAttribute('d', 'M0 0H100V100H0Z'); c.classList.add('is-on');
       root.classList.remove('kyma-arrive');
-      setTimeout(function () { run(true, 820, function () { c.classList.remove('is-on'); }); }, 60);
+      /* arrivée : le rideau se retire seul ; le travail lourd (shaders 3D, modèles GLB) attend la fin (K.settled) */
+      K.arriving = true;
+      setTimeout(function () { run(true, 980, function () { c.classList.remove('is-on'); settle(); }); }, 80);
+      setTimeout(settle, 2600); /* filet de sécurité */
     }
     w.addEventListener('pageshow', function (e) { if (e.persisted) c.classList.remove('is-on'); });
     /* Horizon : si ses transitions de page natives sont activées, on lui laisse la main */
@@ -304,10 +309,15 @@
         scene: cv.getAttribute('data-kyma-3d') || 'hero', colorway: cv.getAttribute('data-colorway') || 'kyma',
         host: host, follow: cv.getAttribute('data-follow') !== 'false', interactive: cv.getAttribute('data-interactive') !== 'false',
         shift: sh ? sh.split(',').map(parseFloat) : null, pattern: parseFloat(cv.getAttribute('data-pattern')) || 0,
-        grain: cv.hasAttribute('data-grain') ? parseFloat(cv.getAttribute('data-grain')) : null
+        grain: cv.hasAttribute('data-grain') ? parseFloat(cv.getAttribute('data-grain')) : null,
+        maxScale: parseFloat(cv.getAttribute('data-max-scale')) || 1
       });
     });
   }
+  /* K.settled(fn) : exécute fn quand la page est calme (rideau d'arrivée terminé) */
+  var settledQ = [], isSettled = false;
+  function settle() { if (isSettled) return; isSettled = true; K.arriving = false; settledQ.splice(0).forEach(function (f) { f(); }); }
+  K.settled = function (fn) { if (isSettled || !K.arriving) fn(); else settledQ.push(fn); };
   function after(fn) {
     var go = function () { (w.requestIdleCallback || function (f) { return setTimeout(f, 60); })(fn, { timeout: 900 }); };
     if (d.readyState === 'complete') w.requestAnimationFrame(go); else w.addEventListener('load', function () { w.requestAnimationFrame(go); });
@@ -343,9 +353,35 @@
       var opts = $('[data-colorway]', sec).filter(function (b) { return b.tagName === 'BUTTON'; });
       var name = sec.querySelector('[data-kyma-cw-name]'), desc = sec.querySelector('[data-kyma-cw-desc]');
       var link = sec.querySelector('[data-kyma-cw-link]'), live = sec.querySelector('[data-kyma-cw-live]'), cur = null, tok = 0, hov;
+      /* hoodie 3D (GLB) : monté à l'approche de l'écran, après le chargement ; le slime reste en fond */
+      var gcv = sec.querySelector('[data-kyma-cw-glb]'), gv = null, viz = gcv && gcv.parentNode;
+      function glbOff() {
+        if (!viz) return; viz.classList.add('is-glb-off'); if (gcv) gcv.hidden = true;
+        var cap = sec.querySelector('[data-kyma-cw-caption]'); if (cap) cap.textContent = cap.getAttribute('data-fallback') || '';
+      }
+      function glbOn() {
+        if (gv || !gcv) return;
+        if (!w.KYMAGLB) { glbOff(); return; }
+        viz.classList.add('is-loading');
+        gv = w.KYMAGLB.mount(gcv, { src: gcv.getAttribute('data-src'), bg: 'none', spin: 11, idle: 0.4, yaw: -18, fit: 1.18,
+          onload: function () { viz.classList.remove('is-loading'); viz.classList.add('is-glb'); },
+          onerror: function () { viz.classList.remove('is-loading'); glbOff(); } });
+        if (gv.dead) { gv = null; glbOff(); return; }
+        if (w.KYMA3D && w.KYMA3D.external) w.KYMA3D.external(gcv); /* le hoodie compte dans le budget de canvas animés */
+      }
+      if (gcv) {
+        var go3 = function () { K.settled(function () { if (w.KYMAGLB) glbOn(); else w.addEventListener('load', glbOn); }); };
+        var o3 = IO(function (es) { if (es[0].isIntersecting) { o3.disconnect(); go3(); } }, { rootMargin: '60% 0px' });
+        if (o3) o3.observe(sec); else go3();
+      }
       function pick(b, announce) {
         if (!b || b === cur) return;
         cur = b; var my = ++tok;
+        if (gcv && b.getAttribute('data-glb')) {
+          gcv.setAttribute('data-src', b.getAttribute('data-glb'));
+          gcv.setAttribute('aria-label', (gcv.getAttribute('data-label') || '') + ' ' + (b.getAttribute('data-name') || ''));
+          if (gv) { viz.classList.add('is-loading'); gv.load(b.getAttribute('data-glb')).then(function () { viz.classList.remove('is-loading'); }, function () { viz.classList.remove('is-loading'); }); }
+        }
         opts.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
         var key = b.getAttribute('data-colorway'), nm = b.getAttribute('data-name') || b.textContent.trim();
         sec.style.setProperty('--cw-a', b.getAttribute('data-a')); sec.style.setProperty('--cw-b', b.getAttribute('data-b'));
@@ -368,7 +404,10 @@
       opts.forEach(function (b) {
         b.addEventListener('click', function () { pick(b, true); });
         b.addEventListener('focus', function () { pick(b, true); });
-        b.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { clearTimeout(hov); hov = setTimeout(function () { pick(b); }, 110); } });
+        b.addEventListener('pointerenter', function (e) {
+          if (gcv && w.KYMAGLB && w.KYMAGLB.prefetch) w.KYMAGLB.prefetch(b.getAttribute('data-glb'));
+          if (e.pointerType === 'mouse') { clearTimeout(hov); hov = setTimeout(function () { pick(b); }, gcv ? 260 : 110); }
+        });
       });
       cur = opts.filter(function (o) { return o.getAttribute('aria-pressed') === 'true'; })[0] || null;
       if (name && !K.reduced) { split(name); name.classList.add('is-in'); }
@@ -496,7 +535,7 @@
     dedupe(); chrome(); initScope(d); smooth(); anchors(); progress(); cursor(); curtain(); variants();
     root.classList.add('kyma-ready');
     lastY = w.scrollY; wake();
-    after(function () { mount3d(d); });
+    K.settled(function () { after(function () { mount3d(d); }); });
   }
   K.init = initScope; K.mount3d = mount3d; K.goTo = goTo;
 

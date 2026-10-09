@@ -23,7 +23,7 @@
       "type": "kyma-colorway-cards",
       "settings": {
         "anchor": "coloris",
-        "number": "01",
+        "number": "02",
         "label": "LES COLORIS",
         "title_before": "Choisir son",
         "title_em": "courant",
@@ -103,7 +103,7 @@
       "type": "kyma-recolor",
       "settings": {
         "anchor": "une-meme-piece",
-        "number": "02",
+        "number": "03",
         "label": "UNE MÊME PIÈCE",
         "title_before": "Même pièce, autre",
         "title_em": "teinte",
@@ -166,7 +166,7 @@
       "type": "kyma-timeline",
       "settings": {
         "anchor": "precommande",
-        "number": "03",
+        "number": "04",
         "label": "LA PRÉCOMMANDE",
         "title_before": "La fabrication suit la",
         "title_em": "précommande",
@@ -219,7 +219,7 @@
       "type": "kyma-cercle-waves",
       "settings": {
         "anchor": "cercle",
-        "number": "04",
+        "number": "05",
         "label": "CERCLE WAVES",
         "title_before": "Rester dans le",
         "title_em": "cercle",
@@ -230,10 +230,92 @@
         "show_rings": true,
         "compact_top": false
       }
+    },
+    "hoodie": {
+      "type": "kyma-product-360",
+      "settings": {
+        "anchor": "hoodie-3d",
+        "number": "01",
+        "label": "LE HOODIE EN 3D",
+        "title_before": "Cinq coloris,",
+        "title_em": "une",
+        "title_after": "pièce.",
+        "text": "Choisissez un coloris : le hoodie Ressac change de teinte et tourne lentement. Glissez pour en faire le tour.",
+        "product": "ressac-hoodie-zippe-oversize",
+        "prefer_native": true,
+        "autorotate": true,
+        "spin_speed": 9,
+        "spin_delay": 1,
+        "help": "Glissez pour tourner, double-cliquez pour approcher. Touches 1 à 4 : face, profil, dos, détail.",
+        "list_label": "Choisir un coloris du hoodie 3D",
+        "presets_label": "Points de vue",
+        "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter.",
+        "loading_label": "Chargement du modèle 3D…",
+        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
+        "caption_fallback": "Illustration du coloris.",
+        "spots_label": "Détails de la pièce",
+        "cta_label": "",
+        "cta_link": ""
+      },
+      "blocks": {
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "glb": "ressac-lilac-whirl.glb",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "glb": "ressac-ivory-tide.glb",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "glb": "ressac-silver-drift.glb",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "glb": "ressac-noir-absolu.glb",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "glb": "ressac-crimson-flow.glb",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E"
+          }
+        }
+      },
+      "block_order": [
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
     }
   },
   "order": [
     "hero",
+    "hoodie",
     "coloris",
     "teinte",
     "precommande",

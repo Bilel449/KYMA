@@ -95,17 +95,19 @@
       <svg viewBox="0 0 44 10" aria-hidden="true" focusable="false"><path d="M1 5 C6 1 10 1 15 5 S24 9 29 5 S38 1 43 5"/></svg>
       <span class="kyma-hero__cue-line" aria-hidden="true"></span>
     </a></section></div>
-<div id="shopify-section-drop" class="shopify-section kyma-section"><section class="kyma-sec kyma-cw" id="dropdrop" aria-labelledby="kyma-cw-title-drop" data-kyma-colorways
+<div id="shopify-section-drop" class="shopify-section kyma-section"><section class="kyma-sec kyma-cw" id="drop" aria-labelledby="kyma-cw-title-drop" data-kyma-colorways
   style="--cw-a: #C8A2C8; --cw-b: #F5EDE4;">
   <div class="kyma-sec__inner">
     <div data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — LE DROP 1</p><h2 class="kyma-sec__title" id="kyma-cw-title-drop">Cinq coloris, un même <em>flux</em>.</h2><p class="kyma-sec__desc">Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série.</p>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — LE DROP 1</p><h2 class="kyma-sec__title" id="kyma-cw-title-drop">Cinq coloris, un même <em>flux</em>.</h2><p class="kyma-sec__desc">Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Choisissez un coloris : le hoodie tourne devant vous, dans sa teinte.</p>
     </div>
 
     <div class="kyma-cw__stage">
-      <div class="kyma-cw__viz" data-kyma-3d-host data-kyma-reveal>
-        <canvas data-kyma-3d="hero" data-shift="0,0" data-colorway="lilac-whirl" aria-hidden="true"></canvas>
-      </div>
+      <div class="kyma-cw__viz kyma-cw__viz--hoodie" data-kyma-3d-host data-kyma-reveal>
+        <canvas class="kyma-cw__slime" data-kyma-3d="hero" data-shift="0.62,-0.42" data-colorway="lilac-whirl" data-interactive="false" data-max-scale="0.45" aria-hidden="true"></canvas><canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="../3d/ressac-lilac-whirl.glb" tabindex="0" role="img"
+            data-label="Hoodie zippé oversize Ressac en 3D, coloris"
+            aria-label="Hoodie zippé oversize Ressac en 3D, coloris Lilac Whirl"></canvas>
+          <p class="kyma-cw__loading" aria-hidden="true">Chargement du modèle 3D…</p></div>
 
       <div class="kyma-cw__panel" data-kyma-reveal style="--kd: 120ms;">
         <p class="kyma-cw__now">
@@ -113,7 +115,7 @@
           <span class="kyma-cw__name" data-kyma-cw-name>Lilac Whirl</span>
         </p>
         <p class="kyma-cw__desc" data-kyma-cw-desc>Le lilas qui tourne, sans jamais revenir.</p>
-        <p class="kyma-vh" aria-live="polite" data-kyma-cw-live></p><ul class="kyma-cw__list" role="list" aria-label="Choisir un coloris pour l&#39;illustration 3D"><li >
+        <p class="kyma-vh" aria-live="polite" data-kyma-cw-live></p><ul class="kyma-cw__list" role="list" aria-label="Choisir un coloris du hoodie 3D"><li >
                 <button
                   type="button"
                   class="kyma-cw__opt"
@@ -123,6 +125,7 @@
                   data-a="#C8A2C8"
                   data-b="#F5EDE4"
                   data-url="/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
+                  data-glb="../3d/ressac-lilac-whirl.glb"
                   aria-pressed="true"
                   style="--a: #C8A2C8; --b: #F5EDE4;"
                 >
@@ -140,6 +143,7 @@
                   data-a="#E8E0D8"
                   data-b="#C5BFB8"
                   data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
+                  data-glb="../3d/ressac-ivory-tide.glb"
                   aria-pressed="false"
                   style="--a: #E8E0D8; --b: #C5BFB8;"
                 >
@@ -157,6 +161,7 @@
                   data-a="#8E9EAB"
                   data-b="#C8CDD2"
                   data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
+                  data-glb="../3d/ressac-silver-drift.glb"
                   aria-pressed="false"
                   style="--a: #8E9EAB; --b: #C8CDD2;"
                 >
@@ -174,6 +179,7 @@
                   data-a="#1A1A1A"
                   data-b="#3A3A4A"
                   data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
+                  data-glb="../3d/ressac-noir-absolu.glb"
                   aria-pressed="false"
                   style="--a: #1A1A1A; --b: #3A3A4A;"
                 >
@@ -191,6 +197,7 @@
                   data-a="#5C2032"
                   data-b="#C4878E"
                   data-url="/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
+                  data-glb="../3d/ressac-crimson-flow.glb"
                   aria-pressed="false"
                   style="--a: #5C2032; --b: #C4878E;"
                 >
@@ -200,11 +207,10 @@
                 </button>
               </li></ul><div class="kyma-cw__foot"><a class="kyma-btn" href="produit.html?variant=57613620904316" data-kyma-cw-link data-kyma-magnetic>
               <span>Voir les coloris</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
-            </a></div><p class="kyma-caption">Illustration du coloris.</p></div>
+            </a></div><p class="kyma-caption" data-kyma-cw-caption data-fallback="Illustration du coloris.">Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</p></div>
     </div>
   </div>
-  <div class="kyma-sec__mark" aria-hidden="true">01</div>
-</section></div>
+  <div class="kyma-sec__mark" aria-hidden="true">01</div><script src="../theme/assets/kyma-glb.js" defer data-kyma-asset="glb"></script></section></div>
 <div id="shopify-section-motif" class="shopify-section kyma-section"><section
   id="motif"
   class="kyma-sec kyma-chap kyma-chap--pattern"
@@ -230,91 +236,68 @@
                   <span class="kyma-vh">Crimson Flow</span>
                 </button></div><figcaption class="kyma-caption">Illustration du coloris.</figcaption></figure></div>
 </section></div>
-<div id="shopify-section-piece" class="shopify-section kyma-section"><section class="kyma-sec kyma-tech" id="piecepiece" aria-labelledby="kyma-tech-title-piece" data-kyma-draw>
-  <div class="kyma-sec__inner">
-    <div class="kyma-tech__grid">
-      <figure class="kyma-tech__fig">
-        <div class="kyma-tech__art">
-          <svg class="kyma-tech__svg" viewBox="40 10 520 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="kyma-tech-title-piece-t" focusable="false">
-  <title id="kyma-tech-title-piece-t">Dessin technique du hoodie zippé oversize KYMA, vue de face : capuche sans cordon, zip intégral, tirette sculptée, deux poches biais, bords-côtes aux poignets et à la taille.</title>
-  <g>
-    <path pathLength="1" d="M240 132 C204 100 210 34 300 24 C390 34 396 100 360 132"/>
-    <path pathLength="1" d="M262 132 C262 98 276 64 300 61 C324 64 338 98 338 132"/>
-    <path pathLength="1" class="is-fine" d="M271 132 C272 104 284 76 300 73 C316 76 328 104 329 132"/>
-    <path pathLength="1" class="is-fine" d="M300 24 L300 61"/>
-    <path pathLength="1" d="M240 132 C200 142 160 152 124 168"/>
-    <path pathLength="1" d="M 360 132 C 400 142 440 152 476 168"/>
-    <path pathLength="1" class="is-fine" d="M127 170 C146 206 156 250 160 296"/>
-    <path pathLength="1" class="is-fine" d="M 473 170 C 454 206 444 250 440 296"/>
-    <path pathLength="1" d="M124 168 C96 256 80 372 74 470"/>
-    <path pathLength="1" d="M 476 168 C 504 256 520 372 526 470"/>
-    <path pathLength="1" d="M160 296 C152 372 138 430 130 470"/>
-    <path pathLength="1" d="M 440 296 C 448 372 462 430 470 470"/>
-    <path pathLength="1" d="M74 470 L130 470 L126 508 L80 508 Z"/>
-    <path pathLength="1" d="M 526 470 L 470 470 L 474 508 L 520 508 Z"/>
-    <path pathLength="1" class="is-fine" d="M86 472 L87 506 M96 472 L96 506 M106 472 L105 506 M116 472 L115 506"/>
-    <path pathLength="1" class="is-fine" d="M 514 472 L 513 506 M 504 472 L 504 506 M 494 472 L 495 506 M 484 472 L 485 506"/>
-    <path pathLength="1" d="M160 296 C163 380 165 470 166 560"/>
-    <path pathLength="1" d="M 440 296 C 437 380 435 470 434 560"/>
-    <path pathLength="1" d="M166 560 L434 560 L431 597 L169 597 Z"/>
-    <path pathLength="1" class="is-fine" d="M180 562 L180 595 M192 562 L192 595 M204 562 L204 595 M216 562 L216 595 M228 562 L228 595 M240 562 L240 595 M252 562 L252 595 M264 562 L264 595 M276 562 L276 595 M288 562 L288 595 M312 562 L312 595 M324 562 L324 595 M336 562 L336 595 M348 562 L348 595 M360 562 L360 595 M372 562 L372 595 M384 562 L384 595 M396 562 L396 595 M408 562 L408 595 M420 562 L420 595"/>
-    <path pathLength="1" class="is-fine" d="M296 134 L296 597 M304 134 L304 597"/>
-    <path pathLength="1" class="is-dim" d="M297 196 L303 196 M297 203 L303 203 M297 210 L303 210 M297 217 L303 217 M297 224 L303 224 M297 231 L303 231 M297 238 L303 238 M297 245 L303 245 M297 252 L303 252 M297 259 L303 259 M297 266 L303 266 M297 273 L303 273 M297 280 L303 280 M297 287 L303 287 M297 294 L303 294 M297 301 L303 301 M297 308 L303 308 M297 315 L303 315 M297 322 L303 322 M297 329 L303 329 M297 336 L303 336 M297 343 L303 343 M297 350 L303 350 M297 357 L303 357 M297 364 L303 364 M297 371 L303 371 M297 378 L303 378 M297 385 L303 385 M297 392 L303 392 M297 399 L303 399 M297 406 L303 406 M297 413 L303 413 M297 420 L303 420 M297 427 L303 427 M297 434 L303 434 M297 441 L303 441 M297 448 L303 448 M297 455 L303 455 M297 462 L303 462 M297 469 L303 469 M297 476 L303 476 M297 483 L303 483 M297 490 L303 490 M297 497 L303 497 M297 504 L303 504 M297 511 L303 511 M297 518 L303 518 M297 525 L303 525 M297 532 L303 532 M297 539 L303 539 M297 546 L303 546 M297 553 L303 553 M297 560 L303 560 M297 567 L303 567 M297 574 L303 574 M297 581 L303 581 M297 588 L303 588"/>
-    <path pathLength="1" class="is-accent" d="M300 140 L300 150 C292 151 290 160 291 172 C292 186 296 194 300 196 C304 194 308 186 309 172 C310 160 308 151 300 150"/>
-    <path pathLength="1" class="is-accent" d="M296 162 C299 165 301 165 304 168 M296 172 C299 175 301 175 304 178"/>
-    <path pathLength="1" d="M184 398 L222 506 M192 396 L230 504"/>
-    <path pathLength="1" d="M 416 398 L 378 506 M 408 396 L 370 504"/>
-    <path pathLength="1" class="is-fine" d="M262 132 C280 140 320 140 338 132"/>
-    <path pathLength="1" class="is-dim" d="M452 560 L464 560 M458 560 L458 597 M452 597 L464 597"/>
-  </g>
-  <text x="470" y="583" font-size="11" fill="#5F5F5F" font-family="Outfit, sans-serif" letter-spacing="1">6 cm</text>
-</svg>
-<button type="button" class="kyma-tech__spot" data-at="0.5"
-              style="left: 36%; top: 10%;"
-              aria-describedby="kyma-tech-title-piece-l1" >
-              <span>1</span><span class="kyma-vh">Capuche sans cordon</span>
-            </button><button type="button" class="kyma-tech__spot" data-at="0.584"
-              style="left: 50%; top: 27%;"
-              aria-describedby="kyma-tech-title-piece-l2" >
-              <span>2</span><span class="kyma-vh">Tirette sculptée « Kyma »</span>
-            </button><button type="button" class="kyma-tech__spot" data-at="0.6679999999999999"
-              style="left: 50%; top: 55%;"
-              aria-describedby="kyma-tech-title-piece-l3" >
-              <span>3</span><span class="kyma-vh">Zip intégral</span>
-            </button><button type="button" class="kyma-tech__spot" data-at="0.752"
-              style="left: 20%; top: 30%;"
-              aria-describedby="kyma-tech-title-piece-l4" >
-              <span>4</span><span class="kyma-vh">Épaules tombantes</span>
-            </button><button type="button" class="kyma-tech__spot" data-at="0.836"
-              style="left: 31%; top: 74%;"
-              aria-describedby="kyma-tech-title-piece-l5" >
-              <span>5</span><span class="kyma-vh">Poches biais</span>
-            </button></div><figcaption class="kyma-caption">Dessin technique illustratif, vue de face — proportions indicatives.</figcaption></figure>
+<div id="shopify-section-piece" class="shopify-section kyma-section"><section id="piece" class="kyma-sec kyma-360 kyma-360--spots" aria-labelledby="kyma-360-piece-t" data-kyma-360 data-mode="glb" data-colorway="lilac-whirl" data-spin="9" data-spin-delay="0.5">
+  <div class="kyma-sec__inner kyma-360__grid">
+    <div class="kyma-360__text" data-kyma-reveal>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">03</span> — LA PIÈCE</p><h2 class="kyma-sec__title" id="kyma-360-piece-t">Une pièce, un <em>seul</em> geste.</h2><p class="kyma-sec__desc">Le motif est imprimé sur tout le tissu. Faites tourner la pièce : chaque détail est numéroté.</p><div class="kyma-tints kyma-tints--named" role="group" aria-label="Coloris du modèle 3D" data-kyma-360-tints><button type="button" class="kyma-tints__dot" data-colorway="lilac-whirl" data-name="Lilac Whirl"
+              data-glb="../3d/ressac-lilac-whirl.glb"
+              aria-pressed="true" style="--a: #C8A2C8; --b: #F5EDE4;" >
+              <span class="kyma-tints__name">Lilac Whirl</span>
+            </button><button type="button" class="kyma-tints__dot" data-colorway="ivory-tide" data-name="Ivory Tide"
+              data-glb="../3d/ressac-ivory-tide.glb"
+              aria-pressed="false" style="--a: #E8E0D8; --b: #C5BFB8;" >
+              <span class="kyma-tints__name">Ivory Tide</span>
+            </button><button type="button" class="kyma-tints__dot" data-colorway="silver-drift" data-name="Silver Drift"
+              data-glb="../3d/ressac-silver-drift.glb"
+              aria-pressed="false" style="--a: #8E9EAB; --b: #C8CDD2;" >
+              <span class="kyma-tints__name">Silver Drift</span>
+            </button><button type="button" class="kyma-tints__dot" data-colorway="noir-absolu" data-name="Noir Absolu"
+              data-glb="../3d/ressac-noir-absolu.glb"
+              aria-pressed="false" style="--a: #1A1A1A; --b: #3A3A4A;" >
+              <span class="kyma-tints__name">Noir Absolu</span>
+            </button><button type="button" class="kyma-tints__dot" data-colorway="crimson-flow" data-name="Crimson Flow"
+              data-glb="../3d/ressac-crimson-flow.glb"
+              aria-pressed="false" style="--a: #5C2032; --b: #C4878E;" >
+              <span class="kyma-tints__name">Crimson Flow</span>
+            </button></div><p class="kyma-360__help">Glissez pour tourner. Choisissez un détail : la pièce pivote vers lui.</p><ol class="kyma-360__legend" role="list" aria-label="Détails de la pièce"><li class="kyma-360__lg" id="kyma-360-piece-s1" data-anchor="capuche" >
+              <button type="button" class="kyma-360__lgbtn" data-anchor="capuche">
+                <span class="kyma-360__n" aria-hidden="true">1</span>
+                <span class="kyma-360__lgt">Capuche sans cordon</span>
+              </button><p>Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d&#39;œillets.</p></li><li class="kyma-360__lg" id="kyma-360-piece-s2" data-anchor="tirette" >
+              <button type="button" class="kyma-360__lgbtn" data-anchor="tirette">
+                <span class="kyma-360__n" aria-hidden="true">2</span>
+                <span class="kyma-360__lgt">Tirette sculptée « Kyma »</span>
+              </button><p>En laiton plaqué or brossé : le seul éclat de la pièce.</p></li><li class="kyma-360__lg" id="kyma-360-piece-s3" data-anchor="zip" >
+              <button type="button" class="kyma-360__lgbtn" data-anchor="zip">
+                <span class="kyma-360__n" aria-hidden="true">3</span>
+                <span class="kyma-360__lgt">Zip intégral</span>
+              </button><p>En métal argent brossé, du col jusqu&#39;à l&#39;ourlet.</p></li><li class="kyma-360__lg" id="kyma-360-piece-s4" data-anchor="poches" >
+              <button type="button" class="kyma-360__lgbtn" data-anchor="poches">
+                <span class="kyma-360__n" aria-hidden="true">4</span>
+                <span class="kyma-360__lgt">Poches biais</span>
+              </button><p>Deux poches coupées en biais.</p></li><li class="kyma-360__lg" id="kyma-360-piece-s5" data-anchor="cotes" >
+              <button type="button" class="kyma-360__lgbtn" data-anchor="cotes">
+                <span class="kyma-360__n" aria-hidden="true">5</span>
+                <span class="kyma-360__lgt">Bords-côtes</span>
+              </button><p>Bords-côtes 2×2 de 6 cm à la taille et aux poignets.</p></li></ol><p class="kyma-360__cta"><a class="kyma-btn" href="produit.html" data-kyma-magnetic><span>Découvrir la pièce</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a></p></div>
 
-      <div class="kyma-tech__text">
-        <div data-kyma-reveal>
-          <p class="kyma-sec__label"><span class="kyma-sec__n">03</span> — LA PIÈCE</p><h2 class="kyma-sec__title" id="kyma-tech-title-piece">Une pièce, un <em>seul</em> geste.</h2><p class="kyma-sec__desc">Le motif est imprimé sur tout le tissu. Pensé pour que chaque pièce soit unique.</p>
+    <figure class="kyma-360__fig" data-kyma-reveal style="--kd: 120ms;">
+      <div class="kyma-360__stage" data-kyma-drag data-kyma-cursor="Glisser"><canvas class="kyma-360__glb" tabindex="0" role="img" data-src="../3d/ressac-lilac-whirl.glb"
+              aria-label="Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter : capuche sans cordon, zip intégral argent, tirette dorée, deux poches biais, bords-côtes."></canvas>
+            <p class="kyma-360__loading" aria-hidden="true">Chargement du modèle 3D…</p><div class="kyma-360__spots" aria-hidden="true"><span class="kyma-360__spot" data-anchor="capuche" data-for="kyma-360-piece-s1"><span>1</span></span><span class="kyma-360__spot" data-anchor="tirette" data-for="kyma-360-piece-s2"><span>2</span></span><span class="kyma-360__spot" data-anchor="zip" data-for="kyma-360-piece-s3"><span>3</span></span><span class="kyma-360__spot" data-anchor="poches" data-for="kyma-360-piece-s4"><span>4</span></span><span class="kyma-360__spot" data-anchor="cotes" data-for="kyma-360-piece-s5"><span>5</span></span></div><div class="kyma-360__fallback" data-kyma-3d-host data-kyma-variant-sync hidden>
+          <canvas data-kyma-3d="swatch" data-colorway="lilac-whirl" data-grain="0" aria-hidden="true" hidden></canvas>
         </div>
-        <ol class="kyma-tech__legend" role="list" style="margin-top: 32px;"><li class="kyma-tech__item" id="kyma-tech-title-piece-l1" data-at="0.5">
-              <span class="kyma-tech__n" aria-hidden="true">1</span>
-              <div><h3>Capuche sans cordon</h3><p>Double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d&#39;œillets.</p></div>
-            </li><li class="kyma-tech__item" id="kyma-tech-title-piece-l2" data-at="0.584">
-              <span class="kyma-tech__n" aria-hidden="true">2</span>
-              <div><h3>Tirette sculptée « Kyma »</h3><p>En laiton plaqué or brossé : le seul éclat de la pièce.</p></div>
-            </li><li class="kyma-tech__item" id="kyma-tech-title-piece-l3" data-at="0.6679999999999999">
-              <span class="kyma-tech__n" aria-hidden="true">3</span>
-              <div><h3>Zip intégral</h3><p>En métal argent brossé, du col jusqu&#39;à l&#39;ourlet.</p></div>
-            </li><li class="kyma-tech__item" id="kyma-tech-title-piece-l4" data-at="0.752">
-              <span class="kyma-tech__n" aria-hidden="true">4</span>
-              <div><h3>Épaules tombantes</h3><p>Coupe oversize : ample, posée.</p></div>
-            </li><li class="kyma-tech__item" id="kyma-tech-title-piece-l5" data-at="0.836">
-              <span class="kyma-tech__n" aria-hidden="true">5</span>
-              <div><h3>Poches biais</h3><p>Deux poches coupées en biais.</p></div>
-            </li></ol><div class="kyma-man__cta"><a class="kyma-link" href="produit.html">Découvrir la pièce</a></div></div>
-    </div>
-  </div>
-  <div class="kyma-sec__mark" aria-hidden="true">03</div>
-</section></div>
+      </div>
+      <div class="kyma-360__presets" role="group" aria-label="Points de vue">
+        <button type="button" data-preset="face" aria-keyshortcuts="1">Face</button>
+        <button type="button" data-preset="profil" aria-keyshortcuts="2">Profil</button>
+        <button type="button" data-preset="dos" aria-keyshortcuts="3">Dos</button>
+        <button type="button" data-preset="detail" aria-keyshortcuts="4">Détail</button>
+      </div>
+      <figcaption class="kyma-caption" data-kyma-360-caption
+        data-model="Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer." data-fallback="Illustration du coloris.">Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</figcaption>
+    </figure>
+  </div><script src="../theme/assets/kyma-glb.js" defer data-kyma-asset="glb"></script></section></div>
 <div id="shopify-section-savoir-faire" class="shopify-section kyma-section"><section
   id="savoir-faire"
   class="kyma-sec kyma-chap kyma-chap--cloth kyma-chap--flip kyma-sec--rose"
@@ -331,56 +314,17 @@
 <div id="shopify-section-cercle" class="shopify-section kyma-section"><section id="cercle" class="kyma-sec kyma-cercle" aria-labelledby="kyma-cw2-title-cercle" data-kyma-rings data-kyma-rings-scroll="join">
   <div class="kyma-sec__inner">
     <div class="kyma-cercle__head" data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">05</span> — CERCLE WAVES</p><h2 class="kyma-sec__title" id="kyma-cw2-title-cercle">Rejoindre le <em>cercle</em>.</h2><p class="kyma-sec__desc">Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et ORIGINE.</p>
+      <p class="kyma-sec__label"><span class="kyma-sec__n">05</span> — CERCLE WAVES</p><h2 class="kyma-sec__title" id="kyma-cw2-title-cercle">Rejoindre le <em>cercle</em>.</h2><p class="kyma-sec__desc">Cercle Waves réunit celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ.</p>
     </div><div class="kyma-cercle__rings" data-kyma-3d-host data-kyma-reveal>
         <canvas data-kyma-3d="rings" data-follow="false" aria-hidden="true"></canvas>
         <span class="kyma-cercle__ringtag kyma-cercle__ringtag--a" aria-hidden="true">INITIUM</span>
-        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--b" aria-hidden="true">ORIGINE</span>
+        <span class="kyma-cercle__ringtag kyma-cercle__ringtag--b" aria-hidden="true">MAJESTÉ</span>
       </div><div class="kyma-cercle__cta" data-kyma-reveal>
         <a class="kyma-btn kyma-btn--ghost" href="cercle-waves.html" data-kyma-magnetic>
           <span>Entrer dans le Cercle</span>
           <span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
         </a>
       </div></div>
-</section></div>
-<div id="shopify-section-instagram" class="shopify-section kyma-section"><section id="instagram" class="kyma-sec kyma-ig" aria-labelledby="kyma-ig-instagram-t">
-  <div class="kyma-sec__inner">
-    <div class="kyma-ig__head" data-kyma-reveal>
-      <p class="kyma-sec__label"><span class="kyma-sec__n">06</span> — INSTAGRAM</p><h2 class="kyma-sec__title" id="kyma-ig-instagram-t">Dans le <em>sillage</em>.</h2><p class="kyma-sec__desc">Coulisses, textures et premiers regards, sur @kymasinsta.</p>
-      <p><a class="kyma-link" href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">Suivre @kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></p>
-    </div>
-    <ul class="kyma-ig__grid" role="list" data-kyma-tiles><li class="kyma-ig__tile" style="--i: 0;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma" data-seed="37">
-            <span class="kyma-ig__cap">Écume</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li><li class="kyma-ig__tile" style="--i: 1;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma-camel" data-seed="74">
-            <span class="kyma-ig__cap">Sillage</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li><li class="kyma-ig__tile" style="--i: 2;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma" data-seed="111">
-            <span class="kyma-ig__cap">Marée</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li><li class="kyma-ig__tile" style="--i: 3;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma-camel" data-seed="148">
-            <span class="kyma-ig__cap">Courant</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li><li class="kyma-ig__tile" style="--i: 4;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma" data-seed="185">
-            <span class="kyma-ig__cap">Horizon</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li><li class="kyma-ig__tile" style="--i: 5;" data-kyma-reveal >
-          <a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener" class="kyma-ig__link" data-colorway="kyma-camel" data-seed="222">
-            <span class="kyma-ig__cap">Ressac</span>
-            <span class="kyma-vh"> — @kymasinsta (nouvel onglet)</span>
-          </a>
-        </li></ul>
-  </div>
 </section></div>
 </main>
 <footer class="kp-footer">

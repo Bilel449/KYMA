@@ -1,7 +1,7 @@
 # KYMA : installer le site multi-pages dans le thème Horizon
 
 > Auteur : Sacha, le 08/10/2026. Statut : « VALIDÉ » d'Arthur pour une copie non publiée. **INSTALLÉ le 08/10/2026 dans la copie non publiée « KYMA — Horizon (préparation) », `gid://shopify/OnlineStoreTheme/189991944572`.** Rien n'est publié.
-> Le thème en ligne (Horizon MAIN `gid://shopify/OnlineStoreTheme/187511734652`) n'a pas été modifié. Aucune attribution de template n'a été changée (pages et produit), puisqu'elle s'appliquerait au thème en ligne : voir le § 4, à faire **au moment de la publication**.
+> Le thème en ligne (Horizon MAIN `gid://shopify/OnlineStoreTheme/187511734652`) n'a pas été modifié. **Mise à jour du 09/10/2026** (retours du fondateur) : 17 fichiers réinstallés dans la copie (§ 1 bis) et templates **attribués** aux pages, au produit et à la collection (§ 4), après vérification que le thème en ligne n'a aucun template de même nom.
 > Prévisualisation : `https://kymas-store.myshopify.com/?preview_theme_id=189991944572`, à ouvrir depuis l'admin connecté. La boutique peut être protégée par mot de passe pendant l'essai.
 > Maquettes : `shopify/preview/*.html`. Elles sont rendues depuis les vrais fichiers Liquid, avec les réglages des templates ci-dessous.
 
@@ -58,6 +58,17 @@ shopify theme push --theme "<ID de la copie>" --path ./theme-kyma --nodelete \
 
 **Si l'éditeur refuse l'extension `.glb`** (le média 3D est refusé sur le plan d'essai, mais les fichiers de thème passent en principe) : utiliser la méthode B, ou laisser faire le repli. Sans GLB, la fiche produit affiche l'aperçu 3D du coloris, sans erreur.
 
+## 1 bis. Réinstallation du 09/10/2026 (retours du fondateur) — 17 fichiers, MD5 relus
+
+`assets/` kyma-3d.js (v2.1), kyma-glb.js (v2.0), kyma-motion.js (v3.1), kyma-pages.js, kyma.css, kyma-pages.css · `sections/` kyma-cercle-waves, kyma-chapter, kyma-colorways, kyma-page-hero, kyma-product-360 · `templates/` index.json, collection.kyma.json, page.cercle-waves.json, page.faq.json, page.nous-connaitre.json · `config/settings_data.json` de la **copie** (palette fond `#F5EDE4` / texte `#4A3B32`, seule modification). Méthode : `stagedUploadsCreate` + `themeFilesUpsert` (corps URL) sur `189991944572`, puis relecture : les 17 MD5 sont identiques au dépôt (pour `settings_data.json`, Shopify calcule le MD5 sur le JSON minifié).
+
+Ce qui change à l'écran :
+- **Accueil** : section 01 Coloris = **hoodie 3D (GLB) du coloris choisi**, qui tourne lentement, devant le slime gardé en fond ; section 03 « La pièce » = **hoodie 3D** (`kyma-product-360` avec blocs « Point chaud » : capuche, tirette, zip, poches, bords-côtes) dont les numéros suivent le modèle et se masquent quand le détail passe derrière ; activer une légende fait pivoter la pièce vers le détail ; mention « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. ». Section Instagram « Dans le sillage » **retirée** (`kyma-instagram` et `kyma-technical` restent dans le thème, inutilisées).
+- **Collection** : nouvelle section « Le hoodie en 3D » (un hoodie, sélecteur des 5 coloris).
+- **Cercle Waves** : cartes de membre 3D au format carte bancaire (85,6 × 54 mm), INITIUM beige crème / MAJESTÉ gris clair à liseré or, « KYMA » doré en relief, vague marbrée ton sur ton ; lévitation, inclinaison vers la souris, reflet qui balaie, pivot au survol / clic / toucher / clavier (verso inert, `aria-pressed`). Prix trimestriels et bouton « Rejoindre » sous les cartes (réglages texte), ligne de conditions réglable.
+- **Nous connaître** : grand titre **KYMA** (visuel « brand » de `kyma-page-hero`), le grec κύμα en petite mention étymologique.
+- **Fluidité** : marche de rayon allégée et rendue en DPR 1 avec échelle adaptative (cible 60 i/s), paramètres de défilement interpolés, une seule boucle d'animation par moteur (correction d'un doublement de boucle), courbes de révélation plus douces, rideau sinusoïdal, scènes 3D et GLB montées après le rideau, défilement lissé léger sur ordinateur (`<html data-kyma-native-scroll>` pour le couper). **Un seul contexte WebGL pour tous les lecteurs GLB** (modèles téléchargés une fois par URL) + un pour les scènes kyma-3d : 2 au plus par page.
+
 ## 2. Une ligne à ajouter dans `layout/theme.liquid`
 
 Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste avant `{{ content_for_header }}` (dans le `<head>`) :
@@ -78,9 +89,9 @@ Cette ligne charge les polices auto-hébergées, `kyma.css`, `kyma-pages.css` et
 - **Logo** : texte « KYMA ». Le SVG de `brand/assets/kyma-logo.svg` contient encore un trait lilas : le repasser en `#C19E86` avant de l'utiliser.
 - **Bandeau d'annonce** (`header-announcements`) : message 1 seul au lancement, « Drop 1 — précommande ouverte. Expédition au plus tard le [À COMPLÉTER : date]. ». Ne l'afficher que si la précommande est réellement ouverte (blocage n° 3 de Victoire).
 
-## 4. Attribuer les templates (**au moment de la publication seulement**)
+## 4. Attribuer les templates — **FAIT le 09/10/2026** (voir `etat-boutique.md` pour la preuve et le retour arrière)
 
-⚠️ Ne rien attribuer avant de publier la copie. Le choix de template d'une page ou d'un produit vaut pour **tous** les thèmes, y compris le thème en ligne, qui n'a pas ces templates. Dans la copie, on prévisualise chaque template avec l'éditeur de thème (menu des modèles, aperçu d'un produit ou d'une page).
+Le choix de template vaut pour **tous** les thèmes. Le thème en ligne n'ayant aucun de ces templates (lecture du 09/10/2026), il continue d'afficher `page.json` / `product.json` / `collection.json` : l'attribution n'a d'effet que dans la copie. Attribué : `cercle-waves` (page publiée, lien du menu) et `cercle-waves-v2` → `cercle-waves` ; `notre-histoire` → `nous-connaitre` ; `faq-v2` → `faq` ; `guide-des-tailles` → `guide-des-tailles` ; produit → `kyma` ; collection `drop-1` → `kyma`. Retour arrière : `templateSuffix` vide. Les renommages d'identifiants ci-dessous restent à faire **au lancement**.
 
 | Ressource existante (brouillon) | Template à choisir | Action complémentaire |
 |---|---|---|
@@ -125,7 +136,7 @@ Mention sous le lecteur : « Visuel de présentation 3D — pensé pour que chaq
 
 - [ ] Aperçu de la copie sur téléphone et sur ordinateur : accueil, collection, produit, Cercle Waves, Nous connaître, Guide des tailles, FAQ, Contact.
 - [ ] Console du navigateur : aucune erreur. Lecteur 360° : il tourne au glisser, et le coloris suit la variante.
-- [ ] Les cartes Cercle Waves pivotent au survol, au clic, au toucher et au clavier (Tab, Entrée, Échap), et n'affichent **aucun prix**.
+- [ ] Les cartes Cercle Waves flottent et pivotent au survol, au clic, au toucher et au clavier (Tab, Entrée, Échap) ; prix trimestriels (réglages) sous les cartes ; « Rejoindre » inactif tant que le lien d'abonnement manque.
 - [ ] Toutes les balises `[À COMPLÉTER]` sont visibles et listées pour le fondateur : date d'expédition, dates de précommande, e-mail, téléphone, grammage, composition, avantages Cercle Waves.
 - [ ] Victoire valide les mentions de consentement des formulaires (Cercle Waves, contact) et la mention des visuels.
 - [x] RGPD : DM Serif Display et Outfit sont auto-hébergées (`kyma-fonts`) et le thème n'appelle plus Google Fonts. « κύμα » est en SVG ; dans le seul H1 textuel (visuellement masqué), le grec retombe sur Georgia, via la pile `--kyma-serif`.
