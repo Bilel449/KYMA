@@ -32,7 +32,7 @@
         "product": "ressac-hoodie-zippe-oversize",
         "shipping_link": "/policies/shipping-policy",
         "more_label": "Voir ce coloris",
-        "caption": "Illustration du coloris."
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué."
       },
       "blocks": {
         "colorway_1": {
@@ -110,7 +110,7 @@
         "title_after": ".",
         "text": "Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche.",
         "list_label": "Choisir un coloris pour l'illustration",
-        "caption": "Illustration du coloris."
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué."
       },
       "blocks": {
         "colorway_1": {
@@ -251,8 +251,8 @@
         "presets_label": "Points de vue",
         "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter.",
         "loading_label": "Chargement du modèle 3D…",
-        "caption": "Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.",
-        "caption_fallback": "Illustration du coloris.",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "caption_fallback": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
         "spots_label": "Détails de la pièce",
         "cta_label": "",
         "cta_link": "",

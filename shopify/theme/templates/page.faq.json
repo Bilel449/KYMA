@@ -100,8 +100,8 @@
         "question_13": {
           "type": "question",
           "settings": {
-            "question": "Comment fonctionne Cercle Waves ?",
-            "answer": "<p>Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, par abonnement trimestriel. Il n'est pas encore ouvert et aucune date n'est fixée : rien n'est à faire pour l'instant. Voir la page <a href=\"/pages/cercle-waves\">Cercle Waves</a>.</p>"
+            "question": "Comment fonctionne le Cercle Waves ?",
+            "answer": "<p>Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. Il n'est pas encore ouvert. Avantages et conditions : voir la page <a href=\"/pages/cercle-waves\">Cercle Waves</a>.</p>"
           }
         }
       },
