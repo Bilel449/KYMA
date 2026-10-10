@@ -18,12 +18,14 @@
 | P4 | Aucun crochet visible sur les pages vers lesquelles Instagram renvoie (E3) | Sacha | Une capture ou un lien qui montre « [À CONFIRMER] » est une publication fautive |
 | P5 | Provenance des GLB `ressac-v2-*.glb` documentée (L5) : auteur, outils, aucun élément tiers, aucune IA | Izaac, fondateur | On publie des captures de ces modèles sur un compte de marque |
 | P6 | Validation d'Arthur (« VALIDÉ ») + confirmation du fondateur | Arthur, fondateur | Règle de livraison |
-| P7 | **Société immatriculée**, politique de confidentialité publiée, boutique sur **forfait payant** ; page des conditions publiée **sans crochet après relecture d'un avocat** | Fondateur, Victoire, Sacha | Statut du post d'annonce (v4 §3, points 4 et 5). **Aucune adresse n'est collectée et aucun e-mail n'est envoyé aux inscrits (confirmation, annonce, newsletter) avant que P7 soit levée** |
+| P7 | **Société immatriculée**, politique de confidentialité publiée, boutique sur **forfait payant** ; page des conditions publiée **sans crochet après relecture d'un avocat** | Fondateur, Victoire, Sacha | Statut du post d'annonce (v4 §3, points 3 et 4). **Rien n'est publié, collecté ni envoyé avant que P7 soit levée : aucune adresse n'est collectée et aucun e-mail n'est envoyé aux inscrits (confirmation, annonce, newsletter)** |
 
 **Portes spécifiques à certains posts**
 - **S2 J1 et suivants (nom « Ressac »)** : accord de Victoire sur l'usage du nom (aucune antériorité recherchée, conformité Entraide E, remarque i).
 - **S3 J1 (cinq coloris)** : le fondateur confirme les 5 coloris du tech pack v3 (point d'arbitrage n° 1 de BRAND.md).
+- **S4 J1 (prix et reconduction affichés)** : relecture de Victoire.
 - **S4 J1, version B** : valeurs entre crochets des avantages validées (partie 4 du document v4) et date du premier accès anticipé fixée (E1).
+- **Partie 6, réponse « Fabriqué où ? »** : « imaginée à Paris » seulement après confirmation du fondateur (comme le champ `Imaginé à | Paris` du récit 3D). Sans cette confirmation : « KYMA est une marque parisienne. »
 
 Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calendrier (les CTA renvoient tous au site). Le contenu ne se publie pas « sans lien ».
 
@@ -44,10 +46,10 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 1. **Aucune image générée par IA.** Sources autorisées : captures du site (modèle 3D, anneaux, motif), dessins techniques vectoriels, typographie en mouvement, photos et vidéos réelles du fondateur, enregistrements sonores réels ou sons libres de droits à usage commercial.
 2. **Mention 3D incrustée dans le visuel** (pas seulement en légende) sur toute capture du hoodie : « Modèle 3D de présentation, pas une photo du produit fabriqué. » Sur les captures de coloris, ajouter « Les couleurs dépendent de votre écran. » Sur le motif : « Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique. » Texte DM Serif/Outfit lisible (jamais sous 24 px en 1080 de large), présent pendant **toute** la durée d'une vidéo, non masqué par l'interface d'Instagram (zone de sécurité haut/bas 250 px en 9:16).
-3. **Phrase de cadrage sur toute pièce qui montre le hoodie** : « Pas encore en vente ; aucune date n'est fixée. » Elle évite l'omission d'information (L.121-3) et la fausse rareté (L.121-4).
+3. **Phrase de cadrage sur toute pièce qui montre le hoodie** : « Pas encore en vente ; aucune date n'est fixée. » Elle évite l'omission d'information (L.121-3) et la fausse rareté (L.121-4). Sur les stories et les vidéos, elle est **incrustée dans le visuel**, comme la mention 3D.
 4. **Interdits de contenu** : GOTS, bio, coton biologique, Portugal / « Made in », drapeau, « éco-responsable », « durable », « zéro plastique » ; prix barré, réduction ; « pièce unique » seul (on écrit « pensée pour être unique ») ; « édition limitée » ; « exclusif », « élite », « VIP », « privilège », « cercle fermé », « sélection », « garanti », « avant tout le monde », « gagnez », « rentabilisez » ; plaqué or, argent brossé (on écrit « finition dorée brossée », « finition argentée brossée »).
 5. **Aucune promesse non datée** : pas de « bientôt », « prochainement », « à venir », « restez connectés ». On énonce l'état présent (« n'est pas encore ouvert », « aucune date n'est fixée »).
-6. **Aucune mention de prix du hoodie** (179 € ou 199 € non tranché). Les prix du Cercle Waves n'apparaissent qu'en S4 J1 (voir note Victoire).
+6. **Aucune mention de prix du hoodie** (179 € ou 199 € non tranché). Les prix du Cercle Waves n'apparaissent qu'en S4 J1.
 7. **Coulisses réelles** : ne montrer ni tech pack complet, ni document de fabricant, ni nom de fournisseur, ni lieu d'atelier (aucun fabricant signé : une image d'atelier suggérerait une origine). Pas de personne tierce reconnaissable sans autorisation écrite (droit à l'image, point 20). Aucune image du lookbook (banque d'images, gabarit Canva).
 8. **Sons** : enregistrement du fondateur (vagues réelles, crayon sur papier) ou musique libre de droits à usage commercial avec licence conservée. Pas de morceau du catalogue grand public sur un compte de marque.
 9. **Accessibilité** : alt-text à chaque image ou carrousel (3 propositions ci-dessous, retenir la première par défaut) ; sous-titres incrustés sur les vidéos qui parlent ; mouvement doux, aucun flash ; toute vidéo reste compréhensible sans le son.
@@ -62,7 +64,7 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 ### S1 J1 — Fil, image unique : annonce de la liste d'attente
 - **Format** : image 4:5 (1080×1350), statique (le visuel animé existe sur le site ; l'image est une capture).
 - **Visuel** : capture du visuel « anneaux » du site : deux anneaux satinés, rose clair et marron clair, qui se rapprochent sur fond beige. Texte incrusté discret : « Cercle Waves » (DM Serif, « Waves » en italique brun) et, en bas, « Rendu 3D, pas une photo. »
-- **Légende** (texte de la v4 corrigée au cycle 1, variante d'accroche n° 1) :
+- **Légende** (texte de la v4 §3, mot pour mot) :
 
 > Un cercle se dessine, vague après vague.
 >
@@ -182,7 +184,7 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 > Un seul éclat.
 >
-> Sculptée « Kyma », dessinée en laiton, finition dorée brossée : la tirette est le détail que le reste de la pièce laisse venir en dernier. Modèle 3D de présentation, pas une photo du produit fabriqué. Le hoodie n'est pas encore en vente ; aucune date n'est fixée.
+> Sculptée « Kyma », en laiton, finition dorée brossée : la tirette est le détail que le reste de la pièce laisse venir en dernier. Modèle 3D de présentation, pas une photo du produit fabriqué. Le hoodie n'est pas encore en vente ; aucune date n'est fixée.
 >
 > Le récit complet se parcourt sur le site (lien en bio).
 
@@ -222,7 +224,8 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 - **Hashtags (5)** : #kyma #lartduflow #hoodieoversize #streetwearunisexe #automne
 
 ### S3 J2 — Stories (4) : une teinte à la fois
-- **Format** : 3 stories fixes (Lilac Whirl, Silver Drift, Crimson Flow en rendu 3D, mention incrustée) puis 1 story sondage : « Lilac Whirl ou Silver Drift ? »
+- **Format** : 3 stories fixes (Lilac Whirl, Silver Drift, Crimson Flow en rendu 3D) puis 1 story sondage : « Lilac Whirl ou Silver Drift ? »
+- **Mentions incrustées sur chacune des 3 stories de rendu 3D** : « Modèle 3D de présentation, pas une photo du produit fabriqué. Les couleurs dépendent de votre écran. » et « Pas encore en vente ; aucune date n'est fixée. »
 - **Réponse au sondage** : un simple « Merci, la marée est partagée. » Aucune promesse de production ou de quantité.
 - **CTA** : sticker lien vers le site (section coloris).
 
@@ -260,15 +263,15 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 ### S3 J6 — Stories (3) : le vocabulaire de la marée
 - **Format** : 3 stories typographiques, DM Serif sur beige grainé.
-- **Texte** : (1) « Ressac : le retour de la vague sur elle-même. » (2) « Sillage : ce qui reste du passage. » (3) « Écume : la limite entre deux états. » On peut intercaler un des mots reçus en S1 J7 (avec accord de la personne).
+- **Texte** : (1) « Ressac : le retour de la vague sur elle-même. » (2) « Houle : le mouvement lent qui précède la vague. » (3) « Écume : la limite entre deux états. » On peut intercaler un des mots reçus en S1 J7 (avec accord de la personne).
 - **CTA** : aucun.
 
 ---
 
 ## 5. Semaine 4 — « Deux paliers, un même courant »
 
-### S4 J1 — Fil, carrousel : INITIUM et MAJESTÉ (version A, publiable sans les avantages)
-- **Porte** : relecture de Victoire (prix et reconduction affichés, voir note ci-dessous).
+### S4 J1 — Fil, carrousel : INITIUM et MAJESTÉ (version A, avec prix et reconduction, sans les avantages)
+- **Porte** : relecture de Victoire (prix et reconduction affichés).
 - **Format** : carrousel 5 images 4:5, typographie sur beige grainé.
 - **Visuel** : 1) « Deux paliers, un même courant. » ; 2) « INITIUM. L'entrée dans le cercle. 12,99 € TTC par trimestre. » ; 3) « MAJESTÉ. Le palier supérieur. 39,99 € TTC par trimestre. » ; 4) « Abonnement trimestriel, renouvelé automatiquement tous les 3 mois. Résiliable à tout moment en ligne, sans frais. Rétractation possible sous 14 jours. Réservé aux majeurs. » ; 5) « L'abonnement n'est pas encore ouvert. La liste d'attente l'est. Lien en bio. »
 - **Légende** :
@@ -286,7 +289,7 @@ Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calen
 - **CTA** : « Le cercle se prépare. » + lien en bio.
 - **Hashtags (5)** : #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 - **Version B (à produire seulement après validation des valeurs entre crochets et de la date du premier accès anticipé)** : ajouter une carte « Avantages » qui reprend **mot pour mot** les lignes `perks` de la page (§1.2 du document v4), crochets remplacés par les valeurs validées, avec la note de nature du cashback (« versé en crédit KYMA, pas en espèces… »). Aucun avantage chiffré ni daté ne figure dans la version A.
-- **Note pour Victoire** : le post d'annonce v4 excluait le prix. Ici je l'inclus parce que la description des deux paliers sans prix ni reconduction me semble une omission (L.121-3). À trancher : version avec ou sans prix.
+- **Décision (Arthur)** : version **avec** prix et reconduction. Les afficher évite l'omission d'information essentielle sur un abonnement (L.121-3) ; la relecture de Victoire reste une porte.
 
 ### S4 J2 — Stories (4) : « Vos questions »
 - **Format** : 1 story avec sticker questions le matin ; 4 stories de réponses fixes le soir (typographie).
@@ -349,7 +352,7 @@ Ton : calme, court, vouvoiement, jamais défensif. Une réponse de moins de 24 h
 | « Je peux m'abonner ? » | « Pas encore : seule la liste d'attente est ouverte, sans paiement. » |
 | « Le Cercle Waves est gratuit ? » | « Non : deux paliers payants, en abonnement trimestriel. L'inscription à la liste d'attente, elle, ne coûte rien. » |
 | « Je me suis inscrit, je n'ai rien reçu. » | « Nous vous écrirons à l'ouverture du Cercle Waves ; la date n'est pas encore fixée. Vous pouvez vous désinscrire à tout moment. » (Aucune promesse de message avant la porte P7.) |
-| « Fabriqué où ? Portugal ? » | « KYMA est imaginée à Paris. Nous n'indiquons que ce qui est confirmé, et ce point ne l'est pas encore. » |
+| « Fabriqué où ? Portugal ? » | « KYMA est une marque parisienne. Nous n'indiquons que ce qui est confirmé, et le lieu de fabrication ne l'est pas encore. » Après confirmation du fondateur (porte de la partie 0) : « KYMA est imaginée à Paris. » |
 | « Coton bio ? GOTS ? » | « Nous n'annonçons que ce qui est confirmé et documenté. La composition n'est pas encore confirmée. » |
 | « Chaque pièce est unique ? » | « Chaque pièce est pensée pour être unique ; la vôtre différera des modèles 3D. » |
 | « Édition limitée ? Combien de pièces ? » | « Nous ne communiquons pas de quantité à ce stade. » |
@@ -404,10 +407,10 @@ Priorité haute (relire avant publication, chaque pièce) :
 | S1 J1 (annonce) | Texte v4 corrigé au cycle 1, déjà relu en base ; vérifier la cohérence avec la version finale de la page |
 | S1 J5 (carrousel) | « Cette inscription n'est pas un abonnement : aucun paiement n'est demandé », cohérence avec le formulaire |
 | S2 J1, J3 | Nom « Ressac » (antériorité), « pas encore en vente ; aucune date n'est fixée », dessin de conception |
-| S2 J5 | « Dessinée en laiton, finition dorée brossée » (R5) |
+| S2 J5 | « En laiton, finition dorée brossée » (R5) |
 | S3 J1 | Cinq noms de coloris, descriptions poétiques, mention « couleurs dépendent de votre écran » |
 | S3 J5 | « Aucune vague ne ressemble à la précédente » : métaphore proche d'une allégation d'unicité, à confirmer |
-| S4 J1 | **Prix TTC et reconduction dans un post** (voir note), version B (avantages) |
+| S4 J1 | **Prix TTC et reconduction dans un post** (version avec prix retenue par Arthur), version B (avantages) |
 | S4 J2 | Quatre réponses de FAQ |
 | Toutes les vidéos | Licence des sons ; droit à l'image dans les coulisses |
 
@@ -462,7 +465,7 @@ Vérifier le volume réel et la pertinence des hashtags #parisstreetwear, #stree
 | S3 J3 | Reel | Récit au défilement | |
 | S3 J5 | Fil image | Motif KYMA Wave | |
 | S3 J6 | 3 stories | Vocabulaire de la marée | |
-| S4 J1 | Carrousel 5 | INITIUM / MAJESTÉ (version A) | Relecture Victoire |
+| S4 J1 | Carrousel 5 | INITIUM / MAJESTÉ (version A, avec prix) | Relecture Victoire |
 | S4 J2 | 5 stories | Vos questions | |
 | S4 J3 | Reel | Quatre semaines de ressac | |
 | S4 J5 | Fil image | Noir Absolu (3D) | |
