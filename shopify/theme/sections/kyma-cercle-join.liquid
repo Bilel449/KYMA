@@ -37,7 +37,7 @@
     <div data-kyma-reveal>
       {% render 'kyma-section-head',
         number: section.settings.number,
-        label: section.settings.label,
+        label: section.settings.closed_label,
         before: section.settings.closed_title_before,
         em: section.settings.closed_title_em,
         after: section.settings.closed_title_after,
@@ -106,6 +106,7 @@
     { "type": "checkbox", "id": "show_waitlist", "label": "Afficher la liste d'attente (formulaire)", "default": false, "info": "À n'activer qu'après l'immatriculation de la société, la publication de la politique de confidentialité et le passage à un forfait payant." },
     { "type": "text", "id": "label", "label": "Label", "default": "ÊTRE PRÉVENU" },
     { "type": "header", "content": "Liste d'attente désactivée" },
+    { "type": "text", "id": "closed_label", "label": "Label", "default": "CERCLE WAVES" },
     { "type": "text", "id": "closed_title_before", "label": "Titre — début", "default": "Le cercle se" },
     { "type": "text", "id": "closed_title_em", "label": "Titre — italique", "default": "prépare" },
     { "type": "text", "id": "closed_title_after", "label": "Titre — fin", "default": "." },

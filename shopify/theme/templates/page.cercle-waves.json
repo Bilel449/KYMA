@@ -145,7 +145,8 @@
         "closed_title_before": "Le cercle se",
         "closed_title_em": "prépare",
         "closed_title_after": ".",
-        "closed_text": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée."
+        "closed_text": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée.",
+        "closed_label": "CERCLE WAVES"
       }
     }
   },
