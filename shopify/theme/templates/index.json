@@ -1,0 +1,326 @@
+{
+  "sections": {
+    "hero": {
+      "type": "kyma-hero-wave",
+      "settings": {
+        "label": "DROP 1 — PRÉCOMMANDE",
+        "title_before": "Une pièce, pensée pour être",
+        "title_em": "unique",
+        "title_after": ".",
+        "heading_tag": "h1",
+        "em_new_line": true,
+        "subtitle": "Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter.",
+        "note": "Expédition au plus tard le [À COMPLÉTER : date]",
+        "cta_label": "Choisir mon coloris",
+        "cta_link": "/collections/drop-1",
+        "cta2_label": "Découvrir le motif",
+        "cta2_link": "/#motif",
+        "colorway": "kyma",
+        "alt_text": "Illustration animée : une sculpture fluide en volute, rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave.",
+        "cue_label": "Défiler",
+        "cue_target": "#drop",
+        "height": "full"
+      }
+    },
+    "drop": {
+      "type": "kyma-colorways",
+      "settings": {
+        "anchor": "drop",
+        "number": "01",
+        "label": "LE DROP 1",
+        "title_before": "Cinq coloris, un même",
+        "title_em": "flux",
+        "title_after": ".",
+        "text": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Choisissez un coloris : le hoodie tourne devant vous, dans sa teinte.",
+        "kicker": "Coloris",
+        "list_label": "Choisir un coloris du hoodie 3D",
+        "cta_label": "Voir les coloris",
+        "cta_link": "/collections/drop-1#coloris",
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
+        "show_hoodie": true,
+        "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
+        "loading_label": "Chargement du modèle 3D…",
+        "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "model_prefix": "ressac-v2"
+      },
+      "blocks": {
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "description": "Le lilas qui tourne, sans jamais revenir.",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "description": "L'ivoire monte comme une marée sur le sable clair.",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "description": "Un gris d'acier qui dérive sur la perle.",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "description": "La nuit, quand la mer ne se voit plus mais s'entend.",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "description": "Un cramoisi qui coule sur le bordeaux.",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
+          }
+        }
+      },
+      "block_order": [
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    },
+    "motif": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "motif",
+        "number": "02",
+        "label": "LE MOTIF",
+        "title_before": "Un motif qui suit son",
+        "title_em": "flux",
+        "title_after": ".",
+        "text": "Le KYMA Wave est un marbré fluide, volutes et tourbillons, toujours tonal. Il capte le rythme des vagues sans chercher à les copier.",
+        "cta_label": "Découvrir le motif",
+        "cta_link": "/pages/nous-connaitre#motif",
+        "visual": "pattern",
+        "keywords": "",
+        "colorway": "lilac-whirl",
+        "tints": true,
+        "tints_label": "Teinte du motif",
+        "sym1": "",
+        "sym2": "",
+        "caption": "Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique.",
+        "flip": false,
+        "tone": "beige"
+      }
+    },
+    "piece": {
+      "type": "kyma-product-story-scroll",
+      "settings": {
+        "anchor": "piece",
+        "number": "03",
+        "label": "LA PIÈCE",
+        "title_before": "Une pièce, un",
+        "title_em": "seul",
+        "title_after": "geste.",
+        "height": 700,
+        "default_colorway": "Lilac Whirl",
+        "show_picker": true,
+        "dof": true,
+        "product": "ressac-hoodie-zippe-oversize",
+        "final_title": "Alors, qu’en dites-vous ?",
+        "final_subtitle": "Êtes-vous prêt à suivre le mouvement ?",
+        "cta_label": "Découvrir la pièce",
+        "cta_link": "/products/ressac-hoodie-zippe-oversize",
+        "cta2_label": "Choisir mon coloris",
+        "cta2_link": "/collections/drop-1#coloris",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "skip_label": "Passer la présentation de la pièce",
+        "picker_label": "Coloris du modèle 3D",
+        "loading_label": "Chargement du modèle 3D…",
+        "model_prefix": "ressac-v2"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "key": "intro",
+            "side": "left",
+            "kicker": "",
+            "title": "",
+            "text": "Le hoodie zippé Ressac. Coupe oversize, épaules tombantes, un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, vue d'ensemble. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "key": "hood",
+            "side": "right",
+            "kicker": "LA CAPUCHE",
+            "title": "Dehors, puis dedans.",
+            "text": "Double épaisseur, sans cordon ni œillets. À l’intérieur, une doublure en jersey ton sur ton.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape capuche. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "key": "back",
+            "side": "left",
+            "kicker": "LE DOS",
+            "title": "Le courant continue.",
+            "text": "Le motif KYMA Wave court sur tout le dos, d’une épaule à l’autre, comme un courant.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape dos. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "key": "pull",
+            "side": "left",
+            "kicker": "LA TIRETTE",
+            "title": "Un seul éclat.",
+            "text": "Sculptée « Kyma », en laiton, finition dorée brossée. Le seul éclat de la pièce.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape tirette. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "key": "zip",
+            "side": "left",
+            "kicker": "LE ZIP",
+            "title": "Elle descend, la pièce s’ouvre.",
+            "text": "Zip intégral en métal, finition argentée brossée, du col jusqu'à l'ourlet.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape zip. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "key": "open_left",
+            "side": "right",
+            "kicker": "À L’INTÉRIEUR",
+            "title": "Composition.",
+            "text": "La composition complète figure sur la fiche produit.",
+            "spec": "",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape intérieur, côté gauche. Pas une photo du produit fabriqué."
+          }
+        },
+        "step_7": {
+          "type": "step",
+          "settings": {
+            "key": "open_right",
+            "side": "left",
+            "kicker": "À L’INTÉRIEUR",
+            "title": "Fabrication.",
+            "text": "",
+            "spec": "Lieu de fabrication |\nImaginé à | Paris",
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape intérieur, côté droit. Pas une photo du produit fabriqué."
+          }
+        },
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4",
+            "lining": "#F3EBDD"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8",
+            "lining": "#FBF6EE"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2",
+            "lining": "#F1F3F4"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A",
+            "lining": "#2B2B31"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E",
+            "lining": "#E9D3D1"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6",
+        "step_7",
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    },
+    "cercle": {
+      "type": "kyma-cercle-waves",
+      "settings": {
+        "anchor": "cercle",
+        "number": "04",
+        "label": "CERCLE WAVES",
+        "title_before": "Le Cercle",
+        "title_em": "Waves",
+        "title_after": ".",
+        "text": "Le Cercle Waves accompagne celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ, par abonnement trimestriel.",
+        "cta_label": "Découvrir les deux paliers",
+        "cta_link": "/pages/cercle-waves",
+        "show_rings": true,
+        "compact_top": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "drop",
+    "motif",
+    "piece",
+    "cercle"
+  ]
+}

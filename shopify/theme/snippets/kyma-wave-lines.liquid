@@ -1,0 +1,24 @@
+{%- comment -%}
+  KYMA — les 3 vagues du logo (kyma-logo.svg) en SVG inline, animées par kyma-motion.js
+  (dessin au scroll puis ondulation lente, en pause hors écran).
+
+  Paramètres (tous optionnels) :
+    class : classes CSS additionnelles (ex. 'kyma-waves--left')
+    label : si renseigné, le SVG est exposé aux lecteurs d'écran ; sinon il est décoratif (aria-hidden)
+    color : couleur CSS (ex. '#C19E86') ; par défaut le marron clair du site
+
+  Exemple : {% render 'kyma-wave-lines', class: 'kyma-hero__waves' %}
+{%- endcomment -%}
+<svg
+  class="kyma-waves{% if class != blank %} {{ class }}{% endif %}"
+  viewBox="0 54 400 50"
+  xmlns="http://www.w3.org/2000/svg"
+  focusable="false"
+  data-kyma-live
+  {% if label != blank %}role="img" aria-label="{{ label | escape }}"{% else %}aria-hidden="true"{% endif %}
+  {% if color != blank %}style="color: {{ color | escape }}"{% endif %}
+>
+  <path class="kyma-waves__1" stroke-width="2.2" d="M50 68 C85 61 110 78 150 68 C190 61 220 78 260 68 C300 61 320 78 350 68"/>
+  <path class="kyma-waves__2" stroke-width="1.5" d="M50 80 C85 74 110 88 150 80 C190 74 220 88 260 80 C300 74 320 88 350 80"/>
+  <path class="kyma-waves__3" stroke-width="1" d="M50 90 C85 85 110 96 150 90 C190 85 220 96 260 90 C300 85 320 96 350 90"/>
+</svg>

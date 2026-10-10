@@ -1,0 +1,70 @@
+{%- comment -%}
+  KYMA — Frise de la précommande (Collection § 03, fiche produit § 05) : une ligne se trace au défilement et
+  chaque point s'allume (cercle marron clair qui se remplit de rose, 320 ms). Survol, focus ou appui sur un
+  point = une phrase explicative d'une ligne. Aucune date inventée : les dates restent [À COMPLÉTER].
+  Rien ne s'affiche comme « précommande ouverte » ici : c'est une explication du fonctionnement.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-tl-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-tl-sec{% if section.settings.compact %} kyma-tl-sec--compact{% endif %}" aria-labelledby="{{ hid }}">
+  <div class="kyma-sec__inner">
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        heading_id: hid
+      %}
+      {%- if section.settings.text != blank -%}
+        <div class="kyma-sec__desc kyma-rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+    <ol class="kyma-tl" role="list" data-kyma-timeline data-kyma-reveal style="--n: {{ section.blocks.size | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        {%- assign pid = tid | append: '-p' | append: forloop.index -%}
+        <li class="kyma-tl__item" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <button type="button" class="kyma-tl__pt" aria-expanded="false" aria-controls="{{ pid }}">
+            <span class="kyma-tl__dot" aria-hidden="true"></span>
+            <span class="kyma-tl__name">{{ block.settings.name | escape }}</span>
+            {%- if block.settings.date != blank -%}<span class="kyma-tl__date">{{ block.settings.date | escape }}</span>{%- endif -%}
+          </button>
+          <p class="kyma-tl__tip" id="{{ pid }}">{{ block.settings.sentence | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Frise précommande",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "precommande" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "text", "id": "label", "label": "Label", "default": "LA PRÉCOMMANDE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "La fabrication suit la" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "précommande" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "richtext", "id": "text", "label": "Texte (liens CGV et Retours possibles)" },
+    { "type": "checkbox", "id": "compact", "label": "Version courte (fiche produit)", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Étape de la frise",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Précommande" },
+        { "type": "text", "id": "date", "label": "Date ou mention (facultative)" },
+        { "type": "text", "id": "sentence", "label": "Phrase explicative (une ligne)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "KYMA — Frise précommande" } ]
+}
+{% endschema %}

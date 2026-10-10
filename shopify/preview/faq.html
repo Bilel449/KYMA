@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>FAQ — maquette KYMA</title>
+<!--
+  Maquette AUTONOME générée depuis le thème : chaque section kyma-* est rendue depuis le VRAI fichier Liquid
+  (shopify/theme/sections) avec les réglages de shopify/theme/templates/page.faq.json. Ressources partagées : ../theme/assets.
+  En-tête, menu, pied de page et bloc d'achat = coquille de maquette (dans la boutique : Horizon).
+  Aucune image : 3D temps réel (WebGL natif), tracés vectoriels, typographie. Les GLB du lecteur 360° (../3d/) se chargent
+  via un petit serveur local (ex. « npx http-server shopify -p 8080 » puis /preview/produit.html) ; ouverte en double-clic,
+  la fiche produit bascule sur l'aperçu 3D du coloris (repli prévu).
+-->
+<script>document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive');if(localStorage.getItem('kyma-motion-paused')==='1')document.documentElement.classList.add('kyma-motion-paused')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../theme/assets/kyma.css">
+<link rel="stylesheet" href="../theme/assets/kyma-pages.css">
+<link rel="stylesheet" href="preview.css">
+<script src="../theme/assets/kyma-3d.js" defer></script>
+<script src="../theme/assets/kyma-motion.js" defer></script>
+<script src="../theme/assets/kyma-pages.js" defer></script>
+<script src="preview.js" defer></script>
+</head>
+<body>
+<a class="kp-skip" href="#MainContent">Aller au contenu</a>
+<p class="kp-announce" role="region" aria-label="Annonce">Drop 1 — précommande ouverte. Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span>.</p>
+<header class="kp-header">
+  <div class="kp-header__bar">
+    <a class="kp-logo" href="index.html" aria-label="KYMA — accueil"><span>KYMA</span><svg viewBox="0 0 64 8" aria-hidden="true" focusable="false"><path d="M1 4 C9 1 13 7 21 4 S33 1 41 4 S55 7 63 4"/></svg></a>
+    <nav class="kp-nav" aria-label="Menu principal">
+      <ul>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="produit.html">Le produit</a></li>
+        <li><a href="cercle-waves.html">Cercle Waves</a></li>
+        <li><a href="nous-connaitre.html">Nous connaître</a></li>
+        <li class="kp-nav__drop">
+          <button type="button" class="kp-nav__more is-current" aria-expanded="false" aria-controls="kp-help">Aide<svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor"/></svg></button>
+          <ul class="kp-nav__sub" id="kp-help">
+            <li><a href="guide-des-tailles.html">Guide des tailles</a></li>
+            <li><a href="faq.html" aria-current="page">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="kp-icons">
+      <a class="kp-icon" href="#panier" aria-label="Panier, 0 article" data-kyma-no-curtain><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 6h12l-1 11H5L4 6Z"/><path d="M7 6V5a3 3 0 0 1 6 0v1"/></svg></a>
+      <button type="button" class="kp-icon kp-burger" aria-expanded="false" aria-controls="kp-panel"><svg viewBox="0 0 22 10" aria-hidden="true" focusable="false"><path d="M1 2 C6 0 10 4 15 2 S21 1 21 2 M1 8 C6 6 10 10 15 8 S21 7 21 8"/></svg><span data-kp-label>Menu</span></button>
+    </div>
+  </div>
+</header>
+<nav class="kp-panel" id="kp-panel" aria-label="Menu principal (mobile)">
+  <ol>
+    <li style="--i:0"><a href="collection.html">Collection</a></li>
+    <li style="--i:1"><a href="produit.html">Le produit</a></li>
+    <li style="--i:2"><a href="cercle-waves.html">Cercle Waves</a></li>
+    <li style="--i:3"><a href="nous-connaitre.html">Nous connaître</a></li>
+    <li style="--i:4"><a href="faq.html" aria-current="page">Aide</a>
+      <ul class="kp-panel__help"><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </li>
+  </ol>
+  <p class="kp-panel__foot">KYMA Paris — L'art du flow. · @kymasinsta</p>
+</nav>
+<main id="MainContent" data-template="page.faq.json">
+<div id="shopify-section-faq" class="shopify-section kyma-section"><section id="faq" class="kyma-sec kyma-faq" aria-labelledby="kyma-faq-faq-t" data-kyma-faq>
+  <div class="kyma-sec__inner kyma-faq__inner">
+    <header class="kyma-faq__head"><p class="kyma-ph__label">FAQ</p><h1 class="kyma-ph__title kyma-faq__title" id="kyma-faq-faq-t" data-kyma-split>Questions <em>fréquentes</em>.</h1><p class="kyma-ph__text" data-kyma-reveal>Les réponses essentielles, sans détour.</p><div class="kyma-faq__search" role="search" data-kyma-reveal>
+        <label class="kyma-faq__slabel" for="kyma-faq-faq-q">Rechercher une question</label>
+        <input class="kyma-faq__q" id="kyma-faq-faq-q" type="search" autocomplete="off" spellcheck="false" data-kyma-faq-search placeholder="Taille, précommande, entretien…">
+        <svg class="kyma-faq__wave" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 6 C16 0 32 12 48 6 S80 0 96 6 S128 12 144 6 S176 0 192 6 S224 12 240 6 S272 0 288 6 S320 12 336 6 S368 0 384 6 S400 8 400 6"/></svg>
+        <p class="kyma-faq__count kyma-vh" aria-live="polite" data-kyma-faq-count></p>
+      </div>
+    </header>
+
+    <p class="kyma-faq__empty" data-kyma-faq-empty hidden>Aucune question ne correspond. <a class="kyma-inline" href="contact.html">Contact</a></p><section class="kyma-faq__group" data-kyma-faq-group aria-labelledby="kyma-faq-faq-g1" data-kyma-reveal >
+          <h2 class="kyma-faq__gtitle" id="kyma-faq-faq-g1">01 — LA PIÈCE</h2>
+          <div class="kyma-faq__list"><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q2-b" aria-expanded="true" aria-controls="kyma-faq-faq-q2-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Quelle taille choisir ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q2-a" role="region" aria-labelledby="kyma-faq-faq-q2-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Le hoodie Ressac est oversize : votre taille habituelle donne la silhouette voulue, ample et posée. Pour une coupe plus ajustée, prenez une taille en dessous. Toutes les mesures sont dans le <a href="guide-des-tailles.html">guide des tailles</a>.</p></div></div>
+          </div>
+        </div><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q3-b" aria-expanded="true" aria-controls="kyma-faq-faq-q3-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Comment entretenir mon hoodie ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q3-a" role="region" aria-labelledby="kyma-faq-faq-q3-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. <span class="kyma-todo">[À CONFIRMER : à aligner sur l'étiquette définitive]</span> Suivez toujours l'étiquette cousue dans la pièce.</p></div></div>
+          </div>
+        </div><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q4-b" aria-expanded="true" aria-controls="kyma-faq-faq-q4-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>De quoi est fait le hoodie ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q4-a" role="region" aria-labelledby="kyma-faq-faq-q4-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>French terry de 400 à 420 g/m², intérieur gratté <span class="kyma-todo">[À CONFIRMER : grammage définitif]</span>. La composition complète figure sur la fiche produit. Zip en métal, finition argentée brossée ; tirette en laiton, finition dorée brossée.</p></div></div>
+          </div>
+        </div><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q5-b" aria-expanded="true" aria-controls="kyma-faq-faq-q5-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Quelle est la différence entre les coloris ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q5-a" role="region" aria-labelledby="kyma-faq-faq-q5-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Aucune, sinon la couleur. Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche.</p></div></div>
+          </div>
+        </div></div></section><section class="kyma-faq__group" data-kyma-faq-group aria-labelledby="kyma-faq-faq-g6" data-kyma-reveal >
+          <h2 class="kyma-faq__gtitle" id="kyma-faq-faq-g6">02 — LE MOTIF</h2>
+          <div class="kyma-faq__list"><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q7-b" aria-expanded="true" aria-controls="kyma-faq-faq-q7-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Chaque pièce est-elle unique ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q7-a" role="region" aria-labelledby="kyma-faq-faq-q7-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Pensé pour que chaque pièce soit unique. Les visuels du site montrent l'esprit du motif, pas votre pièce exacte.</p></div></div>
+          </div>
+        </div></div></section><section class="kyma-faq__group" data-kyma-faq-group aria-labelledby="kyma-faq-faq-g8" data-kyma-reveal >
+          <h2 class="kyma-faq__gtitle" id="kyma-faq-faq-g8">03 — LA PRÉCOMMANDE</h2>
+          <div class="kyma-faq__list"><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q9-b" aria-expanded="true" aria-controls="kyma-faq-faq-q9-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Comment fonctionne la précommande ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q9-a" role="region" aria-labelledby="kyma-faq-faq-q9-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Le Drop 1 est proposé en précommande : la fabrication démarre après la clôture de la précommande. Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span>, indiquée sur la fiche produit. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos <a href="../pages/legal/cgv.html" data-kyma-no-curtain>CGV</a>.</p></div></div>
+          </div>
+        </div><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q10-b" aria-expanded="true" aria-controls="kyma-faq-faq-q10-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Comment se passe la livraison ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q10-a" role="region" aria-labelledby="kyma-faq-faq-q10-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Nous livrons en <span class="kyma-todo">[À COMPLÉTER : pays desservis ; à ce stade, la France]</span>. Frais : <span class="kyma-todo">[À COMPLÉTER]</span>. Délai : <span class="kyma-todo">[À COMPLÉTER : délai après expédition]</span>. Un e-mail de suivi vous est envoyé dès l'envoi. <span class="kyma-todo">[À CONFIRMER : transporteur et suivi]</span></p></div></div>
+          </div>
+        </div><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q11-b" aria-expanded="true" aria-controls="kyma-faq-faq-q11-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Puis-je annuler ou retourner ma commande ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q11-a" role="region" aria-labelledby="kyma-faq-faq-q11-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions et marche à suivre sur la page <a href="../pages/legal/retours-remboursements.html" data-kyma-no-curtain>Retours et remboursements</a>.</p></div></div>
+          </div>
+        </div></div></section><section class="kyma-faq__group" data-kyma-faq-group aria-labelledby="kyma-faq-faq-g12" data-kyma-reveal >
+          <h2 class="kyma-faq__gtitle" id="kyma-faq-faq-g12">04 — CERCLE WAVES</h2>
+          <div class="kyma-faq__list"><div class="kyma-faq__item" data-kyma-faq-item >
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="kyma-faq-faq-q13-b" aria-expanded="true" aria-controls="kyma-faq-faq-q13-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>Comment fonctionne le Cercle Waves ?</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="kyma-faq-faq-q13-a" role="region" aria-labelledby="kyma-faq-faq-q13-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl><p>Le Cercle Waves est l&#39;abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. Il n&#39;est pas encore ouvert. Avantages et conditions : voir la page <a href="cercle-waves.html">Cercle Waves</a>.</p></div></div>
+          </div>
+        </div></div></section><p class="kyma-faq__more" data-kyma-reveal>Une autre question ? <a class="kyma-link" href="contact.html">Contact</a></p></div>
+</section></div>
+</main>
+<footer class="kp-footer">
+  <svg class="kp-footer__wave" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 12 C100 2 200 22 300 12 S500 2 600 12 S800 22 900 12 S1100 2 1200 12"/></svg>
+  <div class="kp-footer__inner">
+    <p class="kp-footer__sig">KYMA Paris — <em>L'art du flow.</em></p>
+    <div class="kp-footer__cols">
+      <div><h2>La maison</h2><ul><li><a href="collection.html">Collection</a></li><li><a href="produit.html">Le produit</a></li><li><a href="cercle-waves.html">Cercle Waves</a></li><li><a href="nous-connaitre.html">Nous connaître</a></li></ul></div>
+      <div><h2>Aide</h2><ul><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h2>Suivre</h2><ul><li><a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">@kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></li></ul></div>
+    </div>
+    <nav class="kp-footer__legal" aria-label="Informations légales">
+      <a href="../pages/legal/mentions-legales.html" data-kyma-no-curtain>Mentions légales</a><a href="../pages/legal/cgv.html" data-kyma-no-curtain>CGV</a><a href="../pages/legal/livraison.html" data-kyma-no-curtain>Livraison</a><a href="../pages/legal/retours-remboursements.html" data-kyma-no-curtain>Retours &amp; remboursements</a><a href="../pages/legal/confidentialite.html" data-kyma-no-curtain>Confidentialité</a><a href="../pages/legal/cookies.html" data-kyma-no-curtain>Cookies</a><a href="#cookies" data-kyma-no-curtain>Gérer mes cookies</a><a href="#retractation" data-kyma-no-curtain>Renoncer au contrat ici</a>
+    </nav>
+    <div class="kp-footer__end">
+      <span>© KYMA — Paris</span>
+      <button type="button" class="kyma-pause" data-kyma-pause aria-pressed="false" data-label-off="Mettre le mouvement en pause" data-label-on="Relancer le mouvement">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="kyma-pause__bars" d="M5 3v10M11 3v10"/><path class="kyma-pause__play" d="M4 3l9 5-9 5z"/></svg>
+        <span data-kyma-pause-label>Mettre le mouvement en pause</span>
+      </button>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

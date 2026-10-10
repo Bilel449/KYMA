@@ -1,0 +1,31 @@
+{%- comment -%}
+  KYMA — pictogrammes vectoriels des étapes du savoir-faire (dessinés pour KYMA, tracés au défilement).
+  Paramètre : icon = fibre | maille | rouleau | ciseaux | silhouette | tirette
+{%- endcomment -%}
+<svg class="kyma-step__icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  {%- case icon -%}
+    {%- when 'fibre' -%}
+      <path pathLength="1" d="M18 92 C34 70 40 48 60 40 C78 33 92 22 104 14"/>
+      <path pathLength="1" d="M22 100 C40 78 48 58 66 50 C82 43 94 34 106 26"/>
+      <path pathLength="1" class="is-fine" d="M16 82 C30 62 34 44 52 34 C66 26 80 18 96 10"/>
+    {%- when 'maille' -%}
+      <path pathLength="1" d="M14 40 C24 22 34 22 40 40 C46 58 56 58 62 40 C68 22 78 22 84 40 C90 58 100 58 106 40"/>
+      <path pathLength="1" d="M14 66 C24 48 34 48 40 66 C46 84 56 84 62 66 C68 48 78 48 84 66 C90 84 100 84 106 66"/>
+      <path pathLength="1" class="is-fine" d="M14 92 C24 74 34 74 40 92 C46 110 56 110 62 92 C68 74 78 74 84 92 C90 110 100 110 106 92"/>
+    {%- when 'rouleau' -%}
+      <path pathLength="1" d="M20 30 C20 22 32 22 32 30 V96 C32 104 20 104 20 96 Z"/>
+      <path pathLength="1" d="M26 22 H96 M26 104 H96 M96 22 V104"/>
+      <path pathLength="1" class="is-fine" d="M40 40 C52 30 60 52 72 42 C82 34 88 48 96 44 M40 66 C50 58 62 76 74 64 C82 58 90 70 96 66 M40 88 C52 80 60 96 72 88"/>
+    {%- when 'ciseaux' -%}
+      <path pathLength="1" d="M30 30 L84 84 M30 90 L84 36"/>
+      <path pathLength="1" d="M24 30 A10 10 0 1 0 24 30.1 M24 90 A10 10 0 1 0 24 90.1"/>
+      <path pathLength="1" class="is-fine" d="M88 22 V106" stroke-dasharray="3 4"/>
+    {%- when 'silhouette' -%}
+      <path pathLength="1" d="M60 14 C76 16 78 30 72 36 C80 38 88 40 96 44 C101 62 104 82 105 100 L94 100 C92 86 90 72 88 62 C88 78 87 92 87 106 L33 106 C33 92 32 78 32 62 C30 72 28 86 26 100 L15 100 C16 82 19 62 24 44 C32 40 40 38 48 36 C42 30 44 16 60 14 Z"/>
+      <path pathLength="1" class="is-fine" d="M60 36 V106"/>
+    {%- else -%}
+      <path pathLength="1" d="M60 10 V34"/>
+      <path pathLength="1" d="M60 34 C48 36 46 52 47 66 C48 84 54 96 60 100 C66 96 72 84 73 66 C74 52 72 36 60 34 Z"/>
+      <path pathLength="1" class="is-fine" d="M54 56 C58 60 62 60 66 64 M54 70 C58 74 62 74 66 78"/>
+  {%- endcase -%}
+</svg>

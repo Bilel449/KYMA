@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Contact — maquette KYMA</title>
+<!--
+  Maquette AUTONOME générée depuis le thème : chaque section kyma-* est rendue depuis le VRAI fichier Liquid
+  (shopify/theme/sections) avec les réglages de shopify/theme/templates/page.contact.json. Ressources partagées : ../theme/assets.
+  En-tête, menu, pied de page et bloc d'achat = coquille de maquette (dans la boutique : Horizon).
+  Aucune image : 3D temps réel (WebGL natif), tracés vectoriels, typographie. Les GLB du lecteur 360° (../3d/) se chargent
+  via un petit serveur local (ex. « npx http-server shopify -p 8080 » puis /preview/produit.html) ; ouverte en double-clic,
+  la fiche produit bascule sur l'aperçu 3D du coloris (repli prévu).
+-->
+<script>document.documentElement.classList.add('kyma-js');try{if(sessionStorage.getItem('kyma-curtain')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('kyma-arrive');if(localStorage.getItem('kyma-motion-paused')==='1')document.documentElement.classList.add('kyma-motion-paused')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../theme/assets/kyma.css">
+<link rel="stylesheet" href="../theme/assets/kyma-pages.css">
+<link rel="stylesheet" href="preview.css">
+<script src="../theme/assets/kyma-3d.js" defer></script>
+<script src="../theme/assets/kyma-motion.js" defer></script>
+<script src="../theme/assets/kyma-pages.js" defer></script>
+<script src="preview.js" defer></script>
+</head>
+<body>
+<a class="kp-skip" href="#MainContent">Aller au contenu</a>
+<p class="kp-announce" role="region" aria-label="Annonce">Drop 1 — précommande ouverte. Expédition au plus tard le <span class="kyma-todo">[À COMPLÉTER : date]</span>.</p>
+<header class="kp-header">
+  <div class="kp-header__bar">
+    <a class="kp-logo" href="index.html" aria-label="KYMA — accueil"><span>KYMA</span><svg viewBox="0 0 64 8" aria-hidden="true" focusable="false"><path d="M1 4 C9 1 13 7 21 4 S33 1 41 4 S55 7 63 4"/></svg></a>
+    <nav class="kp-nav" aria-label="Menu principal">
+      <ul>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="produit.html">Le produit</a></li>
+        <li><a href="cercle-waves.html">Cercle Waves</a></li>
+        <li><a href="nous-connaitre.html">Nous connaître</a></li>
+        <li class="kp-nav__drop">
+          <button type="button" class="kp-nav__more is-current" aria-expanded="false" aria-controls="kp-help">Aide<svg viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor"/></svg></button>
+          <ul class="kp-nav__sub" id="kp-help">
+            <li><a href="guide-des-tailles.html">Guide des tailles</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="kp-icons">
+      <a class="kp-icon" href="#panier" aria-label="Panier, 0 article" data-kyma-no-curtain><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 6h12l-1 11H5L4 6Z"/><path d="M7 6V5a3 3 0 0 1 6 0v1"/></svg></a>
+      <button type="button" class="kp-icon kp-burger" aria-expanded="false" aria-controls="kp-panel"><svg viewBox="0 0 22 10" aria-hidden="true" focusable="false"><path d="M1 2 C6 0 10 4 15 2 S21 1 21 2 M1 8 C6 6 10 10 15 8 S21 7 21 8"/></svg><span data-kp-label>Menu</span></button>
+    </div>
+  </div>
+</header>
+<nav class="kp-panel" id="kp-panel" aria-label="Menu principal (mobile)">
+  <ol>
+    <li style="--i:0"><a href="collection.html">Collection</a></li>
+    <li style="--i:1"><a href="produit.html">Le produit</a></li>
+    <li style="--i:2"><a href="cercle-waves.html">Cercle Waves</a></li>
+    <li style="--i:3"><a href="nous-connaitre.html">Nous connaître</a></li>
+    <li style="--i:4"><a href="faq.html">Aide</a>
+      <ul class="kp-panel__help"><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html" aria-current="page">Contact</a></li></ul>
+    </li>
+  </ol>
+  <p class="kp-panel__foot">KYMA Paris — L'art du flow. · @kymasinsta</p>
+</nav>
+<main id="MainContent" data-template="page.contact.json">
+<div id="shopify-section-contact" class="shopify-section kyma-section"><section id="nous-ecrire" class="kyma-ct" aria-labelledby="kyma-ct-contact-t">
+  <div class="kyma-ct__stage" data-kyma-3d-host>
+    <canvas data-kyma-3d="ripple" data-colorway="kyma" data-follow="false" aria-hidden="true"></canvas>
+  </div>
+  <div class="kyma-ct__inner">
+    <div class="kyma-ct__copy">
+      <p class="kyma-ph__label">CONTACT</p>
+      <h1 class="kyma-ph__title" id="kyma-ct-contact-t" data-kyma-split>Nous <em>écrire</em>.</h1>
+      <p class="kyma-ph__text" data-kyma-reveal>Une question sur une taille, une précommande, un envoi : écrivez-nous. Nous vous répondons <span class="kyma-todo">[À COMPLÉTER : délai de réponse]</span>.</p>
+    </div>
+    <div class="kyma-ct__card" data-kyma-reveal style="--kd: 200ms;"><form method="post" action="/contact" id="KymaContact" class="kyma-form" novalidate="novalidate" data-kyma-form="contact" accept-charset="UTF-8"><input type="hidden" name="form_type" value="contact"><div class="kyma-form__row">
+          <label class="kyma-field"><span class="kyma-field__l">Nom</span>
+            <input class="kyma-field__i" type="text" name="contact[name]" autocomplete="name" value=""></label>
+          <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
+            <input class="kyma-field__i" type="email" name="contact[email]" autocomplete="email" required aria-required="true" value="" data-kyma-email>
+            <span class="kyma-field__err" hidden>Cette adresse semble incomplète. Pouvez-vous la vérifier ?</span></label>
+        </div>
+        <label class="kyma-field"><span class="kyma-field__l">Sujet</span>
+          <select class="kyma-field__i" name="contact[Sujet]"><option>Taille</option><option>Précommande</option><option>Livraison</option><option>Cercle Waves</option><option>Autre</option></select></label>
+        <label class="kyma-field"><span class="kyma-field__l">Message <span aria-hidden="true">*</span></span>
+          <textarea class="kyma-field__i" name="contact[body]" rows="5" required aria-required="true"></textarea></label>
+        <label class="kyma-check">
+          <input type="checkbox" name="contact[Consentement]" value="oui" required aria-required="true">
+          <span>J&#39;accepte que KYMA utilise ces informations pour répondre à mon message. Voir la politique de confidentialité. <span class="kyma-todo">[À VALIDER VICTOIRE]</span></span>
+        </label>
+        <button type="submit" class="kyma-btn" data-kyma-submit><span>Envoyer</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="kyma-form__ok" role="status" data-kyma-ok hidden>Merci. Votre message est parti, nous revenons vers vous.</p></form></div>
+  </div>
+</section>
+<section class="kyma-sec kyma-ct-info" aria-labelledby="kyma-ct-contact-i">
+  <div class="kyma-sec__inner" data-kyma-reveal data-kyma-stagger>
+    <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — COORDONNÉES</p>
+    <h2 class="kyma-sec__title" id="kyma-ct-contact-i">Nous <em>joindre</em>.</h2>
+    <ul class="kyma-ct-info__list" role="list">
+      <li><span class="kyma-ct-info__k">E-mail</span> <span class="kyma-todo">[À COMPLÉTER : adresse]</span></li>
+      <li><span class="kyma-ct-info__k">Téléphone</span> <span class="kyma-todo">[À COMPLÉTER : numéro, obligatoire dans les mentions légales]</span></li>
+      <li><span class="kyma-ct-info__k">Instagram</span> <a class="kyma-link-inline" href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">@kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></li>
+    </ul>
+  </div>
+</section></div>
+</main>
+<footer class="kp-footer">
+  <svg class="kp-footer__wave" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 12 C100 2 200 22 300 12 S500 2 600 12 S800 22 900 12 S1100 2 1200 12"/></svg>
+  <div class="kp-footer__inner">
+    <p class="kp-footer__sig">KYMA Paris — <em>L'art du flow.</em></p>
+    <div class="kp-footer__cols">
+      <div><h2>La maison</h2><ul><li><a href="collection.html">Collection</a></li><li><a href="produit.html">Le produit</a></li><li><a href="cercle-waves.html">Cercle Waves</a></li><li><a href="nous-connaitre.html">Nous connaître</a></li></ul></div>
+      <div><h2>Aide</h2><ul><li><a href="guide-des-tailles.html">Guide des tailles</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h2>Suivre</h2><ul><li><a href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">@kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></li></ul></div>
+    </div>
+    <nav class="kp-footer__legal" aria-label="Informations légales">
+      <a href="../pages/legal/mentions-legales.html" data-kyma-no-curtain>Mentions légales</a><a href="../pages/legal/cgv.html" data-kyma-no-curtain>CGV</a><a href="../pages/legal/livraison.html" data-kyma-no-curtain>Livraison</a><a href="../pages/legal/retours-remboursements.html" data-kyma-no-curtain>Retours &amp; remboursements</a><a href="../pages/legal/confidentialite.html" data-kyma-no-curtain>Confidentialité</a><a href="../pages/legal/cookies.html" data-kyma-no-curtain>Cookies</a><a href="#cookies" data-kyma-no-curtain>Gérer mes cookies</a><a href="#retractation" data-kyma-no-curtain>Renoncer au contrat ici</a>
+    </nav>
+    <div class="kp-footer__end">
+      <span>© KYMA — Paris</span>
+      <button type="button" class="kyma-pause" data-kyma-pause aria-pressed="false" data-label-off="Mettre le mouvement en pause" data-label-on="Relancer le mouvement">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="kyma-pause__bars" d="M5 3v10M11 3v10"/><path class="kyma-pause__play" d="M4 3l9 5-9 5z"/></svg>
+        <span data-kyma-pause-label>Mettre le mouvement en pause</span>
+      </button>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

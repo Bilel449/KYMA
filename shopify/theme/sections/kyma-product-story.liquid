@@ -1,0 +1,291 @@
+{%- comment -%}
+  KYMA — Blocs sous la fiche produit : aperçu 3D du coloris (étoffe kyma-3d synchronisée sur la variante
+  choisie : événement « change » du <variant-picker> de Horizon, option « Couleur »), détails, guide des tailles (tiroir), entretien,
+  mention de précommande (date limite d'expédition = métachamp produit custom.date_expedition, type Date,
+  avec rappel du droit d'annulation et liens Retours / CGV), mention sur les visuels.
+  Aucune allégation en dur (matière, certification, origine) : tout est éditable et vide par défaut.
+  Les mentions manquantes s'affichent en [À COMPLÉTER : …] pour ne rien oublier avant la mise en ligne.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+
+<section class="kyma-story" aria-label="Informations sur le produit">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+
+      {%- when 'preview_3d' -%}
+        {%- liquid
+          assign opt_name = block.settings.option_name | default: 'Couleur'
+          assign cw_value = ''
+          assign opt_index = 1
+          for option in product.options_with_values
+            if option.name == opt_name
+              assign cw_value = option.selected_value
+              assign opt_index = option.position
+            endif
+          endfor
+          assign cw_key = cw_value | handleize | default: 'kyma'
+        -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Aperçu 3D du coloris' | escape }}</h2>
+          <div class="kyma-story__body">
+            <div class="kyma-swatch3d" data-kyma-3d-host data-kyma-variant-sync data-option="{{ opt_name | escape }}" data-option-index="{{ opt_index }}">
+              <canvas data-kyma-3d="swatch" data-colorway="{{ cw_key }}" data-follow="false" aria-hidden="true"></canvas>
+            </div>
+            {%- if cw_value != blank -%}
+              <p class="kyma-swatch3d__name">{{ block.settings.name_label | escape }} <strong data-kyma-cw-name>{{ cw_value | escape }}</strong></p>
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}
+              <p class="kyma-disclaimer">{{ block.settings.caption | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+
+      {%- when 'details' -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Détails' | escape }}</h2>
+          <div class="kyma-story__body">
+            <ul class="kyma-story__list">
+              {%- assign item_lines = block.settings.items | newline_to_br | split: '<br />' -%}
+              {%- for item in item_lines -%}
+                {%- assign item_clean = item | strip -%}
+                {%- if item_clean != blank -%}<li>{{ item_clean | escape }}</li>{%- endif -%}
+              {%- endfor -%}
+              <li>
+                Composition :
+                {% if block.settings.composition != blank %}{{ block.settings.composition | escape }}{% else %}<span class="kyma-todo">[À COMPLÉTER : composition]</span>{% endif %}
+              </li>
+              {%- comment -%} Victoire (conformite.md) : aucune origine affichée tant qu'elle n'est pas prouvée -> ligne masquée si vide. {%- endcomment -%}
+              {%- if block.settings.origin != blank -%}
+                <li>Fabrication : {{ block.settings.origin | escape }}</li>
+              {%- endif -%}
+              {%- if block.settings.certification != blank -%}
+                <li>Certification : {{ block.settings.certification | escape }}</li>
+              {%- endif -%}
+            </ul>
+          </div>
+        </div>
+
+      {%- when 'size_guide' -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Tailles' | escape }}</h2>
+          <div class="kyma-story__body">
+            <p>
+              {%- if block.settings.model_info != blank -%}
+                {{ block.settings.model_info | escape }}
+              {%- else -%}
+                <span class="kyma-todo">[À COMPLÉTER : taille du mannequin et taille portée]</span>
+              {%- endif -%}
+            </p>
+            <details class="kyma-drawer"{% if block.settings.open %} open{% endif %}>
+              <summary>{{ block.settings.drawer_title | default: 'Guide des tailles' | escape }}</summary>
+              <div class="kyma-drawer__body">
+                {%- assign table_rows = block.settings.table | newline_to_br | split: '<br />' -%}
+                <div class="kyma-table-wrap" role="region" aria-label="Tableau des mesures" tabindex="0">
+                  <table class="kyma-table">
+                    <caption class="kyma-vh">Mesures du vêtement à plat, en centimètres</caption>
+                    {%- assign is_first_row = true -%}
+                    {%- for row in table_rows -%}
+                      {%- assign row_clean = row | strip -%}
+                      {%- if row_clean == blank -%}{%- continue -%}{%- endif -%}
+                      {%- assign cells = row_clean | split: ';' -%}
+                      {%- if is_first_row -%}
+                        <thead>
+                          <tr>
+                            {%- for cell in cells -%}<th scope="col">{{ cell | strip | escape }}</th>{%- endfor -%}
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {%- assign is_first_row = false -%}
+                      {%- else -%}
+                        <tr>
+                          {%- for cell in cells -%}
+                            {%- if forloop.first -%}
+                              <th scope="row">{{ cell | strip | escape }}</th>
+                            {%- else -%}
+                              <td>{{ cell | strip | escape }}</td>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </tr>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- unless is_first_row -%}</tbody>{%- endunless -%}
+                  </table>
+                </div>
+                {%- if block.settings.note != blank -%}
+                  <p class="kyma-note">{{ block.settings.note | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.link != blank and block.settings.link_label != blank -%}
+                  <p class="kyma-note"><a class="kyma-link" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a></p>
+                {%- endif -%}
+              </div>
+            </details>
+          </div>
+        </div>
+
+      {%- when 'care' -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Entretien' | escape }}</h2>
+          <div class="kyma-story__body">
+            <ul class="kyma-story__list">
+              {%- assign care_lines = block.settings.text | newline_to_br | split: '<br />' -%}
+              {%- for line in care_lines -%}
+                {%- assign line_clean = line | strip -%}
+                {%- if line_clean != blank -%}<li>{{ line_clean | escape }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+      {%- when 'preorder' -%}
+        {%- assign is_preorder = block.settings.always_show -%}
+        {%- if product.tags contains 'precommande' -%}{%- assign is_preorder = true -%}{%- endif -%}
+        {%- if is_preorder or request.design_mode -%}
+          {%- assign ship_date = product.metafields.custom.date_expedition.value -%}
+          <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+            <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Précommande' | escape }}</h2>
+            <div class="kyma-story__body">
+              {%- unless is_preorder -%}
+                <p class="kyma-note"><span class="kyma-todo">Éditeur seulement : ce bloc reste masqué en boutique tant que le produit n'a pas le tag « precommande » (ou que « Toujours afficher » est coché).</span></p>
+              {%- endunless -%}
+              <div class="kyma-pre">
+                {%- if block.settings.text != blank -%}
+                  <p style="margin:0;">{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+                <p class="kyma-pre__date">
+                  {{ block.settings.date_label | default: 'Expédition au plus tard le :' | escape }}
+                  {% if ship_date != blank -%}
+                    {%- assign months = 'janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre' | split: ',' -%}
+                    {%- assign month_index = ship_date | date: '%-m' | minus: 1 -%}
+                    <strong>{{ ship_date | date: '%-d' }} {{ months[month_index] }} {{ ship_date | date: '%Y' }}</strong>
+                  {%- else -%}
+                    <span class="kyma-todo">[À COMPLÉTER : date — métachamp produit « custom.date_expedition »]</span>
+                  {%- endif %}
+                </p>
+                {%- if block.settings.cancel_text != blank -%}
+                  <p class="kyma-note">
+                    {{ block.settings.cancel_text | escape }}
+                    {%- if block.settings.returns_link != blank %}
+                      <a href="{{ block.settings.returns_link }}">Retours et remboursements</a>
+                    {%- endif -%}
+                    {%- if block.settings.returns_link != blank and block.settings.cgv_link != blank %} · {% endif -%}
+                    {%- if block.settings.cgv_link != blank %}
+                      <a href="{{ block.settings.cgv_link }}">CGV</a>
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- when 'disclaimer' -%}
+        <div class="kyma-story__row" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-story__label">{{ block.settings.heading | default: 'Visuels' | escape }}</h2>
+          <div class="kyma-story__body">
+            <p class="kyma-disclaimer">{{ block.settings.text | escape }}</p>
+          </div>
+        </div>
+
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Histoire produit",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "paragraph", "content": "Ajoutez, retirez ou réordonnez les blocs. La date de précommande se lit dans le métachamp produit « custom.date_expedition » (type Date)." }
+  ],
+  "blocks": [
+    {
+      "type": "preview_3d",
+      "name": "Aperçu 3D du coloris",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Aperçu 3D du coloris" },
+        { "type": "text", "id": "option_name", "label": "Nom de l'option coloris (variantes)", "default": "Couleur" },
+        { "type": "text", "id": "name_label", "label": "Libellé devant le nom", "default": "Coloris :" },
+        { "type": "textarea", "id": "caption", "label": "Mention (validée par Victoire)", "default": "Illustration 3D du motif et des teintes du coloris — pas une photo du produit. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle." }
+      ]
+    },
+    {
+      "type": "details",
+      "name": "Détails",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Détails" },
+        { "type": "textarea", "id": "items", "label": "Points (un par ligne)", "default": "Coupe oversize, épaules tombantes\nZip intégral en métal\nCapuche double épaisseur, sans cordon\nDeux poches biais\nBords-côtes aux poignets et à la taille" },
+        { "type": "text", "id": "composition", "label": "Composition (à renseigner d'après l'étiquette définitive)" },
+        { "type": "text", "id": "origin", "label": "Lieu de fabrication (à renseigner après signature du fabricant)" },
+        { "type": "text", "id": "certification", "label": "Certification (uniquement si le certificat est obtenu)" }
+      ]
+    },
+    {
+      "type": "size_guide",
+      "name": "Guide des tailles",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Tailles" },
+        { "type": "text", "id": "model_info", "label": "Mannequin (ex. « Le mannequin mesure 180 cm et porte une taille M. »)" },
+        { "type": "text", "id": "drawer_title", "label": "Titre du tiroir", "default": "Guide des tailles" },
+        { "type": "checkbox", "id": "open", "label": "Tiroir ouvert par défaut", "default": false },
+        { "type": "textarea", "id": "table", "label": "Tableau (une ligne par mesure, valeurs séparées par « ; »)", "default": "Mesures (cm);XS;S;M;L;XL;XXL\nPoitrine;60;62;64;66;68;70\nÉpaules;54;56;58;60;62;64\nLongueur dos;66;68;70;72;74;76\nManche;62;63;64;65;66;67\nBas (à plat);58;60;62;64;66;68" },
+        { "type": "text", "id": "note", "label": "Note sous le tableau", "default": "Mesures à plat, en centimètres, tolérance ± 1 cm." },
+        { "type": "text", "id": "link_label", "label": "Lien vers la page complète — texte", "default": "Voir le guide des tailles complet" },
+        { "type": "url", "id": "link", "label": "Lien vers la page complète — URL" }
+      ]
+    },
+    {
+      "type": "care",
+      "name": "Entretien",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Entretien" },
+        { "type": "textarea", "id": "text", "label": "Consignes (une par ligne)", "default": "Lavage à 30–40 °C, sur l'envers\nPas de sèche-linge\n[À COMPLÉTER : aligner sur l'étiquette définitive]" }
+      ]
+    },
+    {
+      "type": "preorder",
+      "name": "Précommande",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Précommande" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "La fabrication est lancée après la clôture de la précommande." },
+        { "type": "text", "id": "date_label", "label": "Libellé devant la date limite", "default": "Expédition au plus tard le :" },
+        { "type": "textarea", "id": "cancel_text", "label": "Droit d'annulation (texte validé par Victoire)", "default": "Annulation possible à tout moment avant l'expédition et jusqu'à 14 jours après réception." },
+        { "type": "url", "id": "returns_link", "label": "Lien « Retours et remboursements »" },
+        { "type": "url", "id": "cgv_link", "label": "Lien « CGV »" },
+        { "type": "checkbox", "id": "always_show", "label": "Toujours afficher (sinon : tag « precommande » requis)", "info": "Sinon, affiché seulement si le produit a le tag « precommande ».", "default": false }
+      ]
+    },
+    {
+      "type": "disclaimer",
+      "name": "Mention des visuels",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Visuels" },
+        { "type": "textarea", "id": "text", "label": "Texte (à faire valider par Victoire)", "default": "Les photos du produit fabriqué seront ajoutées après le shooting des préséries. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "KYMA — Histoire produit",
+      "blocks": [
+        { "type": "preview_3d" },
+        { "type": "details" },
+        { "type": "size_guide" },
+        { "type": "care" },
+        { "type": "preorder" },
+        { "type": "disclaimer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "faq": {
+      "type": "kyma-faq",
+      "settings": {
+        "anchor": "faq",
+        "label": "FAQ",
+        "title_before": "Questions",
+        "title_em": "fréquentes",
+        "title_after": ".",
+        "text": "Les réponses essentielles, sans détour.",
+        "search_label": "Rechercher une question",
+        "search_placeholder": "Taille, précommande, entretien…",
+        "empty_text": "Aucune question ne correspond.",
+        "more_text": "Une autre question ?",
+        "contact_label": "Contact",
+        "contact_link": "/pages/contact"
+      },
+      "blocks": {
+        "group_1": {
+          "type": "group",
+          "settings": {
+            "title": "01 — LA PIÈCE"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle taille choisir ?",
+            "answer": "<p>Le hoodie Ressac est oversize : votre taille habituelle donne la silhouette voulue, ample et posée. Pour une coupe plus ajustée, prenez une taille en dessous. Toutes les mesures sont dans le <a href=\"/pages/guide-des-tailles\">guide des tailles</a>.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Comment entretenir mon hoodie ?",
+            "answer": "<p>Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. [À CONFIRMER : à aligner sur l'étiquette définitive] Suivez toujours l'étiquette cousue dans la pièce.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "De quoi est fait le hoodie ?",
+            "answer": "<p>French terry de 400 à 420 g/m², intérieur gratté [À CONFIRMER : grammage définitif]. La composition complète figure sur la fiche produit. Zip en métal, finition argentée brossée ; tirette en laiton, finition dorée brossée.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle est la différence entre les coloris ?",
+            "answer": "<p>Aucune, sinon la couleur. Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche.</p>"
+          }
+        },
+        "group_6": {
+          "type": "group",
+          "settings": {
+            "title": "02 — LE MOTIF"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Chaque pièce est-elle unique ?",
+            "answer": "<p>Pensé pour que chaque pièce soit unique. Les visuels du site montrent l'esprit du motif, pas votre pièce exacte.</p>"
+          }
+        },
+        "group_8": {
+          "type": "group",
+          "settings": {
+            "title": "03 — LA PRÉCOMMANDE"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Comment fonctionne la précommande ?",
+            "answer": "<p>Le Drop 1 est proposé en précommande : la fabrication démarre après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date], indiquée sur la fiche produit. Les conditions de paiement, de délai et de rétractation sont détaillées dans nos <a href=\"/policies/terms-of-service\">CGV</a>.</p>"
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "Comment se passe la livraison ?",
+            "answer": "<p>Nous livrons en [À COMPLÉTER : pays desservis ; à ce stade, la France]. Frais : [À COMPLÉTER]. Délai : [À COMPLÉTER : délai après expédition]. Un e-mail de suivi vous est envoyé dès l'envoi. [À CONFIRMER : transporteur et suivi]</p>"
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je annuler ou retourner ma commande ?",
+            "answer": "<p>Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions et marche à suivre sur la page <a href=\"/policies/refund-policy\">Retours et remboursements</a>.</p>"
+          }
+        },
+        "group_12": {
+          "type": "group",
+          "settings": {
+            "title": "04 — CERCLE WAVES"
+          }
+        },
+        "question_13": {
+          "type": "question",
+          "settings": {
+            "question": "Comment fonctionne le Cercle Waves ?",
+            "answer": "<p>Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. Il n'est pas encore ouvert. Avantages et conditions : voir la page <a href=\"/pages/cercle-waves\">Cercle Waves</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "group_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "group_6",
+        "question_7",
+        "group_8",
+        "question_9",
+        "question_10",
+        "question_11",
+        "group_12",
+        "question_13"
+      ]
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

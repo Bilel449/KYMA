@@ -1,0 +1,74 @@
+{%- comment -%}
+  KYMA — « Même pièce, autre teinte » (Collection § 02) : la silhouette à plat du hoodie, remplie du motif
+  KYMA Wave (canvas E à plat, contexte WebGL partagé) et masquée par le dessin. Cinq pastilles : un clic (ou
+  Entrée) recolore la silhouette, le survol d'une pastille la prévisualise. Légende « Illustration du coloris. »
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-rc-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+{%- assign first = section.blocks.first -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-rc" aria-labelledby="{{ hid }}" data-kyma-tint-scope>
+  <div class="kyma-sec__inner kyma-rc__grid">
+    <div class="kyma-rc__text" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      <div class="kyma-tints kyma-tints--named" role="group" aria-label="{{ section.settings.list_label | escape }}" data-kyma-tints data-preview>
+        {%- for block in section.blocks -%}
+          <button type="button" class="kyma-tints__dot" data-colorway="{{ block.settings.name | handleize }}" data-name="{{ block.settings.name | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
+            <span class="kyma-tints__name">{{ block.settings.name | escape }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+      <p class="kyma-rc__now" aria-live="polite" data-kyma-tint-name>{{ first.settings.name | escape }}</p>
+    </div>
+    <figure class="kyma-rc__fig" data-kyma-reveal style="--kd: 150ms;">
+      <div class="kyma-rc__stage" data-kyma-3d-host>
+        <canvas data-kyma-3d="pattern" data-colorway="{{ first.settings.name | handleize | default: 'lilac-whirl' }}" data-pattern="1.3" data-grain="0" data-follow="false" aria-hidden="true"></canvas>
+        <svg class="kyma-rc__mask" viewBox="40 10 520 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" d="M-2000 -2000 H3000 V3000 H-2000 Z M300 24 C390 34 396 100 360 132 C400 142 440 152 476 168 C504 256 520 372 526 470 L520 508 L474 508 L470 470 C462 430 448 372 440 296 C437 380 435 470 434 560 L431 597 L169 597 L166 560 C165 470 163 380 160 296 C152 372 138 430 130 470 L126 508 L80 508 L74 470 C80 372 96 256 124 168 C160 152 200 142 240 132 C204 100 210 34 300 24 Z"/>
+        </svg>
+        <div class="kyma-rc__lines" data-kyma-trace>{% render 'kyma-hoodie-tech', id: tid %}</div>
+      </div>
+      <figcaption class="kyma-caption">{{ section.settings.caption | escape }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Recoloration",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "02" },
+    { "type": "text", "id": "label", "label": "Label", "default": "UNE MÊME PIÈCE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Même pièce, autre" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "teinte" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche." },
+    { "type": "text", "id": "list_label", "label": "Pastilles — nom accessible", "default": "Choisir un coloris pour l'illustration" },
+    { "type": "text", "id": "caption", "label": "Légende", "default": "Rendu 3D du coloris, pas une photo du produit fabriqué." }
+  ],
+  "blocks": [
+    {
+      "type": "colorway",
+      "name": "Coloris",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Lilac Whirl" },
+        { "type": "color", "id": "color_a", "label": "Nuance principale", "default": "#C8A2C8" },
+        { "type": "color", "id": "color_b", "label": "Nuance secondaire", "default": "#F5EDE4" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "KYMA — Recoloration" } ]
+}
+{% endschema %}

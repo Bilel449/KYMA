@@ -1,0 +1,68 @@
+{%- comment -%}
+  KYMA — Scène Spline (facultative). Si le réglage « URL de la scène Spline (.splinecode) » est rempli,
+  la section charge le lecteur officiel <spline-viewer> (module unpkg, chargé UNIQUEMENT dans ce cas).
+  Sinon, ou si le lecteur ne se charge pas en 8 s, repli automatique sur la scène WebGL maison kyma-3d.
+  ⚠️ Chemin Spline non testé dans l'environnement de développement (unpkg et spline.design inaccessibles) :
+  à vérifier dans l'aperçu du thème après avoir collé l'URL (voir shopify/spline-brief.md).
+  Le canvas / la scène sont décoratifs : le texte équivalent est dans .kyma-vh.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign title_id = 'kyma-spline-title-' | append: section.id -%}
+{%- assign url = section.settings.scene_url | strip -%}
+
+<section class="kyma-sec kyma-spline" aria-labelledby="{{ title_id }}" data-kyma-spline>
+  <div class="kyma-sec__inner">
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: title_id
+      %}
+    </div>
+    <div class="kyma-spline__stage" data-kyma-3d-host data-kyma-reveal>
+      {%- if url != blank -%}
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+        <spline-viewer url="{{ url | escape }}" loading-anim-type="none" aria-hidden="true"></spline-viewer>
+      {%- endif -%}
+      <canvas data-kyma-3d="{{ section.settings.fallback }}" data-shift="0,0" aria-hidden="true"{% if url != blank %} hidden{% endif %}></canvas>
+    </div>
+    <p class="kyma-vh">{{ section.settings.alt_text | escape }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Scène Spline",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Numéro" },
+    { "type": "text", "id": "label", "label": "Label", "default": "En mouvement" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Le motif, en" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "volume" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte" },
+    { "type": "header", "content": "Scène Spline" },
+    { "type": "text", "id": "scene_url", "label": "URL de la scène Spline (.splinecode)", "info": "Spline > Export > Code Export > Public URL (ex. https://prod.spline.design/xxxx/scene.splinecode). Vide = scène KYMA 3D maison." },
+    {
+      "type": "select",
+      "id": "fallback",
+      "label": "Scène de repli (WebGL maison)",
+      "options": [
+        { "value": "hero", "label": "La Vague (sculpture)" },
+        { "value": "swatch", "label": "Étoffe qui ondule" },
+        { "value": "rings", "label": "Anneaux Cercle Waves" }
+      ],
+      "default": "hero"
+    },
+    { "type": "text", "id": "alt_text", "label": "Texte équivalent (lecteurs d'écran)", "default": "Illustration 3D animée du motif KYMA Wave." }
+  ],
+  "presets": [
+    { "name": "KYMA — Scène Spline" }
+  ]
+}
+{% endschema %}

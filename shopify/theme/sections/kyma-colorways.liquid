@@ -1,0 +1,157 @@
+{%- comment -%}
+  KYMA — 01 Coloris : sélecteur interactif des coloris. Survol, clic ou focus clavier : la sculpture 3D
+  change de couleurs en direct (fondu 1,2 s) et le nom du coloris se recompose lettre par lettre.
+  Aucune photo : les vraies photos du shooting iront dans la galerie de la fiche produit.
+  Un bloc = un coloris (nom, description, deux nuances, lien). Les nuances doivent rester tonales.
+  v3 : le HOODIE 3D du coloris choisi s'affiche et tourne doucement devant le slime flottant gardé en fond, avec le
+  lecteur commun du site (assets/kyma-viewer.js + three.js vendorisé, chargés à l'approche de l'écran). Fichier lu :
+  <préfixe>-<coloris>.glb dans les fichiers du thème (réglage « Modèles 3D — préfixe », défaut ressac-v2 ; ressac-v3
+  pour les modèles v3), sauf si le bloc indique un fichier précis.
+  Sans WebGL ou si le fichier échoue : le slime seul, teinté du coloris (comportement d'origine).
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign title_id = 'kyma-cw-title-' | append: section.id -%}
+{%- assign first = section.blocks.first -%}
+{%- assign prefix = section.settings.model_prefix | strip -%}
+{%- assign glb0 = '' -%}
+{%- if section.settings.show_hoodie and first -%}
+  {%- assign f_file = first.settings.glb | strip -%}
+  {%- if f_file == blank and prefix != blank -%}{%- assign f_file = prefix | append: '-' | append: first.settings.name | handleize | append: '.glb' -%}{%- endif -%}
+  {%- if f_file != blank -%}{%- assign glb0 = f_file | asset_url -%}{%- endif -%}
+{%- endif -%}
+
+{%- assign cw_anchor = 'kyma-cw-' | append: section.id -%}
+<section class="kyma-sec kyma-cw" id="{{ section.settings.anchor | default: cw_anchor }}" aria-labelledby="{{ title_id }}" data-kyma-colorways
+  {% if first %}style="--cw-a: {{ first.settings.color_a }}; --cw-b: {{ first.settings.color_b }};"{% endif %}>
+  <div class="kyma-sec__inner">
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: title_id
+      %}
+    </div>
+
+    <div class="kyma-cw__stage">
+      <div class="kyma-cw__viz{% if glb0 != '' %} kyma-cw__viz--hoodie{% endif %}" data-kyma-3d-host data-kyma-reveal>
+        <canvas class="kyma-cw__slime" data-kyma-3d="hero" data-shift="{% if glb0 != '' %}0.62,-0.42{% else %}0,0{% endif %}" data-colorway="{{ first.settings.name | handleize | default: 'lilac-whirl' }}"{% if glb0 != '' %} data-interactive="false" data-max-scale="0.45"{% endif %} aria-hidden="true"></canvas>
+        {%- if glb0 != '' -%}
+          <canvas class="kyma-cw__glb" data-kyma-cw-glb data-src="{{ glb0 }}" data-three="{{ 'kyma-three.js' | asset_url }}" tabindex="0" role="img"
+            data-label="{{ section.settings.hoodie_label | escape }}"
+            aria-label="{{ section.settings.hoodie_label | escape }} {{ first.settings.name | escape }}"></canvas>
+          <p class="kyma-cw__loading" aria-hidden="true">{{ section.settings.loading_label | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="kyma-cw__panel" data-kyma-reveal style="--kd: 120ms;">
+        <p class="kyma-cw__now">
+          <span class="kyma-cw__kicker">{{ section.settings.kicker | escape }}</span>
+          <span class="kyma-cw__name" data-kyma-cw-name>{{ first.settings.name | escape }}</span>
+        </p>
+        <p class="kyma-cw__desc" data-kyma-cw-desc>{{ first.settings.description | escape }}</p>
+        <p class="kyma-vh" aria-live="polite" data-kyma-cw-live></p>
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="kyma-cw__list" role="list" aria-label="{{ section.settings.list_label | escape }}">
+            {%- for block in section.blocks -%}
+              {%- assign b_file = block.settings.glb | strip -%}
+              {%- if b_file == blank and prefix != blank -%}{%- assign b_file = prefix | append: '-' | append: block.settings.name | handleize | append: '.glb' -%}{%- endif -%}
+              <li {{ block.shopify_attributes }}>
+                <button
+                  type="button"
+                  class="kyma-cw__opt"
+                  data-colorway="{{ block.settings.name | handleize }}"
+                  data-name="{{ block.settings.name | escape }}"
+                  data-desc="{{ block.settings.description | escape }}"
+                  data-a="{{ block.settings.color_a }}"
+                  data-b="{{ block.settings.color_b }}"
+                  {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %}
+                  {% if glb0 != '' and b_file != blank %}data-glb="{{ b_file | asset_url }}"{% endif %}
+                  aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                  style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }};"
+                >
+                  <span class="kyma-cw__sw" aria-hidden="true"></span>
+                  <span>{{ block.settings.name | escape }}</span>
+                  <span class="kyma-cw__opt-idx" aria-hidden="true">{{ forloop.index | prepend: '0' }}</span>
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="kyma-cw__foot">
+          {%- if section.settings.cta_label != blank -%}
+            <a class="kyma-btn" href="{{ first.settings.link | default: section.settings.cta_link | default: '#' }}" data-kyma-cw-link data-kyma-magnetic>
+              <span>{{ section.settings.cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+        </div>
+        {%- if glb0 != '' and section.settings.caption_hoodie != blank -%}
+          <p class="kyma-caption" data-kyma-cw-caption data-fallback="{{ section.settings.caption | escape }}">{{ section.settings.caption_hoodie | escape }}</p>
+        {%- elsif section.settings.caption != blank -%}
+          <p class="kyma-caption">{{ section.settings.caption | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="kyma-sec__mark" aria-hidden="true">{{ section.settings.number | escape }}</div>
+  {%- if glb0 != '' -%}<script src="{{ 'kyma-viewer.js' | asset_url }}" defer data-kyma-asset="viewer" data-three="{{ 'kyma-three.js' | asset_url }}"></script>{%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Coloris 3D",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML, facultatif)" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Le Drop 1" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cinq coloris, un même" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "flux" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Lilac Whirl, Ivory Tide, Silver Drift, Noir Absolu, Crimson Flow. Cinq nuances du même mouvement, en petite série." },
+    { "type": "text", "id": "kicker", "label": "Petit label au-dessus du nom", "default": "Coloris" },
+    { "type": "text", "id": "list_label", "label": "Nom accessible de la liste", "default": "Choisir un coloris pour l'aperçu 3D" },
+    { "type": "text", "id": "cta_label", "label": "Bouton — texte", "default": "Voir ce coloris" },
+    { "type": "url", "id": "cta_link", "label": "Bouton — lien par défaut" },
+    { "type": "text", "id": "caption", "label": "Mention sous le sélecteur (sans hoodie 3D)", "default": "Rendu 3D du coloris, pas une photo du produit fabriqué." },
+    { "type": "checkbox", "id": "show_hoodie", "label": "Afficher le hoodie 3D", "default": true },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3. Vide = slime seul." },
+    { "type": "text", "id": "hoodie_label", "label": "Texte équivalent du hoodie 3D", "default": "Hoodie zippé oversize Ressac en 3D, coloris" },
+    { "type": "text", "id": "loading_label", "label": "Texte de chargement", "default": "Chargement du modèle 3D…" },
+    { "type": "text", "id": "caption_hoodie", "label": "Mention sous le hoodie 3D", "default": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran." }
+  ],
+  "blocks": [
+    {
+      "type": "colorway",
+      "name": "Coloris",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom (doit correspondre au nom de la variante)", "default": "Lilac Whirl" },
+        { "type": "text", "id": "description", "label": "Description courte", "default": "Lilas tourbillonnant sur poudre" },
+        { "type": "color", "id": "color_a", "label": "Nuance principale", "default": "#C8A2C8" },
+        { "type": "color", "id": "color_b", "label": "Nuance secondaire", "default": "#F5EDE4" },
+        { "type": "url", "id": "link", "label": "Lien (fiche produit, variante)" },
+        { "type": "text", "id": "glb", "label": "Fichier GLB précis (facultatif)", "info": "Laisser vide : le fichier est déduit du préfixe de la section et du nom du coloris." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "KYMA — Coloris 3D",
+      "blocks": [
+        { "type": "colorway", "settings": { "name": "Lilac Whirl", "description": "Lilas tourbillonnant sur poudre", "color_a": "#C8A2C8", "color_b": "#F5EDE4" } },
+        { "type": "colorway", "settings": { "name": "Ivory Tide", "description": "Crème ivoire sur vanille", "color_a": "#E8E0D8", "color_b": "#C5BFB8" } },
+        { "type": "colorway", "settings": { "name": "Silver Drift", "description": "Gris acier sur perle", "color_a": "#8E9EAB", "color_b": "#C8CDD2" } },
+        { "type": "colorway", "settings": { "name": "Noir Absolu", "description": "Noir sur anthracite, marbrage subtil", "color_a": "#1A1A1A", "color_b": "#3A3A4A" } },
+        { "type": "colorway", "settings": { "name": "Crimson Flow", "description": "Cramoisi sur bordeaux", "color_a": "#5C2032", "color_b": "#C4878E" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

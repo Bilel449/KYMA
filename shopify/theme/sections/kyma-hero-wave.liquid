@@ -1,0 +1,136 @@
+{%- comment -%}
+  KYMA — Hero plein écran : sculpture 3D « La Vague » (kyma-3d.js, WebGL natif) qui respire, suit la souris
+  et se transforme au défilement. Titre révélé lettre par lettre, bouton magnétique, indicateur de défilement.
+  Aucune image : sans WebGL, repli CSS en dégradé tonal ; en mouvement réduit, une image fixe.
+  Le canvas est décoratif (aria-hidden) ; son équivalent textuel est dans .kyma-vh.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+
+<section
+  id="kyma-hero-{{ section.id }}"
+  class="kyma-hero{% if section.settings.height == 'large' %} kyma-hero--large{% endif %}"
+  data-kyma-hero
+  aria-labelledby="kyma-hero-title-{{ section.id }}"
+>
+  <div class="kyma-hero__stage" data-kyma-3d-host>
+    <canvas
+      class="kyma-hero__canvas"
+      data-kyma-3d="hero"
+      data-colorway="{{ section.settings.colorway }}"
+      aria-hidden="true"
+    ></canvas>
+  </div>
+
+  <div class="kyma-hero__inner">
+    <div class="kyma-hero__copy">
+      {%- if section.settings.label != blank -%}
+        <p class="kyma-hero__label">{{ section.settings.label | escape }}</p>
+      {%- endif -%}
+
+      {%- assign htag = section.settings.heading_tag | default: 'h1' -%}
+      <{{ htag }} class="kyma-hero__title" id="kyma-hero-title-{{ section.id }}" data-kyma-split>
+        {{- section.settings.title_before | escape -}}
+        {%- if section.settings.title_em != blank -%}
+          {%- if section.settings.em_new_line %}<br>{% else %} {% endif -%}
+          <em>{{ section.settings.title_em | escape }}</em>
+        {%- endif -%}
+        {%- if section.settings.title_after != blank -%}
+          {%- assign after_first = section.settings.title_after | strip | slice: 0, 1 -%}
+          {%- unless '.,;:!?)' contains after_first %} {% endunless -%}
+          {{- section.settings.title_after | strip | escape -}}
+        {%- endif -%}
+      </{{ htag }}>
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="kyma-hero__sub">{{ section.settings.subtitle | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
+        <div class="kyma-hero__ctas">
+          {%- if section.settings.cta_label != blank -%}
+            <a class="kyma-btn" href="{{ section.settings.cta_link | default: '#' }}" data-kyma-magnetic>
+              <span>{{ section.settings.cta_label | escape }}</span>
+              <span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.cta2_link | default: '#' }}" data-kyma-magnetic>
+              <span>{{ section.settings.cta2_label | escape }}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank -%}
+        <p class="kyma-hero__note">{{ section.settings.note | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <p class="kyma-vh">{{ section.settings.alt_text | escape }}</p>
+
+  {%- if section.settings.cue_label != blank -%}
+    <a class="kyma-hero__cue" href="{{ section.settings.cue_target | default: '#MainContent' }}" data-kyma-cue>
+      <span>{{ section.settings.cue_label | escape }}</span>
+      <svg viewBox="0 0 44 10" aria-hidden="true" focusable="false"><path d="M1 5 C6 1 10 1 15 5 S24 9 29 5 S38 1 43 5"/></svg>
+      <span class="kyma-hero__cue-line" aria-hidden="true"></span>
+    </a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Hero 3D",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "label", "label": "Label (petites capitales)", "default": "DROP 1 — PRÉCOMMANDE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Une pièce, pensée pour être" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "unique" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin (facultatif)", "default": "." },
+    { "type": "select", "id": "heading_tag", "label": "Niveau du titre", "options": [ { "value": "h1", "label": "H1 (page d'accueil)" }, { "value": "h2", "label": "H2" } ], "default": "h1" },
+    { "type": "checkbox", "id": "em_new_line", "label": "Mot en italique sur sa propre ligne", "default": true },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-titre", "default": "Pensé pour que chaque pièce soit unique. Le motif KYMA Wave est un marbré fluide, tonal, qui ne cherche jamais à se répéter." },
+    { "type": "text", "id": "note", "label": "Note sous les boutons (facultative)", "default": "Expédition au plus tard le [À COMPLÉTER : date]" },
+    { "type": "header", "content": "Boutons" },
+    { "type": "text", "id": "cta_label", "label": "Bouton principal — texte", "default": "Choisir mon coloris" },
+    { "type": "url", "id": "cta_link", "label": "Bouton principal — lien" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton secondaire — texte", "default": "Découvrir le motif" },
+    { "type": "url", "id": "cta2_link", "label": "Bouton secondaire — lien" },
+    { "type": "header", "content": "Sculpture 3D « La Vague »" },
+    { "type": "paragraph", "content": "Rendu WebGL temps réel, sans image. Le motif KYMA Wave s'écoule sur la sculpture et n'est jamais deux fois le même. Les visiteurs en mouvement réduit voient une image fixe ; sans WebGL, un dégradé tonal." },
+    {
+      "type": "select",
+      "id": "colorway",
+      "label": "Coloris de départ",
+      "options": [
+        { "value": "kyma", "label": "KYMA — rose clair, beige, marron clair" },
+        { "value": "lilac-whirl", "label": "Lilac Whirl" },
+        { "value": "ivory-tide", "label": "Ivory Tide" },
+        { "value": "silver-drift", "label": "Silver Drift" },
+        { "value": "noir-absolu", "label": "Noir Absolu" },
+        { "value": "crimson-flow", "label": "Crimson Flow" }
+      ],
+      "default": "kyma"
+    },
+    { "type": "text", "id": "alt_text", "label": "Texte équivalent de la 3D (lecteurs d'écran)", "default": "Illustration animée : une sculpture fluide rose clair et beige, veinée de marron clair, recouverte du motif marbré KYMA Wave." },
+    { "type": "header", "content": "Indicateur de défilement" },
+    { "type": "text", "id": "cue_label", "label": "Texte", "default": "Défiler" },
+    { "type": "text", "id": "cue_target", "label": "Ancre de repli sans JavaScript (avec JS : défile juste sous le hero)", "default": "#MainContent" },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Hauteur",
+      "options": [
+        { "value": "full", "label": "Plein écran" },
+        { "value": "large", "label": "Grande (82 %)" }
+      ],
+      "default": "full"
+    }
+  ],
+  "presets": [
+    { "name": "KYMA — Hero 3D" }
+  ]
+}
+{% endschema %}

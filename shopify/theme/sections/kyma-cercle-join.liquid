@@ -1,0 +1,144 @@
+{%- comment -%}
+  KYMA — Inscription au Cercle Waves (formulaire Shopify natif {% form 'customer' %}, étiquettes
+  « cercle-waves »). Un petit anneau resté ouvert (arc de 300°) se ferme en 900 ms à la réussite ; il tourne
+  lentement pendant l'envoi ; en cas d'erreur il reste ouvert, sans secousse, et le champ se souligne.
+  LISTE D'ATTENTE (abonnement non branché) : deux cases distinctes, jamais pré-cochées —
+    1. OBLIGATOIRE : être informé de l'ouverture du Cercle Waves. Sans elle, le formulaire ne part pas (message
+       « consent_error » avec JavaScript ; validation native du navigateur sans JavaScript). Trace : étiquette
+       « consentement-ouverture-<version>-<date> » + texte de la case dans la note client (contact[note]).
+    2. FACULTATIVE : newsletter. Cochée, elle ajoute les étiquettes PROVISOIRES « newsletter-a-confirmer » et
+       « demande-newsletter-<version>-<date> » (double opt-in obligatoire avant toute newsletter : règle C bis)
+       (sans JavaScript aussi : second champ contact[tags], le dernier envoyé l'emporte). Ne conditionne rien.
+  Date = jour d'affichage de la page (heure de la boutique) ; la date exacte d'inscription est celle de la fiche client.
+  ⚠ Le formulaire Shopify « customer » marque toujours le client « abonné e-mail » (accepts_marketing) : n'envoyer
+  la newsletter qu'au segment étiqueté « newsletter » (voir etat-boutique.md). Aucun prix, aucun avantage inventé.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-cj-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+{%- comment -%} Newsletter : étiquette PROVISOIRE seulement (règle C bis de Victoire) — « consentement-newsletter-* » n'est
+  posée qu'après la confirmation du double opt-in (appli de formulaire), jamais par ce formulaire. {%- endcomment -%}
+{%- liquid
+  assign today = 'now' | date: '%Y-%m-%d'
+  assign cv = section.settings.consent_version | strip | handleize | default: 'v1'
+  assign tags_base = section.settings.tags | strip | append: ',consentement-ouverture-' | append: cv | append: '-' | append: today
+  assign tags_news = tags_base | append: ',newsletter-a-confirmer,demande-newsletter-' | append: cv | append: '-' | append: today
+  capture privacy_html
+    if section.settings.privacy_link != blank
+      echo '<a href="' | append: section.settings.privacy_link | append: '">politique de confidentialité</a>'
+    else
+      echo '[politique de confidentialité]'
+    endif
+  endcapture
+-%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-cj" aria-labelledby="{{ hid }}">
+  <div class="kyma-sec__inner kyma-cj__inner">
+    {%- comment -%} Décision d'Arthur : aucune collecte d'adresses avant l'immatriculation de la société. Réglage
+      « Afficher la liste d'attente » désactivé par défaut : titre + phrase, sans formulaire ni anneau. Le formulaire
+      (phase 2, deux cases de consentement) reste prêt derrière ce réglage. {%- endcomment -%}
+    {%- unless section.settings.show_waitlist -%}
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.closed_label,
+        before: section.settings.closed_title_before,
+        em: section.settings.closed_title_em,
+        after: section.settings.closed_title_after,
+        text: section.settings.closed_text,
+        heading_id: hid
+      %}
+      {%- if section.settings.closed_cta_label != blank and section.settings.closed_cta_link != blank -%}
+        {%- assign c_ext = false -%}{%- if section.settings.closed_cta_link contains '://' -%}{%- assign c_ext = true -%}{%- endif -%}
+        <p class="kyma-cj__cta"><a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.closed_cta_link }}"{% if c_ext %} target="_blank" rel="noopener"{% endif %}><span>{{ section.settings.closed_cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a></p>
+      {%- endif -%}
+    </div>
+    {%- else -%}
+    <svg class="kyma-ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false" data-kyma-ring>
+      <circle class="kyma-ring__track" cx="60" cy="60" r="44"/>
+      <circle class="kyma-ring__arc" cx="60" cy="60" r="44" pathLength="360"/>
+    </svg>
+    <div data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+    </div>
+    {%- comment -%} Pas de « novalidate » ici : sans JavaScript, le navigateur bloque l'envoi si la case 1 n'est pas cochée ;
+      kyma-pages.js le pose et prend le relais avec ses propres messages. {%- endcomment -%}
+    {%- form 'customer', id: 'KymaCercle', class: 'kyma-form kyma-cj__form', data-kyma-form: 'cercle' -%}
+      <input type="hidden" name="contact[tags]" value="{{ tags_base | escape }}">
+      {%- if form.posted_successfully? -%}
+        <p class="kyma-form__ok" role="status" data-kyma-posted>{{ section.settings.success | escape }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}<p class="kyma-form__err" role="alert">{{ section.settings.error | escape }}</p>{%- endif -%}
+      <div class="kyma-form__row">
+        <label class="kyma-field"><span class="kyma-field__l">Prénom</span>
+          <input class="kyma-field__i" type="text" name="contact[first_name]" autocomplete="given-name"></label>
+        <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
+          <input class="kyma-field__i" type="email" name="contact[email]" autocomplete="email" required aria-required="true" data-kyma-email>
+          <span class="kyma-field__err" hidden>{{ section.settings.error | escape }}</span></label>
+      </div>
+      <label class="kyma-check">
+        <input type="checkbox" name="contact[note]" value="{{ section.settings.consent_note | escape }} [{{ cv }}, {{ today }}] {{ section.settings.consent | escape }}" required aria-required="true" data-kyma-consent>
+        <span>{{ section.settings.consent | escape | replace: '[politique de confidentialité]', privacy_html }} <span class="kyma-check__req">{{ section.settings.required_label | escape }}</span></span>
+      </label>
+      <p class="kyma-field__err kyma-check__err" data-kyma-consent-err hidden>{{ section.settings.consent_error | escape }}</p>
+      {%- if section.settings.consent_newsletter != blank -%}
+        <label class="kyma-check">
+          <input type="checkbox" name="contact[tags]" value="{{ tags_news | escape }}">
+          <span>{{ section.settings.consent_newsletter | escape | replace: '[politique de confidentialité]', privacy_html }} <span class="kyma-check__req">{{ section.settings.optional_label | escape }}</span></span>
+        </label>
+      {%- endif -%}
+      <button type="submit" class="kyma-btn" data-kyma-submit><span>{{ section.settings.button | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="kyma-form__ok" role="status" data-kyma-ok hidden>{{ section.settings.success | escape }}</p>
+      <p class="kyma-cj__terms">{{ section.settings.terms | escape }}</p>
+    {%- endform -%}
+    {%- endunless -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Inscription Cercle",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "rejoindre" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "03" },
+    { "type": "checkbox", "id": "show_waitlist", "label": "Afficher la liste d'attente (formulaire)", "default": false, "info": "À n'activer qu'après l'immatriculation de la société, la publication de la politique de confidentialité et le passage à un forfait payant." },
+    { "type": "text", "id": "label", "label": "Label", "default": "ÊTRE PRÉVENU" },
+    { "type": "header", "content": "Liste d'attente désactivée" },
+    { "type": "text", "id": "closed_label", "label": "Label", "default": "CERCLE WAVES" },
+    { "type": "text", "id": "closed_title_before", "label": "Titre — début", "default": "Le cercle se" },
+    { "type": "text", "id": "closed_title_em", "label": "Titre — italique", "default": "prépare" },
+    { "type": "text", "id": "closed_title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "closed_text", "label": "Texte", "default": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement." },
+    { "type": "text", "id": "closed_cta_label", "label": "Bouton (facultatif) — texte", "info": "Ex. Suivre @kymasinsta. Vide = pas de bouton." },
+    { "type": "url", "id": "closed_cta_link", "label": "Bouton (facultatif) — lien", "info": "Ex. https://www.instagram.com/kymasinsta/ (s'ouvre dans un nouvel onglet)." },
+    { "type": "header", "content": "Liste d'attente activée (phase 2)" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Être prévenu de" },
+    { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "l'ouverture" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Prénom et adresse e-mail suffisent. Ce n'est pas un abonnement : aucun paiement n'est demandé." },
+    { "type": "textarea", "id": "consent", "label": "Case 1 — OBLIGATOIRE (information de l'ouverture)", "default": "J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans le message ou en écrivant à [À COMPLÉTER : e-mail]. Mon adresse est supprimée de cette liste après l'envoi de ce message, sauf si j'ai aussi accepté la newsletter ci-dessous. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]." },
+    { "type": "text", "id": "consent_note", "label": "Case 1 — trace enregistrée (note client)", "default": "Liste d'attente Cercle Waves : consentement à l'information d'ouverture (case cochée)." },
+    { "type": "textarea", "id": "consent_newsletter", "label": "Case 2 — FACULTATIVE (newsletter ; vide = case masquée)", "default": "Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]." },
+    { "type": "text", "id": "consent_error", "label": "Message si la case 1 n'est pas cochée", "default": "Pour vous prévenir de l'ouverture, nous avons besoin de votre accord. Pouvez-vous cocher la première case ?" },
+    { "type": "text", "id": "consent_version", "label": "Version des textes de consentement (enregistrée avec l'inscription)", "default": "v1", "info": "Changer (v2, v3…) à chaque modification du texte d'une case." },
+    { "type": "url", "id": "privacy_link", "label": "Lien « politique de confidentialité »", "info": "Remplace [politique de confidentialité] dans la case 1. Vide = texte entre crochets." },
+    { "type": "text", "id": "required_label", "label": "Mention « obligatoire »", "default": "(obligatoire)" },
+    { "type": "text", "id": "optional_label", "label": "Mention « facultatif »", "default": "(facultatif)" },
+    { "type": "text", "id": "tags", "label": "Étiquettes client", "default": "cercle-waves,liste-attente" },
+    { "type": "text", "id": "button", "label": "Bouton", "default": "Me prévenir" },
+    { "type": "text", "id": "success", "label": "Confirmation", "default": "Merci. Nous vous écrirons à l'ouverture du Cercle Waves. Cette inscription n'est pas un abonnement." },
+    { "type": "text", "id": "error", "label": "Erreur", "default": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?" },
+    { "type": "text", "id": "terms", "label": "Mention conditions", "default": "Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]." }
+  ],
+  "presets": [ { "name": "KYMA — Inscription Cercle" } ]
+}
+{% endschema %}

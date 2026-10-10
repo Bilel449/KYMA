@@ -1,0 +1,320 @@
+{
+  "sections": {
+    "hero": {
+      "type": "kyma-page-hero",
+      "settings": {
+        "anchor": "",
+        "label": "DROP 1 — PRÉCOMMANDE",
+        "title_before": "Une pièce, cinq",
+        "title_em": "courants",
+        "title_after": ".",
+        "text": "Le hoodie Ressac existe en cinq coloris. Même coupe, même tissu, même motif KYMA Wave : seules changent la teinte du motif et la doublure de la capuche.",
+        "cta_label": "Voir les coloris",
+        "cta_link": "/collections/drop-1#coloris",
+        "note": "Expédition au plus tard le [À COMPLÉTER : date]",
+        "visual": "cloth",
+        "colorway": "kyma",
+        "align": "split",
+        "alt_text": "Illustration animée : une étoffe suspendue qui ondule, au motif marbré rose clair et beige.",
+        "caption": ""
+      }
+    },
+    "coloris": {
+      "type": "kyma-colorway-cards",
+      "settings": {
+        "anchor": "coloris",
+        "number": "02",
+        "label": "LES COLORIS",
+        "title_before": "Choisir son",
+        "title_em": "courant",
+        "title_after": ".",
+        "text": "",
+        "product": "ressac-hoodie-zippe-oversize",
+        "shipping_link": "/policies/shipping-policy",
+        "more_label": "Voir ce coloris",
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué."
+      },
+      "blocks": {
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "lead": "Le lilas qui tourne, sans jamais revenir.",
+            "lining": "Doublure crème.",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613620904316"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "lead": "L'ivoire monte comme une marée sur le sable clair.",
+            "lining": "Doublure blanc chaud.",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621100924"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "lead": "Un gris d'acier qui dérive sur la perle.",
+            "lining": "Doublure blanc froid.",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621297532"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "lead": "La nuit, quand la mer ne se voit plus mais s'entend.",
+            "lining": "",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621494140"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "lead": "Un cramoisi qui coule sur le bordeaux.",
+            "lining": "",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E",
+            "link": "/products/ressac-hoodie-zippe-oversize?variant=57613621690748"
+          }
+        }
+      },
+      "block_order": [
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    },
+    "teinte": {
+      "type": "kyma-recolor",
+      "settings": {
+        "anchor": "une-meme-piece",
+        "number": "03",
+        "label": "UNE MÊME PIÈCE",
+        "title_before": "Même pièce, autre",
+        "title_em": "teinte",
+        "title_after": ".",
+        "text": "Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche.",
+        "list_label": "Choisir un coloris pour l'illustration",
+        "caption": "Rendu 3D du coloris, pas une photo du produit fabriqué."
+      },
+      "blocks": {
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E"
+          }
+        }
+      },
+      "block_order": [
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    },
+    "precommande": {
+      "type": "kyma-timeline",
+      "settings": {
+        "anchor": "precommande",
+        "number": "04",
+        "label": "LA PRÉCOMMANDE",
+        "title_before": "La fabrication suit la",
+        "title_em": "précommande",
+        "title_after": ".",
+        "text": "<p>Précommande du [À COMPLÉTER : date d'ouverture] au [À COMPLÉTER : date de clôture]. La fabrication démarre après la clôture de la précommande. Votre paiement est enregistré à la commande. Expédition au plus tard le [À COMPLÉTER : date]. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Voir les <a href=\"/policies/terms-of-service\">CGV</a> et la page <a href=\"/policies/refund-policy\">Retours et remboursements</a>.</p>",
+        "compact": false
+      },
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "name": "Précommande",
+            "date": "[À COMPLÉTER : dates]",
+            "sentence": "Vous réservez votre pièce ; le paiement est enregistré à la commande."
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "name": "Clôture",
+            "date": "[À COMPLÉTER : date]",
+            "sentence": "La précommande se referme : la série est arrêtée."
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "name": "Fabrication",
+            "date": "Après la clôture",
+            "sentence": "La fabrication démarre après la clôture de la précommande."
+          }
+        },
+        "point_4": {
+          "type": "point",
+          "settings": {
+            "name": "Expédition",
+            "date": "Au plus tard le [À COMPLÉTER : date]",
+            "sentence": "Votre hoodie part ; un e-mail de suivi vous est envoyé."
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4"
+      ]
+    },
+    "cercle": {
+      "type": "kyma-cercle-waves",
+      "settings": {
+        "anchor": "cercle",
+        "number": "05",
+        "label": "CERCLE WAVES",
+        "title_before": "Le Cercle",
+        "title_em": "Waves",
+        "title_after": ".",
+        "text": "Le Cercle Waves accompagne celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ, par abonnement trimestriel.",
+        "cta_label": "Découvrir les deux paliers",
+        "cta_link": "/pages/cercle-waves",
+        "show_rings": true,
+        "compact_top": false
+      }
+    },
+    "hoodie": {
+      "type": "kyma-product-360",
+      "settings": {
+        "anchor": "hoodie-3d",
+        "number": "01",
+        "label": "LE HOODIE EN 3D",
+        "title_before": "Cinq coloris,",
+        "title_em": "une",
+        "title_after": "pièce.",
+        "text": "Choisissez un coloris : le hoodie Ressac change de teinte et tourne lentement. Glissez pour en faire le tour.",
+        "product": "ressac-hoodie-zippe-oversize",
+        "prefer_native": true,
+        "autorotate": true,
+        "spin_speed": 9,
+        "spin_delay": 1,
+        "help": "Glissez pour tourner, double-cliquez pour approcher. Touches 1 à 4 : face, profil, dos, détail.",
+        "list_label": "Choisir un coloris du hoodie 3D",
+        "presets_label": "Points de vue",
+        "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter.",
+        "loading_label": "Chargement du modèle 3D…",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "caption_fallback": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
+        "spots_label": "Détails de la pièce",
+        "cta_label": "",
+        "cta_link": "",
+        "model_prefix": "ressac-v2"
+      },
+      "blocks": {
+        "colorway_1": {
+          "type": "colorway",
+          "settings": {
+            "name": "Lilac Whirl",
+            "color_a": "#C8A2C8",
+            "color_b": "#F5EDE4"
+          }
+        },
+        "colorway_2": {
+          "type": "colorway",
+          "settings": {
+            "name": "Ivory Tide",
+            "color_a": "#E8E0D8",
+            "color_b": "#C5BFB8"
+          }
+        },
+        "colorway_3": {
+          "type": "colorway",
+          "settings": {
+            "name": "Silver Drift",
+            "color_a": "#8E9EAB",
+            "color_b": "#C8CDD2"
+          }
+        },
+        "colorway_4": {
+          "type": "colorway",
+          "settings": {
+            "name": "Noir Absolu",
+            "color_a": "#1A1A1A",
+            "color_b": "#3A3A4A"
+          }
+        },
+        "colorway_5": {
+          "type": "colorway",
+          "settings": {
+            "name": "Crimson Flow",
+            "color_a": "#5C2032",
+            "color_b": "#C4878E"
+          }
+        }
+      },
+      "block_order": [
+        "colorway_1",
+        "colorway_2",
+        "colorway_3",
+        "colorway_4",
+        "colorway_5"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "hoodie",
+    "coloris",
+    "teinte",
+    "precommande",
+    "cercle"
+  ]
+}
