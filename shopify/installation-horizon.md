@@ -59,6 +59,7 @@ shopify theme push --theme "<ID de la copie>" --path ./theme-kyma --nodelete \
 **Si l'éditeur refuse l'extension `.glb`** (le média 3D est refusé sur le plan d'essai, mais les fichiers de thème passent en principe) : utiliser la méthode B, ou laisser faire le repli. Sans GLB, la fiche produit affiche l'aperçu 3D du coloris, sans erreur.
 
 ## 1 bis. Réinstallation du 09/10/2026 (retours du fondateur) — 17 fichiers, MD5 relus
+> *Historique, remplacé par le § 1 quater (10/10/2026) pour le lecteur 3D et les textes.*
 
 `assets/` kyma-3d.js (v2.1), kyma-glb.js (v2.0), kyma-motion.js (v3.1), kyma-pages.js, kyma.css, kyma-pages.css · `sections/` kyma-cercle-waves, kyma-chapter, kyma-colorways, kyma-page-hero, kyma-product-360 · `templates/` index.json, collection.kyma.json, page.cercle-waves.json, page.faq.json, page.nous-connaitre.json · `config/settings_data.json` de la **copie** (palette fond `#F5EDE4` / texte `#4A3B32`, seule modification). Méthode : `stagedUploadsCreate` + `themeFilesUpsert` (corps URL) sur `189991944572`, puis relecture : les 17 MD5 sont identiques au dépôt (pour `settings_data.json`, Shopify calcule le MD5 sur le JSON minifié).
 
@@ -70,6 +71,7 @@ Ce qui change à l'écran :
 - **Fluidité** : marche de rayon allégée et rendue en DPR 1 avec échelle adaptative (cible 60 i/s), paramètres de défilement interpolés, une seule boucle d'animation par moteur (correction d'un doublement de boucle), courbes de révélation plus douces, rideau sinusoïdal, scènes 3D et GLB montées après le rideau, défilement lissé léger sur ordinateur (`<html data-kyma-native-scroll>` pour le couper). **Un seul contexte WebGL pour tous les lecteurs GLB** (modèles téléchargés une fois par URL) + un pour les scènes kyma-3d : 2 au plus par page.
 
 ## 1 ter. Réinstallation du 09/10/2026 (après-midi) — récit au défilement, cartes du fondateur, GLB v2 — 13 fichiers, MD5 relus
+> *Historique, remplacé par le § 1 quater (10/10/2026) : les GLB v2 sont désormais lus par le lecteur commun partout.*
 Copie `189991944572` uniquement (rôle relu : UNPUBLISHED). `stagedUploadsCreate` + `themeFilesUpsert` (corps URL), en 2 lots (assets / GLB / sections, puis templates). Les 13 MD5 relus sont identiques au dépôt.
 - **Nouveaux** : `assets/kyma-three.js` (three.js r180, MIT : core + GLTFLoader + RoomEnvironment + AnimationMixer ; 591 Ko, 151 Ko gzip ; licence dans `shopify/licences/three-js-LICENSE.txt`), `assets/kyma-pstory.js` (29 Ko, 10 Ko gzip), `assets/kyma-pstory.css`, `sections/kyma-product-story-scroll.liquid` (« KYMA — Pièce défilée »), `assets/ressac-v2-<coloris>.glb` × 5 (Izaac, 3,6–3,7 Mo).
 - **Modifiés** : `sections/kyma-cercle-waves.liquid` (recto = visuel de carte : réglage image + URL de repli ; précision sous l'avantage cashback/crédit), `assets/kyma-pages.css`, `templates/index.json` (« Savoir-faire » retiré ; « La pièce » = récit au défilement ; Cercle Waves renuméroté 04), `templates/page.cercle-waves.json` (avantages repris de la page publiée).
@@ -83,6 +85,14 @@ Copie `189991944572` uniquement. `stagedUploadsCreate` + PUT + `themeFilesUpsert
 - `kyma-glb.js` reste dans la copie et dans le dépôt, **plus chargé par aucune section** (`snippets/kyma-assets.liquid` ne l'a jamais chargé : inchangé).
 - **Passer aux GLB v3 (Izaac)** : 1) téléverser `ressac-v3-<coloris>.glb` (5 fichiers) dans assets ; 2) éditeur › accueil › « 01 Coloris », « La pièce » ; collection › « Le hoodie en 3D » ; fiche produit › « La pièce en 3D » : réglage « Modèles 3D — préfixe » = `ressac-v3`. Le récit au défilement suppose le même contrat de nœuds que la v2 (`Panel_*`, `Zip_Slider`, clip `ZipOpen`, extras `poi`/`zipPath`).
 - **Crédit Waves = remise, pas crédit en magasin (Abdou)** — faisabilité, **à vérifier sur les fiches des applis avant tout choix** (non testé, plan d'essai) : (a) natif Shopify : un code de réduction à montant fixe, restreint à un client ou à un segment (étiquette `initium` / `majeste`), usage unique, date d'expiration = validité du crédit ; le montant variant par client, il faut le générer par client (appli ou Shopify Flow, à confirmer selon le forfait) ; (b) Appstle Subscriptions et Seal Subscriptions annoncent des remises réservées aux abonnés (étiquettes client, remises sur commandes suivantes) : vérifier qu'elles savent créer une remise **calculée** (5 % / 10 % du montant payé) et non seulement un pourcentage fixe ; (c) éviter les fonctions « store credit » / « cartes cadeaux » des applis de fidélité. Décision avec Abdou et Victoire.
+
+### Bascule P7 (à faire seulement quand la porte P7 est levée : société immatriculée, politique de confidentialité publiée, forfait payant)
+État actuel de la copie = variante « P7 fermée » (Maya, v4 § 1.6) : bouton du hero « Suivre @kymasinsta » → `https://www.instagram.com/kymasinsta/` (URL à confirmer par le fondateur, réglage `cta_link`), note « Ni inscription, ni paiement à ce stade. Le cercle se prépare. », cartes sans bouton, « passage » au futur, section « rejoindre » fermée (`show_waitlist` = faux) avec bouton « Suivre @kymasinsta ».
+Valeurs à remettre dans `templates/page.cercle-waves.json` à la bascule (v4 § 1.1 à 1.4) :
+- `ouverture.text` : « Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons. » · `cta_label` « Être prévenu de l'ouverture » · `cta_link` `/pages/cercle-waves#rejoindre` · `note` « Aucun paiement n'est demandé à ce stade. »
+- `paliers.tier_1` / `tier_2` : `join_label` « Être prévenu » · `join_link` `/pages/cercle-waves#rejoindre` (puis, quand l'abonnement est branché : « Choisir ce palier » + lien d'abonnement).
+- `passage.text` : « Vous choisissez directement l'un ou l'autre palier. Passer à MAJESTÉ prend effet tout de suite : vous payez la différence, au prorata. Passer à INITIUM prend effet à la fin du trimestre en cours. »
+- `rejoindre.show_waitlist` : vrai (les textes `consent`, `consent_newsletter`, `consent_error`, `button`, `success` sont déjà en place).
 
 ## 2. Une ligne à ajouter dans `layout/theme.liquid`
 
@@ -116,7 +126,7 @@ Le choix de template vaut pour **tous** les thèmes. Le thème en ligne n'ayant 
 | Page `savoir-faire` (`gid://shopify/Page/700768682364`) | sans objet (reste en brouillon) | Redirection 301 `/pages/savoir-faire` → `/pages/nous-connaitre#savoir-faire` (Navigation › Redirections d'URL). |
 | Page `guide-des-tailles` (`gid://shopify/Page/700768715132`) | `page.guide-des-tailles` | Aucune |
 | Page `faq-v2` (`gid://shopify/Page/700768747900`) | `page.faq` | Au lancement : dépublier l'ancienne page `faq`, puis renommer `faq-v2` en `faq`. Nos liens visent déjà `/pages/faq`. |
-| Page `cercle-waves-v2` (`gid://shopify/Page/700768780668`) | `page.cercle-waves` | Au lancement : retirer l'ancienne page `cercle-waves`, qui affiche des prix non validés, puis renommer `cercle-waves-v2` en `cercle-waves`. **Aucun prix** sur la nouvelle page. |
+| Page `cercle-waves-v2` (`gid://shopify/Page/700768780668`) | `page.cercle-waves` | Au lancement : retirer l'ancienne page `cercle-waves` (ORIGINE, prix non validés), puis renommer `cercle-waves-v2` en `cercle-waves`. La nouvelle page **affiche les prix** (12,99 € / 39,99 € TTC par trimestre, réglages texte sous les cartes et ligne de conditions). |
 | Page Contact (à créer, en brouillon) | `page.contact` | Identifiant `contact`. Formulaire Shopify natif. |
 
 Avant le renommage des pages au lancement, les liens `/pages/faq` et `/pages/cercle-waves` mènent encore aux anciennes pages publiées. C'est sans conséquence tant que le thème n'est pas publié.
@@ -141,21 +151,21 @@ Avant le renommage des pages au lancement, les liens `/pages/faq` et `/pages/cer
 
 1. **Média 3D natif** : si le produit a des médias 3D (plan payant), la section utilise le `<model-viewer>` de Shopify. Le texte alternatif de chaque média doit contenir le nom du coloris.
 2. **Lecteur commun** `kyma-viewer.js` (three.js) : sinon, la section lit `<préfixe>-<coloris>.glb` dans les fichiers du thème (préfixe `ressac-v2` ; un bloc « Coloris » peut imposer un fichier précis). C'est le cas actuel, sur le plan d'essai.
-3. **Aperçu 3D du coloris** (étoffe `kyma-3d.js`) : en dernier recours, si WebGL ou le fichier échouent. La légende devient alors « Illustration du coloris. ».
+3. **Aperçu 3D du coloris** (étoffe `kyma-3d.js`) : en dernier recours, si WebGL ou le fichier échouent. La légende devient alors « Rendu 3D du coloris, pas une photo du produit fabriqué. » (R3).
 
 Le coloris suit la variante choisie, via l'événement `change` du `<variant-picker>` de Horizon (option « Coloris »), et aussi les pastilles de la section. Au plus **3 contextes WebGL** par page : `kyma-3d.js` (1, partagé), `kyma-viewer.js` (1, partagé par tous ses lecteurs) et, sur l'accueil seulement, « La pièce » (1).
-Mention sous le lecteur : « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. ».
+Mention sous le lecteur (R1, Victoire) : « Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran. ».
 **À vérifier à l'installation** : les GLB sont servis par `cdn.shopify.com` et chargés par `fetch`. Si la console signale un blocage CORS, téléverser les GLB dans Contenu › Fichiers et saisir leur URL dans le réglage « Fichier GLB » de chaque bloc.
 
 ## 7. Après l'installation : check-list
 
 - [ ] Aperçu de la copie sur téléphone et sur ordinateur : accueil, collection, produit, Cercle Waves, Nous connaître, Guide des tailles, FAQ, Contact.
 - [ ] Console du navigateur : aucune erreur. Lecteur 360° : il tourne au glisser, et le coloris suit la variante.
-- [ ] Les cartes Cercle Waves flottent et pivotent au survol, au clic, au toucher et au clavier (Tab, Entrée, Échap) ; prix trimestriels (réglages) sous les cartes ; « Rejoindre » inactif tant que le lien d'abonnement manque.
+- [ ] Les cartes Cercle Waves flottent et pivotent au survol, au clic, au toucher et au clavier (Tab, Entrée, Échap) ; prix trimestriels (réglages) sous les cartes ; **aucun bouton sous les cartes** tant que la porte P7 est fermée (`join_label` vide) ; la section « rejoindre » affiche « Le cercle se prépare. » sans formulaire.
 - [ ] Toutes les balises `[À COMPLÉTER]` sont visibles et listées pour le fondateur : date d'expédition, dates de précommande, e-mail, téléphone, grammage, composition, avantages Cercle Waves.
 - [ ] Victoire valide les mentions de consentement des formulaires (Cercle Waves, contact) et la mention des visuels.
 - [x] RGPD : DM Serif Display et Outfit sont auto-hébergées (`kyma-fonts`) et le thème n'appelle plus Google Fonts. « κύμα » est en SVG ; dans le seul H1 textuel (visuellement masqué), le grec retombe sur Georgia, via la pile `--kyma-serif`.
 - [ ] **Blocage n° 3 de Victoire** : le label « PRÉCOMMANDE » (hero de l'accueil, collection), le bandeau d'annonce de précommande, le bouton « Précommander » et toutes les dates (ouverture, clôture, « Expédition au plus tard le ») ne s'activent **qu'une fois le contrat fabricant signé**. Avant cela, retirer « — PRÉCOMMANDE » des labels dans l'éditeur, masquer le bandeau et laisser les dates en `[À COMPLÉTER]`.
-- [ ] Formulaire Cercle Waves : la case de consentement envoie `contact[accepts_marketing]=true` et n'est jamais pré-cochée. Victoire valide le texte.
+- [ ] Formulaire Cercle Waves (phase 2, après P7) : **deux cases** jamais pré-cochées — case 1 obligatoire (ouverture du Cercle), case 2 facultative (newsletter) — enregistrées dans des **étiquettes client séparées** (`consentement-ouverture-<version>-<date>`, `consentement-newsletter-<version>-<date>`). Rappel : le formulaire Shopify « customer » marque toujours le client abonné marketing ; n'envoyer la newsletter qu'au segment `consentement-newsletter-*`.
 - [ ] `kyma-spline` : non testé. Ne l'ajouter qu'avec une URL de scène Spline validée.
 - [ ] Publication : **jamais** sans le « VALIDÉ » d'Arthur et la confirmation du fondateur.
