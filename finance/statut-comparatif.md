@@ -28,7 +28,7 @@
 | TVA | Assujettie ; franchise en base possible sous les seuils | Idem | Idem (franchise par défaut sous les seuils) |
 | Plafond de CA | Aucun | Aucun | **203 100 €** de ventes (seuils 2026–2028 ; une source cite encore 188 700 € : à vérifier) |
 | Déficit et stocks | Déficit reportable sur les bénéfices futurs ; stocks et charges réelles déduits | Idem | Aucun déficit possible ; stock et coûts de production non déductibles |
-| ACRE | Exonération partielle la 1re année ; **réduite depuis le 01/07/2026** (décret n° 2026-69 du 06/02/2026 : 25 % au lieu de 50 % pour les micro-entrepreneurs) : portée exacte pour un président de SASU ou un gérant d'EURL **à vérifier** | Idem | Taux minoré 75 % de 12,3 % ≈ 9,2 % pendant 4 trimestres ; délai de demande **à vérifier** (Isabelle) |
+| ACRE | Exonération de **25 %** pendant 12 mois pour le président (LFSS 2026, loi n° 2025-1403 ; décret n° 2026-69 du 06/02/2026 ; date d'application 01/01 ou 01/07/2026 et plafonnement à confirmer) ; **demande personnelle du dirigeant** (formulaire « mandataires sociaux ») ; condition de contrôle du capital (seuils contradictoires selon les sources) ; pas d'ACRE dans les 3 ans précédents. **Demande dans les 60 jours suivant le début d'activité (depuis le 01/01/2026, non automatique), à vérifier sur urssaf.fr** ; au-delà, perte définitive | Idem (gérant) | Exonération ramenée de 50 % à **25 %** pour les débuts d'activité à partir du 01/07/2026 (taux minoré 75 % de 12,3 % ≈ 9,2 %) ; **demande dans les 60 jours suivant le début d'activité (depuis le 01/01/2026, non automatique), à vérifier sur urssaf.fr** |
 | Coût de création | ≈ **250 €** (annonce légale 141–199 € HT, greffe 33,83 €, bénéficiaires effectifs 19,33–21,41 €) + statuts (0 € soi-même, ≈ 79 € HT plateforme, 1 000–2 000 € avocat) | ≈ **177 € HT** + statuts | **≈ 0–24 €** |
 | Coût de tenue | Comptabilité d'engagement, bilan et liasse fiscale, approbation et dépôt des comptes, TVA (CA3) : expert-comptable **[À COMPLÉTER : devis]** | Idem | Livre des recettes, registre des achats ; déclaration mensuelle ou trimestrielle du CA |
 | CFE | Exonérée l'année de création ; ensuite cotisation minimale selon la commune et le CA (à vérifier) | Idem | Idem |
@@ -85,7 +85,7 @@ Lecture :
 1. **SASU à l'IS** (accord avec Victoire), **président non rémunéré** pendant la phase de lancement ; rémunération mixte (salaire modeste + dividendes) dès que les bénéfices le permettent.
 2. **Capital** : quelques milliers d’euros (assez pour être crédible auprès d’un fabricant, sans immobiliser toute la trésorerie), **le reste de l'apport en compte courant d'associé** (remboursable sans impôt). Capital **entièrement libéré** pour garder le taux d'IS de 15 %.
 3. **Franchise en base de TVA** : par défaut en année 1 si le CA prévisionnel reste sous les seuils (ventes 85 000 €, services 37 500 €), réévaluation dès 70 % d'un seuil ; décision finale avec le devis usine (§ 5).
-4. **ACRE** : vérifier l'éligibilité et la demander dans les délais.
+4. **ACRE** : demande personnelle du président à l'Urssaf **dans les 60 jours suivant le début d'activité** (non automatique depuis le 01/01/2026 ; perte définitive au-delà) : à vérifier sur urssaf.fr et à inscrire dans le calendrier de création.
 5. **Expert-comptable** : devis avant immatriculation (tenue, bilan, TVA, paie du président le cas échéant).
 
 ## 7. Décisions à prendre (fondateur)
@@ -94,6 +94,8 @@ Lecture :
 3. Montant du capital et du compte courant.
 4. Franchise en base de TVA ou assujettissement dès la création.
 5. Choix de l'expert-comptable (devis).
+
+**Démarches de création à ne pas oublier (D16)** : statuts, dépôt du capital, annonce légale, dossier au guichet unique, déclaration des bénéficiaires effectifs ; compte bancaire pro ; option TVA (franchise ou assujettissement) ; **demande d'ACRE dans les 60 jours suivant le début d'activité** (non automatique depuis le 01/01/2026, à vérifier sur urssaf.fr) ; dépôt de marque au nom de la société ; assurance RC.
 
 ## 8. Points de vigilance
 - 🔴 **Ne rien encaisser avant l'immatriculation** (Victoire ST1, ST3).
@@ -108,7 +110,7 @@ Lecture :
 - PFU 31,4 % en 2026 (LFSS 2026, art. 12, loi n° 2025-1403) : auguste-patrimoine.fr, meilleurtaux.com, guichetdusavoir.org.
 - Charges SASU / TNS : hayot-expertise.fr (« SASU vs EURL », « Charges sociales SASU 2026 »), legalstart.fr, lefreelance.fr.
 - Dividendes d'EURL au-delà de 10 % : keobiz.fr, hayot-expertise.fr (« Cotisations TNS 2026 »), lscompta.fr.
-- Micro-entreprise : taux 12,3 % (lecoindesentrepreneurs.fr, finactuel.fr) ; plafonds 2026–2028 de 203 100 € / 83 600 € (cci-paris-idf.fr, propulsebyca.fr) ; ACRE réduite au 01/07/2026, décret n° 2026-69 (legifiscal.fr, centre-inffo.fr).
+- Micro-entreprise : taux 12,3 % (lecoindesentrepreneurs.fr, finactuel.fr) ; plafonds 2026–2028 de 203 100 € / 83 600 € (cci-paris-idf.fr, propulsebyca.fr) ; ACRE réduite et non automatique, LFSS 2026 et décret n° 2026-69 (legifiscal.fr, centre-inffo.fr ; vérification d'Isabelle du 10/10/2026 sur extraits, « probable, à vérifier »).
 - Franchise en base : sparkreceipt.com, superindep.fr, legifiscal.fr (PLF 2026).
 - Coûts de création : `finance/couts-reels-recherche.md` (Isabelle) ; keobiz.fr, lecoindesentrepreneurs.fr, swim.legal.
 - TVA sur acomptes : CGI art. 269, 2-a ; BOI-TVA-BASE-20-10 ; Eurex (08/12/2022).
