@@ -1,7 +1,56 @@
 # Visuels 3D — hoodie zippé « Ressac » (Drop 1)
 
-*Izaac, direction créative. v2 du 09/10/2026 : remplace les modèles v1 (`ressac-<coloris>.glb`, SDF), rejetés par le fondateur (« on dirait un cube »).*
-*Fichiers : `shopify/3d/ressac-v2-<coloris>.glb` (5 coloris) ; script `shopify/3d/build_hoodie_v2.py`.*
+*Izaac, direction créative. **v3 du 10/10/2026** (`ressac-v3-<coloris>.glb`, script `shopify/3d/build_hoodie_v3.py`), même contrat que le v2, qu'elle remplace en attendant un modèle réaliste (achat, CLO3D ou scan, voir `shopify/3d/pipeline-remplacement.md`). La v2 du 09/10/2026 (`ressac-v2-<coloris>.glb`, `build_hoodie_v2.py`) reste en place et inchangée. Les v1 (`ressac-<coloris>.glb`) ne doivent plus être utilisées.*
+
+## v3 — ce qui change (10/10/2026)
+Le fondateur a jugé la v2 « vêtement Roblox / cube ». La v3 corrige ce qu'un modèle procédural peut corriger, sans rien acheter.
+
+| | v2 | v3 |
+|---|---|---|
+| Silhouette | devant plat (arrondi de côté 9 cm), côtés droits | section arrondie (15 cm + devant galbé), bas repris par le bord-côte et léger blousant, profondeur galbée |
+| Manches | tubes droits, pose symétrique | axe courbe avec coude doux, gauche et droite différentes, tête de manche moins bombée, tassement en zigzag au-dessus du poignet |
+| Plis | 3 à 7 mm | 6 à 12 mm : gravité, aisselles, pli du coude, blousant et fronces à la taille, rides secondaires partout |
+| Coutures | dessinées dans la texture | **en creux** dans la géométrie (épaules, emmanchures, côtés, ourlet, dessous de bras) + surpiqûres |
+| Capuche | casque rond, intérieur blanc (« tête ») | sommet affaissé vers l'avant (l'arrière reste arrondi), ouverture resserrée, plis de flanc, double épaisseur de 8 mm, intérieur dans l'ombre |
+| Poches biais | trait sombre | fente ouverte : passepoil en relief, fond d'ombre, sac de poche légèrement bombé |
+| Bords-côtes 2×2 | relief 0,85 mm | relief 1,4 mm, repris plus serré |
+| Ombre | aucune (éclairage plat) | **occlusion ambiante cuite** (lancer de rayons, COLOR_0), calculée fermé et ouvert : creux des plis, dessous de bras et intérieur de capuche sombres, intérieur clair une fois ouvert |
+| Matière | maille en JPEG, rugosité unique | maille jersey (endroit du french terry) en **PNG**, carte de rugosité PNG, envers molleton gratté (PNG) séparé de la doublure de capuche jersey, reflet velouté du coton (`KHR_materials_sheen`), toutes les tuiles avec `KHR_texture_transform` |
+| Métal | zip argent, tirette laiton | zip argent brossé (rugosité 0,40), tirette laiton plaqué or brossé (0,34) |
+
+Correctif au passage : l'anneau du bord-côte de taille de la v2 traversait deux fois l'intérieur du corps (bandes cachées, normales faussées). Il est refait en v3.
+
+### Fichiers v3
+| Coloris | Fichier | Poids | Triangles |
+|---|---|---|---|
+| Lilac Whirl | `ressac-v3-lilac-whirl.glb` | 4,21 Mo | 121 148 |
+| Ivory Tide | `ressac-v3-ivory-tide.glb` | 4,11 Mo | 121 148 |
+| Silver Drift | `ressac-v3-silver-drift.glb` | 4,15 Mo | 121 148 |
+| Noir Absolu | `ressac-v3-noir-absolu.glb` | 4,08 Mo | 121 148 |
+| Crimson Flow | `ressac-v3-crimson-flow.glb` | 4,26 Mo | 121 148 |
+
+- **Validateur Khronos** (`gltf-validator` 2.0.0-dev.3.10) : **0 erreur** sur les 5 fichiers. Il reste un seul type d'avertissement, le même que la v2 : les tangentes sont générées à l'exécution.
+- **Extensions** : `KHR_mesh_quantization` (requise), `KHR_texture_transform`, `KHR_materials_sheen`. Toutes sont gérées nativement par three.js r150+ (le thème embarque la r180) et par model-viewer. Un lecteur sans sheen affiche simplement le tissu sans reflet velouté.
+- **7 matériaux** : `French terry KYMA Wave`, `Envers molleton gratté`, `Zip métal argent brossé`, `Tirette Kyma laiton plaqué or brossé`, `Ruban de zip`, `Fond de poche`, `Doublure de capuche jersey ton sur ton`. Le thème ne lit aucun nom de matériau pour un GLB v2/v3.
+- **Tuiles PNG** : `shopify/3d/textures-v3/` (`knit-normal.png` maille 24 mm, `knit-rough.png`, `fleece-normal.png`).
+- **Rendus de contrôle v2 / v3** : `shopify/3d/rendus-v3/` (`comparatif-face|dos|trois-quarts|capuche|zip-ouvert.png`, `coloris-v2-v3.png`). Script : `shopify/3d/render_three.cjs`, avec un éclairage proche de `kyma-pstory.js` ; plans dans `rendus-v3/plans.json`.
+- **Reconstruire** : `python3 shopify/3d/build_hoodie_v3.py --coloris all --textures shopify/3d/textures-v3` (≈ 6 min ; `pip install embreex` conseillé pour l'occlusion).
+
+### Contrat : identique à la v2 (vérifié sur les 5 fichiers)
+Mêmes nœuds, dans le même ordre et avec la même hiérarchie. Mêmes maillages articulés et mêmes `targetNames` (`open`, `open_fold`, `unzip_1..4`). Mêmes clés d'extras (`zipPath`, `zipPathQuat`, `sliderOpen`, `sliderOpenFold`, `poi`, `morphNodes`…). Même clip `ZipOpen` (6 s, 13 canaux). Pas d'`extras.pivot` : les panneaux portent `extras.hinge`. Le chemin du zip bouge de 8 mm au plus. Tout ce qui suit (nœuds, morphs, extras, animation, séquence de défilement) vaut donc pour la v3 comme pour la v2.
+
+**Pour Sacha** : passer de la v2 à la v3 revient à changer l'URL des GLB, `ressac-v2-<coloris>.glb` → `ressac-v3-<coloris>.glb` (téléverser les 5 fichiers dans les fichiers Shopify). Il n'y a rien à modifier dans `kyma-pstory.js`. La couleur de doublure (`data-lining`) n'est plus utilisée par la v3, qui porte ses propres matériaux d'envers. Elle reste sans effet.
+
+### Limites de la v3 (honnêtement)
+- C'est **mieux, pas photoréaliste**. Les plis sont des fonctions de bruit et d'ondes posées sur des surfaces paramétriques. Ce n'est pas une simulation de tissu : ils restent plus réguliers et plus « dessinés » que le tombé réel d'un french terry de 410 g/m². De près, un œil exercé verra toujours un objet de synthèse.
+- La capuche reste la partie la moins crédible. Elle tient debout sans tête et forme un petit pincement à la pointe de l'ouverture.
+- La silhouette garde un côté « bomber » : bas repris et manches tassées.
+- L'occlusion est cuite pour la pose fermée et ouverte. Pendant l'ouverture, les ombres ne bougent pas avec le tissu.
+- Seul un modèle issu d'une **simulation (CLO3D / Marvelous) ou d'un scan** franchira le cap du réalisme : voir `shopify/3d/pipeline-remplacement.md` (conversion au même contrat en une journée).
+
+---
+
+*Les sections suivantes décrivent le contrat v2, inchangé en v3.*
 
 ## Intention
 Le hoodie est construit **comme un vrai vêtement, panneau par panneau** : dos, deux demi-devants, manches, capuche à deux panneaux, bords-côtes. Chaque pièce est un tissu de 5 mm d'épaisseur, avec son endroit, son envers et sa lisière. On y trouve une épaule tombante, des manches qui tombent le long du corps avec plis de coude et tassement au poignet, un blousant au-dessus de la taille et des côtes 2×2. Le motif KYMA Wave tourne en volutes, il ne se répète jamais et il est calculé dans le volume. **Aucune image IA** : la géométrie, le motif, la maille et la tirette sont procéduraux. La tirette porte « Kyma » en relief, en DM Serif Display, la typo de la marque.
@@ -95,3 +144,11 @@ Lumière de studio diffuse (RoomEnvironment de three.js à intensité ~0,75, ou 
 - **Mention obligatoire** près du visualiseur et dans le texte alternatif : « *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.* » (formule unique du site, à valider par Victoire).
 - À remplacer ou à compléter par le shooting du produit fabriqué, après validation des préséries.
 - Les anciens `ressac-<coloris>.glb` (v1) ne doivent plus être utilisés sur le site.
+
+## Provenance des modèles v2 et v3 (note demandée par Victoire)
+- **Auteur** : Izaac (agent IA de l'équipe KYMA, Claude), sur commande du fondateur, pour KYMA. Les scripts sont dans le dépôt de la marque : `shopify/3d/build_hoodie_v2.py` (09/10/2026) et `build_hoodie_v3.py` (10/10/2026).
+- **Méthode** : chaque GLB est **calculé par un programme écrit pour KYMA**. Géométrie : surfaces paramétriques, offsets, profils. Motif KYMA Wave : bruit de Perlin et tourbillons. Maille, rugosité, envers gratté : bruit procédural. Occlusion : lancer de rayons. Tirette : contours vectoriels de la typo « Kyma ». Le résultat est reproductible : même script, même fichier.
+- **Aucune image générée par IA** : aucune texture, photo ni maillage ne vient d'un générateur d'images ou de 3D par IA. Le code a été écrit avec l'assistance de Claude, mais aucune sortie d'un modèle génératif d'images ou de 3D n'est incluse.
+- **Aucun élément tiers dans les fichiers** : aucun modèle, scan, texture ou photo acheté ou téléchargé. Les seules ressources externes sont des **outils** : Python, NumPy, SciPy, Pillow, fontTools, Shapely, mapbox-earcut, trimesh et embreex pour les calculs ; Khronos glTF-Validator pour le contrôle ; three.js et Playwright/Chromium pour les rendus de contrôle. Aucun de ces outils ne transmet de droit sur les fichiers produits.
+- **Une seule réserve** : les lettres « Kyma » en relief sur la tirette reprennent les contours de **DM Serif Display** (police de la marque, licence SIL Open Font License 1.1, qui autorise l'usage et l'incorporation dans un produit ; la police elle-même n'est pas redistribuée, seuls des contours vectorisés figurent dans le maillage).
+- **Rendus de contrôle** (`shopify/3d/rendus-v3/`, captures v2) : vues calculées de ces mêmes GLB, sans retouche ni IA. Ce sont des documents de travail, pas des visuels de campagne.

@@ -94,6 +94,13 @@ Valeurs à remettre dans `templates/page.cercle-waves.json` à la bascule (v4 §
 - `passage.text` : « Vous choisissez directement l'un ou l'autre palier. Passer à MAJESTÉ prend effet tout de suite : vous payez la différence, au prorata. Passer à INITIUM prend effet à la fin du trimestre en cours. »
 - `rejoindre.show_waitlist` : vrai (les textes `consent`, `consent_newsletter`, `consent_error`, `button`, `success` sont déjà en place).
 
+### Newsletter et liste d'attente — règle de Victoire (`conformite.md`, partie C bis) — à respecter AVANT `show_waitlist` = vrai
+- Le formulaire Shopify « customer » marque **tout** client « abonné marketing » : ce statut ne prouve rien. Seules preuves : les étiquettes posées par les cases.
+- Case 1 cochée → `consentement-ouverture-<version>-<date>` (+ texte et version dans la note client). Un seul message d'ouverture, ciblé sur cette étiquette ; adresse supprimée au plus tard [30] jours après cet envoi si la case 2 n'a pas été confirmée.
+- Case 2 cochée → étiquettes **provisoires** `newsletter-a-confirmer` et `demande-newsletter-<version>-<date>` seulement. **Double opt-in obligatoire** via une appli de formulaire (e-mail « Confirmez votre inscription ») ; l'étiquette `consentement-newsletter-<version>-<date>` n'est posée qu'après le clic. Sans appli de double opt-in : **retirer la case 2** de la phase 2 (vider `consent_newsletter`).
+- Newsletter envoyée **uniquement** au segment construit sur `consentement-newsletter-*`, jamais sur « abonné au marketing » ; comparer le nombre de destinataires au nombre d'étiquettes avant chaque envoi.
+- **Tests documentés (captures) avant l'activation** : (a) case 1 seule → étiquette ouverture, aucune étiquette newsletter ; (b) cette adresse absente du segment newsletter ; (c) test d'envoi au segment newsletter = uniquement des `consentement-newsletter-*` ; (d) case 1 non cochée → envoi refusé ; (e) case 2 cochée → aucun envoi avant la confirmation.
+
 ## 2. Une ligne à ajouter dans `layout/theme.liquid`
 
 Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste avant `{{ content_for_header }}` (dans le `<head>`) :
