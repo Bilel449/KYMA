@@ -219,8 +219,8 @@ def catmull(P, n):
 # --------------------------------------------------------------------------------------
 # Corps : contours de patronage et profils de section
 # --------------------------------------------------------------------------------------
-W_HEM_IN = 0.266      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
-W_BLOUSE = 0.281      # v3 : blousant au-dessus du bord-côte
+W_HEM_IN = 0.270      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
+W_BLOUSE = 0.278      # v3 : blousant au-dessus du bord-côte
 Y_BL = 0.150          # hauteur du blousant maximal
 
 
@@ -242,9 +242,9 @@ def depth_factor(y):
     """v3 : profondeur galbée (repris dans le bord-côte, blousant, poitrine)."""
     y = np.asarray(y, np.float64)
     t1 = np.clip((y - Y0) / (Y_BL - Y0), 0, 1)
-    f1 = 0.92 + (1.03 - 0.92) * np.sin(0.5 * np.pi * t1) ** 0.8
+    f1 = 0.94 + (1.02 - 0.94) * np.sin(0.5 * np.pi * t1) ** 0.8
     t2 = np.clip((y - Y_BL) / (Y_AP - Y_BL), 0, 1)
-    f2 = 1.03 + (1.0 - 1.03) * t2 * t2 * (3 - 2 * t2)
+    f2 = 1.02 + (1.0 - 1.02) * t2 * t2 * (3 - 2 * t2)
     return np.where(y <= Y_BL, f1, f2)
 
 
@@ -460,7 +460,7 @@ def sleeve_grid(Gf, Gb, nphi=60, nv=104, side=1):
     rows = []
     b = np.linspace(0, 1, n1)[:-1]
     L = np.linalg.norm(R1 - A, axis=1)[:, None]
-    m0 = TA * L * 0.85     # v3 : tête de manche moins bombée (v2 : 1,05)
+    m0 = TA * L * 0.97     # v3 : tête de manche un peu moins bombée (v2 : 1,05)
     m1 = SLV_D[None] * L * 1.0
     for bb in b:
         h00, h10, h01, h11 = 2 * bb ** 3 - 3 * bb ** 2 + 1, bb ** 3 - 2 * bb ** 2 + bb, -2 * bb ** 3 + 3 * bb ** 2, bb ** 3 - bb ** 2
@@ -781,7 +781,7 @@ def body_disp(G):
     hw = fbm(NOISE, P * np.array([3.0, 0.6, 3.0]) + 7.0, 2).reshape(shape)
     br = 0.45 + 0.55 * smoothstep(-0.35, 0.35, fbm(NOISE, P * np.array([5.0, 2.0, 5.0]) + 13.0, 2).reshape(shape))
     hz = fold_wave(2 * np.pi * (y - 0.09) / 0.052 + 2.8 * hw)
-    d += 0.0042 * hz * br * np.exp(-((y - (Y0 + 0.080)) / 0.050) ** 2)
+    d += 0.0034 * hz * br * np.exp(-((y - (Y0 + 0.075)) / 0.045) ** 2)
     d += 0.0030 * np.exp(-((y - (Y0 + 0.040)) / 0.030) ** 2)
     # fronces dans le bord-côte (le corps est plus large que la côte : il fronce)
     gw = 1.8 * fbm(NOISE, P * 6 + 3.0, 2).reshape(shape)
@@ -861,7 +861,7 @@ def hood_relax(G):
     wb = smoothstep(0.04, 0.40, b)
     x, y, z = P[..., 0].copy(), P[..., 1].copy(), P[..., 2].copy()
     # sommet affaissé
-    y = y - 2.4 * np.maximum(y - 0.775, 0) ** 2 * wb
+    y = y - 3.2 * np.maximum(y - 0.770, 0) ** 2 * wb
     # bord d'ouverture : tombe vers l'avant et vers le bas, se resserre au milieu de la hauteur
     de = np.minimum(a, 1 - a)
     we = np.exp(-(de / 0.16) ** 2) * smoothstep(0.35, 1.0, b)
@@ -958,7 +958,7 @@ def hem_band(ring):
     nh = nrm(np.stack([T[:, 2], np.zeros(nu), -T[:, 0]], 1))
     if np.mean(np.sum(nh * np.stack([R[:, 0], np.zeros(nu), R[:, 2] + 0.005], 1), 1)) < 0:
         nh = -nh
-    o, h, side = rib_profile(Y0, 0.0110)
+    o, h, side = rib_profile(Y0, 0.0080)
     ulen = np.linspace(0, L, nu)
     rw = rib_wave(ulen)
     G = (R[None, :, :] * np.array([1, 0, 1])[None, None] + np.array([0, 1, 0])[None, None] * h[:, None, None]

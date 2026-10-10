@@ -1,9 +1,9 @@
-# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026)
+# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026 ; corrigé le 10/10/2026, cycle 1/2 d'Arthur)
 
 > **Pour** : Sacha (intégration), Victoire (contrôle), Arthur (validation), fondateur (valeurs entre crochets).
 > **Base** : formulations de Victoire, `shopify/conformite.md`, section « Entraide 09/10/2026 », parties B, C, E. Je n'ai changé aucun fait : j'ai travaillé le rythme, la concision et le ton. Vouvoiement partout, mot « cashback » conservé.
 > **Règle de lecture** : `[valeur]` = valeur à faire valider par le fondateur, à laisser visible jusqu'à décision. Aucune publication tant qu'un crochet reste affiché sur le site (point E3 de Victoire).
-> **Contexte** : l'abonnement n'est pas encore branché. La page fonctionne donc en **liste d'attente** (section `rejoindre`). Quand l'appli d'abonnement sera active, seuls les champs de la section 1.6 changent (voir « Bascule » en fin de partie 1).
+> **Contexte** : l'abonnement n'est pas encore branché. La page fonctionne donc en **liste d'attente** (section `rejoindre`). Quand l'appli d'abonnement sera active, seuls les champs de la section 1.4 changent (voir « Bascule » en fin de section 1.4).
 
 ---
 
@@ -17,7 +17,7 @@
 | `title_before` | Le Cercle |
 | `title_em` | Waves |
 | `title_after` | . |
-| `text` | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons. |
+| `text` | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons. |
 | `cta_label` | Être prévenu de l'ouverture |
 | `cta_link` | /pages/cercle-waves#rejoindre |
 | `note` | Aucun paiement n'est demandé à ce stade. |
@@ -48,7 +48,7 @@ Le texte de `terms_text` est celui de Victoire, mot pour mot. « En quelques cli
 | `back_label` | AVANTAGES *(inchangé)* |
 | `perks` — ligne 1 (39 car.) | Cashback 5 % sur vos achats de produits |
 | `perks` — ligne 2 (38 car.) | Accès anticipé de [24 h] à chaque drop |
-| `perks` — ligne 3 (69 car.) | Aperçu des nouvelles collections [3] jours avant l'ouverture au public |
+| `perks` — ligne 3 (70 car.) | Aperçu des nouvelles collections [3] jours avant l'ouverture au public |
 | `perks` — ligne 4 (49 car.) | Carte de membre physique beige, écriture argentée |
 | `cashback_note` | Cashback versé en crédit KYMA (Crédit Waves), pas en espèces : utilisable sur vos prochains achats pendant [12] mois. Hors livraison et cotisation. Voir les conditions. |
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
@@ -76,8 +76,8 @@ Carte de membre physique beige, écriture argentée
 | `back_label` | AVANTAGES *(inchangé)* |
 | `perks` — ligne 1 (39 car.) | Cashback 10 % sur vos achats de produits |
 | `perks` — ligne 2 (62 car.) | Accès anticipé de [48 h] à chaque drop, précommandes comprises |
-| `perks` — ligne 3 (69 car.) | Aperçu des nouvelles collections [7] jours avant l'ouverture au public |
-| `perks` — ligne 4 (60 car.) | Produits réservés aux abonnés MAJESTÉ (au moins [1] par an) |
+| `perks` — ligne 3 (70 car.) | Aperçu des nouvelles collections [7] jours avant l'ouverture au public |
+| `perks` — ligne 4 (59 car.) | Produits réservés aux abonnés MAJESTÉ (au moins [1] par an) |
 | `perks` — ligne 5 (51 car.) | Carte de membre physique gris clair, écriture dorée |
 | `cashback_note` | Cashback versé en crédit KYMA (Crédit Waves), pas en espèces : utilisable sur vos prochains achats pendant [12] mois. Hors livraison et cotisation. Voir les conditions. |
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
@@ -100,13 +100,13 @@ Passés de 8 à 5 lignes, les avantages de MAJESTÉ tiennent mieux au verso. L'o
 
 | Ligne | Version courte | Car. |
 |---|---|---|
-| Aperçu (INITIUM et MAJESTÉ) | Aperçu des collections [3] j avant le public | 45 |
+| Aperçu (INITIUM et MAJESTÉ) | Aperçu des collections [3] j avant le public | 44 |
 | Carte INITIUM | Carte de membre beige, écriture argentée | 40 |
 | Carte MAJESTÉ | Carte de membre gris clair, écriture dorée | 42 |
 
 Les deux dernières perdent « physique » : à ne retenir que si la mention « carte envoyée » figure dans les conditions du verso (voir ci-dessous). Sacha vérifie de toute façon que les lignes longues passent sur deux lignes sans déborder.
 
-**Ajouts proposés au verso (à valider par Victoire, non obligatoires pour l'intégration)**. Victoire place ces précisions « au verso ou dans les conditions » ; le gabarit n'a qu'un champ `condition`. Si Sacha peut ajouter une seconde ligne de petits caractères, voici le texte :
+**Ajouts proposés au verso (à valider par Victoire ; facultatifs tant que la page est une liste d'attente ; obligatoires dès la bascule vers le paiement, point E1 et art. 7.6 des conditions)**. Victoire place ces précisions « au verso ou dans les conditions » ; le gabarit n'a qu'un champ `condition`. Si Sacha peut ajouter une seconde ligne de petits caractères, voici le texte :
 
 | Où | Texte |
 |---|---|
@@ -132,6 +132,8 @@ La version retenue reprend la règle de Victoire (art. 9) en trois phrases court
 
 ### 1.4 Section `rejoindre` (kyma-cercle-join) — liste d'attente
 
+*Décision d'Arthur (cycle 1) : la case de consentement est obligatoire pour la seule finalité « vous prévenir de l'ouverture » ; la newsletter est une seconde case, distincte et facultative. Aucune des deux n'est pré-cochée.*
+
 | Champ | Texte |
 |---|---|
 | `label` | ÊTRE PRÉVENU |
@@ -139,15 +141,18 @@ La version retenue reprend la règle de Victoire (art. 9) en trois phrases court
 | `title_em` | l'ouverture |
 | `title_after` | . |
 | `text` | Prénom et adresse e-mail suffisent. Ce n'est pas un abonnement : aucun paiement n'est demandé. |
-| `consent` | Je souhaite recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. |
+| `consent` (case 1, **obligatoire**, non pré-cochée) | J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. |
+| `consent_newsletter` (case 2, **facultative**, non pré-cochée) *(nouveau champ, à ajouter au gabarit par Sacha)* | Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. |
+| `consent_error` *(nouveau champ, message si la case 1 n'est pas cochée)* | Pour vous prévenir de l'ouverture, nous avons besoin de votre accord. Pouvez-vous cocher la première case ? |
 | `button` | Me prévenir |
 | `success` | Merci. Nous vous écrirons à l'ouverture du Cercle Waves. Cette inscription n'est pas un abonnement. |
 | `error` | Cette adresse semble incomplète. Pouvez-vous la vérifier ? *(inchangé)* |
 | `terms` | Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]. |
 
-Le `consent` est le texte de Victoire. Case **non pré-cochée**. `[politique de confidentialité]` doit devenir un lien vers `/pages/confidentialite` (Sacha) ; la raison sociale est à fournir par le fondateur.
-
-**Question pour Victoire** : sur une liste d'attente, l'objet du formulaire est justement d'envoyer un e-mail à l'ouverture. Si la case de consentement est facultative, l'e-mail d'ouverture est-il couvert par l'inscription elle-même, ou faut-il rendre la case obligatoire pour ce formulaire ? Je n'ai pas modifié le texte, la réponse est juridique.
+Pour Sacha :
+- Le formulaire ne s'envoie pas tant que la case 1 n'est pas cochée. La case 2 n'est jamais requise et ne conditionne rien (ni l'inscription, ni l'accès anticipé futur).
+- Les deux consentements sont enregistrés séparément (case 1 = finalité « ouverture du Cercle Waves » ; case 2 = abonnement aux e-mails de KYMA), avec date et version du texte.
+- `[politique de confidentialité]` doit devenir un lien vers `/pages/confidentialite` ; la raison sociale est à fournir par le fondateur. Aucune adresse n'est collectée ni aucun e-mail envoyé avant que la société soit immatriculée, la politique publiée et la boutique passée sur un forfait payant.
 
 **Bascule quand l'abonnement est branché** (à ne faire qu'à ce moment-là) : ce bloc devient un lien vers le paiement. Valeurs prêtes : `title_before` « Choisir son » · `title_em` « palier » · `title_after` « . » · `text` « Deux paliers, un abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. » · cartes `join_label` « Choisir ce palier » · `join_link` lien d'abonnement. Le message « Merci. Nous vous écrirons… » disparaît avec le formulaire.
 
@@ -193,7 +198,7 @@ Hors demande, mais le titre « Rejoindre le cercle » et le bouton « Entrer dan
 Pour Sacha :
 - `step_6` : le bloc `<dl>` est masqué s'il est vide, la phrase du champ `text` s'affiche à la place. Quand l'étiquette sera définitive, remplir `spec` à l'identique de l'étiquette, jamais « bio » ni « GOTS » sans le certificat.
 - `step_7` : seule la ligne « Imaginé à Paris » s'affiche (une ligne sans valeur n'apparaît pas).
-- Question pour Victoire : la ligne « Bords-côtes | 95 % coton, 5 % élasthanne » vient du tech pack v3. Elle disait de laisser les valeurs vides ; je l'ai donc retirée aussi. Si elle autorise cette ligne seule, elle peut revenir.
+- **Décision d'Arthur** : la ligne « Bords-côtes | 95 % coton, 5 % élasthanne » reste vide à l'étape 6, comme le reste de la composition, jusqu'à confirmation du fabricant.
 
 ### 2.3 Textes alternatifs des images fixes (`still_alt`, mouvement réduit)
 
@@ -224,15 +229,15 @@ Les boutons « Découvrir la pièce » et « Choisir mon coloris » restent. Rap
 
 ## 3. Instagram — @kymasinsta — annonce de la liste d'attente
 
-**Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la page des conditions est publiée, (3) la légende des textes ci-dessus est intégrée.** Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée.
+**Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la page des conditions est publiée, (3) la légende des textes ci-dessus est intégrée, (4) la page des conditions est publiée sans crochet, après relecture d'un avocat, (5) la société est immatriculée, la politique de confidentialité est publiée et la boutique est sur un forfait payant.** Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée.
 
 ### Caption
 
 > Avant la vague, l'eau se retire un instant.
 >
-> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Ce n'est pas un abonnement, aucun paiement n'est demandé.
+> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Cette inscription n'est pas un abonnement : aucun paiement n'est demandé.
 >
-> Le cercle s'élargit.
+> Le cercle se prépare.
 >
 > #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 
@@ -244,7 +249,7 @@ Les boutons « Découvrir la pièce » et « Choisir mon coloris » restent. Rap
 
 ### CTA
 
-Implicite : « Le cercle s'élargit. » + lien en bio (« Liste d'attente Cercle Waves »).
+Implicite : « Le cercle se prépare. » + lien en bio (« Liste d'attente Cercle Waves »).
 
 ### Trois variantes d'accroche (première ligne)
 
@@ -277,6 +282,16 @@ Une story fixe avec le sticker lien : « Liste d'attente ouverte. » puis, sur l
 | Taux de cashback 5 % / 10 % | cartes | décidés ; équilibre à valider avec l'expert-comptable (E8) |
 | « Imaginé à Paris » | `step_7.spec` | à confirmer |
 | « Nominative » ou « numérotée » (carte) | non écrit | à ajouter seulement si le nom ou un numéro est imprimé (E11) |
+| Date d'expédition de la note du hero | `index.json`, section `hero`, `note` : « Expédition au plus tard le [À COMPLÉTER : date] » (R11) | à fixer ; ne pas publier tant que le crochet est affiché |
+
+**Choix éditoriaux du fondateur** (aucun enjeu juridique, à trancher avant intégration) :
+
+| Choix | Où | Options |
+|---|---|---|
+| Titre de la page Cercle Waves | §1.1 `title_*` | « Le Cercle *Waves*. » (retenu par défaut) ou « Suivre le *courant*. » (dans ce cas, titre de `paliers` modifié, voir §1.1) |
+| Texte de `passage` | §1.3 `text` | version retenue (prorata et date d'effet détaillés) ou version neutre (renvoi aux conditions) |
+| Conclusion du récit 3D | §2.4 `final_title` / `final_subtitle` | texte actuel ou paire « Le mouvement continue. / Choisissez votre coloris. » |
+| Section Cercle de l'accueil | §1.5 | titre « Le Cercle *Waves*. », texte et bouton « Découvrir les deux paliers » (proposés) ou texte actuel |
 
 ## 5. Contrôle de conformité avant remise à Sacha
 
@@ -284,4 +299,4 @@ Une story fixe avec le sticker lien : « Liste d'attente ouverte. » puis, sur l
 - Les mots « élite », « VIP », « privilège », « cercle fermé », « sélection », « gagnez » sont absents ; le Cercle n'est présenté ni comme sélectif ni comme mérité.
 - « Garantit » n'apparaît que dans la phrase de `condition` de Victoire, à la forme négative.
 - Aucun prix barré, aucune date d'ouverture non fixée, aucune promesse non datée.
-- Seuls crochets visibles : valeurs de la partie 4.
+- Seuls crochets visibles : valeurs de la partie 4, y compris la date d'expédition du hero.
