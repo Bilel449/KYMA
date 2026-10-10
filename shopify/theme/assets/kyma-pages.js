@@ -486,6 +486,13 @@
       var email = f.querySelector('[data-kyma-email]'), err = email && email.parentNode.querySelector('.kyma-field__err'), ok = f.querySelector('[data-kyma-ok]');
       var demo = f.hasAttribute('data-kyma-demo') || root.hasAttribute('data-kyma-demo');
       if (f.querySelector('[data-kyma-posted]') && ring) ring.classList.add('is-closed');
+      /* validation reprise par le script (sans script : validation native du navigateur, cf. section) */
+      f.noValidate = true;
+      var cons = f.querySelector('[data-kyma-consent]'), cerr = f.querySelector('[data-kyma-consent-err]');
+      if (cons && cerr) {
+        cerr.id = cerr.id || 'kyma-cerr-' + Math.random().toString(36).slice(2);
+        cons.addEventListener('change', function () { if (cons.checked) { cerr.hidden = true; cons.removeAttribute('aria-invalid'); cons.removeAttribute('aria-describedby'); } });
+      }
       function valid(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
       if (email) email.addEventListener('input', function () { if (valid(email.value)) { email.removeAttribute('aria-invalid'); if (err) err.hidden = true; } });
       f.addEventListener('submit', function (e) {
@@ -494,7 +501,12 @@
           email.focus(); if (ring) ring.classList.remove('is-loading'); return;
         }
         var req = $('[required]', f).filter(function (x) { return x.type === 'checkbox' ? !x.checked : !x.value.trim(); })[0];
-        if (req) { e.preventDefault(); req.setAttribute('aria-invalid', 'true'); req.focus(); if (req.reportValidity) req.reportValidity(); return; }
+        if (req) {
+          e.preventDefault(); req.setAttribute('aria-invalid', 'true');
+          if (req === cons && cerr) { cerr.hidden = false; cons.setAttribute('aria-describedby', cerr.id); cerr.setAttribute('role', 'alert'); }
+          else if (req.reportValidity) req.reportValidity();
+          req.focus(); if (ring) ring.classList.remove('is-loading'); return;
+        }
         var btn = f.querySelector('[data-kyma-submit]');
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.classList.add('is-loading'); }
         if (ring) ring.classList.add('is-loading');

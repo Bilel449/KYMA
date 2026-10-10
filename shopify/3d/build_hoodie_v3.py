@@ -702,7 +702,8 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         f = np.linspace(0, 1, len(P0))
         g = np.linspace(0, 1, len(P2))
         P2 = np.stack([np.interp(f, g, P2[:, k]) for k in range(3)], 1)
-        P1 = 0.5 * (P0 + P2) + outward * th * 0.62
+        sc = (th_rows / th)[o_idx[0]][:, None]            # 0 à la pointe de capuche
+        P1 = 0.5 * (P0 + P2) + outward * th * 0.62 * sc
         Vr = np.concatenate([P0, P1, P2])
         Fr = grid_faces(3, len(P0))
         uvr = np.tile(uv0[o_idx[0], o_idx[1]], (3, 1))
