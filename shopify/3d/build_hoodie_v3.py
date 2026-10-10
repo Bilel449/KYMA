@@ -671,11 +671,11 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         # sinon l'envers des deux arêtes se croise et la lisière fait un « X »
         Ng = N.reshape(nv, nu, 3)
         rowlen = np.linalg.norm(np.diff(G, axis=1), axis=2).sum(1)
-        w = smoothstep(0.10, 0.03, rowlen)
+        w = smoothstep(0.16, 0.06, rowlen)
         avg = nrm(Ng.mean(1))
         Ng[:] = nrm(Ng * (1 - w)[:, None, None] + avg[:, None, :] * w[:, None, None])
         N = Ng.reshape(-1, 3)
-        th_rows = th * (1 - smoothstep(0.045, 0.012, rowlen))     # la pointe se referme
+        th_rows = th * (1 - smoothstep(0.16, 0.12, rowlen))       # la pointe se referme
     else:
         th_rows = np.full(nv, th)
     outer = Mesh(V, F, fabric, uv0.reshape(-1, 2), uv1.reshape(-1, 2), N)
@@ -690,7 +690,7 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         Ni = -Ni
     if apex:   # pointe : l'envers s'arrête où l'épaisseur s'annule (sinon il perce l'endroit)
         rowi = Fi.max(1) // len(ii)
-        Fi = Fi[rowlen[jj][rowi] > 0.08]
+        Fi = Fi[rowlen[jj][rowi] > 0.13]
     U1i = uv1[np.ix_(jj, ii)].reshape(-1, 2)
     inner = Mesh(Vi, Fi, lining, None, U1i, Ni)
     # lisières (bord roulé) : rangée extérieure -> milieu bombé -> rangée intérieure
