@@ -1,12 +1,9 @@
-# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026 ; corrigé le 10/10/2026, cycles 1 et 2 d'Arthur)
+# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026 ; corrigé le 10/10/2026, cycle 1/2 d'Arthur)
 
 > **Pour** : Sacha (intégration), Victoire (contrôle), Arthur (validation), fondateur (valeurs entre crochets).
 > **Base** : formulations de Victoire, `shopify/conformite.md`, section « Entraide 09/10/2026 », parties B, C, E. Je n'ai changé aucun fait : j'ai travaillé le rythme, la concision et le ton. Vouvoiement partout, mot « cashback » conservé.
 > **Règle de lecture** : `[valeur]` = valeur à faire valider par le fondateur, à laisser visible jusqu'à décision. Aucune publication tant qu'un crochet reste affiché sur le site (point E3 de Victoire).
-> **Principe directeur (décision d'Arthur)** : **PHASE 1** = annonce « Le cercle se prépare », **sans formulaire ni collecte d'adresses**, tant que la société n'est pas immatriculée (SIREN, raison sociale), les politiques publiées, le plan Shopify payant en place et le tout VALIDÉ. **PHASE 2** (après) = liste d'attente avec formulaire. **PHASE 3** = abonnement branché.
-> **Ce qui change entre les phases** : uniquement les champs marqués « Phase 1 » / « Phase 2 » dans les tableaux ci-dessous, la section `rejoindre` (§1.4) et le post Instagram (§3). Tout le reste (cartes, avantages, récit 3D) est identique.
-
-> **Réglage pour Sacha, phase 1** : dans `page.cercle-waves.json`, la section `rejoindre` est **masquée** (`"disabled": true` sur la section, ou retrait de `"rejoindre"` de `order`) ; aucun champ de formulaire n'est rendu, aucune adresse n'est collectée. Les boutons `join_label` / `join_link` des deux cartes sont **vides** (bouton non affiché), et le CTA du hero pointe vers `#paliers` (voir §1.1). Phase 2 : réactiver la section `rejoindre` et remplir les champs « Phase 2 ». Le lien en bio mène à `/pages/cercle-waves` dans les deux phases.
+> **Contexte** : l'abonnement n'est pas encore branché. La page fonctionne donc en **liste d'attente** (section `rejoindre`). Quand l'appli d'abonnement sera active, seuls les champs de la section 1.4 changent (voir « Bascule » en fin de section 1.4).
 
 ---
 
@@ -14,15 +11,17 @@
 
 ### 1.1 Section `ouverture` (kyma-page-hero)
 
-| Champ | Phase 1 (maintenant) | Phase 2 (après immatriculation) |
-|---|---|---|
-| `label` | CERCLE WAVES | *(identique)* |
-| `title_before` / `title_em` / `title_after` | Le Cercle / Waves / . | *(identique)* |
-| `text` | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. À l'ouverture, vous choisirez votre palier ; vous pourrez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert et aucune date n'est fixée : rien n'est à faire pour l'instant. | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons. |
-| `cta_label` | Découvrir les deux paliers | Être prévenu de l'ouverture |
-| `cta_link` | #paliers | /pages/cercle-waves#rejoindre |
-| `note` | Pas encore ouvert. Ni inscription, ni paiement à ce stade. | Aucun paiement n'est demandé à ce stade. |
-| `alt_text` | Illustration animée : deux anneaux satinés, rose clair et marron clair, qui se rapprochent et s'entrelacent. *(inchangé)* | *(identique)* |
+| Champ | Texte |
+|---|---|
+| `label` | CERCLE WAVES |
+| `title_before` | Le Cercle |
+| `title_em` | Waves |
+| `title_after` | . |
+| `text` | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons. |
+| `cta_label` | Être prévenu de l'ouverture |
+| `cta_link` | /pages/cercle-waves#rejoindre |
+| `note` | Aucun paiement n'est demandé à ce stade. |
+| `alt_text` | Illustration animée : deux anneaux satinés, rose clair et marron clair, qui se rapprochent et s'entrelacent. *(inchangé)* |
 
 Variante de titre, si le fondateur préfère un verbe : `title_before` « Suivre le » · `title_em` « courant » · `title_after` « . » (le titre de la section `paliers` reprend « courant » : dans ce cas, passer `paliers` à « Deux paliers, une même » / « marée »).
 
@@ -35,7 +34,7 @@ Variante de titre, si le fondateur préfère un verbe : `title_before` « Suivre
 | `text` | Deux paliers payants, au choix. Chaque carte se retourne pour montrer ses avantages. |
 | `terms_text` | Abonnement trimestriel : INITIUM 12,99 € TTC, MAJESTÉ 39,99 € TTC, renouvelé automatiquement tous les 3 mois. Résiliable à tout moment en ligne, sans frais, en quelques clics. Rétractation possible sous 14 jours. Réservé aux majeurs. Conditions : |
 | `terms_label` | conditions du Cercle Waves |
-| `terms_link` | /pages/cercle-waves-conditions *(la page légale v3 doit être publiée avant ou en même temps ; sinon, masquer la ligne `terms_*` en phase 1, question posée à Victoire)* |
+| `terms_link` | /pages/cercle-waves-conditions *(la page légale v3 doit être publiée avant ou en même temps)* |
 
 Le texte de `terms_text` est celui de Victoire, mot pour mot. « En quelques clics » reste tel quel tant que le parcours de résiliation n'est pas chronométré (E12).
 
@@ -55,7 +54,8 @@ Le texte de `terms_text` est celui de Victoire, mot pour mot. « En quelques cli
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
 | `aria` | Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso. |
 | `price` / `price_period` | 12,99 € / par trimestre, TTC *(inchangés)* |
-| `join_label` / `join_link` | **Phase 1 : vides** (aucun bouton). **Phase 2 :** « Être prévenu » / `/pages/cercle-waves#rejoindre` |
+| `join_label` *(liste d'attente)* | Être prévenu |
+| `join_link` *(liste d'attente)* | /pages/cercle-waves#rejoindre |
 
 Valeur brute du champ `perks` à coller (séparateur = retour à la ligne) :
 
@@ -83,7 +83,8 @@ Carte de membre physique beige, écriture argentée
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
 | `aria` | Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso. |
 | `price` / `price_period` | 39,99 € / par trimestre, TTC *(inchangés)* |
-| `join_label` / `join_link` | **Phase 1 : vides** (aucun bouton). **Phase 2 :** « Être prévenu » / `/pages/cercle-waves#rejoindre` |
+| `join_label` *(liste d'attente)* | Être prévenu |
+| `join_link` *(liste d'attente)* | /pages/cercle-waves#rejoindre |
 
 ```
 Cashback 10 % sur vos achats de produits
@@ -129,9 +130,7 @@ Les deux dernières perdent « physique » : à ne retenir que si la mention « 
 
 La version retenue reprend la règle de Victoire (art. 9) en trois phrases courtes au lieu d'une phrase à point-virgule. Le sens et les modalités sont identiques.
 
-### 1.4 Section `rejoindre` (kyma-cercle-join) — PHASE 2 uniquement (liste d'attente)
-
-**En phase 1, cette section est masquée et ne collecte rien (voir le réglage en tête de document).** Les textes ci-dessous sont prêts pour la phase 2, après immatriculation, politiques publiées, plan payant et VALIDÉ d'Arthur.
+### 1.4 Section `rejoindre` (kyma-cercle-join) — liste d'attente
 
 *Décision d'Arthur (cycle 1) : la case de consentement est obligatoire pour la seule finalité « vous prévenir de l'ouverture » ; la newsletter est une seconde case, distincte et facultative. Aucune des deux n'est pré-cochée.*
 
@@ -150,12 +149,12 @@ La version retenue reprend la règle de Victoire (art. 9) en trois phrases court
 | `error` | Cette adresse semble incomplète. Pouvez-vous la vérifier ? *(inchangé)* |
 | `terms` | Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]. |
 
-Pour Sacha (phase 2) :
+Pour Sacha :
 - Le formulaire ne s'envoie pas tant que la case 1 n'est pas cochée. La case 2 n'est jamais requise et ne conditionne rien (ni l'inscription, ni l'accès anticipé futur).
 - Les deux consentements sont enregistrés séparément (case 1 = finalité « ouverture du Cercle Waves » ; case 2 = abonnement aux e-mails de KYMA), avec date et version du texte.
-- `[politique de confidentialité]` doit devenir un lien vers `/pages/confidentialite` ; la raison sociale est à fournir par le fondateur. **Aucune adresse n'est collectée et aucun e-mail n'est envoyé avant que la société soit immatriculée (SIREN, raison sociale), la politique publiée, la boutique sur un forfait payant, et le tout VALIDÉ.**
+- `[politique de confidentialité]` doit devenir un lien vers `/pages/confidentialite` ; la raison sociale est à fournir par le fondateur. Aucune adresse n'est collectée ni aucun e-mail envoyé avant que la société soit immatriculée, la politique publiée et la boutique passée sur un forfait payant.
 
-**Bascule quand l'abonnement est branché** (phase 3, à ne faire qu'à ce moment-là) : ce bloc devient un lien vers le paiement. Valeurs prêtes : `title_before` « Choisir son » · `title_em` « palier » · `title_after` « . » · `text` « Deux paliers, un abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. » · cartes `join_label` « Choisir ce palier » · `join_link` lien d'abonnement. Le message « Merci. Nous vous écrirons… » disparaît avec le formulaire.
+**Bascule quand l'abonnement est branché** (à ne faire qu'à ce moment-là) : ce bloc devient un lien vers le paiement. Valeurs prêtes : `title_before` « Choisir son » · `title_em` « palier » · `title_after` « . » · `text` « Deux paliers, un abonnement trimestriel renouvelé automatiquement, résiliable en ligne à tout moment. » · cartes `join_label` « Choisir ce palier » · `join_link` lien d'abonnement. Le message « Merci. Nous vous écrirons… » disparaît avec le formulaire.
 
 ### 1.5 Bonus, accueil (`index.json`, section `cercle`)
 
@@ -228,15 +227,15 @@ Les boutons « Découvrir la pièce » et « Choisir mon coloris » restent. Rap
 
 ---
 
-## 3. Instagram — @kymasinsta — annonce du Cercle Waves (PHASE 1, sans collecte)
+## 3. Instagram — @kymasinsta — annonce de la liste d'attente
 
-**Statut : publiable dès que (1) la page `/pages/cercle-waves` est en ligne sans crochet, **section `rejoindre` masquée**, (2) la page des conditions est publiée sans crochet après relecture d'un avocat (ou la ligne `terms_*` masquée, voir §1.2), (3) la légende 3D permanente est intégrée, (4) Arthur a marqué VALIDÉ et le fondateur a confirmé.** Aucune inscription, aucune adresse collectée, aucun e-mail : le post ne renvoie à aucun formulaire. Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée. La légende ci-dessous est reprise **mot pour mot** en S1 J1 du calendrier (`instagram-calendrier-4-semaines.md`).
+**Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la légende des textes ci-dessus est intégrée, (3) la page des conditions est publiée sans crochet, après relecture d'un avocat, (4) la société est immatriculée, la politique de confidentialité est publiée et la boutique est sur un forfait payant.** Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée.
 
 ### Caption
 
 > Un cercle se dessine, vague après vague.
 >
-> Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. Il n'est pas encore ouvert et aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement. Nous annoncerons l'ouverture sur ce compte.
+> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Cette inscription n'est pas un abonnement : aucun paiement n'est demandé.
 >
 > Le cercle se prépare.
 >
@@ -250,7 +249,7 @@ Les boutons « Découvrir la pièce » et « Choisir mon coloris » restent. Rap
 
 ### CTA
 
-Implicite : « Le cercle se prépare. » Aucun lien d'inscription (le lien en bio mène à la page `/pages/cercle-waves`, qui ne contient aucun formulaire en phase 1).
+Implicite : « Le cercle se prépare. » + lien en bio (« Liste d'attente Cercle Waves »).
 
 ### Trois variantes d'accroche (première ligne)
 
@@ -258,29 +257,11 @@ Implicite : « Le cercle se prépare. » Aucun lien d'inscription (le lien en bi
 2. Le ressac revient toujours. Cette fois, il porte un nom : Cercle Waves.
 3. Ce qui se prépare au large se devine d'abord au bruit de l'eau.
 
-À chaque variante, le reste de la caption est identique. Accroche retenue : « Un cercle se dessine, vague après vague. »
+À chaque variante, le reste de la caption est identique (contexte, mention « n'est pas un abonnement », CTA doux). Accroche retenue dans la caption ci-dessus : « Un cercle se dessine, vague après vague. »
 
 ### Stories associées (facultatif)
 
-Deux stories fixes, sans sticker lien : (1) « Le cercle se prépare. » (2) « Deux paliers payants, en abonnement trimestriel. Pas encore ouvert. »
-
----
-
-## 3 bis. Instagram — Phase 2, après immatriculation (liste d'attente)
-
-**Ne se publie qu'après la porte P0 du calendrier (société immatriculée, politiques publiées, plan payant, VALIDÉ d'Arthur) et l'activation de la section `rejoindre` (§1.4).** Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la page des conditions est publiée sans crochet, après relecture d'un avocat, (3) la légende 3D est intégrée, (4) la société est immatriculée, la politique de confidentialité publiée et la boutique sur un forfait payant, (5) Arthur a marqué VALIDÉ.
-
-> Avant la vague, l'eau se retire un instant.
->
-> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Cette inscription n'est pas un abonnement : aucun paiement n'est demandé.
->
-> Le cercle se prépare.
->
-> #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
-
-- **CTA** : implicite, « Le cercle se prépare. » + lien en bio (« Liste d'attente Cercle Waves » → `/pages/cercle-waves#rejoindre`).
-- **Alt-text** : mêmes trois propositions que la phase 1.
-- **Stories** : « Liste d'attente ouverte. » (sticker lien) puis « Deux paliers payants, en abonnement trimestriel. Les conditions sont sur la page. »
+Une story fixe avec le sticker lien : « Liste d'attente ouverte. » puis, sur la deuxième : « Deux paliers payants, en abonnement trimestriel. Les conditions sont sur la page. »
 
 ---
 
@@ -296,7 +277,7 @@ Deux stories fixes, sans sticker lien : (1) « Le cercle se prépare. » (2) « 
 | Validité du Crédit Waves | `cashback_note` des deux cartes | [12] mois |
 | Délai d'envoi de la carte | ajout au verso | [14] jours |
 | Date du premier accès anticipé | ajout au verso (point E1) | à fixer : aucun drop daté, avantage non vendable sans date |
-| Immatriculation : SIREN et raison sociale | `rejoindre.consent` (phase 2) | à fournir ; **condition de la phase 2** |
+| Raison sociale | `rejoindre.consent` | à fournir |
 | Lien de confidentialité et de conditions | `consent`, `terms`, `terms_link` | pages à publier |
 | Taux de cashback 5 % / 10 % | cartes | décidés ; équilibre à valider avec l'expert-comptable (E8) |
 | « Imaginé à Paris » | `step_7.spec` | à confirmer |
@@ -318,5 +299,4 @@ Deux stories fixes, sans sticker lien : (1) « Le cercle se prépare. » (2) « 
 - Les mots « élite », « VIP », « privilège », « cercle fermé », « sélection », « gagnez » sont absents ; le Cercle n'est présenté ni comme sélectif ni comme mérité.
 - « Garantit » n'apparaît que dans la phrase de `condition` de Victoire, à la forme négative.
 - Aucun prix barré, aucune date d'ouverture non fixée, aucune promesse non datée.
-- Phase 1 : aucun formulaire, aucune collecte d'adresse, aucun e-mail ; la section `rejoindre` est masquée et les boutons des cartes sont vides.
 - Seuls crochets visibles : valeurs de la partie 4, y compris la date d'expédition du hero.
