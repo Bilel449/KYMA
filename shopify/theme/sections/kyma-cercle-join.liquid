@@ -44,6 +44,10 @@
         text: section.settings.closed_text,
         heading_id: hid
       %}
+      {%- if section.settings.closed_cta_label != blank and section.settings.closed_cta_link != blank -%}
+        {%- assign c_ext = false -%}{%- if section.settings.closed_cta_link contains '://' -%}{%- assign c_ext = true -%}{%- endif -%}
+        <p class="kyma-cj__cta"><a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.closed_cta_link }}"{% if c_ext %} target="_blank" rel="noopener"{% endif %}><span>{{ section.settings.closed_cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a></p>
+      {%- endif -%}
     </div>
     {%- else -%}
     <svg class="kyma-ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false" data-kyma-ring>
@@ -110,7 +114,9 @@
     { "type": "text", "id": "closed_title_before", "label": "Titre — début", "default": "Le cercle se" },
     { "type": "text", "id": "closed_title_em", "label": "Titre — italique", "default": "prépare" },
     { "type": "text", "id": "closed_title_after", "label": "Titre — fin", "default": "." },
-    { "type": "textarea", "id": "closed_text", "label": "Texte", "default": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée." },
+    { "type": "textarea", "id": "closed_text", "label": "Texte", "default": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement." },
+    { "type": "text", "id": "closed_cta_label", "label": "Bouton (facultatif) — texte", "info": "Ex. Suivre @kymasinsta. Vide = pas de bouton." },
+    { "type": "url", "id": "closed_cta_link", "label": "Bouton (facultatif) — lien", "info": "Ex. https://www.instagram.com/kymasinsta/ (s'ouvre dans un nouvel onglet)." },
     { "type": "header", "content": "Liste d'attente activée (phase 2)" },
     { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Être prévenu de" },
     { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "l'ouverture" },

@@ -8,7 +8,7 @@
   Les cartes FLOTTENT (lévitation lente, légère rotation, ombre portée qui respire), s'inclinent vers le pointeur,
   un reflet satiné / doré les balaie, et elles PIVOTENT (survol, clic, toucher, clavier) pour montrer le verso
   (avantages). Le texte reste du vrai texte ; verso inert tant qu'il est caché ; aria-pressed sur la zone sensible.
-  Sous chaque carte : prix trimestriel (réglage texte, TTC) + bouton « Rejoindre » (lien réglable ; tant qu'il
+  Sous chaque carte : prix trimestriel (réglage texte, TTC) + bouton facultatif (vide = aucun bouton ; lien réglable ; tant qu'il
   n'est pas une URL, bouton inactif + [À COMPLÉTER]). Sous les cartes : ligne de conditions réglable.
   Aucun achat réel n'est branché. Avantages et conditions : [À COMPLÉTER] (décision du fondateur, validation Victoire).
   Option : deux anneaux 3D (scène « rings », contexte WebGL partagé) qui se rapprochent au défilement.
@@ -235,8 +235,8 @@
         { "type": "textarea", "id": "condition_more", "label": "Précisions supplémentaires (verso, facultatif, une par ligne)", "info": "Petits caractères sous la précision. Ex. : envoi de la carte, date du premier accès anticipé. Texte à faire valider par Victoire." },
         { "type": "text", "id": "price", "label": "Prix (texte libre)", "default": "12,99 €", "info": "Montant affiché tel quel, TTC." },
         { "type": "text", "id": "price_period", "label": "Période", "default": "par trimestre, TTC" },
-        { "type": "text", "id": "join_label", "label": "Bouton — texte", "default": "Rejoindre" },
-        { "type": "text", "id": "join_link", "label": "Bouton — lien (URL ; sinon bouton inactif + mention)", "default": "[À COMPLÉTER : lien d'abonnement]" },
+        { "type": "text", "id": "join_label", "label": "Bouton — texte (vide = pas de bouton)", "info": "Vide tant que la porte P7 est fermée. À la bascule : « Choisir ce palier »." },
+        { "type": "text", "id": "join_link", "label": "Bouton — lien (URL ; sinon bouton inactif + mention)" },
         { "type": "text", "id": "aria", "label": "Annonce lecteur d'écran", "default": "Carte INITIUM, palier d'entrée du Cercle Waves. Activer pour afficher les avantages au verso." }
       ]
     }

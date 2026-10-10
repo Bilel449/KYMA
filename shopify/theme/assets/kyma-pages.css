@@ -361,6 +361,7 @@ select.kyma-field__i { appearance: none; -webkit-appearance: none; padding-right
 .kyma-check { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; font-size: 13.5px; line-height: 1.6; color: var(--kyma-ink-soft); cursor: pointer; }
 .kyma-check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--kyma-ink); cursor: pointer; }
 .kyma-check + .kyma-check { margin-top: 10px; }
+.kyma-cj__cta { margin: 26px 0 0; display: flex; justify-content: center; }
 .kyma-check__req { white-space: nowrap; font-size: 0.92em; color: var(--kyma-ink); }
 .kyma-form .kyma-btn { justify-self: start; }
 .kyma-btn.is-loading::after { content: ''; position: absolute; left: 24px; right: 24px; bottom: 9px; height: 1px; background: var(--kyma-camel); animation: kyma-busy 1.2s linear infinite; }

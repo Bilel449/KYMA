@@ -8,10 +8,10 @@
         "title_before": "Le Cercle",
         "title_em": "Waves",
         "title_after": ".",
-        "text": "Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier ; vous pouvez en changer ou résilier en ligne, à tout moment. L'abonnement n'est pas encore ouvert : laissez votre adresse, nous vous écrirons.",
-        "cta_label": "Être prévenu de l'ouverture",
-        "cta_link": "/pages/cercle-waves",
-        "note": "Aucun paiement n'est demandé à ce stade.",
+        "text": "Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. À l'ouverture, vous choisirez votre palier ; vous pourrez en changer ou résilier en ligne, à tout moment. Il n'est pas encore ouvert et aucune date n'est fixée : rien n'est à faire pour l'instant. Nous annoncerons l'ouverture sur Instagram, @kymasinsta.",
+        "cta_label": "Suivre @kymasinsta",
+        "cta_link": "https://www.instagram.com/kymasinsta/",
+        "note": "Ni inscription, ni paiement à ce stade. Le cercle se prépare.",
         "visual": "rings",
         "colorway": "kyma",
         "align": "split",
@@ -56,8 +56,8 @@
             "condition": "Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris.",
             "price": "12,99 €",
             "price_period": "par trimestre, TTC",
-            "join_label": "Être prévenu",
-            "join_link": "/pages/cercle-waves",
+            "join_label": "",
+            "join_link": "",
             "aria": "Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso.",
             "card_image": "shopify://shop_images/kyma-carte-initium.jpg",
             "condition_more": "Carte sans valeur monétaire, pas un moyen de paiement. Envoyée une fois, sous [14] jours, frais d'envoi inclus."
@@ -81,8 +81,8 @@
             "condition": "Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris.",
             "price": "39,99 €",
             "price_period": "par trimestre, TTC",
-            "join_label": "Être prévenu",
-            "join_link": "/pages/cercle-waves",
+            "join_label": "",
+            "join_link": "",
             "aria": "Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso.",
             "card_image": "shopify://shop_images/kyma-carte-majeste.jpg",
             "condition_more": "Carte sans valeur monétaire, pas un moyen de paiement. Envoyée une fois, sous [14] jours, frais d'envoi inclus."
@@ -103,7 +103,7 @@
         "title_before": "D'un palier à l'autre, sans",
         "title_em": "détour",
         "title_after": ".",
-        "text": "Vous choisissez directement l'un ou l'autre palier. Passer à MAJESTÉ prend effet tout de suite : vous payez la différence, au prorata. Passer à INITIUM prend effet à la fin du trimestre en cours.",
+        "text": "À l'ouverture, vous choisirez directement l'un ou l'autre palier. Passer à MAJESTÉ prendra effet tout de suite : vous paierez la différence, au prorata. Passer à INITIUM prendra effet à la fin du trimestre en cours.",
         "cta_label": "",
         "cta_link": "",
         "visual": "path",
@@ -145,8 +145,10 @@
         "closed_title_before": "Le cercle se",
         "closed_title_em": "prépare",
         "closed_title_after": ".",
-        "closed_text": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée.",
-        "closed_label": "CERCLE WAVES"
+        "closed_text": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement. Nous annoncerons l'ouverture sur Instagram, @kymasinsta.",
+        "closed_label": "CERCLE WAVES",
+        "closed_cta_label": "Suivre @kymasinsta",
+        "closed_cta_link": "https://www.instagram.com/kymasinsta/"
       }
     }
   },
