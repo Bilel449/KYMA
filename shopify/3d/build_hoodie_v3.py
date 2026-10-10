@@ -675,10 +675,13 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         avg = nrm(Ng.mean(1))
         Ng[:] = nrm(Ng * (1 - w)[:, None, None] + avg[:, None, :] * w[:, None, None])
         N = Ng.reshape(-1, 3)
+        th_rows = th * (1 - smoothstep(0.045, 0.012, rowlen))     # la pointe se referme
+    else:
+        th_rows = np.full(nv, th)
     outer = Mesh(V, F, fabric, uv0.reshape(-1, 2), uv1.reshape(-1, 2), N)
     # envers (sous-échantillonné)
     jj, ii = sub_idx(nv, lining_step), sub_idx(nu, lining_step)
-    Gi = (G - th * N.reshape(nv, nu, 3))[np.ix_(jj, ii)]
+    Gi = (G - th_rows[:, None, None] * N.reshape(nv, nu, 3))[np.ix_(jj, ii)]
     Fi = grid_faces(len(jj), len(ii))
     Vi = Gi.reshape(-1, 3)
     Ni = vertex_normals(Vi, Fi)
@@ -1420,6 +1423,7 @@ def bake_ao(layout, nrays=64, rmax=0.30, eps=6e-4, verbose=True):
     local = np.stack([r * np.cos(ang), r * np.sin(ang), np.sqrt(np.maximum(1 - r * r, 0))], 1)
     rng = np.random.default_rng(1)
     best = [np.zeros(len(m.V)) for _, m in prims]
+    closed = [None] * len(prims)
     for st in states:
         Vs, Ns = [], []
         for nd, m in prims:
@@ -1458,13 +1462,15 @@ def bake_ao(layout, nrays=64, rmax=0.30, eps=6e-4, verbose=True):
         ao = 1 - occ
         for i, (_, m) in enumerate(prims):
             best[i] = np.maximum(best[i], ao[offs[i]:offs[i + 1]])
+            if st is None:
+                closed[i] = ao[offs[i]:offs[i + 1]]
         if verbose:
             print(f"  occlusion : état {states.index(st) + 1}/3 ({time.time() - t0:.0f} s)")
     # lissage léger sur le maillage (le bruit des 64 rayons disparaît, les creux restent)
     for i, (_, m) in enumerate(prims):
         if m.material in no_ao:
             continue
-        a = best[i]
+        a = 0.7 * best[i] + 0.3 * closed[i]      # ouvert : intérieur lisible mais pas plat
         for _ in range(2):
             acc = np.zeros(len(a))
             cnt = np.zeros(len(a))

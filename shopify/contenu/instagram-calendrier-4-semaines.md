@@ -1,9 +1,10 @@
-# Instagram @kymasinsta — calendrier éditorial de 4 semaines (Maya, 09/10/2026)
+# Instagram @kymasinsta — calendrier éditorial de 4 semaines (Maya, 09/10/2026 ; mis en cohérence avec les corrections d'Arthur le 10/10/2026)
 
 > **Période** : liste d'attente Cercle Waves + teasing Drop 1 (hoodie zippé Ressac).
-> **Statut** : BROUILLON PRÊT À RELIRE. Rien n'est publiable avant les « portes » de la partie 0. Pour Arthur (validation), Victoire (relecture des posts listés en partie 4), Clémentine (aiguillage), fondateur (valeurs et accord).
-> **Bases lues** : `brand/BRAND.md`, `shopify/contenu/cercle-waves-textes-v4.md` (§3 : post d'annonce, repris tel quel en S1 J1), `shopify/conformite.md` (Entraide 09/10/2026, parties B, C, D, E), `shopify/contenu/tendances-web-2026.md` (typographie cinétique, scrollytelling, grain tactile, 3D douce).
+> **Statut** : BROUILLON PRÊT À RELIRE. Rien n'est publiable avant les « portes » de la partie 0. Pour Arthur (validation), Victoire (relecture des posts listés en partie 8), Clémentine (aiguillage), fondateur (valeurs et accord).
+> **Bases lues** : `brand/BRAND.md`, `shopify/contenu/cercle-waves-textes-v4.md` (§3 : post d'annonce, version corrigée au cycle 1 d'Arthur, repris en S1 J1), `shopify/conformite.md` (Entraide 09/10/2026, parties B, C, D, E), `shopify/contenu/tendances-web-2026.md` (typographie cinétique, scrollytelling, grain tactile, 3D douce).
 > **Convention de date** : « S1 J1 » = premier jour de publication, une fois les portes ouvertes. Jours conseillés pour le rythme : J1, J3, J5 pour le fil (feed/Reels) ; les stories sur J1, J2, J4, J6/J7. Heure conseillée : fin de journée (18 h–20 h), à ajuster avec les statistiques réelles du compte.
+> **Signature des posts Cercle Waves** : « Le cercle se prépare. » (ancienne formule « Le cercle s'élargit. » abandonnée : elle suggérait un cercle déjà ouvert qui grandit).
 
 ---
 
@@ -17,13 +18,14 @@
 | P4 | Aucun crochet visible sur les pages vers lesquelles Instagram renvoie (E3) | Sacha | Une capture ou un lien qui montre « [À CONFIRMER] » est une publication fautive |
 | P5 | Provenance des GLB `ressac-v2-*.glb` documentée (L5) : auteur, outils, aucun élément tiers, aucune IA | Izaac, fondateur | On publie des captures de ces modèles sur un compte de marque |
 | P6 | Validation d'Arthur (« VALIDÉ ») + confirmation du fondateur | Arthur, fondateur | Règle de livraison |
+| P7 | **Société immatriculée**, politique de confidentialité publiée, boutique sur **forfait payant** ; page des conditions publiée **sans crochet après relecture d'un avocat** | Fondateur, Victoire, Sacha | Statut du post d'annonce (v4 §3, points 4 et 5). **Aucune adresse n'est collectée et aucun e-mail n'est envoyé aux inscrits (confirmation, annonce, newsletter) avant que P7 soit levée** |
 
 **Portes spécifiques à certains posts**
 - **S2 J1 et suivants (nom « Ressac »)** : accord de Victoire sur l'usage du nom (aucune antériorité recherchée, conformité Entraide E, remarque i).
 - **S3 J1 (cinq coloris)** : le fondateur confirme les 5 coloris du tech pack v3 (point d'arbitrage n° 1 de BRAND.md).
 - **S4 J1, version B** : valeurs entre crochets des avantages validées (partie 4 du document v4) et date du premier accès anticipé fixée (E1).
 
-Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calendrier (les CTA renvoient tous au site). Le contenu ne se publie pas « sans lien ».
+Si P1 à P7 ne sont pas réunies à la date voulue, on décale **tout** le calendrier (les CTA renvoient tous au site). Le contenu ne se publie pas « sans lien ».
 
 ---
 
@@ -51,6 +53,7 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 9. **Accessibilité** : alt-text à chaque image ou carrousel (3 propositions ci-dessous, retenir la première par défaut) ; sous-titres incrustés sur les vidéos qui parlent ; mouvement doux, aucun flash ; toute vidéo reste compréhensible sans le son.
 10. **Esthétique** : fond Beige #F5EDE4, accents Marron clair #C19E86 et Rose clair #E8C4C4, texte Brun #4A3B32, DM Serif Display (titres, mot fort en italique) + Outfit (corps). Un léger grain tactile sur les fonds typographiques (réponse au rendu « IA trop lisse », tendances-web-2026 §1.5). Le lilas n'apparaît que comme coloris produit.
 11. **Ton** : vouvoiement ; ni point d'exclamation, ni majuscules d'emphase, ni emoji, ni « cool/stylé/trendy ». Hashtags : 5 maximum, tous listés par pièce.
+12. **E-mails aux inscrits** : aucun avant la porte P7. Les publications peuvent dire « nous vous écrirons à l'ouverture » (c'est l'état prévu), jamais « vous allez recevoir » avec une date ni « un e-mail vous attend ».
 
 ---
 
@@ -59,19 +62,19 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 ### S1 J1 — Fil, image unique : annonce de la liste d'attente
 - **Format** : image 4:5 (1080×1350), statique (le visuel animé existe sur le site ; l'image est une capture).
 - **Visuel** : capture du visuel « anneaux » du site : deux anneaux satinés, rose clair et marron clair, qui se rapprochent sur fond beige. Texte incrusté discret : « Cercle Waves » (DM Serif, « Waves » en italique brun) et, en bas, « Rendu 3D, pas une photo. »
-- **Légende** (texte validé en v4, variante d'accroche n° 1) :
+- **Légende** (texte de la v4 corrigée au cycle 1, variante d'accroche n° 1) :
 
 > Un cercle se dessine, vague après vague.
 >
-> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Ce n'est pas un abonnement, aucun paiement n'est demandé.
+> La liste d'attente du Cercle Waves est ouverte. L'abonnement KYMA compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. La date d'ouverture n'est pas encore fixée : laissez votre adresse (lien en bio), nous vous écrirons. Cette inscription n'est pas un abonnement : aucun paiement n'est demandé.
 >
-> Le cercle s'élargit.
+> Le cercle se prépare.
 
 - **Alt-text** (3 propositions) :
   1. Deux anneaux satinés, rose clair et marron clair, qui se rapprochent sur fond beige. Rendu 3D, pas une photo.
   2. Visuel typographique beige : « Cercle Waves » en lettres brunes, deux anneaux souples en arrière-plan.
   3. Capture du site KYMA : deux cercles tonals qui s'entrelacent, rose clair et camel, sur fond beige.
-- **CTA** : implicite, « Le cercle s'élargit. » + lien en bio (« Liste d'attente Cercle Waves » → `/pages/cercle-waves#rejoindre`).
+- **CTA** : implicite, « Le cercle se prépare. » + lien en bio (« Liste d'attente Cercle Waves » → `/pages/cercle-waves#rejoindre`).
 - **Hashtags (5)** : #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 
 ### S1 J1 — Stories (2), publiées le même jour
@@ -95,7 +98,7 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 >
 > Le Cercle Waves est l'abonnement de KYMA, en deux paliers payants. Il n'est pas encore ouvert : la liste d'attente l'est, sans paiement (lien en bio).
 >
-> Le cercle s'élargit.
+> Le cercle se prépare.
 
 - **CTA** : implicite + lien en bio.
 - **Hashtags (5)** : #kyma #lartduflow #cerclewaves #motiondesign #streetwearunisexe
@@ -108,17 +111,17 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 ### S1 J5 — Fil, carrousel : « Un geste simple »
 - **Format** : carrousel 4 images 4:5, typographie sur beige grainé.
-- **Visuel** : 1) « Liste d'attente / Cercle Waves » ; 2) « Prénom et adresse e-mail suffisent. » ; 3) « Aucun paiement n'est demandé. Ce n'est pas un abonnement. » ; 4) « Nous vous écrirons à l'ouverture du Cercle Waves. » + « Lien en bio ». Un trait ondulant relie les quatre cartes.
+- **Visuel** : 1) « Liste d'attente / Cercle Waves » ; 2) « Prénom et adresse e-mail suffisent. » ; 3) « Cette inscription n'est pas un abonnement : aucun paiement n'est demandé. » ; 4) « Nous vous écrirons à l'ouverture du Cercle Waves. » + « Lien en bio ». Un trait ondulant relie les quatre cartes.
 - **Légende** :
 
 > Un geste simple, comme une vague qui se pose.
 >
-> Pour rejoindre la liste d'attente du Cercle Waves, un prénom et une adresse e-mail suffisent. Aucun paiement n'est demandé, et l'inscription n'est pas un abonnement.
+> Pour rejoindre la liste d'attente du Cercle Waves, un prénom et une adresse e-mail suffisent. Cette inscription n'est pas un abonnement : aucun paiement n'est demandé.
 >
-> Le cercle s'élargit.
+> Le cercle se prépare.
 
 - **Alt-text** (3) :
-  1. Carrousel de quatre cartes beiges : « Liste d'attente Cercle Waves », « Prénom et adresse e-mail suffisent », « Aucun paiement n'est demandé », « Nous vous écrirons à l'ouverture ».
+  1. Carrousel de quatre cartes beiges : « Liste d'attente Cercle Waves », « Prénom et adresse e-mail suffisent », « Cette inscription n'est pas un abonnement : aucun paiement n'est demandé », « Nous vous écrirons à l'ouverture ».
   2. Quatre cartes typographiques, texte brun sur fond beige, reliées par un trait ondulant marron clair.
   3. Série de cartes expliquant l'inscription à la liste d'attente du Cercle Waves, sans paiement.
 - **CTA** : implicite + lien en bio.
@@ -274,13 +277,13 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 >
 > Le Cercle Waves compte deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. Il n'est pas encore ouvert : la date n'est pas fixée, et l'inscription à la liste d'attente ne vaut pas abonnement. Les avantages et les conditions sont détaillés sur la page (lien en bio).
 >
-> Le sillage s'élargit.
+> Le cercle se prépare.
 
 - **Alt-text** (3) :
   1. Carrousel de cinq cartes beiges présentant les deux paliers du Cercle Waves, INITIUM et MAJESTÉ, avec leurs prix trimestriels TTC.
   2. Deux cartes typographiques, l'une « INITIUM », l'autre « MAJESTÉ », texte brun sur fond beige, avec les conditions d'abonnement.
   3. Série de cartes expliquant l'abonnement trimestriel du Cercle Waves et la liste d'attente.
-- **CTA** : « Le sillage s'élargit. » + lien en bio.
+- **CTA** : « Le cercle se prépare. » + lien en bio.
 - **Hashtags (5)** : #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 - **Version B (à produire seulement après validation des valeurs entre crochets et de la date du premier accès anticipé)** : ajouter une carte « Avantages » qui reprend **mot pour mot** les lignes `perks` de la page (§1.2 du document v4), crochets remplacés par les valeurs validées, avec la note de nature du cashback (« versé en crédit KYMA, pas en espèces… »). Aucun avantage chiffré ni daté ne figure dans la version A.
 - **Note pour Victoire** : le post d'annonce v4 excluait le prix. Ici je l'inclus parce que la description des deux paliers sans prix ni reconduction me semble une omission (L.121-3). À trancher : version avec ou sans prix.
@@ -297,14 +300,14 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 ### S4 J3 — Reel : quatre semaines de ressac
 - **Format** : Reel 9:16, 15 s, montage doux.
-- **Visuel** : cinq plans de 2–3 s : anneaux, « Cercle Waves » en mouvement, tracé du dessin technique, cinq teintes en fondu, motif. Mention fixe pour les plans 3D : « Modèles 3D de présentation, pas des photos du produit fabriqué. » Dernière image : « Le cercle s'élargit. » Son : vagues du fondateur.
+- **Visuel** : cinq plans de 2–3 s : anneaux, « Cercle Waves » en mouvement, tracé du dessin technique, cinq teintes en fondu, motif. Mention fixe pour les plans 3D : « Modèles 3D de présentation, pas des photos du produit fabriqué. » Dernière image : « Le cercle se prépare. » Son : vagues du fondateur.
 - **Légende** :
 
 > Quatre semaines de ressac : un cercle, un trait, des teintes.
 >
 > La liste d'attente du Cercle Waves reste ouverte (lien en bio). Le hoodie Ressac n'est pas encore en vente ; aucune date n'est fixée. Modèles 3D de présentation, pas des photos du produit fabriqué.
 >
-> Le cercle s'élargit.
+> Le cercle se prépare.
 
 - **CTA** : implicite + lien en bio.
 - **Hashtags (5)** : #kyma #lartduflow #cerclewaves #motiondesign #automne
@@ -330,7 +333,7 @@ Si P1 à P6 ne sont pas réunies à la date voulue, on décale **tout** le calen
 
 ### S4 J7 — Story de clôture
 - **Format** : story fixe 9:16, typographie.
-- **Texte** : « Le cercle s'élargit. » + sticker lien « Liste d'attente Cercle Waves ». Pas d'annonce de suite : on ne promet rien de non daté.
+- **Texte** : « Le cercle se prépare. » + sticker lien « Liste d'attente Cercle Waves ». Pas d'annonce de suite : on ne promet rien de non daté.
 - **Bilan interne** : relever les chiffres de la partie 7 et en tirer une note dans `out/memo-maya.md`.
 
 ---
@@ -345,6 +348,7 @@ Ton : calme, court, vouvoiement, jamais défensif. Une réponse de moins de 24 h
 | « Combien coûte le hoodie ? » | « Le prix n'est pas encore communiqué. » |
 | « Je peux m'abonner ? » | « Pas encore : seule la liste d'attente est ouverte, sans paiement. » |
 | « Le Cercle Waves est gratuit ? » | « Non : deux paliers payants, en abonnement trimestriel. L'inscription à la liste d'attente, elle, ne coûte rien. » |
+| « Je me suis inscrit, je n'ai rien reçu. » | « Nous vous écrirons à l'ouverture du Cercle Waves ; la date n'est pas encore fixée. Vous pouvez vous désinscrire à tout moment. » (Aucune promesse de message avant la porte P7.) |
 | « Fabriqué où ? Portugal ? » | « KYMA est imaginée à Paris. Nous n'indiquons que ce qui est confirmé, et ce point ne l'est pas encore. » |
 | « Coton bio ? GOTS ? » | « Nous n'annonçons que ce qui est confirmé et documenté. La composition n'est pas encore confirmée. » |
 | « Chaque pièce est unique ? » | « Chaque pièce est pensée pour être unique ; la vôtre différera des modèles 3D. » |
@@ -377,7 +381,7 @@ Formats : 4:5 (1080×1350) et 9:16 (1080×1920), vidéos H.264, boucles de 8–1
 | I4 | Rotation douce du hoodie, 6 s, Lilac Whirl | S3 J3 | Aucune déformation de coupe |
 | I5 | Motif KYMA Wave en volutes tonales (capture de la sculpture), 4:5 | S3 J5 | Mention « Illustration du motif… » incrustée |
 | I6 | Dessins techniques vectoriels du hoodie : face, capuche, poche biais, bords-côtes 6 cm ; version fixe (6 cartes) + version animée (tracé, 12 s) | S2 J1, S2 J3 | Fond beige, trait brun ou marron clair |
-| I7 | Trois boucles typographiques : « Cercle Waves », « Le cercle s'élargit. », « Trait. Courbe. Ressac. » (DM Serif + Outfit, « Waves » en italique) | S1 J3, S2 J3, S4 J3 | Mouvement de houle, aucun effet clignotant |
+| I7 | Trois boucles typographiques : « Cercle Waves », « Le cercle se prépare. », « Trait. Courbe. Ressac. » (DM Serif + Outfit, « Waves » en italique) | S1 J3, S2 J3, S4 J3 | Mouvement de houle, aucun effet clignotant |
 | I8 | Cartes typographiques fixes : 4 (S1 J5), 5 (S4 J1), stories | S1 J5, S4 J1, stories | Logo respectant la zone de protection |
 | I9 | **Documenter la provenance des GLB `ressac-v2-*.glb`** (auteur, outils, aucun élément tiers, aucune IA) et **confirmer que le modèle reste fidèle au tech pack** | Porte P5 | Sans cela, aucune capture du hoodie n'est publiable |
 
@@ -387,18 +391,18 @@ Formats : 4:5 (1080×1350) et 9:16 (1080×1920), vidéos H.264, boucles de 8–1
 | Sa1 | Lien en bio principal : `/pages/cercle-waves#rejoindre` (liste d'attente), avec paramètres UTM par semaine | Toutes les semaines |
 | Sa2 | Lien secondaire : accueil, ancre sur la section « piece » (récit 3D) ; prévoir `id` d'ancre et le lien raccourci propre | S2 J1, J5, S3 J3 |
 | Sa3 | Ancres pour la section des coloris (`Coloris du modèle 3D`) et pour la section « motif » | S3 J1, J5 |
-| Sa4 | Page Cercle Waves **sans crochets**, avec conditions et confidentialité publiées ; raison sociale dans le `consent` | S1 J1 (portes P1 à P4) |
+| Sa4 | Page Cercle Waves **sans crochets**, avec conditions et confidentialité publiées ; raison sociale dans le `consent` | S1 J1 (portes P1 à P4, P7) |
 | Sa5 | Légende 3D permanente visible à chaque étape, aussi sans JavaScript ni WebGL (R1/R2) | Toutes les captures |
 | Sa6 | **Test dans le navigateur intégré d'Instagram** (iOS et Android) : le récit 3D doit s'afficher ou basculer sur les images fixes, avec la mention visible | Tout lien en bio |
-| Sa7 | Double confirmation (double opt-in) de l'inscription si elle est retenue ; message de succès v4 | S1 J1 |
+| Sa7 | Formulaire de liste d'attente conforme à la v4 §1.4 : **case 1 obligatoire** (finalité unique « m'informer de l'ouverture du Cercle Waves »), **case 2 newsletter facultative et distincte**, aucune pré-cochée ; double confirmation (double opt-in) si elle est retenue ; message de succès v4. **Aucun e-mail envoyé avant la porte P7** | S1 J1 |
 | Sa8 | Aucun pixel (Meta, TikTok) avant consentement ; confirmer l'état du bandeau cookies | Partie 9 |
 
 ### Victoire — posts à relire
 Priorité haute (relire avant publication, chaque pièce) :
 | Pièce | Point sensible |
 |---|---|
-| S1 J1 (annonce) | Texte v4 déjà relu en base ; vérifier la cohérence avec la version finale de la page |
-| S1 J5 (carrousel) | « Aucun paiement », « n'est pas un abonnement » : cohérence avec le formulaire |
+| S1 J1 (annonce) | Texte v4 corrigé au cycle 1, déjà relu en base ; vérifier la cohérence avec la version finale de la page |
+| S1 J5 (carrousel) | « Cette inscription n'est pas un abonnement : aucun paiement n'est demandé », cohérence avec le formulaire |
 | S2 J1, J3 | Nom « Ressac » (antériorité), « pas encore en vente ; aucune date n'est fixée », dessin de conception |
 | S2 J5 | « Dessinée en laiton, finition dorée brossée » (R5) |
 | S3 J1 | Cinq noms de coloris, descriptions poétiques, mention « couleurs dépendent de votre écran » |
@@ -407,7 +411,7 @@ Priorité haute (relire avant publication, chaque pièce) :
 | S4 J2 | Quatre réponses de FAQ |
 | Toutes les vidéos | Licence des sons ; droit à l'image dans les coulisses |
 
-Points transverses à trancher : (1) mention incrustée suffisante dans les Reels ; (2) formulations de la partie 6 ; (3) hashtags #listedattente, #kymawave ; (4) aucun concours ni influenceur pendant ces quatre semaines.
+Points transverses à trancher : (1) mention incrustée suffisante dans les Reels ; (2) formulations de la partie 6 ; (3) hashtags #listedattente, #kymawave ; (4) aucun concours ni influenceur pendant ces quatre semaines ; (5) « Le cercle se prépare. » comme signature récurrente (état présent, pas de date).
 
 ### Abdou — budget publicitaire éventuel à chiffrer
 Rien n'est à dépenser pour que le calendrier fonctionne : il est entièrement organique. Si le fondateur veut tester un coup de pouce payant, voici le cadre à chiffrer :
@@ -418,7 +422,7 @@ Rien n'est à dépenser pour que le calendrier fonctionne : il est entièrement 
 | B. Test léger | Promotion de deux pièces seulement : le Reel S1 J3 et le carrousel S1 J5 ; objectif « trafic » vers la page de la liste d'attente ; France ; durée courte | À partir de S2, une fois le formulaire testé |
 | C. Test soutenu | B + le carrousel S3 J1 et le Reel S3 J3 ; deux variantes de ciblage | À partir de S3, selon les résultats de B |
 
-À préciser par Abdou : plafond total accepté, budget quotidien, durée de chaque test, coût par clic et coût par inscription acceptable, formule `budget = inscriptions visées ÷ taux d'inscription par clic × coût par clic`. Précisions de cadrage : âge cible à arbitrer (lookbook 18–30, tech pack 22–40) ; les mêmes mentions (3D, « pas encore en vente ») figurent dans les publicités ; l'optimisation se fait sur les clics, sans pixel ; texte publicitaire à relire par Victoire avant mise en ligne ; aucun budget dépensé avant que la société soit immatriculée et que la raison sociale soit renseignée. Je fournis les textes et les visuels (coût de création interne nul).
+À préciser par Abdou : plafond total accepté, budget quotidien, durée de chaque test, coût par clic et coût par inscription acceptable, formule `budget = inscriptions visées ÷ taux d'inscription par clic × coût par clic`. Précisions de cadrage : âge cible à arbitrer (lookbook 18–30, tech pack 22–40) ; les mêmes mentions (3D, « pas encore en vente ») figurent dans les publicités ; l'optimisation se fait sur les clics, sans pixel ; texte publicitaire à relire par Victoire avant mise en ligne ; aucun budget dépensé avant que la société soit immatriculée et que la raison sociale soit renseignée (porte P7). Je fournis les textes et les visuels (coût de création interne nul).
 
 ### Isabelle (facultatif)
 Vérifier le volume réel et la pertinence des hashtags #parisstreetwear, #streetwearunisexe, #hoodieoversize, #listedattente, #kymawave. Sans elle, je garde la liste de base de la marque.
@@ -427,13 +431,14 @@ Vérifier le volume réel et la pertinence des hashtags #parisstreetwear, #stree
 
 ## 9. Prérequis légaux résumés (rappel pour Arthur)
 
-1. Pas de collecte d'adresses avant publication des politiques, forfait Shopify payant et validation (point 10 de la note de conformité).
+1. Pas de collecte d'adresses avant publication des politiques, forfait Shopify payant et validation (point 10 de la note de conformité). **Société immatriculée avant toute collecte ; aucun e-mail aux inscrits avant la porte P7.**
 2. Pas de pixel avant consentement (bandeau « Tout accepter / Tout refuser »).
 3. Aucune allégation GOTS, bio, Portugal, « éco-responsable », « zéro plastique ».
 4. Visuels 3D toujours accompagnés de la mention « pas une photo du produit fabriqué ».
 5. Aucun avantage du Cercle Waves chiffré ou daté dans un post tant que le fondateur ne l'a pas validé et que la date du premier accès anticipé n'est pas fixée (E1).
 6. Pas de prix du hoodie, pas de prix barré, pas de date de vente.
 7. Relecture par un avocat des conditions et des textes d'abonnement avant toute ouverture de l'abonnement (rappel de Victoire).
+8. Liste d'attente : case de consentement obligatoire limitée à la finalité « ouverture du Cercle Waves », newsletter en case distincte facultative, aucune pré-cochée (décision d'Arthur, v4 §1.4).
 
 ---
 
@@ -441,7 +446,7 @@ Vérifier le volume réel et la pertinence des hashtags #parisstreetwear, #stree
 
 | Date | Format | Contenu | Porte |
 |---|---|---|---|
-| S1 J1 | Fil image + 2 stories | Annonce liste d'attente | P1–P6 |
+| S1 J1 | Fil image + 2 stories | Annonce liste d'attente | P1–P7 |
 | S1 J2 | Story vidéo | Son de la vague | |
 | S1 J3 | Reel | « Cercle Waves » en mouvement | |
 | S1 J4 | 3 stories | Coulisses papier | |
