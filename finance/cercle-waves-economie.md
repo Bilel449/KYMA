@@ -9,8 +9,8 @@
 
 | Palier | Prix TTC / trimestre | HT | TVA | Sur 4 trimestres TTC (si l'abonné reste un an) | HT |
 |---|---|---|---|---|---|
-| INITIUM | 12,99 € | 10,83 € | 2,17 € | 51,96 € | 43,30 € |
-| MAJESTÉ | 39,99 € | 33,33 € | 6,67 € | 159,96 € | 133,30 € |
+| INITIUM | 12,99 € | 10,83 € | 2,16 € | 51,96 € | 43,30 € |
+| MAJESTÉ | 39,99 € | 33,33 € | 6,66 € | 159,96 € | 133,30 € |
 
 ## 2. Vérification des calculs de Victoire (et d'Arthur)
 
@@ -26,6 +26,8 @@
 1. À **199 €**, le cashback devient 9,95 € (INITIUM) et 19,90 € (MAJESTÉ) ; **2 hoodies à 199 € = 398 €, juste sous le seuil MAJESTÉ de 399,90 €** : le message « 3 hoodies » reste vrai.
 2. Ces seuils disent quand le **client** récupère sa cotisation. Ils ne disent pas quand le programme **coûte** à KYMA : voir § 4.
 
+> **Usage interne uniquement.** Les seuils 259,80 € / 399,90 € et les soldes du § 4 sont des outils internes. Ne jamais les reformuler au client en « se rentabilise », « rapporte », « gagnez » (Victoire, `shopify/conformite.md` § D).
+
 ## 3. Coûts du programme pour KYMA (par abonné)
 
 | Poste | Central | Prudent | Source |
@@ -35,7 +37,7 @@
 | Enveloppe | 0,20 € | 0,20 € | hypothèse |
 | Affranchissement lettre verte 20 g | 1,52 € | 1,52 € | La Poste, tarif au 01/01/2026 |
 | **Carte envoyée, total (une fois)** | **3,22 €** | **4,72 €** | Amortie sur 4 trimestres (central) ou 2 (prudent) |
-| Appli d'abonnement | ≈ 0,30 € / abonné / trimestre | idem | Appstle : gratuit jusqu'à 500 $ / mois de revenus d'abonnement, puis 10 / 30 / 100 $ / mois, 0 % de commission ; Seal : gratuit jusqu'à 50 abonnements, puis 5,95–9,95 $ / mois (Isabelle). Coût négligeable au démarrage ; Recharge (99 $ / mois) ou Bold (+1 à 2 %) à éviter |
+| Appli d'abonnement | ≈ 0,30 € / abonné / trimestre (hypothèse : ≈ 100 abonnés, plan Appstle à 10 $ / mois) | idem | Appstle : gratuit jusqu'à 500 $ / mois de revenus d'abonnement, puis 10 / 30 / 100 $ / mois, 0 % de commission ; Seal : gratuit jusqu'à 50 abonnements, puis 5,95–9,95 $ / mois (Isabelle). Coût négligeable au démarrage ; Recharge (99 $ / mois) ou Bold (+1 à 2 %) à éviter |
 | Crédit Waves (avoirs) | 0 € si avoir natif Shopify ou Shopify Flow | — | voir § 6 (attention au traitement TVA de l'outil) |
 
 **Marge du programme avant cashback, par abonné et par trimestre** : INITIUM **9,28 €** (central) / **7,56 €** (prudent) ; MAJESTÉ **31,37 €** / **29,34 €**.
@@ -48,6 +50,8 @@
 |---|---|---|
 | INITIUM 5 % | 8,95 € TTC → **7,46 € HT** | 9,95 € TTC → 8,29 € HT |
 | MAJESTÉ 10 % | 17,90 € TTC → **14,92 € HT** | 19,90 € TTC → 16,58 € HT |
+
+**Sensibilité (requalification)** : si le Crédit Waves était requalifié en **bon** à titre onéreux ou en **moyen de paiement** (TVA calculée sur le prix plein, voir § 5.2), le coût par crédit utilisé deviendrait le **TTC** : **8,95 €** (INITIUM) et **17,90 €** (MAJESTÉ) par hoodie à 179 € (9,95 € / 19,90 € à 199 €), soit +20 % ; les seuils P* du tableau ci-dessous baisseraient d'autant (÷ 1,2).
 
 Soit, en pourcentage du chiffre d'affaires HT des abonnés : **5 % × taux d'utilisation** (INITIUM) et **10 % × taux d'utilisation** (MAJESTÉ).
 
