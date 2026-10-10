@@ -1,7 +1,7 @@
 {%- comment -%}
   KYMA — Cercle Waves : deux paliers (INITIUM / MAJESTÉ) en CARTES DE MEMBRE 3D au format carte bancaire.
   RECTO = visuel de carte du fondateur (réglage image « Visuel de la carte », ou URL CDN de repli) ; sans image,
-  carte dessinée ci-dessous. VERSO = avantages (texte réglable) + précision « cashback » sous l'avantage concerné.
+  carte dessinée ci-dessous. VERSO = avantages (texte réglable, serré à partir de 4 lignes) ; précisions (cashback, quantités, carte) en vrai texte sous la carte.
   (85,6 × 54 mm, ratio 1,585), dessinées en CSS 3D + SVG (aucune image, aucune IA) :
   INITIUM = carte beige crème, « KYMA » doré en relief, vague marbrée ton sur ton ;
   MAJESTÉ = carte gris clair, écriture dorée, léger liseré or (palier « premium »).
@@ -44,6 +44,13 @@
           {%- liquid
             assign face_id = 'kyma-tier-' | append: section.id | append: '-' | append: forloop.index
             assign perk_lines = block.settings.perks | newline_to_br | split: '<br />'
+            assign perk_n = 0
+            for perk in perk_lines
+              assign pc = perk | strip
+              if pc != blank
+                assign perk_n = perk_n | plus: 1
+              endif
+            endfor
             assign tone = block.settings.tone
             if tone != 'majeste'
               assign tone = 'initium'
@@ -68,7 +75,7 @@
               endif
             endif
           -%}
-          <li class="kyma-tier kyma-tier--{{ tone }}{% if card_src != '' %} kyma-tier--img kyma-tier--fit-{{ block.settings.image_fit }}{% endif %}" data-kyma-flip style="--kd: {{ forloop.index0 | times: 140 }}ms; --fl: {{ forloop.index0 | times: -2.6 }}s;" data-ring="{{ forloop.index0 | at_most: 1 }}" {{ block.shopify_attributes }}>
+          <li class="kyma-tier kyma-tier--{{ tone }}{% if perk_n >= 4 %} kyma-tier--dense{% endif %}{% if card_src != '' %} kyma-tier--img kyma-tier--fit-{{ block.settings.image_fit }}{% endif %}" data-kyma-flip style="--kd: {{ forloop.index0 | times: 140 }}ms; --fl: {{ forloop.index0 | times: -2.6 }}s;" data-ring="{{ forloop.index0 | at_most: 1 }}" {{ block.shopify_attributes }}>
             <div class="kyma-tier__card" data-kyma-reveal style="--kd: {{ forloop.index0 | times: 140 }}ms;">
               <button type="button" class="kyma-tier__hit" aria-pressed="false" aria-label="{{ block.settings.aria | escape }}"></button>
               <div class="kyma-tier__float">
@@ -121,22 +128,10 @@
                             {%- assign perk_clean = perk | strip -%}
                             {%- if perk_clean != blank -%}
                               {%- assign perk_l = perk_clean | downcase -%}
-                              <li>{{ perk_clean | escape }}
-                                {%- if block.settings.cashback_note != blank -%}
-                                  {%- if perk_l contains 'cashback' or perk_l contains 'crédit' -%}<small class="kyma-tier__note">{{ block.settings.cashback_note | escape }}</small>{%- endif -%}
-                                {%- endif -%}
-                              </li>
+                              <li>{{ perk_clean | escape }}</li>
                             {%- endif -%}
                           {%- endfor -%}
                         </ul>
-                        {%- if block.settings.condition != blank -%}
-                          <p class="kyma-tier__cond">{{ block.settings.condition | escape }}</p>
-                        {%- endif -%}
-                        {%- assign more_lines = block.settings.condition_more | newline_to_br | split: '<br />' -%}
-                        {%- for ml in more_lines -%}
-                          {%- assign ml_clean = ml | strip -%}
-                          {%- if ml_clean != blank -%}<p class="kyma-tier__cond kyma-tier__cond--more">{{ ml_clean | escape }}</p>{%- endif -%}
-                        {%- endfor -%}
                       </div>
                     </div>
                   </div>
@@ -159,6 +154,19 @@
                 {%- endif -%}
               {%- endif -%}
             </div>
+            {%- comment -%} Précisions (cashback, quantités, carte) : en vrai texte SOUS la carte, toujours visibles
+              (le verso au format carte bancaire ne garde que les avantages). {%- endcomment -%}
+            {%- assign more_lines = block.settings.condition_more | newline_to_br | split: '<br />' -%}
+            {%- if block.settings.cashback_note != blank or block.settings.condition != blank or block.settings.condition_more != blank -%}
+              <div class="kyma-tier__fine">
+                {%- if block.settings.cashback_note != blank -%}<p class="kyma-tier__note">{{ block.settings.cashback_note | escape }}</p>{%- endif -%}
+                {%- if block.settings.condition != blank -%}<p class="kyma-tier__cond">{{ block.settings.condition | escape }}</p>{%- endif -%}
+                {%- for ml in more_lines -%}
+                  {%- assign ml_clean = ml | strip -%}
+                  {%- if ml_clean != blank -%}<p class="kyma-tier__cond kyma-tier__cond--more">{{ ml_clean | escape }}</p>{%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </li>
         {%- endfor -%}
       </ul>

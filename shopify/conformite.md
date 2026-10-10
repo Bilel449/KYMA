@@ -360,7 +360,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 1. **Chiffré, daté, conditionné, tenable** (art. L.121-2 et L.121-3 : une omission d'information essentielle est aussi trompeuse). Un avantage qui n'existe pas encore (aucun drop prévu, par exemple) ne peut pas être vendu comme acquis : la date de première application est affichée avant l'achat.
 2. **Ce que tout le monde a déjà n'est pas un avantage.** « Accès classique aux drops » (INITIUM) est l'accès du public : le présenter comme un avantage d'un abonnement payant est trompeur sur ce que le client achète. À remplacer ou à supprimer.
 3. **Aucun superlatif invérifiable** : « maximale », « avant tout le monde », « garantie », « élite », « exclusifs » (sauf si la quantité et la période sont fixées et respectées).
-4. **Pas d'avantage « à la discrétion » de KYMA** sans engagement minimal : « teasing » sans durée ni contenu est un avantage illusoire.
+4. **Pas d'avantage « à la discrétion » de KYMA sans engagement minimal** : « teasing » sans durée ni contenu est un avantage illusoire.
 5. **Cashback : la nature du crédit est dite à côté du mot** (décision du fondateur). Jamais « argent », « remboursé en espèces », « gagnez », « rentabilisez ».
 
 ### B. Table avant → après des avantages (pour Maya)
@@ -616,3 +616,201 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 | L7 | Dossier de preuves 3D : licence en PDF datée, facture au nom de la société, échanges avec le vendeur, captures de la page de vente. | Dossier partagé. | Izaac |
 | L8 | Ne livrer au navigateur que le GLB de production, optimisé (moins de 100 000 triangles, environ 5 Mo), jamais les sources ni les textures d'origine. | Contrôle avant mise en ligne. | Sacha |
 | L9 | Retirer toute attribution exigée par une licence CC-BY ou équivalente dans un endroit visible (mentions légales ou pied de page de la page 3D). | Selon la licence retenue. | Sacha |
+
+---
+
+## Statut juridique — comparatif (avec Abdou), 09/10/2026
+
+> **Auteur** : Victoire · **Binôme** : Abdou (angle fiscal et social, `finance/statut-comparatif.md`). Ce fichier n'existait pas encore dans le dépôt à la rédaction : je n'ai donc pas pu recouper nos conclusions. **Je ne chiffre rien** (cotisations, IS/IR, TVA, rémunération) : tout chiffre fiscal ou social cité ci-dessous vient de sources secondaires et est marqué « pour Abdou ».
+> **Hypothèses** (`brand/BRAND.md`, note de conformité) : fondateur unique, personne physique ; SASU « envisagée », rien d'immatriculé ; marque non déposée ; aucun fabricant signé ; précommandes encaissées avant production (≈ 50 % du volume) ; abonnement Cercle Waves (12,99 € et 39,99 € TTC par trimestre) ; levée de fonds possible plus tard (à confirmer par le fondateur).
+> **Sources** : service-public.fr, INPI, Légifrance et economie.gouv.fr sont inaccessibles depuis l'environnement (erreur réseau le 09/10/2026). Tout ce qui suit vient d'extraits de recherche et de guides secondaires (cabinets, CCI, Infogreffe, éditeurs). Les articles cités de mémoire sont suivis de « (à relire) ». **Relire chaque article sur Légifrance** avant de s'y fier. Modèle à faire valider par un avocat, et par Abdou pour tout ce qui est fiscal ou social.
+
+### 1. Réponse courte
+
+**SASU**, créée **avant** les précommandes, l'ouverture du compte de paiement, la signature du fabricant et le dépôt de marque. L'EURL est un second choix valable. La micro-entreprise est juridiquement possible mais mal adaptée à KYMA. Raisons, détaillées plus bas : (1) un fabricant, une banque ou un investisseur attend une société ; (2) la SASU peut accueillir des associés sans changer de forme ; (3) la marque, le motif et le domaine appartiennent dès le début à la société, sans transfert ultérieur ; (4) pas de transfert de contrats clients (précommandes, abonnements) en cas de changement de statut. **Certitude** : élevée sur l'orientation, moyenne sur les détails (sources secondaires).
+
+### 2. Tableau comparatif juridique
+
+| Critère | SASU | EURL | Micro-entreprise / EI |
+|---|---|---|---|
+| **Nature** | Société (SAS à associé unique), personne morale | Société (SARL à associé unique), personne morale | Personne physique ; la micro-entreprise est un régime simplifié de l'EI, pas un statut distinct |
+| **Responsabilité** | Limitée aux apports. Le dirigeant reste responsable de ses fautes de gestion (art. L.651-2 C. com.), de ses infractions et des cautions qu'il signe | Idem | Patrimoines professionnel et personnel séparés de plein droit depuis le 15/05/2022 (loi n° 2022-172), avec exceptions (voir 3.1) |
+| **Capital** | Libre, 1 € possible. Au moins la moitié des apports en numéraire libérée à la création, le solde sous 5 ans (L.225-3 appliqué à la SAS selon les guides, à relire) | Libre, 1 € possible. Au moins un cinquième libéré à la création (L.223-7, à relire) | Aucun |
+| **Gouvernance** | Statuts très libres ; un président (le fondateur) ; décisions de l'associé unique consignées ; comptes approuvés chaque année et déposés au greffe | Cadre légal de la SARL plus rigide ; un gérant ; mêmes obligations de comptes | Aucune structure ; l'entrepreneur décide seul ; pas de dépôt de comptes |
+| **Fabricant et banques** | Bon : Kbis, SIREN, capital, TVA intracommunautaire, comptes déposés | Bon, équivalent | Plus faible : contrat signé par une personne physique, pas de capital, pas de bilan public |
+| **Levée de fonds** | Très bon : entrée d'associés sans transformation, actions de préférence, BSA/BSA-AIR, pacte (à confirmer par l'avocat) | Moyen : la SARL accueille des associés mais ne peut pas émettre de valeurs mobilières donnant accès au capital (à relire) ; transformation en SAS possible mais coûteuse | Impossible : il faut d'abord créer une société et y transférer l'activité |
+| **Précommandes et abonnement** | Adapté : la société encaisse, contracte et rembourse ; dettes de la société | Adapté | Possible, mais les encaissements d'avance consomment vite les plafonds (pour Abdou) ; transfert de contrats clients si passage en société |
+| **Marque et PI** | Titulaire naturel de la marque, du motif, du domaine | Idem | Titulaire = le fondateur ; cession à prévoir ensuite |
+| **Création** | Statuts, dépôt de capital, annonce légale, dossier au guichet unique ; en pratique 1 à 3 semaines | Idem | Déclaration en ligne ; la plus rapide (quelques jours) |
+| **Domiciliation** | Siège au domicile du président ou chez une société de domiciliation | Idem | Adresse d'activité = souvent le domicile, visible publiquement |
+| **RC pro** | Souscrite au nom de la société | Idem | Souscrite à titre personnel/professionnel |
+| **Pages légales** | Mentions de société (voir 5) | Idem, avec « EURL » et « gérant » | Mention « EI », pas de capital, adresse du domicile |
+
+### 3. Analyse par thème
+
+#### 3.1 Responsabilité et protection du patrimoine personnel
+
+- **SASU / EURL.** L'associé unique ne risque en principe que son apport (art. L.227-1 pour la SAS, à relire). La protection tombe dans trois cas : (a) **cautions personnelles** signées pour la banque ou le fabricant (pratique courante pour une jeune société, négociable, jamais obligatoire par la loi) ; (b) **faute de gestion** avec insuffisance d'actif : le tribunal peut mettre tout ou partie des dettes à la charge du dirigeant (art. L.651-2 C. com. ; exemples de fautes retenues : absence de comptabilité, poursuite d'une exploitation déficitaire, CA Agen, 13/11/2024) ; (c) **responsabilité personnelle du dirigeant** pour ses infractions (pratiques commerciales trompeuses, abus de biens sociaux) et en matière fiscale (à relire). Le président qui prélève de l'argent dans la société hors rémunération, dividendes ou compte courant régulier s'expose à l'abus de biens sociaux, même seul associé.
+- **EI / micro-entreprise.** Depuis le 15/05/2022, l'entrepreneur a **deux patrimoines distincts de plein droit**, sans formalité ; la résidence principale est insaisissable de droit. Mais : (a) le créancier professionnel peut demander à l'entrepreneur de **renoncer par écrit** à la limitation de son gage pour un engagement précis (art. L.526-25, à relire) ; l'entrepreneur peut aussi accorder une sûreté sur son patrimoine personnel ; (b) l'administration fiscale et les organismes sociaux peuvent poursuivre sur l'ensemble des patrimoines pour l'impôt sur le revenu et les prélèvements sociaux (art. L.526-24, selon une source secondaire) ; (c) d'autres exceptions existent en cas de fraude ou de manquements graves (**je n'ai pas pu les vérifier**, art. L.526-22 à relire) ; (d) en cas de mélange des comptes ou de comptabilité absente, la séparation se prouve mal.
+- **Lecture.** Sur le papier, la protection patrimoniale est comparable depuis 2022. En pratique, la société est plus nette : structure formelle, comptabilité obligatoire, comptes déposés, preuve de séparation. **Le point qui compte le plus est celui des cautions**, quel que soit le statut : ne jamais signer une caution illimitée ni une renonciation sans l'avis d'un avocat. **Certitude** : moyenne (pas d'accès aux textes).
+
+#### 3.2 Capital, libération et gouvernance
+
+- Pas de minimum légal de capital pour la SASU ni l'EURL. Un capital de 1 € est légal mais présente la société comme dépourvue de fonds propres, ce qui pèse auprès du fabricant et de la banque. **Le montant du capital et la part en compte courant d'associé sont une décision financière : à fixer avec Abdou.**
+- Le capital en numéraire est déposé sur un compte bloqué (banque, plateforme en ligne ou notaire) ; la banque remet l'**attestation de dépôt des fonds**, pièce indispensable au dossier d'immatriculation. Un dossier sans cette attestation est rejeté (sources secondaires).
+- **Gouvernance SASU** : les statuts peuvent déjà prévoir ce qui servira plus tard (agrément des nouveaux associés, clause d'inaliénabilité, règles de majorité). Rédiger des statuts « prêts pour des associés » coûte peu à la création et évite une réécriture.
+- **Dirigeant** : président de SASU (assimilé salarié) ou gérant d'EURL (en principe travailleur non salarié) : différence sociale et fiscale **pour Abdou**.
+
+#### 3.3 Crédibilité auprès du fabricant et des banques
+
+- Le fabricant portugais contractera avec une entité identifiable : dénomination, SIREN, numéro de TVA intracommunautaire, représentant légal. Une société permet de négocier un **acompte plutôt qu'un paiement intégral d'avance** et de plafonner la responsabilité. Je n'ai trouvé aucune source sur les exigences réelles des fabricants : **demander par écrit au fabricant** ce qu'il exige (Kbis, caution, acompte, assurance) avant de signer.
+- Les banques et plateformes de paiement demandent les documents d'identité de la société : pour Shopify Payments, le compte « société privée » demande les informations de la société, du représentant et la liste des bénéficiaires effectifs ; le compte « entreprise individuelle » demande le SIRET (source : guide secondaire, non officiel). Pièces acceptées : Kbis ou avis de situation SIREN (forums Shopify).
+- **TVA intracommunautaire sur les achats au Portugal** : le régime de TVA (franchise ou non) conditionne la TVA facturée par le fabricant et le numéro à communiquer : **pour Abdou, avant la signature**.
+
+#### 3.4 Levée de fonds future
+
+- **SASU puis SAS** : l'arrivée d'un second associé ne change pas la forme sociale ; on adapte les statuts et on signe un pacte. La SAS est la forme la plus courante auprès des investisseurs (sources secondaires). Le **financement participatif en capital ou en prêt** passe par des plateformes agréées (règlement (UE) 2020/1503 et AMF, non vérifié) ; la **prévente avec contreparties** (type Ulule) est une précommande : mêmes obligations de livraison que sur le site, et mêmes mentions.
+- **EURL** : possible mais plus rigide ; une transformation en SAS coûte de l'ordre de 500 à 2 000 € selon un guide secondaire (**à chiffrer par Abdou**).
+- **EI / micro** : aucun investisseur ne peut entrer. Passer en société plus tard suppose de transférer le fonds, les contrats, la marque, le domaine, le compte Shopify et les stocks, avec des coûts et un risque de rupture.
+
+#### 3.5 Précommandes et Cercle Waves (encaissements d'avance)
+
+1. **Qui encaisse.** Les fonds appartiennent à la société, qui doit les rembourser en cas de rétractation, d'impossibilité de livrer ou de résolution (art. L.216-1 et s. C. conso). En cas de défaillance, les clients sont des créanciers de la société comme les autres. **Je n'ai trouvé aucune obligation légale de cantonner (séquestrer) les sommes reçues pour une vente à distance de biens** (à confirmer par l'avocat). Bonne pratique : compte bancaire dédié aux précommandes, trésorerie de remboursement provisionnée, aucun prélèvement personnel.
+2. **Responsabilité pénale.** Encaisser en sachant que l'on ne livrera pas, ou afficher une date que l'on sait intenable, reste une infraction (pratique trompeuse, escroquerie) quel que soit le statut : la forme sociale ne protège pas le dirigeant.
+3. **Shopify Payments** peut constituer des **réserves** (retenue d'une partie des fonds) selon l'analyse de risque du compte ; le centre d'aide ne traite pas expressément des précommandes, mais l'expérience de marchands signale des retenues de 30 à 120 jours (forums, anecdotes). Conséquence : ne pas compter sur un versement immédiat ; provisionner la trésorerie avec Abdou. [Shopify Help Center, « Overview of reserves », consulté 09/10/2026.]
+4. **Cercle Waves.** Un abonnement à renouvellement automatique suppose un cocontractant clair, des CGV et conditions au nom de la société, et un prélèvement récurrent sur le compte de la société. Le Crédit Waves est une dette envers les clients (avoir) : traitement comptable et TVA **pour Abdou**. Les obligations de la section Cercle Waves (rappel J-35, résiliation en ligne, rétractation) sont les mêmes dans tous les statuts.
+5. **Micro-entreprise.** Les encaissements d'avance comptent dans le chiffre d'affaires et peuvent rapprocher plus vite des plafonds et des seuils de franchise de TVA. Plafonds 2026-2028 selon les guides : 203 100 € pour la vente de marchandises (ancien plafond : 188 700 € ; une source divergente cite encore l'ancien) ; franchise de TVA à 85 000 € (tolérance 93 500 €) : **chiffres à confirmer par Abdou**.
+
+#### 3.6 Dépôt de la marque KYMA : au nom de la personne ou de la société ?
+
+**Recommandation : au nom de la SASU**, dès que le SIREN est attribué.
+
+- **Pourquoi la société.** Elle exploitera la marque : le titulaire de la marque est l'exploitant, sinon il faut une licence écrite. Un investisseur, un fabricant ou une plateforme attendent que les actifs de PI soient dans la société. Pas de cession à organiser plus tard, donc pas de frais ni d'impôt de cession (pour Abdou : une cession onéreuse de marque est assimilée à une cession d'actif avec droits d'enregistrement, selon une source secondaire).
+- **Pourquoi pas avant l'immatriculation, au nom de la « société en formation ».** Le fondateur peut déposer pour le compte d'une société en formation, et la société reprend ensuite le dépôt (source secondaire). Mais la reprise des actes accomplis pour une société en formation doit être **expresse** (état des actes annexé aux statuts ou mandat) ; la jurisprudence a évolué, dont des arrêts du 29/11/2023 que je n'ai pas pu lire (art. L.210-6 C. com. et art. 1842 C. civ., à relire). Tant qu'elle n'est pas reprise, la personne qui a agi est engagée personnellement. Le gain de quelques jours ne justifie pas ce flou.
+- **Solution de repli si l'urgence est réelle** (annonce publique imminente, signe qu'un tiers dépose un nom proche, immatriculation qui traîne au-delà de 3 à 4 semaines) : dépôt **au nom du fondateur**, personne physique, puis **cession écrite à la société** après son immatriculation, avec inscription de la cession au Registre national des marques pour qu'elle soit opposable aux tiers (art. L.714-7 CPI, à relire ; frais d'inscription non trouvés, à vérifier sur le barème INPI). Entre-temps, une licence écrite et gratuite du fondateur à la société évite un vide.
+- **Priorité.** Le droit sur la marque s'acquiert par le **premier dépôt** : chaque semaine de retard est un risque. Le compte @kymasinsta et les annonces publiques augmentent l'exposition. La **recherche d'antériorités** (INPI, EUIPO/TMview, WIPO) peut et doit être faite **dès maintenant**, car « kyma » est un mot grec courant.
+- **Coût.** Tarif INPI en vigueur depuis le 02/07/2026 : **190 € pour une classe** ; **40 € par classe supplémentaire** selon des guides (non repris dans l'extrait officiel lu), soit **230 € pour les classes 25 et 35**. La protection court pour 10 ans, renouvelable (renouvellement 290 € pour une classe selon une source non officielle). Extension UE (EUIPO) : revendiquer la **priorité de 6 mois** de la Convention de Paris, après le dépôt INPI ; tarif EUIPO non vérifié.
+- **Autres actifs à mettre au nom de la société** : logo et motif « KYMA Wave » (**cession écrite des droits d'auteur** du créateur à la société, art. L.131-3 CPI), nom de domaine, boutique Shopify (transfert de propriété du compte), comptes de réseaux sociaux (e-mail professionnel de la société). Le nom de produit « Ressac » doit être couvert par la recherche d'antériorités.
+
+#### 3.7 Démarches et délais de création (guichet unique INPI)
+
+Depuis le 01/01/2023, le **guichet unique** de l'INPI (formalites.entreprises.gouv.fr) est la seule voie pour toute formalité de création, de modification ou de cessation (sources secondaires).
+
+| Étape | SASU | Délai indicatif |
+|---|---|---|
+| 1 | Vérifier la disponibilité du nom et recherche d'antériorités de la marque | 1 à 3 jours |
+| 2 | Rédiger les statuts (objet social large : création, fabrication sous-traitée et vente de vêtements, e-commerce, abonnement et fidélité ; siège ; président ; durée) | 1 à 3 jours |
+| 3 | Déposer le capital et obtenir l'attestation de dépôt des fonds | quelques jours selon la banque ou le notaire |
+| 4 | Publier l'annonce légale de constitution | 1 à 2 jours |
+| 5 | Saisir le dossier sur le guichet unique : statuts signés, attestation de dépôt des fonds, justificatif de siège, pièce d'identité, déclaration de non-condamnation, annonce légale, déclaration des bénéficiaires effectifs | 1 jour |
+| 6 | Instruction et immatriculation (Kbis, SIREN, SIRET) | 3 à 7 jours ouvrés dans les guides, avec des estimations divergentes (24 h par étape pour d'autres) |
+| 7 | Après le Kbis : compte bancaire définitif, régime de TVA, Shopify Payments, assurance, adhésion Refashion, convention de médiation, dépôt de marque | variable |
+
+- **Total réaliste** : 1 à 3 semaines si le dossier est complet ; l'incomplétude du dossier est la première cause de retard (sources secondaires). **Coût** : un guide secondaire cite 250 à 500 € hors honoraires ; **devis à demander, chiffrage par Abdou**.
+- **Micro-entreprise** : déclaration en ligne sur le même guichet, sans capital, sans statuts ni annonce légale, délai de quelques jours. Un commerçant s'immatricule aussi au RCS (à relire).
+- **Ne rien signer au nom de KYMA avant le Kbis** (fabricant, domaine, Shopify, graphistes, 3D) : voir ST3.
+
+#### 3.8 Domiciliation
+
+| Option | Avantages | Limites |
+|---|---|---|
+| **Domicile du président** | Gratuit ; le dirigeant peut y installer le siège de façon permanente sauf disposition contraire de la loi ou du contrat (Infogreffe) | Les sources divergent sur une durée maximale de 5 ans selon les clauses du bail ou du règlement de copropriété (art. L.123-11-1 C. com., à relire) ; prévenir le bailleur ou le syndic ; l'adresse devient publique (Kbis, mentions légales) |
+| **Société de domiciliation agréée** | Adresse professionnelle ; domicile du fondateur non publié ; contrat de domiciliation écrit | Coût mensuel (devis) ; courrier à relever |
+| **Local ou espace de coworking** | Crédibilité, adresse de retours possible | Coût, bail |
+
+Le choix pèse sur les pages légales : une **personne physique** ne bénéficie de l'anonymat de son domicile qu'à titre non professionnel (art. 6 III LCEN, à relire), alors que la société n'a besoin d'afficher que son siège. **Adresse de retours et de service client** : distincte du siège, à fixer avec le fabricant et le transporteur.
+
+#### 3.9 Assurance RC professionnelle et responsabilité produit
+
+- **Pas d'obligation légale** de RC pro pour la vente en ligne de vêtements (guides Shopify, Shine, Assurup), mais elle est **fortement conseillée** et peut être exigée par un partenaire.
+- **Garantie à retenir** : RC exploitation **et RC produits après livraison** (dommages causés par un produit livré : allergie, blessure, défaut). La garantie dommages au stock et la cyber-assurance sont des options.
+- **Pourquoi c'est important pour KYMA.** (a) Celui qui **appose sa marque** sur un produit est assimilé au producteur pour la responsabilité du fait des produits défectueux (ancien art. 1386-6, devenu 1245-5 C. civ. ; la CJUE a précisé la notion en 2024, aff. C-157/23 ; art. à relire). La victime peut s'adresser à KYMA même si le fabricant est au Portugal. La directive (UE) 2024/2853 doit être transposée et modifiera ce régime (à suivre). (b) Le règlement (UE) 2023/988 (**GPSR**, applicable depuis le 13/12/2024) impose que l'offre en ligne indique le **nom, l'adresse postale et l'adresse électronique du fabricant** (art. 19 selon des guides, à relire) ; une marque qui fait fabriquer sous son nom peut être qualifiée de fabricant (art. 3, à relire). La **société** devient donc le contact affiché sur les fiches produit et sur l'étiquette ou l'emballage.
+- **À faire** : souscrire avant la première expédition (et avant la signature du fabricant s'il l'exige), au nom de la société, avec une garantie couvrant la vente à distance dans l'UE et la contrefaçon ; demander au fabricant son attestation d'assurance et un **recours contractuel** en cas de défaut. **Prime : devis, chiffrage par Abdou.**
+
+### 4. Ce que le statut change pour les pages légales
+
+| Page | Si SASU (hypothèse actuelle) | Si EURL | Si EI / micro |
+|---|---|---|---|
+| **Mentions légales** (`mentions-legales.html`) | Dénomination, « SASU », capital, siège, RCS et SIREN, n° de TVA intracommunautaire, président (directeur de la publication), e-mail, téléphone, hébergeur, médiateur, IDU. Le modèle est déjà rédigé pour cette hypothèse | « EURL », gérant au lieu de président | Nom, prénom et mention « EI » ou « entrepreneur individuel » (décret n° 2022-725 du 28/04/2022 pour les documents commerciaux, afficher par prudence sur le site) ; SIREN ; adresse ; pas de capital ; « TVA non applicable, art. 293 B du CGI » en franchise |
+| **CGV** (`cgv.html`) | Vendeur = la société ; identité complète en tête ; clause de **transfert** à un successeur (voir 5) | Idem, « EURL » | Vendeur = EI ; adresse du domicile ; mention EI |
+| **Cercle Waves** | Cocontractant = la société ; prélèvements à son nom | Idem | Idem avec le nom de l'EI |
+| **Retours** | Adresse de retours distincte du siège | Idem | Idem |
+| **Confidentialité** | Responsable du traitement = la société ; DPA Shopify accepté par la société ; registre au nom de la société | Idem | Responsable = l'EI (la personne) |
+| **Cookies** | Aucun changement | Aucun | Aucun |
+| **Fiches produit et étiquette** | Nom, adresse postale et e-mail de la société (GPSR) ; marque KYMA | Idem | Nom de l'EI ; l'adresse de l'EI devient le contact public |
+| **Facturation** | Mentions de société : SIREN, forme, capital, TVA | Idem | Mention EI, SIREN, franchise de TVA le cas échéant |
+
+### 5. Obligations qui en découlent (pages légales, CGV et au-delà)
+
+1. **Aucune page légale n'est publiable sans SIREN** : `[À COMPLÉTER]` ne peut être levé qu'après le Kbis (point 1).
+2. **Identité du vendeur dans les CGV** : dénomination, forme, capital, siège, RCS, TVA, téléphone et e-mail (art. L.111-1 et L.221-5 C. conso). La **forme juridique ne doit jamais être déduite** : copier le Kbis.
+3. **Clause de transfert du contrat** dans les CGV et les conditions du Cercle Waves : en cas de transformation, de fusion ou de reprise par une société du groupe, le professionnel peut transférer ses droits et obligations **sous réserve d'en informer le client et sans réduire ses droits**. Sans cette clause, la cession d'un contrat en cours (précommande, abonnement) exige l'accord du client (art. 1216 C. civ., à relire). Une **simple transformation** de SASU en SAS ne crée pas de nouvelle personne morale et n'en a pas besoin ; **le passage d'une EI à une société, si**. C'est un argument de plus pour la société d'emblée. Clause à faire valider par l'avocat (équilibre des clauses, art. L.212-1).
+4. **Médiation de la consommation** : convention signée au nom de l'entité qui vend.
+5. **Éco-organismes** : Refashion et emballages demandent le SIREN ; l'IDU est ensuite inscrit dans les mentions légales et les CGV.
+6. **Fabricant, GPSR et étiquette** : l'identité de la société sur l'étiquette ou l'emballage, selon le règlement GPSR (à confirmer avec le fabricant).
+7. **Mise à jour des textes** : je mets à jour `mentions-legales.html`, `cgv.html` et `confidentialite.html` dès réception du Kbis (point E10 de l'entraide). Tant que le statut n'est pas arrêté, le modèle reste rédigé pour une SASU.
+
+### 6. Recommandation (à confirmer avec Abdou pour les chiffres et avec un avocat)
+
+**Créer une SASU**, avec ces conditions :
+
+1. **Immatriculer d'abord, vendre ensuite.** Rien n'est signé ni encaissé avant le Kbis : ni contrat fabricant, ni domaine, ni précommande, ni abonnement.
+2. **Statuts « prêts pour des associés »** : objet social large, agrément des nouveaux associés, siège domicilié, président = fondateur. Le capital et le compte courant sont fixés avec Abdou.
+3. **Marque** : recherche d'antériorités maintenant ; dépôt INPI **au nom de la SASU** (classes 25 et 35, avec « Ressac » dans la recherche) dès le SIREN ; repli en nom propre avec cession écrite si l'urgence est réelle ; extension UE dans les 6 mois de priorité.
+4. **PI** : cession écrite des droits (logo, motif Wave, rendus, 3D) à la société dès l'immatriculation ; domaine, boutique Shopify et réseaux au nom de la société.
+5. **Argent** : compte bancaire professionnel dédié, provision de remboursement des précommandes, aucune caution illimitée ni renonciation sans avocat.
+6. **Assurance** : RC exploitation et RC produits avant la première expédition.
+7. **Domiciliation** : société de domiciliation si le fondateur souhaite ne pas publier son domicile ; sinon domicile après vérification du bail ou du règlement de copropriété.
+8. **Choisir l'EURL à la place** seulement si les chiffres d'Abdou montrent un avantage social ou fiscal net pour un dirigeant non salarié **et** si le fondateur renonce à une levée de fonds. **Ne pas choisir la micro-entreprise** : pas de levée possible, crédibilité plus faible, transfert de contrats plus tard, domicile public.
+
+**À confirmer avec Abdou (chiffres)** : capital et compte courant ; régime social et fiscal du dirigeant (président assimilé salarié ou gérant non salarié) ; IS ou IR ; franchise de TVA ou assujettissement et TVA sur achats au Portugal ; plafonds de la micro-entreprise ; coût de création et de domiciliation ; prime de RC pro ; impact de la réserve Shopify sur la trésorerie ; traitement comptable et TVA du Crédit Waves ; fiscalité d'une éventuelle cession de marque.
+
+**À confirmer avec un avocat** : statuts ; clause de reprise des actes (si un acte est signé avant le Kbis) ; caution et renonciation ; clause de transfert de contrat ; absence d'obligation de cantonnement des fonds de précommande ; contrat fabricant (PI, garantie, assurance) ; GPSR et responsabilité du fait des produits ; recherche d'antériorités.
+
+### 7. Points de vigilance (statut juridique)
+
+**🔴 Bloquant avant mise en vente**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| ST1 | **Statut non arrêté et non immatriculé** : pas de SIREN, donc pas de compte de paiement, de CGV complètes ni de contrat fabricant sûr. | Décider (SASU recommandée), immatriculer sur le guichet unique, puis lever les `[À COMPLÉTER]`. | Fondateur, Abdou |
+| ST2 | **Marque non déposée et titularité à trancher** : risque de perte du nom par un dépôt tiers (le premier déposant gagne). | Recherche d'antériorités maintenant ; dépôt au nom de la SASU dès le SIREN, ou repli en nom propre avec cession écrite. | Fondateur, conseil en PI |
+| ST3 | **Engagements pris avant l'immatriculation** (fabricant, domaine, outils, prestataires 3D ou graphiques) : la personne qui signe est engagée personnellement tant que la société ne les a pas repris (art. L.210-6 C. com., à relire). | Ne rien signer au nom de KYMA avant le Kbis, ou lister les actes dans une annexe aux statuts ou donner un mandat exprès. | Fondateur, avocat |
+| ST4 | **Droits d'auteur du logo, du motif Wave et des visuels** détenus par le créateur et non par la société. | Cession écrite détaillée (art. L.131-3 CPI), signée dès l'immatriculation. Voir la clause H4 pour la 3D. | Fondateur |
+
+**🟠 À régler rapidement**
+
+| # | Risque | Action | Qui |
+|---|---|---|---|
+| ST5 | **Cautions personnelles et renonciations** demandées par la banque ou le fabricant : perte de la protection du patrimoine. | Refuser les cautions illimitées ; plafonner montant et durée ; avis d'un avocat avant de signer. | Fondateur, avocat |
+| ST6 | **Encaissements d'avance** non cantonnés et mêlés à la trésorerie courante : défaut de remboursement en cas de rétractation ou d'arrêt de la production ; faute de gestion possible. | Compte dédié et provision de remboursement ; aucune dépense hors production avant l'expédition. | Fondateur, Abdou |
+| ST7 | **Réserve Shopify Payments** sur les précommandes non expédiées : fonds retenus. | Interroger le support Shopify par écrit avant l'ouverture ; prévoir la trésorerie. | Sacha, Abdou |
+| ST8 | **RC pro et RC produits absentes**, alors que KYMA répond du produit comme « producteur apparent ». | Devis et souscription avant la première expédition. | Fondateur, Abdou |
+| ST9 | **GPSR** : identité du fabricant (nom, adresse postale, e-mail) absente des fiches et de l'étiquette ou de l'emballage. | Ajouter ces champs sur les fiches ; vérifier l'étiquette avec le fabricant. | Sacha, Izaac, fondateur |
+| ST10 | **Domiciliation** : siège au domicile sans vérification du bail ou du règlement de copropriété ; adresse personnelle publiée. | Vérifier, prévenir le bailleur ou le syndic, ou choisir une société de domiciliation. | Fondateur |
+| ST11 | **Transfert de contrats clients** (précommandes, abonnements) non prévu : accord des clients exigé en cas de changement de statut. | Clause de transfert dans les CGV et les conditions du Cercle Waves. | Victoire, avocat |
+| ST12 | **Boutique Shopify, domaine et réseaux** au nom d'une personne physique. | Transférer la propriété à la société après le Kbis (e-mail professionnel, titulaire du domaine). | Fondateur, Sacha |
+
+**🟢 Bonnes pratiques**
+
+| # | Point | Action | Qui |
+|---|---|---|---|
+| ST13 | Statuts « SAS-ready » et pacte simple dès l'arrivée d'un second associé. | Avocat lors de la rédaction des statuts. | Fondateur |
+| ST14 | Dossier de preuves du statut : statuts, Kbis, attestation de dépôt des fonds, attestations d'assurance, contrat de domiciliation. | Dossier partagé. | Fondateur |
+| ST15 | Veille : transposition de la directive (UE) 2024/2853 (responsabilité produit), plafonds 2026-2028, évolution des règles de reconduction tacite. | Relecture trimestrielle. | Victoire, Abdou |
+
+### 8. Sources de cette section (consultées le 09/10/2026 ; extraits de recherche et sources secondaires, accès direct aux sources officielles impossible)
+
+- **Guichet unique, délais, SASU** : Swim Legal, « Délais INPI création d'entreprise » et « Immatriculation SASU : étapes, documents et procédure Guichet unique » (swim.legal) ; Copeps, « Comment créer une SASU sur le guichet unique » (copeps.fr) ; LegalPlace, « Temps de création d'entreprise » (legalplace.fr). Question écrite n° 9869 (16e législature), Assemblée nationale, sur le guichet unique.
+- **Capital et dépôt des fonds** : LegalPlace, « Dépôt de capital SASU » ; Hayot Expertise, « Apport en numéraire : libération du capital » ; Selectra, « Déposer son capital en ligne ».
+- **Entrepreneur individuel, séparation des patrimoines** : loi n° 2022-172 du 14/02/2022 ; CCI Paris Île-de-France, « Nouveau statut des entrepreneurs individuels » ; Lefebvre Dalloz, « Protéger le patrimoine personnel de l'entrepreneur individuel » ; Fiducial, « Insaisissabilité des biens immobiliers non professionnels » ; actu-juridique.fr (art. L.526-22, L.526-24, L.526-25). Mention « EI » : décret n° 2022-725 du 28/04/2022, selon Legifiscal, GHR et Obat.
+- **Responsabilité du dirigeant** : art. L.227-1 et L.651-2 C. com. ; CA Agen, 13/11/2024 (doctrine.fr) ; Cass. com., 13/12/2023, n° 21-14.579 (Dalloz actualité).
+- **Société en formation, reprise des actes** : art. L.210-6 C. com. et art. 1842 C. civ. ; Gazette du Palais (2021) ; Le Monde du Droit, « Société en formation : anticiper et formaliser la reprise d'engagements » ; actu-juridique.fr, « Les conditions de reprise d'un acte passé au nom d'une société en formation, un important revirement jurisprudentiel » (arrêts du 29/11/2023).
+- **Marque** : INPI, document tarifaire applicable depuis le 02/07/2026 (inpi.fr, extrait lu : 190 € pour une classe) ; Weblex, « Redevances des procédures INPI 2026 » ; Copeps et Keobiz sur le coût du dépôt, le dépôt par une société en formation et la cession de marque. Convention de Paris (priorité de 6 mois) : connaissance générale, à relire.
+- **Domiciliation** : Infogreffe, « Où domicilier le siège social de sa société ? » ; CCI Paris Île-de-France, « Quelle domiciliation pour une société commerciale ? » ; Copeps ; LegalPlace (art. L.123-11-1 C. com.).
+- **Micro-entreprise** : Legifiscal, « Nouveaux seuils micro-entreprises année 2026 » ; Propulse by CA ; Hayot Expertise, « Plafonds micro-entreprise 2026 ».
+- **Comparatifs de statuts** : Finalib, Advizexperts, L'Expert-Comptable.com (guides 2026 ; chiffres sociaux non repris).
+- **Assurance** : Shopify, « Assurances e-commerce » (shopify.com/fr/blog/assurances-ecommerce) ; Shine ; Assurup ; Coover.
+- **Responsabilité produit et GPSR** : art. 1245-5 C. civ. (ancien 1386-6) ; CJUE, 19/12/2024, aff. C-157/23 (Dalloz actualité, LegalNews) ; règlement (UE) 2023/988, art. 19 (Vimm, donneespersonnelles.fr, GS1 ; applicable depuis le 13/12/2024) ; directive (UE) 2024/2853.
+- **Shopify** : Shopify Help Center, « Overview of reserves in Shopify Payments » (help.shopify.com) ; forum Shopify Community (documents demandés par Shopify Payments pour une société).
+- **Financement participatif** : règlement (UE) 2020/1503 ; Ulule et guides sectoriels (non officiels).

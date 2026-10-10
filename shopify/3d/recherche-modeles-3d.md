@@ -10,7 +10,7 @@
 ## 1. Modèles identifiés
 | # | Modèle | Plateforme | Prix | Formats | Géométrie | Licence | Remarques |
 |---|---|---|---|---|---|---|---|
-| 1 | Oversized Hoodie (polygonal-miniatures) — https://www.renderhub.com/polygonal-miniatures/oversized-hoodie | RenderHub | non trouvé | FBX, **GLB**, OBJ, blend | 70 486 polygones (triangles à recompter) ; diffuse + normal 4K | non trouvée | Photogrammétrie (ZBrush) : plis et ombres figés dans la texture → recoloris difficile ; zip devant non séparé |
+| 1 | Oversized Hoodie (polygonal-miniatures) — https://www.renderhub.com/polygonal-miniatures/oversized-hoodie | RenderHub | non trouvé | FBX, **GLB**, OBJ, blend | 70 486 polygones (triangles à recompter) ; diffuse + normal 4K | non trouvée | Photogrammétrie (ZBrush) : plis et ombres figés dans la texture → changement de couleur difficile ; zip devant non séparé |
 | 2 | Zip Hoodie Wash (Clothing Axis) — https://www.renderhub.com/clothing-axis/zip-hoodie-wash | RenderHub | non trouvé | **projet CLO3D/Marvelous (ZPRJ)**, blend, OBJ, FBX, **GLB**, USD, DXF | 300 000 polygones (trop lourd : décimation/retopo) ; UV sans chevauchement | Extended Use | Patron modifiable via le projet CLO ; oversize non confirmé |
 | 3 | Ultimate Oversized Zip Hoodie CLO 3D — https://www.cgtrader.com/3d-models/character/clothing/ultimate-oversized-zip-hoodie-clo-3d | CGTrader | 6 $ | FBX (~69,5 Mo), projet CLO/Marvelous (~76 Mo) ; pas de GLB | high poly, textures 4K, UV prêtes, pose A | « Custom License » à lire | Seul « oversized + zip » explicite ; aucun avis |
 | 4 | Hoodie Zip Generic (Frezzy) — https://www.renderhub.com/frezzy/hoodie-zip-generic · https://superhivemarket.com/products/hoodie-zip-generic | RenderHub / Superhive | 27 $ (Superhive) | FBX, OBJ, Blender, Max, Maya, C4D ; pas de GLB | non trouvée (repère : « Hoodie Generic Black » du même vendeur = 37 293 polygones) | Extended Use (RenderHub) | Oversize non confirmé |
@@ -34,8 +34,8 @@ Point critique commun : une page WebGL envoie le fichier au navigateur, donc le 
 - Scan 3D à Paris : aucun prestataire ni tarif fiable trouvé. Les scans ont des ombres cuites et des plis permanents (gênant pour recolorer).
 
 ## Recommandation factuelle
-- **A.** Zip Hoodie Wash (Clothing Axis, RenderHub) ou Ultimate Oversized Zip Hoodie (CGTrader, 6 $) : projet CLO3D fourni → patron modifiable (oversize, capuche sans cordon, poches biais). Prévoir retopo/bake/export GLB pour tenir < 100k triangles et 5 Mo.
-- **B.** Oversized Hoodie (polygonal-miniatures) : déjà en GLB, < 100k polygones, réaliste, mais recoloris difficile ; prix et licence à vérifier.
+- **A.** Zip Hoodie Wash (Clothing Axis, RenderHub) ou Ultimate Oversized Zip Hoodie (CGTrader, 6 $) — « Custom License » non lue : à lire avant toute décision ; évaluée en rouge en l'état par Victoire (conformite.md, partie H) : projet CLO3D fourni → patron modifiable (oversize, capuche sans cordon, poches biais). Prévoir retopo/bake/export GLB pour tenir < 100k triangles et 5 Mo.
+- **B.** Oversized Hoodie (polygonal-miniatures) : déjà en GLB, < 100k polygones, réaliste, mais changement de couleur difficile ; prix et licence à vérifier.
 - Alternative : freelance CLO3D à partir du tech pack v3, avec clause de cession des droits au contrat.
 
 ## Points de vigilance licence (à valider par Victoire)

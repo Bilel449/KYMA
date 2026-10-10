@@ -649,7 +649,7 @@ class Mesh:
 
 
 def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("l", "r", "b", "t"),
-                    th=TH, fabric="fabric", lining="lining"):
+                    th=TH, fabric="fabric", lining="lining", apex=False):
     """Coque épaisse à partir d'une nappe extérieure G (nv, nu, 3).
     out_ref : fonction(P) -> direction extérieure approximative (pour orienter).
     Renvoie (outer Mesh [+ lisières], inner Mesh)."""
@@ -665,6 +665,15 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
         avg = nrm(Ng[:, 0] + Ng[:, -1])
         Ng[:, 0] = avg
         Ng[:, -1] = avg
+        N = Ng.reshape(-1, 3)
+    if apex:
+        # v3 : pointe de capuche (rangées qui se referment en un point) — normale commune,
+        # sinon l'envers des deux arêtes se croise et la lisière fait un « X »
+        Ng = N.reshape(nv, nu, 3)
+        rowlen = np.linalg.norm(np.diff(G, axis=1), axis=2).sum(1)
+        w = smoothstep(0.10, 0.03, rowlen)
+        avg = nrm(Ng.mean(1))
+        Ng[:] = nrm(Ng * (1 - w)[:, None, None] + avg[:, None, :] * w[:, None, None])
         N = Ng.reshape(-1, 3)
     outer = Mesh(V, F, fabric, uv0.reshape(-1, 2), uv1.reshape(-1, 2), N)
     # envers (sous-échantillonné)
@@ -758,14 +767,16 @@ def body_disp(G):
     warp = 2.2 * fbm(NOISE, P * np.array([2.4, 0.8, 2.4]) + 5.0, 2).reshape(shape)
     amp = 0.55 + 0.45 * fbm(NOISE, P * np.array([2.0, 1.0, 2.0]) + 61.0, 2).reshape(shape)
     gv = fold_wave(9 * th + warp) + 0.6 * np.sin(5 * th + 1.3 * warp + 1.0)
-    d += 0.0060 * gv * amp * smoothstep(0.64, 0.26, y) * smoothstep(Y0 + 0.02, Y0 + 0.10, y)
+    d += 0.0085 * gv * amp * smoothstep(0.66, 0.28, y) * smoothstep(Y0 + 0.02, Y0 + 0.10, y)
+    # petites rides secondaires (le molleton ondule partout, jamais lisse comme une coque)
+    d += 0.0016 * fbm(NOISE, P * np.array([16.0, 7.0, 16.0]) + 77.0, 2).reshape(shape)
     # plis d'aisselle : diagonales du dessous de bras vers le bas et le milieu (devant et dos)
     px, py = ax - W_CH, y - Y_AP
     ang = math.radians(40)
     perp = px * math.sin(ang) - py * math.cos(ang)
     dist = np.sqrt(px ** 2 + py ** 2)
     ph = fbm(NOISE, P * 4.0 + 31.0, 2).reshape(shape)
-    d += 0.0100 * fold_wave(2 * np.pi * perp / 0.064 + 2.0 * ph) * np.exp(-dist / 0.12) * smoothstep(0.0, 0.05, -py + 0.04)
+    d += 0.0120 * fold_wave(2 * np.pi * perp / 0.066 + 2.0 * ph) * np.exp(-dist / 0.13) * smoothstep(0.0, 0.05, -py + 0.04)
     # blousant : plis horizontaux irréguliers au-dessus du bord-côte (ils se cassent, se relaient)
     hw = fbm(NOISE, P * np.array([3.0, 0.6, 3.0]) + 7.0, 2).reshape(shape)
     br = 0.45 + 0.55 * smoothstep(-0.35, 0.35, fbm(NOISE, P * np.array([5.0, 2.0, 5.0]) + 13.0, 2).reshape(shape))
@@ -810,6 +821,7 @@ def sleeve_disp(G):
     ve = SLV_POSE[side]["elbow"]
     _, vlen = arc_coords(G)
     d = 0.0045 * fbm(NOISE, P * np.array([5.0, 1.6, 5.0]) + 11.0, 3).reshape(shape)
+    d += 0.0014 * fbm(NOISE, P * np.array([18.0, 8.0, 18.0]) + 71.0, 2).reshape(shape)
     ph = fbm(NOISE, P * 5.0 + 5.0, 2).reshape(shape)
     # drapé en spirale le long de la manche
     d += 0.0045 * fold_wave(3 * phi + 2 * np.pi * vlen / 0.30 + 2.0 * ph) * smoothstep(-0.6, 0.1, v) * smoothstep(0.95, 0.72, v)
@@ -1909,7 +1921,7 @@ def finish_geometry(geo, S=2048):
         outer, inner = shell_from_grid(G, g[k]["ref"], g[k]["uv0"], g[k]["uv1"], closed_u=closed,
                                        rims=("b", "t") if closed else ("l", "r", "b", "t"),
                                        th=TH_HOOD if k == "Hood" else TH,
-                                       lining="hoodlining" if k == "Hood" else "lining")
+                                       lining="hoodlining" if k == "Hood" else "lining", apex=(k == "Hood"))
         nodes[k] = [outer, inner]
     # poches
     for k, sg in (("Panel_Left", 1), ("Panel_Right", -1)):
