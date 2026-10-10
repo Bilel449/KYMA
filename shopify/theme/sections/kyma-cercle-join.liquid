@@ -6,7 +6,8 @@
     1. OBLIGATOIRE : être informé de l'ouverture du Cercle Waves. Sans elle, le formulaire ne part pas (message
        « consent_error » avec JavaScript ; validation native du navigateur sans JavaScript). Trace : étiquette
        « consentement-ouverture-<version>-<date> » + texte de la case dans la note client (contact[note]).
-    2. FACULTATIVE : newsletter. Cochée, elle ajoute l'étiquette « consentement-newsletter-<version>-<date> »
+    2. FACULTATIVE : newsletter. Cochée, elle ajoute les étiquettes PROVISOIRES « newsletter-a-confirmer » et
+       « demande-newsletter-<version>-<date> » (double opt-in obligatoire avant toute newsletter : règle C bis)
        (sans JavaScript aussi : second champ contact[tags], le dernier envoyé l'emporte). Ne conditionne rien.
   Date = jour d'affichage de la page (heure de la boutique) ; la date exacte d'inscription est celle de la fiche client.
   ⚠ Le formulaire Shopify « customer » marque toujours le client « abonné e-mail » (accepts_marketing) : n'envoyer
@@ -15,11 +16,13 @@
 {% render 'kyma-assets' %}
 {%- assign tid = 'kyma-cj-' | append: section.id -%}
 {%- assign hid = tid | append: '-t' -%}
+{%- comment -%} Newsletter : étiquette PROVISOIRE seulement (règle C bis de Victoire) — « consentement-newsletter-* » n'est
+  posée qu'après la confirmation du double opt-in (appli de formulaire), jamais par ce formulaire. {%- endcomment -%}
 {%- liquid
   assign today = 'now' | date: '%Y-%m-%d'
   assign cv = section.settings.consent_version | strip | handleize | default: 'v1'
   assign tags_base = section.settings.tags | strip | append: ',consentement-ouverture-' | append: cv | append: '-' | append: today
-  assign tags_news = tags_base | append: ',newsletter,consentement-newsletter-' | append: cv | append: '-' | append: today
+  assign tags_news = tags_base | append: ',newsletter-a-confirmer,demande-newsletter-' | append: cv | append: '-' | append: today
   capture privacy_html
     if section.settings.privacy_link != blank
       echo '<a href="' | append: section.settings.privacy_link | append: '">politique de confidentialité</a>'
@@ -88,7 +91,7 @@
       {%- if section.settings.consent_newsletter != blank -%}
         <label class="kyma-check">
           <input type="checkbox" name="contact[tags]" value="{{ tags_news | escape }}">
-          <span>{{ section.settings.consent_newsletter | escape }} <span class="kyma-check__req">{{ section.settings.optional_label | escape }}</span></span>
+          <span>{{ section.settings.consent_newsletter | escape | replace: '[politique de confidentialité]', privacy_html }} <span class="kyma-check__req">{{ section.settings.optional_label | escape }}</span></span>
         </label>
       {%- endif -%}
       <button type="submit" class="kyma-btn" data-kyma-submit><span>{{ section.settings.button | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
@@ -122,9 +125,9 @@
     { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "l'ouverture" },
     { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Prénom et adresse e-mail suffisent. Ce n'est pas un abonnement : aucun paiement n'est demandé." },
-    { "type": "textarea", "id": "consent", "label": "Case 1 — OBLIGATOIRE (information de l'ouverture)", "default": "J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]." },
+    { "type": "textarea", "id": "consent", "label": "Case 1 — OBLIGATOIRE (information de l'ouverture)", "default": "J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans le message ou en écrivant à [À COMPLÉTER : e-mail]. Mon adresse est supprimée de cette liste après l'envoi de ce message, sauf si j'ai aussi accepté la newsletter ci-dessous. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]." },
     { "type": "text", "id": "consent_note", "label": "Case 1 — trace enregistrée (note client)", "default": "Liste d'attente Cercle Waves : consentement à l'information d'ouverture (case cochée)." },
-    { "type": "textarea", "id": "consent_newsletter", "label": "Case 2 — FACULTATIVE (newsletter ; vide = case masquée)", "default": "Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message." },
+    { "type": "textarea", "id": "consent_newsletter", "label": "Case 2 — FACULTATIVE (newsletter ; vide = case masquée)", "default": "Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]." },
     { "type": "text", "id": "consent_error", "label": "Message si la case 1 n'est pas cochée", "default": "Pour vous prévenir de l'ouverture, nous avons besoin de votre accord. Pouvez-vous cocher la première case ?" },
     { "type": "text", "id": "consent_version", "label": "Version des textes de consentement (enregistrée avec l'inscription)", "default": "v1", "info": "Changer (v2, v3…) à chaque modification du texte d'une case." },
     { "type": "url", "id": "privacy_link", "label": "Lien « politique de confidentialité »", "info": "Remplace [politique de confidentialité] dans la case 1. Vide = texte entre crochets." },
