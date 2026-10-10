@@ -1,15 +1,17 @@
-# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026 ; corrigé le 10/10/2026, cycle 1/2 d'Arthur)
+# Cercle Waves et récit 3D — textes définitifs v4 (Maya, 09/10/2026 ; corrigé le 10/10/2026, cycle 1/2 d'Arthur ; variante P7 fermée ajoutée)
 
 > **Pour** : Sacha (intégration), Victoire (contrôle), Arthur (validation), fondateur (valeurs entre crochets).
 > **Base** : formulations de Victoire, `shopify/conformite.md`, section « Entraide 09/10/2026 », parties B, C, E. Je n'ai changé aucun fait : j'ai travaillé le rythme, la concision et le ton. Vouvoiement partout, mot « cashback » conservé.
 > **Règle de lecture** : `[valeur]` = valeur à faire valider par le fondateur, à laisser visible jusqu'à décision. Aucune publication tant qu'un crochet reste affiché sur le site (point E3 de Victoire).
-> **Contexte** : l'abonnement n'est pas encore branché. La page fonctionne donc en **liste d'attente** (section `rejoindre`). Quand l'appli d'abonnement sera active, seuls les champs de la section 1.4 changent (voir « Bascule » en fin de section 1.4).
+> **Contexte** : l'abonnement n'est pas encore branché. La page fonctionne donc en **liste d'attente** (section `rejoindre`) **une fois la porte P7 levée** (société immatriculée, politique publiée, forfait payant, VALIDÉ). **Tant que P7 est fermée, la page ne collecte rien et n'invite à aucune inscription : utiliser la « Variante P7 fermée » du §1.6** pour les champs concernés. Quand l'appli d'abonnement sera active, seuls les champs de la section 1.4 changent (voir « Bascule » en fin de section 1.4).
 
 ---
 
 ## 1. Page Cercle Waves — `shopify/theme/templates/page.cercle-waves.json`
 
 ### 1.1 Section `ouverture` (kyma-page-hero)
+
+*Valeurs « P7 levée » (liste d'attente active). Pour « P7 fermée », voir §1.6.*
 
 | Champ | Texte |
 |---|---|
@@ -54,8 +56,8 @@ Le texte de `terms_text` est celui de Victoire, mot pour mot. « En quelques cli
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
 | `aria` | Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso. |
 | `price` / `price_period` | 12,99 € / par trimestre, TTC *(inchangés)* |
-| `join_label` *(liste d'attente)* | Être prévenu |
-| `join_link` *(liste d'attente)* | /pages/cercle-waves#rejoindre |
+| `join_label` *(liste d'attente, P7 levée)* | Être prévenu |
+| `join_link` *(liste d'attente, P7 levée)* | /pages/cercle-waves#rejoindre |
 
 Valeur brute du champ `perks` à coller (séparateur = retour à la ligne) :
 
@@ -83,8 +85,8 @@ Carte de membre physique beige, écriture argentée
 | `condition` | Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. |
 | `aria` | Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso. |
 | `price` / `price_period` | 39,99 € / par trimestre, TTC *(inchangés)* |
-| `join_label` *(liste d'attente)* | Être prévenu |
-| `join_link` *(liste d'attente)* | /pages/cercle-waves#rejoindre |
+| `join_label` *(liste d'attente, P7 levée)* | Être prévenu |
+| `join_link` *(liste d'attente, P7 levée)* | /pages/cercle-waves#rejoindre |
 
 ```
 Cashback 10 % sur vos achats de produits
@@ -128,9 +130,9 @@ Les deux dernières perdent « physique » : à ne retenir que si la mention « 
 | `sym2` | MAJESTÉ — Le palier supérieur. *(inchangé)* |
 | autres champs | inchangés |
 
-La version retenue reprend la règle de Victoire (art. 9) en trois phrases courtes au lieu d'une phrase à point-virgule. Le sens et les modalités sont identiques.
+La version retenue reprend la règle de Victoire (art. 9) en trois phrases courtes au lieu d'une phrase à point-virgule. Le sens et les modalités sont identiques. Pour la page « P7 fermée », une version au futur est proposée au §1.6.
 
-### 1.4 Section `rejoindre` (kyma-cercle-join) — liste d'attente
+### 1.4 Section `rejoindre` (kyma-cercle-join) — liste d'attente (P7 levée)
 
 *Décision d'Arthur (cycle 1) : la case de consentement est obligatoire pour la seule finalité « vous prévenir de l'ouverture » ; la newsletter est une seconde case, distincte et facultative. Aucune des deux n'est pré-cochée.*
 
@@ -165,6 +167,46 @@ Hors demande, mais le titre « Rejoindre le cercle » et le bouton « Entrer dan
 | `title_before` / `title_em` / `title_after` | Le Cercle / Waves / . |
 | `text` | Le Cercle Waves accompagne celles et ceux qui suivent KYMA de près. Deux paliers, INITIUM et MAJESTÉ, par abonnement trimestriel. |
 | `cta_label` | Découvrir les deux paliers |
+
+### 1.6 Variante P7 fermée (aucune collecte, aucune invitation à s'inscrire)
+
+**À utiliser tant que la porte P7 est fermée** (`show_waitlist` à `false`). Problème corrigé : en P7 fermée, la page disait encore « laissez votre adresse, nous vous écrirons » et gardait deux types de boutons (« Être prévenu de l'ouverture » en tête de page, « Être prévenu » sur chaque carte) qui renvoyaient à la page elle-même, sans formulaire. Ici : on dit l'état présent (« pas encore ouvert, aucune date n'est fixée »), on ne demande rien, on signe « Le cercle se prépare. », et l'annonce se fera sur Instagram, @kymasinsta.
+
+**Ce qui change (champ → texte)**
+
+| Champ | Texte (P7 fermée) |
+|---|---|
+| `ouverture` · `text` | Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. À l'ouverture, vous choisirez votre palier ; vous pourrez en changer ou résilier en ligne, à tout moment. Il n'est pas encore ouvert et aucune date n'est fixée : rien n'est à faire pour l'instant. Nous annoncerons l'ouverture sur Instagram, @kymasinsta. |
+| `ouverture` · `cta_label` (**option A, recommandée**) | Suivre @kymasinsta |
+| `ouverture` · `cta_link` (option A) | https://www.instagram.com/kymasinsta/ *(ouverture dans un nouvel onglet, `rel="noopener"`, à la discrétion de Sacha)* |
+| `ouverture` · `cta_label` / `cta_link` (**option B : bouton masqué**) | *(deux champs vides)* ; rien ne s'affiche. Si Sacha préfère un bouton interne : « Découvrir les deux paliers » / `#paliers`. |
+| `ouverture` · `note` | Ni inscription, ni paiement à ce stade. Le cercle se prépare. |
+| `paliers` · `tier_1.join_label` / `join_link` | *(vides : aucun bouton sur la carte INITIUM)* |
+| `paliers` · `tier_2.join_label` / `join_link` | *(vides : aucun bouton sur la carte MAJESTÉ)* |
+| `passage` · `text` (version au futur, recommandée) | À l'ouverture, vous choisirez directement l'un ou l'autre palier. Passer à MAJESTÉ prendra effet tout de suite : vous paierez la différence, au prorata. Passer à INITIUM prendra effet à la fin du trimestre en cours. |
+| `passage` · `text` (version neutre au futur) | À l'ouverture, vous choisirez directement l'un ou l'autre palier, et vous pourrez en changer ensuite. Les modalités (date d'effet, prorata) figureront dans les conditions du Cercle Waves. |
+| `rejoindre` (bloc fermé, champs `closed_*` déjà présents) · `closed_label` | CERCLE WAVES |
+| `rejoindre` · `closed_title_before` / `closed_title_em` / `closed_title_after` | Le cercle se / prépare / . |
+| `rejoindre` · `closed_text` | Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement. Nous annoncerons l'ouverture sur Instagram, @kymasinsta. |
+| `rejoindre` · bouton du bloc fermé *(nouveau champ facultatif, ex. `closed_cta_label` / `closed_cta_link`)* | Suivre @kymasinsta / https://www.instagram.com/kymasinsta/ *(à ne créer que si Sacha ajoute le champ ; sinon, rien)* |
+
+**Ce qui ne change pas** : `paliers.text`, `terms_*`, avantages (`perks`), `cashback_note`, `condition`, `aria`, `price`, `lead`, `sym1` / `sym2`, titres et labels de `passage`, récit 3D. Les cartes continuent de présenter les deux paliers : c'est de l'information, pas une collecte.
+
+**Pour Sacha (vérifications)**
+- Les ancres `#rejoindre` ne doivent plus apparaître nulle part tant que P7 est fermée (hero, cartes, menu, pied de page, bandeaux, accueil).
+- Chercher tout autre bouton ou lien libellé « Rejoindre », « Être prévenu », « Entrer dans le cercle » (menu, pied de page, fenêtre contextuelle, accueil) : ils sont à masquer ou à remplacer par « Suivre @kymasinsta » ou « Découvrir les deux paliers ».
+- L'accueil (§1.5) est déjà conforme : le bouton « Découvrir les deux paliers » mène à `/pages/cercle-waves`.
+- Quand P7 est levée : remettre les valeurs des §1.1, §1.2 (`join_*`), §1.3 et activer `show_waitlist` (§1.4).
+
+**Cohérence Instagram** : en P7 fermée, aucun post ne dit « liste d'attente ouverte » ni « laissez votre adresse ». La légende de substitution à publier tant que P7 est fermée est la suivante (à valider par Arthur, c'est une alternative au post du §3) :
+
+> Un cercle se dessine, vague après vague.
+>
+> Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, en abonnement trimestriel. Il n'est pas encore ouvert et aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement. Nous annoncerons l'ouverture sur ce compte.
+>
+> Le cercle se prépare.
+>
+> #kyma #lartduflow #cerclewaves #streetwearunisexe #parisstreetwear
 
 ---
 
@@ -229,7 +271,7 @@ Les boutons « Découvrir la pièce » et « Choisir mon coloris » restent. Rap
 
 ## 3. Instagram — @kymasinsta — annonce de la liste d'attente
 
-**Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la légende des textes ci-dessus est intégrée, (3) la page des conditions est publiée sans crochet, après relecture d'un avocat, (4) la société est immatriculée, la politique de confidentialité est publiée et la boutique est sur un forfait payant.** Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée.
+**Statut : publiable dès que (1) le formulaire de la liste d'attente est actif, (2) la légende des textes ci-dessus est intégrée, (3) la page des conditions est publiée sans crochet, après relecture d'un avocat, (4) la société est immatriculée, la politique de confidentialité est publiée et la boutique est sur un forfait payant.** Format : un visuel unique (capture du visuel animé « anneaux » du site, rendu 3D, aucune image IA). Pas de prix dans le post, ni de réduction, ni de date d'ouverture annoncée. *Tant que P7 est fermée, utiliser la légende de substitution du §1.6.*
 
 ### Caption
 
@@ -283,13 +325,15 @@ Une story fixe avec le sticker lien : « Liste d'attente ouverte. » puis, sur l
 | « Imaginé à Paris » | `step_7.spec` | à confirmer |
 | « Nominative » ou « numérotée » (carte) | non écrit | à ajouter seulement si le nom ou un numéro est imprimé (E11) |
 | Date d'expédition de la note du hero | `index.json`, section `hero`, `note` : « Expédition au plus tard le [À COMPLÉTER : date] » (R11) | à fixer ; ne pas publier tant que le crochet est affiché |
+| Lien Instagram du bouton (P7 fermée) | §1.6 | `https://www.instagram.com/kymasinsta/` à confirmer (compte @kymasinsta) |
 
 **Choix éditoriaux du fondateur** (aucun enjeu juridique, à trancher avant intégration) :
 
 | Choix | Où | Options |
 |---|---|---|
 | Titre de la page Cercle Waves | §1.1 `title_*` | « Le Cercle *Waves*. » (retenu par défaut) ou « Suivre le *courant*. » (dans ce cas, titre de `paliers` modifié, voir §1.1) |
-| Texte de `passage` | §1.3 `text` | version retenue (prorata et date d'effet détaillés) ou version neutre (renvoi aux conditions) |
+| Texte de `passage` | §1.3 `text` | version retenue (prorata et date d'effet détaillés) ou version neutre (renvoi aux conditions) ; au futur en P7 fermée (§1.6) |
+| Bouton du hero en P7 fermée | §1.6 | « Suivre @kymasinsta » (option A, recommandée) ou bouton masqué (option B) |
 | Conclusion du récit 3D | §2.4 `final_title` / `final_subtitle` | texte actuel ou paire « Le mouvement continue. / Choisissez votre coloris. » |
 | Section Cercle de l'accueil | §1.5 | titre « Le Cercle *Waves*. », texte et bouton « Découvrir les deux paliers » (proposés) ou texte actuel |
 
@@ -299,4 +343,5 @@ Une story fixe avec le sticker lien : « Liste d'attente ouverte. » puis, sur l
 - Les mots « élite », « VIP », « privilège », « cercle fermé », « sélection », « gagnez » sont absents ; le Cercle n'est présenté ni comme sélectif ni comme mérité.
 - « Garantit » n'apparaît que dans la phrase de `condition` de Victoire, à la forme négative.
 - Aucun prix barré, aucune date d'ouverture non fixée, aucune promesse non datée.
+- Variante P7 fermée (§1.6) : aucun texte n'invite à laisser une adresse, aucun bouton ne renvoie à la page elle-même, aucune collecte.
 - Seuls crochets visibles : valeurs de la partie 4, y compris la date d'expédition du hero.

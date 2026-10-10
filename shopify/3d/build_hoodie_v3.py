@@ -868,7 +868,8 @@ def hood_relax(G):
     wb = smoothstep(0.04, 0.40, b)
     x, y, z = P[..., 0].copy(), P[..., 1].copy(), P[..., 2].copy()
     # sommet affaissé
-    y = y - 3.2 * np.maximum(y - 0.770, 0) ** 2 * wb
+    # (affaissement surtout vers l'avant : l'arrière du crâne de capuche reste arrondi)
+    y = y - 3.0 * np.maximum(y - 0.770, 0) ** 2 * wb * (0.25 + 0.75 * smoothstep(-0.16, 0.0, z))
     # bord d'ouverture : tombe vers l'avant et vers le bas, se resserre au milieu de la hauteur
     de = np.minimum(a, 1 - a)
     we = np.exp(-(de / 0.16) ** 2) * smoothstep(0.35, 1.0, b)
@@ -2248,7 +2249,7 @@ def export_glb(path, col, geo, layout, atlas_img, tiles):
     tilt = -math.radians(12)
     nodes_js.append({"name": "Zip_Pull", "mesh": mi, "translation": [float(v) for v in geo["pull_pivot"]],
                      "rotation": [math.sin(tilt / 2), 0.0, 0.0, math.cos(tilt / 2)],
-                     "extras": {"description": "Tirette « Kyma » (laiton doré), pivote autour de X sur l'anse du curseur"}})
+                     "extras": {"description": "Tirette « Kyma » (laiton plaqué or brossé), tourne autour de X sur l'anse du curseur"}})
     index["Zip_Pull"] = len(nodes_js) - 1
     nodes_js[index["Zip_Slider"]]["children"] = [index["Zip_Pull"]]
     g.g["scenes"][0]["nodes"] = [0]
