@@ -688,6 +688,9 @@ def shell_from_grid(G, out_ref, uv0, uv1, closed_u=False, lining_step=2, rims=("
     if np.mean(np.sum(Ni * out_ref(Vi), 1)) > 0:
         Fi = Fi[:, ::-1].copy()
         Ni = -Ni
+    if apex:   # pointe : l'envers s'arrête où l'épaisseur s'annule (sinon il perce l'endroit)
+        rowi = Fi.max(1) // len(ii)
+        Fi = Fi[th_rows[jj][rowi] > 0.5 * th]
     U1i = uv1[np.ix_(jj, ii)].reshape(-1, 2)
     inner = Mesh(Vi, Fi, lining, None, U1i, Ni)
     # lisières (bord roulé) : rangée extérieure -> milieu bombé -> rangée intérieure

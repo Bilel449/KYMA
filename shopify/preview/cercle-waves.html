@@ -176,7 +176,7 @@
     </svg>
     <div data-kyma-reveal>
       <p class="kyma-sec__label"><span class="kyma-sec__n">03</span> — ÊTRE PRÉVENU</p><h2 class="kyma-sec__title" id="kyma-cj-rejoindre-t">Être prévenu de <em>l&#39;ouverture</em>.</h2><p class="kyma-sec__desc">Prénom et adresse e-mail suffisent. Ce n&#39;est pas un abonnement : aucun paiement n&#39;est demandé.</p>
-    </div><form method="post" action="/contact#KymaCercle" id="KymaCercle" class="kyma-form kyma-cj__form" novalidate="novalidate" data-kyma-form="cercle" accept-charset="UTF-8"><input type="hidden" name="form_type" value="customer"><input type="hidden" name="contact[tags]" value="cercle-waves,liste-attente"><div class="kyma-form__row">
+    </div><form method="post" action="/contact#KymaCercle" id="KymaCercle" class="kyma-form kyma-cj__form" data-kyma-form="cercle" accept-charset="UTF-8"><input type="hidden" name="form_type" value="customer"><input type="hidden" name="contact[tags]" value="cercle-waves,liste-attente"><div class="kyma-form__row">
         <label class="kyma-field"><span class="kyma-field__l">Prénom</span>
           <input class="kyma-field__i" type="text" name="contact[first_name]" autocomplete="given-name"></label>
         <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
@@ -184,11 +184,12 @@
           <span class="kyma-field__err" hidden>Cette adresse semble incomplète. Pouvez-vous la vérifier ?</span></label>
       </div>
       <label class="kyma-check">
-        <input type="checkbox" name="contact[note]" value="Liste d&#39;attente Cercle Waves : consentement à l&#39;information d&#39;ouverture (case cochée)." required aria-required="true">
-        <span>J&#39;accepte que KYMA utilise mon adresse e-mail pour m&#39;informer de l&#39;ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : <span class="kyma-todo">[À COMPLÉTER]</span>. Voir la <span class="kyma-todo">[politique de confidentialité]</span>. <span class="kyma-check__req">(obligatoire)</span></span>
-      </label><label class="kyma-check">
+        <input type="checkbox" name="contact[note]" value="Liste d&#39;attente Cercle Waves : consentement à l&#39;information d&#39;ouverture (case cochée)." required aria-required="true" data-kyma-consent>
+        <span>J&#39;accepte que KYMA utilise mon adresse e-mail pour m&#39;informer de l&#39;ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : <span class="kyma-todo">[À COMPLÉTER : raison sociale]</span>. Voir la <a href="/pages/confidentialite">politique de confidentialité</a>. <span class="kyma-check__req">(obligatoire)</span></span>
+      </label>
+      <p class="kyma-field__err kyma-check__err" data-kyma-consent-err hidden>Pour vous prévenir de l&#39;ouverture, nous avons besoin de votre accord. Pouvez-vous cocher la première case ?</p><label class="kyma-check">
           <input type="checkbox" name="contact[tags]" value="cercle-waves,liste-attente,newsletter">
-          <span>Je souhaite aussi recevoir la newsletter de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment. <span class="kyma-todo">[À VALIDER VICTOIRE : libellé définitif]</span> <span class="kyma-check__req">(facultatif)</span></span>
+          <span>Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. <span class="kyma-check__req">(facultatif)</span></span>
         </label>
       <button type="submit" class="kyma-btn" data-kyma-submit><span>Me prévenir</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
       <p class="kyma-form__ok" role="status" data-kyma-ok hidden>Merci. Nous vous écrirons à l&#39;ouverture du Cercle Waves. Cette inscription n&#39;est pas un abonnement.</p>

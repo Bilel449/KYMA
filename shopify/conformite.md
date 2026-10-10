@@ -1,6 +1,6 @@
 # KYMA — Note de conformité juridique du site Shopify
 
-> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; section « Entraide 09/10/2026 » en fin de note) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
+> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; sections « Entraide 09/10/2026 » et « Statut juridique » en fin de note ; corrections d'Arthur du 10/10/2026 appliquées) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
 > **Destinataires** : Arthur (validation), Clémentine, Izaac, Maya, Sacha, fondateur.
 > **Rappel unique** : les textes de `shopify/pages/legal/` et cette note sont des **modèles**. Ils doivent être relus et validés par un avocat (droit de la consommation / RGPD) avant toute mise en ligne.
 
@@ -16,7 +16,7 @@
 | `pages/legal/livraison.html` | Politiques > « Politique d'expédition » |
 | `pages/legal/confidentialite.html` | Politiques > « Politique de confidentialité » (remplacer le modèle Shopify) |
 | `pages/legal/cookies.html` | Page `/pages/cookies` |
-| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**v3 du 09/10/2026 : avantages alignés sur la section « Entraide 09/10/2026 » en fin de note ; ne pas publier avant validation des avantages et des valeurs entre crochets**) |
+| `pages/legal/cercle-waves-conditions.html` | Page `/pages/cercle-waves-conditions` (**v3.1 du 10/10/2026 : avantages alignés sur la section « Entraide 09/10/2026 » en fin de note ; ne pas publier avant validation des avantages et des valeurs entre crochets, voir le tableau D bis**) |
 
 Shopify demande aussi une politique « Coordonnées » (Contact information) : y reprendre raison sociale, adresse, e-mail, téléphone, SIREN et TVA, sans rien inventer.
 
@@ -40,7 +40,7 @@ Shopify demande aussi une politique « Coordonnées » (Contact information) : y
 | **Paris** | « Made in Paris », « fabriqué en France », drapeau tricolore sur le produit. | « **KYMA Paris** », « marque créée à Paris » (vrai : marque basée à Paris). | — |
 | **Disponibilité / rareté** | « En stock », « livraison rapide », « plus que X pièces » si c'est faux. | « **Précommande — expédition au plus tard le [date]** » | — |
 
-**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.** » (formule mise à jour le 08/10/2026 : repli conforme au tableau d'unicité tant que les préséries ne sont pas validées — à confirmer par Victoire) Une mention « non contractuel » ne rend pas licite un visuel trompeur. Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries. **[Mise à jour 09/10/2026 : cette formule est jugée insuffisante seule et doit être remplacée par la version de la section « Entraide 09/10/2026 », partie E, correction R1.]**
+**Visuels (rendus).** Sous chaque visuel qui est un rendu, Sacha affiche la mention : « **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.** » (formule mise à jour le 08/10/2026 : repli conforme au tableau d'unicité tant que les préséries ne sont pas validées — à confirmer par Victoire) Une mention « non contractuel » ne rend pas licite un visuel trompeur : l'art. L.121-2 s'apprécie sur l'ensemble de la présentation du produit (jurisprudence spécifique sur les visuels « non contractuels » : non vérifiée). Le rendu doit donc rester fidèle à la coupe, au coloris et aux finitions réels. Remplacer les rendus par des photos du produit fabriqué dès le shooting des préséries. **[Mise à jour 09/10/2026 : cette formule est jugée insuffisante seule et doit être remplacée par la version de la section « Entraide 09/10/2026 », partie E, correction R1.]**
 
 ---
 
@@ -111,7 +111,7 @@ Le bandeau propose « Tout accepter », « Tout refuser » (même niveau, même 
 15. Médiateur de la consommation retenu (convention signée ?).
 16. Adhésion à Refashion (filière textiles) et IDU ; emballages (Citeo / Léko) et IDU.
 17. Applications Shopify prévues : précommande, fidélité, avis, newsletter (Shopify Email ? Klaviyo ?), analytics, pixels publicitaires.
-18. Règles du Cercle Waves : gratuit ou payant, critères d'accès à INITIUM et à ORIGINE, avantages, points, durée de validité. **[Tranché le 09/10/2026 : abonnement payant INITIUM / MAJESTÉ, voir la dernière section. Restent à fournir : valeur et durée de chaque avantage, quantités réservées, nature de la carte.]**
+18. Règles du Cercle Waves : gratuit ou payant, critères d'accès à INITIUM et à ORIGINE, avantages, points, durée de validité. **[Tranché le 09/10/2026 : abonnement payant INITIUM / MAJESTÉ, voir la dernière section. Restent à fournir : valeur et durée de chaque avantage, quantités réservées, nature de la carte. Voir le tableau D bis.]**
 
 **Propriété intellectuelle et visuels**
 19. Dépôt de la marque KYMA : effectué ? Classes, n° de dépôt ? Recherche d'antériorités faite ?
@@ -198,14 +198,14 @@ L'accès direct à Légifrance, economie.gouv.fr et village-justice.com était b
 - **Étiquetage textile** : règlement (UE) 1007/2011, art. 4, 11 et 16 (EUR-Lex / legislation.gov.uk) ; DGCCRF, « L'étiquetage des vêtements » ; economie.gouv.fr, « Vêtements : les 6 indications à bien repérer » (19/09/2025) [08/10/2026].
 - **Traçabilité AGEC** : décret n° 2022-748 du 29/04/2022 (seuil de 10 M€ et 10 000 unités depuis le 01/01/2025), selon des synthèses SGS et Intertek [08/10/2026].
 - **REP textiles et emballages** : C. env. art. L.541-10 et s. ; Refashion, guide d'adhésion ; ministère de la Transition écologique, « Produits textiles (TLC) » [08/10/2026].
-- **Visuels non contractuels** : C. conso art. L.121-2 (pratiques trompeuses) ; DGCCRF (délit de tromperie) ; Cass. 1re civ., 06/05/2010, n° 08-14.461 (valeur contractuelle des documents publicitaires précis, référence secondaire non vérifiée) [08/10/2026].
+- **Visuels non contractuels** : C. conso art. L.121-2 (pratiques trompeuses, appréciation globale de la présentation) ; DGCCRF (délit de tromperie). Jurisprudence spécifique sur les visuels ou photos « non contractuels » : **non vérifiée** (une référence secondaire, Cass. 1re civ., 06/05/2010, n° 08-14.461, valeur contractuelle des documents publicitaires précis, n'a pas été relue) [08/10/2026].
 - **Accessibilité** : directive (UE) 2019/882 (European Accessibility Act), applicable depuis le 28/06/2025, avec exemption des micro-entreprises pour les services (sources secondaires) [08/10/2026].
 
 ---
 
 ## Cercle Waves (abonnement) : ajout du 09/10/2026
 
-> **Décision du fondateur** : le Cercle Waves devient un abonnement payant. **INITIUM 12,99 € TTC par trimestre** et **MAJESTÉ 39,99 € TTC par trimestre**, renouvellement automatique. L'ancien palier ORIGINE disparaît. Cette section **remplace** les points 16 et 18 ci-dessus. Texte de la page : `pages/legal/cercle-waves-conditions.html` (v3, voir la section « Entraide 09/10/2026 » en fin de note). Les avantages et leurs valeurs ne sont pas validés par le fondateur.
+> **Décision du fondateur** : le Cercle Waves devient un abonnement payant. **INITIUM 12,99 € TTC par trimestre** et **MAJESTÉ 39,99 € TTC par trimestre**, renouvellement automatique. L'ancien palier ORIGINE disparaît. Cette section **remplace** les points 16 et 18 ci-dessus. Texte de la page : `pages/legal/cercle-waves-conditions.html` (v3.1, voir la section « Entraide 09/10/2026 » en fin de note). Les avantages et leurs valeurs ne sont pas validés par le fondateur.
 > **Rappel unique** : modèles à faire relire par un avocat en droit de la consommation avant publication, et par l'expert-comptable pour la TVA du crédit.
 > **Sources** : l'accès direct à Légifrance et à economie.gouv.fr est bloqué depuis l'environnement de travail. Les règles ci-dessous viennent d'extraits de recherche (Légifrance, INC, DGCCRF, questions parlementaires) et de sources secondaires. **Relire les articles sur Légifrance** avant publication.
 
@@ -352,8 +352,8 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 ## Entraide 09/10/2026 — formulations Cercle Waves et récit 3D
 
 > **Auteur** : Victoire · **Demande** : plan de Clémentine du 09/10/2026 · **Pour** : Maya (formulations), Sacha (intégration), Izaac (récit 3D), Arthur (validation), fondateur (valeurs).
-> **Fichiers lus** : `brand/BRAND.md`, la présente note, `pages/legal/cercle-waves-conditions.html` (réécrit en **v3**), `theme/templates/page.cercle-waves.json`, `theme/sections/kyma-product-story-scroll.liquid`, `theme/templates/index.json`, `contenu/recherche-abonnement-fidelite.md` (Isabelle). Les autres fichiers du thème n'ont pas été relus.
-> **Rappel unique** : modèles à faire valider par un avocat en droit de la consommation. **Sources** : Légifrance, DGCCRF et INC restent inaccessibles depuis l'environnement ; la numérotation des alinéas de l'art. L.121-4 est donnée de mémoire (la liste est connue : fausse rareté ou fausse limitation dans le temps, droits légaux présentés comme spécificité de l'offre, mention « gratuit » trompeuse, label sans autorisation) et **doit être relue sur Légifrance**. Une jurisprudence confirme que les pratiques de L.121-4 sont trompeuses « en toutes circonstances », sans preuve d'altération du comportement du consommateur (Cass. crim., 28/01/2020, n° 19-80496, selon Revue des contrats, Lextenso). Directive (UE) 2024/825 : l'allégation environnementale générique et le label de durabilité non certifié sont interdits depuis le 27/09/2026 [recherche web du 09/10/2026, sources secondaires].
+> **Fichiers lus** : `brand/BRAND.md`, la présente note, `pages/legal/cercle-waves-conditions.html` (réécrit en **v3**, corrigé en **v3.1** le 10/10/2026), `theme/templates/page.cercle-waves.json`, `theme/sections/kyma-product-story-scroll.liquid`, `theme/templates/index.json`, `contenu/recherche-abonnement-fidelite.md` (Isabelle). Les autres fichiers du thème n'ont pas été relus.
+> **Rappel unique** : modèles à faire valider par un avocat en droit de la consommation. **Sources** : Légifrance, DGCCRF et INC restent inaccessibles depuis l'environnement ; la numérotation des alinéas de l'art. L.121-4 est donnée de mémoire (la liste est connue : fausse rareté ou fausse limitation dans le temps, droits légaux présentés comme spécificité de l'offre, mention « gratuit » trompeuse, label sans autorisation) et **doit être relue sur Légifrance**. La Cour de cassation juge que les pratiques de la liste L.121-4 sont trompeuses « en toutes circonstances », sans preuve d'altération du comportement du consommateur (Cass. crim., 28/01/2020, n° 19-80496, F-PBI, affaire de grilles Loto/EuroMillions ; confirmé par Isabelle le 10/10/2026 d'après Dalloz actualité, Revue des contrats 2020 n° 2 et n° 3, Gaz. Pal. 31/03/2020). **Cet arrêt ne concerne que la liste L.121-4 : il n'est pas invoqué pour les visuels ni pour les mentions « non contractuel ».** Directive (UE) 2024/825 : l'allégation environnementale générique et le label de durabilité non certifié sont interdits depuis le 27/09/2026 [recherche web du 09/10/2026, sources secondaires].
 
 ### A. Les cinq règles à suivre pour chaque avantage
 
@@ -395,7 +395,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 
 | Où | Avant | Après | Pourquoi |
 |---|---|---|---|
-| Ouverture, `text` | « Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu'à la proximité. Deux paliers, qui se découvrent dans l'ordre. » | « Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback, accès anticipé aux drops et carte de membre. Vous choisissez votre palier, vous pouvez en changer ou résilier en ligne à tout moment. » (Maya peut réécrire le ton, pas les faits.) | « Programme de fidélité » laisse croire à une adhésion gratuite. « Dans l'ordre » est faux si on peut choisir MAJESTÉ directement. |
+| Ouverture, `text` | « Cercle Waves est le programme de fidélité de KYMA. Il accompagne celles et ceux qui suivent la marque, du premier pas jusqu'à la proximité. Deux paliers, qui se découvrent dans l'ordre. » | « Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. Vous choisissez votre palier, vous pouvez en changer ou résilier en ligne à tout moment. » (Maya peut réécrire le ton, pas les faits.) | « Programme de fidélité » laisse croire à une adhésion gratuite. « Dans l'ordre » est faux si on peut choisir MAJESTÉ directement. « Cashback » seul laisserait croire à un remboursement en argent : sa nature est dite à côté du mot. |
 | Paliers, `terms_text` | « Abonnement trimestriel, renouvelé automatiquement, résiliable à tout moment. Conditions : » | « Abonnement trimestriel : INITIUM 12,99 € TTC, MAJESTÉ 39,99 € TTC, renouvelé automatiquement tous les 3 mois. Résiliable à tout moment en ligne, sans frais, en quelques clics. Rétractation possible sous 14 jours. Réservé aux majeurs. Conditions : » | Mentions précontractuelles (L.221-5). Éviter « en 3 clics » tant que Sacha n'a pas chronométré le parcours. |
 | Paliers, `terms_label` | « règlement Cercle Waves » | « conditions du Cercle Waves » | Cohérence avec la page légale. |
 | Cartes, `condition` (les deux) | « Condition d'accès : [À COMPLÉTER] » | « Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris. » | Le champ est affiché tel quel. Aucune condition d'accès n'existe (voir art. 3 des conditions). |
@@ -404,8 +404,9 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 | Passage, `title_*` | « Dans l'ordre, sans détour. » | À réécrire par Maya, par exemple « D'un palier à l'autre, sans détour. » | Même raison. |
 | Passage, `sym1` / `sym2` | « L'entrée dans le cercle. » / « Le palier supérieur. » | Inchangé. | Faits. |
 | Rejoindre (formulaire e-mail), `title`, `button`, `success` | « Entrer dans le cercle. » / « Rejoindre le cercle » / « Bienvenue dans le cercle. Votre place est enregistrée. » | **Tant que l'appli d'abonnement n'est pas branchée** : titre « Être prévenu de l'ouverture » ; bouton « Me prévenir » ; succès « Merci. Nous vous écrirons à l'ouverture du Cercle Waves. Cette inscription n'est pas un abonnement. » Une fois l'abonnement actif, ce bloc redevient un lien vers le paiement. | Un simple formulaire e-mail ne peut pas s'appeler « rejoindre » ni confirmer une « place » : le visiteur croirait être abonné ou avoir une place réservée. |
-| Rejoindre, `consent` | « J'accepte de recevoir les e-mails de KYMA (…) [À VALIDER VICTOIRE …] » | « Je souhaite recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. » Case **non pré-cochée**. | Consentement libre, spécifique, éclairé (RGPD, CPCE art. L.34-5). Les e-mails liés à l'abonnement n'ont pas besoin de ce consentement, mais l'accès anticipé ne doit pas être conditionné à cette case. |
-| Rejoindre, `terms` | « Conditions du programme : [À COMPLÉTER : lien. …] » | « Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]. » | Page rédigée (v3), non publiée. |
+| Rejoindre, **case 1 (OBLIGATOIRE, non pré-cochée)** : remplace `consent` | « J'accepte de recevoir les e-mails de KYMA (…) [À VALIDER VICTOIRE …] » | « J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans le message ou en écrivant à [À COMPLÉTER : e-mail]. Mon adresse est supprimée de cette liste après l'envoi de ce message, sauf si j'ai aussi accepté la newsletter ci-dessous. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. » | **Une seule finalité** : prévenir de l'ouverture. Consentement libre, spécifique, éclairé, univoque (RGPD art. 4 et 7). La case bloque l'envoi du formulaire, car sans elle KYMA n'a aucune base pour écrire. Le message d'ouverture est un message d'information sur un service que la personne a demandé : il ne contient aucune offre. |
+| Rejoindre, **case 2 (FACULTATIVE, non pré-cochée)** : nouvelle case, distincte | — | « Je souhaite aussi recevoir la newsletter de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité]. » | Consentement séparé pour la prospection (CPCE art. L.34-5). Ne pas cocher n'empêche pas de valider le formulaire. **Pas de lien entre les deux cases ni avec l'abonnement** : l'accès anticipé ne doit jamais dépendre de la case 2. Double opt-in recommandé pour la newsletter (point 22). Sacha enregistre séparément les deux consentements (date, texte affiché). |
+| Rejoindre, `terms` | « Conditions du programme : [À COMPLÉTER : lien. …] » | « Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions]. » | Page rédigée (v3.1), non publiée. |
 | Accueil `index.json`, section `cercle`, `text` | « … Deux paliers, INITIUM et MAJESTÉ. » | Ajouter « , par abonnement trimestriel » avant le point. | L'accueil ne doit pas laisser croire à un programme gratuit. |
 
 ### D. Valeurs proposées au fondateur (toutes marquées « proposition »)
@@ -424,10 +425,44 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 | Produits réservés MAJESTÉ | Au moins **[1] par an**, quantité indiquée sur la page | — | À retirer si le fondateur ne peut pas s'engager sur un chiffre. |
 | Quantités réservées pendant l'accès anticipé | Aucune par défaut | — | Variante : [N] pièces par coloris réservées MAJESTÉ. |
 | Envoi de la carte | Au plus tard **[14] jours** après la souscription, frais inclus | — | Date ou délai obligatoire (L.216-1). Carte INITIUM et MAJESTÉ (cartes du fondateur). |
-| Fenêtre d'annonce | Dates d'accès anticipé annoncées au moins 48 h à l'avance | — | |
+| Fenêtre d'annonce | Dates d'accès anticipé annoncées au moins 48 h à l'avance, **dans l'espace client** ; par e-mail seulement pour les personnes qui ont accepté de recevoir les e-mails de KYMA | — | L'annonce d'un accès anticipé invite à acheter : ce n'est pas un e-mail de service. |
 | Calendrier type d'un drop | J-7 aperçu MAJESTÉ · J-3 aperçu INITIUM · J-2 accès anticipé MAJESTÉ · J-1 accès anticipé INITIUM · J ouverture au public | — | Indicatif. |
 
 **Chiffres à connaître avant de fixer les taux.** Le cashback ne couvre la cotisation qu'au-delà de **260 € d'achats par trimestre pour INITIUM** (12,99 ÷ 5 %), soit 2 hoodies à 179 € ; et de **400 € pour MAJESTÉ** (39,99 ÷ 10 %), soit 3 hoodies. À 179 €, un hoodie génère 8,95 € (INITIUM) ou 17,90 € (MAJESTÉ). Conséquence rédactionnelle : ne jamais écrire que l'abonnement « se rentabilise » ou « rapporte ».
+
+### D bis. Toutes les valeurs entre crochets du règlement v3.1 : décisions du fondateur
+
+> Chaque ligne correspond à un crochet de `pages/legal/cercle-waves-conditions.html`. « Proposition » = ma suggestion, jamais une décision. Colonne de droite : le fondateur coche ou écrit sa valeur. **La page ne peut pas être publiée tant que cette colonne n'est pas remplie et que les champs d'identité ne sont pas levés par le Kbis.**
+
+| # | Article | Valeur à fixer | Proposition de Victoire | Contrainte ou remarque | Décision du fondateur |
+|---|---|---|---|---|---|
+| 1 | 1, 8, 10, 15 | Identité : raison sociale, forme, capital, siège, RCS, TVA, e-mail, téléphone ; nom de domaine | Aucune : recopier le Kbis. Pas de publication avant le Kbis. | Voir la section « Statut juridique ». | ☐ rempli le : ____ |
+| 2 | 2 | Taux de TVA ou franchise en base | À fixer par Abdou selon le régime. | Le prix TTC affiché ne change pas ; la mention change. | ☐ ____ |
+| 3 | 2, 7.2, 7.3 | Accès anticipé : [24 h] INITIUM, [48 h] MAJESTÉ ; aperçu : [3] jours INITIUM, [7] jours MAJESTÉ | 24 h / 48 h ; 3 jours / 7 jours | MAJESTÉ s'ouvre toujours avant INITIUM. | ☐ oui ☐ autre : ____ |
+| 4 | 2, 7.4 | Produits réservés MAJESTÉ : [1] par période de 12 mois | 1 par période de 12 mois, ou retirer l'avantage | Un chiffre promis doit être tenu. | ☐ oui ☐ retirer ☐ autre : ____ |
+| 5 | 3 | Zone de résidence des abonnés | France au lancement (livraison France), UE plus tard | UE : TVA du pays du client (guichet unique OSS) et livraison à prévoir. | ☐ France ☐ UE ☐ autre : ____ |
+| 6 | 3 | Critère d'accès à MAJESTÉ | Aucun (choix libre des paliers) | S'il y a un critère, le décrire art. 3, art. 9 et sur la page. | ☐ aucun ☐ critère : ____ |
+| 7 | 4 | Libellé exact du bouton | « Je m'abonne : commande avec obligation de paiement » si le thème ou l'appli le permet, sinon la phrase placée au-dessus du bouton (section 2.C) | Sacha confirme ce que Shopify autorise. | ☐ oui ☐ autre : ____ |
+| 8 | 5 | Moyens de paiement | Cartes bancaires et portefeuilles du prestataire retenu (par exemple Shopify Payments), compatibles avec les prélèvements récurrents | Sacha et le fondateur confirment. | ☐ ____ |
+| 9 | 5 | Paiement refusé : nombre de tentatives et délai | **3 tentatives sur 7 jours** (J+1, J+3, J+7), un e-mail à chaque échec ; avantages suspendus après l'échec final, puis fin de l'abonnement sans frais | Dépend du réglage de l'appli d'abonnement ; 3D Secure possible. | ☐ oui ☐ autre : ____ |
+| 10 | 6 | Rappel de reconduction | **J-35** (e-mail dédié) + J-7 en bonne pratique | Légal : entre 3 mois et 1 mois avant le terme. Voir E7 pour la mise en place. | ☐ oui ☐ autre : ____ |
+| 11 | 6 | Préavis de hausse de prix : [60] jours | 60 jours | Doit dépasser le rappel J-35 pour que le client puisse refuser. Avocat (point O6). | ☐ oui ☐ autre : ____ |
+| 12 | 7.1 | Date de versement du cashback | 14 jours après la réception des produits (date de livraison du transporteur) | Précommande : après expédition. | ☐ oui ☐ autre : ____ |
+| 13 | 7.1 | Plafond de cashback | Aucun plafond ; aucun minimum d'utilisation | Tout plafond doit figurer sous l'avantage. | ☐ aucun ☐ plafond : ____ |
+| 14 | 7.1 | Validité du Crédit Waves ; alerte avant expiration ; maintien après résiliation | [12] mois ; [30] jours ; [6] mois minimum après la fin | Voir O2. | ☐ oui ☐ autre : ____ |
+| 15 | 7.2 | Délai d'annonce d'une fenêtre d'accès anticipé | Au moins 48 h avant, **dans l'espace client** ; par e-mail seulement pour les personnes qui ont accepté de recevoir les e-mails de KYMA | L'e-mail d'annonce n'est pas un e-mail de service (v3.1). | ☐ oui ☐ autre : ____ |
+| 16 | 7.2 | Quantités réservées aux MAJESTÉ pendant leur fenêtre : [N] pièces par coloris | Aucune quantité réservée | Si retenue, afficher le nombre sur la page du produit. | ☐ aucune ☐ N = ____ |
+| 17 | 7.4 | Date de lancement du Cercle (début de la période de 12 mois) | Pas de date proposée : la date d'ouverture de l'abonnement, jamais avant le Kbis, l'appli testée et un premier drop daté | Voir E1. | ☐ date : ____ |
+| 18 | 7.5 | Délai d'envoi de la carte | Au plus tard **14 jours** après la souscription | Date ou délai obligatoire (L.216-1). | ☐ oui ☐ autre : ____ |
+| 19 | 7.5 | Carte « nominative » ou « numérotée » | Ne rien écrire tant que le nom ou un numéro n'est pas imprimé sur la carte | Allégation non exacte = pratique trompeuse. | ☐ nominative ☐ numérotée ☐ aucune |
+| 20 | 7.5 | Carte perdue ou volée : remplacement gratuit ou payant | **Un premier remplacement gratuit** par abonnement ; ensuite payant au coût de fabrication et d'envoi, de [N] € TTC annoncé dans l'article avant la souscription | Un frais non annoncé est inopposable. | ☐ oui ☐ autre : ____ |
+| 21 | 7.6 | Premier drop concerné par l'accès anticipé, l'aperçu et les produits réservés | Le Drop 1 si l'abonnement ouvre avant l'ouverture publique de ses précommandes ; sinon le drop suivant. Date affichée sur la page avant la souscription. | Voir E1 (omission trompeuse sinon). | ☐ drop : ____ date : ____ |
+| 22 | 11 | Référence exacte des garanties applicables aux contenus et services numériques | À confirmer par l'avocat | | ☐ avocat : ____ |
+| 23 | 12 | Préavis de modification des conditions : [30] jours | 30 jours | Voir aussi O6. | ☐ oui ☐ autre : ____ |
+| 24 | 13 | Délai pour présenter ses observations avant suspension : [15] jours | 15 jours | | ☐ oui ☐ autre : ____ |
+| 25 | 14 | Prestataire de paiement | Le prestataire retenu par le fondateur (par exemple Shopify Payments) | Doit figurer dans la politique de confidentialité. | ☐ ____ |
+| 26 | 15 | Service client : e-mail, téléphone, délai de réponse | Réponse sous **5 jours ouvrés** | Le téléphone est obligatoire (mentions légales). | ☐ oui ☐ autre : ____ |
+| 27 | 15 | Médiateur de la consommation | Aucune : à désigner (convention signée) | Point 7 de la section (d). | ☐ ____ |
 
 ### E. Relecture du récit 3D (`kyma-product-story-scroll.liquid`, `index.json`)
 
@@ -444,7 +479,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 **La mention « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » est insuffisante**, pour trois raisons :
 1. **Elle n'est visible qu'à la toute fin.** Dans le gabarit, la légende est dans le bloc de sortie (`outro`) de la section épinglée de 700 vh : pendant les sept étapes de la présentation (capuche, tirette, intérieur), aucune mention n'est à l'écran.
 2. **Elle ne dit pas que ce n'est pas une photo du produit fabriqué.** « Visuel de présentation 3D » peut se lire comme un rendu fidèle d'un produit existant. Or le produit n'est pas encore fabriqué ni photographié.
-3. **Elle ne dit pas en quoi la pièce peut différer** (motif, nuances de couleur, finitions, écran). Une mention « non contractuel » ne rend de toute façon pas licite un visuel trompeur : le rendu doit rester fidèle à la coupe, au coloris et aux finitions annoncés dans le tech pack.
+3. **Elle ne dit pas en quoi la pièce peut différer** (motif, nuances de couleur, finitions, écran). Une mention « non contractuelle » ne rend de toute façon pas licite un visuel trompeur : l'art. L.121-2 s'apprécie sur l'ensemble de la présentation (jurisprudence spécifique sur les visuels : non vérifiée). Le rendu doit rester fidèle à la coupe, au coloris et aux finitions annoncés dans le tech pack.
 
 **Corrections exactes (texte avant → après)**
 
@@ -456,7 +491,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 | R4 | Étape 1 (`text`) | « … un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile. » | « … un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile. » |
 | R5 | Étape 4 (`text`) | « Sculptée « Kyma », en laiton plaqué or brossé. Le seul éclat de la pièce. » | « Sculptée « Kyma », en laiton, finition dorée brossée. Le seul éclat de la pièce. » (revenir à « plaqué or » seulement avec la fiche technique du fabricant et après vérification de la dénomination) |
 | R6 | Étape 5 (`text`) | « Zip intégral en métal argent brossé, du col jusqu'à l'ourlet. » | « Zip intégral en métal, finition argentée brossée, du col jusqu'à l'ourlet. » |
-| R7 | Étape 6 (`spec`) | `Corps \| [À CONFIRMER : 100 % coton]` · `Bords-côtes \| 95 % coton, 5 % élasthanne` · `Doublure \| [À COMPLÉTER]` | **Laisser les valeurs vides** tant que le fabricant n'a pas confirmé la composition (le gabarit n'affiche pas une ligne sans valeur) ; Sacha masque le bloc `<dl>` s'il est vide et affiche à la place : « La composition complète figure sur la fiche produit. » Les valeurs seront ajoutées à l'identique de l'étiquette (jamais « bio » ni « GOTS » sans le tableau (a)). |
+| R7 | Étape 6 (`spec`) | `Corps \| [À CONFIRMER : 100 % coton]` · `Bords-côtes \| 95 % coton, 5 % élasthanne` · `Doublure \| [À COMPLÉTER]` | **Laisser les valeurs vides** tant que le fabricant n'a pas confirmé la composition (le gabarit n'affiche pas une ligne sans valeur) ; Sacha masque le bloc `<dl>` s'il est vide et affiche à la place : « La composition complète figure sur la fiche produit. » Les valeurs seront ajoutées à l'identique de l'étiquette (jamais « bio » ni « GOTS » sans le tableau (a)). **Réponse à Maya** : la ligne « Bords-côtes \| 95 % coton, 5 % élasthanne » **ne revient pas** tant que le fabricant n'a pas confirmé la composition par écrit (fiche technique). Le tech pack est un document interne : il ne prouve pas l'étiquette finale, et une composition affichée qui diffère de l'étiquette est une pratique trompeuse. |
 | R8 | Étape 7 (`spec`) | `Lieu de fabrication \| [À CONFIRMER : Portugal]` · `Imaginé à \| Paris` | `Lieu de fabrication \|` (valeur vide jusqu'au contrat signé et à l'attestation d'origine) · `Imaginé à \| Paris` (conservé, vrai si la conception est bien faite à Paris ; confirmer avec le fondateur) |
 | R9 | Étape 3 (`text`) | « Le motif KYMA Wave court sur tout le dos, d'une épaule à l'autre, comme un courant. » | Conservé, **sous réserve** que le tech pack confirme l'impression all-over ; à recontrôler sur les préséries. |
 | R10 | Images fixes (`still_alt`, mouvement réduit) | vide | « Rendu 3D du hoodie Ressac, [coloris], étape [capuche / dos / tirette / zip / intérieur]. Pas une photo du produit fabriqué. » |
@@ -481,7 +516,7 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 | E3 | **Champs affichant des crochets** (`[À COMPLÉTER]`, `[À CONFIRMER : Portugal]`) dans le récit 3D et la page Cercle. | Vider ou renseigner avant tout partage de l'URL ; pas de publication avec crochets. | Sacha |
 | E4 | **Légende 3D visible seulement à la dernière étape** et libellée « Visuel de présentation 3D ». | Correctifs R1 à R3 : légende permanente, texte « Modèle 3D de présentation, pas une photo du produit fabriqué. … ». | Sacha |
 | E5 | **Allégations de matière non prouvées** : « plaqué or », « argent brossé ». | Correctifs R5, R6 jusqu'à la fiche technique. | Izaac, Sacha |
-| E6 | **Formulaire e-mail intitulé « Rejoindre le cercle »** alors que l'adhésion est payante. | Correctifs de la partie C (liste d'attente tant que l'abonnement n'est pas actif). | Maya, Sacha |
+| E6 | **Formulaire e-mail intitulé « Rejoindre le cercle »** alors que l'adhésion est payante. | Correctifs de la partie C (liste d'attente avec deux cases distinctes tant que l'abonnement n'est pas actif). | Maya, Sacha |
 
 **🟠 À régler rapidement**
 
@@ -499,7 +534,7 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 |---|---|---|---|
 | E12 | Chronométrer le parcours de résiliation avant d'écrire « en 3 clics ». | Test documenté, captures. | Sacha |
 | E13 | Le compte client affiche : solde de Crédit Waves, date d'expiration de chaque crédit, date du prochain prélèvement. | Intégrer au portail. | Sacha |
-| E14 | Réviser les valeurs d'avantages à chaque nouveau drop (dates d'accès anticipé annoncées 48 h avant). | Calendrier partagé. | Maya, Sacha |
+| E14 | Réviser les valeurs d'avantages à chaque nouveau drop (dates d'accès anticipé annoncées dans l'espace client au moins 48 h avant ; e-mail seulement aux personnes qui ont accepté de recevoir les e-mails de KYMA). | Calendrier partagé. | Maya, Sacha |
 | E15 | Recontrôler le récit 3D après les préséries : coupe, finitions, impression all-over. | Comparaison modèle / pièce. | Izaac |
 
 ### H. Licences de la shortlist de modèles 3D (`shopify/3d/recherche-modeles-3d.md`) — 09/10/2026
@@ -621,7 +656,7 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 
 ## Statut juridique — comparatif (avec Abdou), 09/10/2026
 
-> **Auteur** : Victoire · **Binôme** : Abdou (angle fiscal et social, `finance/statut-comparatif.md`). Ce fichier n'existait pas encore dans le dépôt à la rédaction : je n'ai donc pas pu recouper nos conclusions. **Je ne chiffre rien** (cotisations, IS/IR, TVA, rémunération) : tout chiffre fiscal ou social cité ci-dessous vient de sources secondaires et est marqué « pour Abdou ».
+> **Auteur** : Victoire · **Binôme** : Abdou (angle fiscal et social, `finance/statut-comparatif.md`). Ce fichier n'existait pas encore dans le dépôt à la rédaction (vérifié de nouveau le 10/10/2026 : toujours absent) : je n'ai donc pas pu recouper nos conclusions. **Je ne chiffre rien** (cotisations, IS/IR, TVA, rémunération) : tout chiffre fiscal ou social cité ci-dessous vient de sources secondaires et est marqué « pour Abdou ».
 > **Hypothèses** (`brand/BRAND.md`, note de conformité) : fondateur unique, personne physique ; SASU « envisagée », rien d'immatriculé ; marque non déposée ; aucun fabricant signé ; précommandes encaissées avant production (≈ 50 % du volume) ; abonnement Cercle Waves (12,99 € et 39,99 € TTC par trimestre) ; levée de fonds possible plus tard (à confirmer par le fondateur).
 > **Sources** : service-public.fr, INPI, Légifrance et economie.gouv.fr sont inaccessibles depuis l'environnement (erreur réseau le 09/10/2026). Tout ce qui suit vient d'extraits de recherche et de guides secondaires (cabinets, CCI, Infogreffe, éditeurs). Les articles cités de mémoire sont suivis de « (à relire) ». **Relire chaque article sur Légifrance** avant de s'y fier. Modèle à faire valider par un avocat, et par Abdou pour tout ce qui est fiscal ou social.
 
