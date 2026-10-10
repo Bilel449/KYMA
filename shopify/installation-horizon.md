@@ -76,6 +76,14 @@ Copie `189991944572` uniquement (rôle relu : UNPUBLISHED). `stagedUploadsCreate
 - `kyma-three.js` n'est chargé que par la section, à l'approche de l'écran (script injecté, pas de module : aucun souci CORS sur le CDN). Les GLB v1 restent utilisés par le lecteur maison `kyma-glb.js` (accueil « Drop 1 », collection, fiche) : il ne lit pas `KHR_mesh_quantization`, donc pas les v2.
 - **Cartes du fondateur** : la page `/pages/cercle-waves` (Admin API, 09/10) **ne contient aucune image** et aucun fichier de la boutique n'est identifiable comme carte. Dans l'éditeur : Cercle Waves › bloc Palier › « Visuel de la carte (recto) » → choisir son image (ou coller son URL CDN dans « URL de repli »). Sans image, la carte dessinée reste affichée.
 
+## 1 quater. Réinstallation du 10/10/2026 — lecteur 3D unique, textes v4 — 19 fichiers, MD5 relus
+Copie `189991944572` uniquement. `stagedUploadsCreate` + PUT + `themeFilesUpsert` (corps URL), en 2 lots (assets et sections, puis templates : les templates utilisent les nouveaux réglages). Les 19 MD5 relus sont identiques au dépôt.
+- **Nouveau** : `assets/kyma-viewer.js` (23 Ko, ~7 Ko gzip) — LE lecteur 3D du site. Il charge `kyma-three.js` à la première utilisation (promesse partagée `window.KYMAThreeP` avec `kyma-pstory.js` : three.js téléchargé et exécuté une seule fois par page), un seul contexte WebGL pour tous ses lecteurs (rendu hors écran recopié dans le canvas de chaque section), GLB analysés une fois par URL. Mouvement façon Spline : glisser (inertie), rotation lente, inclinaison vers la souris, rotation liée au défilement, lévitation, fondu « vague » au changement de coloris. Pause hors écran / onglet caché / bouton pause ; `prefers-reduced-motion` = modèle immobile (le visiteur peut encore le tourner) ; sans WebGL = repli existant (slime / aperçu de coloris + légende). Points chauds recalculés sur le modèle chargé (`extras.zipPath` / `poi` du GLB v2+).
+- **Modifiés** : `kyma-pages.js` et `kyma-motion.js` (appellent `KYMAViewer` au lieu de `KYMAGLB`), `kyma-pstory.js` (chargement de three.js partagé, rien d'autre), `kyma-pstory.css` (légende R1 permanente), `kyma-pages.css` (verso serré des cartes, précisions sous la carte, deux cases), sections `kyma-colorways`, `kyma-product-360`, `kyma-product-story-scroll` (réglage « Modèles 3D — préfixe des fichiers GLB », défaut `ressac-v2` ; le champ GLB des blocs devient une surcharge facultative), `kyma-cercle-waves` (champ `condition_more`), `kyma-cercle-join` (porte P7, deux consentements), `kyma-technical`, `kyma-instagram`, templates `index`, `collection.kyma`, `product.kyma`, `page.cercle-waves`, `page.nous-connaitre`, `page.faq`.
+- `kyma-glb.js` reste dans la copie et dans le dépôt, **plus chargé par aucune section** (`snippets/kyma-assets.liquid` ne l'a jamais chargé : inchangé).
+- **Passer aux GLB v3 (Izaac)** : 1) téléverser `ressac-v3-<coloris>.glb` (5 fichiers) dans assets ; 2) éditeur › accueil › « 01 Coloris », « La pièce » ; collection › « Le hoodie en 3D » ; fiche produit › « La pièce en 3D » : réglage « Modèles 3D — préfixe » = `ressac-v3`. Le récit au défilement suppose le même contrat de nœuds que la v2 (`Panel_*`, `Zip_Slider`, clip `ZipOpen`, extras `poi`/`zipPath`).
+- **Crédit Waves = remise, pas crédit en magasin (Abdou)** — faisabilité, **à vérifier sur les fiches des applis avant tout choix** (non testé, plan d'essai) : (a) natif Shopify : un code de réduction à montant fixe, restreint à un client ou à un segment (étiquette `initium` / `majeste`), usage unique, date d'expiration = validité du crédit ; le montant variant par client, il faut le générer par client (appli ou Shopify Flow, à confirmer selon le forfait) ; (b) Appstle Subscriptions et Seal Subscriptions annoncent des remises réservées aux abonnés (étiquettes client, remises sur commandes suivantes) : vérifier qu'elles savent créer une remise **calculée** (5 % / 10 % du montant payé) et non seulement un pourcentage fixe ; (c) éviter les fonctions « store credit » / « cartes cadeaux » des applis de fidélité. Décision avec Abdou et Victoire.
+
 ## 2. Une ligne à ajouter dans `layout/theme.liquid`
 
 Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste avant `{{ content_for_header }}` (dans le `<head>`) :
@@ -86,7 +94,7 @@ Dans la copie, ouvrir `layout/theme.liquid` et insérer **une ligne**, juste ava
 ```
 
 **Fait dans la copie** : la ligne est placée juste avant `</head>`, après `{{ content_for_header }}`. Le fichier a été relu avant la modification (MD5 identique à Horizon) ; rien d'autre n'a été changé.
-Cette ligne charge les polices auto-hébergées, `kyma.css`, `kyma-pages.css` et les trois scripts, une fois par page (en `defer`, sans bloquer l'affichage). Chaque section `kyma-*` rappelle aussi ce snippet : le site fonctionne même si la ligne manque, et `kyma-motion.js` supprime les doublons. `kyma-glb.js` n'est chargé que par la section 360°.
+Cette ligne charge les polices auto-hébergées, `kyma.css`, `kyma-pages.css` et les trois scripts, une fois par page (en `defer`, sans bloquer l'affichage). Chaque section `kyma-*` rappelle aussi ce snippet : le site fonctionne même si la ligne manque, et `kyma-motion.js` supprime les doublons. Le lecteur 3D `kyma-viewer.js` n'est chargé que par les sections 3D (coloris, 360°) ; `kyma-glb.js` n'est plus chargé (10/10/2026).
 
 ## 3. Réglages de Horizon (éditeur de thème › Paramètres du thème)
 
@@ -132,10 +140,10 @@ Avant le renommage des pages au lancement, les liens `/pages/faq` et `/pages/cer
 ## 6. Le lecteur 360° de la fiche produit (ordre de repli)
 
 1. **Média 3D natif** : si le produit a des médias 3D (plan payant), la section utilise le `<model-viewer>` de Shopify. Le texte alternatif de chaque média doit contenir le nom du coloris.
-2. **Lecteur maison** `kyma-glb.js` : sinon, chaque bloc « Coloris » de la section pointe vers `ressac-<coloris>.glb`, dans les fichiers du thème. C'est le cas actuel, sur le plan d'essai.
+2. **Lecteur commun** `kyma-viewer.js` (three.js) : sinon, la section lit `<préfixe>-<coloris>.glb` dans les fichiers du thème (préfixe `ressac-v2` ; un bloc « Coloris » peut imposer un fichier précis). C'est le cas actuel, sur le plan d'essai.
 3. **Aperçu 3D du coloris** (étoffe `kyma-3d.js`) : en dernier recours, si WebGL ou le fichier échouent. La légende devient alors « Illustration du coloris. ».
 
-Le coloris suit la variante choisie, via l'événement `change` du `<variant-picker>` de Horizon (option « Coloris »), et aussi les pastilles de la section. Au plus **2 contextes WebGL** par page : le moteur `kyma-3d.js` (1 contexte partagé par toutes les scènes) et le lecteur GLB (1).
+Le coloris suit la variante choisie, via l'événement `change` du `<variant-picker>` de Horizon (option « Coloris »), et aussi les pastilles de la section. Au plus **3 contextes WebGL** par page : `kyma-3d.js` (1, partagé), `kyma-viewer.js` (1, partagé par tous ses lecteurs) et, sur l'accueil seulement, « La pièce » (1).
 Mention sous le lecteur : « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. ».
 **À vérifier à l'installation** : les GLB sont servis par `cdn.shopify.com` et chargés par `fetch`. Si la console signale un blocage CORS, téléverser les GLB dans Contenu › Fichiers et saisir leur URL dans le réglage « Fichier GLB » de chaque bloc.
 
