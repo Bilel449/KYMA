@@ -49,7 +49,7 @@
       %}
       {%- if section.settings.closed_cta_label != blank and section.settings.closed_cta_link != blank -%}
         {%- assign c_ext = false -%}{%- if section.settings.closed_cta_link contains '://' -%}{%- assign c_ext = true -%}{%- endif -%}
-        <p class="kyma-cj__cta"><a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.closed_cta_link }}"{% if c_ext %} target="_blank" rel="noopener"{% endif %}><span>{{ section.settings.closed_cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a></p>
+        <p class="kyma-cj__cta"><a class="kyma-btn kyma-btn--ghost" href="{{ section.settings.closed_cta_link }}"{% if c_ext %} target="_blank" rel="noopener"{% endif %}><span>{{ section.settings.closed_cta_label | escape }}</span>{% if c_ext %}<span class="kyma-vh"> (nouvel onglet)</span>{% endif %}<span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a></p>
       {%- endif -%}
     </div>
     {%- else -%}

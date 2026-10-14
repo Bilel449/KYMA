@@ -18,8 +18,8 @@ Ce qui change par rapport au v2 (retour du fondateur : « vêtement Roblox / cub
     de capuche, dessous de bras ; calculée fermé ET ouvert (l'intérieur reste clair ouvert).
   * Matière : normal map de jersey (endroit du french terry) et carte de rugosité en PNG
     tuilées (KHR_texture_transform), envers gratté (molleton) et doublure de capuche jersey
-    séparés, reflet velouté du coton (KHR_materials_sheen) ; zip argent brossé, tirette
-    laiton plaqué or brossé.
+    séparés, reflet velouté du coton (KHR_materials_sheen) ; zip métal finition argentée
+    brossée, tirette laiton doré brossé.
 
 Construction (unités : mètres, Y vers le haut, face avant vers +Z, bas du bord-côte à y = 0) :
   * Corps : 3 panneaux comme un patronage réel (dos, demi-devant gauche, demi-devant droit).
@@ -59,11 +59,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Coloris (tech pack v3) : teinte A (fond), teinte B (volutes), doublure ton sur ton
 # --------------------------------------------------------------------------------------
 COLORIS = {
-    "lilac-whirl":  {"name": "Lilac Whirl",  "a": "#E9D3C4", "b": "#C29CC4", "lining": "#EEE2D4", "seed": 11},
+    # v3 : Lilac Whirl recentré sur le lilas #C8A2C8 (le v2 virait orchidée), Crimson Flow sur le
+    # bordeaux / cramoisi (le v2 virait brique) ; les autres coloris sont ceux du v2.
+    "lilac-whirl":  {"name": "Lilac Whirl",  "a": "#E6DBDF", "b": "#B9A0C6", "lining": "#EEE6DC", "seed": 11},
     "ivory-tide":   {"name": "Ivory Tide",   "a": "#EEE7DA", "b": "#D2C7B4", "lining": "#F4EFE6", "seed": 23},
     "silver-drift": {"name": "Silver Drift", "a": "#BDC6CD", "b": "#8D9399", "lining": "#E4E8EC", "seed": 37},
     "noir-absolu":  {"name": "Noir Absolu",  "a": "#1B1B1B", "b": "#2E333B", "lining": "#151515", "seed": 41},
-    "crimson-flow": {"name": "Crimson Flow", "a": "#8A2620", "b": "#3F1411", "lining": "#2B0F0D", "seed": 53},
+    "crimson-flow": {"name": "Crimson Flow", "a": "#7C1A2B", "b": "#46101D", "lining": "#2A0D13", "seed": 53},
 }
 
 # --------------------------------------------------------------------------------------
@@ -76,7 +78,7 @@ DROP_F, DROP_B = 0.085, 0.022
 ZN_F, ZN_B = 0.080, 0.068   # profondeur de l'anneau d'encolure devant / dos
 Y_AP = 0.395          # dessous de bras (emmanchure profonde)
 Y_SP = 0.612          # point d'épaule : ~4 cm plus bas qu'une coupe classique (épaule tombante)
-W_HEM, W_CH, W_SH = 0.281, 0.270, 0.272
+W_HEM, W_CH, W_SH = 0.281, 0.270, 0.262   # v3 : épaule 0,262 (arc dos ≈ 58 cm, guide M)
 DF, DB = 0.110, 0.099   # demi-profondeurs devant / dos (v2 : 0,104 / 0,094)
 ZA_F, ZA_B = 0.074, 0.070   # demi-profondeur d'emmanchure
 XG = 0.0055           # demi-écart des lisières au milieu devant (sous le zip)
@@ -219,7 +221,7 @@ def catmull(P, n):
 # --------------------------------------------------------------------------------------
 # Corps : contours de patronage et profils de section
 # --------------------------------------------------------------------------------------
-W_HEM_IN = 0.270      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
+W_HEM_IN = 0.276      # v3 : bas du corps froncé dans le bord-côte (plus de côtés droits)
 W_BLOUSE = 0.278      # v3 : blousant au-dessus du bord-côte
 Y_BL = 0.150          # hauteur du blousant maximal
 
@@ -335,7 +337,7 @@ def mirror_x(G):
 # Manches
 # --------------------------------------------------------------------------------------
 SLV_C1 = np.array([0.337, 0.376, 0.004])
-SLV_LEN = 0.345
+SLV_LEN = 0.285          # v3 : manche ≈ 64 cm (guide M) une fois drapée
 SLV_D = np.array([math.sin(ALPHA), -math.cos(ALPHA), 0.0])
 SLV_OUT = np.array([math.cos(ALPHA), math.sin(ALPHA), 0.0])
 CUFF_LEN = 0.060
@@ -966,7 +968,7 @@ def hem_band(ring):
     nh = nrm(np.stack([T[:, 2], np.zeros(nu), -T[:, 0]], 1))
     if np.mean(np.sum(nh * np.stack([R[:, 0], np.zeros(nu), R[:, 2] + 0.005], 1), 1)) < 0:
         nh = -nh
-    o, h, side = rib_profile(Y0, 0.0080)
+    o, h, side = rib_profile(Y0, 0.0050)
     ulen = np.linspace(0, L, nu)
     rw = rib_wave(ulen)
     G = (R[None, :, :] * np.array([1, 0, 1])[None, None] + np.array([0, 1, 0])[None, None] * h[:, None, None]
@@ -2169,10 +2171,10 @@ def export_glb(path, col, geo, layout, atlas_img, tiles):
             "baseColorFactor": [*map(float, lin), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.96},
          "normalTexture": {"index": tex_fleece, "texCoord": 0, "scale": 0.55, "extensions": trf},
          "extensions": {"KHR_materials_sheen": {"sheenColorFactor": sheen_l, "sheenRoughnessFactor": 0.80}}},
-        {"name": "Zip métal argent brossé", "pbrMetallicRoughness": {
+        {"name": "Zip métal finition argentée brossée", "pbrMetallicRoughness": {
             "baseColorFactor": [0.80, 0.81, 0.83, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.40}},
-        {"name": "Tirette Kyma laiton plaqué or brossé", "pbrMetallicRoughness": {
-            "baseColorFactor": [0.93, 0.74, 0.40, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.34}},
+        {"name": "Tirette Kyma laiton doré brossé", "pbrMetallicRoughness": {
+            "baseColorFactor": [0.96, 0.78, 0.42, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.30}},
         {"name": "Ruban de zip", "pbrMetallicRoughness": {
             "baseColorFactor": [*map(float, tape), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.9}},
         {"name": "Fond de poche", "pbrMetallicRoughness": {
@@ -2249,7 +2251,7 @@ def export_glb(path, col, geo, layout, atlas_img, tiles):
     tilt = -math.radians(12)
     nodes_js.append({"name": "Zip_Pull", "mesh": mi, "translation": [float(v) for v in geo["pull_pivot"]],
                      "rotation": [math.sin(tilt / 2), 0.0, 0.0, math.cos(tilt / 2)],
-                     "extras": {"description": "Tirette « Kyma » (laiton plaqué or brossé), tourne autour de X sur l'anse du curseur"}})
+                     "extras": {"description": "Tirette « Kyma » (laiton, finition dorée brossée), tourne autour de X sur l'anse du curseur"}})
     index["Zip_Pull"] = len(nodes_js) - 1
     nodes_js[index["Zip_Slider"]]["children"] = [index["Zip_Pull"]]
     g.g["scenes"][0]["nodes"] = [0]

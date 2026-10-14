@@ -73,7 +73,7 @@
         <div class="kyma-ph__ctas" data-kyma-reveal style="--kd: 700ms;">
           {%- assign cta_ext = false -%}{%- if section.settings.cta_link contains '://' -%}{%- assign cta_ext = true -%}{%- endif -%}
           <a class="kyma-btn" href="{{ section.settings.cta_link | default: '#' }}"{% if cta_ext %} target="_blank" rel="noopener"{% endif %} data-kyma-magnetic>
-            <span>{{ section.settings.cta_label | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
+            <span>{{ section.settings.cta_label | escape }}</span>{% if cta_ext %}<span class="kyma-vh"> (nouvel onglet)</span>{% endif %}<span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
       {%- endif -%}
