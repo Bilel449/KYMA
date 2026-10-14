@@ -256,7 +256,7 @@
         "spots_label": "Détails de la pièce",
         "cta_label": "",
         "cta_link": "",
-        "model_prefix": "ressac-v3"
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "colorway_1": {

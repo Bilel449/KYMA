@@ -21,7 +21,7 @@
         "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
         "caption_fallback": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
         "mv_src": "",
-        "model_prefix": "ressac-v3"
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "colorway_1": {

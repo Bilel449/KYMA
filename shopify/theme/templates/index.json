@@ -41,7 +41,7 @@
         "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
         "loading_label": "Chargement du modèle 3D…",
         "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
-        "model_prefix": "ressac-v3"
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "colorway_1": {
@@ -151,7 +151,7 @@
         "skip_label": "Passer la présentation de la pièce",
         "picker_label": "Coloris du modèle 3D",
         "loading_label": "Chargement du modèle 3D…",
-        "model_prefix": "ressac-v3"
+        "model_prefix": "ressac-v2"
       },
       "blocks": {
         "step_1": {
