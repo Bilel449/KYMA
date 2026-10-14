@@ -16,25 +16,53 @@ Le fondateur a jugé la v2 « vêtement Roblox / cube ». La v3 corrige ce qu'un
 | Bords-côtes 2×2 | relief 0,85 mm | relief 1,4 mm, repris plus serré |
 | Ombre | aucune (éclairage plat) | **occlusion ambiante cuite** (lancer de rayons, COLOR_0), calculée fermé et ouvert : creux des plis, dessous de bras et intérieur de capuche sombres, intérieur clair une fois ouvert |
 | Matière | maille en JPEG, rugosité unique | maille jersey (endroit du french terry) en **PNG**, carte de rugosité PNG, envers molleton gratté (PNG) séparé de la doublure de capuche jersey, reflet velouté du coton (`KHR_materials_sheen`), toutes les tuiles avec `KHR_texture_transform` |
-| Métal | zip argent, tirette laiton | zip argent brossé (rugosité 0,40), tirette laiton plaqué or brossé (0,34) |
+| Métal | zip argenté, tirette laiton | zip métal finition argentée brossée (rugosité 0,40), tirette laiton doré brossé (0,40) |
+| Coloris | — | Lilac Whirl recentré sur le lilas (le v2 virait orchidée), Crimson Flow sur le bordeaux (le v2 virait brique) ; voir le tableau des couleurs |
+| Mesures | non vérifiées | recalées sur le guide des tailles M : épaule 0,262 m au lieu de 0,272, manche raccourcie, bas du bord-côte élargi (voir le tableau des mesures) |
 
 Correctif au passage : l'anneau du bord-côte de taille de la v2 traversait deux fois l'intérieur du corps (bandes cachées, normales faussées). Il est refait en v3.
 
 ### Fichiers v3
 | Coloris | Fichier | Poids | Triangles |
 |---|---|---|---|
-| Lilac Whirl | `ressac-v3-lilac-whirl.glb` | 4,21 Mo | 121 148 |
-| Ivory Tide | `ressac-v3-ivory-tide.glb` | 4,11 Mo | 121 148 |
-| Silver Drift | `ressac-v3-silver-drift.glb` | 4,15 Mo | 121 148 |
-| Noir Absolu | `ressac-v3-noir-absolu.glb` | 4,08 Mo | 121 148 |
-| Crimson Flow | `ressac-v3-crimson-flow.glb` | 4,26 Mo | 121 148 |
+| Lilac Whirl | `ressac-v3-lilac-whirl.glb` | 4,21 Mo | 121 308 |
+| Ivory Tide | `ressac-v3-ivory-tide.glb` | 4,12 Mo | 121 308 |
+| Silver Drift | `ressac-v3-silver-drift.glb` | 4,16 Mo | 121 308 |
+| Noir Absolu | `ressac-v3-noir-absolu.glb` | 4,09 Mo | 121 308 |
+| Crimson Flow | `ressac-v3-crimson-flow.glb` | 4,18 Mo | 121 308 |
+
+**Écart assumé sur les triangles** : la cible de la recherche et de la conformité est < 100 000 triangles (L8). La v3 en compte 121 308, comme la v2 avant elle (125 340), qui est déjà en ligne en aperçu. Le poids, lui, reste sous 5 Mo. Ces triangles servent l'épaisseur du tissu (endroit, envers, lisières), les côtes 2×2, les dents du zip et les morphs. Descendre sous 100 000 est possible (doublure moins dense, côtes en normal map), mais coûterait du relief visible. C'est à faire si Sacha mesure un ralentissement sur mobile ; le modèle de remplacement, lui, visera directement < 100 000.
 
 - **Validateur Khronos** (`gltf-validator` 2.0.0-dev.3.10) : **0 erreur** sur les 5 fichiers. Il reste un seul type d'avertissement, le même que la v2 : les tangentes sont générées à l'exécution.
 - **Extensions** : `KHR_mesh_quantization` (requise), `KHR_texture_transform`, `KHR_materials_sheen`. Toutes sont gérées nativement par three.js r150+ (le thème embarque la r180) et par model-viewer. Un lecteur sans sheen affiche simplement le tissu sans reflet velouté.
-- **7 matériaux** : `French terry KYMA Wave`, `Envers molleton gratté`, `Zip métal argent brossé`, `Tirette Kyma laiton plaqué or brossé`, `Ruban de zip`, `Fond de poche`, `Doublure de capuche jersey ton sur ton`. Le thème ne lit aucun nom de matériau pour un GLB v2/v3.
+- **7 matériaux** : `French terry KYMA Wave`, `Envers molleton gratté`, `Zip métal finition argentée brossée`, `Tirette Kyma laiton doré brossé`, `Ruban de zip`, `Fond de poche`, `Doublure de capuche jersey ton sur ton`. Le thème ne lit aucun nom de matériau pour un GLB v2/v3. Ces noms sont lisibles par tout visiteur qui ouvre le fichier : ils ne contiennent aucune allégation non confirmée par le fabricant (pas de « plaqué or », pas d'« argent » comme matière). J'ai vérifié par recherche de chaîne dans le JSON des 5 GLB que « plaqué » et « argent brossé » n'y figurent plus.
 - **Tuiles PNG** : `shopify/3d/textures-v3/` (`knit-normal.png` maille 24 mm, `knit-rough.png`, `fleece-normal.png`).
-- **Rendus de contrôle v2 / v3** : `shopify/3d/rendus-v3/` (`comparatif-face|dos|trois-quarts|capuche|zip-ouvert.png`, `coloris-v2-v3.png`). Script : `shopify/3d/render_three.cjs`, avec un éclairage proche de `kyma-pstory.js` ; plans dans `rendus-v3/plans.json`.
+- **Rendus de contrôle v2 / v3** : `shopify/3d/rendus-v3/` (`comparatif-face|dos|trois-quarts|capuche|zip-ouvert.png`, `coloris-v2-v3.png`). Script : `shopify/3d/render_three.cjs`, avec un éclairage proche de `kyma-pstory.js` (RoomEnvironment 0,75 + lumière principale) ; plans dans `rendus-v3/plans.json`. **Ce sont des documents de travail : ils ne sont jamais publiés sans la mention R1** (voir « Limites — à afficher »).
 - **Reconstruire** : `python3 shopify/3d/build_hoodie_v3.py --coloris all --textures shopify/3d/textures-v3` (≈ 6 min ; `pip install embreex` conseillé pour l'occlusion).
+
+### Mesures du modèle (taille M) comparées au guide des tailles
+Les mesures sont prises sur la géométrie du GLB, en cm « à plat » : demi-tour pour la poitrine et le bas, arc sur la surface pour le reste. Le relevé a été fait par un script Python à partir de `build_geometry` : coupe horizontale des nappes, longueur des polylignes, côtes du bord-côte lissées sur une période. Le « patron » est la nappe avant drapé, le « drapé » est la forme livrée : les plis ajoutent de la longueur d'arc.
+
+| Mesure | Guide M | Patron v3 | Drapé v3 | v2 (patron) | Commentaire |
+|---|---|---|---|---|---|
+| Poitrine (2,5 cm sous l'aisselle) | 64 | 64,0 | 67,1 | 65,9 | conforme (le drapé ajoute l'ampleur des plis) |
+| Épaules (arc sur le dos, couture à couture) | 58 | 58,9 | 59,5 | 61,5 | corrigé : `W_SH` 0,272 → 0,262 m. La corde en ligne droite fait 52,4 cm, mais une mesure à plat suit le tissu, donc l'arc. |
+| Longueur dos | 70 | 68,6 depuis le milieu dos de l'encolure ; 70,0 en hauteur depuis le point d'encolure côté | 68,9 | 68,4 | conforme en hauteur. L'arc depuis le point d'encolure côté (76 cm) passe par-dessus l'épaule et la profondeur du buste fantôme : il ne se compare pas à une mesure à plat. |
+| Manche (couture d'épaule → bout du poignet) | 64 | 64,1 | 64,9 | 69,5 | corrigé : `SLV_LEN` 0,345 → 0,285 m. Les poignets s'arrêtent un peu au-dessus de l'ourlet. |
+| Bas (bord-côte, à plat) | 62 | 61,0 en bas / 62,4 en haut | idem | non mesurable (l'anneau défectueux du v2 donne 119) | conforme (côte légèrement resserrée en bas) |
+| Capuche | — (pas de cote au guide) | arête d'ouverture 32,5 ; couture milieu 50,9 ; profondeur 27,1 ; largeur 28,4 | 33,7 / 52,0 / 27,4 / 28,5 | 37,2 / 52,9 / 28,2 / 30,1 | dans la norme d'une capuche adulte (ouverture ≈ 33–35 cm). À recaler sur le patron du fabricant dès réception. |
+
+### Couleurs : théorie et rendu mesuré
+Mesures prises sous l'éclairage de contrôle (RoomEnvironment 0,75), médiane des pixels.
+
+| Élément | Valeur théorique (GLB) | Mesuré v3 | Mesuré v2 | Cible |
+|---|---|---|---|---|
+| Tirette | facteur linéaire [1,00 ; 0,77 ; 0,34], rugosité 0,40 (≈ #FFE39E en sRGB) | #C6AB6A (laiton doré) | kaki | doré brossé. La proposition [0,96 ; 0,78 ; 0,42] avec rugosité 0,30 a été testée : **#95845A, kaki**. Plus le métal est lisse, plus il reflète le fond gris du studio ; à 0,40, il redevient doré. |
+| Lilac Whirl, nuance B | #B9A0C6 (v2 : #C29CC4) | #C5ADC9 | #E5B8D5 (orchidée) | #C8A2C8 (lilas) |
+| Lilac Whirl, nuance A (poudre) | #E6DBDF (v2 : #E9D3C4, pêche) | #F6E9ED | #F7DFD1 | poudre neutre |
+| Crimson Flow, nuances A / B | #7C1A2B / #46101D (v2 : #8A2620 / #3F1411) | #9D2438 / #5A1724 | #AB3028 / #501B16 (brique) | cramoisi sur bordeaux |
+
+Ivory Tide, Silver Drift et Noir Absolu gardent les valeurs du v2.
 
 ### Contrat : identique à la v2 (vérifié sur les 5 fichiers)
 Mêmes nœuds, dans le même ordre et avec la même hiérarchie. Mêmes maillages articulés et mêmes `targetNames` (`open`, `open_fold`, `unzip_1..4`). Mêmes clés d'extras (`zipPath`, `zipPathQuat`, `sliderOpen`, `sliderOpenFold`, `poi`, `morphNodes`…). Même clip `ZipOpen` (6 s, 13 canaux). Pas d'`extras.pivot` : les panneaux portent `extras.hinge`. Le chemin du zip bouge de 8 mm au plus. Tout ce qui suit (nœuds, morphs, extras, animation, séquence de défilement) vaut donc pour la v3 comme pour la v2.
@@ -45,6 +73,9 @@ Mêmes nœuds, dans le même ordre et avec la même hiérarchie. Mêmes maillage
 - C'est **mieux, pas photoréaliste**. Les plis sont des fonctions de bruit et d'ondes posées sur des surfaces paramétriques. Ce n'est pas une simulation de tissu : ils restent plus réguliers et plus « dessinés » que le tombé réel d'un french terry de 410 g/m². De près, un œil exercé verra toujours un objet de synthèse.
 - La capuche reste la partie la moins crédible. Elle tient debout sans tête et forme un petit pincement à la pointe de l'ouverture.
 - La silhouette garde un côté « bomber » : bas repris et manches tassées.
+- **Poches biais encore peu lisibles** à distance (vue d'ensemble) : la fente ouverte ne se lit bien qu'en gros plan ou en trois-quarts.
+- **Coutures d'emmanchure presque verticales** sur le devant : avec l'épaule tombante, elles dessinent un léger effet de plastron, plus marqué que sur un vrai sweat, où le tissu les adoucit.
+- **Occlusion = compromis** : `bake_ao` mélange 70 % de la valeur la plus claire (fermé, ouvert, ouvert + revers) et 30 % de la valeur fermée. L'intérieur ouvert reste lisible mais un peu plus clair que la réalité, l'intérieur fermé un peu moins sombre.
 - L'occlusion est cuite pour la pose fermée et ouverte. Pendant l'ouverture, les ombres ne bougent pas avec le tissu.
 - Seul un modèle issu d'une **simulation (CLO3D / Marvelous) ou d'un scan** franchira le cap du réalisme : voir `shopify/3d/pipeline-remplacement.md` (conversion au même contrat en une journée).
 
@@ -85,10 +116,10 @@ KYMA_Hoodie                      racine, extras (zipPath, poi, …)
 ├─ Sleeve_Left / Sleeve_Right    manches (endroit + envers)
 ├─ Cuff_Left / Cuff_Right        poignets, bord-côte 2×2 de 6 cm
 ├─ Hem                           bord-côte de taille 2×2 de 6 cm (ouvert au milieu devant)
-└─ Zip_Slider                    curseur (métal argent brossé), repère local : Y = vers le haut du zip, Z = vers l'extérieur
+└─ Zip_Slider                    curseur (métal finition argentée brossée), repère local : Y = vers le haut du zip, Z = vers l'extérieur
    └─ Zip_Pull                   tirette « Kyma » en laiton doré, accrochée à l'anse (pivot = origine, axe X)
 ```
-Matériaux : `Molleton KYMA Wave` (atlas 2048 JPEG + normal map de maille en tuile, rugosité 0,86), `Doublure jersey ton sur ton` (unie, rugosité 0,92), `Zip métal argent brossé`, `Tirette Kyma laiton doré`, `Ruban de zip`, `Fond de poche`.
+Matériaux : `Molleton KYMA Wave` (atlas 2048 JPEG + normal map de maille en tuile, rugosité 0,86), `Doublure jersey ton sur ton` (unie, rugosité 0,92), `Zip métal argent brossé`, `Tirette Kyma laiton doré`, `Ruban de zip`, `Fond de poche`. Ce sont les noms des fichiers **v2**. Le nom de zip du v2 contient « argent brossé » : la v3 le remplace, et c'est la v3 qui doit être téléversée.
 
 ## Morph targets (mêmes noms, même ordre, sur chaque maillage articulé)
 Index : `0 open`, `1 open_fold`, `2 unzip_1`, `3 unzip_2`, `4 unzip_3`, `5 unzip_4` (noms aussi dans `mesh.extras.targetNames`, que three.js lit en `morphTargetDictionary`).
@@ -141,7 +172,9 @@ Lumière de studio diffuse (RoomEnvironment de three.js à intensité ~0,75, ou 
 - C'est une **représentation 3D procédurale**, pas le produit fabriqué. Le tombé du French terry, les coutures et le placement du motif diffèrent, car chaque pièce est découpée dans une zone différente du rouleau.
 - Les bords-côtes sont imprimés comme sur les rendus du lookbook. En production, ils pourraient être unis : à confirmer avec le fabricant.
 - La tirette reprend « Kyma » en DM Serif Display. Ce n'est pas la gravure définitive du fabricant.
-- **Mention obligatoire** près du visualiseur et dans le texte alternatif : « *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.* » (formule unique du site, à valider par Victoire).
+- **Mention obligatoire (R1, Victoire)**, légende permanente en texte réel près du visualiseur : « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** »
+- **Texte alternatif des images fixes (R10)** : « Rendu 3D du hoodie Ressac, [coloris], étape [capuche / dos / tirette / zip / intérieur]. Pas une photo du produit fabriqué. »
+- Les comparatifs de `shopify/3d/rendus-v3/` sont des documents de travail. Ils ne sont jamais publiés sans la mention R1.
 - À remplacer ou à compléter par le shooting du produit fabriqué, après validation des préséries.
 - Les anciens `ressac-<coloris>.glb` (v1) ne doivent plus être utilisés sur le site.
 
@@ -150,5 +183,6 @@ Lumière de studio diffuse (RoomEnvironment de three.js à intensité ~0,75, ou 
 - **Méthode** : chaque GLB est **calculé par un programme écrit pour KYMA**. Géométrie : surfaces paramétriques, offsets, profils. Motif KYMA Wave : bruit de Perlin et tourbillons. Maille, rugosité, envers gratté : bruit procédural. Occlusion : lancer de rayons. Tirette : contours vectoriels de la typo « Kyma ». Le résultat est reproductible : même script, même fichier.
 - **Aucune image générée par IA** : aucune texture, photo ni maillage ne vient d'un générateur d'images ou de 3D par IA. Le code a été écrit avec l'assistance de Claude, mais aucune sortie d'un modèle génératif d'images ou de 3D n'est incluse.
 - **Aucun élément tiers dans les fichiers** : aucun modèle, scan, texture ou photo acheté ou téléchargé. Les seules ressources externes sont des **outils** : Python, NumPy, SciPy, Pillow, fontTools, Shapely, mapbox-earcut, trimesh et embreex pour les calculs ; Khronos glTF-Validator pour le contrôle ; three.js et Playwright/Chromium pour les rendus de contrôle. Aucun de ces outils ne transmet de droit sur les fichiers produits.
-- **Une seule réserve** : les lettres « Kyma » en relief sur la tirette reprennent les contours de **DM Serif Display** (police de la marque, licence SIL Open Font License 1.1, qui autorise l'usage et l'incorporation dans un produit ; la police elle-même n'est pas redistribuée, seuls des contours vectorisés figurent dans le maillage).
-- **Rendus de contrôle** (`shopify/3d/rendus-v3/`, captures v2) : vues calculées de ces mêmes GLB, sans retouche ni IA. Ce sont des documents de travail, pas des visuels de campagne.
+- **Une seule réserve** : les lettres « Kyma » en relief sur la tirette reprennent les contours de **DM Serif Display** (police de la marque, paquet `@fontsource/dm-serif-display` 5.3.0, fichier `dm-serif-display-latin-400-normal.woff`, licence SIL Open Font License 1.1, qui autorise l'usage et l'incorporation dans un produit ; seuls des contours vectorisés figurent dans le maillage, la police n'est pas redistribuée). Le journal de la construction finale des 5 GLB v3 (14/10/2026) l'atteste : « police tirette : …/fontsource-dm-serif-display-5.3.0/package/files/dm-serif-display-latin-400-normal.woff ». Le repli DejaVu Serif du script **n'a pas servi**.
+- **Titularité des droits sur ces fichiers** : aucun contrat de cession (travail réalisé par un agent IA sous commande du fondateur) ; point à trancher par Victoire.
+- **Rendus de contrôle** (`shopify/3d/rendus-v3/`, captures comparatives v2 et v3) : vues calculées de ces mêmes GLB, sans retouche ni IA. Ce sont des documents de travail, pas des visuels de campagne, jamais publiés sans la mention R1.

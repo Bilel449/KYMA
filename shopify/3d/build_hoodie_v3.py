@@ -2174,7 +2174,8 @@ def export_glb(path, col, geo, layout, atlas_img, tiles):
         {"name": "Zip métal finition argentée brossée", "pbrMetallicRoughness": {
             "baseColorFactor": [0.80, 0.81, 0.83, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.40}},
         {"name": "Tirette Kyma laiton doré brossé", "pbrMetallicRoughness": {
-            "baseColorFactor": [0.96, 0.78, 0.42, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.30}},
+            "baseColorFactor": [1.0, 0.77, 0.34, 1.0], "metallicFactor": 1.0, "roughnessFactor": 0.40}},
+        # (rugosité 0,40 : un laiton brossé ; plus lisse, il reflète le fond gris du studio et vire au kaki)
         {"name": "Ruban de zip", "pbrMetallicRoughness": {
             "baseColorFactor": [*map(float, tape), 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.9}},
         {"name": "Fond de poche", "pbrMetallicRoughness": {
