@@ -5,7 +5,7 @@
 > **Sources consolidées** : `out/feuille-de-route/` (squelette de Clémentine, Isabelle, Victoire, Abdou, Izaac, Maya, Sacha). Les dates sont des propositions posées sur l'état au 15/10/2026. L'expert-comptable valide le fiscal et le social, un avocat valide les contrats et les textes légaux.
 > **Jours de semaine** : tous les jours cités ont été recalculés (lundi 1er février 2027 = repère). Deux erreurs corrigées : le 31 oct. 2026 est un **samedi** (retenu : ven. 30 oct.) et le 19 mars 2027 est un **vendredi** (Victoire écrivait « jeudi »). Voir 7.3.
 > **Légende** : F fondateur · V Victoire · A Abdou · I Izaac · M Maya · S Sacha · Is Isabelle · Ar Arthur · EC expert-comptable · Av avocat.
-> **Glossaire** : GLB = fichier 3D ; BAT = bon à tirer ; IDU = identifiant unique Refashion ; CECMC = commission d'évaluation et de contrôle de la médiation de la consommation (médiateur) ; CA3 = déclaration de TVA ; CFE = cotisation foncière des entreprises ; ACRE = exonération de cotisations de création ; SKU = référence article ; DPA = accord de sous-traitance RGPD.
+> **Glossaire** : GLB = fichier 3D ; BAT = bon à tirer ; IDU = identifiant unique Refashion ; CECMC = commission d'évaluation et de contrôle de la médiation de la consommation (médiateur) ; CA3 = déclaration de TVA ; CFE = cotisation foncière des entreprises ; ACRE = exonération de cotisations de création ; SKU = référence article ; DPA = accord de sous-traitance RGPD ; R1 = mention obligatoire affichée sous chaque modèle 3D et dessin du hoodie (texte arrêté par Arthur le 15/10/2026 : « Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran. »).
 >
 > **Règles permanentes**
 > - Aucune image générée par IA.
@@ -265,7 +265,7 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 
 ## 5. Décisions du fondateur
 
-Format : `Dxx | décision | date limite | qui conseille`, triées par date. D44 à D46 sont créées par cette consolidation (D40 à D43 l'avaient été par le squelette). D2, D22, D24, D35 et D36 reviennent volontairement à deux étapes (préparation puis décision finale) : ce ne sont pas des doublons.
+Format : `Dxx | décision | date limite | qui conseille`, triées par date. D44 à D46 sont créées par cette consolidation (D40 à D43 l'avaient été par le squelette). D2, D22, D24 et D36 reviennent volontairement à deux étapes (préparation puis décision finale) ; D35 à trois (courtier, RC exploitation, RC produits) : ce ne sont pas des doublons.
 
 | Dxx | Décision | Date limite | Qui conseille |
 |---|---|---|---|
