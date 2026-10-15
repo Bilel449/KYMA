@@ -216,7 +216,7 @@ Hors demande, mais le titre « Rejoindre le cercle » et le bouton « Entrer dan
 
 | Champ | Texte |
 |---|---|
-| `caption` (section `piece`) | Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran. |
+| `caption` (section `piece`) | Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran. |
 | `caption_hoodie` (section `drop`) | *(même texte que ci-dessus)* |
 | `caption` (section `drop`) | Rendu 3D du coloris, pas une photo du produit fabriqué. |
 | `caption` (section `motif`) | Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique. |

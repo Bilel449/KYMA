@@ -1,6 +1,6 @@
 # État de la boutique Shopify — kymas-store.myshopify.com
 
-> Mis à jour le 10/10/2026 (lecteur 3D unique, textes v4 Cercle Waves et récit 3D, porte P7 fermée ; avant : retours du fondateur du 09/10). Copie de thème KYMA installée le 08/10/2026, non publiée. Plan : essai (passage à un plan payant nécessaire avant toute vente).
+> Mis à jour le 15/10/2026 (R1 étendue, réserves P1 à P3 de Victoire, GLB à supprimer avant publication ; avant : sweat v3 du 14/10, lecteur 3D unique et textes v4 du 10/10, retours du fondateur du 09/10). Copie de thème KYMA installée le 08/10/2026, non publiée. Plan : essai (passage à un plan payant nécessaire avant toute vente).
 > Tout ce qui est listé ici a été créé **en brouillon / non publié**, après « VALIDÉ » d'Arthur (cycle 2).
 
 ## Créé par l'équipe
@@ -38,6 +38,12 @@ SKU : `KYMA-HZ-001-<LILAC|IVORY|SILVER|NOIR|CRIMSON>-<XS…XXL>`.
 - Publication du thème KYMA et attribution des templates (voir `installation-horizon.md` § 4), après réglages Horizon (§ 3) et levée du blocage n° 3 (contrat fabricant).
 - Menus, politiques légales (attendent les données de la société), nom de la boutique, domaine, applis (avis, cookies, rétractation en ligne).
 - Aucune publication, aucun produit ACTIVE.
+- **Avant toute publication : les 10 GLB `ressac-v2-*` et `ressac-<coloris>.glb` sont supprimés de la copie (action manuelle du fondateur) ; Sacha relit ensuite la liste des assets et confirme qu'il n'en reste aucun.** (La suppression par l'API est bloquée par le connecteur : marche à suivre dans « Sweat v3 branché — 14/10/2026 » plus bas.)
+
+### À traiter avant l'ouverture des précommandes (réserves P1 à P3 de Victoire — `conformite.md`, « Provenance des visuels 3D, 14/10/2026 »)
+- **P1 — Titularité des fichiers 3D (🟠, fondateur)** : constituer un dossier de création daté (brief, tech pack v3, charte, échanges où le fondateur fixe les choix, corrections de la v2 à la v3) et **signer l'attestation** type de Victoire ; après le Kbis, cession écrite fondateur → SASU.
+- **P2 — Fichiers v1 et v2 encore téléchargeables (🟠, Sacha)** : ne téléverser que la v3 ; supprimer v1 et v2 de la copie (action manuelle du fondateur, voir ci-dessus) et de Shopify. Le nom de matériau « Zip métal argent brossé » de la v2 est ambigu.
+- **P3 — Mention R1 (🟠, Izaac, Sacha, fondateur)** : R1 complétée et appliquée le 15/10/2026 (voir plus bas). **Reste ouvert** jusqu'à la confirmation écrite du fabricant sur les bords-côtes et la tirette : la mention est un **palier, pas une solution définitive**. Ensuite, soit le modèle est aligné, soit « peuvent aussi différer » devient la liste des écarts confirmés. À retirer ou adapter dès que des photos de préséries remplacent les rendus.
 
 ## Retours du fondateur — 09/10/2026 (Sacha)
 
@@ -104,3 +110,17 @@ Copie `189991944572` uniquement, rien publié.
 - **Revenir en arrière** : re-téléverser `ressac-v2-<coloris>.glb` depuis `shopify/3d/` puis mettre le réglage « Modèles 3D — préfixe » à `ressac-v2` dans les 3 sections.
 - R1 en vrai texte, visible aux 9 moments du récit (test automatique), `still_alt` au modèle R10 (« Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape … . Pas une photo du produit fabriqué. »).
 - Tests : `preview/captures/v3-final-*.png` (accueil coloris, produit face/dos/Crimson, collection Noir Absolu, récit en 9 étapes dont zip ouvert, mobile, mouvement réduit), 0 erreur console, three.js chargé une seule fois.
+
+### R1 étendue (texte validé par Arthur) — 15/10/2026 (Sacha)
+Copie `189991944572` uniquement (rôle relu avant et après : UNPUBLISHED). Thème en ligne `187511734652` non touché ; aucune page, aucun produit, aucun menu modifié ; rien publié ; aucune suppression d'asset tentée.
+- **Nouveau texte R1** : « Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran. » (~290 caractères).
+- **Appliqué** : défauts de schéma `caption` (`kyma-product-360`, `kyma-product-story-scroll`) et `caption_hoodie` (`kyma-colorways`), passés de `text` à `textarea` ; valeurs en dur de `index.json` (`drop.caption_hoodie`, `piece.caption`), `product.kyma.json` (`hoodie-3d.caption`), `collection.kyma.json` (`hoodie.caption`) ; maquettes `preview/index.html` (2), `collection.html` (2, dont `data-model`), `produit.html` (2, dont le bloc « Pensé pour être unique » du texte de la fiche), `produit-story.html` (1). `caption_fallback` et légendes R3 intacts.
+- **Installé (themeFilesUpsert, 6 fichiers)** : `sections/kyma-product-360.liquid`, `sections/kyma-colorways.liquid`, `sections/kyma-product-story-scroll.liquid`, `templates/index.json`, `templates/product.kyma.json`, `templates/collection.kyma.json`. Contrôle : taille en octets de chaque fichier de la copie = taille avant + insertion attendue (112 octets par occurrence, +4 octets pour `text` → `textarea`), voir le compte rendu pour les MD5 relus.
+- **`installation-horizon.md` mis à jour** : GLB v1 retirés du tableau (v3 seulement), méthode B en `assets/ressac-v3-*.glb`, défaut `ressac-v3`, R1 du § 6, case « avant toute publication » en § 7.
+- 🔴 **Hors thème, à traiter avec accord** : la description du produit DRAFT (`gid://shopify/Product/16151822205308`) porte encore une ancienne mention (« Visuel de présentation (rendu) ») ; elle n'a pas été modifiée (hors périmètre de cette passe). Même chose pour `contenu/fiches-produit.md` (formule d'Izaac, plus ancienne que R1).
+- ⚠️ **Non fait dans cette passe (aucun navigateur ni shell disponible)** : test automatique des 9 moments du récit, vérification de la légende épinglée à 360 et 390 px, captures `r1-etendue-*.png`, grep automatisé. À refaire par une session avec navigateur sans tête avant toute publication. Estimation par lecture de `kyma-pstory.css` (non vérifiée à l'écran) : la légende épinglée n'a ni `overflow` ni `line-clamp`, elle s'étend donc en hauteur (environ 6 lignes à 11 px en 360 px, sous les pastilles) ; la carte d'étape est ancrée en bas (`bottom: 18px`) : le chevauchement reste à contrôler sur les petits écrans (360 × 640).
+
+### Tests R1 étendue — 15/10/2026 (orchestrateur, Sacha n'ayant pas de navigateur)
+- MD5 des 6 fichiers installés sur la copie (`kyma-product-360`, `kyma-colorways`, `kyma-product-story-scroll`, `index.json`, `product.kyma.json`, `collection.kyma.json`) identiques au dépôt.
+- Grep : plus aucune ancienne R1 dans le thème, les templates et les maquettes (nouvelle R1 : 10 occurrences).
+- Récit en 9 étapes à 360×640, 360×800, 390×844 et 1366×900 : légende entièrement visible à chaque étape, aucun chevauchement avec les cartes d'étape (hauteur 92 px en mobile), 0 erreur console. Captures `preview/captures/r1-etendue-*.png`.
