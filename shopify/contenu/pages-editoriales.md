@@ -4,7 +4,7 @@
 > Mêmes balises que `fiches-produit.md` : `[SI CERTIFIÉ : …]`, `[SI CONFIRMÉ : …]`, `[SI PRÉSÉRIE VALIDÉE : …]` (avec `[REPLI : …]`), `[À COMPLÉTER : …]`, `[À CONFIRMER : …]`.
 > Par défaut, tant que rien n'est activé, le texte public se lit sans les passages entre crochets `[SI …]`, et les `[REPLI]` sont publiés.
 > Repli standard d'unicité : « Pensé pour que chaque pièce soit unique. »
-> Mention des visuels (formule unique) : « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. »
+> Mention des visuels : près d'un modèle 3D = R1 « Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran. » ; sous un rendu fixe = R3 « Rendu 3D du coloris, pas une photo du produit fabriqué. »
 > Aucun fabricant n'est nommé. Nom de la pièce signature utilisé : « Ressac » (repli : « le hoodie zippé KYMA »).
 > Ton : vouvoiement partout, aligné sur les textes de Maya.
 
@@ -67,7 +67,7 @@ Deux nuances proches, un tourbillon qui s'écoule.
 `[SI PRÉSÉRIE VALIDÉE : Le motif ne se répète pas : chaque hoodie est découpé dans une zone différente du rouleau, et porte son propre dessin.]`
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
 
-Si un visuel 3D accompagne ce bloc, la mention s'affiche dessous : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
+Si un visuel 3D accompagne ce bloc, la mention s'affiche dessous : R1 (modèle 3D) ou R3 (rendu fixe).
 
 ## Appel à l'action
 
@@ -117,7 +117,7 @@ Coupe oversize, épaules tombantes. Capuche à double épaisseur, doublure en je
 
 ## 6. Le zip
 
-Zip intégral en métal argent brossé. Au bout, une tirette sculptée « Kyma » en laiton plaqué or brossé. C'est le seul éclat de la pièce.
+Zip intégral en métal, finition argentée brossée. Au bout, une tirette sculptée « Kyma », en laiton, finition dorée brossée. C'est le seul éclat de la pièce.
 
 ## 7. Le lieu
 
@@ -145,7 +145,7 @@ Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. `[À CONFIRMER : à al
 
 `[SI PRÉSÉRIE VALIDÉE : Oui. Le motif est imprimé en continu sur un rouleau de tissu, sans répétition. Chaque hoodie est découpé dans une zone différente : deux pièces du même coloris partagent les mêmes teintes, jamais le même dessin.]`
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
-Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.
+Les modèles 3D de présentation de ce site ne sont pas des photos du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ces modèles. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.
 
 ### 4. Comment fonctionne la précommande ?
 
@@ -163,7 +163,7 @@ Oui. Les conditions, le délai et la marche à suivre sont réunis sur la page [
 
 French terry de 400 à 420 g/m², intérieur gratté `[À CONFIRMER : grammage définitif]`. Composition par élément :
 Corps : `[À CONFIRMER : 100 % coton]` `[SI CERTIFIÉ : coton biologique certifié GOTS]` · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : `[À COMPLÉTER : composition]`.
-Zip métal argent brossé, tirette en laiton plaqué or brossé.
+Zip en métal, finition argentée brossée ; tirette en laiton, finition dorée brossée.
 
 ### 8. Quelle est la différence entre les coloris ?
 

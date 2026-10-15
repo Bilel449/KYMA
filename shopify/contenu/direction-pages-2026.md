@@ -102,7 +102,7 @@ Nom du produit : « Ressac » sous réserve de disponibilité (repli : « Hoodie
 **Couleurs d'interface.** Fond Beige `#F5EDE4` · Brun `#4A3B32` (textes, titres) · Marron clair `#C19E86` (filets, tracés, détails, jamais du texte) · Rose clair `#E8C4C4` (aplats `#F3DEDC` : cartes, halos, survols). Le lilas n'est plus une couleur d'interface.
 **Mot en italique des titres.** La charte le mettait en lilas foncé : ce n'est plus possible. Proposition : italique en **Camel profond `#8A6A52`** [À VALIDER fondateur], uniquement dès 32 px (contraste 4,2:1 sur beige, valable pour grand texte). À défaut : italique en Brun. Camel `#C19E86` seul sur beige n'atteint que 2,1:1 : jamais pour du texte.
 **Labels numérotés** : Outfit 500, capitales, interlettrage 4 px, 12 à 13 px, Brun à 72 %. Format « 01 — LE DROP 1 ».
-**Mention de rendu (partout où un rendu du hoodie apparaît)** : « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » — formule unique du site (alignée par le coordinateur sur `fiches-produit.md` et `conformite.md`, à confirmer par Victoire).
+**Mention de rendu (partout où un rendu du hoodie apparaît)** : R1 près d'un modèle 3D, R3 sous un rendu fixe (texte arrêté par Arthur le 15/10/2026, voir `conformite.md`).
 **Aucune image IA, aucune photo de banque.** Toute matière est générée par shader ou dessinée en vectoriel. Les PNG de `brand/private/images/` sont des rendus IA : ils ne servent ni de texture ni de fond, même floutés.
 
 **Moteur 3D (pour Sacha).** Un seul contexte WebGL par page, un seul fichier partagé (`kyma-gl.js`, mis en cache entre les pages), un seul canvas qui suit la section visible. Le canvas hérite de la taille de son conteneur (`aspect-ratio` réservé, pas de décalage de mise en page). Rendu à la demande : la boucle s'arrête quand le canvas est hors écran (IntersectionObserver) ou l'onglet masqué. Résolution : devicePixelRatio plafonné à 1,75 (bureau) et 1,5 (mobile). Si le temps d'image dépasse 24 ms sur 30 images, passer à ratio 1, puis à 30 i/s. Budget : JS total < 150 Ko min+gzip (budget Shopify), textures ≤ 2048 px (≤ 1024 sur mobile), GLB ≤ 4 Mo.
@@ -127,7 +127,7 @@ Nom du produit : « Ressac » sous réserve de disponibilité (repli : « Hoodie
 
 **H — Hoodie 3D 360° (fiche produit uniquement)**
 - Source : modèle GLB d'Izaac [dépendance : je ne l'ai pas vu dans le dépôt]. ≤ 4 Mo, textures ≤ 2048 px, seulement normales et occlusion préparées. Le motif est calculé par shader (mêmes uniformes que E) pour obtenir les 5 coloris avec un seul modèle. Aucune texture dérivée des rendus IA.
-- Matières : French terry = rugosité élevée + voile de bord (sheen) 0,35 ; zip = métal argent brossé, spéculaire anisotrope ; tirette « Kyma » = laiton plaqué or brossé ; doublure de capuche = jersey ton sur ton.
+- Matières : French terry = rugosité élevée + voile de bord (sheen) 0,35 ; zip = métal, finition argentée brossée, spéculaire anisotrope ; tirette « Kyma » = laiton, finition dorée brossée ; doublure de capuche = jersey ton sur ton.
 - Caméra : champ 28°, distance 3,2, cible (0 ; 0,05 ; 0). Orbite libre en lacet sur 360°, tangage borné entre −8° et +18°. Inertie : décroissance exponentielle, constante 0,55 s. Rotation automatique 7°/s après 3 s sans action, arrêtée à l'appui, reprise après 4 s.
 - Préréglages Face (0°), Profil (90°), Dos (180°), Détail (zoom 1,7 sur le zip) : trajet de 900 ms, easing `--ease-tide`.
 - Changement de coloris : uniforme uMix de 0 à 1 en 900 ms. Front de balayage de bas en haut : masque = smoothstep(p−0,15 ; p+0,15 ; bruit(uv·3)+0,8·uv.y). Le motif change de teinte comme une vague qui passe.
@@ -297,7 +297,7 @@ Mise en page bureau : le visualiseur reste épinglé à gauche pendant que la co
 - Titre : Ressac, hoodie zippé *oversize*.
 - Accroche (italique) : Pensé pour que chaque pièce soit unique. [SI PRÉSÉRIE VALIDÉE : Une vague ne se répète jamais. Celle-ci non plus.]
 - Texte : Le coton épais tombe, lourd et doux. L'intérieur gratté garde la chaleur, comme un sable tiède. Le motif ondoie d'une épaule à l'autre. Le zip glisse ; la tirette brille, à peine.
-- Sous le visualiseur : « Visuel de présentation (rendu). Pensé pour que chaque pièce soit unique ; la vôtre pourra différer. »
+- Sous le visualiseur : R1 : « Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran. »
 - Colonne d'achat (contenu obligatoire, rien ne doit être masqué par une animation) :
   - Prix : `{{ prix TTC }}`, « hors frais de livraison », lien Livraison.
   - Coloris : cinq pastilles + nom. Taille : XS à XXL + lien Guide des tailles.
@@ -334,8 +334,8 @@ Mise en page bureau : le visualiseur reste épinglé à gauche pendant que la co
 - Label : 03 — LES DÉTAILS
 - Titre : Rien d'ajouté, rien de *bruyant*.
 - Texte (cinq légendes) :
-  - Zip intégral en métal argent brossé.
-  - Tirette sculptée « Kyma », en laiton plaqué or brossé. C'est le seul éclat de la pièce.
+  - Zip intégral en métal, finition argentée brossée.
+  - Tirette sculptée « Kyma », en laiton, finition dorée brossée. C'est le seul éclat de la pièce.
   - Capuche à double épaisseur, doublure en jersey ton sur ton. Pas de cordon, pas d'œillets : un choix de design, pour une ligne sans interruption.
   - Deux poches biais.
   - Bords-côtes 2×2 de 6 cm aux poignets et à la taille.
@@ -451,7 +451,7 @@ Une seule page, cinq chapitres, avec ancres. Reprend les textes d'Izaac (`pages-
   3. Le motif. Le motif KYMA Wave est imprimé en pigmentaire, all-over, sur un long rouleau de tissu.
   4. La découpe. Chaque pièce est découpée avec soin dans le tissu imprimé. Pensé pour que chaque pièce soit unique. [SI PRÉSÉRIE VALIDÉE : Chaque pièce est découpée dans une zone différente du rouleau. C'est ce geste qui rend chaque hoodie unique.]
   5. La forme. Coupe oversize, épaules tombantes. Capuche à double épaisseur, doublure en jersey ton sur ton. Deux poches biais. Bords-côtes 2×2 de 6 cm aux poignets et à la taille.
-  6. Le zip. Zip intégral en métal argent brossé. Au bout, une tirette sculptée « Kyma » en laiton plaqué or brossé. C'est le seul éclat de la pièce.
+  6. Le zip. Zip intégral en métal, finition argentée brossée. Au bout, une tirette sculptée « Kyma », en laiton, finition dorée brossée. C'est le seul éclat de la pièce.
 - Exclus : toute mention de certification des fibres ou des encres et tout lieu de fabrication.
 - Interactif : **D**, frise horizontale épinglée (240 vh) : fibre (brin), maille (tricot), rouleau (bande imprimée), ciseaux (découpe), silhouette, tirette. Chaque dessin se trace au scroll (900 ms), l'étape active en Brun, les autres en Camel à 50 %.
   - Souris : clic sur une étape = saut animé de 900 ms.
@@ -535,7 +535,7 @@ Page fonctionnelle : le mouvement reste minimal.
 *01 — LA PIÈCE*
 - Quelle taille choisir ? Le hoodie Ressac est oversize : votre taille habituelle donne la silhouette voulue, ample et posée. Pour une coupe plus ajustée, prenez une taille en dessous. Toutes les mesures sont dans le guide des tailles.
 - Comment entretenir mon hoodie ? Lavage à 30–40 °C, sur l'envers. Pas de sèche-linge. [À CONFIRMER : à aligner sur l'étiquette définitive] Suivez toujours l'étiquette cousue dans la pièce.
-- De quoi est fait le hoodie ? French terry de 400 à 420 g/m², intérieur gratté [À CONFIRMER : grammage définitif]. Corps : [À CONFIRMER : 100 % coton] · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : [À COMPLÉTER : composition]. Zip métal argent brossé, tirette en laiton plaqué or brossé.
+- De quoi est fait le hoodie ? French terry de 400 à 420 g/m², intérieur gratté [À CONFIRMER : grammage définitif]. Corps : [À CONFIRMER : 100 % coton] · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : [À COMPLÉTER : composition]. Zip en métal, finition argentée brossée ; tirette en laiton, finition dorée brossée.
 - Quelle est la différence entre les coloris ? Aucune, sinon la couleur. Même coupe, même tissu, même motif KYMA Wave. Seuls changent la teinte du motif et la doublure de la capuche.
 
 *02 — LE MOTIF*

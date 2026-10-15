@@ -1,14 +1,18 @@
 # KYMA — Fiches produit Shopify (Drop 1)
 
-> Livrable Izaac, mode mission. Statut : version 3 (vouvoiement, visuels 3D, section Médias 3D). Relecture juridique Victoire à refaire sur la mention des visuels.
+> Livrable Izaac, mode mission. Statut : version 3 (vouvoiement, visuels 3D, section Médias 3D). Mention des visuels alignée sur la R1 étendue (décision d'Arthur, 15/10/2026) ; à retirer ou adapter dès que des photos de préséries remplacent les rendus.
 > Source : `brand/BRAND.md` (tech pack v3, avril 2026). Visuels : `shopify/3d/` (voir « Médias 3D » en fin de document).
 > Ton : vouvoiement partout, aligné sur les textes de Maya.
 
 ## Mention des visuels (formule unique)
 
-> **Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.**
+- **Description produit** (texte autonome, voyage hors du thème : flux, e-mails, recherche) :
+  > **Les modèles 3D de présentation de ce site ne sont pas des photos du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ces modèles. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.**
+- **Légende du visualiseur 3D** : R1, mot pour mot :
+  > **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.**
+- **Sous une vignette ou un rendu fixe** : forme courte R3 : « Rendu 3D du coloris, pas une photo du produit fabriqué. »
 
-À afficher sous le visualiseur 3D et sous chaque vignette. Elle ne promet pas l'unicité : elle exprime l'intention (repli validé par Victoire) et annonce l'écart possible.
+Elle ne promet pas l'unicité : elle exprime l'intention (repli validé par Victoire) et annonce les écarts possibles.
 
 ## Légende des balises (à lire avant publication)
 
@@ -71,8 +75,8 @@ Cette version garde les balises pour le jour où les preuves seront réunies. **
   <li><strong>Matière</strong> : French terry, 400–420 g/m² [À CONFIRMER : grammage définitif à la présérie], intérieur gratté.</li>
   <li><strong>Composition</strong> : Corps : [À CONFIRMER : 100 % coton] [SI CERTIFIÉ : coton biologique certifié GOTS] · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : [À COMPLÉTER : composition]</li>
   <li><strong>Coupe</strong> : oversize, épaules tombantes. Unisexe.</li>
-  <li><strong>Zip</strong> : intégral, métal argent brossé.</li>
-  <li><strong>Tirette</strong> : sculptée « Kyma », laiton plaqué or brossé.</li>
+  <li><strong>Zip</strong> : intégral, en métal, finition argentée brossée.</li>
+  <li><strong>Tirette</strong> : sculptée « Kyma », en laiton, finition dorée brossée.</li>
   <li><strong>Capuche</strong> : double épaisseur, doublure en jersey ton sur ton. Sans cordon ni œillets : un choix de design, pour que la ligne reste pure.</li>
   <li><strong>Poches</strong> : deux poches biais.</li>
   <li><strong>Bords-côtes</strong> : 2×2, 6 cm aux poignets et à la taille.</li>
@@ -82,7 +86,7 @@ Cette version garde les balises pour le jour où les preuves seront réunies. **
 
 <h3>[SI PRÉSÉRIE VALIDÉE : Chaque pièce est unique] [REPLI : Pensé pour être unique]</h3>
 <p>[SI PRÉSÉRIE VALIDÉE : Le motif KYMA Wave est imprimé en continu sur un long rouleau de tissu. Il ne boucle pas. Chaque hoodie est découpé dans une zone différente du rouleau : le tourbillon qui passe sur votre épaule n'existe que sur votre pièce. Deux hoodies du même coloris partagent la même famille de nuances, jamais le même dessin.] [REPLI : Pensé pour que chaque pièce soit unique.]</p>
-<p><em>Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</em></p>
+<p><em>Les modèles 3D de présentation de ce site ne sont pas des photos du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ces modèles. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.</em></p>
 
 <h3>Précommande</h3>
 <p>La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions détaillées dans nos <a href="/policies/terms-of-service">CGV</a> et sur la page <a href="/policies/refund-policy">Retours et remboursements</a>.</p>
@@ -108,8 +112,8 @@ Replis appliqués, aucune balise `[SI …]`. Restent uniquement les trois champs
   <li><strong>Matière</strong> : French terry, 400–420 g/m² [À CONFIRMER : grammage définitif à la présérie], intérieur gratté.</li>
   <li><strong>Composition</strong> : Corps : [À CONFIRMER : 100 % coton] · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : [À COMPLÉTER : composition]</li>
   <li><strong>Coupe</strong> : oversize, épaules tombantes. Unisexe.</li>
-  <li><strong>Zip</strong> : intégral, métal argent brossé.</li>
-  <li><strong>Tirette</strong> : sculptée « Kyma », laiton plaqué or brossé.</li>
+  <li><strong>Zip</strong> : intégral, en métal, finition argentée brossée.</li>
+  <li><strong>Tirette</strong> : sculptée « Kyma », en laiton, finition dorée brossée.</li>
   <li><strong>Capuche</strong> : double épaisseur, doublure en jersey ton sur ton. Sans cordon ni œillets : un choix de design, pour que la ligne reste pure.</li>
   <li><strong>Poches</strong> : deux poches biais.</li>
   <li><strong>Bords-côtes</strong> : 2×2, 6 cm aux poignets et à la taille.</li>
@@ -118,7 +122,7 @@ Replis appliqués, aucune balise `[SI …]`. Restent uniquement les trois champs
 </ul>
 
 <h3>Pensé pour être unique</h3>
-<p><em>Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.</em></p>
+<p><em>Les modèles 3D de présentation de ce site ne sont pas des photos du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ces modèles. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.</em></p>
 
 <h3>Précommande</h3>
 <p>La fabrication est lancée après la clôture de la précommande. Expédition au plus tard le [À COMPLÉTER : date]. Vous pouvez annuler votre précommande à tout moment avant l'expédition, et jusqu'à 14 jours après réception. Conditions détaillées dans nos <a href="/policies/terms-of-service">CGV</a> et sur la page <a href="/policies/refund-policy">Retours et remboursements</a>.</p>
@@ -159,8 +163,8 @@ Le coton épais tombe, lourd et doux. L'intérieur gratté garde la chaleur, com
 - **Matière** : French terry, 400–420 g/m² `[À CONFIRMER : grammage définitif à la présérie]`, intérieur gratté.
 - **Composition** : Corps : `[À CONFIRMER : 100 % coton]` `[SI CERTIFIÉ : coton biologique certifié GOTS]` · Bords-côtes : 95 % coton, 5 % élasthanne · Doublure de capuche : `[À COMPLÉTER : composition]`
 - **Coupe** : oversize, épaules tombantes. Unisexe.
-- **Zip** : intégral, métal argent brossé.
-- **Tirette** : sculptée « Kyma », laiton plaqué or brossé.
+- **Zip** : intégral, en métal, finition argentée brossée.
+- **Tirette** : sculptée « Kyma », en laiton, finition dorée brossée.
 - **Capuche** : double épaisseur, doublure en jersey ton sur ton. Sans cordon ni œillets : un choix de design, pour que la ligne reste pure.
 - **Poches** : deux poches biais.
 - **Bords-côtes** : 2×2, 6 cm aux poignets et à la taille.
@@ -179,7 +183,7 @@ Ce n'est pas une imperfection. C'est le principe.
 
 `[REPLI : Pensé pour que chaque pièce soit unique.]`
 
-Hors balise (toujours publiable, sous le visualiseur 3D et sous chaque vignette) : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
+Hors balise (toujours publiable) : légende du visualiseur = R1 ; sous chaque vignette = R3 (voir « Mention des visuels » en tête).
 
 `[À CONFIRMER : une carte numérotée accompagne chaque pièce, selon le packaging final]`
 
@@ -331,7 +335,7 @@ Textes alternatifs : partie B, deux par coloris (modèle 3D, vignette).
 **À l'import (Sacha)**
 - Ordre conseillé : vignette face en premier média, puis le modèle 3D, puis les vues secondaires (trois-quarts avant, dos) si elles sont rendues.
 - Une vignette par coloris sert d'image de variante ; l'association d'un modèle 3D à une variante est à vérifier dans l'admin Shopify.
-- Mention à afficher près du visualiseur et sous chaque vignette : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
+- Près du visualiseur : R1 ; sous chaque vignette : R3 (« Rendu 3D du coloris, pas une photo du produit fabriqué. »).
 - Éclairage du visualiseur : environnement « neutral » de model-viewer, ombre douce (intensité 1, flou 1), fond Beige #F5EDE4.
 
 **Ce que montre le 360°** : silhouette boxy aux épaules tombantes, bords-côtes de 6 cm, zip argent et tirette dorée, deux poches biais, capuche double épaisseur sans cordon ni œillets, motif marbré en deux tons continu d'une face à l'autre.
