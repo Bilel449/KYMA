@@ -5,10 +5,19 @@
 > **Sources consolidées** : `out/feuille-de-route/` (squelette de Clémentine, Isabelle, Victoire, Abdou, Izaac, Maya, Sacha). Les dates sont des propositions posées sur l'état au 15/10/2026. L'expert-comptable valide le fiscal et le social, un avocat valide les contrats et les textes légaux.
 > **Jours de semaine** : tous les jours cités ont été recalculés (lundi 1er février 2027 = repère). Deux erreurs corrigées : le 31 oct. 2026 est un **samedi** (retenu : ven. 30 oct.) et le 19 mars 2027 est un **vendredi** (Victoire écrivait « jeudi »). Voir 7.3.
 > **Légende** : F fondateur · V Victoire · A Abdou · I Izaac · M Maya · S Sacha · Is Isabelle · Ar Arthur · EC expert-comptable · Av avocat.
+> **Glossaire** : GLB = fichier 3D ; BAT = bon à tirer ; IDU = identifiant unique Refashion ; CECMC = commission d'évaluation et de contrôle de la médiation de la consommation (médiateur) ; CA3 = déclaration de TVA ; CFE = cotisation foncière des entreprises ; ACRE = exonération de cotisations de création ; SKU = référence article ; DPA = accord de sous-traitance RGPD.
+>
+> **Règles permanentes**
+> - Aucune image générée par IA.
+> - « KYMA » sans ® avant le certificat INPI.
+> - Aucune allégation GOTS, bio, Portugal ou unicité sans preuve.
+> - Aucune publication (Instagram, liste d'attente, Cercle Waves du 7 juin, précommandes du 14 juin, communiqués, journal de fabrication, message aux précommandeurs) sans « VALIDÉ » d'Arthur et confirmation expresse du fondateur.
 
 ---
 
 ## 1. En-tête
+
+**Le calendrier daté commence le 1er février 2027 ; d'octobre 2026 à janvier 2027, il s'agit de préparation sans aucune signature.**
 
 **Période** : 15 octobre 2026 (jeudi) → 29 février 2028 (mardi). Date d'expédition promise aux clients du Drop 1 : « au plus tard le vendredi 17 décembre 2027 » (proposition, à fixer par le contrat fabricant).
 
@@ -81,7 +90,7 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 
 ### J0 — octobre 2026 à janvier 2027 (préparer sans signer)
 
-- [Site] Nettoyage de la boutique (D10 page Cercle Waves, D14 produits de test, D18 allégations) ; suppression manuelle des 10 GLB v1/v2 par le fondateur ; attestation P1 — F (accord ven. 30 oct.), S, V — boutique propre, relevé « aucun GLB restant » avant le 29 janv.
+- [Site] Nettoyage de la boutique (D10 page Cercle Waves, D14 produits de test, D18 allégations) ; suppression manuelle des 10 GLB v1/v2 par le fondateur ; attestation de titularité de la 3D (P1) — F (accord ven. 30 oct.), S, V — boutique propre, relevé « aucun GLB restant » avant le 29 janv.
 - [Marque] Recherche d'antériorités (KYMA mot et logo, Ressac, Cercle Waves, INITIUM, MAJESTÉ ; classes 25 et 35) — V, conseil en PI — rapport daté fin nov.
 - [Marque] Inventaire des divulgations du motif et du logo (délai de grâce dessin et modèle) — F, M, V — tableau daté en nov.
 - [Entreprise & légal] Devis d'EC, d'avocat, de domiciliation ; décision D26 le 18 déc. — F, A, Is — fiche de décisions
@@ -94,7 +103,7 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 
 ### Février 2027
 
-- [Entreprise & légal] Lun. 1er : statuts signés, président nommé, capital déposé ; annonce légale S5 ; dossier guichet unique S6 — F, Av ou plateforme, V — **Kbis visé ven. 19, limite ven. 26**
+- [Entreprise & légal] Lun. 1er : statuts signés, président nommé, capital déposé ; annonce légale ; dossier au guichet unique — F, Av ou plateforme, V — **Kbis visé ven. 19, limite ven. 26**
 - [Entreprise & légal] Dès le Kbis : registres, décision de reprise des actes, état des frais avancés avant le Kbis — F, V — registres ouverts
 - [Marque] Lun. 22 : dépôt INPI KYMA au nom de la SASU (repli : nom propre au plus tard le 12 mars, puis cession) — F, V, conseil en PI — récépissé daté
 - [Fiscalité & compta] Compte pro opérationnel, espace professionnel impots.gouv, lettre de mission EC (26 fév.–5 mars), logiciel de compta — A, EC — compte et mandat
@@ -111,7 +120,7 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 - [Fiscalité & compta] Ven. 5 : demande d'ACRE (limite de précaution jeu. 18) ; question écrite sur l'intérêt réel avec un président non rémunéré — F, EC, A — accusé de demande
 - [Site] Ven. 5 : voie 3D (D1, D2, D3) et sort des GLB du thème — F, I, V, S — note d'état de la 3D
 - [Site] **Au plus tard ven. 12** : Shopify Payments au nom de la SASU et question écrite sur la réserve de fonds ; relance le 1er avril — S, A, F — courrier daté, plan B chiffré
-- [Marque] Ven. 12 : présentation de marque v1, pages deck, captures du site — I, M, A, S — dossier financeurs
+- [Marque] Ven. 12 : présentation de marque v1, pages deck et captures du site (représentations 3D temps réel ou dessins techniques vectoriels, aucune image générée par IA, mention R1) — I, M, A, S — dossier financeurs
 - [Financement] Ven. 12 : business plan v1, plan de trésorerie mensuel v1 ; décision Bourse French Tech (défaut : non) — A, F, Is — BP v1, décision écrite
 - [Produit & fournisseurs] Consultation de 4 à 6 ateliers dès la signature des NDA, coupons de tissu, essais de teinte ; **devis indicatifs écrits (au moins deux) reçus au plus tard mer. 17** ; devis comparés ven. 26 — I, Is, A — tableau comparatif
 - [Financement] **Ven. 19** : dossiers de financement socle (prêt d'honneur, prêt bancaire avec garantie Bpifrance possible, compte courant, love money) — F, A, EC — dossiers déposés
@@ -153,9 +162,9 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 - [Communication] Lun. 31 mai–ven. 4 juin : shooting de la présérie ; ven. 11 : fiches avec photos — M, I, S, V — banque d'images, droits en règle
 - [Entreprise & légal] **Ven. 4** : go/no-go juridique (17 points, une ligne manquante suffit pour ne pas publier) — V, Ar, F — liste signée
 - [Site] **Ven. 4** : publication du thème après « VALIDÉ » d'Arthur et confirmation expresse du fondateur (D13) — S, Ar, F — thème principal, plan de retour
-- [Communication] **Lun. 7** : ouverture du Cercle Waves (INITIUM, MAJESTÉ), première souscription de contrôle — S, M, V, A — page en ligne
+- [Communication] **Lun. 7** : ouverture du Cercle Waves (INITIUM, MAJESTÉ), première souscription de contrôle — S, M, V, A, Ar, F — page en ligne
 - [Site] Jeu. 10 : dates d'accès anticipé annoncées dans l'espace client (48 h avant) ; ven. 11 : activation du produit ; **sam. 12 MAJESTÉ, dim. 13 INITIUM, lun. 14 public** ; clôture dim. 4 juil. — S, M, F, Ar — captures du verrouillage
-- [Communication] Teasing, communiqué sous embargo, influenceurs sous contrat avec « Collaboration commerciale » ; présentation parisienne seulement si D45 = oui (sans vente sur place) — M, V — plan jour par jour
+- [Communication] Teasing, communiqué sous embargo, influenceurs sous contrat avec « Collaboration commerciale » ; présentation parisienne seulement si D45 = oui (sans vente sur place) — M, V, Ar, F — plan jour par jour
 - [Logistique] 22-28 : envoi des cartes aux premiers abonnés (après les 14 jours de rétractation, au plus tard 21 jours après la souscription) — S, F — journal d'envoi
 - [Fiscalité & compta] Suivi hebdomadaire (chaque lundi) : export par SKU, rapprochement Shopify, TVA mise de côté (1/6 du TTC) — A, S — fichier hebdomadaire
 - [Financement] Mer. 30 : fonds du socle disponibles ; décision d'extension EUIPO — A, F, V — plan de trésorerie v3
@@ -243,20 +252,20 @@ Format : `[domaine] mission — qui — livrable`. Doublons entre agents fusionn
 
 ## 4. Chemin critique
 
-1. **Décisions de création tranchées le 15 janv. 2027 (D26, D34, D38, D39, D40) puis Kbis visé le 19 fév., limite le 26.** Sans Kbis : aucune signature, aucun paiement, aucune collecte, aucun dépôt de marque. Un Kbis tardif (Isabelle : 2 à 4 semaines à Paris) décale tout ; dossier complet dès la semaine du 1er fév.
+1. **Décisions de création tranchées le 15 janv. 2027 (D26, D34, D38, D39, D40) puis Kbis visé le 19 fév., limite le 26.** Sans Kbis : aucune signature de contrat commercial, aucun paiement fournisseur, aucune collecte de données, aucun dépôt de marque au nom de la SASU (exceptés les statuts et le dépôt du capital ; repli : dépôt en nom propre jusqu'au 12 mars, puis cession). Un Kbis tardif (Isabelle : 2 à 4 semaines à Paris) décale tout ; dossier complet dès la semaine du 1er fév.
 2. **Devis fabricants (indicatifs avant le 17 mars, comparés le 26) puis fabricant retenu le 9 avril, présérie commandée le 12 avril, reçue le 14 mai, validée le 28 mai.** Un tour de correction coûte deux semaines : c'est toute la marge avant le 14 juin.
 3. **Contrat fabricant signé le 28 mai (limite 4 juin)** avec date ferme, date limite de commande au 2 août, capacité réservée, fermeture estivale neutralisée. Sans contrat, pas de date d'expédition, donc pas de précommande.
 4. **Prix, volume, seuil, règles de précommande figés le 30 avril** : ils alimentent les CGV, les 30 variantes, le bloc de précommande, le devis final et le plan de trésorerie.
 5. **Shopify opérationnel** : plan payant le 3 mai, Payments activé, réponse écrite sur la réserve avant le 30 avril, rappel de reconduction testé en mai. Sans cela, ni précommande ni abonnement.
 6. **Pack légal prêt le 4 juin** : avocat (retour 28 mai), TVA validée par l'EC (21 mai), médiateur, RC exploitation, Refashion engagé, cessions signées. Sans lui, pas de publication (D13).
 7. **Financement socle accordé au plus tard le 28 mai, décaissé le 30 juin, et dimensionné pour couvrir avril-mai** : sans lui, pas de bon de commande le 12 juillet.
-8. **Fabrication de 18 semaines à compter du 12 juillet** (15 nov. : non confirmée par une source) : au-delà du 2 août, l'expédition avant Noël n'est plus tenable ; la fenêtre du 29 nov. au 17 déc. n'a pas de marge.
+8. **Fabrication de 18 semaines à compter du 12 juillet** (15 nov. : non confirmée par une source) : le 2 août est déjà hors marge (production prête le 6 déc., réception vers le 13 déc., 4 jours ouvrés avant le 17 déc.). Le contrat doit avancer la date limite de commande, ou la promesse du 17 déc. n'est tenue que pour une commande passée le 12 juillet. Victoire et Abdou négocient avant le 28 mai. La fenêtre du 29 nov. au 17 déc. n'a pas de marge.
 
 ---
 
 ## 5. Décisions du fondateur
 
-Format : `Dxx | décision | date limite | qui conseille`, triées par date. D44 à D46 sont créées par cette consolidation (D40 à D43 l'avaient été par le squelette).
+Format : `Dxx | décision | date limite | qui conseille`, triées par date. D44 à D46 sont créées par cette consolidation (D40 à D43 l'avaient été par le squelette). D2, D22, D24, D35 et D36 reviennent volontairement à deux étapes (préparation puis décision finale) : ce ne sont pas des doublons.
 
 | Dxx | Décision | Date limite | Qui conseille |
 |---|---|---|---|
@@ -288,7 +297,7 @@ Format : `Dxx | décision | date limite | qui conseille`, triées par date. D44 
 | D37 | Échéancier de l'usine (solde après réception) | 2027-05-21 | Abdou, Victoire |
 | D35 | Souscription de la RC exploitation | 2027-06-04 | Abdou, Victoire |
 | D13 | Feu vert de publication du thème (confirmation attendue le 3 juin) | 2027-06-04 | Arthur, Sacha |
-| D19 | Extension EUIPO oui ou non (dépôt au plus tard le 20 août) | 2027-06-30 | Victoire, Abdou |
+| D19b | Extension EUIPO oui ou non (dépôt au plus tard le 20 août) | 2027-06-30 | Victoire, Abdou |
 | D22, D36 | Seuil atteint : produire, ajuster le volume, rembourser | 2027-07-08 | Abdou, Victoire |
 | D24, D35 | Refashion, Citeo ou Léko ; RC produits | 2027-09-15 | Victoire, Abdou |
 | D41 | Contrat logistique | 2027-09-30 | Sacha, Abdou |
@@ -330,7 +339,7 @@ Qui produit chaque document et quand (base : Victoire, complété par Abdou). To
 | C3 | Dossier d'investissement, data room, term sheet, pacte, BSA-AIR éventuel | Abdou, Av, Victoire | Prêt avril-mai ; discussions août-oct. si D42 = oui |
 | **D. Propriété intellectuelle** | | | |
 | D1 | Rapport d'antériorités | Victoire, conseil en PI | 2026-11-30 |
-| D2 | Dossier de création 3D, attestation P1, NOTICE, licence OFL | F, Izaac | 2026-10-30 |
+| D2 | Dossier de création 3D, attestation de titularité de la 3D (P1), NOTICE, licence OFL | F, Izaac | 2026-10-30 |
 | D3 | Tableau de première divulgation ; dépôt de dessin et modèle éventuel | F, Maya, conseil en PI | Nov. 2026 ; dépôt fév.-mars 2027 |
 | D4 | Cession fondateur vers SASU ; cessions des auteurs du motif et du logo | Victoire (modèle), Av, F | 2027-02-22 à 03-05 |
 | D5 | Dépôt INPI KYMA, récépissé | F, Victoire | 2027-02-22 (limite 03-12) |
@@ -345,7 +354,7 @@ Qui produit chaque document et quand (base : Victoire, complété par Abdou). To
 | E5 | Convention de médiation CECMC | F | 2027-03-31 |
 | E6 | Contrats d'influence et fiche « Dits et interdits » | Maya, Victoire | Avant la première publication |
 | E7 | Contrat logistique, transport, adresse de retours | F, Sacha, Victoire | 2027-09-30 |
-| E8 | Contrat 3D freelance (clause H4), si commandé | Victoire, F | Après le Kbis, décision 2027-03-05 |
+| E8 | Contrat 3D freelance (clause de cession de tous les droits d'auteur à la SASU, avec remise des fichiers sources), si commandé | Victoire, F | Après le Kbis, décision 2027-03-05 |
 | **F. Assurance, produit, éco-organismes** | | | |
 | F1 | RC exploitation (devis en mars) | F, courtier | Avant 2027-06-04 |
 | F2 | RC produits | F, courtier | Au plus tard 2027-09-15 |
@@ -379,7 +388,7 @@ Qui produit chaque document et quand (base : Victoire, complété par Abdou). To
 | 7 | **Trésorerie négative en avril-mai** (scénario prudent d'Abdou, sans montant) | **Couvrir la période dès le 15 janv.** : apport et compte courant dimensionnés pour avril-mai (D34), prêt d'honneur décaissé dès l'accord du comité sans attendre la banque (à négocier, déblocage souvent lié au prêt bancaire), sinon apport relevé. Point de contrôle au BP v2 du 30 avril. Rien n'est engagé hors budget sans accord du fondateur. |
 | 8 | **ACRE** (60 jours Urssaf, 45 jours ailleurs) | **Demande cible ven. 5 mars, limite de précaution jeu. 18 mars** (45 jours après le 1er fév.). Le 2 avril (squelette) n'est plus utilisé. Sans paie du président, l'ACRE n'a aucun effet ; question posée à l'EC. |
 | 9 | **INPI et EUIPO** | Au 14 juin la marque est **déposée mais non enregistrée** (publication vers le 5 avril, enregistrement possible à partir du 22 juillet) : **écrire « KYMA » sans ®**. EUIPO : décision le 30 juin, **dépôt au plus tard ven. 20 août** (le 22 août est un dimanche), priorité revendiquée dans la demande. Si l'INPI glisse au 12 mars : ven. 10 sept. |
-| 10 | **Contrat fabricant** | Signé le 28 mai (limite 4 juin), avec **date limite de commande le lun. 2 août**, **réservation de capacité** du 28 mai au 12 juillet et **fermeture estivale neutralisée** (production continue ou date limite avancée). Un fabricant qui refuse ces trois points ne peut pas être retenu le 9 avril. |
+| 10 | **Contrat fabricant** | Signé le 28 mai (limite 4 juin), avec **date limite de commande le lun. 2 août au plus tard, à avancer** (à cette date, production prête le 6 déc. et réception vers le 13 déc. : 4 jours ouvrés avant le 17 déc. ; la promesse du 17 déc. n'est tenue que pour une commande le 12 juillet ; Victoire et Abdou négocient avant le 28 mai), **réservation de capacité** du 28 mai au 12 juillet et **fermeture estivale neutralisée** (production continue ou date limite avancée). Un fabricant qui refuse ces trois points ne peut pas être retenu le 9 avril. |
 | 11 | **Assurances et éco-organismes** | **RC exploitation et adhésion Refashion (IDU) engagées avant le ven. 4 juin** ; **RC produits et Citeo ou Léko au plus tard mer. 15 sept.** Le 30 juin du squelette n'est plus la date de choix des assurances. |
 | 12 | **Black Friday et soldes** | **Aucune remise et aucun prix barré sur le Drop 1** : soldes d'été (23 juin–20 juil.), Black Friday (ven. 26 nov.), Cyber Monday (lun. 29 nov.), soldes d'hiver 2028 (12 janv.–8 fév., à confirmer). Une seule prise de parole calme. Confirmation formelle en D46 au 30 sept. |
 
@@ -388,13 +397,13 @@ Qui produit chaque document et quand (base : Victoire, complété par Abdou). To
 | # | Sujet | Écart | Ce que je retiens |
 |---|---|---|---|
 | 1 | Prototype puis présérie (Izaac) contre une seule présérie (squelette) | Izaac prévoit deux échantillons (avril, mai) ; le squelette commande la présérie le 12 avril | **Une présérie** (12 avril, reçue le 14 mai). Un deuxième tour consomme la marge avant le 4 juin. |
-| 2 | Shooting | Maya : avril ; squelette et Sacha : 31 mai–4 juin | **31 mai–4 juin** : la présérie n'existe pas avant le 14 mai. Rendus avec mention R1 jusque-là. |
+| 2 | Shooting | Maya : avril ; squelette et Sacha : 31 mai–4 juin | **31 mai–4 juin** : la présérie n'existe pas avant le 14 mai. Représentations 3D temps réel ou dessins techniques vectoriels (aucune image générée par IA, aucun rendu de `brand/private/images/`), mention R1, jusqu'aux photos du shooting. |
 | 3 | Contrôle qualité | Izaac : octobre ; squelette : 8 nov. | **Lun. 8 nov.** chez l'atelier, production prête le 15 nov. |
 | 4 | Envoi des cartes Cercle Waves | Maya : juillet ; squelette, Sacha, Victoire : 22-28 juin | **22-28 juin** (après 14 jours de rétractation, au plus tard 21 jours après la souscription). |
 | 5 | Cashback D5 | Squelette : 15 avril ; Abdou : avec le prix le 30 avril | **D5 le 30 avril avec D27** ; D4 et D7 restent au 15 avril ; D5 doit être connu pour les modèles envoyés à l'avocat le 3 mai. |
 | 6 | Kbis | Cible 19 fév. contre 2 à 4 semaines à Paris (Isabelle) | Cible maintenue ; limite 26 fév. ; repli marque en nom propre jusqu'au 12 mars. |
 | 7 | Durée de fabrication de 18 semaines | Aucune source ne la confirme ; fermeture estivale possible | À confirmer par écrit par le fabricant retenu avant le 28 mai. |
-| 8 | Date d'expédition « 17 décembre 2027 » | Proposition de Clémentine, pas encore au contrat | À figer dans le contrat du 28 mai, avec marge. |
+| 8 | Date d'expédition « 17 décembre 2027 » | Proposition de Clémentine, pas encore au contrat | À figer dans le contrat du 28 mai, avec marge. Le 2 août est déjà hors marge (production prête le 6 déc., réception vers le 13 déc., 4 jours ouvrés avant le 17 déc.) : le contrat doit avancer la date limite de commande, ou la promesse du 17 déc. n'est tenue que pour une commande passée le 12 juillet. Victoire et Abdou négocient avant le 28 mai. |
 | 9 | TVA | Suppression du réel simplifié au 1er janvier 2027 : sources de cabinets seulement ; périodicité de la CA3 divergente | Assujettissement dès la création en CA3, à confirmer par l'EC (D38). |
 | 10 | Premier exercice | Durée maximale : 18 mois (Isabelle), 24 mois (Abdou) ; clôture 31 déc. 2027 sans enjeu | Clôture 31 déc. 2027 (D40) ; à confirmer par l'EC. |
 | 11 | Facturation électronique | Émission des PME au 1er sept. 2027, report évoqué | Choisir la plateforme en sept. ; confirmer auprès de l'EC. |
