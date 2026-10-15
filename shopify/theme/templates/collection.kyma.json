@@ -251,7 +251,7 @@
         "presets_label": "Points de vue",
         "canvas_label": "Modèle 3D du hoodie zippé oversize Ressac, à faire pivoter.",
         "loading_label": "Chargement du modèle 3D…",
-        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.",
         "caption_fallback": "Rendu 3D du coloris, pas une photo du produit fabriqué.",
         "spots_label": "Détails de la pièce",
         "cta_label": "",
