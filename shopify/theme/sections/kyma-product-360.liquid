@@ -5,8 +5,8 @@
      coloris : le texte alternatif du média doit contenir le nom du coloris (ex. « Ressac — Lilac Whirl »).
   2. LECTEUR COMMUN : sinon, GLB des fichiers du thème -> assets/kyma-viewer.js (three.js r180 vendorisé dans
      assets/kyma-three.js, chargé seulement à l'approche de l'écran ; même moteur que « La pièce »). Fichier lu pour
-     chaque coloris : <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v2 ; ressac-v3 pour les
-     modèles v3), sauf si le bloc indique un fichier précis. Contourne la limite du plan d'essai (média 3D refusé).
+     chaque coloris : <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v3 depuis le 14/10/2026 ; ressac-v2 pour revenir aux
+     modèles v2, à re-téléverser), sauf si le bloc indique un fichier précis. Contourne la limite du plan d'essai (média 3D refusé).
   3. REPLI : sinon (ou si WebGL / le fichier échoue) -> aperçu 3D du coloris (étoffe, kyma-3d.js).
   Le coloris suit la variante (Horizon : <variant-picker>, option « Couleur ») ou, si la boutique a un produit
   par coloris, le titre du produit ; les pastilles de la section permettent aussi de changer de coloris.
@@ -174,7 +174,7 @@
     { "type": "textarea", "id": "text", "label": "Texte" },
     { "type": "product", "id": "product", "label": "Produit (vide = produit de la page)" },
     { "type": "checkbox", "id": "prefer_native", "label": "Utiliser le média 3D Shopify s'il existe (plan payant)", "default": true },
-    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3. Vide = aucun modèle (aperçu de repli)." },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v3", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v3-lilac-whirl.glb). Écrire ressac-v2 pour revenir aux modèles v2 (à re-téléverser). Vide = aucun modèle (aperçu de repli)." },
     { "type": "checkbox", "id": "autorotate", "label": "Rotation lente automatique", "default": true },
     { "type": "range", "id": "spin_speed", "label": "Vitesse de rotation", "min": 3, "max": 20, "step": 1, "unit": "°/s", "default": 7 },
     { "type": "range", "id": "spin_delay", "label": "Délai avant la rotation", "min": 0, "max": 5, "step": 0.5, "unit": "s", "default": 3 },

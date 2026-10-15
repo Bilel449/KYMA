@@ -41,7 +41,7 @@
         "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
         "loading_label": "Chargement du modèle 3D…",
         "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
-        "model_prefix": "ressac-v2"
+        "model_prefix": "ressac-v3"
       },
       "blocks": {
         "colorway_1": {
@@ -151,7 +151,7 @@
         "skip_label": "Passer la présentation de la pièce",
         "picker_label": "Coloris du modèle 3D",
         "loading_label": "Chargement du modèle 3D…",
-        "model_prefix": "ressac-v2"
+        "model_prefix": "ressac-v3"
       },
       "blocks": {
         "step_1": {
@@ -163,7 +163,7 @@
             "title": "",
             "text": "Le hoodie zippé Ressac. Coupe oversize, épaules tombantes, un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile.",
             "spec": "",
-            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, vue d'ensemble. Pas une photo du produit fabriqué."
+            "still_alt": "Rendu 3D du hoodie Ressac, coloris Lilac Whirl, étape vue d'ensemble. Pas une photo du produit fabriqué."
           }
         },
         "step_2": {

@@ -1,6 +1,6 @@
 # KYMA — Note de conformité juridique du site Shopify
 
-> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; sections « Entraide 09/10/2026 » et « Statut juridique » en fin de note ; corrections d'Arthur du 10/10/2026 appliquées ; concordance avec les notes d'Abdou du 10/10/2026 en section 9 du statut ; règle de consentement Shopify en partie C bis) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
+> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; sections « Entraide 09/10/2026 » et « Statut juridique » en fin de note ; corrections d'Arthur du 10/10/2026 appliquées ; concordance avec les notes d'Abdou du 10/10/2026 en section 9 du statut ; règle de consentement Shopify en partie C bis ; provenance des visuels 3D du 14/10/2026 en dernière section) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
 > **Destinataires** : Arthur (validation), Clémentine, Izaac, Maya, Sacha, fondateur.
 > **Rappel unique** : les textes de `shopify/pages/legal/` et cette note sont des **modèles**. Ils doivent être relus et validés par un avocat (droit de la consommation / RGPD) avant toute mise en ligne.
 
@@ -512,7 +512,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 
 | # | Où | Avant | Après |
 |---|---|---|---|
-| R1 | Légende (réglage `caption` de la section, `index.json` « piece » et valeur par défaut du schéma ; aussi `caption_hoodie` de la section « drop ») | « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » | « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** » |
+| R1 | Légende (réglage `caption` de la section, `index.json` « piece » et valeur par défaut du schéma ; aussi `caption_hoodie` de la section « drop ») | « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » | « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** » (**complété le 14/10/2026** : voir la dernière section de la note) |
 | R2 | Affichage de la légende (Sacha, `.liquid`) | Légende dans l'étape finale seulement | **Légende permanente dans la zone épinglée** (`kyma-pstory__sticky`), visible à chaque étape, aussi dans le rendu statique (mouvement réduit, sans JavaScript, sans WebGL) |
 | R3 | Sections « drop » et « motif », `caption` | « Illustration du coloris. » | « Rendu 3D du coloris, pas une photo du produit fabriqué. » (section drop) · « Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique. » (section motif) |
 | R4 | Étape 1 (`text`) | « … un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile. » | « … un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile. » |
@@ -588,7 +588,7 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 | — | Freelance CLO3D à partir du tech pack v3 | 🟢 **si** contrat de cession signé | Le modèle est fait pour KYMA, aux mesures du tech pack : fidélité maximale et plus de redistribution à craindre. | Clause H4 signée ; justificatif de licence commerciale du logiciel (CLO / Marvelous Designer) du freelance ; liste de tout élément tiers. |
 | — | Embed Sketchfab (viewer hébergé) | 🟠 | Évite de servir le GLB depuis notre site, mais : la licence Sketchfab Standard n'autorise pas la redistribution comme asset autonome (source secondaire) ; cookies et traceurs tiers du viewer (consentement CNIL, mise à jour de `cookies.html` et du bandeau) ; moins de contrôle sur le récit au défilement (tirette, panneaux) ; dépendance à un tiers. | Mêmes réponses écrites (H2) ; test de Sacha sur le récit ; consentement cookies avant chargement du viewer. |
 
-**Lecture d'ensemble** : aucun achat sur étagère n'est recommandable sans réponse écrite. **Ma préférence juridique** est le freelance CLO3D avec cession de droits (seule option « verte » en droit), puis le n° 2 si le vendeur répond positivement par écrit. Les GLB déjà présents dans le thème (`ressac-v2-*.glb`) : **documenter qui les a créés et avec quels outils** (cession, absence d'IA, absence d'élément tiers), pour la même raison.
+**Lecture d'ensemble** : aucun achat sur étagère n'est recommandable sans réponse écrite. **Ma préférence juridique** est le freelance CLO3D avec cession de droits (seule option « verte » en droit), puis le n° 2 si le vendeur répond positivement par écrit. Les GLB déjà présents dans le thème (`ressac-v2-*.glb`) : **documenter qui les a créés et avec quels outils** (cession, absence d'IA, absence d'élément tiers), pour la même raison. **[Fait le 14/10/2026 : voir la dernière section de la note.]**
 
 #### H2. Question écrite à poser au vendeur avant achat (anglais, prête à envoyer)
 
@@ -671,7 +671,7 @@ Isabelle livre une shortlist de modèles 3D sous licence (`shopify/3d/recherche-
 | # | Risque | Action | Qui |
 |---|---|---|---|
 | L4 | **GLB téléchargeable par le navigateur** (risque commun à tout achat) : interdiction de redistribution dans la plupart des licences. | Obtenir la clause écrite (H2) ou passer au modèle sur mesure avec cession (H4). | Izaac, fondateur |
-| L5 | **Provenance des GLB `ressac-v2-*.glb` déjà dans le thème** non documentée : auteur, outils, éléments tiers, absence d'IA (décision du fondateur : aucune IA). | Izaac documente l'origine de chaque fichier ; cession écrite si un tiers est intervenu. | Izaac, fondateur |
+| L5 | **Provenance des GLB `ressac-v2-*.glb` déjà dans le thème** non documentée : auteur, outils, éléments tiers, absence d'IA (décision du fondateur : aucune IA). | Izaac documente l'origine de chaque fichier ; cession écrite si un tiers est intervenu. **[Fait : note de provenance d'Izaac relue le 14/10/2026, voir la dernière section.]** | Izaac, fondateur |
 | L6 | **Embed Sketchfab** : cookies et traceurs tiers avant consentement. | N'activer le viewer qu'après consentement ; mettre à jour `cookies.html` et la politique de confidentialité. | Sacha, Victoire |
 
 **🟢 Bonnes pratiques**
@@ -841,7 +841,7 @@ Le choix pèse sur les pages légales : une **personne physique** ne bénéficie
 | ST1 | **Statut non arrêté et non immatriculé** : pas de SIREN, donc pas de compte de paiement, de CGV complètes ni de contrat fabricant sûr. | Décider (SASU recommandée), immatriculer sur le guichet unique, puis lever les `[À COMPLÉTER]`. | Fondateur, Abdou |
 | ST2 | **Marque non déposée et titularité à trancher** : risque de perte du nom par un dépôt tiers (le premier déposant gagne). | Recherche d'antériorités maintenant ; dépôt au nom de la SASU dès le SIREN, ou repli en nom propre avec cession écrite. | Fondateur, conseil en PI |
 | ST3 | **Engagements pris avant l'immatriculation** (fabricant, domaine, outils, prestataires 3D ou graphiques) : la personne qui signe est engagée personnellement tant que la société ne les a pas repris (art. L.210-6 C. com., à relire). | Ne rien signer au nom de KYMA avant le Kbis, ou lister les actes dans une annexe aux statuts ou donner un mandat exprès. | Fondateur, avocat |
-| ST4 | **Droits d'auteur du logo, du motif Wave et des visuels** détenus par le créateur et non par la société. | Cession écrite détaillée (art. L.131-3 CPI), signée dès l'immatriculation. Voir la clause H4 pour la 3D. | Fondateur |
+| ST4 | **Droits d'auteur du logo, du motif Wave et des visuels** détenus par le créateur et non par la société. | Cession écrite détaillée (art. L.131-3 CPI), signée dès l'immatriculation. Voir la clause H4 pour la 3D et la dernière section pour les fichiers 3D produits par programme. | Fondateur |
 
 **🟠 À régler rapidement**
 
@@ -927,3 +927,55 @@ Le choix pèse sur les pages légales : une **personne physique** ne bénéficie
 - **Validité de 12 mois** : concordant (D).
 - **Taux MAJESTÉ (10 % ou 7 à 8 %) et plafond par trimestre** : décision économique ; si retenue, à écrire à l'art. 7.1 et sous la carte (D bis, ligne 13).
 - **Cotisation traitée comme prestation de services à 20 % de TVA, TVA à l'encaissement** : sans effet sur le règlement, qui affiche des prix TTC.
+
+---
+
+## Provenance des visuels 3D, 14/10/2026
+
+> **Lu** : `shopify/contenu/visuels-3d.md` (note de provenance des modèles v2 et v3, mention R1, alt R10). **Sources** : Anthropic, Commercial Terms (archive, extrait lu) ; commentaires de cabinets sur le droit d'auteur et l'IA (sources secondaires, textes de loi non consultés). Modèle à faire valider par un avocat en propriété intellectuelle.
+
+### 1. Ce que dit la note de provenance : acceptée, avec quatre réserves
+
+- **Aucun asset tiers, aucune image IA** : acceptée sur la foi des scripts (`shopify/3d/build_hoodie_v2.py` et `build_hoodie_v3.py`) et du journal de construction du 14/10/2026. Le texte est exact : le code a été écrit avec l'aide d'une IA, mais aucune image ni aucun maillage ne sort d'un générateur d'images ou de 3D. La décision du fondateur (« aucune image IA ») est respectée à la lettre. Ne pas écrire « aucune IA n'a participé » dans une communication.
+- **Police DM Serif Display (SIL OFL 1.1)** sur la tirette : l'usage des contours dans un maillage est permis (la licence autorise l'usage et l'incorporation dans un produit ; la police n'est pas redistribuée). Conserver la copie de la licence OFL du paquet `@fontsource/dm-serif-display` 5.3.0 dans le dossier de preuves. Certitude élevée sur le principe, texte non relu ici.
+- **Outils** (Python, NumPy, SciPy, Pillow, fontTools, Shapely, trimesh, etc.) : leurs licences sont réputées permissives et ne revendiquent aucun droit sur les fichiers produits (connaissance générale, non vérifiée ici). Conserver la liste des versions utilisées.
+- **Réserve 1, fichiers v1 et v2** : la note reconnaît que le matériau du zip v2 s'appelle « Zip métal argent brossé » (ambiguïté « en argent », voir R6) et que les fichiers v1 et v2 « ne doivent plus être utilisés ». Tant qu'ils sont téléversés dans les fichiers du thème ou de Shopify, ils sont téléchargeables par tout visiteur. **Ne téléverser que la v3 ; si la v1 ou la v2 est déjà en ligne, la supprimer dès le passage à la v3.**
+
+### 2. Titularité : décision
+
+**Pas de contrat de cession à signer avec Izaac.** Un agent IA n'a pas la personnalité juridique : il n'est ni auteur ni partie à un contrat. Il n'y a rien à céder.
+
+**Ce que cela implique pour le fondateur.**
+- En droit français, seule une **personne physique** peut être auteur (art. L.111-1 CPI), et l'œuvre doit porter l'empreinte de sa personnalité. Une création **assistée** par un outil appartient à l'humain qui en fait les choix créatifs ; un contenu produit **sans intervention humaine caractérisée** ne bénéficie pas, en l'état du droit, de la qualité d'œuvre de l'esprit (sources secondaires).
+- **Conséquence** : les fichiers 3D v2 et v3 sont protégés par le droit d'auteur **seulement dans la mesure où le fondateur a fait des choix créatifs réels et démontrables** (brief, tech pack, charte, motif Wave, retours du type « vêtement Roblox, cube » qui ont fait passer de la v2 à la v3, choix des coloris et des détails). Cet apport existe, mais il n'est pas documenté. **La protection est incertaine, pas nulle.**
+- **Côté Anthropic** : selon les Commercial Terms, le client possède les sorties (*Outputs*) et Anthropic lui cède ses droits « s'il en existe », sous réserve du respect des conditions. Cela écarte toute revendication d'Anthropic. Cela ne crée **pas** un droit d'auteur qui n'existerait pas faute d'apport humain. Les conditions applicables au compte réellement utilisé (grand public ou commercial) n'ont pas pu être relues ici : conserver une copie datée.
+
+**À faire par le fondateur (dans cet ordre).**
+1. **Constituer un dossier de création daté** : brief, tech pack v3, charte, échanges où il fixe les choix (forme, matières, motif, coloris, détails de la tirette), corrections demandées entre la v2 et la v3. Une heure de travail, à classer dans le dossier de preuves.
+2. **Signer une attestation** (modèle ci-dessous), datée, à joindre au dossier.
+3. **Après le Kbis**, signer une **cession écrite du fondateur à la SASU** de « tous droits éventuels » sur les fichiers 3D, les scripts, les rendus, le motif et le logo (même clause que pour ST4, à adapter de la clause H4). Avant le Kbis, **rien à signer avec la société** : elle n'existe pas (ST3).
+4. **Dépôt public** : les scripts `shopify/3d/*.py` sont dans un dépôt public sans licence. Ajouter une mention « © KYMA, tous droits réservés » (fichier `NOTICE`) ou déplacer les scripts dans un dépôt privé. Les GLB étant de toute façon téléchargeables par les visiteurs, ne pas fonder la protection sur le secret.
+5. **Le motif « KYMA Wave » ne doit pas dépendre de ces fichiers.** Le fichier d'impression remis au fabricant et la charte viennent d'auteurs humains : obtenir leur **cession écrite** (point 21 de la section (c), toujours ouvert). Un style marbré n'est pas protégeable en lui-même : pour protéger l'apparence du motif, voir avec un conseil en PI un **dépôt de dessin ou modèle** (INPI ou EUIPO), en plus de la marque.
+
+**Attestation type (à faire valider par l'avocat).**
+> Je soussigné [prénom nom], fondateur de KYMA, atteste avoir conçu et dirigé la création des modèles 3D du hoodie « Ressac » (fichiers `ressac-v2-*.glb` et `ressac-v3-*.glb`, scripts associés) : j'ai fixé les choix de forme, de matières, de motif, de coloris et de détails à partir de mon tech pack et de ma charte, demandé des corrections successives et retenu la version finale. Les fichiers ont été calculés par des programmes écrits avec l'assistance de l'outil Claude (Anthropic) sous mes instructions, sans image ni maillage issu d'un générateur d'images ou de 3D, et sans élément tiers autre que les outils et la police DM Serif Display sous licence SIL OFL 1.1. Fait à [lieu], le [date]. [Signature]
+
+### 3. Mention R1 et alt R10 : R1 à compléter, R10 conforme
+
+- **R10 (texte alternatif)** : conforme, sans changement.
+- **R1** : suffisante sur trois points (modèle 3D, pas une photo, couleurs selon l'écran, motif différent), **mais pas sur ce que la note admet elle-même** : les bords-côtes sont imprimés dans le modèle alors qu'ils pourraient être unis en production, la gravure de la tirette n'est pas définitive, le tombé du tissu et les coutures diffèrent. Un écart connu sur un élément visible, non dit, est un risque de présentation trompeuse (L.121-2). **Deux options** : (a) confirmer ces points avec le fabricant et aligner le modèle avant d'ouvrir les précommandes ; (b) compléter R1 comme suit.
+
+> « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran, et certains détails (bords-côtes, gravure de la tirette, tombé du tissu) peuvent différer.** »
+
+- Le texte d'**origine** « Visuel de présentation 3D — … » (partie (a) en tête de note) reste remplacé par R1.
+- Le dépassement de la cible de 100 000 triangles (121 308 en v3) n'est pas une question juridique.
+
+### 4. Points de vigilance
+
+| # | Niveau | Risque | Action | Qui |
+|---|---|---|---|---|
+| P1 | 🟠 | Titularité des fichiers 3D incertaine (apport humain non documenté) | Dossier de création daté, attestation signée, puis cession fondateur → SASU après le Kbis (étapes 1 à 3) | Fondateur |
+| P2 | 🟠 | Fichiers v1 et v2 encore téléchargeables, nom de matériau ambigu (« argent brossé ») | Ne téléverser que la v3 ; supprimer v1 et v2 des fichiers du thème et de Shopify | Sacha |
+| P3 | 🟠 | R1 ne couvre pas les écarts connus (bords-côtes, tirette, tombé) | Aligner le modèle sur le fabricant ou compléter R1 | Izaac, Sacha |
+| P4 | 🟢 | Scripts dans un dépôt public sans licence | `NOTICE` « tous droits réservés » ou dépôt privé | Fondateur, Izaac |
+| P5 | 🟢 | Motif de production hors des fichiers 3D | Cession écrite des auteurs humains du motif ; dépôt de dessin ou modèle à étudier | Fondateur, conseil en PI |

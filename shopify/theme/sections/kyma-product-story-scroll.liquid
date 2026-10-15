@@ -11,8 +11,8 @@
     8 outro      dézoom, puis en bas « Alors, qu'en dites-vous ? » + sous-titre + boutons
   Moteur : three.js r180 (MIT) vendorisé dans assets/kyma-three.js (core + GLTFLoader + RoomEnvironment),
   chargé en différé seulement à l'approche de la section, par assets/kyma-pstory.js.
-  Modèle : GLB des fichiers du thème, <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v2 ;
-  ressac-v3 pour les modèles v3), sauf si un bloc « Coloris » indique un fichier précis. three.js est partagé avec le
+  Modèle : GLB des fichiers du thème, <préfixe>-<coloris>.glb (réglage « Modèles 3D — préfixe », défaut ressac-v3 depuis le 14/10/2026 ;
+  ressac-v2 pour revenir aux modèles v2), sauf si un bloc « Coloris » indique un fichier précis. three.js est partagé avec le
   lecteur commun assets/kyma-viewer.js (téléchargé une seule fois par page). Contrat v2 (Izaac) : nœuds Panel_Left/Right (morph
   « open » ou pivots), Lining_*, Hood_*, Zip_Slider/Zip_Pull, extras zipPath + poi. Repli gracieux sur le GLB v1
   (un seul maillage) : ouverture calculée dans le shader, doublure = faces arrière teintées.
@@ -162,7 +162,7 @@
     { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "geste." },
     { "type": "range", "id": "height", "label": "Longueur du défilement", "min": 500, "max": 900, "step": 50, "unit": "vh", "default": 700 },
     { "type": "text", "id": "default_colorway", "label": "Coloris par défaut (nom d'un bloc Coloris)", "default": "Lilac Whirl" },
-    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v2", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v2-lilac-whirl.glb). Écrire ressac-v3 pour passer aux modèles v3 (même contrat de nœuds). Vide = section statique." },
+    { "type": "text", "id": "model_prefix", "label": "Modèles 3D — préfixe des fichiers GLB", "default": "ressac-v3", "info": "Fichier lu pour chaque coloris : <préfixe>-<coloris>.glb dans les fichiers du thème (ex. ressac-v3-lilac-whirl.glb). Écrire ressac-v2 pour revenir aux modèles v2 (à re-téléverser) (même contrat de nœuds). Vide = section statique." },
     { "type": "checkbox", "id": "show_picker", "label": "Afficher le sélecteur de coloris", "default": true },
     { "type": "checkbox", "id": "dof", "label": "Mise au point douce sur la tirette (ordinateur)", "default": true },
     { "type": "product", "id": "product", "label": "Produit (lien du bouton si vide)" },
