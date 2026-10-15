@@ -26,7 +26,7 @@ Source : `shopify/theme/` pour le thème, `shopify/3d/` pour les modèles GLB.
 |---|---|---|
 | `assets/` (6) | `kyma.css`, `kyma-pages.css`, `kyma-3d.js`, `kyma-motion.js`, `kyma-pages.js`, `kyma-glb.js` | JS : 36 Ko gzip au total (budget de Maya : 150 Ko) |
 | `assets/` (6 polices) | `kyma-font-dm-serif-400.woff2`, `kyma-font-dm-serif-400-italic.woff2`, `kyma-font-outfit-300.woff2`, `kyma-font-outfit-400.woff2`, `kyma-font-outfit-500.woff2`, `kyma-font-outfit-600.woff2` | **Auto-hébergées** (`@fontsource` 5.3.0, sous-ensemble latin, licence OFL 1.1 : `shopify/licences/`). Le thème ne fait **plus aucun appel à Google Fonts**. Seules les maquettes l'utilisent encore. |
-| `assets/` (5 GLB) | `ressac-lilac-whirl.glb`, `ressac-ivory-tide.glb`, `ressac-silver-drift.glb`, `ressac-noir-absolu.glb`, `ressac-crimson-flow.glb` | À copier depuis `shopify/3d/` **sans les renommer**, de 2,8 à 3,1 Mo chacun |
+| `assets/` (5 GLB) | `ressac-v3-lilac-whirl.glb`, `ressac-v3-ivory-tide.glb`, `ressac-v3-silver-drift.glb`, `ressac-v3-noir-absolu.glb`, `ressac-v3-crimson-flow.glb` | À copier depuis `shopify/3d/` **sans les renommer**. **Ne pas téléverser** les GLB v1 (`ressac-<coloris>.glb`) ni v2 (`ressac-v2-*.glb`) : ils restent dans le dépôt pour mémoire seulement (noms de matériaux « plaqué or » / « argent brossé » retirés de la v3). |
 | `sections/` (20) | `kyma-cercle-join`, `kyma-cercle-waves`, `kyma-chapter`, `kyma-colorway-cards`, `kyma-colorways`, `kyma-contact`, `kyma-faq`, `kyma-hero-wave`, `kyma-instagram`, `kyma-manifesto`, `kyma-page-hero`, `kyma-product-360`, `kyma-product-story`, `kyma-recolor`, `kyma-size-guide`, `kyma-spline`, `kyma-steps`, `kyma-technical`, `kyma-timeline`, `kyma-unique-piece` (tous en `.liquid`) | **`kyma-marquee` n'est PAS téléversé** : Maya refuse les bandeaux défilants. Il reste dans le dépôt. `kyma-manifesto`, `kyma-unique-piece` et `kyma-spline` ne sont utilisés par aucun template. **`kyma-spline` n'est pas testé** : son URL de scène est vide, et il retombe sur la 3D maison. |
 | `snippets/` (9) | `kyma-assets`, `kyma-fonts`, `kyma-colorway-key`, `kyma-hoodie-tech`, `kyma-kuma`, `kyma-section-head`, `kyma-size-figure`, `kyma-step-icon`, `kyma-wave-lines` (en `.liquid`) | `kyma-fonts` contient les `@font-face` (avec `asset_url`) et précharge les 2 polices du premier écran |
 | `templates/` (8) | `index.json`, `collection.kyma.json`, `product.kyma.json`, `page.nous-connaitre.json`, `page.cercle-waves.json`, `page.guide-des-tailles.json`, `page.faq.json`, `page.contact.json` | `index.json` et `page.contact.json` **remplacent** ceux de la copie. Le `product.json` de Horizon reste intact. |
@@ -49,9 +49,9 @@ Dans la copie : ⋯ › Modifier le code.
 
 ### Méthode B : Shopify CLI
 ```bash
-# dans un dossier de travail : copier shopify/theme/* et shopify/3d/ressac-*.glb (dans assets/)
+# dans un dossier de travail : copier shopify/theme/* et shopify/3d/ressac-v3-*.glb (dans assets/) — v3 seulement
 shopify theme push --theme "<ID de la copie>" --path ./theme-kyma --nodelete \
-  --only "assets/kyma*" --only "assets/ressac-*.glb" --only "sections/kyma-*" --only "snippets/kyma-*" --only "templates/*.json" \
+  --only "assets/kyma*" --only "assets/ressac-v3-*.glb" --only "sections/kyma-*" --only "snippets/kyma-*" --only "templates/*.json" \
   --ignore "sections/kyma-marquee.liquid"
 ```
 ⚠️ Toujours passer `--nodelete`. Sans cette option, `push` **supprime** de la copie tous les fichiers de Horizon absents du dossier local.

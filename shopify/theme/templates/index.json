@@ -40,7 +40,7 @@
         "show_hoodie": true,
         "hoodie_label": "Hoodie zippé oversize Ressac en 3D, coloris",
         "loading_label": "Chargement du modèle 3D…",
-        "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "caption_hoodie": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.",
         "model_prefix": "ressac-v3"
       },
       "blocks": {
@@ -147,7 +147,7 @@
         "cta_link": "/products/ressac-hoodie-zippe-oversize",
         "cta2_label": "Choisir mon coloris",
         "cta2_link": "/collections/drop-1#coloris",
-        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.",
+        "caption": "Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.",
         "skip_label": "Passer la présentation de la pièce",
         "picker_label": "Coloris du modèle 3D",
         "loading_label": "Chargement du modèle 3D…",
