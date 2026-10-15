@@ -1,6 +1,6 @@
 # KYMA — Note de conformité juridique du site Shopify
 
-> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; sections « Entraide 09/10/2026 » et « Statut juridique » en fin de note ; corrections d'Arthur du 10/10/2026 appliquées ; concordance avec les notes d'Abdou du 10/10/2026 en section 9 du statut ; règle de consentement Shopify en partie C bis ; provenance des visuels 3D du 14/10/2026 en dernière section) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
+> **Auteur** : Victoire (juriste KYMA) · **Version** : v1 du 08/10/2026 (section Cercle Waves du 09/10/2026 ; sections « Entraide 09/10/2026 » et « Statut juridique » en fin de note ; corrections d'Arthur du 10/10/2026 appliquées ; concordance avec les notes d'Abdou du 10/10/2026 en section 9 du statut ; règle de consentement Shopify en partie C bis ; provenance des visuels 3D du 14/10/2026 en dernière section ; R1 complétée le 15/10/2026) · **Boutique** : kymas-store.myshopify.com (essai, rien de publié)
 > **Destinataires** : Arthur (validation), Clémentine, Izaac, Maya, Sacha, fondateur.
 > **Rappel unique** : les textes de `shopify/pages/legal/` et cette note sont des **modèles**. Ils doivent être relus et validés par un avocat (droit de la consommation / RGPD) avant toute mise en ligne.
 
@@ -512,7 +512,7 @@ Règle générale : tout avantage affiché est **chiffré, daté, conditionné e
 
 | # | Où | Avant | Après |
 |---|---|---|---|
-| R1 | Légende (réglage `caption` de la section, `index.json` « piece » et valeur par défaut du schéma ; aussi `caption_hoodie` de la section « drop ») | « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » | « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** » (**complété le 14/10/2026** : voir la dernière section de la note) |
+| R1 | Légende (réglage `caption` de la section, `index.json` « piece » et valeur par défaut du schéma ; aussi `caption_hoodie` de la section « drop ») | « Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer. » | « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.** » (**complété le 14/10/2026, texte arrêté par Arthur le 15/10/2026** : voir la dernière section) |
 | R2 | Affichage de la légende (Sacha, `.liquid`) | Légende dans l'étape finale seulement | **Légende permanente dans la zone épinglée** (`kyma-pstory__sticky`), visible à chaque étape, aussi dans le rendu statique (mouvement réduit, sans JavaScript, sans WebGL) |
 | R3 | Sections « drop » et « motif », `caption` | « Illustration du coloris. » | « Rendu 3D du coloris, pas une photo du produit fabriqué. » (section drop) · « Illustration du motif, pas une photo du produit fabriqué. Chaque pièce est pensée pour être unique. » (section motif) |
 | R4 | Étape 1 (`text`) | « … un motif qui ne se répète jamais. Faites défiler : la pièce se dévoile. » | « … un motif pensé pour ne pas se répéter. Faites défiler : la pièce se dévoile. » |
@@ -960,13 +960,16 @@ Le choix pèse sur les pages légales : une **personne physique** ne bénéficie
 **Attestation type (à faire valider par l'avocat).**
 > Je soussigné [prénom nom], fondateur de KYMA, atteste avoir conçu et dirigé la création des modèles 3D du hoodie « Ressac » (fichiers `ressac-v2-*.glb` et `ressac-v3-*.glb`, scripts associés) : j'ai fixé les choix de forme, de matières, de motif, de coloris et de détails à partir de mon tech pack et de ma charte, demandé des corrections successives et retenu la version finale. Les fichiers ont été calculés par des programmes écrits avec l'assistance de l'outil Claude (Anthropic) sous mes instructions, sans image ni maillage issu d'un générateur d'images ou de 3D, et sans élément tiers autre que les outils et la police DM Serif Display sous licence SIL OFL 1.1. Fait à [lieu], le [date]. [Signature]
 
-### 3. Mention R1 et alt R10 : R1 à compléter, R10 conforme
+### 3. Mention R1 et alt R10 : R1 complétée (texte arrêté par Arthur, 15/10/2026), R10 conforme
 
 - **R10 (texte alternatif)** : conforme, sans changement.
-- **R1** : suffisante sur trois points (modèle 3D, pas une photo, couleurs selon l'écran, motif différent), **mais pas sur ce que la note admet elle-même** : les bords-côtes sont imprimés dans le modèle alors qu'ils pourraient être unis en production, la gravure de la tirette n'est pas définitive, le tombé du tissu et les coutures diffèrent. Un écart connu sur un élément visible, non dit, est un risque de présentation trompeuse (L.121-2). **Deux options** : (a) confirmer ces points avec le fabricant et aligner le modèle avant d'ouvrir les précommandes ; (b) compléter R1 comme suit.
+- **R1 de départ** : suffisante sur le modèle 3D, l'absence de photo, les couleurs et le motif, mais pas sur les écarts que la note de provenance admet elle-même (bords-côtes imprimés dans le modèle alors qu'ils pourraient être unis en production, inscription de la tirette non définitive, coutures, tombé du tissu). Un écart connu sur un élément visible, non dit, est un risque de présentation trompeuse (L.121-2).
+- **Texte final** (arrêté par Arthur le 15/10/2026, appliqué par Sacha) :
 
-> « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran, et certains détails (bords-côtes, gravure de la tirette, tombé du tissu) peuvent différer.** »
+> « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.** »
 
+- **Reformulations d'Arthur par rapport à ma proposition** : « coutures » ajoutées ; « inscription de la tirette » à la place de « gravure » (le site écrit « Tirette sculptée "Kyma" ») ; phrase séparée pour les détails.
+- **Mon avis : conforme comme palier, pas comme solution définitive.** P3 reste ouvert jusqu'à la confirmation écrite du fabricant sur les bords-côtes et la tirette. Ensuite, soit le modèle est aligné, soit la mention énonce les écarts confirmés au lieu de « peuvent ». Conditions d'emploi : légende visible à chaque étape (R2) et en texte réel ; la mention ne rend pas licite un visuel trompeur (le rendu reste fidèle à la coupe, au coloris et aux finitions du tech pack) ; à retirer ou adapter dès que des photos de préséries remplacent les rendus (« pas une photo du produit fabriqué » deviendrait inexact).
 - Le texte d'**origine** « Visuel de présentation 3D — … » (partie (a) en tête de note) reste remplacé par R1.
 - Le dépassement de la cible de 100 000 triangles (121 308 en v3) n'est pas une question juridique.
 
@@ -976,6 +979,6 @@ Le choix pèse sur les pages légales : une **personne physique** ne bénéficie
 |---|---|---|---|---|
 | P1 | 🟠 | Titularité des fichiers 3D incertaine (apport humain non documenté) | Dossier de création daté, attestation signée, puis cession fondateur → SASU après le Kbis (étapes 1 à 3) | Fondateur |
 | P2 | 🟠 | Fichiers v1 et v2 encore téléchargeables, nom de matériau ambigu (« argent brossé ») | Ne téléverser que la v3 ; supprimer v1 et v2 des fichiers du thème et de Shopify | Sacha |
-| P3 | 🟠 | R1 ne couvre pas les écarts connus (bords-côtes, tirette, tombé) | Aligner le modèle sur le fabricant ou compléter R1 | Izaac, Sacha |
+| P3 | 🟠 | R1 complétée et appliquée par Sacha (15/10/2026) ; reste ouvert : écarts bords-côtes et tirette non confirmés par le fabricant | Confirmation écrite du fabricant, puis alignement du modèle ou mention ajustée ; la mention est un palier, pas une solution définitive | Izaac, Sacha, fondateur |
 | P4 | 🟢 | Scripts dans un dépôt public sans licence | `NOTICE` « tous droits réservés » ou dépôt privé | Fondateur, Izaac |
 | P5 | 🟢 | Motif de production hors des fichiers 3D | Cession écrite des auteurs humains du motif ; dépôt de dessin ou modèle à étudier | Fondateur, conseil en PI |

@@ -172,7 +172,8 @@ Lumière de studio diffuse (RoomEnvironment de three.js à intensité ~0,75, ou 
 - C'est une **représentation 3D procédurale**, pas le produit fabriqué. Le tombé du French terry, les coutures et le placement du motif diffèrent, car chaque pièce est découpée dans une zone différente du rouleau.
 - Les bords-côtes sont imprimés comme sur les rendus du lookbook. En production, ils pourraient être unis : à confirmer avec le fabricant.
 - La tirette reprend « Kyma » en DM Serif Display. Ce n'est pas la gravure définitive du fabricant.
-- **Mention obligatoire (R1, Victoire)**, légende permanente en texte réel près du visualiseur : « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Les couleurs dépendent de votre écran.** »
+- **Mention obligatoire (R1, étendue sur décision d'Arthur, proposition de Victoire)**, légende permanente en texte réel près du visualiseur : « **Modèle 3D de présentation, pas une photo du produit fabriqué. Le motif de chaque pièce est pensé pour être unique : la vôtre différera de ce modèle. Certains détails (bords-côtes, inscription de la tirette, coutures, tombé du tissu) peuvent aussi différer. Les couleurs dépendent de votre écran.** »
+- Dès la confirmation du fabricant sur les bords-côtes et la tirette, on alignera le modèle ou on retirera les mentions devenues inutiles de la R1.
 - **Texte alternatif des images fixes (R10)** : « Rendu 3D du hoodie Ressac, [coloris], étape [capuche / dos / tirette / zip / intérieur]. Pas une photo du produit fabriqué. »
 - Les comparatifs de `shopify/3d/rendus-v3/` sont des documents de travail. Ils ne sont jamais publiés sans la mention R1.
 - À remplacer ou à compléter par le shooting du produit fabriqué, après validation des préséries.
