@@ -57,9 +57,13 @@ for r in rows(sec('| # | Document', '## 7.')):
 
 arbitrages = [{'n': r[0], 'sujet': inline(r[1]), 'choix': inline(r[2])} for r in rows(sec('| # | Écart |', '### 7.2'))]
 
-data = dict(phases=phases, jalons=jalons, months=months, critique=critique,
+regles = [inline(l[4:]) for l in md.splitlines() if l.startswith('> - ')]
+glossaire = [inline(g) for g in re.search(r'> \*\*Glossaire\*\* : (.+)', md)[1].rstrip('.').split(' ; ')]
+debut = inline(re.search(r'^\*\*(Le calendrier daté.+?)\*\*$', md, re.M)[1])
+
+data = dict(regles=regles, glossaire=glossaire, debut=debut, phases=phases, jalons=jalons, months=months, critique=critique,
             decisions=decisions, dossier=dossier, arbitrages=arbitrages)
-assert len(jalons) >= 30 and len(months) >= 13 and decisions and dossier and len(phases) == 5, {k: len(v) for k, v in data.items()}
+assert len(regles) == 4 and len(glossaire) >= 9 and len(jalons) >= 30 and len(months) >= 13 and decisions and dossier and len(phases) == 5, {k: len(v) for k, v in data.items()}
 
 tpl = (D / 'frise.tpl.html').read_text(encoding='utf-8')
 (D / 'frise-2027.html').write_text(tpl.replace('/*DATA*/null', json.dumps(data, ensure_ascii=False)), encoding='utf-8')

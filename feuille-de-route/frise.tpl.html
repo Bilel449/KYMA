@@ -122,6 +122,9 @@ tr.next td { background: color-mix(in srgb, var(--rose) 45%, transparent); }
 details { border-top: 1px solid var(--line); padding-block: 12px; }
 details summary { cursor: pointer; font-family: var(--font-display); font-size: 1.2rem; }
 details .tbl { margin-top: 10px; }
+.regles { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.regles li { border-top: 2px solid var(--fg); padding-top: 10px; font-size: .95rem; }
+.gloss { margin: 10px 0 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: .9rem; max-width: 90ch; }
 .note { font-size: .85rem; color: var(--muted); max-width: 80ch; }
 
 @media (max-width: 720px) {
@@ -140,7 +143,13 @@ details .tbl { margin-top: 10px; }
     <h1>Feuille de route,<br><em>octobre 2026 → février 2028</em></h1>
     <p class="lede">Tout ce qui reste à faire pour créer la marque, du Kbis au bilan du Drop 1 : entreprise, légal, fiscalité, comptabilité, financement, fabricant, logistique, site, communication et présentation de la marque.</p>
     <div class="keys" id="keys"></div>
+    <p class="note" id="debut"></p>
   </header>
+
+  <section class="block" aria-labelledby="t-regles">
+    <h2 id="t-regles">Règles permanentes</h2>
+    <ul class="regles" id="regles"></ul>
+  </section>
 
   <section class="block" aria-labelledby="t-frise">
     <h2 id="t-frise">La ligne</h2>
@@ -176,6 +185,7 @@ details .tbl { margin-top: 10px; }
   <section class="block" aria-labelledby="t-arb">
     <h2 id="t-arb">Arbitrages de l'équipe</h2>
     <div id="arb"></div>
+    <details><summary>Glossaire</summary><ul class="gloss" id="gloss"></ul></details>
     <p class="note">Source : <code>feuille-de-route/feuille-de-route-2027.md</code>, consolidée par Clémentine à partir des parties d'Isabelle, Victoire, Abdou, Izaac, Maya et Sacha. Aucun montant confidentiel : les chiffres sont dans <code>finance/private/</code>.</p>
   </section>
 </div>
@@ -274,6 +284,9 @@ $('filters').addEventListener('click', e => {
 });
 apply();
 
+$('debut').innerHTML = DATA.debut;
+$('regles').innerHTML = DATA.regles.map(r => `<li>${r}</li>`).join('');
+$('gloss').innerHTML = DATA.glossaire.map(g => `<li>${g}</li>`).join('');
 /* Chemin critique, décisions, dossier, arbitrages */
 $('crit').innerHTML = DATA.critique.map(c => `<li>${c}</li>`).join('');
 const today = new Date().toISOString().slice(0, 10);
