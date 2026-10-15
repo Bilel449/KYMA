@@ -211,7 +211,7 @@ Depuis la décision « produit unique » : ces blocs servent aux textes alternat
 Même pièce, même coupe, même tissu. Seuls changent la teinte du motif et la doublure de la capuche.
 Décompte en caractères, espaces compris.
 
-**Deux médias par coloris** : le modèle 3D (GLB) et la vignette rendue depuis la 3D (PNG 1600 × 1600, fond beige). Mention à afficher près de chacun : *Visuel de présentation 3D — pensé pour que chaque pièce soit unique ; la vôtre pourra différer.*
+**Deux médias par coloris** : le modèle 3D (GLB) et la vignette rendue depuis la 3D (PNG 1600 × 1600, fond beige). Mention à afficher : R1 près du modèle 3D, R3 sous la vignette (voir « Mention des visuels » en tête de document).
 
 ## 1. Lilac Whirl (coloris signature)
 
