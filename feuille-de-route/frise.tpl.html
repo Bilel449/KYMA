@@ -212,7 +212,7 @@ const T0 = P('2026-10-15'), T1 = P('2028-02-29'), W = 1500;
 const x = s => Math.round((P(s) - T0) / (T1 - T0) * W);
 DATA.phases.forEach((p, i) => {
   const [a, b] = p.dates.split('→').map(s => s.trim());
-  $('phases').insertAdjacentHTML('beforeend', `<div class="phase" style="left:${x(a)}px;width:${x(b) - x(a)}px;background:var(--ph${i + 1})" title="${p.name}"><b>${i + 1}. ${p.name}</b>${fmt(a, { day: 'numeric', month: 'short' })} → ${fmt(b, { day: 'numeric', month: 'short' })}</div>`);
+  $('phases').insertAdjacentHTML('beforeend', `<div class="phase" style="left:${x(a)}px;width:${x(b) - x(a)}px;background:var(--ph${i % 5 + 1})" title="${p.name}"><b>${p.name}</b>${fmt(a, { day: 'numeric', month: 'short' })} → ${fmt(b, { day: 'numeric', month: 'short' })}</div>`);
 });
 for (let y = 2026, m = 10; y < 2028 || m <= 2; m++) {
   if (m > 12) { m = 1; y++; }
