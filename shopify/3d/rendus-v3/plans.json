@@ -1,0 +1,7 @@
+[
+ {"name":"face","pos":[0,0.55,2.35],"target":[0,0.43,0],"fov":30},
+ {"name":"trois-quarts","pos":[1.45,0.66,1.85],"target":[0,0.43,0],"fov":30},
+ {"name":"dos","pos":[0,0.6,-2.35],"target":[0,0.43,0],"fov":30},
+ {"name":"capuche","pos":[0.62,0.98,1.10],"target":[0,0.76,-0.04],"fov":30},
+ {"name":"zip-ouvert","pos":[0.35,0.6,2.2],"target":[0,0.43,0],"fov":30,"mixerTime":5.0}
+]

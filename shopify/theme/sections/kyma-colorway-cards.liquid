@@ -1,0 +1,109 @@
+{%- comment -%}
+  KYMA — Les cinq coloris en cartes (Collection § 01). Chaque carte : une étoffe 3D qui ondule (E, palette du
+  coloris, sans grain pour la fidélité des couleurs), le nom, l'accroche, la doublure (si connue), et le lien
+  vers le produit. Survol : la carte s'élargit (×1,4), son ondulation se calme, les autres reculent à 72 %.
+  Clavier : flèches gauche/droite entre les cartes, Entrée pour ouvrir. Mobile : défilement avec accroche.
+  Un seul contexte WebGL pour les cinq étoffes ; au plus deux s'animent à la fois, les autres restent figées.
+  Prix : jamais codé en dur ; lu dans Shopify (produit choisi), affiché une seule fois, « hors frais de livraison ».
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- liquid
+  assign tid = 'kyma-cards-' | append: section.id
+  assign hid = tid | append: '-t'
+  assign price_product = section.settings.product
+  if price_product == blank
+    for block in section.blocks
+      if block.settings.product != blank and price_product == blank
+        assign price_product = block.settings.product
+      endif
+    endfor
+  endif
+-%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-cards-sec" aria-labelledby="{{ hid }}">
+  <div class="kyma-sec__inner">
+    <div class="kyma-cards__head" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      <p class="kyma-cards__price">
+        {%- if price_product != blank -%}
+          <span class="kyma-cards__amount">{{ price_product.price | money }}</span> TTC, hors frais de livraison.
+        {%- else -%}
+          <span class="kyma-todo">[À COMPLÉTER : choisir le produit pour afficher le prix Shopify]</span>
+        {%- endif -%}
+        {%- if section.settings.shipping_link != blank %} <a class="kyma-inline" href="{{ section.settings.shipping_link }}">Livraison</a>{%- endif -%}
+      </p>
+    </div>
+
+    <ul class="kyma-cards" role="list" data-kyma-cards>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign cw = block.settings.name | handleize
+          assign url = block.settings.link
+          if block.settings.product != blank
+            assign url = block.settings.product.url
+          endif
+        -%}
+        <li class="kyma-card" style="--a: {{ block.settings.color_a }}; --b: {{ block.settings.color_b }}; --kd: {{ forloop.index0 | times: 120 }}ms;" data-kyma-reveal {{ block.shopify_attributes }}>
+          <a class="kyma-card__link" href="{{ url | default: '#' }}">
+            <span class="kyma-card__viz" data-kyma-3d-host>
+              <canvas data-kyma-3d="swatch" data-colorway="{{ cw }}" data-follow="false" data-grain="0" aria-hidden="true"></canvas>
+            </span>
+            <span class="kyma-card__body">
+              <span class="kyma-card__idx" aria-hidden="true">{{ forloop.index | prepend: '0' }}</span>
+              <span class="kyma-card__name">{{ block.settings.name | escape }}</span>
+              <span class="kyma-card__lead">{{ block.settings.lead | escape }}</span>
+              {%- if block.settings.lining != blank -%}<span class="kyma-card__lining">{{ block.settings.lining | escape }}</span>{%- endif -%}
+              <span class="kyma-card__more">{{ section.settings.more_label | escape }}<span class="kyma-vh"> : {{ block.settings.name | escape }}</span></span>
+            </span>
+          </a>
+          <p class="kyma-card__cap">{{ section.settings.caption | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Cartes coloris",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "coloris" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "LES COLORIS" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Choisir son" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "courant" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte" },
+    { "type": "product", "id": "product", "label": "Produit dont le prix est affiché (sinon : 1er bloc)" },
+    { "type": "url", "id": "shipping_link", "label": "Lien « Livraison »" },
+    { "type": "text", "id": "more_label", "label": "Lien de carte — texte", "default": "Voir ce coloris" },
+    { "type": "text", "id": "caption", "label": "Légende sous chaque étoffe", "default": "Rendu 3D du coloris, pas une photo du produit fabriqué." }
+  ],
+  "blocks": [
+    {
+      "type": "colorway",
+      "name": "Coloris",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nom", "default": "Lilac Whirl" },
+        { "type": "text", "id": "lead", "label": "Accroche", "default": "Le lilas qui tourne, sans jamais revenir." },
+        { "type": "text", "id": "lining", "label": "Doublure (laisser vide si non précisée au tech pack)" },
+        { "type": "color", "id": "color_a", "label": "Nuance principale", "default": "#C8A2C8" },
+        { "type": "color", "id": "color_b", "label": "Nuance secondaire", "default": "#F5EDE4" },
+        { "type": "product", "id": "product", "label": "Produit (ou variante via le lien ci-dessous)" },
+        { "type": "url", "id": "link", "label": "Lien (si pas de produit, ex. ?variant=…)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "KYMA — Cartes coloris" } ]
+}
+{% endschema %}

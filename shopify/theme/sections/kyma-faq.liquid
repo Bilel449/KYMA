@@ -1,0 +1,96 @@
+{%- comment -%}
+  KYMA — FAQ en accordéon animé (page FAQ). Ouverture de la hauteur en 320 ms ; l'icône « + » est une ligne
+  ondulée qui s'aplatit en « − ». Une seule réponse ouverte à la fois par groupe. Clavier : Entrée / Espace,
+  flèches haut/bas, Début / Fin. Champ « Rechercher une question » : filtre en direct (120 ms), terme surligné
+  en rose, ligne ondulée qui s'étire avec la saisie. Sans JavaScript, toutes les réponses sont visibles.
+  Blocs : « Groupe » (titre de groupe) puis « Question » ; les questions suivent le groupe qui les précède.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-faq-' | append: section.id -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-faq" aria-labelledby="{{ tid }}-t" data-kyma-faq>
+  <div class="kyma-sec__inner kyma-faq__inner">
+    <header class="kyma-faq__head">
+      {%- if section.settings.label != blank -%}<p class="kyma-ph__label">{{ section.settings.label | escape }}</p>{%- endif -%}
+      <h1 class="kyma-ph__title kyma-faq__title" id="{{ tid }}-t" data-kyma-split>
+        {{- section.settings.title_before | escape -}}
+        {%- if section.settings.title_em != blank %} <em>{{ section.settings.title_em | escape }}</em>{% endif -%}
+        {{- section.settings.title_after | escape -}}
+      </h1>
+      {%- if section.settings.text != blank -%}<p class="kyma-ph__text" data-kyma-reveal>{{ section.settings.text | escape }}</p>{%- endif -%}
+      <div class="kyma-faq__search" role="search" data-kyma-reveal>
+        <label class="kyma-faq__slabel" for="{{ tid }}-q">{{ section.settings.search_label | escape }}</label>
+        <input class="kyma-faq__q" id="{{ tid }}-q" type="search" autocomplete="off" spellcheck="false" data-kyma-faq-search placeholder="{{ section.settings.search_placeholder | escape }}">
+        <svg class="kyma-faq__wave" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 6 C16 0 32 12 48 6 S80 0 96 6 S128 12 144 6 S176 0 192 6 S224 12 240 6 S272 0 288 6 S320 12 336 6 S368 0 384 6 S400 8 400 6"/></svg>
+        <p class="kyma-faq__count kyma-vh" aria-live="polite" data-kyma-faq-count></p>
+      </div>
+    </header>
+
+    <p class="kyma-faq__empty" data-kyma-faq-empty hidden>{{ section.settings.empty_text | escape }} <a class="kyma-inline" href="{{ section.settings.contact_link | default: '/pages/contact' }}">{{ section.settings.contact_label | escape }}</a></p>
+
+    {%- assign open_group = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'group' -%}
+        {%- if open_group -%}</div></section>{%- endif -%}
+        <section class="kyma-faq__group" data-kyma-faq-group aria-labelledby="{{ tid }}-g{{ forloop.index }}" data-kyma-reveal {{ block.shopify_attributes }}>
+          <h2 class="kyma-faq__gtitle" id="{{ tid }}-g{{ forloop.index }}">{{ block.settings.title | escape }}</h2>
+          <div class="kyma-faq__list">
+        {%- assign open_group = true -%}
+      {%- else -%}
+        {%- unless open_group -%}
+          <section class="kyma-faq__group" data-kyma-faq-group data-kyma-reveal><div class="kyma-faq__list">
+          {%- assign open_group = true -%}
+        {%- endunless -%}
+        {%- assign qid = tid | append: '-q' | append: forloop.index -%}
+        <div class="kyma-faq__item" data-kyma-faq-item {{ block.shopify_attributes }}>
+          <h3 class="kyma-faq__h">
+            <button type="button" class="kyma-faq__btn" id="{{ qid }}-b" aria-expanded="true" aria-controls="{{ qid }}-a">
+              <span class="kyma-faq__qtext" data-kyma-hl>{{ block.settings.question | escape }}</span>
+              <svg class="kyma-faq__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="kyma-faq__h-line" d="M3 12 C6 9 9 9 12 12 S18 15 21 12"/><path class="kyma-faq__v-line" d="M12 4 V20"/></svg>
+            </button>
+          </h3>
+          <div class="kyma-faq__a" id="{{ qid }}-a" role="region" aria-labelledby="{{ qid }}-b">
+            <div class="kyma-faq__ain"><div class="kyma-rte" data-kyma-hl>{{ block.settings.answer }}</div></div>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if forloop.last and open_group -%}</div></section>{%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.settings.more_text != blank -%}
+      <p class="kyma-faq__more" data-kyma-reveal>{{ section.settings.more_text | escape }} <a class="kyma-link" href="{{ section.settings.contact_link | default: '/pages/contact' }}">{{ section.settings.contact_label | escape }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — FAQ",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "faq" },
+    { "type": "text", "id": "label", "label": "Label", "default": "FAQ" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Questions" },
+    { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "fréquentes" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "text", "id": "text", "label": "Texte", "default": "Les réponses essentielles, sans détour." },
+    { "type": "text", "id": "search_label", "label": "Recherche — libellé", "default": "Rechercher une question" },
+    { "type": "text", "id": "search_placeholder", "label": "Recherche — exemple", "default": "Taille, précommande, entretien…" },
+    { "type": "text", "id": "empty_text", "label": "Aucun résultat", "default": "Aucune question ne correspond." },
+    { "type": "text", "id": "more_text", "label": "Bas de page", "default": "Une autre question ?" },
+    { "type": "text", "id": "contact_label", "label": "Lien contact — texte", "default": "Contact" },
+    { "type": "url", "id": "contact_link", "label": "Lien contact — URL" }
+  ],
+  "blocks": [
+    { "type": "group", "name": "Groupe", "settings": [ { "type": "text", "id": "title", "label": "Titre du groupe", "default": "01 — LA PIÈCE" } ] },
+    {
+      "type": "question", "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Quelle taille choisir ?" },
+        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Réponse.</p>" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "KYMA — FAQ" } ]
+}
+{% endschema %}

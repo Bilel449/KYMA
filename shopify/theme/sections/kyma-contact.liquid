@@ -1,0 +1,89 @@
+{%- comment -%}
+  KYMA — Contact : ouverture + formulaire Shopify natif ({% form 'contact' %}) sur un plan beige où des ondes
+  concentriques (R, kyma-3d.js) partent du pointeur (une onde tous les 180 px parcourus) ou d'un appui ; une
+  grande onde part du bouton à l'envoi. Mouvement réduit : fond statique. Messages : confirmation et erreur
+  du cahier des charges. Consentement non pré-coché [À VALIDER VICTOIRE]. Coordonnées en dessous.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-ct-' | append: section.id -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-ct" aria-labelledby="{{ tid }}-t">
+  <div class="kyma-ct__stage" data-kyma-3d-host>
+    <canvas data-kyma-3d="ripple" data-colorway="kyma" data-follow="false" aria-hidden="true"></canvas>
+  </div>
+  <div class="kyma-ct__inner">
+    <div class="kyma-ct__copy">
+      <p class="kyma-ph__label">{{ section.settings.label | escape }}</p>
+      <h1 class="kyma-ph__title" id="{{ tid }}-t" data-kyma-split>{{ section.settings.title_before | escape }} <em>{{ section.settings.title_em | escape }}</em>{{ section.settings.title_after | escape }}</h1>
+      <p class="kyma-ph__text" data-kyma-reveal>{{ section.settings.text | escape }}</p>
+    </div>
+    <div class="kyma-ct__card" data-kyma-reveal style="--kd: 200ms;">
+      {%- form 'contact', id: 'KymaContact', class: 'kyma-form', novalidate: 'novalidate', data-kyma-form: 'contact' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="kyma-form__ok" role="status" tabindex="-1">{{ section.settings.success | escape }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="kyma-form__err" role="alert">{{ section.settings.error | escape }}</p>
+        {%- endif -%}
+        <div class="kyma-form__row">
+          <label class="kyma-field"><span class="kyma-field__l">Nom</span>
+            <input class="kyma-field__i" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}"></label>
+          <label class="kyma-field"><span class="kyma-field__l">E-mail <span aria-hidden="true">*</span></span>
+            <input class="kyma-field__i" type="email" name="contact[email]" autocomplete="email" required aria-required="true" value="{{ form.email }}" data-kyma-email>
+            <span class="kyma-field__err" hidden>{{ section.settings.error | escape }}</span></label>
+        </div>
+        <label class="kyma-field"><span class="kyma-field__l">Sujet</span>
+          <select class="kyma-field__i" name="contact[Sujet]">
+            {%- assign subjects = section.settings.subjects | split: ',' -%}
+            {%- for s in subjects -%}<option>{{ s | strip | escape }}</option>{%- endfor -%}
+          </select></label>
+        <label class="kyma-field"><span class="kyma-field__l">Message <span aria-hidden="true">*</span></span>
+          <textarea class="kyma-field__i" name="contact[body]" rows="5" required aria-required="true">{{ form.body }}</textarea></label>
+        <label class="kyma-check">
+          <input type="checkbox" name="contact[Consentement]" value="oui" required aria-required="true">
+          <span>{{ section.settings.consent | escape }}</span>
+        </label>
+        <button type="submit" class="kyma-btn" data-kyma-submit><span>{{ section.settings.button | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="kyma-form__ok" role="status" data-kyma-ok hidden>{{ section.settings.success | escape }}</p>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+<section class="kyma-sec kyma-ct-info" aria-labelledby="{{ tid }}-i">
+  <div class="kyma-sec__inner" data-kyma-reveal data-kyma-stagger>
+    <p class="kyma-sec__label"><span class="kyma-sec__n">01</span> — {{ section.settings.info_label | escape }}</p>
+    <h2 class="kyma-sec__title" id="{{ tid }}-i">{{ section.settings.info_title_before | escape }} <em>{{ section.settings.info_title_em | escape }}</em>.</h2>
+    <ul class="kyma-ct-info__list" role="list">
+      <li><span class="kyma-ct-info__k">E-mail</span> {{ section.settings.email | escape }}</li>
+      <li><span class="kyma-ct-info__k">Téléphone</span> {{ section.settings.phone | escape }}</li>
+      <li><span class="kyma-ct-info__k">Instagram</span> <a class="kyma-link-inline" href="https://www.instagram.com/kymasinsta/" target="_blank" rel="noopener">@kymasinsta<span class="kyma-vh"> (nouvel onglet)</span></a></li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Contact",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "nous-ecrire" },
+    { "type": "text", "id": "label", "label": "Label", "default": "CONTACT" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Nous" },
+    { "type": "text", "id": "title_em", "label": "Titre — italique", "default": "écrire" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Une question sur une taille, une précommande, un envoi : écrivez-nous. Nous vous répondons [À COMPLÉTER : délai de réponse]." },
+    { "type": "text", "id": "subjects", "label": "Sujets (séparés par des virgules)", "default": "Taille, Précommande, Livraison, Cercle Waves, Autre" },
+    { "type": "textarea", "id": "consent", "label": "Consentement [À VALIDER VICTOIRE]", "default": "J'accepte que KYMA utilise ces informations pour répondre à mon message. [À VALIDER VICTOIRE : formulation RGPD, responsable de traitement]" },
+    { "type": "text", "id": "button", "label": "Bouton", "default": "Envoyer" },
+    { "type": "text", "id": "success", "label": "Confirmation", "default": "Merci. Votre message est parti, nous revenons vers vous." },
+    { "type": "text", "id": "error", "label": "Erreur e-mail", "default": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?" },
+    { "type": "header", "content": "Coordonnées" },
+    { "type": "text", "id": "info_label", "label": "Label", "default": "COORDONNÉES" },
+    { "type": "text", "id": "info_title_before", "label": "Titre — début", "default": "Nous" },
+    { "type": "text", "id": "info_title_em", "label": "Titre — italique", "default": "joindre" },
+    { "type": "text", "id": "email", "label": "E-mail", "default": "[À COMPLÉTER : adresse]" },
+    { "type": "text", "id": "phone", "label": "Téléphone", "default": "[À COMPLÉTER : numéro, obligatoire dans les mentions légales]" }
+  ],
+  "presets": [ { "name": "KYMA — Contact" } ]
+}
+{% endschema %}

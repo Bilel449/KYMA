@@ -1,3 +1,10 @@
 node_modules/
 .env
 out/
+
+# Documents internes / confidentiels (dépôt public)
+brand/private/
+__pycache__/
+
+# Finance confidentielle (Abdou) : chiffres, business plan, finances personnelles du fondateur
+finance/private/

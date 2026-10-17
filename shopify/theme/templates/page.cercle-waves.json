@@ -1,0 +1,161 @@
+{
+  "sections": {
+    "ouverture": {
+      "type": "kyma-page-hero",
+      "settings": {
+        "anchor": "",
+        "label": "CERCLE WAVES",
+        "title_before": "Le Cercle",
+        "title_em": "Waves",
+        "title_after": ".",
+        "text": "Le Cercle Waves est l'abonnement de KYMA : deux paliers payants, INITIUM et MAJESTÉ, avec cashback versé en crédit KYMA, accès anticipé aux drops et carte de membre. À l'ouverture, vous choisirez votre palier ; vous pourrez en changer ou résilier en ligne, à tout moment. Il n'est pas encore ouvert et aucune date n'est fixée : rien n'est à faire pour l'instant. Nous annoncerons l'ouverture sur Instagram, @kymasinsta.",
+        "cta_label": "Suivre @kymasinsta",
+        "cta_link": "https://www.instagram.com/kymasinsta/",
+        "note": "Ni inscription, ni paiement à ce stade. Le cercle se prépare.",
+        "visual": "rings",
+        "colorway": "kyma",
+        "align": "split",
+        "alt_text": "Illustration animée : deux anneaux satinés, rose clair et marron clair, qui se rapprochent et s'entrelacent.",
+        "caption": ""
+      }
+    },
+    "paliers": {
+      "type": "kyma-cercle-waves",
+      "settings": {
+        "anchor": "paliers",
+        "number": "01",
+        "label": "LES DEUX PALIERS",
+        "title_before": "Deux paliers, un même",
+        "title_em": "courant",
+        "title_after": ".",
+        "text": "Deux paliers payants, au choix. Chaque carte se retourne pour montrer ses avantages.",
+        "cta_label": "",
+        "cta_link": "",
+        "show_rings": false,
+        "compact_top": false,
+        "terms_text": "Abonnement trimestriel : INITIUM 12,99 € TTC, MAJESTÉ 39,99 € TTC, renouvelé automatiquement tous les 3 mois. Résiliable à tout moment en ligne, sans frais, en quelques clics. Rétractation possible sous 14 jours. Réservé aux majeurs. Conditions :",
+        "terms_label": "conditions du Cercle Waves",
+        "terms_link": "/pages/cercle-waves-conditions"
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "number": "01",
+            "name": "INITIUM",
+            "circle_label": "Cercle Waves",
+            "lead": "L'entrée dans le cercle.",
+            "card_image_url": "",
+            "card_alt": "Carte de membre INITIUM du Cercle Waves",
+            "image_fit": "cover",
+            "tone": "initium",
+            "invite": "Retourner la carte",
+            "back_label": "AVANTAGES",
+            "perks": "Cashback 5 % sur vos achats de produits\nAccès anticipé de [24 h] à chaque drop\nAperçu des nouvelles collections [3] jours avant l'ouverture au public\nCarte de membre physique beige, écriture argentée",
+            "cashback_note": "Cashback versé en crédit KYMA (Crédit Waves), pas en espèces : utilisable sur vos prochains achats pendant [12] mois. Hors livraison et cotisation. Voir les conditions.",
+            "condition": "Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris.",
+            "price": "12,99 €",
+            "price_period": "par trimestre, TTC",
+            "join_label": "",
+            "join_link": "",
+            "aria": "Carte INITIUM, palier d'entrée du Cercle Waves, 12,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso.",
+            "card_image": "shopify://shop_images/kyma-carte-initium.jpg",
+            "condition_more": "Carte sans valeur monétaire, pas un moyen de paiement, envoyée après le délai de rétractation de 14 jours (au plus tard [21] jours après la souscription), frais d'envoi inclus. Vos avantages ne dépendent pas de la carte."
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "number": "02",
+            "name": "MAJESTÉ",
+            "circle_label": "Cercle Waves",
+            "lead": "Le palier supérieur du Cercle Waves.",
+            "card_image_url": "",
+            "card_alt": "Carte de membre MAJESTÉ du Cercle Waves",
+            "image_fit": "cover",
+            "tone": "majeste",
+            "invite": "Retourner la carte",
+            "back_label": "AVANTAGES",
+            "perks": "Cashback 10 % sur vos achats de produits\nAccès anticipé de [48 h] à chaque drop, précommandes comprises\nAperçu des nouvelles collections [7] jours avant l'ouverture au public\nProduits réservés aux abonnés MAJESTÉ (au moins [1] par an)\nCarte de membre physique gris clair, écriture dorée",
+            "cashback_note": "Cashback versé en crédit KYMA (Crédit Waves), pas en espèces : utilisable sur vos prochains achats pendant [12] mois. Hors livraison et cotisation. Voir les conditions.",
+            "condition": "Les quantités sont limitées : l'accès anticipé ne garantit pas la disponibilité d'une taille ou d'un coloris.",
+            "price": "39,99 €",
+            "price_period": "par trimestre, TTC",
+            "join_label": "",
+            "join_link": "",
+            "aria": "Carte MAJESTÉ, palier supérieur du Cercle Waves, 39,99 € par trimestre TTC, renouvelé automatiquement. Activer pour afficher les avantages au verso.",
+            "card_image": "shopify://shop_images/kyma-carte-majeste.jpg",
+            "condition_more": "Carte sans valeur monétaire, pas un moyen de paiement, envoyée après le délai de rétractation de 14 jours (au plus tard [21] jours après la souscription), frais d'envoi inclus. Vos avantages ne dépendent pas de la carte."
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2"
+      ]
+    },
+    "passage": {
+      "type": "kyma-chapter",
+      "settings": {
+        "anchor": "passage",
+        "number": "02",
+        "label": "DE L'UN À L'AUTRE",
+        "title_before": "D'un palier à l'autre, sans",
+        "title_em": "détour",
+        "title_after": ".",
+        "text": "À l'ouverture, vous choisirez directement l'un ou l'autre palier. Passer à MAJESTÉ prendra effet tout de suite : vous paierez la différence, au prorata. Passer à INITIUM prendra effet à la fin du trimestre en cours.",
+        "cta_label": "",
+        "cta_link": "",
+        "visual": "path",
+        "keywords": "",
+        "colorway": "kyma",
+        "tints": false,
+        "tints_label": "",
+        "sym1": "INITIUM — L'entrée dans le cercle.",
+        "sym2": "MAJESTÉ — Le palier supérieur.",
+        "caption": "",
+        "flip": false,
+        "tone": "rose"
+      }
+    },
+    "rejoindre": {
+      "type": "kyma-cercle-join",
+      "settings": {
+        "anchor": "rejoindre",
+        "number": "03",
+        "label": "ÊTRE PRÉVENU",
+        "title_before": "Être prévenu de",
+        "title_em": "l'ouverture",
+        "title_after": ".",
+        "text": "Prénom et adresse e-mail suffisent. Ce n'est pas un abonnement : aucun paiement n'est demandé.",
+        "consent": "J'accepte que KYMA utilise mon adresse e-mail pour m'informer de l'ouverture du Cercle Waves. Je peux me désinscrire à tout moment via le lien présent dans le message ou en écrivant à [À COMPLÉTER : e-mail]. Mon adresse est supprimée de cette liste après l'envoi de ce message, sauf si j'ai aussi accepté la newsletter ci-dessous. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité].",
+        "button": "Me prévenir",
+        "success": "Merci. Nous vous écrirons à l'ouverture du Cercle Waves. Cette inscription n'est pas un abonnement.",
+        "error": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?",
+        "terms": "Conditions du Cercle Waves : [lien vers /pages/cercle-waves-conditions].",
+        "consent_note": "Liste d'attente Cercle Waves : consentement à l'information d'ouverture (case cochée).",
+        "consent_newsletter": "Je souhaite aussi recevoir par e-mail les actualités de KYMA (ouvertures de drops, coulisses, offres). Je peux me désinscrire à tout moment via le lien présent dans chaque message. Responsable du traitement : [À COMPLÉTER : raison sociale]. Voir la [politique de confidentialité].",
+        "required_label": "(obligatoire)",
+        "optional_label": "(facultatif)",
+        "tags": "cercle-waves,liste-attente",
+        "consent_error": "Pour vous prévenir de l'ouverture, nous avons besoin de votre accord. Pouvez-vous cocher la première case ?",
+        "consent_version": "v1",
+        "privacy_link": "/pages/confidentialite",
+        "show_waitlist": false,
+        "closed_title_before": "Le cercle se",
+        "closed_title_em": "prépare",
+        "closed_title_after": ".",
+        "closed_text": "Le Cercle Waves n'est pas encore ouvert ; aucune date n'est fixée. Rien n'est à faire pour l'instant : ni inscription, ni paiement. Nous annoncerons l'ouverture sur Instagram, @kymasinsta.",
+        "closed_label": "CERCLE WAVES",
+        "closed_cta_label": "Suivre @kymasinsta",
+        "closed_cta_link": "https://www.instagram.com/kymasinsta/"
+      }
+    }
+  },
+  "order": [
+    "ouverture",
+    "paliers",
+    "passage",
+    "rejoindre"
+  ]
+}

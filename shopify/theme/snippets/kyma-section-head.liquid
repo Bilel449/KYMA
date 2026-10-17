@@ -1,0 +1,32 @@
+{%- comment -%}
+  KYMA — en-tête de section façon charte : « 01 — LABEL / titre avec mot en italique / texte ».
+
+  Paramètres :
+    number     : ex. '01'
+    label      : ex. 'Le Drop 1'
+    before     : début du titre
+    em         : mot en italique (Camel profond #8A6A52 dès 32 px, sinon Brun : voir kyma.css)
+    after      : fin du titre
+    text       : texte d'introduction (les retours à la ligne sont conservés)
+    heading_id : id HTML du titre (pour aria-labelledby)
+    tag        : balise du titre, 'h2' par défaut ('h1' pour l'ouverture d'une page)
+{%- endcomment -%}
+{%- assign htag = tag | default: 'h2' -%}
+{%- if number != blank or label != blank -%}
+  <p class="kyma-sec__label">
+    {%- if number != blank -%}<span class="kyma-sec__n">{{ number | escape }}</span> — {% endif -%}
+    {{- label | escape -}}
+  </p>
+{%- endif -%}
+{%- if before != blank or em != blank or after != blank -%}
+  <{{ htag }} class="kyma-sec__title"{% if heading_id != blank %} id="{{ heading_id }}"{% endif %}>
+    {{- before | escape -}}
+    {%- if em != blank %} <em>{{ em | escape }}</em>{% endif -%}
+    {%- if after != blank -%}
+      {%- assign after_first = after | strip | slice: 0, 1 -%}
+      {%- unless '.,;:!?)' contains after_first %} {% endunless -%}
+      {{- after | strip | escape -}}
+    {%- endif -%}
+  </{{ htag }}>
+{%- endif -%}
+{%- if text != blank -%}<p class="kyma-sec__desc">{{ text | escape | newline_to_br }}</p>{%- endif -%}

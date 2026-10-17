@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "contact": {
+      "type": "kyma-contact",
+      "settings": {
+        "anchor": "nous-ecrire",
+        "label": "CONTACT",
+        "title_before": "Nous",
+        "title_em": "écrire",
+        "title_after": ".",
+        "text": "Une question sur une taille, une précommande, un envoi : écrivez-nous. Nous vous répondons [À COMPLÉTER : délai de réponse].",
+        "subjects": "Taille, Précommande, Livraison, Cercle Waves, Autre",
+        "consent": "J'accepte que KYMA utilise ces informations pour répondre à mon message. Voir la politique de confidentialité. [À VALIDER VICTOIRE]",
+        "button": "Envoyer",
+        "success": "Merci. Votre message est parti, nous revenons vers vous.",
+        "error": "Cette adresse semble incomplète. Pouvez-vous la vérifier ?",
+        "info_label": "COORDONNÉES",
+        "info_title_before": "Nous",
+        "info_title_em": "joindre",
+        "email": "[À COMPLÉTER : adresse]",
+        "phone": "[À COMPLÉTER : numéro, obligatoire dans les mentions légales]"
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

@@ -1,0 +1,31 @@
+{%- comment -%}
+  KYMA — renvoie la clé du coloris courant d'un produit (ex. « lilac-whirl »), sans espace.
+  1. Option de variante nommée Couleur / Coloris / Color (produit unique à 5 coloris, ex. « Ressac ») ;
+  2. sinon, nom de coloris présent dans le titre du produit (boutique actuelle : un produit par coloris) ;
+  3. sinon « kyma » (palette du site).
+  Usage : {%- capture cw_key -%}{% render 'kyma-colorway-key', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign k = ''
+  if product != blank
+    for opt in product.options_with_values
+      assign on = opt.name | downcase
+      if on == 'couleur' or on == 'coloris' or on == 'color' or on == 'colour'
+        assign k = opt.selected_value | handleize
+      endif
+    endfor
+    if k == ''
+      assign t = product.title | handleize
+      assign known = 'lilac-whirl,ivory-tide,silver-drift,noir-absolu,crimson-flow' | split: ','
+      for c in known
+        if t contains c
+          assign k = c
+        endif
+      endfor
+    endif
+  endif
+  if k == ''
+    assign k = 'kyma'
+  endif
+  echo k
+-%}

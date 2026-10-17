@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "ouverture": {
+      "type": "kyma-page-hero",
+      "settings": {
+        "anchor": "",
+        "label": "GUIDE DES TAILLES",
+        "title_before": "Choisir sa",
+        "title_em": "taille",
+        "title_after": ".",
+        "text": "Le hoodie Ressac est coupé large. Les épaules tombent, la matière flotte, le zip suit le mouvement. Ce guide vous aide à choisir l'amplitude que vous préférez. Les mesures sont données à plat, en centimètres, avec une tolérance de ±1 cm.",
+        "cta_label": "",
+        "cta_link": "",
+        "note": "",
+        "visual": "tape",
+        "colorway": "kyma",
+        "align": "split",
+        "alt_text": "",
+        "caption": ""
+      }
+    },
+    "guide": {
+      "type": "kyma-size-guide",
+      "settings": {
+        "mode": "full",
+        "anchor": "mesures",
+        "number": "01",
+        "label": "LES MESURES",
+        "title_before": "Cinq mesures, six",
+        "title_em": "tailles",
+        "title_after": ".",
+        "text": "",
+        "default_size": 2,
+        "link_label": "",
+        "link": "",
+        "m_label": "SE MESURER",
+        "m_title_before": "Poser à plat,",
+        "m_title_em": "comparer",
+        "m_text": "Posez à plat un hoodie que vous portez déjà, mesurez-le, comparez. C'est le plus fiable.",
+        "m_again": "Revoir",
+        "a_label": "CONSEILS",
+        "a_title_before": "Entre deux",
+        "a_title_em": "tailles",
+        "a_text": "Coupe prévue : oversize. Votre taille habituelle donne la silhouette voulue : ample, posée. Pour une coupe plus ajustée, prenez une taille en dessous. Entre deux tailles : la plus petite pour plus de tenue, la plus grande pour plus d'amplitude. Unisexe : une seule grille, pour toutes et tous.",
+        "d_label": "UN DOUTE",
+        "d_title_before": "Nous",
+        "d_title_em": "écrire",
+        "d_text": "Un doute sur la taille : écrivez-nous [À COMPLÉTER : adresse e-mail de contact], nous vous répondons.",
+        "d_cta": "Contacter KYMA",
+        "d_link": "/pages/contact",
+        "d_link2_label": "Retour à la pièce",
+        "d_link2": "/products/ressac-hoodie-zippe-oversize"
+      }
+    }
+  },
+  "order": [
+    "ouverture",
+    "guide"
+  ]
+}

@@ -1,0 +1,81 @@
+{%- comment -%}
+  KYMA — Étapes du savoir-faire en frise (Nous connaître § 04). Bureau : section épinglée (position: sticky,
+  sans bibliothèque) sur ~240 vh ; chaque dessin se trace quand son étape devient active (Brun), les autres
+  restent en marron clair à 50 %. Un clic sur une étape y mène (défilement de 900 ms), flèches gauche/droite
+  au clavier. Mobile : défilement horizontal avec accroche, sans épinglage. Mouvement réduit : liste statique.
+  Tout le texte est dans le DOM, visible sans JavaScript.
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- assign tid = 'kyma-steps-' | append: section.id -%}
+{%- assign hid = tid | append: '-t' -%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-steps" aria-labelledby="{{ hid }}" data-kyma-steps style="--steps: {{ section.blocks.size | at_least: 1 }};">
+  <div class="kyma-steps__sticky">
+    <div class="kyma-sec__inner">
+      <div class="kyma-steps__head" data-kyma-reveal>
+        {% render 'kyma-section-head',
+          number: section.settings.number,
+          label: section.settings.label,
+          before: section.settings.title_before,
+          em: section.settings.title_em,
+          after: section.settings.title_after,
+          text: section.settings.text,
+          heading_id: hid
+        %}
+      </div>
+      <div class="kyma-steps__bar" aria-hidden="true"><span></span></div>
+      <ol class="kyma-steps__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="kyma-step{% if forloop.first %} is-on{% endif %}" data-step="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <button type="button" class="kyma-step__go" aria-current="{% if forloop.first %}step{% else %}false{% endif %}">
+              {% render 'kyma-step-icon', icon: block.settings.icon %}
+              <span class="kyma-step__n">{{ forloop.index | prepend: '0' }}</span>
+              <span class="kyma-step__title">{{ block.settings.title | escape }}</span>
+            </button>
+            <p class="kyma-step__text">{{ block.settings.text | escape }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Étapes (frise)",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "savoir-faire" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "04" },
+    { "type": "text", "id": "label", "label": "Label", "default": "SAVOIR-FAIRE" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "De la fibre au" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "zip" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte d'introduction" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "La fibre" },
+        { "type": "textarea", "id": "text", "label": "Texte" },
+        {
+          "type": "select", "id": "icon", "label": "Dessin",
+          "options": [
+            { "value": "fibre", "label": "Fibre (brin)" },
+            { "value": "maille", "label": "Maille (tricot)" },
+            { "value": "rouleau", "label": "Rouleau imprimé" },
+            { "value": "ciseaux", "label": "Ciseaux (découpe)" },
+            { "value": "silhouette", "label": "Silhouette du hoodie" },
+            { "value": "tirette", "label": "Tirette" }
+          ],
+          "default": "fibre"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "KYMA — Étapes (frise)" } ]
+}
+{% endschema %}

@@ -1,0 +1,193 @@
+{%- comment -%}
+  KYMA — Guide des tailles (page Guide des tailles ; version « compacte » sur la fiche produit, § 04).
+  Le tableau HTML est la SOURCE UNIQUE des mesures (accessible, sélectionnable, sans grain ni animation de
+  texte). À droite, le dessin technique à cotes : choisir une taille (en-tête de colonne) redessine la
+  silhouette à l'échelle (±3 %, 320 ms) et fait monter les valeurs ; choisir une mesure (en-tête de ligne)
+  met sa cote en surbrillance (Brun 2 px). Clavier : flèches entre les en-têtes. Mobile : 1re colonne figée.
+  Version complète : « Se mesurer » (3 vignettes animées, bouton Revoir), « Conseils » (curseur
+  Plus ajusté — Plus ample + taille habituelle -> indication), « Un doute » (contact).
+{%- endcomment -%}
+{% render 'kyma-assets' %}
+{%- liquid
+  assign tid = 'kyma-size-' | append: section.id
+  assign hid = tid | append: '-t'
+  assign rows = section.settings.table | newline_to_br | split: '<br />'
+  assign head = rows.first | strip | split: ';'
+  assign full = false
+  if section.settings.mode == 'full'
+    assign full = true
+  endif
+  assign def_idx = section.settings.default_size | minus: 0
+-%}
+<section id="{{ section.settings.anchor | default: tid }}" class="kyma-sec kyma-size{% unless full %} kyma-size--compact{% endunless %}" aria-labelledby="{{ hid }}" data-kyma-size data-default="{{ def_idx }}">
+  <div class="kyma-sec__inner">
+    <div class="kyma-size__head" data-kyma-reveal>
+      {% render 'kyma-section-head',
+        number: section.settings.number,
+        label: section.settings.label,
+        before: section.settings.title_before,
+        em: section.settings.title_em,
+        after: section.settings.title_after,
+        text: section.settings.text,
+        heading_id: hid
+      %}
+      {%- if section.settings.link_label != blank -%}
+        <p class="kyma-size__link"><a class="kyma-link" href="{{ section.settings.link | default: '/pages/guide-des-tailles' }}">{{ section.settings.link_label | escape }}</a></p>
+      {%- endif -%}
+    </div>
+
+    <div class="kyma-size__grid">
+      <div class="kyma-size__tablebox" data-kyma-reveal>
+        <p class="kyma-size__pick" id="{{ tid }}-pick">{{ section.settings.pick_label | escape }}</p>
+        <div class="kyma-size__scroll" role="region" aria-labelledby="{{ tid }}-cap" tabindex="0">
+          <table class="kyma-size__table">
+            <caption id="{{ tid }}-cap" class="kyma-vh">{{ section.settings.note | escape }}</caption>
+            <thead>
+              <tr>
+                {%- for h in head -%}
+                  {%- if forloop.first -%}
+                    <th scope="col" class="kyma-size__corner">{{ h | strip | escape }}</th>
+                  {%- else -%}
+                    {%- assign ci = forloop.index0 | minus: 1 -%}
+                    <th scope="col" data-col="{{ ci }}"><button type="button" class="kyma-size__sz" data-size-btn="{{ ci }}" aria-pressed="{% if ci == def_idx %}true{% else %}false{% endif %}" aria-describedby="{{ tid }}-pick">{{ h | strip | escape }}</button></th>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for r in rows offset: 1 -%}
+                {%- assign cells = r | strip | split: ';' -%}
+                {%- if cells.size > 1 -%}
+                  {%- assign mk = cells.first | strip | handleize -%}
+                  <tr data-measure="{{ mk }}">
+                    {%- for c in cells -%}
+                      {%- if forloop.first -%}
+                        <th scope="row"><button type="button" class="kyma-size__ms" data-measure-btn="{{ mk }}" aria-pressed="false">{{ c | strip | escape }}</button></th>
+                      {%- else -%}
+                        <td data-col="{{ forloop.index0 | minus: 1 }}">{{ c | strip | escape }}</td>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </tr>
+                {%- endif -%}
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        <p class="kyma-note">{{ section.settings.note | escape }}</p>
+      </div>
+      <figure class="kyma-size__fig" data-kyma-reveal style="--kd: 150ms;">
+        {% render 'kyma-size-figure', id: tid %}
+        <figcaption class="kyma-caption">{{ section.settings.fig_caption | escape }}</figcaption>
+      </figure>
+    </div>
+
+    {%- if full -%}
+      <div class="kyma-size__block" id="se-mesurer" data-kyma-reveal>
+        <p class="kyma-sec__label"><span class="kyma-sec__n">02</span> — {{ section.settings.m_label | escape }}</p>
+        <h2 class="kyma-sec__title kyma-sec__title--sm">{{ section.settings.m_title_before | escape }} <em>{{ section.settings.m_title_em | escape }}</em>.</h2>
+        <p class="kyma-sec__desc">{{ section.settings.m_text | escape }}</p>
+        <ol class="kyma-measure" role="list" data-kyma-measure>
+          {%- assign mnames = 'Poitrine,Épaules,Longueur' | split: ',' -%}
+          {%- for mn in mnames -%}
+            <li class="kyma-measure__item" style="--i: {{ forloop.index0 }};">
+              <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+                <path class="kyma-measure__garment" d="M100 30 C120 32 122 44 116 50 C130 53 142 56 152 62 C158 92 160 120 161 146 L146 146 C144 126 142 108 140 96 C140 118 139 140 139 166 L61 166 C61 140 60 118 60 96 C58 108 56 126 54 146 L39 146 C40 120 42 92 48 62 C58 56 70 53 84 50 C78 44 80 32 100 30 Z"/>
+                {%- case forloop.index -%}
+                  {%- when 1 -%}<path class="kyma-measure__tape" pathLength="1" d="M60 100 H140"/>
+                  {%- when 2 -%}<path class="kyma-measure__tape" pathLength="1" d="M48 62 C80 56 120 56 152 62"/>
+                  {%- else -%}<path class="kyma-measure__tape" pathLength="1" d="M172 50 V166"/>
+                {%- endcase -%}
+              </svg>
+              <span class="kyma-measure__n">{{ mn }}</span>
+            </li>
+          {%- endfor -%}
+        </ol>
+        <button type="button" class="kyma-btn kyma-btn--ghost kyma-measure__again" data-kyma-measure-again><span>{{ section.settings.m_again | escape }}</span></button>
+      </div>
+
+      <div class="kyma-size__block kyma-advice" id="conseils" data-kyma-reveal data-kyma-advice>
+        <p class="kyma-sec__label"><span class="kyma-sec__n">03</span> — {{ section.settings.a_label | escape }}</p>
+        <h2 class="kyma-sec__title kyma-sec__title--sm">{{ section.settings.a_title_before | escape }} <em>{{ section.settings.a_title_em | escape }}</em>.</h2>
+        <p class="kyma-sec__desc">{{ section.settings.a_text | escape }}</p>
+        <div class="kyma-advice__ui">
+          <label class="kyma-field">
+            <span class="kyma-field__l">{{ section.settings.a_usual | escape }}</span>
+            <select class="kyma-field__i" data-advice-usual>
+              {%- for h in head offset: 1 -%}
+                <option value="{{ forloop.index0 }}"{% if forloop.index0 == def_idx %} selected{% endif %}>{{ h | strip | escape }}</option>
+              {%- endfor -%}
+            </select>
+          </label>
+          <label class="kyma-range">
+            <span class="kyma-range__ends"><span>Plus ajusté</span><span>Plus ample</span></span>
+            <input type="range" min="0" max="100" value="50" step="1" data-advice-fit aria-valuetext="Coupe posée">
+            <span class="kyma-vh">{{ section.settings.a_slider | escape }}</span>
+          </label>
+          <output class="kyma-advice__out" data-advice-out aria-live="polite"></output>
+          <p class="kyma-advice__small">{{ section.settings.a_note | escape }}</p>
+        </div>
+      </div>
+
+      <div class="kyma-size__block" id="un-doute" data-kyma-reveal>
+        <p class="kyma-sec__label"><span class="kyma-sec__n">04</span> — {{ section.settings.d_label | escape }}</p>
+        <h2 class="kyma-sec__title kyma-sec__title--sm">{{ section.settings.d_title_before | escape }} <em>{{ section.settings.d_title_em | escape }}</em>.</h2>
+        <p class="kyma-sec__desc">{{ section.settings.d_text | escape }}</p>
+        <p class="kyma-size__ctas">
+          <a class="kyma-btn" href="{{ section.settings.d_link | default: '/pages/contact' }}" data-kyma-magnetic><span>{{ section.settings.d_cta | escape }}</span><span class="kyma-btn__arrow" aria-hidden="true">&rarr;</span></a>
+          {%- if section.settings.d_link2_label != blank -%}
+            <a class="kyma-link" href="{{ section.settings.d_link2 | default: '/collections/drop-1' }}">{{ section.settings.d_link2_label | escape }}</a>
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KYMA — Guide des tailles",
+  "tag": "div",
+  "class": "kyma-section",
+  "settings": [
+    { "type": "select", "id": "mode", "label": "Version", "options": [ { "value": "full", "label": "Complète (page Guide des tailles)" }, { "value": "compact", "label": "Compacte (fiche produit)" } ], "default": "full" },
+    { "type": "text", "id": "anchor", "label": "Ancre (id HTML)", "default": "mesures" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "label", "label": "Label", "default": "LES MESURES" },
+    { "type": "text", "id": "title_before", "label": "Titre — début", "default": "Cinq mesures, six" },
+    { "type": "text", "id": "title_em", "label": "Titre — mot en italique", "default": "tailles" },
+    { "type": "text", "id": "title_after", "label": "Titre — fin", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Texte" },
+    { "type": "textarea", "id": "table", "label": "Tableau (une ligne par mesure, valeurs séparées par « ; »)", "default": "Mesure (cm);XS;S;M;L;XL;XXL\nPoitrine;60;62;64;66;68;70\nÉpaules;54;56;58;60;62;64\nLongueur dos;66;68;70;72;74;76\nManche;62;63;64;65;66;67\nBas (à plat);58;60;62;64;66;68" },
+    { "type": "range", "id": "default_size", "label": "Taille affichée au départ (0 = 1re colonne)", "min": 0, "max": 5, "step": 1, "default": 2 },
+    { "type": "text", "id": "pick_label", "label": "Consigne", "default": "Choisissez une taille ou une mesure : le dessin se met à l'échelle." },
+    { "type": "text", "id": "note", "label": "Note sous le tableau", "default": "Mesures à plat, en centimètres, tolérance ±1 cm." },
+    { "type": "text", "id": "fig_caption", "label": "Légende du dessin", "default": "Dessin technique à plat, proportions indicatives." },
+    { "type": "text", "id": "link_label", "label": "Lien (version compacte)" },
+    { "type": "url", "id": "link", "label": "Lien — URL" },
+    { "type": "header", "content": "Se mesurer (version complète)" },
+    { "type": "text", "id": "m_label", "label": "Label", "default": "SE MESURER" },
+    { "type": "text", "id": "m_title_before", "label": "Titre — début", "default": "Poser à plat," },
+    { "type": "text", "id": "m_title_em", "label": "Titre — italique", "default": "comparer" },
+    { "type": "textarea", "id": "m_text", "label": "Texte", "default": "Posez à plat un hoodie que vous portez déjà, mesurez-le, comparez. C'est le plus fiable." },
+    { "type": "text", "id": "m_again", "label": "Bouton", "default": "Revoir" },
+    { "type": "header", "content": "Conseils (version complète)" },
+    { "type": "text", "id": "a_label", "label": "Label", "default": "CONSEILS" },
+    { "type": "text", "id": "a_title_before", "label": "Titre — début", "default": "Entre deux" },
+    { "type": "text", "id": "a_title_em", "label": "Titre — italique", "default": "tailles" },
+    { "type": "textarea", "id": "a_text", "label": "Texte", "default": "Coupe prévue : oversize. Votre taille habituelle donne la silhouette voulue : ample, posée. Pour une coupe plus ajustée, prenez une taille en dessous. Entre deux tailles : la plus petite pour plus de tenue, la plus grande pour plus d'amplitude. Unisexe : une seule grille, pour toutes et tous." },
+    { "type": "text", "id": "a_usual", "label": "Liste — libellé", "default": "Votre taille habituelle" },
+    { "type": "text", "id": "a_slider", "label": "Curseur — nom accessible", "default": "Silhouette souhaitée, de plus ajustée à plus ample" },
+    { "type": "text", "id": "a_note", "label": "Mention", "default": "Indication, à confirmer avec le tableau." },
+    { "type": "header", "content": "Un doute (version complète)" },
+    { "type": "text", "id": "d_label", "label": "Label", "default": "UN DOUTE" },
+    { "type": "text", "id": "d_title_before", "label": "Titre — début", "default": "Nous" },
+    { "type": "text", "id": "d_title_em", "label": "Titre — italique", "default": "écrire" },
+    { "type": "textarea", "id": "d_text", "label": "Texte", "default": "Un doute sur la taille : écrivez-nous [À COMPLÉTER : adresse e-mail de contact], nous vous répondons." },
+    { "type": "text", "id": "d_cta", "label": "Bouton", "default": "Contacter KYMA" },
+    { "type": "url", "id": "d_link", "label": "Bouton — lien" },
+    { "type": "text", "id": "d_link2_label", "label": "Second lien", "default": "Retour à la pièce" },
+    { "type": "url", "id": "d_link2", "label": "Second lien — URL" }
+  ],
+  "presets": [ { "name": "KYMA — Guide des tailles" } ]
+}
+{% endschema %}
